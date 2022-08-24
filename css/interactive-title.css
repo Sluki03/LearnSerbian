@@ -1,0 +1,59 @@
+.interactive-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin: 10px 0;
+}
+
+.interactive-title span {
+    color: white;
+    font-size: 120px;
+    text-transform: capitalize;
+    font-weight: bold;
+    white-space: nowrap;
+    text-shadow: 0px 0px 5px rgba(0,0,0,0.5);
+    cursor: default;
+    transition: text-shadow .25s, color .25s, top .25s, left .5s, z-index .5s;
+    user-select: none;
+    z-index: 3;
+}
+
+.interactive-title:hover span {
+    text-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+}
+
+.interactive-title span:first-child,
+.interactive-title span:last-child {
+    position: absolute;
+}
+
+.interactive-title span:first-child {
+    color: var(--defRed);
+    top: -5px;
+    left: -3px;
+    z-index: 1;
+}
+
+.interactive-title:hover span:first-child {
+    color: var(--defLightRed);
+    top: -7px;
+    left: -5px;
+    z-index: 2;
+    text-shadow: var(--defGlowingRed);
+}
+
+.interactive-title span:last-child {
+    color: var(--defBlue);
+    top: 5px;
+    left: 5px;
+    z-index: 2;
+}
+
+.interactive-title:hover span:last-child {
+    color: var(--defLightBlue);
+    top: 7px;
+    left: 7px;
+    z-index: 1;
+    text-shadow: var(--defGlowingBlue);
+}

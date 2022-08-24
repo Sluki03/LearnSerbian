@@ -1,52 +1,51 @@
-/*Nav style*/
-.navbar {
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
-    display: inline-block;
     user-select: none;
     background-color: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(10px);
-    height: 60px;
     box-shadow: 0px 1px 10px gray;
     position: fixed;
     top: 0;
+    padding: 3px;
     z-index: 10;
 }
 
-.navbarTitle {
-    position: absolute;
+nav a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: rgb(60, 60, 60);
+    font-size: 20px;
 }
 
-.navbar img {
-    height: 50px;
-    padding: 7px;
-    float: left;
+nav img {
+    width: 265px;
 }
 
-.navbar ul {
-    display: inline-flex;
-    float: right;
-    margin-top: 4px;
-    padding-right: 15px;
+nav ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
 }
 
-.navbar li {
+nav ul li {
     margin: 0px 5px;
     padding: 12px;
     cursor: pointer;
     transition: background-color .3s, border-radius .3s;
 }
 
-.navbar li:hover, .navbar li:focus {
+nav ul li:hover,
+nav li:focus {
     background-color: rgba(129, 129, 129, 0.4);
     border-radius: 15px;
 }
 
-.navbar a {
-    text-decoration: none;
-    color: rgb(60, 60, 60);
-    font-size: 20px;
-}
-
-.currentPage {
+.current-page {
     font-weight: bold;
 }

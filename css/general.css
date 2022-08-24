@@ -3,14 +3,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap');
 
 :root {
-    --crvena: #c7363d;
-    --plava: #0d4077;
+    --defRed: #df1c3d;
+    --defLightRed: #f2072f;
+    --defGlowingRed: 0px 0px 15px rgba(247,72,101,0.5);
+    --defBlue: #144eba;
+    --defLightBlue: #0559f5;
+    --defGlowingBlue: 0px 0px 15px rgba(82,138,242,0.5);
+    --defRedBlue: linear-gradient(135deg, var(--defRed) 35%, var(--defBlue) 65%);
+    --defBlueRed: linear-gradient(135deg, var(--defBlue) 35%, var(--defRed) 65%);
+    --defDarkGrey: #3c3c3c;
 }
 
 /*General style*/
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
     font-family: Nunito, Calibri;
     list-style-type: none;
     text-decoration: none;

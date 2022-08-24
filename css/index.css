@@ -12,79 +12,26 @@ img {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
     height: 100vh;
     font-weight: bold;
     text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.30);
-    color: rgb(60, 60, 60);
+    color: var(--defDarkGrey);
     position: relative;
 }
 
-.first h1 {
-    font-size: 42px;
-}
-
-.first main {
+.first .first-content {
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
-    margin: 10px 0;
+    flex-direction: column;
+    transform: translateY(-25%);
 }
 
-.first main span {
-    color: white;
-    font-size: 120px;
-    text-transform: capitalize;
-    font-weight: bold;
-    white-space: nowrap;
-    text-shadow: 0px 0px 5px rgba(0,0,0,0.5);
-    cursor: default;
-    transition: text-shadow .5s, color .5s, top .5s, left .5s, z-index .5s;
-    user-select: none;
-    z-index: 3;
+.first .first-content h1 {
+    font-size: 42px;
 }
 
-.first main:hover span {
-    text-shadow: 0px 0px 10px rgba(0,0,0,0.5);
-}
-
-.first main span:first-child,
-.first main span:last-child {
-    position: absolute;
-}
-
-.first main span:first-child {
-    color: rgb(223, 37, 37);
-    top: -5px;
-    left: -3px;
-    z-index: 1;
-}
-
-.first main:hover span:first-child {
-    color: red;
-    top: -7px;
-    left: -5px;
-    z-index: 2;
-    text-shadow: 0px 0px 10px rgb(223, 37, 37, 0.5);
-}
-
-.first main span:last-child {
-    color: rgb(18, 70, 167);
-    top: 5px;
-    left: 5px;
-    z-index: 2;
-}
-
-.first main:hover span:last-child {
-    color: rgb(23, 99, 240);
-    top: 7px;
-    left: 7px;
-    z-index: 1;
-    text-shadow: 0px 0px 10px rgb(18, 70, 167, 0.5);
-}
-
-.first p {
+.first .first-content p {
     font-size: 22px;
     font-weight: normal;
 }
@@ -94,17 +41,25 @@ img {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 20px;
     height: 100vh;
     text-align: center;
     position: relative;
 }
 
-.title {
-    font-size: 25px;
+.second .second-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    transform: translateY(-25%);
+}
+
+.second h1 {
+    font-size: 50px;
     text-align: center;
     text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.69);
-    color: rgb(60, 60, 60);
+    color: var(--defDarkGrey);
 }
 
 .arrowButton {
@@ -117,7 +72,7 @@ img {
     cursor: pointer;
     transition: background-color .3s;
     position: absolute;
-    bottom: 20px;
+    bottom: 40px;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -152,11 +107,12 @@ img {
     vertical-align: top;
     backdrop-filter: blur(10px);
     transition: font-size 0.5s;
-    color: rgb(60, 60, 60);
+    color: var(--defDarkGrey);
     height: 250px;
 }
 
 .panelContent h1 {
+    font-size: 35px;
     padding-bottom: 5px;
     background-color: white;
     border-radius: 20px 20px 0px 0px;
