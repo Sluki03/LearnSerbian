@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template - 1</title>
+
+    <!--CSS liked files-->
+    <link rel="stylesheet" href="../../../css/exercise.css">
+    <link rel="stylesheet" href="../../../css/general.css">
+</head>
+<body class="body">
+    <!--Leave button-->
+    <div class="leave">
+        <a href="/index.html" title="Leave">X</a>
+    </div>
+
+    <!--Content in the center of the page-->
+    <div class="center">
+        <!--Exercise title and icon-->
+        <div class="exerciseTitle">
+            <img src="../../../images/icons/lines.png" class="exerciseIcon">
+            <p id="exerciseTitle">Fill in the line with the word "name" in Serbian.</p>
+        </div>
+
+        <!--Exercise-->
+        <div>
+            Zdravo, moje <input type="text" id="answer" autofocus> je Ana.
+        </div>
+
+        <div class="letterButtons">
+            <button class="button letterButton" onclick="ch()">č</button>
+            <button class="button letterButton" onclick="tj()">ć</button>
+            <button class="button letterButton" onclick="dj()">đ</button>
+            <button class="button letterButton" onclick="sh()">š</button>
+            <button class="button letterButton" onclick="zh()">ž</button>
+            <button class="button letterButton" onclick="dzh()">dž</button>
+        </div>
+    </div>
+
+    <!-- The panel at the bottom of the page-->
+    <div class="panel" id="panel">
+        <!--Message-->
+        <p class="panelMessage" id="panelMessage">Enter the answer and then press the <b>Check</b> button.</p>
+        <!--Check/Continue button-->
+        <button class="button panelButton continueButtonGlobal gradientButton" id="panelButton" onclick="Check();"><b>Check</b></button>
+    </div>
+</body>
+<script src="script.js"></script>
+<script src="../../../scripts/enterKey.js"></script>
+<script src="../../../scripts/letterButtons.js"></script>
+</html>

@@ -1,0 +1,52 @@
+/*Nav style*/
+.navbar {
+    width: 100%;
+    display: inline-block;
+    user-select: none;
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    height: 60px;
+    box-shadow: 0px 1px 10px gray;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+}
+
+.navbarTitle {
+    position: absolute;
+}
+
+.navbar img {
+    height: 50px;
+    padding: 7px;
+    float: left;
+}
+
+.navbar ul {
+    display: inline-flex;
+    float: right;
+    margin-top: 4px;
+    padding-right: 15px;
+}
+
+.navbar li {
+    margin: 0px 5px;
+    padding: 12px;
+    cursor: pointer;
+    transition: background-color .3s, border-radius .3s;
+}
+
+.navbar li:hover, .navbar li:focus {
+    background-color: rgba(129, 129, 129, 0.4);
+    border-radius: 15px;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: rgb(60, 60, 60);
+    font-size: 20px;
+}
+
+.currentPage {
+    font-weight: bold;
+}

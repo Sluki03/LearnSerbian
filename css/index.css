@@ -1,0 +1,249 @@
+body {
+    background-color: white;
+    background-image: url("../images/background.png");
+    background-attachment: fixed;
+}
+
+img {
+    user-select: none;
+}
+
+.first {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    font-weight: bold;
+    text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.30);
+    color: rgb(60, 60, 60);
+    position: relative;
+}
+
+.first h1 {
+    font-size: 42px;
+}
+
+.first main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin: 10px 0;
+}
+
+.first main span {
+    color: white;
+    font-size: 120px;
+    text-transform: capitalize;
+    font-weight: bold;
+    white-space: nowrap;
+    text-shadow: 0px 0px 5px rgba(0,0,0,0.5);
+    cursor: default;
+    transition: text-shadow .5s, color .5s, top .5s, left .5s, z-index .5s;
+    user-select: none;
+    z-index: 3;
+}
+
+.first main:hover span {
+    text-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+}
+
+.first main span:first-child,
+.first main span:last-child {
+    position: absolute;
+}
+
+.first main span:first-child {
+    color: rgb(223, 37, 37);
+    top: -5px;
+    left: -3px;
+    z-index: 1;
+}
+
+.first main:hover span:first-child {
+    color: red;
+    top: -7px;
+    left: -5px;
+    z-index: 2;
+    text-shadow: 0px 0px 10px rgb(223, 37, 37, 0.5);
+}
+
+.first main span:last-child {
+    color: rgb(18, 70, 167);
+    top: 5px;
+    left: 5px;
+    z-index: 2;
+}
+
+.first main:hover span:last-child {
+    color: rgb(23, 99, 240);
+    top: 7px;
+    left: 7px;
+    z-index: 1;
+    text-shadow: 0px 0px 10px rgb(18, 70, 167, 0.5);
+}
+
+.first p {
+    font-size: 22px;
+    font-weight: normal;
+}
+
+.second {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    height: 100vh;
+    text-align: center;
+    position: relative;
+}
+
+.title {
+    font-size: 25px;
+    text-align: center;
+    text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.69);
+    color: rgb(60, 60, 60);
+}
+
+.arrowButton {
+    border: none;
+    background-color: rgb(230, 230, 230);
+    border-radius: 50px;
+    height: 100px;
+    width: 100px;
+    box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.50);
+    cursor: pointer;
+    transition: background-color .3s;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.arrowButton:hover {
+    background-color: rgb(200, 200, 200);
+}
+
+.arrowButton img {
+    padding-top: 10px;
+    height: 50px;
+}
+
+.panels {
+    display: inline-block;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.panel {
+    max-width: 350px;
+    background-color: #f0f0f0;
+    text-align: center;
+    border-radius: 20px;
+
+    /*padding: 10px;*/
+
+    margin: 10px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.50);
+    width: 100%;
+    display: inline-block;
+    vertical-align: top;
+    backdrop-filter: blur(10px);
+    transition: font-size 0.5s;
+    color: rgb(60, 60, 60);
+    height: 250px;
+}
+
+.panelContent h1 {
+    padding-bottom: 5px;
+    background-color: white;
+    border-radius: 20px 20px 0px 0px;
+    padding-top: 8px;
+}
+
+.panelContent p {
+    margin: 20px;
+    font-size: 20px;
+}
+
+.alignDivs {
+    text-align: center;
+}
+
+.examplePanel {
+    width: 450px;
+    max-width: calc(100% - 20px);
+    padding: 0 10px;
+}
+
+.markText {
+    background-color: rgba(255, 37, 208, 0.4);
+    border-radius: 5px;
+}
+
+.panelContentExercise {
+    text-align: left;
+}
+
+input {
+    background-color: #ffffff00;
+    color: black;
+    border: none;
+    border-bottom: solid 2px white;
+    outline: none;
+    width: 30px;
+    margin: 5px 0;
+    font-size: 18px;
+    text-align: center;
+    font-weight: bold;
+    transition: border-bottom .3s;
+    text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.69);
+}
+
+.checkButtonDemo {
+    font-size: 22px;
+    float: right;
+    border-radius: 10px;
+    border: none;
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: black;
+    margin: 25px 15px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: box-shadow .3s, transform .3s, background-color .3s;
+}
+
+.checkButtonDemo:hover, .checkButtonDemo:focus {
+    box-shadow: 0px 4px rgba(0, 0, 0, 0.6);
+    outline: none;
+}
+
+.checkButtonDemo:active {
+    background-color: rgb(36, 36, 36);
+    transform: translateY(4px);
+}
+
+.alignDivs :nth-child(1) .panelContent h1 {
+    background-color: #c72f2f;
+    color: white;
+}
+
+.alignDivs :nth-child(2) .panelContent h1 {
+    background-color: #2f6cc7;
+    color: white;
+}
+
+.alignDivs :nth-child(1) .panelContent p {
+    margin-top: 28px;
+}
+
+.alignDivs :nth-child(2) .panelContent p {
+    margin-top: 42px;
+}
+
+.alignDivs :nth-child(3) .panelContent p {
+    margin-top: 42px;
+}

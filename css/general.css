@@ -1,0 +1,32 @@
+/*Nunito font implementation*/
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap');
+
+:root {
+    --crvena: #c7363d;
+    --plava: #0d4077;
+}
+
+/*General style*/
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Nunito, Calibri;
+    list-style-type: none;
+    text-decoration: none;
+    scroll-behavior: smooth;
+}
+
+/*Selected text style*/
+::selection {
+    color: white;
+    background-color: rgb(72, 138, 158, 0.5);
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
