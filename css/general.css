@@ -12,6 +12,8 @@
     --defRedBlue: linear-gradient(135deg, var(--defRed) 35%, var(--defBlue) 65%);
     --defBlueRed: linear-gradient(135deg, var(--defBlue) 35%, var(--defRed) 65%);
     --defDarkGrey: #3c3c3c;
+    --defGreen: #0fff03;
+    --defYellow: #ffe603;
 }
 
 /*General style*/
