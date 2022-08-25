@@ -25,6 +25,23 @@
     scroll-behavior: smooth;
 }
 
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: white;
+    border-left: 1px solid var(--defBlue);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--defRed);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--defLightRed);
+}
+
 /*Selected text style*/
 ::selection {
     color: white;

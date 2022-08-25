@@ -26,19 +26,27 @@ section {
 }
 
 .exercises-info {
-    width: 45%;
-}
-
-.exercises-info .title {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     flex-direction: column;
-    margin-top: 10px;
+    width: 45%;
+    overflow: auto;
 }
 
 .exercises-info .interactive-title span {
     font-size: 70px;
+}
+
+.exercises-info .mini-title span {
+    font-size: 40px;
+}
+
+.exercises-info p {
+    color: var(--defDarkGrey);
+    font-size: 20px;
+    text-align: center;
+    padding: 10px;
 }
 
 .exercises-holder {
@@ -48,7 +56,11 @@ section {
     border-left: 1px solid black;
     box-shadow: -2px 0px 30px -2px rgba(0,0,0,0.3);
     transition: 100ms;
-    overflow: hidden;
+    overflow: auto;
+}
+
+.exercises-holder::-webkit-scrollbar {
+    width: 0;
 }
 
 .exercises-holder .exercises-tree {
