@@ -1,4 +1,6 @@
-export default function createInteractiveTitle(title, appendTo) {
+export default function interactiveTitle(componentParams) {
+    const [title, appendTo] = componentParams;
+
     const interactiveTitle = document.createElement("div");
     interactiveTitle.setAttribute("class", "interactive-title");
     appendTo.appendChild(interactiveTitle);

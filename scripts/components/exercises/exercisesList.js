@@ -1,9 +1,12 @@
-import { exercisesData } from "../../data/exercisesData.js";
-import getInteractiveTitle from "../getInteractiveTitle.js";
+import { exercisesData } from "../../../data/exercisesData.js";
+import createComponent from "../index.js";
+import closeExerciseModal from "../../exercises/closeExerciseModal.js";
 
-export default function generator() {
+export default function exercisesList() {
     const tree = document.querySelector(".exercises-tree");
     const treeEnd = document.getElementById("exercises-tree-end");
+
+    let activeExerciseId = 0;
 
     exercisesData.forEach((exercise, index) => {
         const exerciseHolder = document.createElement("div");
@@ -27,13 +30,15 @@ export default function generator() {
         articleExercise.setAttribute("class", "exercise");
         exerciseHolder.appendChild(articleExercise);
 
+        articleExercise.addEventListener("click", () => openExerciseModal(articleExercise, exercise, index + 1));
+
         const exerciseContent = document.createElement("div");
         exerciseContent.setAttribute("class", "exercise-content");
         articleExercise.appendChild(exerciseContent);
 
-        getInteractiveTitle(index + 1, exerciseContent);
+        createComponent("interactiveTitle", index + 1, exerciseContent);
     });
-
+    
     function getDifficultyColor(difficulty) {
         const colors = { easy: "#0fff03", medium: "#ffe603", hard: "#df1c3d" };
         let selectedColor = "";
@@ -43,5 +48,17 @@ export default function generator() {
         });
 
         return selectedColor;
+    }
+
+    function openExerciseModal(activeExercise, exercise, id) {
+        if(activeExerciseId === id) return;
+        if(activeExerciseId !== 0) closeExerciseModal({ activeExercise, exercise });
+        
+        else {
+            activeExercise.setAttribute("id", "active-exercise");
+            createComponent("singleExercise", exercise);
+        }
+
+        activeExerciseId = id;
     }
 }

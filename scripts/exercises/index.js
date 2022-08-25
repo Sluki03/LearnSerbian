@@ -1,7 +1,7 @@
 import scrollingParallax from "./scrollingParallax.js";
-import generator from "./generator.js";
+import createComponent from "../components/index.js";
 
 window.addEventListener("load", () => {
     scrollingParallax();
-    generator();
+    createComponent("exercisesList");
 });

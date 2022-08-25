@@ -1,0 +1,43 @@
+.modal-x {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 50px;
+    background-color: transparent;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    transition: 300ms;
+}
+
+.modal-x::before,
+.modal-x::after {
+    content: "";
+    display: block;
+    height: 5px;
+    width: 100%;
+    position: absolute;
+    transition: 300ms;
+}
+
+.modal-x::before {
+    background-color: var(--defRed);
+    transform: rotate(45deg);
+}
+
+.modal-x:hover::before {
+    background-color: var(--defBlue);
+    transform: rotate(-45deg);
+}
+
+.modal-x::after {
+    background-color: var(--defBlue);
+    transform: rotate(-45deg);
+}
+
+.modal-x:hover::after {
+    background-color: var(--defRed);
+    transform: rotate(45deg);
+}
