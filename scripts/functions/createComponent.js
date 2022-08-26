@@ -1,7 +1,7 @@
-import interactiveTitle from "./other/interactiveTitle.js"
-import modalX from "./other/modalX.js";
-import exercisesList from "./exercises/exercisesList.js";
-import singleExercise from "./exercises/singleExercise.js";
+import interactiveTitle from "../components/other/interactiveTitle.js"
+import modalX from "../components/other/modalX.js";
+import exercisesList from "../components/exercises/exercisesList.js";
+import singleExercise from "../components/exercises/singleExercise.js";
 
 const components = {
     INTERACTIVE_TITLE: "interactiveTitle",
