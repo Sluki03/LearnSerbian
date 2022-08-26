@@ -1,9 +1,12 @@
+import createElement from "../../functions/createElement.js";
+
 export default function modalX(componentParams) {
     const [closeFunction, appendTo] = componentParams;
 
-    const modalX = document.createElement("div");
-    modalX.setAttribute("class", "modal-x");
-    appendTo.appendChild(modalX);
-
-    modalX.addEventListener("click", () => closeFunction());
+    createElement({
+        tag: "div",
+        attributes: { class: "modal-x" },
+        events: [{ on: "click", call: () => closeFunction() }],
+        appendTo
+    });
 }

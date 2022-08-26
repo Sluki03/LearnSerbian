@@ -1,22 +1,27 @@
-import createComponent from "../index.js";
+import createComponent from "../../functions/createComponent.js";
+import createElement from "../../functions/createElement.js";
 import closeExerciseModal from "../../exercises/closeExerciseModal.js";
 
 export default function singleExercise(componentParams) {
     const [exercise] = componentParams;
-    
-    const main = document.querySelector("main");
 
-    const exerciseModal = document.createElement("div");
-    exerciseModal.setAttribute("class", "exercise-modal");
-    main.appendChild(exerciseModal);
+    const main = document.querySelector("main");
+    
+    const exerciseModal = createElement({
+        tag: "div",
+        attributes: { class: "exercise-modal" },
+        appendTo: main
+    });
 
     setTimeout(() => exerciseModal.setAttribute("id", "active-exercise-modal"), 100);
 
     createComponent("modalX", closeExerciseModal, exerciseModal);
 
-    const exerciseModalTitle = document.createElement("div");
-    exerciseModalTitle.setAttribute("class", "exercise-modal-title");
-    exerciseModal.appendChild(exerciseModalTitle);
+    const exerciseModalTitle = createElement({
+        tag: "div",
+        attributes: { class: "exercise-modal-title" },
+        appendTo: exerciseModal
+    });
 
     createComponent("interactiveTitle", exercise.name, exerciseModalTitle);
 
@@ -27,7 +32,15 @@ export default function singleExercise(componentParams) {
     
     exerciseModalTitle.appendChild(activeExerciseClone);
 
-    const divider = document.createElement("div");
-    divider.setAttribute("class", "exercise-modal-divider");
-    exerciseModal.appendChild(divider);
+    createElement({
+        tag: "div",
+        attributes: { class: "exercise-modal-divider" },
+        appendTo: exerciseModal
+    });
+
+    createElement({
+        tag: "div",
+        attributes: { class: "exercise-modal-content" },
+        appendTo: exerciseModal
+    });
 }

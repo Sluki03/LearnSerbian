@@ -3,7 +3,8 @@
 export const exercisesData = [
     {
         name: "New words",
-        difficulty: "easy"
+        difficulty: "easy",
+        tips: "In this exercise you will have the opportunity to test you past tense knowledge..."
     },
 
     {
