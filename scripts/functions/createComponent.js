@@ -1,36 +1,50 @@
+import nav from "../components/other/nav.js";
 import interactiveTitle from "../components/other/interactiveTitle.js"
 import modalX from "../components/other/modalX.js";
 import exercisesList from "../components/exercises/exercisesList.js";
 import singleExercise from "../components/exercises/singleExercise.js";
+import panelsList from "../components/index/panelsList.js";
 
-const components = {
+const COMPONENTS = {
+    NAV: "nav",
     INTERACTIVE_TITLE: "interactiveTitle",
     MODAL_X: "modalX",
     EXERCISES_LIST: "exercisesList",
-    SINGLE_EXERCISE: "singleExercise"
+    SINGLE_EXERCISE: "singleExercise",
+    PANELS_LIST: "panelsList"
 };
 
 export default function createComponent(...params) {
     let componentFunction;
     
     switch(params[0]) {
-        case components.INTERACTIVE_TITLE: {
+        case COMPONENTS.NAV: {
+            componentFunction = nav;
+            break;
+        }
+        
+        case COMPONENTS.INTERACTIVE_TITLE: {
             componentFunction = interactiveTitle;
             break;
         }
 
-        case components.MODAL_X: {
+        case COMPONENTS.MODAL_X: {
             componentFunction = modalX;
             break;
         }
 
-        case components.EXERCISES_LIST: {
+        case COMPONENTS.EXERCISES_LIST: {
             componentFunction = exercisesList;
             break;
         }
 
-        case components.SINGLE_EXERCISE: {
+        case COMPONENTS.SINGLE_EXERCISE: {
             componentFunction = singleExercise;
+            break;
+        }
+
+        case COMPONENTS.PANELS_LIST: {
+            componentFunction = panelsList;
             break;
         }
 

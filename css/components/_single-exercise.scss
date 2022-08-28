@@ -1,0 +1,104 @@
+.exercise-holder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    .exercise-title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        max-width: 285px;
+        background-color: white;
+        border: 1px solid $defDarkGrey;
+        position: absolute;
+        left: 35%;
+        padding: 0 5px;
+        transform: translate(-100%, 50%);
+
+        .exercise-difficulty {
+            height: 20px;
+            width: 20px;
+            border: 1px solid $defDarkGrey;
+            border-radius: 50%;
+            background: $defRed;
+        }
+
+        p {
+            color: $defDarkGrey;
+            font-size: 30px;
+            margin: 0;
+        }
+    }
+
+    .exercise {
+        height: 180px;
+        width: 180px;
+        background: $defRedBlue;
+        cursor: pointer;
+        clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
+        position: relative;
+        transition: 300ms;
+
+        .exercise-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 165px;
+            width: 165px;
+            background-color: white;
+            cursor: inherit;
+            clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: 300ms;
+
+            .interactive-title span {
+                font-size: 50px;
+            }
+        }
+
+        .exercise:hover .exercise-content,
+        #active-exercise .exercise-content {
+            height: 155px;
+            width: 155px;
+        }
+    }
+
+    #active-exercise {
+        cursor: default;
+    }
+    
+    .exercise:hover,
+    #active-exercise {
+        background: $defBlueRed;
+    }
+
+    .exercise-clone {
+        height: 100px;
+        width: 100px;
+        cursor: default;
+
+        &:hover {
+            background: $defRedBlue;
+        }
+
+        .exercise-content {
+            height: 85px;
+            width: 85px;
+        }
+
+        &:hover .exercise-content {
+            height: 85px;
+            width: 85px;
+
+            .interactive-title span {
+                font-size: 90px;
+                cursor: inherit;
+            }
+        }
+    }
+}

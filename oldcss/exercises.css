@@ -44,6 +44,10 @@ section {
     left: 0;
 }
 
+#disabled-exercise-modal {
+    display: none;
+}
+
 .exercise-modal .exercise-modal-title {
     display: flex;
     align-items: center;
@@ -60,6 +64,45 @@ section {
     height: 3px;
     width: 80%;
     background: var(--defRedBlue);
+}
+
+.exercise-modal .exercise-modal-content {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 80%;
+    margin: 10px 0;
+}
+
+.exercise-modal-content .content-difficulty {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    width: 100%;
+}
+
+.content-difficulty p,
+.content-difficulty i {
+    color: var(--defDarkGrey);
+    font-size: 30px;
+    text-transform: capitalize;
+    font-weight: bold;
+}
+
+.content-difficulty .content-difficulty-circles {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+}
+
+.content-difficulty-circles .content-difficulty-circle {
+    height: 20px;
+    width: 20px;
+    border: 1px solid black;
+    border-radius: 50%;
 }
 
 .exercises-info {

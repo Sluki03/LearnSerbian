@@ -1,0 +1,50 @@
+@import "https://fonts.googleapis.com/css2?family=Nunito&display=swap";
+@import "https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap";
+
+@import "./variables";
+
+@function set-size($size) {
+    @return map-get($fontSizes, $size);
+}
+
+@mixin add-flex($direction: row, $justify: center, $align: center) {
+    display: flex;
+    align-items: $align;
+    justify-content: $justify;
+    flex-direction: $direction;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Nunito, Calibri;
+    list-style-type: none;
+    text-decoration: none;
+    scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: white;
+    border-left: 1px solid $defBlue;
+}
+
+::-webkit-scrollbar-thumb {
+    background: $defRed;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: $defLightRed;
+}
+
+::selection {
+    color: $defLightBlue;
+    background-color: $defLightRed50;
+}
+
+@import "./pages/main";
+@import "./components/main";

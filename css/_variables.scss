@@ -1,0 +1,26 @@
+$fontSizes: (
+    "sm": 10px,
+    "md": 15px,
+    "lg": 20px,
+    "xl": 25px,
+    "xxl": 35px,
+    "heading": 50px,
+    "xheading": 60px,
+    "xxheading": 70px,
+    "superheading": 100px
+);
+
+$defTextShadow: 2px 2px 15px rgba(0, 0, 0, 0.30);
+
+$defRed: #df1c3d;
+$defLightRed: #f2072f;
+$defLightRed50: rgba(242, 7, 47, 0.5);
+$defGlowingRed: 0px 0px 15px rgba(247,72,101,0.5);
+$defBlue: #144eba;
+$defLightBlue: #0559f5;
+$defGlowingBlue: 0px 0px 15px rgba(82,138,242,0.5);
+$defRedBlue: linear-gradient($defRed 35%, $defBlue 65%);
+$defBlueRed: linear-gradient(135deg, $defBlue 35%, $defRed 65%);
+$defDarkGrey: #3c3c3c;
+$defGreen: #0fff03;
+$defYellow: #ffe603;

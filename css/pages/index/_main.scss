@@ -1,0 +1,12 @@
+body {
+    background-color: white;
+    background-image: url("../images/background.png");
+    background-attachment: fixed;
+}
+
+img {
+    user-select: none;
+}
+
+@import "./welcome";
+@import "./info";

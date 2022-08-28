@@ -1,6 +1,7 @@
 import { exercisesData } from "../../../data/exercisesData.js";
 import createComponent from "../../functions/createComponent.js";
 import createElement from "../../functions/createElement.js";
+import getDifficultyColor from "../../exercises/getDifficultyColor.js";
 import closeExerciseModal from "../../exercises/closeExerciseModal.js";
 
 export default function exercisesList() {
@@ -51,24 +52,13 @@ export default function exercisesList() {
 
         createComponent("interactiveTitle", index + 1, exerciseContent);
     });
-    
-    function getDifficultyColor(difficulty) {
-        const colors = { easy: "#0fff03", medium: "#ffe603", hard: "#df1c3d" };
-        let selectedColor = "";
-
-        Object.keys(colors).forEach((key, index) => {
-            if(key === difficulty) selectedColor = Object.values(colors)[index];
-        });
-
-        return selectedColor;
-    }
 
     function openExerciseModal(activeExercise, exercise, id) {
         const exerciseModal = document.querySelector(".exercise-modal");
-        if(exerciseModal === null) activeExerciseId = 0;
-        
-        if(activeExerciseId === id) return;
 
+        if(exerciseModal.id === "disabled-exercise-modal" && activeExerciseId > 0) activeExerciseId = 0;
+        if(activeExerciseId === id) return;
+        
         if(activeExerciseId !== 0) closeExerciseModal({ activeExercise, exercise });
         
         else {
