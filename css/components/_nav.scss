@@ -1,11 +1,10 @@
 nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    @include add-flex(row, space-between);
+    height: 65px;
     width: 100%;
     user-select: none;
-    background-color: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(5px);
     box-shadow: 0px 1px 10px gray;
     position: fixed;
     top: 0;

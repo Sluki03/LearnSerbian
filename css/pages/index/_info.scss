@@ -35,7 +35,10 @@
     
                 h1 {
                     width: 100%;
-                    font-size: 35px;
+                    color: white;
+                    -webkit-text-stroke-width: 1px;
+                    -webkit-text-stroke-color: $defDarkGrey;
+                    font-size: set-size(xl);
                     background-color: $defLightBlue;
                     border-radius: 20px 20px 0px 0px;
                     padding: 10px 0;
@@ -50,7 +53,7 @@
                 }
 
                 p {
-                    font-size: set-size(lg);
+                    font-size: set-size(md);
                     padding: 20px;
                 }
             }

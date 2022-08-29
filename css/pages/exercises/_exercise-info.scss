@@ -1,0 +1,19 @@
+.exercises-info {
+    @include add-flex(column, flex-start);
+    width: 55%;
+    position: relative;
+    overflow: auto;
+
+    @include interactive-title(70px);
+
+    .mini-title span {
+        font-size: set-size(miniheading);
+    }
+
+    p {
+        color: $defDarkGrey;
+        font-size: set-size(md);
+        text-align: center;
+        padding: 10px 30px;
+    }
+}

@@ -6,10 +6,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="images/logo.png" type="image/x-icon"/>
         <link rel="stylesheet" href="./css/main.css">
+        <script defer type="module" src="./scripts/exercises/index.js"></script>
         <title>Learn Serbian - Exercises</title>
     </head>
 
-    <body>
+    <body id="exercises">
+        <nav id="exercises-nav"></nav>
+        
         <main>
             <div class="exercise-modal" id="disabled-exercise-modal">
                 <div class="modal-x"></div>
@@ -73,6 +76,11 @@
             </section>
             
             <section class="exercises-holder">
+                <div class="exercises-loading">
+                    <div class="rotating-div"></div>
+                    <div class="circle"></div>
+                </div>
+                
                 <div class="exercises-tree">
                     <div class="exercises-tree-line"></div>
                     
@@ -81,7 +89,5 @@
                 </div>
             </section>
         </main>
-
-        <script type="module" src="./scripts/exercises/index.js"></script>
     </body>
 </html>

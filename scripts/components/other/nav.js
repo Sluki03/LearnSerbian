@@ -1,16 +1,8 @@
 import { navButtonsData } from "../../../data/navButtonsData.js";
 import createElement from "../../functions/createElement.js";
 
-export default function nav(specialId) {
-    const body = document.querySelector("body");
-    const firstElement = document.querySelector("body").firstChild;
-
-    const navElement = createElement({
-        tag: "nav",
-        attributes: { id: specialId ? specialId : "" },
-        appendTo: body,
-        before: firstElement
-    });
+export default function nav() {
+    const navElement = document.querySelector("nav");
 
     const homeLink = createElement({
         tag: "a",

@@ -1,6 +1,7 @@
 .welcome {
     @include add-flex;
     height: 100vh;
+    width: 100%;
     color: $defDarkGrey;
     font-weight: bold;
     text-shadow: $defTextShadow;
@@ -10,12 +11,14 @@
         @include add-flex(column);
         transform: translateY(-25%);
 
+        @include interactive-title;
+        
         h1 {
-            font-size: set-size(xxl);
+            font-size: set-size(miniheading);
         }
 
         p {
-            font-size: set-size(xl);
+            font-size: set-size(lg);
             font-weight: normal;
         }
     }

@@ -1,0 +1,68 @@
+@mixin exercise {
+    .exercise {
+        height: 180px;
+        width: 180px;
+        background: $defRedBlue;
+        cursor: pointer;
+        clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
+        position: relative;
+        transition: 300ms;
+
+        &:hover {
+            background: $defBlueRed;
+        }
+
+        .exercise-content {
+            @include add-flex;
+            height: 165px;
+            width: 165px;
+            background-color: white;
+            cursor: inherit;
+            clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: 300ms;
+        }
+
+        &:hover .exercise-content {
+            height: 155px;
+            width: 155px;
+        }
+    }
+
+    #active-exercise {
+        background: $defBlueRed;
+        cursor: default;
+
+        .exercise-content {
+            height: 155px;
+            width: 155px;
+        }
+    }
+
+    .exercise-clone {
+        height: 100px;
+        width: 100px;
+        cursor: default;
+
+        &:hover {
+            background: $defRedBlue;
+        }
+
+        .exercise-content {
+            height: 85px;
+            width: 85px;
+            
+            .interactive-title span {
+                font-size: set-size(heading);
+            }
+        }
+
+        &:hover .exercise-content {
+            height: 85px;
+            width: 85px;
+        }
+    }
+}

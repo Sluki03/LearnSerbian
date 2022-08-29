@@ -1,0 +1,88 @@
+.exercises-holder {
+    width: 45%;
+    background-image: url("../images/background.png");
+    background-position-y: 0;
+    border-left: 1px solid black;
+    box-shadow: -2px 0px 30px -2px rgba(0,0,0,0.3);
+    position: relative;
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+        width: 0;
+    }
+
+    .exercises-loading {
+        @include add-flex;
+        height: 100%;
+        width: 100%;
+        background-image: url("../images/background.png");
+        background-color: white;
+        position: absolute;
+        z-index: 1;
+        
+        .rotating-div {
+            @include add-flex;
+            height: 100px;
+            width: 100px;
+            background: $defRedBlueWhite;
+            border-radius: 50%;
+            position: relative;
+            animation: rotating-div 5s linear infinite;
+            
+            @keyframes rotating-div {
+                from { transform: rotate(0) }
+                to { transform: rotate(360deg) }
+            }
+        }
+
+        .circle {
+            height: 80px;
+            width: 80px;
+            background-color: white;
+            border-radius: 50%;
+            position: absolute;
+        }
+    }
+    
+    .exercises-tree {
+        @include add-flex(column, flex-start);
+        gap: 100px;
+        width: 100%;
+        position: relative;
+        top: 0;
+        margin: 20px 0;
+        transition: 50ms;
+        
+        & > div:nth-of-type(2) {
+            margin-top: 100px;
+        }
+        
+        & > div:nth-last-of-type(1) {
+            margin-bottom: 100px;
+        }
+
+        & strong:last-of-type {
+            bottom: 0;
+        }
+
+        .exercises-tree-line {
+            height: 100%;
+            width: 3px;
+            background: $defDarkGrey;
+            position: absolute;
+        }
+
+        strong {
+            color: $defDarkGrey;
+            font-size: set-size(xl);
+            text-transform: capitalize;
+            background: white;
+            border: 1px solid $defDarkGrey;
+            padding: 5px;
+            position: absolute;
+        }
+
+        @include interactive-title(90px);
+        @include exercise;
+    }
+}

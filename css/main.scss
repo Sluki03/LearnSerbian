@@ -2,16 +2,10 @@
 @import "https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap";
 
 @import "./variables";
+@import "./mixins/main";
 
 @function set-size($size) {
     @return map-get($fontSizes, $size);
-}
-
-@mixin add-flex($direction: row, $justify: center, $align: center) {
-    display: flex;
-    align-items: $align;
-    justify-content: $justify;
-    flex-direction: $direction;
 }
 
 * {
