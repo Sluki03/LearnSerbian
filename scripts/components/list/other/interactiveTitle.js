@@ -1,4 +1,4 @@
-import createElement from "../../functions/createElement.js";
+import createElement from "../../../functions/createElement.js";
 
 export default function interactiveTitle(componentParams) {
     const [title, appendTo] = componentParams;

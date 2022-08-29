@@ -10,7 +10,7 @@ export default function createElement(element) {
 
     if(element.style) Object.keys(element.style).forEach((key, index) => {
         const value = Object.values(element.style)[index];
-        newElement.style.setProperty(JsToCssStandard(key), value);
+        newElement.style.setProperty(jsToCssStandard(key), value);
     });
 
     if(element.innerText) newElement.innerText = element.innerText;
@@ -25,7 +25,7 @@ export default function createElement(element) {
 
     return newElement;
 
-    function JsToCssStandard(string) {
+    function jsToCssStandard(string) {
         let newString = "";
 
         for(let i = 0; i < string.length; i++) {

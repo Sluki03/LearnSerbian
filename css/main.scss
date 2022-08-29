@@ -18,6 +18,11 @@
     scroll-behavior: smooth;
 }
 
+body {
+    position: relative;
+    overflow: hidden;
+}
+
 ::-webkit-scrollbar {
     width: 10px;
 }

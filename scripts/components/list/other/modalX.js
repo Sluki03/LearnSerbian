@@ -1,4 +1,4 @@
-import createElement from "../../functions/createElement.js";
+import createElement from "../../../functions/createElement.js";
 
 export default function modalX(componentParams) {
     const [closeFunction, appendTo] = componentParams;

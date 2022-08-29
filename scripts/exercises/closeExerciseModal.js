@@ -1,4 +1,4 @@
-import createComponent from "../functions/createComponent.js";
+import { Component } from "../components/component.js";
 
 export default function closeExerciseModal(openNew) {
     const exerciseModal = document.querySelector(".exercise-modal");
@@ -15,7 +15,7 @@ export default function closeExerciseModal(openNew) {
             const { activeExercise, exercise } = openNew;
 
             activeExercise.setAttribute("id", "active-exercise");
-            createComponent("singleExercise", exercise);
+            Component.create("singleExercise", exercise);
         }
     }, 300);
 

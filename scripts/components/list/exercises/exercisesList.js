@@ -1,8 +1,8 @@
-import { exercisesData } from "../../../data/exercisesData.js";
-import createComponent from "../../functions/createComponent.js";
-import createElement from "../../functions/createElement.js";
-import getDifficultyColor from "../../exercises/getDifficultyColor.js";
-import closeExerciseModal from "../../exercises/closeExerciseModal.js";
+import { exercisesData } from "../../../../data/exercisesData.js";
+import { Component } from "../../component.js";
+import createElement from "../../../functions/createElement.js";
+import getDifficultyColor from "../../../exercises/getDifficultyColor.js";
+import closeExerciseModal from "../../../exercises/closeExerciseModal.js";
 
 export default function exercisesList() {
     const tree = document.querySelector(".exercises-tree");
@@ -50,7 +50,7 @@ export default function exercisesList() {
             appendTo: articleExercise
         });
 
-        createComponent("interactiveTitle", index + 1, exerciseContent);
+        Component.create("interactiveTitle", index + 1, exerciseContent);
     });
 
     function openExerciseModal(activeExercise, exercise, id) {
@@ -63,7 +63,7 @@ export default function exercisesList() {
         
         else {
             activeExercise.setAttribute("id", "active-exercise");
-            createComponent("singleExercise", exercise);
+            Component.create("singleExercise", exercise);
         }
 
         activeExerciseId = id;

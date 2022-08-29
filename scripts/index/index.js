@@ -1,11 +1,14 @@
-import getComponents from "../functions/getComponent.js";
-import createComponent from "../functions/createComponent.js";
+import loaded from "../functions/loaded.js";
+import { Component } from "../components/component.js";
 import scrollingParallax from "../functions/scrollingParallax.js";
 
 window.addEventListener("load", () => {
-    getComponents("interactiveTitle");
-    createComponent("nav");
-    createComponent("panelsList");
+    loaded();
+    
+    Component.create("nav");
+    Component.create("panelsList");
+
+    Component.render();
 
     const body = document.querySelector("body");
     scrollingParallax({ scroll: window, bg: body });

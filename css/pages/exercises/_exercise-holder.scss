@@ -11,16 +11,17 @@
         width: 0;
     }
 
-    .exercises-loading {
+    .loading {
         @include add-flex;
         height: 100%;
         width: 100%;
         background-image: url("../images/background.png");
         background-color: white;
         position: absolute;
+        transition: 300ms;
         z-index: 1;
         
-        .rotating-div {
+        .rotating {
             @include add-flex;
             height: 100px;
             width: 100px;
@@ -33,14 +34,14 @@
                 from { transform: rotate(0) }
                 to { transform: rotate(360deg) }
             }
-        }
 
-        .circle {
-            height: 80px;
-            width: 80px;
-            background-color: white;
-            border-radius: 50%;
-            position: absolute;
+            .circle {
+                height: 80px;
+                width: 80px;
+                background-color: white;
+                border-radius: 50%;
+                position: absolute;
+            }
         }
     }
     

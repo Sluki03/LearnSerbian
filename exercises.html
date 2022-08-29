@@ -11,6 +11,12 @@
     </head>
 
     <body id="exercises">
+        <div class="loading">
+            <div class="rotating">
+                <div class="circle"></div>
+            </div>
+        </div>
+        
         <nav id="exercises-nav"></nav>
         
         <main>
@@ -30,17 +36,8 @@
             </div>
             
             <section class="exercises-info">
-                <div class="interactive-title">
-                    <span>exercises</span>
-                    <span>exercises</span>
-                    <span>exercises</span>
-                </div>
-
-                <div class="interactive-title mini-title">
-                    <span>test your knowledge</span>
-                    <span>test your knowledge</span>
-                    <span>test your knowledge</span>
-                </div>
+                <component class="interactive-title" data-title="exercises"></component>
+                <component class="interactive-title mini-title" data-title="test your knowledge"></component>
 
                 <p>
                     You can test your knowledge of the Serbian language through the exercises on this page.
@@ -48,11 +45,7 @@
                     knowledge of Serbian is.
                 </p>
 
-                <div class="interactive-title mini-title">
-                    <span>about</span>
-                    <span>about</span>
-                    <span>about</span>
-                </div>
+                <component class="interactive-title mini-title" data-title="about"></component>
 
                 <p>
                     Before choosing an exercise, you will be able to see information about it.
@@ -63,11 +56,7 @@
                     sentences...). After the solved exercise, you will receive information about your score.
                 </p>
 
-                <div class="interactive-title mini-title">
-                    <span>learn from your mistakes</span>
-                    <span>learn from your mistakes</span>
-                    <span>learn from your mistakes</span>
-                </div>
+                <component class="interactive-title mini-title" data-title="learn from your mistakes"></component>
 
                 <p>
                     Exercises can be especially helpful, because if you make a mistake, you will be able to see
@@ -76,9 +65,10 @@
             </section>
             
             <section class="exercises-holder">
-                <div class="exercises-loading">
-                    <div class="rotating-div"></div>
-                    <div class="circle"></div>
+                <div class="loading">
+                    <div class="rotating">
+                        <div class="circle"></div>
+                    </div>
                 </div>
                 
                 <div class="exercises-tree">

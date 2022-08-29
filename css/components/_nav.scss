@@ -22,12 +22,24 @@ nav {
 
         a {
             color: $defDarkGrey;
+            text-align: center;
             font-size: set-size(lg);
             text-transform: capitalize;
+            position: relative;
+            top: 0;
+            transition: 300ms;
+
+            &:hover {
+                color: white;
+                text-shadow: -2px -2px 0px $defRed, 2px 2px 0px $defBlue;
+            }
         }
 
-        .current-page {
+        #current-page {
+            color: white;
             font-weight: bold;
+            text-shadow: -2px -2px 0px $defRed, 2px 2px 0px $defBlue;
+            top: -2px;
         }
     }
 }

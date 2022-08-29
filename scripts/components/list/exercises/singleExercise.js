@@ -1,7 +1,7 @@
-import createComponent from "../../functions/createComponent.js";
-import createElement from "../../functions/createElement.js";
-import getDifficultyColor from "../../exercises/getDifficultyColor.js";
-import closeExerciseModal from "../../exercises/closeExerciseModal.js";
+import { Component } from "../../component.js";
+import createElement from "../../../functions/createElement.js";
+import getDifficultyColor from "../../../exercises/getDifficultyColor.js";
+import closeExerciseModal from "../../../exercises/closeExerciseModal.js";
 
 export default function singleExercise(componentParams) {
     const [exercise] = componentParams;
@@ -16,7 +16,7 @@ export default function singleExercise(componentParams) {
 
     const exerciseModalTitle = document.querySelector(".exercise-modal-title");
 
-    createComponent("interactiveTitle", exercise.name, exerciseModalTitle);
+    Component.create("interactiveTitle", exercise.name, exerciseModalTitle);
 
     const activeExerciseClone = document.getElementById("active-exercise").cloneNode(true);
     

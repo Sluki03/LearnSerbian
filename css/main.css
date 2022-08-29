@@ -10,6 +10,11 @@
   scroll-behavior: smooth;
 }
 
+body {
+  position: relative;
+  overflow: hidden;
+}
+
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -486,7 +491,7 @@ main .exercises-holder {
 main .exercises-holder::-webkit-scrollbar {
   width: 0;
 }
-main .exercises-holder .exercises-loading {
+main .exercises-holder .loading {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -496,9 +501,10 @@ main .exercises-holder .exercises-loading {
   background-image: url("../images/background.png");
   background-color: white;
   position: absolute;
+  transition: 300ms;
   z-index: 1;
 }
-main .exercises-holder .exercises-loading .rotating-div {
+main .exercises-holder .loading .rotating {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -527,7 +533,7 @@ main .exercises-holder .exercises-loading .rotating-div {
     transform: rotate(360deg);
   }
 }
-main .exercises-holder .exercises-loading .circle {
+main .exercises-holder .loading .rotating .circle {
   height: 80px;
   width: 80px;
   background-color: white;
@@ -687,6 +693,55 @@ main .exercises-holder .exercises-tree .exercise-clone:hover .exercise-content {
   width: 85px;
 }
 
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  height: 100vh;
+  width: 100%;
+  background-image: url("../../images/background.png");
+  background-color: white;
+  position: absolute;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 1;
+  transition: 300ms;
+  z-index: 100;
+}
+.loading .rotating {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  height: 100px;
+  width: 100px;
+  background: linear-gradient(135deg, #df1c3d 45%, white 45% 55%, #144eba 55% 100%);
+  border-radius: 50%;
+  position: relative;
+  -webkit-animation: rotating-div 5s linear infinite;
+          animation: rotating-div 5s linear infinite;
+}
+@keyframes rotating-div {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.loading .rotating .circle {
+  height: 80px;
+  width: 80px;
+  background-color: white;
+  border-radius: 50%;
+  position: absolute;
+}
+
 nav {
   display: flex;
   align-items: center;
@@ -720,11 +775,22 @@ nav .button-holder {
 }
 nav .button-holder a {
   color: #3c3c3c;
+  text-align: center;
   font-size: 25px;
   text-transform: capitalize;
+  position: relative;
+  top: 0;
+  transition: 300ms;
 }
-nav .button-holder .current-page {
+nav .button-holder a:hover {
+  color: white;
+  text-shadow: -2px -2px 0px #df1c3d, 2px 2px 0px #144eba;
+}
+nav .button-holder #current-page {
+  color: white;
   font-weight: bold;
+  text-shadow: -2px -2px 0px #df1c3d, 2px 2px 0px #144eba;
+  top: -2px;
 }
 
 #exercises-nav {

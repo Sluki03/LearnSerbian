@@ -1,12 +1,14 @@
-import cancelLoading from "../functions/cancelLoading.js";
-import createComponent from "../functions/createComponent.js";
+import loaded from "../functions/loaded.js";
+import { Component } from "../components/component.js";
 import scrollingParallax from "../functions/scrollingParallax.js";
 
 window.addEventListener("load", () => {
-    cancelLoading(".exercises-loading");
+    loaded();
     
-    createComponent("nav");
-    createComponent("exercisesList");
+    Component.create("nav");
+    Component.create("exercisesList");
+
+    Component.render();
     
     const exercisesHolder = document.querySelector(".exercises-holder");
     scrollingParallax({ scroll: exercisesHolder, bg: exercisesHolder });
