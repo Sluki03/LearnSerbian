@@ -1,5 +1,6 @@
 import { navButtonsData } from "../../../../data/navButtonsData.js";
 import createElement from "../../../functions/createElement.js";
+import { Component } from "../../component.js";
 
 export default function nav() {
     const navElement = document.querySelector("nav");
@@ -10,11 +11,7 @@ export default function nav() {
         appendTo: navElement
     });
 
-    createElement({
-        tag: "img",
-        attributes: { src: "images/icons/Learn Serbian - Watermark (Long with crown).png", alt: "Logo" },
-        appendTo: homeLink
-    });
+    Component.create("interactiveTitle", "learn serbian", homeLink);
 
     const buttonHolder = createElement({ tag: "div", attributes: { class: "button-holder" }, appendTo: navElement });
 
