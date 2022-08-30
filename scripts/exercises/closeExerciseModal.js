@@ -9,7 +9,7 @@ export default function closeExerciseModal(openNew) {
 
     setTimeout(() => {        
         exerciseModal.id = "disabled-exercise-modal";
-        cleanup(".exercise-modal-title", ".content-difficulty .content-difficulty-circles", ".content-difficulty i");
+        cleanup(".exercise-modal-title", ".content-difficulty .content-difficulty-circles");
         
         if(openNew !== undefined) {
             const { activeExercise, exercise } = openNew;

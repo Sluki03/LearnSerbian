@@ -1,11 +1,12 @@
 .exercise-modal {
     @include add-flex(column, flex-start);
-    height: calc(100vh - 65px);
+    height: 100%;
     width: 55%;
     background: white;
     position: absolute;
     left: -100%;
     transition: 300ms;
+    overflow: auto;
     z-index: 10;
 
     .exercise-modal-title {
@@ -18,15 +19,17 @@
     }
 
     .exercise-modal-divider {
-        height: 3px;
+        min-height: 3px;
         width: 80%;
         background: $defRedBlue;
+        margin: 5px 0;
     }
 
     .exercise-modal-content {
         @include add-flex(column, flex-start);
         width: 80%;
-        margin: 10px 0;
+        position: relative;
+        margin-top: 10px;
 
         .content-difficulty {
             @include add-flex(row, flex-start);
@@ -60,33 +63,57 @@
             margin: 15px 0;
         }
         
+        h1 {
+            font-size: set-size(miniheading);
+        }
+
+        h2 {
+            font-size: set-size(xxl);
+        }
+
+        h3 {
+            font-size: set-size(xl);
+        }
+
+        h4 {
+            font-size: set-size(lg);
+        }
+        
         p {
             color: $defDarkGrey;
             font-size: set-size(md);
-            white-space: pre-line;
+        }
+
+        button {
+            width: 100%;
+            color: $defBlue;
+            font-size: set-size(xl);
+            font-weight: bold;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            background: linear-gradient(-45deg, $defBlue 35%, white 35% 65%, $defRed 65%);
+            background-position-x: 0;
+            border: 1px solid $defBlue;
+            cursor: pointer;
+            padding: 5px 10px;
+            position: sticky;
+            bottom: 0;
+            margin: 5px 0;
+            transition: 300ms;
+    
+            &:hover {
+                color: white;
+                letter-spacing: 10px;
+                background-position-x: 450px;
+            }
         }
     }
 
-    button {
-        width: 80%;
-        color: white;
-        font-size: set-size(xl);
-        font-weight: bold;
-        letter-spacing: 5px;
-        text-transform: uppercase;
-        background: linear-gradient(-45deg, $defBlue 50%, $defRed 50%);
-        border: 1px solid white;
-        cursor: pointer;
-        padding: 5px 10px;
-        position: absolute;
-        bottom: 0;
-        transition: 300ms;
+    #extended-exercise-modal-content {
+        height: 100%;
 
-        &:hover {
-            font-size: set-size(xxl);
-            text-shadow: -2px -2px 0px $defRed, 2px 2px 0px $defBlue;
-            background: white;
-            border: 1px solid $defBlue;
+        button {
+            position: absolute;
         }
     }
 }
@@ -97,4 +124,9 @@
 
 #disabled-exercise-modal {
     display: none;
+}
+
+#full-screen-exercise-modal {
+    width: 100%;
+    left: 0;
 }

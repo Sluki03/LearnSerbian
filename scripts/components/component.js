@@ -1,11 +1,13 @@
+import loading from "./list/other/loading.js";
 import nav from "./list/other/nav.js"
+import footer from "./list/other/footer.js";
 import interactiveTitle from "./list/other/interactiveTitle.js"
-import modalX from "./list/other/modalX.js";
+import modalOptions from "./list/other/modalOptions.js";
 import exercisesList from "./list/exercises/exercisesList.js";
 import singleExercise from "./list/exercises/singleExercise.js";
 import panelsList from "./list/index/panelsList.js";
 
-const components = { nav, interactiveTitle, modalX, exercisesList, singleExercise, panelsList };
+const components = { loading, nav, footer, interactiveTitle, modalOptions, exercisesList, singleExercise, panelsList };
 
 export const Component = { create, render };
 

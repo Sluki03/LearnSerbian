@@ -11,17 +11,12 @@
     </head>
 
     <body id="exercises">
-        <div class="loading">
-            <div class="rotating">
-                <div class="circle"></div>
-            </div>
-        </div>
-        
-        <nav data-component="nav" id="exercises-nav"></nav>
+        <div class="loading" data-component="loading"></div>
+        <nav id="exercises-nav" data-component="nav"></nav>
         
         <main>
             <div class="exercise-modal" id="disabled-exercise-modal">
-                <div class="modal-x"></div>
+                <div class="modal-options" data-component="modal-options"></div>
 
                 <div class="exercise-modal-title"></div>
                 <div class="exercise-modal-divider"></div>
@@ -30,14 +25,13 @@
                     <div class="content-difficulty">
                         <p>difficulty:</p>
                         <div class="content-difficulty-circles"></div>
-                        <i></i>
                     </div>
 
                     <strong>tips:</strong>
                     <p class="content-p"></p>
-                </div>
 
-                <button>start</button>
+                    <button>start</button>
+                </div>
             </div>
             
             <section class="exercises-info">
@@ -70,11 +64,7 @@
             </section>
             
             <section class="exercises-holder">
-                <div class="loading">
-                    <div class="rotating">
-                        <div class="circle"></div>
-                    </div>
-                </div>
+                <div class="loading" data-component="loading"></div>
                 
                 <div class="exercises-tree">
                     <div class="exercises-tree-line"></div>

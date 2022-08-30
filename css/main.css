@@ -227,12 +227,13 @@ main .exercise-modal {
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
-  height: calc(100vh - 65px);
+  height: 100%;
   width: 55%;
   background: white;
   position: absolute;
   left: -100%;
   transition: 300ms;
+  overflow: auto;
   z-index: 10;
 }
 main .exercise-modal .exercise-modal-title {
@@ -301,7 +302,7 @@ main .exercise-modal .exercise-modal-title .interactive-title:hover span:last-ch
 main .exercise-modal .exercise-modal-title .exercise {
   height: 180px;
   width: 180px;
-  background: linear-gradient(#df1c3d 35%, #144eba 65%);
+  background: linear-gradient(135deg, #df1c3d 35%, #144eba 65%);
   cursor: pointer;
   -webkit-clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
           clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
@@ -346,7 +347,7 @@ main .exercise-modal .exercise-modal-title .exercise-clone {
   cursor: default;
 }
 main .exercise-modal .exercise-modal-title .exercise-clone:hover {
-  background: linear-gradient(#df1c3d 35%, #144eba 65%);
+  background: linear-gradient(135deg, #df1c3d 35%, #144eba 65%);
 }
 main .exercise-modal .exercise-modal-title .exercise-clone .exercise-content {
   height: 85px;
@@ -360,9 +361,10 @@ main .exercise-modal .exercise-modal-title .exercise-clone:hover .exercise-conte
   width: 85px;
 }
 main .exercise-modal .exercise-modal-divider {
-  height: 3px;
+  min-height: 3px;
   width: 80%;
-  background: linear-gradient(#df1c3d 35%, #144eba 65%);
+  background: linear-gradient(135deg, #df1c3d 35%, #144eba 65%);
+  margin: 5px 0;
 }
 main .exercise-modal .exercise-modal-content {
   display: flex;
@@ -370,7 +372,8 @@ main .exercise-modal .exercise-modal-content {
   justify-content: flex-start;
   flex-direction: column;
   width: 80%;
-  margin: 10px 0;
+  position: relative;
+  margin-top: 10px;
 }
 main .exercise-modal .exercise-modal-content .content-difficulty {
   display: flex;
@@ -405,37 +408,60 @@ main .exercise-modal .exercise-modal-content strong {
   text-transform: uppercase;
   margin: 15px 0;
 }
+main .exercise-modal .exercise-modal-content h1 {
+  font-size: 40px;
+}
+main .exercise-modal .exercise-modal-content h2 {
+  font-size: 35px;
+}
+main .exercise-modal .exercise-modal-content h3 {
+  font-size: 30px;
+}
+main .exercise-modal .exercise-modal-content h4 {
+  font-size: 25px;
+}
 main .exercise-modal .exercise-modal-content p {
   color: #3c3c3c;
   font-size: 20px;
-  white-space: pre-line;
 }
-main .exercise-modal button {
-  width: 80%;
-  color: white;
+main .exercise-modal .exercise-modal-content button {
+  width: 100%;
+  color: #144eba;
   font-size: 30px;
   font-weight: bold;
   letter-spacing: 5px;
   text-transform: uppercase;
-  background: linear-gradient(-45deg, #144eba 50%, #df1c3d 50%);
-  border: 1px solid white;
+  background: linear-gradient(-45deg, #144eba 35%, white 35% 65%, #df1c3d 65%);
+  background-position-x: 0;
+  border: 1px solid #144eba;
   cursor: pointer;
   padding: 5px 10px;
-  position: absolute;
+  position: -webkit-sticky;
+  position: sticky;
   bottom: 0;
+  margin: 5px 0;
   transition: 300ms;
 }
-main .exercise-modal button:hover {
-  font-size: 35px;
-  text-shadow: -2px -2px 0px #df1c3d, 2px 2px 0px #144eba;
-  background: white;
-  border: 1px solid #144eba;
+main .exercise-modal .exercise-modal-content button:hover {
+  color: white;
+  letter-spacing: 10px;
+  background-position-x: 450px;
+}
+main .exercise-modal #extended-exercise-modal-content {
+  height: 100%;
+}
+main .exercise-modal #extended-exercise-modal-content button {
+  position: absolute;
 }
 main #active-exercise-modal {
   left: 0;
 }
 main #disabled-exercise-modal {
   display: none;
+}
+main #full-screen-exercise-modal {
+  width: 100%;
+  left: 0;
 }
 main .exercises-info {
   display: flex;
@@ -665,7 +691,7 @@ main .exercises-holder .exercises-tree .interactive-title:hover span:last-child 
 main .exercises-holder .exercises-tree .exercise {
   height: 180px;
   width: 180px;
-  background: linear-gradient(#df1c3d 35%, #144eba 65%);
+  background: linear-gradient(135deg, #df1c3d 35%, #144eba 65%);
   cursor: pointer;
   -webkit-clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
           clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
@@ -710,7 +736,7 @@ main .exercises-holder .exercises-tree .exercise-clone {
   cursor: default;
 }
 main .exercises-holder .exercises-tree .exercise-clone:hover {
-  background: linear-gradient(#df1c3d 35%, #144eba 65%);
+  background: linear-gradient(135deg, #df1c3d 35%, #144eba 65%);
 }
 main .exercises-holder .exercises-tree .exercise-clone .exercise-content {
   height: 85px;
@@ -896,10 +922,9 @@ footer {
   justify-content: space-around;
   flex-direction: row;
   width: 100%;
-  color: rgb(60, 60, 60);
   background-color: rgba(255, 255, 255, 0.2);
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
   box-shadow: 0px 1px 10px gray;
   padding: 10px 0;
 }
@@ -910,6 +935,7 @@ footer div {
   flex-direction: column;
 }
 footer div h3 {
+  color: #3c3c3c;
   margin-bottom: 5px;
 }
 footer div a {
@@ -917,21 +943,29 @@ footer div a {
   text-decoration: none;
 }
 
-.modal-x {
+.modal-options {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  height: 50px;
-  width: 50px;
-  background-color: transparent;
-  cursor: pointer;
+  gap: 15px;
   position: absolute;
   top: 10px;
   right: 10px;
+}
+.modal-options .modal-x {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  height: 40px;
+  width: 40px;
+  background-color: transparent;
+  cursor: pointer;
+  position: relative;
   transition: 300ms;
 }
-.modal-x::before, .modal-x::after {
+.modal-options .modal-x::before, .modal-options .modal-x::after {
   content: "";
   display: block;
   height: 5px;
@@ -939,21 +973,37 @@ footer div a {
   position: absolute;
   transition: 300ms;
 }
-.modal-x::before {
+.modal-options .modal-x::before {
   background-color: #df1c3d;
   transform: rotate(45deg);
 }
-.modal-x:hover::before {
+.modal-options .modal-x:hover::before {
   background-color: #144eba;
   transform: rotate(-45deg);
 }
-.modal-x::after {
+.modal-options .modal-x::after {
   background-color: #144eba;
   transform: rotate(-45deg);
 }
-.modal-x:hover::after {
+.modal-options .modal-x:hover::after {
   background-color: #df1c3d;
   transform: rotate(45deg);
+}
+.modal-options .modal-resize {
+  height: 40px;
+  width: 20px;
+  border-top: 5px solid #df1c3d;
+  border-bottom: 5px solid #df1c3d;
+  border-left: 5px solid #144eba;
+  border-right: 5px solid #144eba;
+  cursor: pointer;
+  transition: 300ms;
+}
+.modal-options .modal-resize:hover {
+  transform: rotate(90deg);
+}
+.modal-options #active-modal-resize {
+  transform: rotate(90deg);
 }
 
 .arrow-button {
@@ -971,7 +1021,6 @@ footer div a {
   position: absolute;
   bottom: 40px;
   transition: 300ms;
-  transform: translateX(25%);
 }
 .arrow-button:hover {
   background-color: rgb(200, 200, 200);
@@ -1016,7 +1065,7 @@ footer div a {
 .exercise-holder .exercise {
   height: 180px;
   width: 180px;
-  background: linear-gradient(#df1c3d 35%, #144eba 65%);
+  background: linear-gradient(135deg, #df1c3d 35%, #144eba 65%);
   cursor: pointer;
   -webkit-clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
           clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
@@ -1061,7 +1110,7 @@ footer div a {
   cursor: default;
 }
 .exercise-holder .exercise-clone:hover {
-  background: linear-gradient(#df1c3d 35%, #144eba 65%);
+  background: linear-gradient(135deg, #df1c3d 35%, #144eba 65%);
 }
 .exercise-holder .exercise-clone .exercise-content {
   height: 85px;

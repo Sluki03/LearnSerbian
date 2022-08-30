@@ -17,12 +17,11 @@ $defTextShadow: 2px 2px 15px rgba(0, 0, 0, 0.30);
 
 $defRed: #df1c3d;
 $defLightRed: #f2072f;
-$defLightRed50: rgba(242, 7, 47, 0.5);
 $defGlowingRed: 0px 0px 15px rgba(247,72,101,0.5);
 $defBlue: #144eba;
 $defLightBlue: #0559f5;
 $defGlowingBlue: 0px 0px 15px rgba(82,138,242,0.5);
-$defRedBlue: linear-gradient($defRed 35%, $defBlue 65%);
+$defRedBlue: linear-gradient(135deg, $defRed 35%, $defBlue 65%);
 $defBlueRed: linear-gradient(135deg, $defBlue 35%, $defRed 65%);
 $defRedBlueWhite: linear-gradient(135deg, $defRed 45%, white 45% 55%, $defBlue 55% 100%);
 $defDarkGrey: #3c3c3c;

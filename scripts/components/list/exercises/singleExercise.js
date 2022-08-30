@@ -12,7 +12,14 @@ export default function singleExercise(componentProps) {
 
     setTimeout(() => exerciseModal.setAttribute("id", "active-exercise-modal"), 100);
 
-    const modalX = document.querySelector(".exercise-modal .modal-x");
+    const modalOptionsChildren = [...document.querySelector(".exercise-modal .modal-options").children];
+    const [modalResize, modalX] = modalOptionsChildren;
+    
+    modalResize.onclick = () => {
+        if(modalResize.id) exerciseModal.style.width = "100%";
+        else exerciseModal.style.width = "";
+    }
+    
     modalX.onclick = () => closeExerciseModal();
 
     const exerciseModalTitle = document.querySelector(".exercise-modal-title");
@@ -27,7 +34,6 @@ export default function singleExercise(componentProps) {
     exerciseModalTitle.appendChild(activeExerciseClone);
 
     const contentDifficultyCircles = document.querySelector(".content-difficulty-circles");
-    const contentDifficultyI = document.querySelector(".content-difficulty i");
 
     for(let i = 0; i < getDifficultyIndex(); i++) createElement({
         tag: "div",
@@ -36,11 +42,13 @@ export default function singleExercise(componentProps) {
         appendTo: contentDifficultyCircles
     });
 
-    contentDifficultyI.innerText = `(${exercise.difficulty})`;
-    contentDifficultyI.style.color = getDifficultyColor(exercise.difficulty);
-
     const contentP = document.querySelector(".exercise-modal-content .content-p");
     contentP.innerHTML = exercise.tips ? markup(exercise.tips) : "This exercise has no tips.";
+
+    const exerciseModalContent = document.querySelector(".exercise-modal-content");
+
+    if(exerciseModal.scrollHeight < window.innerHeight) exerciseModalContent.id = "extended-exercise-modal-content";
+    else exerciseModalContent.id = "";
 
     function getDifficultyIndex() {
         const difficultyRow = ["easy", "medium", "hard"];
