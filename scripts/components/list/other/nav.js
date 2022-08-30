@@ -2,8 +2,11 @@ import { navButtonsData } from "../../../../data/navButtonsData.js";
 import createElement from "../../../functions/createElement.js";
 import { Component } from "../../component.js";
 
-export default function nav() {
-    const navElement = document.querySelector("nav");
+export default function nav(componentProps) {
+    const { builtIn } = componentProps;
+    const [id, appendTo] = componentProps.params;
+    
+    const navElement = builtIn ? builtIn : createElement({ tag: "nav", attributes: { id }, appendTo });
 
     const homeLink = createElement({
         tag: "a",

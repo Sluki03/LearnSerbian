@@ -2,9 +2,10 @@ import { Component } from "../../component.js";
 import createElement from "../../../functions/createElement.js";
 import getDifficultyColor from "../../../exercises/getDifficultyColor.js";
 import closeExerciseModal from "../../../exercises/closeExerciseModal.js";
+import markup from "../../../functions/markup.js";
 
-export default function singleExercise(componentParams) {
-    const [exercise] = componentParams;
+export default function singleExercise(componentProps) {
+    const [exercise] = componentProps.params;
 
     const exerciseModal = document.querySelector(".exercise-modal");
     exerciseModal.id = "";
@@ -37,6 +38,9 @@ export default function singleExercise(componentParams) {
 
     contentDifficultyI.innerText = `(${exercise.difficulty})`;
     contentDifficultyI.style.color = getDifficultyColor(exercise.difficulty);
+
+    const contentP = document.querySelector(".exercise-modal-content .content-p");
+    contentP.innerHTML = exercise.tips ? markup(exercise.tips) : "This exercise has no tips.";
 
     function getDifficultyIndex() {
         const difficultyRow = ["easy", "medium", "hard"];

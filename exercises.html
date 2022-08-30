@@ -17,7 +17,7 @@
             </div>
         </div>
         
-        <nav id="exercises-nav"></nav>
+        <nav data-component="nav" id="exercises-nav"></nav>
         
         <main>
             <div class="exercise-modal" id="disabled-exercise-modal">
@@ -32,12 +32,17 @@
                         <div class="content-difficulty-circles"></div>
                         <i></i>
                     </div>
+
+                    <strong>tips:</strong>
+                    <p class="content-p"></p>
                 </div>
+
+                <button>start</button>
             </div>
             
             <section class="exercises-info">
-                <component class="interactive-title" data-title="exercises"></component>
-                <component class="interactive-title mini-title" data-title="test your knowledge"></component>
+                <div class="interactive-title" data-component="interactive-title" data-title="exercises"></div>
+                <div class="interactive-title mini-title" data-component="interactive-title" data-title="test your knowledge"></div>
 
                 <p>
                     You can test your knowledge of the Serbian language through the exercises on this page.
@@ -45,7 +50,7 @@
                     knowledge of Serbian is.
                 </p>
 
-                <component class="interactive-title mini-title" data-title="about"></component>
+                <div class="interactive-title mini-title" data-component="interactive-title" data-title="about"></div>
 
                 <p>
                     Before choosing an exercise, you will be able to see information about it.
@@ -56,7 +61,7 @@
                     sentences...). After the solved exercise, you will receive information about your score.
                 </p>
 
-                <component class="interactive-title mini-title" data-title="learn from your mistakes"></component>
+                <div class="interactive-title mini-title" data-component="interactive-title" data-title="learn from your mistakes"></div>
 
                 <p>
                     Exercises can be especially helpful, because if you make a mistake, you will be able to see

@@ -14,7 +14,6 @@
     box-sizing: border-box;
     font-family: Nunito, Calibri;
     list-style-type: none;
-    text-decoration: none;
     scroll-behavior: smooth;
 }
 
@@ -41,8 +40,8 @@ body {
 }
 
 ::selection {
-    color: $defLightBlue;
-    background-color: $defLightRed50;
+    color: white;
+    background-color: $defLightBlue;
 }
 
 @import "./pages/main";

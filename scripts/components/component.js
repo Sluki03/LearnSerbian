@@ -5,8 +5,6 @@ import exercisesList from "./list/exercises/exercisesList.js";
 import singleExercise from "./list/exercises/singleExercise.js";
 import panelsList from "./list/index/panelsList.js";
 
-import createElement from "../functions/createElement.js";
-
 const components = { nav, interactiveTitle, modalX, exercisesList, singleExercise, panelsList };
 
 export const Component = { create, render };
@@ -18,33 +16,28 @@ function create(...params) {
         if(params[0] === component) componentFunction = Object.values(components)[index];
     });
 
-    componentFunction(params.slice(1));
+    const componentProps = { builtIn: null, params: params.slice(1) };
+    componentFunction(componentProps);
 }
 
 function render() {
-    const allComponents = document.querySelectorAll("component");
-    const types = [];
+    const componentElements = document.querySelectorAll("[data-component]");
+    const componentTypes = [];
 
-    for(let i = 0; i < allComponents.length; i++) types.push(cssToJsStandard(allComponents[i].classList[0]));
+    for(let i = 0; i < componentElements.length; i++) componentTypes.push(cssToJsStandard(componentElements[i].dataset.component));
 
-    for(let i = 0; i < types.length; i++) {
-        switch(types[i]) {
-            case "interactiveTitle": {
-                const interactiveTitle = allComponents[i];
-                const title = allComponents[i].dataset.title;
+    componentTypes.forEach((componentType, index) => {
+        let componentFunction;
+        
+        Object.keys(components).forEach((component, componentIndex) => {
+            if(componentType === component) componentFunction = Object.values(components)[componentIndex];
+        });
 
-                for(let i = 0; i < 3; i++) createElement({
-                    tag: "span",
-                    innerText: title,
-                    appendTo: interactiveTitle
-                });
+        const datasetParams = Object.values(componentElements[index].dataset).slice(1);
 
-                break;
-            }
-
-            default: return;
-        }
-    }
+        const componentProps = { builtIn: componentElements[index], params: datasetParams };
+        componentFunction(componentProps);
+    });
 
     function cssToJsStandard(string) {
         let newString = "";

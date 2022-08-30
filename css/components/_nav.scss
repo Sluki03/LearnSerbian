@@ -13,8 +13,12 @@ nav {
     
     @include interactive-title(40px);
 
-    .interactive-title {
-        margin-left: 10px;
+    a {
+        text-decoration: none;
+
+        .interactive-title {
+            margin-left: 10px;
+        }
     }
 
     .button-holder {
@@ -27,6 +31,7 @@ nav {
             text-align: center;
             font-size: set-size(lg);
             text-transform: capitalize;
+            text-decoration: none;
             position: relative;
             top: 0;
             padding: 12px;

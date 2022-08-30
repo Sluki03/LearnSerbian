@@ -4,7 +4,9 @@ export const exercisesData = [
     {
         name: "New words",
         difficulty: "easy",
-        tips: "In this exercise you will have the opportunity to test you past tense knowledge..."
+        tips: `#Legendary exercise# In **this** exercise *you* **will *have*** the _opportunity_ to -test- yout past tense knowledge...
+        So I want to test
+        This out`
     },
 
     {

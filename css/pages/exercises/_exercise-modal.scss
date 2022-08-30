@@ -1,6 +1,6 @@
 .exercise-modal {
     @include add-flex(column, flex-start);
-    height: 100%;
+    height: calc(100vh - 65px);
     width: 55%;
     background: white;
     position: absolute;
@@ -51,6 +51,42 @@
                     border-radius: 50%;
                 }
             }
+        }
+
+        strong {
+            color: $defDarkGrey;
+            font-size: set-size(xxl);
+            text-transform: uppercase;
+            margin: 15px 0;
+        }
+        
+        p {
+            color: $defDarkGrey;
+            font-size: set-size(md);
+            white-space: pre-line;
+        }
+    }
+
+    button {
+        width: 80%;
+        color: white;
+        font-size: set-size(xl);
+        font-weight: bold;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        background: linear-gradient(-45deg, $defBlue 50%, $defRed 50%);
+        border: 1px solid white;
+        cursor: pointer;
+        padding: 5px 10px;
+        position: absolute;
+        bottom: 0;
+        transition: 300ms;
+
+        &:hover {
+            font-size: set-size(xxl);
+            text-shadow: -2px -2px 0px $defRed, 2px 2px 0px $defBlue;
+            background: white;
+            border: 1px solid $defBlue;
         }
     }
 }
