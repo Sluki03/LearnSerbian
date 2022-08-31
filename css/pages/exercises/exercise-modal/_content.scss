@@ -1,0 +1,98 @@
+.exercise-modal-content {
+    @include add-flex(column, flex-start);
+    width: 80%;
+    position: relative;
+    left: 0;
+    margin-top: 10px;
+    transition: 300ms;
+
+    .content-difficulty {
+        @include add-flex(row, flex-start);
+        gap: 10px;
+        width: 100%;
+
+        p, i {
+            color: $defDarkGrey;
+            font-size: set-size(xl);
+            text-transform: capitalize;
+            font-weight: bold;
+        }
+
+        .content-difficulty-circles {
+            @include add-flex;
+            gap: 3px;
+
+            .content-difficulty-circle {
+                height: 20px;
+                width: 20px;
+                border: 1px solid black;
+                border-radius: 50%;
+            }
+        }
+    }
+
+    strong {
+        color: $defDarkGrey;
+        font-size: set-size(xxl);
+        text-transform: uppercase;
+        margin: 15px 0;
+    }
+    
+    h1 {
+        font-size: set-size(miniheading);
+    }
+
+    h2 {
+        font-size: set-size(xxl);
+    }
+
+    h3 {
+        font-size: set-size(xl);
+    }
+
+    h4 {
+        font-size: set-size(lg);
+    }
+    
+    p {
+        color: $defDarkGrey;
+        font-size: set-size(md);
+    }
+
+    button {
+        width: 100%;
+        color: $defBlue;
+        font-size: set-size(xl);
+        font-weight: bold;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        background: linear-gradient(-45deg, $defBlue 35%, white 35% 65%, $defRed 65%);
+        background-position-x: 0;
+        border: 1px solid $defBlue;
+        cursor: pointer;
+        padding: 5px 10px;
+        position: sticky;
+        bottom: 0;
+        margin: 5px 0;
+        transition: 300ms;
+
+        &:hover {
+            color: white;
+            letter-spacing: 10px;
+            background-position-x: 450px;
+        }
+    }
+}
+
+.started-exercise-modal-content {
+    opacity: 0;
+    left: -20px;
+}
+
+#extended-exercise-modal-content {
+    height: 100%;
+
+    button {
+        position: absolute;
+    }
+}

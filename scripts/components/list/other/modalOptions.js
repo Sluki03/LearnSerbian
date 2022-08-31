@@ -19,6 +19,8 @@ export default function modalOptions(componentProps) {
         appendTo: modalOptionsElement
     }));
 
+    return modalOptionsElement;
+
     function chooseFunction(option) {
         if(option === "resize") return changeResizeStatus();
         else if(closeFunction !== undefined) return closeFunction();

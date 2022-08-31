@@ -1,0 +1,66 @@
+.exercise-modal-task {
+    @include add-flex(column, flex-start);
+    width: 80%;
+    opacity: 0;
+    position: relative;
+    left: 20px;
+    margin-top: 10px;
+    transition: 300ms;
+
+    h3 {
+        color: $defDarkGrey;
+        font-size: set-size(xxl);
+        text-align: center;
+    }
+
+    .task-holder {
+        @include add-flex;
+        width: 100%;
+        
+        .multiple-choice-holder {
+            display: grid;
+            align-items: center;
+            justify-content: center;
+            grid-template-rows: repeat(2, 1fr);
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            width: 100%;
+            max-width: 700px;
+            margin: 10px 0;
+
+            .multiple-choice-button {
+                width: 80%;
+                max-width: 350px;
+                color: $defDarkGrey;
+                font-size: set-size(lg);
+                background-color: white;
+                border: none;
+                border-radius: 20px;
+                box-shadow: none;
+                cursor: pointer;
+                position: relative;
+                padding: 5px 10px;
+                transition: 300ms;
+
+                &::before {
+                    content: "";
+                    display: block;
+                    height: calc(100% + 5px);
+                    width: calc(100% + 5px);
+                    background: red;
+                    border-radius: 20px;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    z-index: -1;
+                }
+            }
+        }
+    }
+}
+
+#active-exercise-modal-task {
+    opacity: 1;
+    left: 0;
+}

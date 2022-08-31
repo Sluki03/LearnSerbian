@@ -12,4 +12,6 @@ export default function loading(componentProps) {
 
     const rotating = createElement({ tag: "div", attributes: { class: "rotating" }, appendTo: loadingElement });
     createElement({ tag: "div", attributes: { class: "circle" }, appendTo: rotating });
+
+    return loadingElement;
 }

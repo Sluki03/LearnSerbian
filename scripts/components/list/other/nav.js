@@ -27,4 +27,6 @@ export default function nav(componentProps) {
         innerText: button.title,
         appendTo: buttonHolder
     }));
+
+    return navElement;
 }

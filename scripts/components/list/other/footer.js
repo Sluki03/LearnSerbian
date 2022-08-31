@@ -18,4 +18,6 @@ export default function footer(componentProps) {
             appendTo: div
         }));
     });
+
+    return footerElement;
 }

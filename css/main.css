@@ -303,9 +303,8 @@ main .exercise-modal .exercise-modal-title .exercise {
   height: 180px;
   width: 180px;
   background: linear-gradient(135deg, #df1c3d 35%, #144eba 65%);
+  box-shadow: 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
   cursor: pointer;
-  -webkit-clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
-          clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
   position: relative;
   transition: 300ms;
 }
@@ -320,9 +319,8 @@ main .exercise-modal .exercise-modal-title .exercise .exercise-content {
   height: 165px;
   width: 165px;
   background-color: white;
+  box-shadow: inset 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
   cursor: inherit;
-  -webkit-clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
-          clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
   position: absolute;
   top: 50%;
   left: 50%;
@@ -373,7 +371,9 @@ main .exercise-modal .exercise-modal-content {
   flex-direction: column;
   width: 80%;
   position: relative;
+  left: 0;
   margin-top: 10px;
+  transition: 300ms;
 }
 main .exercise-modal .exercise-modal-content .content-difficulty {
   display: flex;
@@ -447,17 +447,84 @@ main .exercise-modal .exercise-modal-content button:hover {
   letter-spacing: 10px;
   background-position-x: 450px;
 }
+main .exercise-modal .started-exercise-modal-content {
+  opacity: 0;
+  left: -20px;
+}
 main .exercise-modal #extended-exercise-modal-content {
   height: 100%;
 }
 main .exercise-modal #extended-exercise-modal-content button {
   position: absolute;
 }
-main #active-exercise-modal {
+main .exercise-modal .exercise-modal-task {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 80%;
+  opacity: 0;
+  position: relative;
+  left: 20px;
+  margin-top: 10px;
+  transition: 300ms;
+}
+main .exercise-modal .exercise-modal-task h3 {
+  color: #3c3c3c;
+  font-size: 35px;
+  text-align: center;
+}
+main .exercise-modal .exercise-modal-task .task-holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  width: 100%;
+}
+main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  width: 100%;
+  max-width: 700px;
+  margin: 10px 0;
+}
+main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .multiple-choice-button {
+  width: 80%;
+  max-width: 350px;
+  color: #3c3c3c;
+  font-size: 25px;
+  background-color: white;
+  border: none;
+  border-radius: 20px;
+  box-shadow: none;
+  cursor: pointer;
+  position: relative;
+  padding: 5px 10px;
+  transition: 300ms;
+}
+main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .multiple-choice-button::before {
+  content: "";
+  display: block;
+  height: calc(100% + 5px);
+  width: calc(100% + 5px);
+  background: red;
+  border-radius: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+main .exercise-modal #active-exercise-modal-task {
+  opacity: 1;
   left: 0;
 }
-main #disabled-exercise-modal {
-  display: none;
+main #active-exercise-modal {
+  left: 0;
 }
 main #full-screen-exercise-modal {
   width: 100%;
@@ -547,55 +614,6 @@ main .exercises-holder {
 }
 main .exercises-holder::-webkit-scrollbar {
   width: 0;
-}
-main .exercises-holder .loading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  height: 100%;
-  width: 100%;
-  background-image: url("../images/background.png");
-  background-color: white;
-  position: absolute;
-  transition: 300ms;
-  z-index: 1;
-}
-main .exercises-holder .loading .rotating {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  height: 100px;
-  width: 100px;
-  background: linear-gradient(135deg, #df1c3d 45%, white 45% 55%, #144eba 55% 100%);
-  border-radius: 50%;
-  position: relative;
-  -webkit-animation: rotating-div 5s linear infinite;
-          animation: rotating-div 5s linear infinite;
-}
-@-webkit-keyframes rotating-div {
-  from {
-    transform: rotate(0);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-@keyframes rotating-div {
-  from {
-    transform: rotate(0);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-main .exercises-holder .loading .rotating .circle {
-  height: 80px;
-  width: 80px;
-  background-color: white;
-  border-radius: 50%;
-  position: absolute;
 }
 main .exercises-holder .exercises-tree {
   display: flex;
@@ -692,9 +710,8 @@ main .exercises-holder .exercises-tree .exercise {
   height: 180px;
   width: 180px;
   background: linear-gradient(135deg, #df1c3d 35%, #144eba 65%);
+  box-shadow: 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
   cursor: pointer;
-  -webkit-clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
-          clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
   position: relative;
   transition: 300ms;
 }
@@ -709,9 +726,8 @@ main .exercises-holder .exercises-tree .exercise .exercise-content {
   height: 165px;
   width: 165px;
   background-color: white;
+  box-shadow: inset 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
   cursor: inherit;
-  -webkit-clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
-          clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
   position: absolute;
   top: 50%;
   left: 50%;
@@ -782,6 +798,14 @@ main .exercises-holder .exercises-tree .exercise-clone:hover .exercise-content {
   position: relative;
   -webkit-animation: rotating-div 5s linear infinite;
           animation: rotating-div 5s linear infinite;
+}
+@-webkit-keyframes rotating-div {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 @keyframes rotating-div {
   from {
@@ -1066,9 +1090,8 @@ footer div a {
   height: 180px;
   width: 180px;
   background: linear-gradient(135deg, #df1c3d 35%, #144eba 65%);
+  box-shadow: 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
   cursor: pointer;
-  -webkit-clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
-          clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
   position: relative;
   transition: 300ms;
 }
@@ -1083,9 +1106,8 @@ footer div a {
   height: 165px;
   width: 165px;
   background-color: white;
+  box-shadow: inset 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
   cursor: inherit;
-  -webkit-clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
-          clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
   position: absolute;
   top: 50%;
   left: 50%;

@@ -15,25 +15,6 @@
         <nav id="exercises-nav" data-component="nav"></nav>
         
         <main>
-            <div class="exercise-modal" id="disabled-exercise-modal">
-                <div class="modal-options" data-component="modal-options"></div>
-
-                <div class="exercise-modal-title"></div>
-                <div class="exercise-modal-divider"></div>
-
-                <div class="exercise-modal-content">
-                    <div class="content-difficulty">
-                        <p>difficulty:</p>
-                        <div class="content-difficulty-circles"></div>
-                    </div>
-
-                    <strong>tips:</strong>
-                    <p class="content-p"></p>
-
-                    <button>start</button>
-                </div>
-            </div>
-            
             <section class="exercises-info">
                 <div class="interactive-title" data-component="interactive-title" data-title="exercises"></div>
                 <div class="interactive-title mini-title" data-component="interactive-title" data-title="test your knowledge"></div>
@@ -74,5 +55,48 @@
                 </div>
             </section>
         </main>
+
+        <template data-template="exercise">
+            <div class="exercise-holder">
+                <div class="exercise-title">
+                    <div class="exercise-difficulty"></div>
+                    <p></p>
+                </div>
+
+                <article class="exercise">
+                    <div class="exercise-content"></div>
+                </article>
+            </div>
+        </template>
+
+        <template data-template="exercise-modal">
+            <div class="exercise-modal" id="disabled-exercise-modal">
+                <div class="modal-options" data-component="modal-options"></div>
+    
+                <div class="exercise-modal-title"></div>
+                <div class="exercise-modal-divider"></div>
+            </div>
+        </template>
+
+        <template data-template="exercise-modal-content">
+            <div class="exercise-modal-content">
+                <div class="content-difficulty">
+                    <p>difficulty:</p>
+                    <div class="content-difficulty-circles"></div>
+                </div>
+
+                <strong>tips:</strong>
+                <p class="content-p"></p>
+
+                <button>start</button>
+            </div>
+        </template>
+
+        <template data-template="exercise-modal-task">
+            <div class="exercise-modal-task">
+                <h3></h3>
+                <div class="task-holder"></div>
+            </div>
+        </template>
     </body>
 </html>

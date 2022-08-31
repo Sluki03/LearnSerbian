@@ -10,40 +10,6 @@
     &::-webkit-scrollbar {
         width: 0;
     }
-
-    .loading {
-        @include add-flex;
-        height: 100%;
-        width: 100%;
-        background-image: url("../images/background.png");
-        background-color: white;
-        position: absolute;
-        transition: 300ms;
-        z-index: 1;
-        
-        .rotating {
-            @include add-flex;
-            height: 100px;
-            width: 100px;
-            background: $defRedBlueWhite;
-            border-radius: 50%;
-            position: relative;
-            animation: rotating-div 5s linear infinite;
-            
-            @keyframes rotating-div {
-                from { transform: rotate(0) }
-                to { transform: rotate(360deg) }
-            }
-
-            .circle {
-                height: 80px;
-                width: 80px;
-                background-color: white;
-                border-radius: 50%;
-                position: absolute;
-            }
-        }
-    }
     
     .exercises-tree {
         @include add-flex(column, flex-start);

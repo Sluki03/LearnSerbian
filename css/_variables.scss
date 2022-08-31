@@ -13,6 +13,8 @@ $fontSizes: (
     "superheading": 100px
 );
 
+$defShadow: 3px 3px 15px 1px rgba(0,0,0,0.3);
+$defInnerShadow: inset 3px 3px 15px 1px rgba(0,0,0,0.3);
 $defTextShadow: 2px 2px 15px rgba(0, 0, 0, 0.30);
 
 $defRed: #df1c3d;

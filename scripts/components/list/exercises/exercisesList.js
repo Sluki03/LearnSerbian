@@ -1,7 +1,7 @@
 import { exercisesData } from "../../../../data/exercisesData.js";
 import { Component } from "../../component.js";
-import createElement from "../../../functions/createElement.js";
 import getDifficultyColor from "../../../exercises/getDifficultyColor.js";
+import getBorderRadius from "../../../exercises/getBorderRadius.js";
 import closeExerciseModal from "../../../exercises/closeExerciseModal.js";
 
 export default function exercisesList() {
@@ -9,46 +9,26 @@ export default function exercisesList() {
     const treeEnd = document.getElementById("exercises-tree-end");
 
     let activeExerciseId = 0;
+    let lastRadius = null;
 
     exercisesData.forEach((exercise, index) => {
-        const exerciseHolder = createElement({
-            tag: "div",
-            attributes: { class: "exercise-holder" },
-            appendTo: tree,
-            before: treeEnd
-        });
+        const borderRadius = getBorderRadius(lastRadius);
+        lastRadius = borderRadius;
 
-        const exerciseTitle = createElement({
-            tag: "div",
-            attributes: { class: "exercise-title" },
-            appendTo: exerciseHolder
-        });
+        const exerciseHolder = document.querySelector("[data-template='exercise']").content.firstElementChild.cloneNode(true);
+        tree.insertBefore(exerciseHolder, treeEnd);
 
-        createElement({
-            tag: "div",
-            attributes: { class: "exercise-difficulty" },
-            style: { backgroundColor: getDifficultyColor(exercise.difficulty) },
-            appendTo: exerciseTitle
-        });
+        const [exerciseTitle, articleExercise] = [...exerciseHolder.children];
+        const [exerciseDifficulty, exerciseP] = [...exerciseTitle.children];
 
-        createElement({
-            tag: "p",
-            innerText: exercise.name,
-            appendTo: exerciseTitle
-        });
+        exerciseDifficulty.style.backgroundColor = getDifficultyColor(exercise.difficulty);
+        exerciseP.innerText = exercise.name;
 
-        const articleExercise = createElement({
-            tag: "article",
-            attributes: { class: "exercise" },
-            events: [{ on: "click", call: () => openExerciseModal(articleExercise, exercise, index + 1) }],
-            appendTo: exerciseHolder
-        });
+        articleExercise.style.borderRadius = borderRadius;
+        articleExercise.onclick = () => openExerciseModal(articleExercise, exercise, index + 1);
 
-        const exerciseContent = createElement({
-            tag: "div",
-            attributes: { class: "exercise-content" },
-            appendTo: articleExercise
-        });
+        const [exerciseContent] = [...articleExercise.children];
+        exerciseContent.style.borderRadius = borderRadius;
 
         Component.create("interactiveTitle", index + 1, exerciseContent);
     });
@@ -56,7 +36,7 @@ export default function exercisesList() {
     function openExerciseModal(activeExercise, exercise, id) {
         const exerciseModal = document.querySelector(".exercise-modal");
 
-        if(exerciseModal.id === "disabled-exercise-modal" && activeExerciseId > 0) activeExerciseId = 0;
+        if(exerciseModal === null && activeExerciseId > 0) activeExerciseId = 0;
         if(activeExerciseId === id) return;
         
         if(activeExerciseId !== 0) closeExerciseModal({ activeExercise, exercise });

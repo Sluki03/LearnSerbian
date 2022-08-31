@@ -8,8 +8,7 @@ export default function closeExerciseModal(openNew) {
     activeExercise.id = "";
 
     setTimeout(() => {        
-        exerciseModal.id = "disabled-exercise-modal";
-        cleanup(".exercise-modal-title", ".content-difficulty .content-difficulty-circles");
+        exerciseModal.remove();
         
         if(openNew !== undefined) {
             const { activeExercise, exercise } = openNew;
@@ -18,11 +17,4 @@ export default function closeExerciseModal(openNew) {
             Component.create("singleExercise", exercise);
         }
     }, 300);
-
-    function cleanup(...selectors) {
-        for(let i = 0; i < selectors.length; i++) {
-            const selectedElement = document.querySelector(selectors[i]);
-            selectedElement.innerHTML = "";
-        }
-    }
 }

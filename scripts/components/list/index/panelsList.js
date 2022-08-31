@@ -8,22 +8,14 @@ export default function panelsList(componentProps) {
     const panels = builtIn ? builtIn : createElement({ tag: "div", attributes: { class: "panels" }, appendTo });
 
     indexPanelsData.forEach((panelData) => {
-        const panel = createElement({
-            tag: "article",
-            attributes: { class: "panel" },
-            appendTo: panels
-        });
+        const panel = document.querySelector("[data-template='panel']").content.firstElementChild.cloneNode(true);
+        panels.appendChild(panel);
 
-        createElement({
-            tag: "h1",
-            innerText: panelData.title,
-            appendTo: panel
-        });
+        const [panelH1, panelP] = [...panel.children];
 
-        createElement({
-            tag: "p",
-            innerText: panelData.description,
-            appendTo: panel
-        });
+        panelH1.innerText = panelData.title;
+        panelP.innerText = panelData.description;
     });
+
+    return panels;
 }

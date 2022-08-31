@@ -1,14 +1,14 @@
 import { Component } from "../../component.js";
-import createElement from "../../../functions/createElement.js";
-import getDifficultyColor from "../../../exercises/getDifficultyColor.js";
 import closeExerciseModal from "../../../exercises/closeExerciseModal.js";
-import markup from "../../../functions/markup.js";
 
 export default function singleExercise(componentProps) {
     const [exercise] = componentProps.params;
 
-    const exerciseModal = document.querySelector(".exercise-modal");
-    exerciseModal.id = "";
+    const main = document.querySelector("main");
+    const exerciseModal = document.querySelector("[data-template='exercise-modal']").content.firstElementChild.cloneNode(true);
+    main.insertBefore(exerciseModal, main.firstChild);
+
+    Component.render(exerciseModal);
 
     setTimeout(() => exerciseModal.setAttribute("id", "active-exercise-modal"), 100);
 
@@ -33,29 +33,21 @@ export default function singleExercise(componentProps) {
     
     exerciseModalTitle.appendChild(activeExerciseClone);
 
-    const contentDifficultyCircles = document.querySelector(".content-difficulty-circles");
+    const exerciseModalContent = Component.create("singleContent", exercise, exerciseModal);
+    const contentButton = document.querySelector(".exercise-modal-content button");
+    
+    contentButton.onclick = () => {
+        contentButton.style.bottom = "-100px";
 
-    for(let i = 0; i < getDifficultyIndex(); i++) createElement({
-        tag: "div",
-        attributes: { class: "content-difficulty-circle" },
-        style: { backgroundColor: getDifficultyColor(exercise.difficulty) },
-        appendTo: contentDifficultyCircles
-    });
+        setTimeout(() => {
+            exerciseModalContent.classList.add("started-exercise-modal-content");
 
-    const contentP = document.querySelector(".exercise-modal-content .content-p");
-    contentP.innerHTML = exercise.tips ? markup(exercise.tips) : "This exercise has no tips.";
-
-    const exerciseModalContent = document.querySelector(".exercise-modal-content");
-
-    if(exerciseModal.scrollHeight < window.innerHeight) exerciseModalContent.id = "extended-exercise-modal-content";
-    else exerciseModalContent.id = "";
-
-    function getDifficultyIndex() {
-        const difficultyRow = ["easy", "medium", "hard"];
-        
-        let index;
-        for(let i = 0; i < difficultyRow.length; i++) if(exercise.difficulty === difficultyRow[i]) index = i;
-
-        return index + 1;
+            setTimeout(() => {
+                exerciseModalContent.remove();
+                Component.create("singleTask", exercise.tasks, exerciseModal);
+            }, 300);
+        }, 300);
     }
+
+    return exerciseModal;
 }

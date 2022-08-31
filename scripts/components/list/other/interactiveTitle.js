@@ -15,4 +15,6 @@ export default function interactiveTitle(componentProps) {
         innerText: title,
         appendTo: interactiveTitle
     });
+
+    return interactiveTitle;
 }

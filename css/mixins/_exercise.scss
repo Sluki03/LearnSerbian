@@ -3,8 +3,8 @@
         height: 180px;
         width: 180px;
         background: $defRedBlue;
+        box-shadow: $defShadow;
         cursor: pointer;
-        clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
         position: relative;
         transition: 300ms;
 
@@ -17,8 +17,8 @@
             height: 165px;
             width: 165px;
             background-color: white;
+            box-shadow: $defInnerShadow;
             cursor: inherit;
-            clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
             position: absolute;
             top: 50%;
             left: 50%;
