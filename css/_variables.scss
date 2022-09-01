@@ -13,12 +13,14 @@ $fontSizes: (
     "superheading": 100px
 );
 
-$defShadow: 3px 3px 15px 1px rgba(0,0,0,0.3);
-$defInnerShadow: inset 3px 3px 15px 1px rgba(0,0,0,0.3);
-$defTextShadow: 2px 2px 15px rgba(0, 0, 0, 0.30);
-
-$defRed: #df1c3d;
-$defLightRed: #f2072f;
+$defDarkGrey: #5e5c5c;
+$defGreen: #059c20;
+$defLightGreen: #07db2d;
+$defLighterGreen: #00ff2e;
+$defYellow: #ffe603;
+$defRed: #bd1330;
+$defLightRed: #d91435;
+$defLighterRed: #f20707;
 $defGlowingRed: 0px 0px 15px rgba(247,72,101,0.5);
 $defBlue: #144eba;
 $defLightBlue: #0559f5;
@@ -26,6 +28,12 @@ $defGlowingBlue: 0px 0px 15px rgba(82,138,242,0.5);
 $defRedBlue: linear-gradient(135deg, $defRed 35%, $defBlue 65%);
 $defBlueRed: linear-gradient(135deg, $defBlue 35%, $defRed 65%);
 $defRedBlueWhite: linear-gradient(135deg, $defRed 45%, white 45% 55%, $defBlue 55% 100%);
-$defDarkGrey: #3c3c3c;
-$defGreen: #0fff03;
-$defYellow: #ffe603;
+$defCorrect: linear-gradient(135deg, $defGreen 65%, $defLightGreen 65% 85%, $defLighterGreen 85%);
+$defIncorrect: linear-gradient(135deg, $defRed 65%, $defLightRed 65% 85%, $defLighterRed 85%);
+
+$defLightShadow: 1px 1px 10px 1px rgba(0,0,0,0.3);
+$defShadow: 3px 3px 15px 1px rgba(0,0,0,0.3);
+$defLightInnerShadow: inset 1px 1px 10px 1px rgba(0,0,0,0.3);
+$defInnerShadow: inset 3px 3px 15px 1px rgba(0,0,0,0.3);
+$defTextShadow: 2px 2px 15px rgba(0, 0, 0, 0.30);
+$defRedBlueShadow: -3px -3px 5px 1px $defRed, 3px 3px 5px 1px $defBlue;

@@ -19,48 +19,133 @@
         
         .multiple-choice-holder {
             display: grid;
-            align-items: center;
-            justify-content: center;
             grid-template-rows: repeat(2, 1fr);
             grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
+            gap: 15px;
             width: 100%;
             max-width: 700px;
-            margin: 10px 0;
+            margin: 20px 0;
 
             .multiple-choice-button {
-                width: 80%;
+                height: 100%;
+                width: 100%;
                 max-width: 350px;
                 color: $defDarkGrey;
                 font-size: set-size(lg);
                 background-color: white;
-                border: none;
+                border: 1px solid $defDarkGrey;
                 border-radius: 20px;
-                box-shadow: none;
                 cursor: pointer;
                 position: relative;
+                top: 0;
+                margin: 0 auto;
                 padding: 5px 10px;
                 transition: 300ms;
+                
+                &:hover {
+                    border: 1px solid transparent;
+                    box-shadow: $defRedBlueShadow;
+                    top: -5px;
+                }
 
-                &::before {
-                    content: "";
-                    display: block;
-                    height: calc(100% + 5px);
-                    width: calc(100% + 5px);
-                    background: red;
-                    border-radius: 20px;
+                span {
+                    height: 35px;
+                    width: 35px;
+                    color: $defDarkGrey;
+                    font-size: set-size(md);
+                    line-height: 1.25;
+                    border: 1px solid $defDarkGrey;
+                    border-radius: 50%;
                     position: absolute;
                     top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    z-index: -1;
+                    left: 5px;
+                    padding: 5px;
+                    transform: translateY(-50%);
                 }
+            }
+
+            .active-multiple-choice-button {
+                border: 1px solid transparent;
+                box-shadow: $defRedBlueShadow;
+                top: -5px;
+            }
+        }
+    }
+
+    .check-button {
+        color: white;
+        font-size: set-size(xl);
+        font-weight: bold;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        background: linear-gradient(-45deg, $defBlue 50%, $defRed 50%);
+        background-position-x: 0;
+        border: 1px solid $defBlue;
+        cursor: pointer;
+        margin-top: 30px;
+        padding: 5px 10px;
+        transition: 300ms;
+
+        &:hover {
+            letter-spacing: 10px;
+            background-position-x: 50px;
+        }
+    }
+
+    #disabled-check-button {
+        cursor: default;
+        opacity: 0.5;
+
+        &:hover {
+            letter-spacing: 5px;
+            background-position-x: 0;
+        }
+    }
+
+    .task-info {
+        @include add-flex(row, flex-start);
+        gap: 15px;
+        width: 100%;
+        border-top-right-radius: 40px;
+        box-shadow: $defShadow;
+        position: sticky;
+        bottom: -100px;
+        padding: 10px 20px;
+        transition: 300ms;
+
+        img {
+            height: 60px;
+            width: 60px;
+            object-fit: contain;
+            filter: invert(1);
+        }
+        
+        .task-info-text {
+            @include add-flex(column, center, flex-start);
+            
+            h4 {
+                color: white;
+                font-size: set-size(xl);
+            }
+    
+            p {
+                color: white;
+                font-size: set-size(md);
+                margin: 0;
             }
         }
     }
 }
 
-#active-exercise-modal-task {
+.active-exercise-modal-task {
     opacity: 1;
     left: 0;
+}
+
+#extended-exercise-modal-task {
+    height: 100%;
+
+    .task-info {
+        position: absolute;
+    }
 }

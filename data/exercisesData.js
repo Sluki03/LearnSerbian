@@ -24,7 +24,9 @@ export const exercisesData = [
                 title: "How to say: 'color' in Serbian?",
                 constructor: {
                     acceptableAnswers: ["boja"],
-                    options: ["cemu", "to", "nesto", "boja"]
+                    options: ["cemu", "to", "nesto", "boja"],
+                    correct: { title: "Correct!", text: "That one is true." },
+                    incorrect: { title: "Incorrect!", text: "That one is false." }
                 }
             }
         ]

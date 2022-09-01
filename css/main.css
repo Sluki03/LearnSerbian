@@ -24,11 +24,11 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #df1c3d;
+  background: #bd1330;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #f2072f;
+  background: #d91435;
 }
 
 ::-moz-selection {
@@ -59,7 +59,7 @@ img {
   flex-direction: row;
   height: 100vh;
   width: 100%;
-  color: #3c3c3c;
+  color: #5e5c5c;
   font-weight: bold;
   text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
   position: relative;
@@ -98,7 +98,7 @@ img {
   position: absolute;
 }
 .welcome .welcome-content .interactive-title span:first-child {
-  color: #df1c3d;
+  color: #bd1330;
   top: -5px;
   left: -3px;
   z-index: 1;
@@ -113,7 +113,7 @@ img {
   text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
 .welcome .welcome-content .interactive-title:hover span:first-child {
-  color: #f2072f;
+  color: #d91435;
   top: -7px;
   left: -5px;
   z-index: 2;
@@ -152,7 +152,7 @@ img {
   transform: translateY(-25%);
 }
 .info .info-content h1 {
-  color: #3c3c3c;
+  color: #5e5c5c;
   font-size: 50px;
   text-align: center;
   text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
@@ -173,7 +173,7 @@ img {
   height: 250px;
   width: 100%;
   max-width: 350px;
-  color: #3c3c3c;
+  color: #5e5c5c;
   text-align: center;
   background-color: white;
   border-radius: 20px;
@@ -185,14 +185,14 @@ img {
   width: 100%;
   color: white;
   -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: #3c3c3c;
+  -webkit-text-stroke-color: #5e5c5c;
   font-size: 30px;
   background-color: #0559f5;
   border-radius: 20px 20px 0px 0px;
   padding: 10px 0;
 }
 .info .info-content .panels .panel:nth-child(1) h1 {
-  background-color: #f2072f;
+  background-color: #d91435;
 }
 .info .info-content .panels .panel:nth-child(3) h1 {
   background-color: white;
@@ -271,7 +271,7 @@ main .exercise-modal .exercise-modal-title .interactive-title span:first-child, 
   position: absolute;
 }
 main .exercise-modal .exercise-modal-title .interactive-title span:first-child {
-  color: #df1c3d;
+  color: #bd1330;
   top: -5px;
   left: -3px;
   z-index: 1;
@@ -286,7 +286,7 @@ main .exercise-modal .exercise-modal-title .interactive-title:hover span {
   text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
 main .exercise-modal .exercise-modal-title .interactive-title:hover span:first-child {
-  color: #f2072f;
+  color: #d91435;
   top: -7px;
   left: -5px;
   z-index: 2;
@@ -302,14 +302,15 @@ main .exercise-modal .exercise-modal-title .interactive-title:hover span:last-ch
 main .exercise-modal .exercise-modal-title .exercise {
   height: 180px;
   width: 180px;
-  background: linear-gradient(135deg, #df1c3d 35%, #144eba 65%);
+  background: linear-gradient(135deg, #bd1330 35%, #144eba 65%);
+  border-radius: 50%;
   box-shadow: 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
   cursor: pointer;
   position: relative;
   transition: 300ms;
 }
 main .exercise-modal .exercise-modal-title .exercise:hover {
-  background: linear-gradient(135deg, #144eba 35%, #df1c3d 65%);
+  background: linear-gradient(135deg, #144eba 35%, #bd1330 65%);
 }
 main .exercise-modal .exercise-modal-title .exercise .exercise-content {
   display: flex;
@@ -319,6 +320,7 @@ main .exercise-modal .exercise-modal-title .exercise .exercise-content {
   height: 165px;
   width: 165px;
   background-color: white;
+  border-radius: 50%;
   box-shadow: inset 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
   cursor: inherit;
   position: absolute;
@@ -332,7 +334,7 @@ main .exercise-modal .exercise-modal-title .exercise:hover .exercise-content {
   width: 155px;
 }
 main .exercise-modal .exercise-modal-title #active-exercise {
-  background: linear-gradient(135deg, #144eba 35%, #df1c3d 65%);
+  background: linear-gradient(135deg, #144eba 35%, #bd1330 65%);
   cursor: default;
 }
 main .exercise-modal .exercise-modal-title #active-exercise .exercise-content {
@@ -345,7 +347,7 @@ main .exercise-modal .exercise-modal-title .exercise-clone {
   cursor: default;
 }
 main .exercise-modal .exercise-modal-title .exercise-clone:hover {
-  background: linear-gradient(135deg, #df1c3d 35%, #144eba 65%);
+  background: linear-gradient(135deg, #bd1330 35%, #144eba 65%);
 }
 main .exercise-modal .exercise-modal-title .exercise-clone .exercise-content {
   height: 85px;
@@ -361,7 +363,7 @@ main .exercise-modal .exercise-modal-title .exercise-clone:hover .exercise-conte
 main .exercise-modal .exercise-modal-divider {
   min-height: 3px;
   width: 80%;
-  background: linear-gradient(135deg, #df1c3d 35%, #144eba 65%);
+  background: linear-gradient(135deg, #bd1330 35%, #144eba 65%);
   margin: 5px 0;
 }
 main .exercise-modal .exercise-modal-content {
@@ -384,7 +386,7 @@ main .exercise-modal .exercise-modal-content .content-difficulty {
   width: 100%;
 }
 main .exercise-modal .exercise-modal-content .content-difficulty p, main .exercise-modal .exercise-modal-content .content-difficulty i {
-  color: #3c3c3c;
+  color: #5e5c5c;
   font-size: 30px;
   text-transform: capitalize;
   font-weight: bold;
@@ -403,7 +405,7 @@ main .exercise-modal .exercise-modal-content .content-difficulty .content-diffic
   border-radius: 50%;
 }
 main .exercise-modal .exercise-modal-content strong {
-  color: #3c3c3c;
+  color: #5e5c5c;
   font-size: 35px;
   text-transform: uppercase;
   margin: 15px 0;
@@ -421,7 +423,7 @@ main .exercise-modal .exercise-modal-content h4 {
   font-size: 25px;
 }
 main .exercise-modal .exercise-modal-content p {
-  color: #3c3c3c;
+  color: #5e5c5c;
   font-size: 20px;
 }
 main .exercise-modal .exercise-modal-content button {
@@ -431,7 +433,7 @@ main .exercise-modal .exercise-modal-content button {
   font-weight: bold;
   letter-spacing: 5px;
   text-transform: uppercase;
-  background: linear-gradient(-45deg, #144eba 35%, white 35% 65%, #df1c3d 65%);
+  background: linear-gradient(-45deg, #144eba 35%, white 35% 65%, #bd1330 65%);
   background-position-x: 0;
   border: 1px solid #144eba;
   cursor: pointer;
@@ -470,7 +472,7 @@ main .exercise-modal .exercise-modal-task {
   transition: 300ms;
 }
 main .exercise-modal .exercise-modal-task h3 {
-  color: #3c3c3c;
+  color: #5e5c5c;
   font-size: 35px;
   text-align: center;
 }
@@ -483,45 +485,125 @@ main .exercise-modal .exercise-modal-task .task-holder {
 }
 main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder {
   display: grid;
-  align-items: center;
-  justify-content: center;
   grid-template-rows: repeat(2, 1fr);
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  gap: 15px;
   width: 100%;
   max-width: 700px;
-  margin: 10px 0;
+  margin: 20px 0;
 }
 main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .multiple-choice-button {
-  width: 80%;
+  height: 100%;
+  width: 100%;
   max-width: 350px;
-  color: #3c3c3c;
+  color: #5e5c5c;
   font-size: 25px;
   background-color: white;
-  border: none;
+  border: 1px solid #5e5c5c;
   border-radius: 20px;
-  box-shadow: none;
   cursor: pointer;
   position: relative;
+  top: 0;
+  margin: 0 auto;
   padding: 5px 10px;
   transition: 300ms;
 }
-main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .multiple-choice-button::before {
-  content: "";
-  display: block;
-  height: calc(100% + 5px);
-  width: calc(100% + 5px);
-  background: red;
-  border-radius: 20px;
+main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .multiple-choice-button:hover {
+  border: 1px solid transparent;
+  box-shadow: -3px -3px 5px 1px #bd1330, 3px 3px 5px 1px #144eba;
+  top: -5px;
+}
+main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .multiple-choice-button span {
+  height: 35px;
+  width: 35px;
+  color: #5e5c5c;
+  font-size: 20px;
+  line-height: 1.25;
+  border: 1px solid #5e5c5c;
+  border-radius: 50%;
   position: absolute;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: -1;
+  left: 5px;
+  padding: 5px;
+  transform: translateY(-50%);
 }
-main .exercise-modal #active-exercise-modal-task {
+main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .active-multiple-choice-button {
+  border: 1px solid transparent;
+  box-shadow: -3px -3px 5px 1px #bd1330, 3px 3px 5px 1px #144eba;
+  top: -5px;
+}
+main .exercise-modal .exercise-modal-task .check-button {
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  background: linear-gradient(-45deg, #144eba 50%, #bd1330 50%);
+  background-position-x: 0;
+  border: 1px solid #144eba;
+  cursor: pointer;
+  margin-top: 30px;
+  padding: 5px 10px;
+  transition: 300ms;
+}
+main .exercise-modal .exercise-modal-task .check-button:hover {
+  letter-spacing: 10px;
+  background-position-x: 50px;
+}
+main .exercise-modal .exercise-modal-task #disabled-check-button {
+  cursor: default;
+  opacity: 0.5;
+}
+main .exercise-modal .exercise-modal-task #disabled-check-button:hover {
+  letter-spacing: 5px;
+  background-position-x: 0;
+}
+main .exercise-modal .exercise-modal-task .task-info {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 15px;
+  width: 100%;
+  border-top-right-radius: 40px;
+  box-shadow: 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: -100px;
+  padding: 10px 20px;
+  transition: 300ms;
+}
+main .exercise-modal .exercise-modal-task .task-info img {
+  height: 60px;
+  width: 60px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  filter: invert(1);
+}
+main .exercise-modal .exercise-modal-task .task-info .task-info-text {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+}
+main .exercise-modal .exercise-modal-task .task-info .task-info-text h4 {
+  color: white;
+  font-size: 30px;
+}
+main .exercise-modal .exercise-modal-task .task-info .task-info-text p {
+  color: white;
+  font-size: 20px;
+  margin: 0;
+}
+main .exercise-modal .active-exercise-modal-task {
   opacity: 1;
   left: 0;
+}
+main .exercise-modal #extended-exercise-modal-task {
+  height: 100%;
+}
+main .exercise-modal #extended-exercise-modal-task .task-info {
+  position: absolute;
 }
 main #active-exercise-modal {
   left: 0;
@@ -566,7 +648,7 @@ main .exercises-info .interactive-title span:first-child, main .exercises-info .
   position: absolute;
 }
 main .exercises-info .interactive-title span:first-child {
-  color: #df1c3d;
+  color: #bd1330;
   top: -5px;
   left: -3px;
   z-index: 1;
@@ -581,7 +663,7 @@ main .exercises-info .interactive-title:hover span {
   text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
 main .exercises-info .interactive-title:hover span:first-child {
-  color: #f2072f;
+  color: #d91435;
   top: -7px;
   left: -5px;
   z-index: 2;
@@ -598,7 +680,7 @@ main .exercises-info .mini-title span {
   font-size: 40px;
 }
 main .exercises-info p {
-  color: #3c3c3c;
+  color: #5e5c5c;
   font-size: 20px;
   text-align: center;
   padding: 10px 30px;
@@ -639,15 +721,15 @@ main .exercises-holder .exercises-tree strong:last-of-type {
 main .exercises-holder .exercises-tree .exercises-tree-line {
   height: 100%;
   width: 3px;
-  background: #3c3c3c;
+  background: #5e5c5c;
   position: absolute;
 }
 main .exercises-holder .exercises-tree strong {
-  color: #3c3c3c;
+  color: #5e5c5c;
   font-size: 30px;
   text-transform: capitalize;
   background: white;
-  border: 1px solid #3c3c3c;
+  border: 1px solid #5e5c5c;
   padding: 5px;
   position: absolute;
 }
@@ -678,7 +760,7 @@ main .exercises-holder .exercises-tree .interactive-title span:first-child, main
   position: absolute;
 }
 main .exercises-holder .exercises-tree .interactive-title span:first-child {
-  color: #df1c3d;
+  color: #bd1330;
   top: -5px;
   left: -3px;
   z-index: 1;
@@ -693,7 +775,7 @@ main .exercises-holder .exercises-tree .interactive-title:hover span {
   text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
 main .exercises-holder .exercises-tree .interactive-title:hover span:first-child {
-  color: #f2072f;
+  color: #d91435;
   top: -7px;
   left: -5px;
   z-index: 2;
@@ -709,14 +791,15 @@ main .exercises-holder .exercises-tree .interactive-title:hover span:last-child 
 main .exercises-holder .exercises-tree .exercise {
   height: 180px;
   width: 180px;
-  background: linear-gradient(135deg, #df1c3d 35%, #144eba 65%);
+  background: linear-gradient(135deg, #bd1330 35%, #144eba 65%);
+  border-radius: 50%;
   box-shadow: 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
   cursor: pointer;
   position: relative;
   transition: 300ms;
 }
 main .exercises-holder .exercises-tree .exercise:hover {
-  background: linear-gradient(135deg, #144eba 35%, #df1c3d 65%);
+  background: linear-gradient(135deg, #144eba 35%, #bd1330 65%);
 }
 main .exercises-holder .exercises-tree .exercise .exercise-content {
   display: flex;
@@ -726,6 +809,7 @@ main .exercises-holder .exercises-tree .exercise .exercise-content {
   height: 165px;
   width: 165px;
   background-color: white;
+  border-radius: 50%;
   box-shadow: inset 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
   cursor: inherit;
   position: absolute;
@@ -739,7 +823,7 @@ main .exercises-holder .exercises-tree .exercise:hover .exercise-content {
   width: 155px;
 }
 main .exercises-holder .exercises-tree #active-exercise {
-  background: linear-gradient(135deg, #144eba 35%, #df1c3d 65%);
+  background: linear-gradient(135deg, #144eba 35%, #bd1330 65%);
   cursor: default;
 }
 main .exercises-holder .exercises-tree #active-exercise .exercise-content {
@@ -752,7 +836,7 @@ main .exercises-holder .exercises-tree .exercise-clone {
   cursor: default;
 }
 main .exercises-holder .exercises-tree .exercise-clone:hover {
-  background: linear-gradient(135deg, #df1c3d 35%, #144eba 65%);
+  background: linear-gradient(135deg, #bd1330 35%, #144eba 65%);
 }
 main .exercises-holder .exercises-tree .exercise-clone .exercise-content {
   height: 85px;
@@ -793,7 +877,7 @@ main .exercises-holder .exercises-tree .exercise-clone:hover .exercise-content {
   flex-direction: row;
   height: 100px;
   width: 100px;
-  background: linear-gradient(135deg, #df1c3d 45%, white 45% 55%, #144eba 55% 100%);
+  background: linear-gradient(135deg, #bd1330 45%, white 45% 55%, #144eba 55% 100%);
   border-radius: 50%;
   position: relative;
   -webkit-animation: rotating-div 5s linear infinite;
@@ -870,7 +954,7 @@ nav .interactive-title span:first-child, nav .interactive-title span:last-child 
   position: absolute;
 }
 nav .interactive-title span:first-child {
-  color: #df1c3d;
+  color: #bd1330;
   top: -5px;
   left: -3px;
   z-index: 1;
@@ -885,7 +969,7 @@ nav .interactive-title:hover span {
   text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
 nav .interactive-title:hover span:first-child {
-  color: #f2072f;
+  color: #d91435;
   top: -7px;
   left: -5px;
   z-index: 2;
@@ -913,7 +997,7 @@ nav .button-holder {
   margin-right: 15px;
 }
 nav .button-holder a {
-  color: #3c3c3c;
+  color: #5e5c5c;
   text-align: center;
   font-size: 25px;
   text-transform: capitalize;
@@ -959,7 +1043,7 @@ footer div {
   flex-direction: column;
 }
 footer div h3 {
-  color: #3c3c3c;
+  color: #5e5c5c;
   margin-bottom: 5px;
 }
 footer div a {
@@ -998,7 +1082,7 @@ footer div a {
   transition: 300ms;
 }
 .modal-options .modal-x::before {
-  background-color: #df1c3d;
+  background-color: #bd1330;
   transform: rotate(45deg);
 }
 .modal-options .modal-x:hover::before {
@@ -1010,14 +1094,14 @@ footer div a {
   transform: rotate(-45deg);
 }
 .modal-options .modal-x:hover::after {
-  background-color: #df1c3d;
+  background-color: #bd1330;
   transform: rotate(45deg);
 }
 .modal-options .modal-resize {
   height: 40px;
   width: 20px;
-  border-top: 5px solid #df1c3d;
-  border-bottom: 5px solid #df1c3d;
+  border-top: 5px solid #bd1330;
+  border-bottom: 5px solid #bd1330;
   border-left: 5px solid #144eba;
   border-right: 5px solid #144eba;
   cursor: pointer;
@@ -1068,7 +1152,7 @@ footer div a {
   gap: 10px;
   max-width: 285px;
   background-color: white;
-  border: 1px solid #3c3c3c;
+  border: 1px solid #5e5c5c;
   position: absolute;
   left: 35%;
   padding: 0 5px;
@@ -1077,26 +1161,27 @@ footer div a {
 .exercise-holder .exercise-title .exercise-difficulty {
   height: 20px;
   width: 20px;
-  border: 1px solid #3c3c3c;
+  border: 1px solid #5e5c5c;
   border-radius: 50%;
-  background: #df1c3d;
+  background: #bd1330;
 }
 .exercise-holder .exercise-title p {
-  color: #3c3c3c;
+  color: #5e5c5c;
   font-size: 25px;
   margin: 0;
 }
 .exercise-holder .exercise {
   height: 180px;
   width: 180px;
-  background: linear-gradient(135deg, #df1c3d 35%, #144eba 65%);
+  background: linear-gradient(135deg, #bd1330 35%, #144eba 65%);
+  border-radius: 50%;
   box-shadow: 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
   cursor: pointer;
   position: relative;
   transition: 300ms;
 }
 .exercise-holder .exercise:hover {
-  background: linear-gradient(135deg, #144eba 35%, #df1c3d 65%);
+  background: linear-gradient(135deg, #144eba 35%, #bd1330 65%);
 }
 .exercise-holder .exercise .exercise-content {
   display: flex;
@@ -1106,6 +1191,7 @@ footer div a {
   height: 165px;
   width: 165px;
   background-color: white;
+  border-radius: 50%;
   box-shadow: inset 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
   cursor: inherit;
   position: absolute;
@@ -1119,7 +1205,7 @@ footer div a {
   width: 155px;
 }
 .exercise-holder #active-exercise {
-  background: linear-gradient(135deg, #144eba 35%, #df1c3d 65%);
+  background: linear-gradient(135deg, #144eba 35%, #bd1330 65%);
   cursor: default;
 }
 .exercise-holder #active-exercise .exercise-content {
@@ -1132,7 +1218,7 @@ footer div a {
   cursor: default;
 }
 .exercise-holder .exercise-clone:hover {
-  background: linear-gradient(135deg, #df1c3d 35%, #144eba 65%);
+  background: linear-gradient(135deg, #bd1330 35%, #144eba 65%);
 }
 .exercise-holder .exercise-clone .exercise-content {
   height: 85px;

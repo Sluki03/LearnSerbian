@@ -3,6 +3,7 @@
         height: 180px;
         width: 180px;
         background: $defRedBlue;
+        border-radius: 50%;
         box-shadow: $defShadow;
         cursor: pointer;
         position: relative;
@@ -17,6 +18,7 @@
             height: 165px;
             width: 165px;
             background-color: white;
+            border-radius: 50%;
             box-shadow: $defInnerShadow;
             cursor: inherit;
             position: absolute;

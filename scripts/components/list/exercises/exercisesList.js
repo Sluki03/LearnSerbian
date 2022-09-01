@@ -1,7 +1,6 @@
 import { exercisesData } from "../../../../data/exercisesData.js";
 import { Component } from "../../component.js";
 import getDifficultyColor from "../../../exercises/getDifficultyColor.js";
-import getBorderRadius from "../../../exercises/getBorderRadius.js";
 import closeExerciseModal from "../../../exercises/closeExerciseModal.js";
 
 export default function exercisesList() {
@@ -9,12 +8,8 @@ export default function exercisesList() {
     const treeEnd = document.getElementById("exercises-tree-end");
 
     let activeExerciseId = 0;
-    let lastRadius = null;
 
     exercisesData.forEach((exercise, index) => {
-        const borderRadius = getBorderRadius(lastRadius);
-        lastRadius = borderRadius;
-
         const exerciseHolder = document.querySelector("[data-template='exercise']").content.firstElementChild.cloneNode(true);
         tree.insertBefore(exerciseHolder, treeEnd);
 
@@ -24,11 +19,9 @@ export default function exercisesList() {
         exerciseDifficulty.style.backgroundColor = getDifficultyColor(exercise.difficulty);
         exerciseP.innerText = exercise.name;
 
-        articleExercise.style.borderRadius = borderRadius;
         articleExercise.onclick = () => openExerciseModal(articleExercise, exercise, index + 1);
 
         const [exerciseContent] = [...articleExercise.children];
-        exerciseContent.style.borderRadius = borderRadius;
 
         Component.create("interactiveTitle", index + 1, exerciseContent);
     });
