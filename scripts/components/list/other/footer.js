@@ -1,7 +1,7 @@
 import { footerData } from "../../../../data/footerData.js";
 import createEelement from "../../../functions/createElement.js";
 
-export default function footer(componentProps) {
+export default function Footer(componentProps) {
     const { builtIn } = componentProps;
     const [appendTo] = componentProps.params;
 

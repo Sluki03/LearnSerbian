@@ -1,8 +1,8 @@
-import { Component } from "../../component.js";
+import { Component } from "../../Component.js";
 import closeExerciseModal from "../../../exercises/closeExerciseModal.js";
 import realParseInt from "../../../functions/realParseInt.js";
 
-export default function singleExercise(componentProps) {
+export default function SingleExercise(componentProps) {
     const [exercise] = componentProps.params;
 
     const main = document.querySelector("main");
@@ -29,7 +29,7 @@ export default function singleExercise(componentProps) {
     exerciseModal.appendChild(exerciseModalTitle);
     exerciseModal.appendChild(exerciseModalDivider);
 
-    Component.create("interactiveTitle", exercise.name, exerciseModalTitle);
+    Component.create("InteractiveTitle", exercise.name, exerciseModalTitle);
 
     const activeExerciseClone = document.getElementById("active-exercise").cloneNode(true);
     
@@ -38,7 +38,7 @@ export default function singleExercise(componentProps) {
     
     exerciseModalTitle.appendChild(activeExerciseClone);
 
-    const exerciseModalContent = Component.create("singleContent", exercise, exerciseModal);
+    const exerciseModalContent = Component.create("SingleContent", exercise, exerciseModal);
     const contentButton = document.querySelector(".exercise-modal-content button");
 
     let isExerciseStarted = false;
@@ -66,7 +66,7 @@ export default function singleExercise(componentProps) {
                 exerciseModalTitle.remove();
                 exerciseModalDivider.remove();
 
-                Component.create("singleTask", exercise.tasks, exerciseModal);
+                Component.create("SingleTask", exercise.tasks, exerciseModal);
             }, 300);
         }, buttonAnimation ? 300 : 0);
     }

@@ -1,8 +1,8 @@
 import { navButtonsData } from "../../../../data/navButtonsData.js";
 import createElement from "../../../functions/createElement.js";
-import { Component } from "../../component.js";
+import { Component } from "../../Component.js";
 
-export default function nav(componentProps) {
+export default function Nav(componentProps) {
     const { builtIn } = componentProps;
     const [id, appendTo] = componentProps.params;
     
@@ -14,7 +14,7 @@ export default function nav(componentProps) {
         appendTo: navElement
     });
 
-    Component.create("interactiveTitle", "learn serbian", homeLink);
+    Component.create("InteractiveTitle", "learn serbian", homeLink);
 
     const buttonHolder = createElement({ tag: "div", attributes: { class: "button-holder" }, appendTo: navElement });
 

@@ -73,34 +73,13 @@
         }
     }
 
-    .check-button {
-        color: white;
-        font-size: set-size(xl);
-        font-weight: bold;
-        letter-spacing: 5px;
-        text-transform: uppercase;
-        background: linear-gradient(-45deg, $defBlue 50%, $defRed 50%);
-        background-position-x: 0;
-        border: 1px solid $defBlue;
-        cursor: pointer;
-        margin-top: 30px;
-        padding: 5px 10px;
-        transition: 300ms;
+    @include flag-button;
 
-        &:hover {
-            letter-spacing: 10px;
-            background-position-x: 50px;
-        }
-    }
-
-    #disabled-check-button {
-        cursor: default;
-        opacity: 0.5;
-
-        &:hover {
-            letter-spacing: 5px;
-            background-position-x: 0;
-        }
+    .flag-button {
+        width: 80%;
+        position: absolute;
+        bottom: -100px;
+        margin: 0;
     }
 
     .task-info {
@@ -115,7 +94,7 @@
         padding: 10px 20px;
         transition: 300ms;
 
-        img {
+        & > img {
             height: 60px;
             width: 60px;
             object-fit: contain;
@@ -136,12 +115,29 @@
                 margin: 0;
             }
         }
+
+        .arrow-button {
+            height: 70px;
+            width: 70px;
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%) rotate(-90deg);
+
+            img {
+                height: 40px;
+            }
+        }
     }
 }
 
 .active-exercise-modal-task {
     opacity: 1;
     left: 0;
+
+    .flag-button {
+        bottom: 0;
+    }
 }
 
 #extended-exercise-modal-task {

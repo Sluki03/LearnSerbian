@@ -92,24 +92,26 @@
                 <strong>tips:</strong>
                 <p class="content-p"></p>
 
-                <button>start</button>
+                <button class="flag-button">start</button>
             </div>
         </template>
 
         <template data-template="exercise-modal-task">
             <div class="exercise-modal-task">
-                <h3></h3>
+                <h3 data-name="task-h3"></h3>
 
-                <div class="task-holder"></div>
-                <button class="check-button" id="disabled-check-button">check</button>
+                <div class="task-holder" data-name="task-holder"></div>
+                <button class="flag-button disabled-flag-button" data-name="check-button">check</button>
 
-                <div class="task-info">
-                    <img src="" alt="">
+                <div class="task-info" data-name="task-info">
+                    <img src="" alt="" data-name="task-info-img">
                     
-                    <div class="task-info-text">
-                        <h4></h4>
-                        <p></p>
+                    <div class="task-info-text" data-name="task-info-text">
+                        <h4 data-name="task-info-text-h4"></h4>
+                        <p data-name="task-info-text-p"></p>
                     </div>
+
+                    <button class="arrow-button" data-component="arrow-button" data-name="task-info-button"></button>
                 </div>
             </div>
         </template>

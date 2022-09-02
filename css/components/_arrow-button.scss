@@ -2,17 +2,18 @@
     @include add-flex;
     height: 100px;
     width: 100px;
-    background-color: rgb(230, 230, 230);
-    border: none;
+    background: linear-gradient(-45deg, $defBlue 35%, white 35% 65%, $defRed 65%);
+    border: 3px solid black;
     border-radius: 50px;
-    box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.50);
+    box-shadow: $defLightShadow;
     cursor: pointer;
     position: absolute;
     bottom: 40px;
     transition: 300ms;
 
     &:hover {
-        background-color: rgb(200, 200, 200);
+        background: linear-gradient(-45deg, $defLightBlue 35%, white 35% 65%, $defLightRed 65%);
+        box-shadow: $defShadow;
     }
 
     img {

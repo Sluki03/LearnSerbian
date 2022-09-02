@@ -1,3 +1,5 @@
+import { Convert } from "./Convert.js";
+
 export default function createElement(element) {
     const newElement = document.createElement(element.tag);
     
@@ -10,7 +12,7 @@ export default function createElement(element) {
 
     if(element.style) Object.keys(element.style).forEach((key, index) => {
         const value = Object.values(element.style)[index];
-        newElement.style.setProperty(jsToCssStandard(key), value);
+        newElement.style.setProperty(Convert.jsToCssStandard(key), value);
     });
 
     if(element.innerText) newElement.innerText = element.innerText;
@@ -24,15 +26,4 @@ export default function createElement(element) {
     else element.appendTo.appendChild(newElement);
 
     return newElement;
-
-    function jsToCssStandard(string) {
-        let newString = "";
-
-        for(let i = 0; i < string.length; i++) {
-            if(string[i] === string[i].toUpperCase()) newString += `-${string[i].toLowerCase()}`;
-            else newString += string[i];
-        }
-
-        return newString;
-    }
 }

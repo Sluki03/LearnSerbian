@@ -6,7 +6,7 @@ window.addEventListener("load", () => {
     loaded();
 
     Component.render();
-    Component.create("exercisesList");
+    Component.create("ExercisesList");
     
     const exercisesHolder = document.querySelector(".exercises-holder");
     scrollingParallax({ scroll: exercisesHolder, bg: exercisesHolder });

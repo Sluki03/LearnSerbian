@@ -28,6 +28,28 @@ export const exercisesData = [
                     correct: { title: "Correct!", text: "That one is true." },
                     incorrect: { title: "Incorrect!", text: "That one is false." }
                 }
+            },
+
+            {
+                type: "multipleChoice",
+                title: "How to say: \"dog\" in Serbian?",
+                constructor: {
+                    acceptableAnswers: ["pas"],
+                    options: ["ae", "videcemo", "pas", "jako"],
+                    correct: { title: "Correct!", text: "That one is true." },
+                    incorrect: { title: "Incorrect!", text: "That one is false." }
+                }
+            },
+
+            {
+                type: "multipleChoice",
+                title: "What is the translation of: \"cemu to\"?",
+                constructor: {
+                    acceptableAnswers: ["why that"],
+                    options: ["why that", "I don't know", "maybe", "tomorrow"],
+                    correct: { title: "Correct!", text: "That one is true." },
+                    incorrect: { title: "Incorrect!", text: "That one is false." }
+                }
             }
         ]
     },

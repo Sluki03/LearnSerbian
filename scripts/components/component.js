@@ -1,17 +1,19 @@
-import panelsList from "./list/index/panelsList.js";
-import exercisesList from "./list/exercises/exercisesList.js";
-import singleExercise from "./list/exercises/singleExercise.js";
-import singleContent from "./list/exercises/singleContent.js";
-import singleTask from "./list/exercises/singleTask.js";
-import loading from "./list/other/loading.js";
-import nav from "./list/other/nav.js"
-import footer from "./list/other/footer.js";
-import interactiveTitle from "./list/other/interactiveTitle.js"
-import modalOptions from "./list/other/modalOptions.js";
+import PanelsList from "./list/index/PanelsList.js";
+import ExercisesList from "./list/exercises/ExercisesList.js";
+import SingleExercise from "./list/exercises/SingleExercise.js";
+import SingleContent from "./list/exercises/SingleContent.js";
+import SingleTask from "./list/exercises/SingleTask.js";
+import Loading from "./list/other/Loading.js";
+import Nav from "./list/other/Nav.js"
+import Footer from "./list/other/Footer.js";
+import InteractiveTitle from "./list/other/InteractiveTitle.js"
+import ModalOptions from "./list/other/ModalOptions.js";
+import ArrowButton from "./list/other/ArrowButton.js";
+import { Convert } from "../functions/Convert.js";
 
 const components = {
-    panelsList, exercisesList, singleExercise, singleContent, singleTask,
-    loading, nav, footer, interactiveTitle, modalOptions
+    PanelsList, ExercisesList, SingleExercise, SingleContent, SingleTask,
+    Loading, Nav, Footer, InteractiveTitle, ModalOptions, ArrowButton
 };
 
 export const Component = { create, render };
@@ -35,7 +37,12 @@ function render(element) {
     const componentElements = selectIn.querySelectorAll("[data-component]");
     const componentTypes = [];
 
-    for(let i = 0; i < componentElements.length; i++) componentTypes.push(cssToJsStandard(componentElements[i].dataset.component));
+    for(let i = 0; i < componentElements.length; i++) {
+        const componentType = Convert.cssToJsStandard(componentElements[i].dataset.component);
+        const validComponentType = componentType[0].toUpperCase() + componentType.substring(1);
+
+        componentTypes.push(validComponentType);
+    }
 
     componentTypes.forEach((componentType, index) => {
         let componentFunction;
@@ -49,21 +56,4 @@ function render(element) {
         const componentProps = { builtIn: componentElements[index], params: datasetParams };
         componentFunction(componentProps);
     });
-
-    function cssToJsStandard(string) {
-        let newString = "";
-        let upperCaseStatus = false;
-
-        for(let i = 0; i < string.length; i++) {
-            if(upperCaseStatus) {
-                upperCaseStatus = false;
-                newString += string[i].toUpperCase();
-            }
-
-            else if(string[i] === "-") upperCaseStatus = true;
-            else newString += string[i];
-        }
-
-        return newString;
-    }
 }

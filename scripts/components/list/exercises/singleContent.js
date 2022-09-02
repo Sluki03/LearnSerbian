@@ -2,7 +2,7 @@ import createElement from "../../../functions/createElement.js";
 import getDifficultyColor from "../../../exercises/getDifficultyColor.js";
 import markup from "../../../functions/markup.js";
 
-export default function singleContent(componentProps) {
+export default function SingleContent(componentProps) {
     const [exercise, exerciseModal] = componentProps.params;
     
     const exerciseModalContent = document.querySelector("[data-template='exercise-modal-content']").content.firstElementChild.cloneNode(true);

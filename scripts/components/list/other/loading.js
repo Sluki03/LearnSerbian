@@ -1,6 +1,6 @@
 import createElement from "../../../functions/createElement.js";
 
-export default function loading(componentProps) {
+export default function Loading(componentProps) {
     const { builtIn } = componentProps;
     const [appendTo] = componentProps.params;
 

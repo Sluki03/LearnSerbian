@@ -1,6 +1,6 @@
 import createElement from "../../../functions/createElement.js";
 
-export default function interactiveTitle(componentProps) {
+export default function InteractiveTitle(componentProps) {
     const { builtIn } = componentProps;
     const [title, appendTo] = componentProps.params;
 

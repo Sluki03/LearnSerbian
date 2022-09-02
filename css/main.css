@@ -440,8 +440,7 @@ main .exercise-modal .exercise-modal-content p {
   color: #5e5c5c;
   font-size: 20px;
 }
-main .exercise-modal .exercise-modal-content button {
-  width: 100%;
+main .exercise-modal .exercise-modal-content .flag-button {
   color: #144eba;
   font-size: 30px;
   font-weight: bold;
@@ -452,16 +451,28 @@ main .exercise-modal .exercise-modal-content button {
   border: 1px solid #144eba;
   cursor: pointer;
   padding: 5px 10px;
-  position: -webkit-sticky;
-  position: sticky;
-  bottom: 0;
   margin: 5px 0;
   transition: 300ms;
 }
-main .exercise-modal .exercise-modal-content button:hover {
+main .exercise-modal .exercise-modal-content .flag-button:hover {
   color: white;
   letter-spacing: 10px;
   background-position-x: 450px;
+}
+main .exercise-modal .exercise-modal-content .disabled-flag-button {
+  cursor: default;
+  opacity: 0.5;
+}
+main .exercise-modal .exercise-modal-content .disabled-flag-button:hover {
+  color: #144eba;
+  letter-spacing: 5px;
+  background-position-x: 0;
+}
+main .exercise-modal .exercise-modal-content .flag-button {
+  width: 100%;
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 0;
 }
 main .exercise-modal .started-exercise-modal-content {
   opacity: 0;
@@ -547,31 +558,39 @@ main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .
   box-shadow: -3px -3px 5px 1px #bd1330, 3px 3px 5px 1px #144eba;
   top: -5px;
 }
-main .exercise-modal .exercise-modal-task .check-button {
-  color: white;
+main .exercise-modal .exercise-modal-task .flag-button {
+  color: #144eba;
   font-size: 30px;
   font-weight: bold;
   letter-spacing: 5px;
   text-transform: uppercase;
-  background: linear-gradient(-45deg, #144eba 50%, #bd1330 50%);
+  background: linear-gradient(-45deg, #144eba 35%, white 35% 65%, #bd1330 65%);
   background-position-x: 0;
   border: 1px solid #144eba;
   cursor: pointer;
-  margin-top: 30px;
   padding: 5px 10px;
+  margin: 5px 0;
   transition: 300ms;
 }
-main .exercise-modal .exercise-modal-task .check-button:hover {
+main .exercise-modal .exercise-modal-task .flag-button:hover {
+  color: white;
   letter-spacing: 10px;
-  background-position-x: 50px;
+  background-position-x: 450px;
 }
-main .exercise-modal .exercise-modal-task #disabled-check-button {
+main .exercise-modal .exercise-modal-task .disabled-flag-button {
   cursor: default;
   opacity: 0.5;
 }
-main .exercise-modal .exercise-modal-task #disabled-check-button:hover {
+main .exercise-modal .exercise-modal-task .disabled-flag-button:hover {
+  color: #144eba;
   letter-spacing: 5px;
   background-position-x: 0;
+}
+main .exercise-modal .exercise-modal-task .flag-button {
+  width: 80%;
+  position: absolute;
+  bottom: -100px;
+  margin: 0;
 }
 main .exercise-modal .exercise-modal-task .task-info {
   display: flex;
@@ -588,7 +607,7 @@ main .exercise-modal .exercise-modal-task .task-info {
   padding: 10px 20px;
   transition: 300ms;
 }
-main .exercise-modal .exercise-modal-task .task-info img {
+main .exercise-modal .exercise-modal-task .task-info > img {
   height: 60px;
   width: 60px;
   -o-object-fit: contain;
@@ -610,9 +629,23 @@ main .exercise-modal .exercise-modal-task .task-info .task-info-text p {
   font-size: 20px;
   margin: 0;
 }
+main .exercise-modal .exercise-modal-task .task-info .arrow-button {
+  height: 70px;
+  width: 70px;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%) rotate(-90deg);
+}
+main .exercise-modal .exercise-modal-task .task-info .arrow-button img {
+  height: 40px;
+}
 main .exercise-modal .active-exercise-modal-task {
   opacity: 1;
   left: 0;
+}
+main .exercise-modal .active-exercise-modal-task .flag-button {
+  bottom: 0;
 }
 main .exercise-modal #extended-exercise-modal-task {
   height: 100%;
@@ -1137,17 +1170,18 @@ footer div a {
   flex-direction: row;
   height: 100px;
   width: 100px;
-  background-color: rgb(230, 230, 230);
-  border: none;
+  background: linear-gradient(-45deg, #144eba 35%, white 35% 65%, #bd1330 65%);
+  border: 3px solid black;
   border-radius: 50px;
-  box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
   cursor: pointer;
   position: absolute;
   bottom: 40px;
   transition: 300ms;
 }
 .arrow-button:hover {
-  background-color: rgb(200, 200, 200);
+  background: linear-gradient(-45deg, #0559f5 35%, white 35% 65%, #d91435 65%);
+  box-shadow: 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
 }
 .arrow-button img {
   height: 50px;

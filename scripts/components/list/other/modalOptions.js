@@ -1,6 +1,6 @@
 import createElement from "../../../functions/createElement.js";
 
-export default function modalOptions(componentProps) {
+export default function ModalOptions(componentProps) {
     const { builtIn } = componentProps;
     const [closeFunction, appendTo] = componentProps.params;
 
