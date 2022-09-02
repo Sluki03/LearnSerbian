@@ -1,5 +1,6 @@
 import { Component } from "../../component.js";
 import closeExerciseModal from "../../../exercises/closeExerciseModal.js";
+import realParseInt from "../../../functions/realParseInt.js";
 
 export default function singleExercise(componentProps) {
     const [exercise] = componentProps.params;
@@ -22,7 +23,11 @@ export default function singleExercise(componentProps) {
     
     modalX.onclick = () => closeExerciseModal();
 
-    const exerciseModalTitle = document.querySelector(".exercise-modal-title");
+    const exerciseModalTitleDivider = document.querySelector("[data-template='exercise-modal-title-divider']").content.firstElementChild.cloneNode(true);
+    const [exerciseModalTitle, exerciseModalDivider] = [...exerciseModalTitleDivider.children];
+
+    exerciseModal.appendChild(exerciseModalTitle);
+    exerciseModal.appendChild(exerciseModalDivider);
 
     Component.create("interactiveTitle", exercise.name, exerciseModalTitle);
 
@@ -35,18 +40,35 @@ export default function singleExercise(componentProps) {
 
     const exerciseModalContent = Component.create("singleContent", exercise, exerciseModal);
     const contentButton = document.querySelector(".exercise-modal-content button");
+
+    let isExerciseStarted = false;
     
     contentButton.onclick = () => {
-        contentButton.style.bottom = "-100px";
+        if(isExerciseStarted) return;
+        isExerciseStarted = true;
+        
+        const exerciseModalHeight = parseFloat(getComputedStyle(exerciseModal).getPropertyValue("height"));
+        const buttonAnimation = exerciseModal.scrollHeight - 10 > realParseInt(exerciseModal.scrollTop + exerciseModalHeight);
+
+        if(buttonAnimation) contentButton.style.bottom = "-100px";
 
         setTimeout(() => {
             exerciseModalContent.classList.add("started-exercise-modal-content");
 
+            exerciseModalTitle.style.opacity = "0";
+            exerciseModalTitle.style.top = "-10px";
+
+            exerciseModalDivider.style.opacity = "0";
+            exerciseModalDivider.style.top = "-10px";
+
             setTimeout(() => {
                 exerciseModalContent.remove();
+                exerciseModalTitle.remove();
+                exerciseModalDivider.remove();
+
                 Component.create("singleTask", exercise.tasks, exerciseModal);
             }, 300);
-        }, 300);
+        }, buttonAnimation ? 300 : 0);
     }
 
     return exerciseModal;

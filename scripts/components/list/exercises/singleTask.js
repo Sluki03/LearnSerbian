@@ -17,8 +17,8 @@ export default function singleTask(componentProps) {
     
     taskH3.innerText = task.title;
 
-    checkButton.onclick = check;
-    window.addEventListener("keydown", check);
+    checkButton.onclick = e => check(e, "button");
+    window.addEventListener("keydown", e => check(e, "keyboard"));
 
     let answer;
     
@@ -36,8 +36,9 @@ export default function singleTask(componentProps) {
         else if(!checkButton.id) checkButton.id = "disabled-check-button";
     }
 
-    function check(event) {
-        if(event.key !== "Enter" || checkButton.id === "disabled-check-button") return;
+    function check(event, checkType) {
+        if(checkType === "button" && checkButton.id === "disabled-check-button") return;
+        if(checkType === "keyboard" && event.key !== "Enter") return;
 
         const image = { correct: "./images/icons/circle-check.svg", incorrect: "./images/icons/circle-x.svg" };
         

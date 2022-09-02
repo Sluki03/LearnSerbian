@@ -21,7 +21,7 @@ export const exercisesData = [
         tasks: [
             {
                 type: "multipleChoice",
-                title: "How to say: 'color' in Serbian?",
+                title: "How to say: \"color\" in Serbian?",
                 constructor: {
                     acceptableAnswers: ["boja"],
                     options: ["cemu", "to", "nesto", "boja"],

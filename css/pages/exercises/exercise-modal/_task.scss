@@ -1,11 +1,12 @@
 .exercise-modal-task {
-    @include add-flex(column, flex-start);
-    width: 80%;
+    @include add-flex(column, center);
+    width: 100%;
     opacity: 0;
     position: relative;
     left: 20px;
     margin-top: 10px;
     transition: 300ms;
+    overflow: hidden;
 
     h3 {
         color: $defDarkGrey;
@@ -23,13 +24,13 @@
             grid-template-columns: repeat(2, 1fr);
             gap: 15px;
             width: 100%;
-            max-width: 700px;
+            max-width: 660px;
             margin: 20px 0;
 
             .multiple-choice-button {
                 height: 100%;
                 width: 100%;
-                max-width: 350px;
+                max-width: 330px;
                 color: $defDarkGrey;
                 font-size: set-size(lg);
                 background-color: white;
@@ -105,10 +106,11 @@
     .task-info {
         @include add-flex(row, flex-start);
         gap: 15px;
-        width: 100%;
+        width: 80%;
+        border-top-left-radius: 40px;
         border-top-right-radius: 40px;
         box-shadow: $defShadow;
-        position: sticky;
+        position: absolute;
         bottom: -100px;
         padding: 10px 20px;
         transition: 300ms;
