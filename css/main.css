@@ -191,10 +191,9 @@ img {
 .info .info-content .panels .panel h1 {
   width: 100%;
   color: white;
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: #5e5c5c;
   font-size: 30px;
   background-color: #0559f5;
+  border-bottom: 1px solid black;
   border-radius: 20px 20px 0px 0px;
   padding: 10px 0;
 }
@@ -202,6 +201,7 @@ img {
   background-color: #d91435;
 }
 .info .info-content .panels .panel:nth-child(3) h1 {
+  color: black;
   background-color: white;
 }
 .info .info-content .panels .panel p {
@@ -967,8 +967,8 @@ nav {
       -ms-user-select: none;
           user-select: none;
   background-color: rgba(255, 255, 255, 0.7);
-  -webkit-backdrop-filter: blur(5px);
-          backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
   box-shadow: 0px 1px 10px gray;
   position: fixed;
   top: 0;
@@ -1079,8 +1079,8 @@ footer {
   flex-direction: row;
   width: 100%;
   background-color: rgba(255, 255, 255, 0.2);
-  -webkit-backdrop-filter: blur(5px);
-          backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
   box-shadow: 0px 1px 10px gray;
   padding: 10px 0;
 }
@@ -1170,18 +1170,18 @@ footer div a {
   flex-direction: row;
   height: 100px;
   width: 100px;
-  background: linear-gradient(-45deg, #144eba 35%, white 35% 65%, #bd1330 65%);
+  background-color: white;
   border: 3px solid black;
   border-radius: 50px;
-  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
   cursor: pointer;
   position: absolute;
   bottom: 40px;
   transition: 300ms;
 }
 .arrow-button:hover {
-  background: linear-gradient(-45deg, #0559f5 35%, white 35% 65%, #d91435 65%);
-  box-shadow: 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
+  background-color: rgb(200, 200, 200);
+  box-shadow: inset 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
 }
 .arrow-button img {
   height: 50px;

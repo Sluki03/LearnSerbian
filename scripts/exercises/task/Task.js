@@ -1,5 +1,8 @@
-import { Convert } from "../functions/Convert.js";
-import createElement from "../functions/createElement.js";
+import { TaskFunctions } from "./TaskFunctions.js";
+import { Convert } from "../../functions/Convert.js";
+import { EventParams } from "../../functions/EventParams.js";
+import createElement from "../../functions/createElement.js";
+import randomArray from "../../functions/randomArray.js";
 
 export class Task {
     constructor(taskElement, tasks) {
@@ -38,13 +41,14 @@ export class Task {
     }
 
     startNew() {
-        const { taskHolder, taskInfo, checkButton } = this.elements;
+        const { taskHolder, taskInfo, checkButton, taskInfoButton } = this.elements;
+        const { setActiveButton } = TaskFunctions;
         
         taskInfo.style.bottom = "";
         checkButton.style.bottom = "";
 
         window.removeEventListener("keydown", this.check);
-        this.body.onkeydown = null;
+        window.removeEventListener("keydown", setActiveButton);
 
         this.taskElement.style.opacity = "0";
         this.taskElement.style.left = "-20px";
@@ -84,14 +88,14 @@ export class Task {
         });
     }
     
-    check(event) {        
+    check(e) {        
         const {
             checkButton, taskInfo, taskInfoImg, taskInfoTextH4, taskInfoTextP,
             taskInfoButton
         } = this.elements;
         
-        if(event.type === "click" && checkButton.classList.contains("disabled-flag-button")) return;
-        if(event.type === "keydown" && event.key !== "Enter") return;
+        if(e.type === "click" && checkButton.classList.contains("disabled-flag-button")) return;
+        if(e.type === "keydown" && e.key !== "Enter") return;
 
         checkButton.style.bottom = "-100px";
         
@@ -141,8 +145,9 @@ export class Task {
     }
 
     construct() {
-        const { currentTask, answerChanged } = this;
+        const { answerChanged } = this;
         const { taskHolder } = this.elements;
+        const { setActiveButton } = TaskFunctions;
         
         switch(this.currentTask.type) {
             case "multipleChoice": {
@@ -151,13 +156,15 @@ export class Task {
                     attributes: { class: "multiple-choice-holder" },
                     appendTo: taskHolder
                 });
+
+                const randomOptions = randomArray(this.currentTask.constructor.options);
                 
-                for(let i = 0; i < this.currentTask.constructor.options.length; i++) {
+                for(let i = 0; i < randomOptions.length; i++) {
                     const multipleChoiceButton = createElement({
                         tag: "button",
                         attributes: { class: "multiple-choice-button", id: `multiple-choice-button-${i + 1}` },
-                        innerText: this.currentTask.constructor.options[i],
-                        events: [{ on: "click", call: () => setActiveButton(i + 1) }],
+                        innerText: randomOptions[i],
+                        events: [{ on: "click", call: setActiveButton }],
                         appendTo: multipleChoiceHolder
                     });
 
@@ -169,23 +176,8 @@ export class Task {
                     });
                 }
 
-                this.body.onkeydown = e => setActiveButton(parseInt(e.key));
-
-                function setActiveButton(id) {
-                    if(isNaN(id) || id > currentTask.constructor.options.length) return;
-                    
-                    const allButtons = document.querySelectorAll(".multiple-choice-button");
-                    const buttonId = `multiple-choice-button-${id}`;
-
-                    allButtons.forEach(button => {
-                        if(button.classList.contains("active-multiple-choice-button") && button.id !== buttonId) button.classList.remove("active-multiple-choice-button");
-                        
-                        if(button.id === buttonId) {
-                            button.classList.add("active-multiple-choice-button");
-                            answerChanged(currentTask.constructor.options[id - 1]);
-                        }
-                    });
-                }
+                EventParams.set("setActiveButton", { randomOptions, answerChanged });
+                window.addEventListener("keydown", setActiveButton);
                 
                 break;
             }

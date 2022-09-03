@@ -1,5 +1,5 @@
 import { Component } from "../../Component.js";
-import { Task } from "../../../exercises/Task.js";
+import { Task } from "../../../exercises/task/Task.js";
 
 export default function SingleTask(componentProps) {
     const [tasks, exerciseModal] = componentProps.params;

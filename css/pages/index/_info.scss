@@ -36,10 +36,9 @@
                 h1 {
                     width: 100%;
                     color: white;
-                    -webkit-text-stroke-width: 1px;
-                    -webkit-text-stroke-color: $defDarkGrey;
                     font-size: set-size(xl);
                     background-color: $defLightBlue;
+                    border-bottom: 1px solid black;
                     border-radius: 20px 20px 0px 0px;
                     padding: 10px 0;
                 }
@@ -49,6 +48,7 @@
                 }
 
                 &:nth-child(3) h1 {
+                    color: black;
                     background-color: white;
                 }
 
