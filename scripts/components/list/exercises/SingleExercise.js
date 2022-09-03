@@ -66,7 +66,7 @@ export default function SingleExercise(componentProps) {
                 exerciseModalTitle.remove();
                 exerciseModalDivider.remove();
 
-                Component.create("SingleTask", exercise.tasks, exerciseModal);
+                Component.create("SingleTask", exercise, exerciseModal);
             }, 300);
         }, buttonAnimation ? 300 : 0);
     }

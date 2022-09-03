@@ -22,18 +22,9 @@
         @include exercise;
     }
 
-    .exercise-modal-divider {
-        min-height: 3px;
-        width: 80%;
-        background: $defRedBlue;
-        position: relative;
-        top: 0;
-        margin: 5px 0;
-        transition: 300ms;
-    }
-
     @import "./content";
     @import "./task";
+    @import "./finished";
 }
 
 #active-exercise-modal {

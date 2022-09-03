@@ -78,7 +78,7 @@
         <template data-template="exercise-modal-title-divider">
             <div class="exercise-modal-title-divider">
                 <div class="exercise-modal-title"></div>
-                <div class="exercise-modal-divider"></div>
+                <div class="divider"></div>
             </div>
         </template>
 
@@ -113,6 +113,36 @@
 
                     <button class="arrow-button" data-component="arrow-button" data-name="task-info-button"></button>
                 </div>
+            </div>
+        </template>
+
+        <template data-template="exercise-modal-finished">
+            <div class="exercise-modal-finished">
+                <div class="finished-title"></div>
+                <div class="divider"></div>
+
+                <div class="finished-holder">
+                    <strong>exercise finished!</strong>
+                    
+                    <div class="holder-overview">
+                        <div class="overview-block">
+                            <p>score:</p>
+                            <strong>42 XP</strong>
+                        </div>
+
+                        <div class="overview-block">
+                            <p>correct:</p>
+                            <strong>100%</strong>
+                        </div>
+
+                        <div class="overview-block">
+                            <p>mistakes:</p>
+                            <strong>0</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="flag-button">continue</button>
             </div>
         </template>
     </body>

@@ -6,7 +6,9 @@ function setActiveButton(e) {
     e.preventDefault();
     
     const setActiveButtonParams = EventParams.get("setActiveButton");
-    const { randomOptions, answerChanged } = setActiveButtonParams;
+    const { randomOptions, answerChanged, submitted } = setActiveButtonParams;
+
+    if(submitted) return;
 
     const id = e.type === "keydown" ? parseInt(e.key) : e.target.id.split("-")[3];
     

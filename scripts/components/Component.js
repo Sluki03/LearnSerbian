@@ -3,6 +3,7 @@ import ExercisesList from "./list/exercises/ExercisesList.js";
 import SingleExercise from "./list/exercises/SingleExercise.js";
 import SingleContent from "./list/exercises/SingleContent.js";
 import SingleTask from "./list/exercises/SingleTask.js";
+import Finished from "./list/exercises/Finished.js";
 import Loading from "./list/other/Loading.js";
 import Nav from "./list/other/Nav.js"
 import Footer from "./list/other/Footer.js";
@@ -13,7 +14,8 @@ import { Convert } from "../functions/Convert.js";
 
 const components = {
     PanelsList, ExercisesList, SingleExercise, SingleContent, SingleTask,
-    Loading, Nav, Footer, InteractiveTitle, ModalOptions, ArrowButton
+    Finished, Loading, Nav, Footer, InteractiveTitle,
+    ModalOptions, ArrowButton
 };
 
 export const Component = { create, render };

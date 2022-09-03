@@ -1,16 +1,20 @@
 import { TaskFunctions } from "./TaskFunctions.js";
+import { Component } from "../../components/Component.js";
 import { Convert } from "../../functions/Convert.js";
 import { EventParams } from "../../functions/EventParams.js";
 import createElement from "../../functions/createElement.js";
 import randomArray from "../../functions/randomArray.js";
 
 export class Task {
-    constructor(taskElement, tasks) {
+    constructor(taskElement, exercise) {
+        this.exercise = exercise;
+        
         this.taskElement = taskElement;
-        this.tasks = tasks;
+        this.tasks = randomArray(exercise.tasks);
         this.taskNumber = 0;
         this.currentTask = this.tasks[this.taskNumber];
         this.answer = "";
+        this.submitted = false;
 
         this.body = document.querySelector("body");
         this.elements = {};
@@ -24,6 +28,7 @@ export class Task {
         this.taskNumber++;
         this.currentTask = this.tasks[this.taskNumber];
         this.answer = "";
+        this.submitted = false;
         this.elements = {};
     }
     
@@ -40,8 +45,10 @@ export class Task {
         window.addEventListener("keydown", this.check);
     }
 
-    startNew() {
-        const { taskHolder, taskInfo, checkButton, taskInfoButton } = this.elements;
+    startNew(e) {
+        if(e.type === "keydown" && e.key !== "Enter") return;
+        
+        const { taskHolder, taskInfo, checkButton } = this.elements;
         const { setActiveButton } = TaskFunctions;
         
         taskInfo.style.bottom = "";
@@ -49,6 +56,7 @@ export class Task {
 
         window.removeEventListener("keydown", this.check);
         window.removeEventListener("keydown", setActiveButton);
+        window.removeEventListener("keydown", this.startNew);
 
         this.taskElement.style.opacity = "0";
         this.taskElement.style.left = "-20px";
@@ -60,9 +68,18 @@ export class Task {
             this.taskElement.classList.remove("active-exercise-modal-task");
 
             taskHolder.innerHTML = "";
+            
+            if(this.tasks.length - 1 > this.taskNumber) {
+                this.next();
+                this.start();
+            }
 
-            this.next();
-            this.start();
+            else {
+                this.taskElement.remove();
+                
+                const exerciseModal = document.querySelector(".exercise-modal");
+                Component.create("Finished", this.exercise, exerciseModal);
+            }
         }, 300);
     }
 
@@ -88,15 +105,17 @@ export class Task {
         });
     }
     
-    check(e) {        
+    check(e) {
         const {
             checkButton, taskInfo, taskInfoImg, taskInfoTextH4, taskInfoTextP,
             taskInfoButton
         } = this.elements;
         
-        if(e.type === "click" && checkButton.classList.contains("disabled-flag-button")) return;
+        if(checkButton.classList.contains("disabled-flag-button")) return;
         if(e.type === "keydown" && e.key !== "Enter") return;
 
+        this.submitted = true;
+        
         checkButton.style.bottom = "-100px";
         
         const image = { correct: "./images/icons/circle-check.svg", incorrect: "./images/icons/circle-x.svg" };
@@ -125,6 +144,7 @@ export class Task {
         }
 
         taskInfoButton.onclick = this.startNew;
+        window.addEventListener("keydown", this.startNew);
 
         function getLinearGradient(isCorrect) {
             const color = isCorrect ? green : red;
