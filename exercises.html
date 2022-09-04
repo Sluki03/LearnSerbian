@@ -118,25 +118,39 @@
 
         <template data-template="exercise-modal-finished">
             <div class="exercise-modal-finished">
-                <div class="finished-title"></div>
-                <div class="divider"></div>
-
                 <div class="finished-holder">
-                    <strong>exercise finished!</strong>
-                    
-                    <div class="holder-overview">
+                    <strong class="exercise-finished"><span>exercise</span> finished!</strong>
+                        
+                    <div class="overview-holder">
+                        <div class="overview-holder-line"></div>
+                        
                         <div class="overview-block">
-                            <p>score:</p>
+                            <div class="overview-dot">
+                                <div class="img-holder">
+                                    <img src="./images/icons/score-icon.svg" alt="SCORE">
+                                </div>
+                            </div>
+                            
                             <strong>42 XP</strong>
                         </div>
-
+    
                         <div class="overview-block">
-                            <p>correct:</p>
+                            <div class="overview-dot">
+                                <div class="img-holder">
+                                    <img src="./images/icons/correct-icon.svg" alt="CORRECT">
+                                </div>
+                            </div>
+
                             <strong>100%</strong>
                         </div>
-
+    
                         <div class="overview-block">
-                            <p>mistakes:</p>
+                            <div class="overview-dot">
+                                <div class="img-holder">
+                                    <img src="./images/icons/mistakes-icon.svg" alt="MISTAKES">
+                                </div>
+                            </div>
+
                             <strong>0</strong>
                         </div>
                     </div>

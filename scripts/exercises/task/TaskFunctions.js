@@ -5,6 +5,11 @@ export const TaskFunctions = { setActiveButton };
 function setActiveButton(e) {
     e.preventDefault();
     
+    const taskInfo = document.querySelector(".task-info");
+    const taskInfoBottom = parseInt(getComputedStyle(taskInfo).getPropertyValue("bottom"));
+
+    if(taskInfoBottom === 0) return;
+    
     const setActiveButtonParams = EventParams.get("setActiveButton");
     const { randomOptions, answerChanged, submitted } = setActiveButtonParams;
 

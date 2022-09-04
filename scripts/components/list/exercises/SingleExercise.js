@@ -54,9 +54,7 @@ export default function SingleExercise(componentProps) {
 
         setTimeout(() => {
             exerciseModalContent.classList.add("started-exercise-modal-content");
-
-            exerciseModalTitle.style.opacity = "0";
-            exerciseModalTitle.style.top = "-10px";
+            exerciseModalTitle.classList.add("disabled-exercise-modal-title");
 
             exerciseModalDivider.style.opacity = "0";
             exerciseModalDivider.style.top = "-10px";

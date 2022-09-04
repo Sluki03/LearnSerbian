@@ -6,76 +6,86 @@
     transition: 300ms;
     overflow: hidden;
 
-    .finished-title {
-        @include add-flex;
-        gap: 20px;
-        margin: 20px 0px 10px 0px;
-        opacity: 0;
-        position: relative;
-        top: -10px;
-        transition: 300ms;
-        
-        @include interactive-title(70px);
-        @include exercise;
-    }
-
-    .active-finished-title {
-        opacity: 1;
-        top: 0;
-    }
-
     .finished-holder {
-        @include add-flex(column, flex-start);
-        height: 100%;
+        @include add-flex(column, flex-start, );
         width: 80%;
         opacity: 0;
         position: relative;
         left: 20px;
+        margin-top: 40px;
         transition: 300ms;
-
-        strong {
+        
+        .exercise-finished {
+            width: 395px;
             color: $defDarkGrey;
             font-size: set-size(miniheading);
             text-transform: capitalize;
             letter-spacing: 3px;
+            line-height: 0.5;
+
+            span {
+                color: $defBlue;
+            }
         }
 
-        .holder-overview {
-            @include add-flex;
-            width: 100%;
-            margin: 15px 0;
-
-            .overview-block {
-                @include add-flex(column);
+        .overview-holder {
+            @include add-flex(column, flex-start, flex-start);
+            width: 395px;
+            gap: 70px;
+            position: relative;
+            
+            .overview-holder-line {
+                height: 100%;
                 width: 100%;
-                margin: 0 5px;
-                padding: 5px 15px;
+                width: 5px;
+                background-color: $defBlue;
+                position: absolute;
+                left: 3px;
+            }
+            
+            .overview-block {
+                @include add-flex(row, flex-start);
+                gap: 10px;
+                width: 100%;
+                line-height: 1;
+                position: relative;
+    
+                .overview-dot {
+                    @include add-flex;
+                    height: 50px;
+                    width: 50px;
+                    background-color: white;
+                    border-radius: 50%;
+                    box-shadow: $defLightShadow;
+                    position: absolute;
+                    left: -20px;
 
-                p {
-                    color: $defDarkGrey;
-                    font-size: set-size(lg);
-                    text-transform: capitalize;
+                    .img-holder {
+                        @include add-flex;
+                        height: 45px;
+                        width: 45px;
+                        background-color: $defRed;
+                        border-radius: 50%;
+
+                        img {
+                            height: 35px;
+                            width: 35px;
+                            object-fit: contain;
+                            filter: invert(1);
+                            padding: 5px;
+                        }
+                    }
                 }
-
+    
                 strong {
                     color: $defDarkGrey;
                     font-size: set-size(xl);
-                    text-transform: none;
-                    letter-spacing: 0;
+                    margin-left: 50px;
                 }
             }
 
-            & > div:first-child {
-                margin-left: 0;
-            }
-
             & > div:nth-child(2) {
-                border-left: 3px solid $defDarkGrey;
-                border-right: 3px solid $defDarkGrey;
-            }
-
-            & > div:last-child {
-                margin-right: 0;
+                padding-top: 50px;
             }
         }
     }

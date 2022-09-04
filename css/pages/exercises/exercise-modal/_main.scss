@@ -22,6 +22,11 @@
         @include exercise;
     }
 
+    .disabled-exercise-modal-title {
+        opacity: 0;
+        top: -10px;
+    }
+
     @import "./content";
     @import "./task";
     @import "./finished";
