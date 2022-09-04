@@ -1312,18 +1312,16 @@ footer div a {
   flex-direction: row;
   height: 100px;
   width: 100px;
-  background-color: white;
-  border: 3px solid black;
+  background-color: rgb(240, 240, 240);
   border-radius: 50px;
-  box-shadow: inset 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
   cursor: pointer;
   position: absolute;
   bottom: 40px;
+  box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.3);
   transition: 300ms;
 }
 .arrow-button:hover {
-  background-color: rgb(200, 200, 200);
-  box-shadow: inset 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
+  background-color: rgb(220, 220, 220);
 }
 .arrow-button img {
   height: 50px;
