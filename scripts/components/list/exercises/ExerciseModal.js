@@ -1,8 +1,7 @@
 import { Component } from "../../Component.js";
 import closeExerciseModal from "../../../exercises/closeExerciseModal.js";
-import realParseInt from "../../../functions/realParseInt.js";
 
-export default function SingleExercise(componentProps) {
+export default function ExerciseModal(componentProps) {
     const [exercise] = componentProps.params;
 
     const main = document.querySelector("main");
@@ -38,36 +37,7 @@ export default function SingleExercise(componentProps) {
     
     exerciseModalTitle.appendChild(activeExerciseClone);
 
-    const exerciseModalContent = Component.create("SingleContent", exercise, exerciseModal);
-    const contentButton = document.querySelector(".exercise-modal-content button");
-
-    let isExerciseStarted = false;
-    
-    contentButton.onclick = () => {
-        if(isExerciseStarted) return;
-        isExerciseStarted = true;
-        
-        const exerciseModalHeight = parseFloat(getComputedStyle(exerciseModal).getPropertyValue("height"));
-        const buttonAnimation = exerciseModal.scrollHeight - 10 > realParseInt(exerciseModal.scrollTop + exerciseModalHeight);
-
-        if(buttonAnimation) contentButton.style.bottom = "-100px";
-
-        setTimeout(() => {
-            exerciseModalContent.classList.add("started-exercise-modal-content");
-            exerciseModalTitle.classList.add("disabled-exercise-modal-title");
-
-            exerciseModalDivider.style.opacity = "0";
-            exerciseModalDivider.style.top = "-10px";
-
-            setTimeout(() => {
-                exerciseModalContent.remove();
-                exerciseModalTitle.remove();
-                exerciseModalDivider.remove();
-
-                Component.create("SingleTask", exercise, exerciseModal);
-            }, 300);
-        }, buttonAnimation ? 300 : 0);
-    }
+    Component.create("ExerciseModalContent", exercise, exerciseModal);
 
     return exerciseModal;
 }

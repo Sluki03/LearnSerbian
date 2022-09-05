@@ -88,6 +88,8 @@
                 padding-top: 50px;
             }
         }
+
+        @include classic-button;
     }
 
     .active-finished-holder {

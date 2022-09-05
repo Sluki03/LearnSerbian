@@ -1,9 +1,10 @@
 import PanelsList from "./list/index/PanelsList.js";
 import ExercisesList from "./list/exercises/ExercisesList.js";
-import SingleExercise from "./list/exercises/SingleExercise.js";
-import SingleContent from "./list/exercises/SingleContent.js";
-import SingleTask from "./list/exercises/SingleTask.js";
-import Finished from "./list/exercises/Finished.js";
+import ExerciseModal from "./list/exercises/ExerciseModal.js";
+import ExerciseModalContent from "./list/exercises/ExerciseModalContent.js";
+import ExerciseModalTask from "./list/exercises/ExerciseModalTask.js";
+import ExerciseModalFinished from "./list/exercises/ExerciseModalFinished.js";
+import ExerciseModalReview from "./list/exercises/ExerciseModalReview.js";
 import Loading from "./list/other/Loading.js";
 import Nav from "./list/other/Nav.js"
 import Footer from "./list/other/Footer.js";
@@ -13,9 +14,9 @@ import ArrowButton from "./list/other/ArrowButton.js";
 import { Convert } from "../functions/Convert.js";
 
 const components = {
-    PanelsList, ExercisesList, SingleExercise, SingleContent, SingleTask,
-    Finished, Loading, Nav, Footer, InteractiveTitle,
-    ModalOptions, ArrowButton
+    PanelsList, ExercisesList, ExerciseModal, ExerciseModalContent, ExerciseModalTask,
+    ExerciseModalFinished, ExerciseModalReview, Loading, Nav, Footer,
+    InteractiveTitle, ModalOptions, ArrowButton
 };
 
 export const Component = { create, render };

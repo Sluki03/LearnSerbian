@@ -3,11 +3,12 @@
         color: $defBlue;
         font-size: set-size(xl);
         font-weight: bold;
-        letter-spacing: 5px;
         text-transform: uppercase;
         background: linear-gradient(-45deg, $defBlue 35%, white 35% 65%, $defRed 65%);
         background-position-x: 0;
         border: 1px solid $defBlue;
+        border-top-left-radius: 40px;
+        border-top-right-radius: 40px;
         cursor: pointer;
         padding: 5px 10px;
         margin: 5px 0;
@@ -15,7 +16,6 @@
     
         &:hover {
             color: white;
-            letter-spacing: 10px;
             background-position-x: 450px;
         }
     }
@@ -26,7 +26,6 @@
 
         &:hover {
             color: $defBlue;
-            letter-spacing: 5px;
             background-position-x: 0;
         }
     }

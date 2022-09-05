@@ -15,7 +15,6 @@
         position: relative;
         transition: 300ms;
         
-    
         &::before,
         &::after {
             content: "";
@@ -64,5 +63,55 @@
 
     #active-modal-resize {
         transform: rotate(90deg);
+    }
+
+    .modal-return {
+        @include add-flex;
+        height: 35px;
+        width: 35px;
+        background-color: transparent;
+        cursor: pointer;
+        position: relative;
+        transition: 300ms;
+
+        &::before,
+        &::after {
+            content: "";
+            display: block;
+            height: 5px;
+            width: 100%;
+            border-radius: 5px;
+            position: absolute;
+            transition: 300ms;
+        }
+
+        &:hover {
+            height: 40px;
+            width: 40px;
+        }
+        
+        &::before {
+            background-color: $defRed;
+            top: 10px;
+            transform: rotate(-30deg);
+        }
+
+        &:hover::before {
+            background-color: $defBlue;
+            top: 50%;
+            transform: rotate(45deg);
+        }
+    
+        &::after {
+            background-color: $defBlue;
+            top: calc(100% - 10px);
+            transform: rotate(30deg);
+        }
+
+        &:hover::after {
+            background-color: $defRed;
+            top: 50%;
+            transform: rotate(-45deg);
+        }
     }
 }

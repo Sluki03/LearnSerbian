@@ -78,7 +78,7 @@ export class Task {
                 this.taskElement.remove();
                 
                 const exerciseModal = document.querySelector(".exercise-modal");
-                Component.create("Finished", this.exercise, exerciseModal);
+                Component.create("ExerciseModalFinished", this.exercise, exerciseModal);
             }
         }, 300);
     }

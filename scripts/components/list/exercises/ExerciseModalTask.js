@@ -1,7 +1,7 @@
 import { Component } from "../../Component.js";
 import { Task } from "../../../exercises/task/Task.js";
 
-export default function SingleTask(componentProps) {
+export default function ExerciseModalTask(componentProps) {
     const [exercise, exerciseModal] = componentProps.params;
     
     const exerciseModalTask = document.querySelector("[data-template='exercise-modal-task']").content.firstElementChild.cloneNode(true);

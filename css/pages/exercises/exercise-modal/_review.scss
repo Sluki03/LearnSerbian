@@ -1,0 +1,20 @@
+.exercise-modal-review {
+    @include add-flex(column, flex-start);
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    position: relative;
+    left: 20px;
+    transition: 300ms;
+    overflow: hidden;
+
+    h3 {
+        color: $defDarkGrey;
+        font-size: set-size(xxl);
+    }
+}
+
+.active-exercise-modal-review {
+    opacity: 1;
+    left: 0;
+}

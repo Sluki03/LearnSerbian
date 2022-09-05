@@ -14,7 +14,7 @@ export default function closeExerciseModal(openNew) {
             const { activeExercise, exercise } = openNew;
 
             activeExercise.setAttribute("id", "active-exercise");
-            Component.create("SingleExercise", exercise);
+            Component.create("ExerciseModal", exercise);
         }
     }, 300);
 }

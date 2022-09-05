@@ -1,4 +1,4 @@
-import { Convert } from "./Convert.js";
+import setStyles from "./setStyles.js";
 
 export default function createElement(element) {
     const newElement = document.createElement(element.tag);
@@ -10,10 +10,7 @@ export default function createElement(element) {
 
     attributes.keys.forEach((key, index) => newElement.setAttribute(key, attributes.values[index]));
 
-    if(element.style) Object.keys(element.style).forEach((key, index) => {
-        const value = Object.values(element.style)[index];
-        newElement.style.setProperty(Convert.jsToCssStandard(key), value);
-    });
+    if(element.style) setStyles(newElement, element.style);
 
     if(element.innerText) newElement.innerText = element.innerText;
 

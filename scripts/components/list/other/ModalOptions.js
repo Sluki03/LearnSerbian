@@ -2,7 +2,7 @@ import createElement from "../../../functions/createElement.js";
 
 export default function ModalOptions(componentProps) {
     const { builtIn } = componentProps;
-    const [closeFunction, appendTo] = componentProps.params;
+    const [closeFunction, appendTo, optionsList] = componentProps.params;
 
     const modalOptionsElement = builtIn ? builtIn : createElement({
         tag: "div",
@@ -10,7 +10,7 @@ export default function ModalOptions(componentProps) {
         appendTo
     });
 
-    const options = ["resize", "x"];
+    const options = optionsList ? optionsList : ["resize", "x"];
 
     options.forEach(option => createElement({
         tag: "div",

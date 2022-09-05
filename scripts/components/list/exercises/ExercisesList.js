@@ -36,7 +36,7 @@ export default function ExercisesList() {
         
         else {
             activeExercise.setAttribute("id", "active-exercise");
-            Component.create("SingleExercise", exercise);
+            Component.create("ExerciseModal", exercise);
         }
 
         activeExerciseId = id;
