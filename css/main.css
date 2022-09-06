@@ -443,8 +443,7 @@ main .exercise-modal .exercise-modal-content .flag-button {
   background: linear-gradient(-45deg, #144eba 35%, white 35% 65%, #bd1330 65%);
   background-position-x: 0;
   border: 1px solid #144eba;
-  border-top-left-radius: 40px;
-  border-top-right-radius: 40px;
+  border-radius: 30px;
   cursor: pointer;
   padding: 5px 10px;
   margin: 5px 0;
@@ -466,7 +465,10 @@ main .exercise-modal .exercise-modal-content .flag-button {
   width: 100%;
   position: -webkit-sticky;
   position: sticky;
-  bottom: 0;
+  bottom: 5px;
+}
+main .exercise-modal .exercise-modal-content .flag-button:hover {
+  box-shadow: 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
 }
 main .exercise-modal .started-exercise-modal-content {
   opacity: 0;
@@ -559,8 +561,7 @@ main .exercise-modal .exercise-modal-task .flag-button {
   background: linear-gradient(-45deg, #144eba 35%, white 35% 65%, #bd1330 65%);
   background-position-x: 0;
   border: 1px solid #144eba;
-  border-top-left-radius: 40px;
-  border-top-right-radius: 40px;
+  border-radius: 30px;
   cursor: pointer;
   padding: 5px 10px;
   margin: 5px 0;
@@ -584,6 +585,9 @@ main .exercise-modal .exercise-modal-task .flag-button {
   bottom: -100px;
   margin: 0;
 }
+main .exercise-modal .exercise-modal-task .flag-button:hover {
+  box-shadow: 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
+}
 main .exercise-modal .exercise-modal-task .task-info {
   display: flex;
   align-items: center;
@@ -600,8 +604,8 @@ main .exercise-modal .exercise-modal-task .task-info {
   transition: 300ms;
 }
 main .exercise-modal .exercise-modal-task .task-info > img {
-  height: 60px;
-  width: 60px;
+  height: 70px;
+  width: 70px;
   -o-object-fit: contain;
      object-fit: contain;
   filter: invert(1);
@@ -637,7 +641,7 @@ main .exercise-modal .active-exercise-modal-task {
   left: 0;
 }
 main .exercise-modal .active-exercise-modal-task .flag-button {
-  bottom: 0;
+  bottom: 5px;
 }
 main .exercise-modal #extended-exercise-modal-task {
   height: 100%;
@@ -778,8 +782,7 @@ main .exercise-modal .exercise-modal-finished .flag-button {
   background: linear-gradient(-45deg, #144eba 35%, white 35% 65%, #bd1330 65%);
   background-position-x: 0;
   border: 1px solid #144eba;
-  border-top-left-radius: 40px;
-  border-top-right-radius: 40px;
+  border-radius: 30px;
   cursor: pointer;
   padding: 5px 10px;
   margin: 5px 0;
@@ -801,7 +804,10 @@ main .exercise-modal .exercise-modal-finished .flag-button {
   width: 80%;
   margin: 0;
   position: absolute;
-  bottom: 0;
+  bottom: 5px;
+}
+main .exercise-modal .exercise-modal-finished .flag-button:hover {
+  box-shadow: 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
 }
 main .exercise-modal .exercise-modal-review {
   display: flex;

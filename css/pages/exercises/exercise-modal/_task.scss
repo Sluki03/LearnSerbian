@@ -79,6 +79,10 @@
         position: absolute;
         bottom: -100px;
         margin: 0;
+
+        &:hover {
+            box-shadow: $defShadow;
+        }
     }
 
     .task-info {
@@ -94,8 +98,8 @@
         transition: 300ms;
 
         & > img {
-            height: 60px;
-            width: 60px;
+            height: 70px;
+            width: 70px;
             object-fit: contain;
             filter: invert(1);
         }
@@ -135,7 +139,7 @@
     left: 0;
 
     .flag-button {
-        bottom: 0;
+        bottom: 5px;
     }
 }
 

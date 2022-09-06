@@ -64,7 +64,11 @@
     .flag-button {
         width: 100%;
         position: sticky;
-        bottom: 0;
+        bottom: 5px;
+
+        &:hover {
+            box-shadow: $defShadow;
+        }
     }
 }
 

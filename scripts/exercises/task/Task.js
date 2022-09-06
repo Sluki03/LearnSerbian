@@ -28,6 +28,7 @@ export class Task {
         this.taskNumber++;
         this.currentTask = this.tasks[this.taskNumber];
         this.answer = "";
+        this.answerChanged(this.answer);
         this.submitted = false;
         this.elements = {};
     }
@@ -50,13 +51,13 @@ export class Task {
         
         const { taskHolder, taskInfo, checkButton } = this.elements;
         const { setActiveButton } = TaskFunctions;
-        
-        taskInfo.style.bottom = "";
-        checkButton.style.bottom = "";
 
         window.removeEventListener("keydown", this.check);
         window.removeEventListener("keydown", setActiveButton);
         window.removeEventListener("keydown", this.startNew);
+        
+        taskInfo.style.bottom = "";
+        checkButton.style.bottom = "";
 
         this.taskElement.style.opacity = "0";
         this.taskElement.style.left = "-20px";

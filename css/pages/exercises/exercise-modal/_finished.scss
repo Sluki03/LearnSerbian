@@ -103,6 +103,10 @@
         width: 80%;
         margin: 0;
         position: absolute;
-        bottom: 0;
+        bottom: 5px;
+
+        &:hover {
+            box-shadow: $defShadow;
+        }
     }
 }

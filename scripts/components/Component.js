@@ -19,7 +19,7 @@ const components = {
     InteractiveTitle, ModalOptions, ArrowButton
 };
 
-export const Component = { create, render };
+export const Component = { create, render, update };
 
 function create(...params) {
     let componentFunction;
@@ -59,4 +59,17 @@ function render(element) {
         const componentProps = { builtIn: componentElements[index], params: datasetParams };
         componentFunction(componentProps);
     });
+}
+
+function update(...params) {
+    const componentElement = params[0];
+    const componentParent = componentElement.parentNode;
+    const componentClone = componentElement.cloneNode(true);
+
+    componentElement.remove();
+
+    const componentName = Convert.cssToJsStandard(componentClone.dataset.component);
+    const validComponentType = componentName[0].toUpperCase() + componentName.substring(1);
+    
+    Component.create(validComponentType, componentParent, params[1]);
 }
