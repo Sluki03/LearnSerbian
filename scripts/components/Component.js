@@ -21,14 +21,14 @@ const components = {
 
 export const Component = { create, render, update };
 
-function create(...params) {
+function create(componentName, params) {
     let componentFunction;
 
     Object.keys(components).forEach((component, index) => {
-        if(params[0] === component) componentFunction = Object.values(components)[index];
+        if(componentName === component) componentFunction = Object.values(components)[index];
     });
 
-    const componentProps = { builtIn: null, params: params.slice(1) };
+    const componentProps = { builtIn: null, params };
     const newComponent = componentFunction(componentProps);
 
     return newComponent;
@@ -53,23 +53,23 @@ function render(element) {
         Object.keys(components).forEach((component, componentIndex) => {
             if(componentType === component) componentFunction = Object.values(components)[componentIndex];
         });
+        
+        const { dataset } = componentElements[index];
+        let validDataset = {};
 
-        const datasetParams = Object.values(componentElements[index].dataset).slice(1);
+        Object.keys(dataset).forEach((key, index) => {
+            if(key === "component") return;
+            validDataset = {...validDataset, [key]: Object.values(dataset)[index]};
+        });
 
-        const componentProps = { builtIn: componentElements[index], params: datasetParams };
+        const componentProps = { builtIn: componentElements[index], params: validDataset };
         componentFunction(componentProps);
     });
 }
 
-function update(...params) {
-    const componentElement = params[0];
-    const componentParent = componentElement.parentNode;
-    const componentClone = componentElement.cloneNode(true);
-
+function update(componentName, componentElement, params) {
+    const parent = componentElement.parentNode;
     componentElement.remove();
 
-    const componentName = Convert.cssToJsStandard(componentClone.dataset.component);
-    const validComponentType = componentName[0].toUpperCase() + componentName.substring(1);
-    
-    Component.create(validComponentType, componentParent, params[1]);
+    Component.create(componentName, {...params, appendTo: parent});
 }

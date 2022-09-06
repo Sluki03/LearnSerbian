@@ -23,7 +23,7 @@ export default function ExercisesList() {
 
         const [exerciseContent] = [...articleExercise.children];
 
-        Component.create("InteractiveTitle", index + 1, exerciseContent);
+        Component.create("InteractiveTitle", { title: index + 1, appendTo: exerciseContent });
     });
 
     function openExerciseModal(activeExercise, exercise, id) {
@@ -36,7 +36,7 @@ export default function ExercisesList() {
         
         else {
             activeExercise.setAttribute("id", "active-exercise");
-            Component.create("ExerciseModal", exercise);
+            Component.create("ExerciseModal", { exercise });
         }
 
         activeExerciseId = id;

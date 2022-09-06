@@ -3,7 +3,7 @@ import createElement from "../../../functions/createElement.js";
 
 export default function PanelsList(componentProps) {
     const { builtIn } = componentProps;
-    const [appendTo] = componentProps.params;
+    const { appendTo } = componentProps.params;
 
     const panels = builtIn ? builtIn : createElement({ tag: "div", attributes: { class: "panels" }, appendTo });
 

@@ -3,7 +3,7 @@ import createEelement from "../../../functions/createElement.js";
 
 export default function Footer(componentProps) {
     const { builtIn } = componentProps;
-    const [appendTo] = componentProps.params;
+    const { appendTo } = componentProps.params;
 
     const footerElement = builtIn ? builtIn : createEelement({ tag: "footer", appendTo });
 

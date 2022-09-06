@@ -2,7 +2,7 @@ import createElement from "../../../functions/createElement.js";
 
 export default function ArrowButton(componentProps) {
     const { builtIn } = componentProps;
-    const [tag, href, appendTo] = componentProps.params;
+    const { tag, href, appendTo } = componentProps.params;
 
     const arrowButtonElement = builtIn ? builtIn : createElement({
         tag,

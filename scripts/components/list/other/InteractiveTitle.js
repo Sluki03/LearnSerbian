@@ -2,7 +2,7 @@ import createElement from "../../../functions/createElement.js";
 
 export default function InteractiveTitle(componentProps) {
     const { builtIn } = componentProps;
-    const [title, appendTo] = componentProps.params;
+    const { title, appendTo } = componentProps.params;
 
     const interactiveTitle = builtIn ? builtIn : createElement({
         tag: "div",

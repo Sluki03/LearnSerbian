@@ -6,12 +6,12 @@ import setStyles from "../../../functions/setStyles.js";
 import realParseInt from "../../../functions/realParseInt.js";
 
 export default function ExerciseModalContent(componentProps) {
-    const [exercise, exerciseModal, styles] = componentProps.params;
+    const { exercise, appendTo, style } = componentProps.params;
     
     const exerciseModalContent = document.querySelector("[data-template='exercise-modal-content']").content.firstElementChild.cloneNode(true);
-    if(styles !== undefined) setStyles(exerciseModalContent, styles);
+    if(style !== undefined) setStyles(exerciseModalContent, style);
     
-    exerciseModal.appendChild(exerciseModalContent);
+    appendTo.appendChild(exerciseModalContent);
     
     const contentDifficultyCircles = document.querySelector(".content-difficulty-circles");
 
@@ -36,8 +36,8 @@ export default function ExerciseModalContent(componentProps) {
         if(isExerciseStarted) return;
         isExerciseStarted = true;
         
-        const exerciseModalHeight = parseFloat(getComputedStyle(exerciseModal).getPropertyValue("height"));
-        const buttonAnimation = exerciseModal.scrollHeight - 10 > realParseInt(exerciseModal.scrollTop + exerciseModalHeight);
+        const exerciseModalHeight = parseFloat(getComputedStyle(appendTo).getPropertyValue("height"));
+        const buttonAnimation = appendTo.scrollHeight - 10 > realParseInt(appendTo.scrollTop + exerciseModalHeight);
 
         if(buttonAnimation) contentButton.style.bottom = "-100px";
 
@@ -53,12 +53,12 @@ export default function ExerciseModalContent(componentProps) {
                 exerciseModalTitle.remove();
                 exerciseModalDivider.remove();
 
-                Component.create("ExerciseModalTask", exercise, exerciseModal);
+                Component.create("ExerciseModalTask", { exercise, appendTo });
             }, 300);
         }, buttonAnimation ? 300 : 0);
     }
 
-    if(exerciseModal.scrollHeight < window.innerHeight) exerciseModalContent.id = "extended-exercise-modal-content";
+    if(appendTo.scrollHeight < window.innerHeight) exerciseModalContent.id = "extended-exercise-modal-content";
     else exerciseModalContent.id = "";
 
     return exerciseModalContent;

@@ -1,10 +1,10 @@
 import { Component } from "../../Component.js";
 
 export default function ExerciseModalFinished(componentProps) {
-    const [exercise, exerciseModal] = componentProps.params;
+    const { exercise, appendTo } = componentProps.params;
 
     const exerciseModalFinished = document.querySelector("[data-template='exercise-modal-finished']").content.firstElementChild.cloneNode(true);
-    exerciseModal.appendChild(exerciseModalFinished);
+    appendTo.appendChild(exerciseModalFinished);
 
     const [finishedHolder, continueButton] = [...exerciseModalFinished.children];
 
@@ -13,8 +13,8 @@ export default function ExerciseModalFinished(componentProps) {
 
     exerciseModalTitle.classList.add("disabled-exercise-modal-title");
 
-    exerciseModal.insertBefore(exerciseModalTitle, exerciseModalFinished);
-    exerciseModal.insertBefore(exerciseModalDivider, exerciseModalFinished);
+    appendTo.insertBefore(exerciseModalTitle, exerciseModalFinished);
+    appendTo.insertBefore(exerciseModalDivider, exerciseModalFinished);
     
     exerciseModalDivider.style.opacity = "0";
     exerciseModalDivider.style.top = "-10px";
@@ -31,7 +31,7 @@ export default function ExerciseModalFinished(componentProps) {
         continueButton.style.bottom = "";
     }, 100);
 
-    Component.create("InteractiveTitle", exercise.name, exerciseModalTitle);
+    Component.create("InteractiveTitle", { title: exercise.name, appendTo: exerciseModalTitle });
     
     const activeExerciseClone = document.getElementById("active-exercise").cloneNode(true);
     
@@ -57,10 +57,9 @@ export default function ExerciseModalFinished(componentProps) {
             exerciseModalTitle.remove();
             exerciseModalDivider.remove();
 
-            finishedHolder.remove();
-            continueButton.remove();
+            exerciseModalFinished.remove();
 
-            Component.create("ExerciseModalReview", exercise, exerciseModal);
+            Component.create("ExerciseModalReview", { exercise, appendTo });
         }, 300);
     }
 
@@ -71,7 +70,11 @@ export default function ExerciseModalFinished(componentProps) {
         setTimeout(() => {
             exerciseModalFinished.remove();
             
-            const exerciseModalContent = Component.create("ExerciseModalContent", exercise, exerciseModal, { opacity: "0", left: "-20px" });
+            const exerciseModalContent = Component.create("ExerciseModalContent", {
+                exercise,
+                appendTo,
+                style: { opacity: "0", left: "-20px" }
+            });
 
             setTimeout(() => {
                 exerciseModalContent.style.opacity = "";

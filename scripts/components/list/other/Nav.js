@@ -4,7 +4,7 @@ import { Component } from "../../Component.js";
 
 export default function Nav(componentProps) {
     const { builtIn } = componentProps;
-    const [id, appendTo] = componentProps.params;
+    const { id, appendTo } = componentProps.params;
     
     const navElement = builtIn ? builtIn : createElement({ tag: "nav", attributes: { id }, appendTo });
 
@@ -14,7 +14,7 @@ export default function Nav(componentProps) {
         appendTo: navElement
     });
 
-    Component.create("InteractiveTitle", "learn serbian", homeLink);
+    Component.create("InteractiveTitle", { title: "learn serbian", appendTo: homeLink });
 
     const buttonHolder = createElement({ tag: "div", attributes: { class: "button-holder" }, appendTo: navElement });
 
