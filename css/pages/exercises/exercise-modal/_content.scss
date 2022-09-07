@@ -5,38 +5,6 @@
     left: 0;
     margin-top: 10px;
     transition: 300ms;
-
-    .content-difficulty {
-        @include add-flex(row, flex-start);
-        gap: 10px;
-        width: 100%;
-
-        p, i {
-            color: $defDarkGrey;
-            font-size: set-size(xl);
-            text-transform: capitalize;
-            font-weight: bold;
-        }
-
-        .content-difficulty-circles {
-            @include add-flex;
-            gap: 3px;
-
-            .content-difficulty-circle {
-                height: 20px;
-                width: 20px;
-                border: 1px solid black;
-                border-radius: 50%;
-            }
-        }
-    }
-
-    strong {
-        color: $defDarkGrey;
-        font-size: set-size(xxl);
-        text-transform: uppercase;
-        margin: 15px 0;
-    }
     
     h1 {
         font-size: set-size(miniheading);

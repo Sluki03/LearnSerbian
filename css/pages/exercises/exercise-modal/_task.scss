@@ -45,7 +45,6 @@
                 &:hover {
                     border: 1px solid transparent;
                     box-shadow: $defRedBlueShadow;
-                    top: -5px;
                 }
 
                 span {
@@ -66,8 +65,11 @@
 
             .active-multiple-choice-button {
                 border: 1px solid transparent;
-                box-shadow: $defRedBlueShadow;
-                top: -5px;
+                box-shadow: $defBlueRedShadow;
+
+                &:hover {
+                    box-shadow: $defBlueRedShadow;
+                }
             }
         }
     }

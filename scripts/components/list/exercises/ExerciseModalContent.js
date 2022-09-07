@@ -12,15 +12,6 @@ export default function ExerciseModalContent(componentProps) {
     if(style !== undefined) setStyles(exerciseModalContent, style);
     
     appendTo.appendChild(exerciseModalContent);
-    
-    const contentDifficultyCircles = document.querySelector(".content-difficulty-circles");
-
-    for(let i = 0; i < getDifficultyIndex(); i++) createElement({
-        tag: "div",
-        attributes: { class: "content-difficulty-circle" },
-        style: { backgroundColor: getDifficultyColor(exercise.difficulty) },
-        appendTo: contentDifficultyCircles
-    });
 
     const contentP = document.querySelector(".exercise-modal-content .content-p");
     contentP.innerHTML = exercise.tips ? markup(exercise.tips) : "This exercise has no tips.";

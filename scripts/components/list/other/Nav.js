@@ -19,7 +19,7 @@ export default function Nav(componentProps) {
     const buttonHolder = createElement({ tag: "div", attributes: { class: "button-holder" }, appendTo: navElement });
 
     const pathname = window.location.pathname.substring(1).split(".")[0];
-    const currentPage = pathname === "index" ? "home" : pathname;
+    const currentPage = (pathname === "index" || !pathname) ? "home" : pathname;
     
     navButtonsData.forEach(button => createElement({
         tag: "a",

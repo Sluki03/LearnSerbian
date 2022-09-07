@@ -90,6 +90,10 @@
         }
 
         @include classic-button;
+
+        button {
+            border-radius: 30px;
+        }
     }
 
     .active-finished-holder {

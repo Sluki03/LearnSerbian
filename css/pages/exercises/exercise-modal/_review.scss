@@ -1,5 +1,6 @@
 .exercise-modal-review {
-    @include add-flex(column, flex-start);
+    @include add-flex(column);
+    gap: 10px;
     height: 100%;
     width: 100%;
     opacity: 0;
@@ -11,8 +12,58 @@
 
     h3 {
         color: $defDarkGrey;
-        font-size: set-size(xxl);
+        font-size: set-size(miniheading);
         text-transform: capitalize;
+    }
+
+    .review-holder {
+        @include add-flex(column);
+        max-height: 100%;
+        width: 80%;
+        background-color: black;
+        border: 1px solid black;
+        overflow: auto;
+
+        .exercise-modal-review-task {
+            @include add-flex(row, flex-start);
+            width: 100%;
+            border-bottom: 1px solid white;
+            padding: 10px 15px;
+
+            img {
+                height: 70px;
+                width: 70px;
+                object-fit: contain;
+                filter: invert(1);
+            }
+
+            .review-task-info {
+                @include add-flex(column, center, flex-start);
+                margin-left: 15px;
+                
+                strong {
+                    color: white;
+                    font-size: set-size(xl);
+                }
+
+                .review-task-answers {
+                    @include add-flex(column, center, flex-start);
+
+                    p {
+                        color: white;
+                        font-size: set-size(md);
+                    
+                        span {
+                            font-weight: bold;
+                        }
+                    }
+                }
+            }
+        }
+
+        & > div:last-of-type {
+            border: none;
+        }
     }
 }
 

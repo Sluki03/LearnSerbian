@@ -13,6 +13,7 @@ export default function createElement(element) {
     if(element.style) setStyles(newElement, element.style);
 
     if(element.innerText) newElement.innerText = element.innerText;
+    if(element.innerHTML) newElement.innerHTML = element.innerHTML;
 
     if(element.events) for(let i = 0; i < element.events.length; i++) {
         const { on, call } = element.events[i];

@@ -386,39 +386,6 @@ main .exercise-modal .exercise-modal-content {
   margin-top: 10px;
   transition: 300ms;
 }
-main .exercise-modal .exercise-modal-content .content-difficulty {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-direction: row;
-  gap: 10px;
-  width: 100%;
-}
-main .exercise-modal .exercise-modal-content .content-difficulty p, main .exercise-modal .exercise-modal-content .content-difficulty i {
-  color: #5e5c5c;
-  font-size: 30px;
-  text-transform: capitalize;
-  font-weight: bold;
-}
-main .exercise-modal .exercise-modal-content .content-difficulty .content-difficulty-circles {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  gap: 3px;
-}
-main .exercise-modal .exercise-modal-content .content-difficulty .content-difficulty-circles .content-difficulty-circle {
-  height: 20px;
-  width: 20px;
-  border: 1px solid black;
-  border-radius: 50%;
-}
-main .exercise-modal .exercise-modal-content strong {
-  color: #5e5c5c;
-  font-size: 35px;
-  text-transform: uppercase;
-  margin: 15px 0;
-}
 main .exercise-modal .exercise-modal-content h1 {
   font-size: 40px;
 }
@@ -532,7 +499,6 @@ main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .
 main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .multiple-choice-button:hover {
   border: 1px solid transparent;
   box-shadow: -3px -3px 5px 1px #bd1330, 3px 3px 5px 1px #144eba;
-  top: -5px;
 }
 main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .multiple-choice-button span {
   height: 35px;
@@ -550,8 +516,10 @@ main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .
 }
 main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .active-multiple-choice-button {
   border: 1px solid transparent;
-  box-shadow: -3px -3px 5px 1px #bd1330, 3px 3px 5px 1px #144eba;
-  top: -5px;
+  box-shadow: 3px 3px 5px 1px #bd1330, -3px -3px 5px 1px #144eba;
+}
+main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .active-multiple-choice-button:hover {
+  box-shadow: 3px 3px 5px 1px #bd1330, -3px -3px 5px 1px #144eba;
 }
 main .exercise-modal .exercise-modal-task .flag-button {
   color: #144eba;
@@ -757,8 +725,6 @@ main .exercise-modal .exercise-modal-finished .finished-holder button {
   background-color: transparent;
   border: 1px solid #bd1330;
   cursor: pointer;
-  position: relative;
-  top: 0;
   margin-top: 30px;
   padding: 5px 10px;
   transition: 300ms;
@@ -768,7 +734,9 @@ main .exercise-modal .exercise-modal-finished .finished-holder button:hover {
   background-color: #bd1330;
   border: 1px solid #144eba;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
-  top: -5px;
+}
+main .exercise-modal .exercise-modal-finished .finished-holder button {
+  border-radius: 30px;
 }
 main .exercise-modal .exercise-modal-finished .active-finished-holder {
   opacity: 1;
@@ -812,8 +780,9 @@ main .exercise-modal .exercise-modal-finished .flag-button:hover {
 main .exercise-modal .exercise-modal-review {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   flex-direction: column;
+  gap: 10px;
   height: 100%;
   width: 100%;
   opacity: 0;
@@ -825,8 +794,62 @@ main .exercise-modal .exercise-modal-review {
 }
 main .exercise-modal .exercise-modal-review h3 {
   color: #5e5c5c;
-  font-size: 35px;
+  font-size: 40px;
   text-transform: capitalize;
+}
+main .exercise-modal .exercise-modal-review .review-holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  max-height: 100%;
+  width: 80%;
+  background-color: black;
+  border: 1px solid black;
+  overflow: auto;
+}
+main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  width: 100%;
+  border-bottom: 1px solid white;
+  padding: 10px 15px;
+}
+main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task img {
+  height: 70px;
+  width: 70px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  filter: invert(1);
+}
+main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .review-task-info {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  margin-left: 15px;
+}
+main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .review-task-info strong {
+  color: white;
+  font-size: 30px;
+}
+main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .review-task-info .review-task-answers {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+}
+main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .review-task-info .review-task-answers p {
+  color: white;
+  font-size: 20px;
+}
+main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .review-task-info .review-task-answers p span {
+  font-weight: bold;
+}
+main .exercise-modal .exercise-modal-review .review-holder > div:last-of-type {
+  border: none;
 }
 main .exercise-modal .active-exercise-modal-review {
   opacity: 1;
@@ -957,6 +980,7 @@ main .exercises-holder .exercises-tree strong {
   text-transform: capitalize;
   background: white;
   border: 1px solid #5e5c5c;
+  border-radius: 20px;
   padding: 5px;
   position: absolute;
 }
