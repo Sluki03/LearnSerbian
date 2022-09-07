@@ -18,8 +18,6 @@ export default function createElement(element) {
         const { on, call } = element.events[i];
         newElement.addEventListener(on, call);
     }
-
-    if(element.appendTo === undefined) console.log(element)
     
     if(element.before) element.appendTo.insertBefore(newElement, element.before);
     else element.appendTo.appendChild(newElement);

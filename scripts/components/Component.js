@@ -67,9 +67,12 @@ function render(element) {
     });
 }
 
-function update(componentName, componentElement, params) {
-    const parent = componentElement.parentNode;
-    componentElement.remove();
+function update(componentElement, newParams) {
+    const component = componentElement.component;
+    const { name, params } = component;
 
-    Component.create(componentName, {...params, appendTo: parent});
+    const parent = componentElement.parentNode;
+
+    componentElement.remove();
+    return create(name, {...params, ...newParams, appendTo: parent});
 }

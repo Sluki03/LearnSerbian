@@ -15,6 +15,7 @@ export class Task {
         this.currentTask = this.tasks[this.taskNumber];
         this.answer = "";
         this.submitted = false;
+        this.results = [];
 
         this.body = document.querySelector("body");
         this.elements = {};
@@ -52,7 +53,6 @@ export class Task {
         const { taskHolder, taskInfo, checkButton } = this.elements;
         const { setActiveButton } = TaskFunctions;
 
-        window.removeEventListener("keydown", this.check);
         window.removeEventListener("keydown", setActiveButton);
         window.removeEventListener("keydown", this.startNew);
         
@@ -79,7 +79,7 @@ export class Task {
                 this.taskElement.remove();
                 
                 const exerciseModal = document.querySelector(".exercise-modal");
-                Component.create("ExerciseModalFinished", { exercise: this.exercise, appendTo: exerciseModal });
+                Component.create("ExerciseModalFinished", { exercise: this.exercise, results: this.results, appendTo: exerciseModal });
             }
         }, 300);
     }
@@ -115,6 +115,8 @@ export class Task {
         if(checkButton.classList.contains("disabled-flag-button")) return;
         if(e.type === "keydown" && e.key !== "Enter") return;
 
+        window.removeEventListener("keydown", this.check);
+
         this.submitted = true;
         
         checkButton.style.bottom = "-100px";
@@ -143,6 +145,15 @@ export class Task {
             taskInfoTextH4.innerText = this.currentTask.constructor.incorrect.title;
             taskInfoTextP.innerText = this.currentTask.constructor.incorrect.text;
         }
+
+        const taskResult = {
+            title: this.currentTask.title,
+            acceptableAnswers: this.currentTask.constructor.acceptableAnswers,
+            userAnswer: this.answer,
+            isCorrect: this.currentTask.constructor.acceptableAnswers.indexOf(this.answer) > -1
+        };
+
+        this.results.push(taskResult);
 
         taskInfoButton.onclick = this.startNew;
         window.addEventListener("keydown", this.startNew);

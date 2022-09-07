@@ -1,7 +1,7 @@
 import { Component } from "../../Component.js";
 
 export default function ExerciseModalFinished(componentProps) {
-    const { exercise, appendTo } = componentProps.params;
+    const { exercise, results, appendTo } = componentProps.params;
 
     const exerciseModalFinished = document.querySelector("[data-template='exercise-modal-finished']").content.firstElementChild.cloneNode(true);
     appendTo.appendChild(exerciseModalFinished);
@@ -59,7 +59,7 @@ export default function ExerciseModalFinished(componentProps) {
 
             exerciseModalFinished.remove();
 
-            Component.create("ExerciseModalReview", { exercise, appendTo });
+            Component.create("ExerciseModalReview", { exercise, results, appendTo });
         }, 300);
     }
 

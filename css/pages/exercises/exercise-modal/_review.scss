@@ -5,12 +5,14 @@
     opacity: 0;
     position: relative;
     left: 20px;
+    padding: 15px 0;
     transition: 300ms;
     overflow: hidden;
 
     h3 {
         color: $defDarkGrey;
         font-size: set-size(xxl);
+        text-transform: capitalize;
     }
 }
 
