@@ -22,7 +22,6 @@ export class Task {
 
         this.startNew = this.startNew.bind(this);
         this.check = this.check.bind(this);
-        this.afterCheck = this.afterCheck.bind(this);
         this.answerChanged = this.answerChanged.bind(this);
     }
 
@@ -162,8 +161,6 @@ export class Task {
 
         this.results.push(taskResult);
 
-        this.afterCheck();
-
         taskInfoButton.onclick = this.startNew;
         window.addEventListener("keydown", this.startNew);
 
@@ -183,33 +180,6 @@ export class Task {
             });
 
             return result;
-        }
-    }
-
-    afterCheck() {
-        switch(this.currentTask.type) {
-            case "multipleChoice": {
-                const allButtons = document.querySelectorAll(".multiple-choice-button");
-                const activeButton = document.querySelector(".active-multiple-choice-button");
-                let correctButton = null;
-
-                allButtons.forEach(button => {
-                    if(correctButton !== null) return;
-
-                    const buttonContent = button.textContent.substring(0, button.textContent.length - 1);
-                    if(this.currentTask.acceptableAnswers[0] === buttonContent) correctButton = button;
-                });
-
-                if(!activeButton.isEqualNode(correctButton)) {
-                    activeButton.classList.remove("active-multiple-choice-button");
-                    activeButton.classList.add("incorrect-multiple-choice-button");
-                }
-
-                if(correctButton.classList.contains("active-multiple-choice-button")) correctButton.classList.remove("active-multiple-choice-button");
-                correctButton.classList.add("correct-multiple-choice-button");
-            }
-            
-            default: ;
         }
     }
 

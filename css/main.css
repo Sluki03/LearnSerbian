@@ -515,8 +515,8 @@ main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .
   transform: translateY(-50%);
 }
 main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .active-multiple-choice-button {
-  -webkit-animation: rotate-box-shadow 500ms linear forwards;
-          animation: rotate-box-shadow 500ms linear forwards;
+  -webkit-animation: rotate-box-shadow 300ms linear forwards;
+          animation: rotate-box-shadow 300ms linear forwards;
 }
 @-webkit-keyframes rotate-box-shadow {
   0% {
@@ -539,24 +539,6 @@ main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .
   100% {
     box-shadow: 3px 3px 5px 1px #bd1330, -3px -3px 5px 1px #144eba;
   }
-}
-main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .correct-multiple-choice-button {
-  color: white;
-  background: linear-gradient(135deg, #059c20 65%, #07db2d 65% 85%, #00ff2e 85%);
-  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
-}
-main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .correct-multiple-choice-button span {
-  color: white;
-  border: 1px solid white;
-}
-main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .incorrect-multiple-choice-button {
-  color: white;
-  background: linear-gradient(135deg, #bd1330 65%, #d91435 65% 85%, #f20707 85%);
-  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
-}
-main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .incorrect-multiple-choice-button span {
-  color: white;
-  border: 1px solid white;
 }
 main .exercise-modal .exercise-modal-task .flag-button {
   color: #144eba;
