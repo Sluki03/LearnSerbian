@@ -32,7 +32,7 @@
                 max-width: 330px;
                 color: $defDarkGrey;
                 font-size: set-size(lg);
-                background-color: white;
+                background: white;
                 border: 1px solid $defDarkGrey;
                 border-radius: 20px;
                 cursor: pointer;
@@ -64,11 +64,42 @@
             }
 
             .active-multiple-choice-button {
-                border: 1px solid transparent;
-                box-shadow: $defBlueRedShadow;
+                animation: rotate-box-shadow 500ms linear forwards;
 
-                &:hover {
-                    box-shadow: $defBlueRedShadow;
+                @keyframes rotate-box-shadow {
+                    0% {
+                        box-shadow: -3px -3px 5px 1px $defRed, 3px 3px 5px 1px $defBlue;
+                    }
+
+                    50% {
+                        box-shadow: 3px -3px 5px 1px $defRed, -3px 3px 5px 1px $defBlue;
+                    }
+
+                    100% {
+                        box-shadow: 3px 3px 5px 1px $defRed, -3px -3px 5px 1px $defBlue;
+                    }
+                }
+            }
+
+            .correct-multiple-choice-button {
+                color: white;
+                background: $defCorrect;
+                box-shadow: $defLightShadow;
+
+                span {
+                    color: white;
+                    border: 1px solid white;
+                }
+            }
+
+            .incorrect-multiple-choice-button {
+                color: white;
+                background: $defIncorrect;
+                box-shadow: $defLightShadow;
+
+                span {
+                    color: white;
+                    border: 1px solid white;
                 }
             }
         }
@@ -112,12 +143,17 @@
             h4 {
                 color: white;
                 font-size: set-size(xl);
+                text-transform: capitalize;
             }
     
             p {
                 color: white;
                 font-size: set-size(md);
                 margin: 0;
+
+                span {
+                    font-weight: bold;
+                }
             }
         }
 

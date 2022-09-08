@@ -22,34 +22,27 @@ export const exercisesData = [
             {
                 type: "multipleChoice",
                 title: "How to say: \"color\" in Serbian?",
-                constructor: {
-                    acceptableAnswers: ["boja"],
-                    options: ["cemu", "to", "nesto", "boja"],
-                    correct: { title: "Correct!", text: "That one is true." },
-                    incorrect: { title: "Incorrect!", text: "That one is false." }
-                }
+                acceptableAnswers: ["boja"],
+                options: ["cemu", "to", "nesto", "boja"],
+                explanation: `
+                    #Reason#
+                    Why the answer is: **boja**?<br />
+                    Well, the reason is *simple*, that is how we say \"color\" in Serbian language...
+                `
             },
 
             {
                 type: "multipleChoice",
                 title: "How to say: \"dog\" in Serbian?",
-                constructor: {
-                    acceptableAnswers: ["pas"],
-                    options: ["ae", "videcemo", "pas", "jako"],
-                    correct: { title: "Correct!", text: "That one is true." },
-                    incorrect: { title: "Incorrect!", text: "That one is false." }
-                }
+                acceptableAnswers: ["pas"],
+                options: ["ae", "videcemo", "pas", "jako"]
             },
 
             {
                 type: "multipleChoice",
                 title: "What is the translation of: \"cemu to\"?",
-                constructor: {
-                    acceptableAnswers: ["why that"],
-                    options: ["why that", "I don't know", "maybe", "tomorrow"],
-                    correct: { title: "Correct!", text: "That one is true." },
-                    incorrect: { title: "Incorrect!", text: "That one is false." }
-                }
+                acceptableAnswers: ["why that"],
+                options: ["why that", "I don't know", "maybe", "tomorrow"]
             }
         ]
     },

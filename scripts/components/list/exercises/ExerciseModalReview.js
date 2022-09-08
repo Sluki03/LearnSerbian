@@ -1,5 +1,6 @@
 import { Component } from "../../Component.js";
 import createElement from "../../../functions/createElement.js";
+import markup from "../../../functions/markup.js";
 
 export default function ExerciseModalReview(componentProps) {
     const { exercise, results, appendTo } = componentProps.params;
@@ -21,7 +22,8 @@ export default function ExerciseModalReview(componentProps) {
         const reviewTask = document.querySelector("[data-template='exercise-modal-review-task']").content.firstElementChild.cloneNode(true);
         reviewHolder.appendChild(reviewTask);
 
-        const [reviewTaskInfo] = [...reviewTask.children];
+        const [reviewTaskHolder, taskExplanation] = [...reviewTask.children];
+        const [reviewTaskInfo] = [...reviewTaskHolder.children];
 
         const green = { normal: "#059c20", light: "#07db2d", lighter: "#00ff2e" };
         const red = { normal: "#bd1330", light: "#d91435", lighter: "#f20707" };
@@ -37,7 +39,7 @@ export default function ExerciseModalReview(componentProps) {
         createElement({
             tag: "img",
             attributes: { src: validImage, alt: result.isCorrect ? "CORRECT" : "INCORRECT" },
-            appendTo: reviewTask,
+            appendTo: reviewTaskHolder,
             before: reviewTaskInfo
         });
         
@@ -79,6 +81,32 @@ export default function ExerciseModalReview(componentProps) {
                 appendTo: infoAnswers
             });
         }
+
+        if(result.explanation) {
+            Component.render(taskExplanation);
+
+            const [explanationTitle, explanationP] = [...taskExplanation.children];
+            const [titleButton] = [...explanationTitle.children];
+
+            titleButton.onclick = () => {
+                const titleButtonTransform = getComputedStyle(titleButton).getPropertyValue("transform");
+                
+                if(titleButtonTransform === "none") {
+                    titleButton.style.transform = "rotate(180deg)";
+
+                    explanationP.innerHTML = markup(result.explanation);
+                    explanationP.classList.add("active-explanation-p");
+                }
+                
+
+                else {
+                    titleButton.style.transform = "";
+                    explanationP.classList.remove("active-explanation-p");
+                }
+            }
+        }
+        
+        else taskExplanation.remove();
     });
 
     function modalOptionsReturn() {

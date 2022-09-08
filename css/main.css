@@ -486,7 +486,7 @@ main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .
   max-width: 330px;
   color: #5e5c5c;
   font-size: 25px;
-  background-color: white;
+  background: white;
   border: 1px solid #5e5c5c;
   border-radius: 20px;
   cursor: pointer;
@@ -515,11 +515,48 @@ main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .
   transform: translateY(-50%);
 }
 main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .active-multiple-choice-button {
-  border: 1px solid transparent;
-  box-shadow: 3px 3px 5px 1px #bd1330, -3px -3px 5px 1px #144eba;
+  -webkit-animation: rotate-box-shadow 500ms linear forwards;
+          animation: rotate-box-shadow 500ms linear forwards;
 }
-main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .active-multiple-choice-button:hover {
-  box-shadow: 3px 3px 5px 1px #bd1330, -3px -3px 5px 1px #144eba;
+@-webkit-keyframes rotate-box-shadow {
+  0% {
+    box-shadow: -3px -3px 5px 1px #bd1330, 3px 3px 5px 1px #144eba;
+  }
+  50% {
+    box-shadow: 3px -3px 5px 1px #bd1330, -3px 3px 5px 1px #144eba;
+  }
+  100% {
+    box-shadow: 3px 3px 5px 1px #bd1330, -3px -3px 5px 1px #144eba;
+  }
+}
+@keyframes rotate-box-shadow {
+  0% {
+    box-shadow: -3px -3px 5px 1px #bd1330, 3px 3px 5px 1px #144eba;
+  }
+  50% {
+    box-shadow: 3px -3px 5px 1px #bd1330, -3px 3px 5px 1px #144eba;
+  }
+  100% {
+    box-shadow: 3px 3px 5px 1px #bd1330, -3px -3px 5px 1px #144eba;
+  }
+}
+main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .correct-multiple-choice-button {
+  color: white;
+  background: linear-gradient(135deg, #059c20 65%, #07db2d 65% 85%, #00ff2e 85%);
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
+}
+main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .correct-multiple-choice-button span {
+  color: white;
+  border: 1px solid white;
+}
+main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .incorrect-multiple-choice-button {
+  color: white;
+  background: linear-gradient(135deg, #bd1330 65%, #d91435 65% 85%, #f20707 85%);
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
+}
+main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .incorrect-multiple-choice-button span {
+  color: white;
+  border: 1px solid white;
 }
 main .exercise-modal .exercise-modal-task .flag-button {
   color: #144eba;
@@ -587,11 +624,15 @@ main .exercise-modal .exercise-modal-task .task-info .task-info-text {
 main .exercise-modal .exercise-modal-task .task-info .task-info-text h4 {
   color: white;
   font-size: 30px;
+  text-transform: capitalize;
 }
 main .exercise-modal .exercise-modal-task .task-info .task-info-text p {
   color: white;
   font-size: 20px;
   margin: 0;
+}
+main .exercise-modal .exercise-modal-task .task-info .task-info-text p span {
+  font-weight: bold;
 }
 main .exercise-modal .exercise-modal-task .task-info .arrow-button {
   height: 70px;
@@ -800,53 +841,111 @@ main .exercise-modal .exercise-modal-review h3 {
 main .exercise-modal .exercise-modal-review .review-holder {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
   max-height: 100%;
   width: 80%;
-  background-color: black;
-  border: 1px solid black;
+  border-radius: 40px;
+  box-shadow: 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
   overflow: auto;
 }
+main .exercise-modal .exercise-modal-review .review-holder::-webkit-scrollbar {
+  width: 0;
+}
 main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  border-bottom: 1px solid white;
+}
+main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .review-task-holder {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   flex-direction: row;
   width: 100%;
-  border-bottom: 1px solid white;
   padding: 10px 15px;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task img {
+main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .review-task-holder img {
   height: 70px;
   width: 70px;
   -o-object-fit: contain;
      object-fit: contain;
   filter: invert(1);
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .review-task-info {
+main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .review-task-holder .review-task-info {
   display: flex;
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
   margin-left: 15px;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .review-task-info strong {
+main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .review-task-holder .review-task-info strong {
   color: white;
   font-size: 30px;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .review-task-info .review-task-answers {
+main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .review-task-holder .review-task-info .review-task-answers {
   display: flex;
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .review-task-info .review-task-answers p {
+main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .review-task-holder .review-task-info .review-task-answers p {
   color: white;
   font-size: 20px;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .review-task-info .review-task-answers p span {
+main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .review-task-holder .review-task-info .review-task-answers p span {
   font-weight: bold;
+}
+main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-explanation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-top: 1px solid white;
+  padding: 5px 0;
+}
+main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-explanation .explanation-title {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
+}
+main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-explanation .explanation-title .arrow-button {
+  height: 25px;
+  width: 25px;
+  position: relative;
+  bottom: auto;
+  margin-left: 20px;
+}
+main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-explanation .explanation-title .arrow-button img {
+  height: 15px;
+}
+main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-explanation .explanation-title p {
+  color: #5e5c5c;
+  font-size: 20px;
+  text-transform: capitalize;
+  font-weight: bold;
+  margin: 0;
+}
+main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-explanation .explanation-p {
+  max-height: 0;
+  color: #5e5c5c;
+  font-size: 20px;
+  opacity: 0;
+  position: relative;
+  padding: 0 20px;
+  transition: 300ms;
+}
+main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-explanation .active-explanation-p {
+  max-height: 5000px;
+  opacity: 1;
 }
 main .exercise-modal .exercise-modal-review .review-holder > div:last-of-type {
   border: none;

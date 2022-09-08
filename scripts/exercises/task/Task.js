@@ -22,6 +22,7 @@ export class Task {
 
         this.startNew = this.startNew.bind(this);
         this.check = this.check.bind(this);
+        this.afterCheck = this.afterCheck.bind(this);
         this.answerChanged = this.answerChanged.bind(this);
     }
 
@@ -107,6 +108,8 @@ export class Task {
     }
     
     check(e) {
+        const { currentTask } = this;
+        
         const {
             checkButton, taskInfo, taskInfoImg, taskInfoTextH4, taskInfoTextP,
             taskInfoButton
@@ -127,43 +130,86 @@ export class Task {
         const red = { normal: "#bd1330", light: "#d91435", lighter: "#f20707" };
         
         taskInfo.style.bottom = "0";
-        
-        if(this.currentTask.constructor.acceptableAnswers.indexOf(this.answer) > -1) {
-            taskInfo.style.background = getLinearGradient(true);
 
-            taskInfoImg.src = image.correct;
-            
-            taskInfoTextH4.innerText = this.currentTask.constructor.correct.title;
-            taskInfoTextP.innerText = this.currentTask.constructor.correct.text;
-        }
-        
-        else {
-            taskInfo.style.background = getLinearGradient(false);
+        const isCorrect = currentTask.acceptableAnswers.indexOf(this.answer) > -1;
 
-            taskInfoImg.src = image.incorrect;
-            
-            taskInfoTextH4.innerText = this.currentTask.constructor.incorrect.title;
-            taskInfoTextP.innerText = this.currentTask.constructor.incorrect.text;
-        }
+        taskInfo.style.background = getLinearGradient();
+        taskInfoImg.src = isCorrect ? image.correct : image.incorrect;
+
+        const correctTitles = ["correct", "good job", "very well", "nice", "excellent"];
+        const incorrectTitles = ["incorrect", "wrong", "false", "mistake", "think again"];
+        const validTitles = isCorrect ? correctTitles : incorrectTitles;
+
+        taskInfoTextH4.innerText = `${validTitles[Math.floor(Math.random() * validTitles.length)]}!`;
+
+        const randomCorrectAnswer = currentTask.acceptableAnswers[Math.floor(Math.random() * currentTask.acceptableAnswers.length)];
+
+        const text = {
+            correct: {},
+            incorrect: { multipleChoice: `Correct answer: <span>${randomCorrectAnswer}</span>.` }
+        };
+
+        const validText = isCorrect ? text.correct : text.incorrect;
+        taskInfoTextP.innerHTML = getText();
 
         const taskResult = {
-            title: this.currentTask.title,
-            acceptableAnswers: this.currentTask.constructor.acceptableAnswers,
+            title: currentTask.title,
+            acceptableAnswers: currentTask.acceptableAnswers,
             userAnswer: this.answer,
-            isCorrect: this.currentTask.constructor.acceptableAnswers.indexOf(this.answer) > -1
+            isCorrect: currentTask.acceptableAnswers.indexOf(this.answer) > -1,
+            explanation: currentTask.explanation || null
         };
 
         this.results.push(taskResult);
 
+        this.afterCheck();
+
         taskInfoButton.onclick = this.startNew;
         window.addEventListener("keydown", this.startNew);
 
-        function getLinearGradient(isCorrect) {
+        function getLinearGradient() {
             const color = isCorrect ? green : red;
             const { normal, light, lighter } = color;
 
             const linearGradient = `linear-gradient(135deg, ${normal} 65%, ${light} 65% 85%, ${lighter} 85%)`;
             return linearGradient;
+        }
+
+        function getText() {
+            let result = "";
+            
+            Object.keys(validText).forEach((key, index) => {
+                if(currentTask.type === key) result = Object.values(validText)[index];
+            });
+
+            return result;
+        }
+    }
+
+    afterCheck() {
+        switch(this.currentTask.type) {
+            case "multipleChoice": {
+                const allButtons = document.querySelectorAll(".multiple-choice-button");
+                const activeButton = document.querySelector(".active-multiple-choice-button");
+                let correctButton = null;
+
+                allButtons.forEach(button => {
+                    if(correctButton !== null) return;
+
+                    const buttonContent = button.textContent.substring(0, button.textContent.length - 1);
+                    if(this.currentTask.acceptableAnswers[0] === buttonContent) correctButton = button;
+                });
+
+                if(!activeButton.isEqualNode(correctButton)) {
+                    activeButton.classList.remove("active-multiple-choice-button");
+                    activeButton.classList.add("incorrect-multiple-choice-button");
+                }
+
+                if(correctButton.classList.contains("active-multiple-choice-button")) correctButton.classList.remove("active-multiple-choice-button");
+                correctButton.classList.add("correct-multiple-choice-button");
+            }
+            
+            default: ;
         }
     }
 
@@ -189,7 +235,7 @@ export class Task {
                     appendTo: taskHolder
                 });
 
-                const randomOptions = randomArray(this.currentTask.constructor.options);
+                const randomOptions = randomArray(this.currentTask.options);
                 
                 for(let i = 0; i < randomOptions.length; i++) {
                     const multipleChoiceButton = createElement({
