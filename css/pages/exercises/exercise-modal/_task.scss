@@ -1,3 +1,43 @@
+.task-progress-bar {
+    height: 25px;
+    width: 70%;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 20px;
+    box-shadow: $defLighterShadow;
+    opacity: 0;
+    position: absolute;
+    top: 5%;
+    transition: 300ms;
+    overflow: hidden;
+
+    .progress-bar-line {
+        @include add-flex;
+        height: 100%;
+        width: 0;
+        background-color: $defLightBlue;
+        border-radius: 20px;
+        box-shadow: 10px 0 0 $defLightRed;
+        position: relative;
+        transition: 500ms;
+        
+        p {
+            color: white;
+            font-size: set-size(md);
+            font-weight: bold;
+            opacity: 0;
+            position: absolute;
+            margin: 0;
+            transition: 300ms;
+        }
+    }
+}
+
+.active-task-progress-bar {
+    opacity: 1;
+    top: 10%;
+}
+
 .exercise-modal-task {
     @include add-flex(column, center);
     width: 100%;
@@ -6,7 +46,7 @@
     left: 20px;
     transition: 300ms;
     overflow: hidden;
-
+    
     h3 {
         color: $defDarkGrey;
         font-size: set-size(xxl);
@@ -78,6 +118,16 @@
                     100% {
                         box-shadow: 3px 3px 5px 1px $defRed, -3px -3px 5px 1px $defBlue;
                     }
+                }
+            }
+
+            .disabled-multiple-choice-button {
+                cursor: default;
+                opacity: 0.5;
+
+                &:hover {
+                    border: 1px solid $defDarkGrey;
+                    box-shadow: none;
                 }
             }
         }

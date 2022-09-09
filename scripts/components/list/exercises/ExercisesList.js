@@ -10,7 +10,7 @@ export default function ExercisesList() {
     let activeExerciseId = 0;
 
     exercisesData.forEach((exercise, index) => {
-        const exerciseHolder = document.querySelector("[data-template='exercise']").content.firstElementChild.cloneNode(true);
+        const exerciseHolder = document.querySelector("[data-template='exercise-holder']").content.firstElementChild.cloneNode(true);
         tree.insertBefore(exerciseHolder, treeEnd);
 
         const [exerciseTitle, articleExercise] = [...exerciseHolder.children];
@@ -32,7 +32,7 @@ export default function ExercisesList() {
         if(exerciseModal === null && activeExerciseId > 0) activeExerciseId = 0;
         if(activeExerciseId === id) return;
         
-        if(activeExerciseId !== 0) closeExerciseModal({ activeExercise, exercise });
+        if(activeExerciseId !== 0) closeExerciseModal(false, { activeExercise, exercise });
         
         else {
             activeExercise.setAttribute("id", "active-exercise");

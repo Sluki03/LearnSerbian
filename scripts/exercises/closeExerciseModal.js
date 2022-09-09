@@ -1,8 +1,16 @@
 import { Component } from "../components/Component.js";
 
-export default function closeExerciseModal(openNew) {
+export default function closeExerciseModal(confirmed, openNew) {
     const exerciseModal = document.querySelector(".exercise-modal");
     const activeExercise = document.getElementById("active-exercise");
+
+    const exerciseModalTask = document.querySelector(".active-exercise-modal-task");
+
+    if(exerciseModalTask !== null && !confirmed) return Component.create("ConfirmModal", {
+        question: "Do you really want to close the exercise?",
+        confirmFunction,
+        appendTo: exerciseModal
+    });
 
     exerciseModal.id = "";
     activeExercise.id = "";
@@ -17,4 +25,8 @@ export default function closeExerciseModal(openNew) {
             Component.create("ExerciseModal", { exercise });
         }
     }, 300);
+
+    function confirmFunction() {
+        closeExerciseModal(true, openNew);
+    }
 }

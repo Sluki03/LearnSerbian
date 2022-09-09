@@ -447,6 +447,45 @@ main .exercise-modal #extended-exercise-modal-content {
 main .exercise-modal #extended-exercise-modal-content button {
   position: absolute;
 }
+main .exercise-modal .task-progress-bar {
+  height: 25px;
+  width: 70%;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 20px;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  position: absolute;
+  top: 5%;
+  transition: 300ms;
+  overflow: hidden;
+}
+main .exercise-modal .task-progress-bar .progress-bar-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  height: 100%;
+  width: 0;
+  background-color: #0559f5;
+  border-radius: 20px;
+  box-shadow: 10px 0 0 #d91435;
+  position: relative;
+  transition: 500ms;
+}
+main .exercise-modal .task-progress-bar .progress-bar-line p {
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  opacity: 0;
+  position: absolute;
+  margin: 0;
+  transition: 300ms;
+}
+main .exercise-modal .active-task-progress-bar {
+  opacity: 1;
+  top: 10%;
+}
 main .exercise-modal .exercise-modal-task {
   display: flex;
   align-items: center;
@@ -539,6 +578,14 @@ main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .
   100% {
     box-shadow: 3px 3px 5px 1px #bd1330, -3px -3px 5px 1px #144eba;
   }
+}
+main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .disabled-multiple-choice-button {
+  cursor: default;
+  opacity: 0.5;
+}
+main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .disabled-multiple-choice-button:hover {
+  border: 1px solid #5e5c5c;
+  box-shadow: none;
 }
 main .exercise-modal .exercise-modal-task .flag-button {
   color: #144eba;
@@ -1620,4 +1667,64 @@ footer div a {
 .exercise-holder .exercise-clone:hover .exercise-content {
   height: 85px;
   width: 85px;
+}
+
+.confirm-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 15px;
+  width: 80%;
+  background-color: white;
+  border: 1px solid black;
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  padding: 10px 15px;
+  transform: translate(-50%, -50%);
+  transition: 300ms;
+}
+.confirm-modal strong {
+  color: #5e5c5c;
+  font-size: 30px;
+  text-align: center;
+}
+.confirm-modal .button-holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 10px;
+  width: 80%;
+}
+.confirm-modal .button-holder button {
+  color: #144eba;
+  font-size: 25px;
+  font-weight: bold;
+  text-transform: capitalize;
+  background-color: transparent;
+  border: 1px solid #bd1330;
+  cursor: pointer;
+  margin-top: 30px;
+  padding: 5px 10px;
+  transition: 300ms;
+}
+.confirm-modal .button-holder button:hover {
+  color: white;
+  background-color: #bd1330;
+  border: 1px solid #144eba;
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
+}
+.confirm-modal .button-holder button {
+  width: 100%;
+  border-radius: 20px;
+  margin: 0;
+}
+
+.active-confirm-modal {
+  opacity: 1;
+  top: 50%;
 }/*# sourceMappingURL=main.css.map */

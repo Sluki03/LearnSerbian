@@ -6,7 +6,7 @@ import createElement from "../../functions/createElement.js";
 import randomArray from "../../functions/randomArray.js";
 
 export class Task {
-    constructor(taskElement, exercise) {
+    constructor(taskProgressBar, taskElement, exercise) {
         this.exercise = exercise;
         
         this.taskElement = taskElement;
@@ -17,11 +17,15 @@ export class Task {
         this.submitted = false;
         this.results = [];
 
+        this.progressBar = { value: 0, increase: 100 / this.tasks.length, inRow: 0 };
+        this.progressBarElement = taskProgressBar;
+
         this.body = document.querySelector("body");
         this.elements = {};
 
         this.startNew = this.startNew.bind(this);
         this.check = this.check.bind(this);
+        this.afterCheck = this.afterCheck.bind(this);
         this.answerChanged = this.answerChanged.bind(this);
     }
 
@@ -35,7 +39,11 @@ export class Task {
     }
     
     start() {
-        setTimeout(() => { this.taskElement.classList.add("active-exercise-modal-task") }, 100);
+        setTimeout(() => {
+            this.taskElement.classList.add("active-exercise-modal-task");
+            this.progressBarElement.classList.add("active-task-progress-bar");
+        }, 100);
+        
         this.initializeElements();
         this.construct();
         
@@ -55,10 +63,20 @@ export class Task {
 
         window.removeEventListener("keydown", setActiveButton);
         window.removeEventListener("keydown", this.startNew);
+
+        const [progressBarLine] = [...this.progressBarElement.children];
+        const [progressBarLineP] = [...progressBarLine.children];
+
+        if(progressBarLineP.innerText) {
+            progressBarLineP.style.opacity = "";
+            setTimeout(() => { progressBarLineP.innerText = "" }, 300);
+        }
         
         taskInfo.style.bottom = "";
         checkButton.style.bottom = "";
 
+        if(this.tasks.length - 1 === this.taskNumber) this.progressBarElement.classList.remove("active-task-progress-bar");
+        
         this.taskElement.style.opacity = "0";
         this.taskElement.style.left = "-20px";
 
@@ -76,6 +94,7 @@ export class Task {
             }
 
             else {
+                this.progressBarElement.remove();
                 this.taskElement.remove();
                 
                 const exerciseModal = document.querySelector(".exercise-modal");
@@ -113,13 +132,40 @@ export class Task {
             checkButton, taskInfo, taskInfoImg, taskInfoTextH4, taskInfoTextP,
             taskInfoButton
         } = this.elements;
+
+        const [progressBarLine] = [...this.progressBarElement.children];
+        const [progressBarLineP] = [...progressBarLine.children];
         
         if(checkButton.classList.contains("disabled-flag-button")) return;
         if(e.type === "keydown" && e.key !== "Enter") return;
 
+        this.afterCheck();
+
         window.removeEventListener("keydown", this.check);
 
+        const isCorrect = currentTask.acceptableAnswers.indexOf(this.answer) > -1;
+
+        if(isCorrect) this.progressBar.inRow++;
+        else this.progressBar.inRow = 0;
+
         this.submitted = true;
+
+        this.progressBar.value += this.progressBar.increase;
+
+        progressBarLine.style.width = `${this.progressBar.value}%`;
+        progressBarLine.style.backgroundColor = "#0589f5";
+
+        progressBarLine.style.boxShadow = "30px 0 0 #f20707";
+
+        if(this.progressBar.inRow > 1) {
+            progressBarLineP.innerText = `${this.progressBar.inRow} in a row!`;
+            progressBarLineP.style.opacity = "1";
+        }
+
+        setTimeout(() => {
+            if(this.progressBar.value < 100) progressBarLine.style.backgroundColor = "";
+            progressBarLine.style.boxShadow = "";
+        }, 300);
         
         checkButton.style.bottom = "-100px";
         
@@ -129,8 +175,6 @@ export class Task {
         const red = { normal: "#bd1330", light: "#d91435", lighter: "#f20707" };
         
         taskInfo.style.bottom = "0";
-
-        const isCorrect = currentTask.acceptableAnswers.indexOf(this.answer) > -1;
 
         taskInfo.style.background = getLinearGradient();
         taskInfoImg.src = isCorrect ? image.correct : image.incorrect;
@@ -180,6 +224,21 @@ export class Task {
             });
 
             return result;
+        }
+    }
+
+    afterCheck() {
+        switch(this.currentTask.type) {
+            case "multipleChoice":
+                const allButtons = document.querySelectorAll(".multiple-choice-button");
+                
+                allButtons.forEach(button => {
+                    if(button.classList.contains("active-multiple-choice-button")) return;
+                    button.classList.add("disabled-multiple-choice-button");
+                });
+
+                break;
+            default: ;
         }
     }
 
