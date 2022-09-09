@@ -11,7 +11,8 @@ export default function ExerciseModalReview(componentProps) {
     const modalOptions = document.querySelector(".modal-options");
     const updatedModalOptions = Component.update(modalOptions, {
         options: ["return", "resize", "x"],
-        functions: {...modalOptions.component.params.functions, return: modalOptionsReturn}
+        functions: {...modalOptions.component.params.functions, return: modalOptionsReturn},
+        resizeId: modalOptions.children[0].id ? "active-modal-resize" : ""
     });
 
     setTimeout(() => { exerciseModalReview.classList.add("active-exercise-modal-review") }, 100);
@@ -88,7 +89,7 @@ export default function ExerciseModalReview(componentProps) {
             const [explanationTitle, explanationP] = [...taskExplanation.children];
             const [titleButton] = [...explanationTitle.children];
 
-            titleButton.onclick = () => {
+            explanationTitle.onclick = () => {
                 const titleButtonTransform = getComputedStyle(titleButton).getPropertyValue("transform");
                 
                 if(titleButtonTransform === "none") {
@@ -102,6 +103,8 @@ export default function ExerciseModalReview(componentProps) {
                 else {
                     titleButton.style.transform = "";
                     explanationP.classList.remove("active-explanation-p");
+
+                    setTimeout(() => { explanationP.innerHTML = "" }, 300);
                 }
             }
         }
@@ -115,7 +118,12 @@ export default function ExerciseModalReview(componentProps) {
         setTimeout(() => {
             exerciseModalReview.remove();
             Component.create("ExerciseModalFinished", { exercise, results, appendTo });
-            Component.update(updatedModalOptions, { options: null, functions: {...updatedModalOptions.component.params.functions, return: null} });
+            
+            Component.update(updatedModalOptions, {
+                options: null,
+                functions: {...updatedModalOptions.component.params.functions, return: null},
+                resizeId: updatedModalOptions.children[1].id ? "active-modal-resize" : ""
+            });
         }, 300);
     }
 

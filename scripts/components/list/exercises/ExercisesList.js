@@ -1,4 +1,4 @@
-import { exercisesData } from "../../../../data/exercisesData.js";
+import { exercisesData } from "../../../../data/exercises/index.js";
 import { Component } from "../../Component.js";
 import getDifficultyColor from "../../../exercises/getDifficultyColor.js";
 import closeExerciseModal from "../../../exercises/closeExerciseModal.js";

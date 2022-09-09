@@ -10,7 +10,7 @@ export class Task {
         this.exercise = exercise;
         
         this.taskElement = taskElement;
-        this.tasks = randomArray(exercise.tasks);
+        this.tasks = randomArray(exercise.tasks, exercise.numberOfTasks);
         this.taskNumber = 0;
         this.currentTask = this.tasks[this.taskNumber];
         this.answer = "";

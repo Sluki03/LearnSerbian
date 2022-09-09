@@ -803,7 +803,7 @@ main .exercise-modal .exercise-modal-finished .flag-button:hover {
 main .exercise-modal .exercise-modal-review {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
   gap: 10px;
   height: 100%;
@@ -811,6 +811,7 @@ main .exercise-modal .exercise-modal-review {
   opacity: 0;
   position: relative;
   left: 20px;
+  margin-top: 30px;
   padding: 15px 0;
   transition: 300ms;
   overflow: hidden;
@@ -883,7 +884,7 @@ main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-revie
 }
 main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-explanation {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   flex-direction: column;
   width: 100%;
@@ -898,6 +899,7 @@ main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-revie
   flex-direction: row;
   gap: 10px;
   width: 100%;
+  cursor: pointer;
 }
 main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-explanation .explanation-title .arrow-button {
   height: 25px;
@@ -917,17 +919,17 @@ main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-revie
   margin: 0;
 }
 main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-explanation .explanation-p {
-  max-height: 0;
   color: #5e5c5c;
   font-size: 20px;
   opacity: 0;
   position: relative;
+  top: 10px;
   padding: 0 20px;
   transition: 300ms;
 }
 main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-explanation .active-explanation-p {
-  max-height: 5000px;
   opacity: 1;
+  top: 0;
 }
 main .exercise-modal .exercise-modal-review .review-holder > div:last-of-type {
   border: none;
