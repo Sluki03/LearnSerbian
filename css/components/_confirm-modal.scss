@@ -1,7 +1,7 @@
 .confirm-modal {
     @include add-flex(column);
     gap: 15px;
-    width: 80%;
+    width: 700px;
     background-color: white;
     border: 1px solid black;
     box-shadow: $defLightShadow;
