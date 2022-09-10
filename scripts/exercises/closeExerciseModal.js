@@ -8,7 +8,7 @@ export default function closeExerciseModal(confirmed, openNew) {
 
     if(exerciseModalTask !== null && !confirmed) return Component.create("ClassicModal", {
         text: "Do you really want to close the exercise?",
-        buttons: ["yes", "no"],
+        buttons: ["no", "yes"],
         functions: { yes: confirmFunction },
         appendTo: exerciseModal
     });

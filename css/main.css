@@ -1764,6 +1764,21 @@ footer div a {
   margin: 0;
   background-color: rgba(230, 230, 230, 0.3);
   border-color: rgb(200, 200, 200);
+  color: rgb(80, 80, 80);
+}
+.classic-modal .button-holder :first-child {
+  background-color: rgba(139, 230, 121, 0.3);
+}
+.classic-modal .button-holder :first-child:hover {
+  background-color: rgba(0, 255, 21, 0.5);
+  border: rgba(0, 255, 21, 0.5);
+}
+.classic-modal .button-holder :last-child {
+  background-color: rgba(230, 121, 121, 0.3);
+}
+.classic-modal .button-holder :last-child:hover {
+  background-color: rgba(255, 0, 0, 0.5);
+  border: rgba(255, 0, 0, 0.5);
 }
 
 .active-classic-modal {
