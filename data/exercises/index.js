@@ -21,7 +21,8 @@ export const exercisesData = [
             Duis volutpat mauris nisl. Donec efficitur oreet non in nunc. Sed nec urna at urna consequat consequat. Nam metus erat, tristique vitae pretium vitae, euismod nec nisl. Suspendisse potenti. Aliquam erat volutpat. Nam nisl velit, scelerisque a turpis non, vehicula maximus nibh. Nam viverra gravida condimentum. Nam ac metus laoreet, cursus nunc vel, pretium metus. Maecenas blandit sem dictum lacus molestie convallis. Fusce suscipit, tellus eget bibendum tempor, neque nunc fermentum ipsum, quis condimentum nunc nunc in felis.
         `,
         tasks: newWords,
-        numberOfTasks: 5
+        numberOfTasks: 5,
+        lives: 2
     },
 
     {

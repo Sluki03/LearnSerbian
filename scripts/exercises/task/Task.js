@@ -6,7 +6,7 @@ import createElement from "../../functions/createElement.js";
 import randomArray from "../../functions/randomArray.js";
 
 export class Task {
-    constructor(taskProgressBar, taskElement, exercise) {
+    constructor(taskStats, taskElement, exercise) {
         this.exercise = exercise;
         
         this.taskElement = taskElement;
@@ -18,7 +18,9 @@ export class Task {
         this.results = [];
 
         this.progressBar = { value: 0, increase: 100 / this.tasks.length, inRow: 0 };
-        this.progressBarElement = taskProgressBar;
+        this.taskStatsElement = taskStats;
+
+        this.currentLives = this.exercise.lives;
 
         this.body = document.querySelector("body");
         this.elements = {};
@@ -37,11 +39,27 @@ export class Task {
         this.submitted = false;
         this.elements = {};
     }
+
+    resetAll() {
+        this.taskNumber = 0;
+        this.currentTask = this.tasks[this.taskNumber];
+        this.answer = "";
+        this.submitted = false;
+        this.results = [];
+        this.progressBar = { value: 0, increase: 100 / this.tasks.length, inRow: 0 };
+        this.currentLives = this.exercise.lives;
+        this.elements = {};
+
+        const [progressBar] = [...this.taskStatsElement.children];
+        const [progressBarLine] = [...progressBar.children];
+
+        progressBarLine.style.width = "";
+    }
     
     start() {
         setTimeout(() => {
             this.taskElement.classList.add("active-exercise-modal-task");
-            this.progressBarElement.classList.add("active-task-progress-bar");
+            this.taskStatsElement.classList.add("active-task-stats");
         }, 100);
         
         this.initializeElements();
@@ -51,12 +69,17 @@ export class Task {
 
         taskH3.innerText = this.currentTask.title;
 
+        const taskLives = [...this.taskStatsElement.children][1];
+        const taskLivesSpan = [...taskLives.children][1];
+
+        taskLivesSpan.innerText = this.currentLives;
+
         checkButton.onclick = this.check;
         window.addEventListener("keydown", this.check);
     }
 
     startNew(e) {
-        if(e.type === "keydown" && e.key !== "Enter") return;
+        if(e?.type === "keydown" && e?.key !== "Enter") return;
         
         const { taskHolder, taskInfo, checkButton } = this.elements;
         const { setActiveButton } = TaskFunctions;
@@ -64,7 +87,8 @@ export class Task {
         window.removeEventListener("keydown", setActiveButton);
         window.removeEventListener("keydown", this.startNew);
 
-        const [progressBarLine] = [...this.progressBarElement.children];
+        const [progressBar] = [...this.taskStatsElement.children];
+        const [progressBarLine] = [...progressBar.children];
         const [progressBarLineP] = [...progressBarLine.children];
 
         if(progressBarLineP.innerText) {
@@ -75,7 +99,7 @@ export class Task {
         taskInfo.style.bottom = "";
         checkButton.style.bottom = "";
 
-        if(this.tasks.length - 1 === this.taskNumber) this.progressBarElement.classList.remove("active-task-progress-bar");
+        if(this.tasks.length - 1 === this.taskNumber) this.taskStatsElement.classList.remove("active-task-stats");
         
         this.taskElement.style.opacity = "0";
         this.taskElement.style.left = "-20px";
@@ -88,13 +112,18 @@ export class Task {
 
             taskHolder.innerHTML = "";
             
-            if(this.tasks.length - 1 > this.taskNumber) {
+            if(this.currentLives === 0) {
+                this.resetAll();
+                this.start();
+            }
+            
+            else if(this.tasks.length - 1 > this.taskNumber) {
                 this.next();
                 this.start();
             }
 
             else {
-                this.progressBarElement.remove();
+                this.taskStatsElement.remove();
                 this.taskElement.remove();
                 
                 const exerciseModal = document.querySelector(".exercise-modal");
@@ -133,8 +162,10 @@ export class Task {
             taskInfoButton
         } = this.elements;
 
-        const [progressBarLine] = [...this.progressBarElement.children];
+        const [progressBar, taskLives] = [...this.taskStatsElement.children];
+        const [progressBarLine] = [...progressBar.children];
         const [progressBarLineP] = [...progressBarLine.children];
+        const taskLivesSpan = [...taskLives.children][1];
         
         if(checkButton.classList.contains("disabled-flag-button")) return;
         if(e.type === "keydown" && e.key !== "Enter") return;
@@ -166,6 +197,22 @@ export class Task {
             if(this.progressBar.value < 100) progressBarLine.style.backgroundColor = "";
             progressBarLine.style.boxShadow = "";
         }, 300);
+
+        if(!isCorrect) {
+            this.currentLives--;
+            taskLivesSpan.innerText = this.currentLives;
+
+            if(this.currentLives === 0) {
+                const exerciseModal = document.querySelector(".exercise-modal");
+
+                return Component.create("ClassicModal", {
+                    text: "You have no more lives.",
+                    buttons: ["try again", "cancel"],
+                    functions: { tryAgain: this.startNew, cancel: () => console.log("cancel") },
+                    appendTo: exerciseModal
+                });
+            }
+        }
         
         checkButton.style.bottom = "-100px";
         

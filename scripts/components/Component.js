@@ -11,13 +11,13 @@ import Footer from "./list/other/Footer.js";
 import InteractiveTitle from "./list/other/InteractiveTitle.js"
 import ModalOptions from "./list/other/ModalOptions.js";
 import ArrowButton from "./list/other/ArrowButton.js";
-import ConfirmModal from "./list/other/ConfirmModal.js";
+import ClassicModal from "./list/other/ClassicModal.js";
 import { Convert } from "../functions/Convert.js";
 
 const components = {
     PanelsList, ExercisesList, ExerciseModal, ExerciseModalContent, ExerciseModalTask,
     ExerciseModalFinished, ExerciseModalReview, Loading, Nav, Footer,
-    InteractiveTitle, ModalOptions, ArrowButton, ConfirmModal
+    InteractiveTitle, ModalOptions, ArrowButton, ClassicModal
 };
 
 export const Component = { create, render, update };

@@ -447,20 +447,33 @@ main .exercise-modal #extended-exercise-modal-content {
 main .exercise-modal #extended-exercise-modal-content button {
   position: absolute;
 }
-main .exercise-modal .task-progress-bar {
-  height: 25px;
-  width: 70%;
-  background-color: white;
-  border: 1px solid rgb(200, 200, 200);
-  border-radius: 20px;
-  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+main .exercise-modal .task-stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
   opacity: 0;
   position: absolute;
   top: 5%;
   transition: 300ms;
+}
+main .exercise-modal .task-stats .task-progress-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  height: 25px;
+  width: 70%;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 20px;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+  position: relative;
   overflow: hidden;
 }
-main .exercise-modal .task-progress-bar .progress-bar-line {
+main .exercise-modal .task-stats .task-progress-bar .progress-bar-line {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -470,10 +483,11 @@ main .exercise-modal .task-progress-bar .progress-bar-line {
   background-color: #0559f5;
   border-radius: 20px;
   box-shadow: 10px 0 0 #d91435;
-  position: relative;
+  position: absolute;
+  left: 0;
   transition: 500ms;
 }
-main .exercise-modal .task-progress-bar .progress-bar-line p {
+main .exercise-modal .task-stats .task-progress-bar .progress-bar-line p {
   color: white;
   font-size: 20px;
   font-weight: bold;
@@ -482,7 +496,26 @@ main .exercise-modal .task-progress-bar .progress-bar-line p {
   margin: 0;
   transition: 300ms;
 }
-main .exercise-modal .active-task-progress-bar {
+main .exercise-modal .task-stats .task-lives {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  position: relative;
+}
+main .exercise-modal .task-stats .task-lives img {
+  height: 40px;
+  width: 40px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+main .exercise-modal .task-stats .task-lives span {
+  color: white;
+  font-size: 25px;
+  font-weight: bold;
+  position: absolute;
+}
+main .exercise-modal .active-task-stats {
   opacity: 1;
   top: 10%;
 }
@@ -1669,7 +1702,7 @@ footer div a {
   width: 85px;
 }
 
-.confirm-modal {
+.classic-modal {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1694,12 +1727,12 @@ footer div a {
       -ms-user-select: none;
           user-select: none;
 }
-.confirm-modal strong {
+.classic-modal strong {
   color: #5e5c5c;
   font-size: 30px;
   text-align: center;
 }
-.confirm-modal .button-holder {
+.classic-modal .button-holder {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1707,7 +1740,7 @@ footer div a {
   gap: 50px;
   width: 80%;
 }
-.confirm-modal .button-holder button {
+.classic-modal .button-holder button {
   color: #144eba;
   font-size: 25px;
   font-weight: bold;
@@ -1719,13 +1752,13 @@ footer div a {
   padding: 5px 10px;
   transition: 300ms;
 }
-.confirm-modal .button-holder button:hover {
+.classic-modal .button-holder button:hover {
   color: white;
   background-color: #bd1330;
   border: 1px solid #144eba;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
 }
-.confirm-modal .button-holder button {
+.classic-modal .button-holder button {
   width: 100%;
   border-radius: 20px;
   margin: 0;
@@ -1733,7 +1766,7 @@ footer div a {
   border-color: rgb(200, 200, 200);
 }
 
-.active-confirm-modal {
+.active-classic-modal {
   opacity: 1;
   top: 50%;
 }/*# sourceMappingURL=main.css.map */

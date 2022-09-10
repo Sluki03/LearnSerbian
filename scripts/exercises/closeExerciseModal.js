@@ -6,9 +6,10 @@ export default function closeExerciseModal(confirmed, openNew) {
 
     const exerciseModalTask = document.querySelector(".active-exercise-modal-task");
 
-    if(exerciseModalTask !== null && !confirmed) return Component.create("ConfirmModal", {
-        question: "Do you really want to close the exercise?",
-        confirmFunction,
+    if(exerciseModalTask !== null && !confirmed) return Component.create("ClassicModal", {
+        text: "Do you really want to close the exercise?",
+        buttons: ["yes", "no"],
+        functions: { yes: confirmFunction },
         appendTo: exerciseModal
     });
 
