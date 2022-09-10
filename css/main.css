@@ -467,7 +467,7 @@ main .exercise-modal .task-stats .task-progress-bar {
   height: 25px;
   width: 70%;
   background-color: white;
-  border: 1px solid black;
+  border: 1px solid rgb(200, 200, 200);
   border-radius: 20px;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
   position: relative;
