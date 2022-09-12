@@ -10,8 +10,6 @@ export default function ModalOptions(componentProps) {
         appendTo
     });
 
-    modalOptionsElement.component = { name: "ModalOptions", params: componentProps.params };
-
     const validOptions = options ? options : ["resize", "x"];
 
     validOptions.forEach(option => createElement({

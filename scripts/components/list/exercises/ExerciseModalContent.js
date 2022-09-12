@@ -12,8 +12,7 @@ export default function ExerciseModalContent(componentProps) {
     appendTo.appendChild(exerciseModalTitle);
     appendTo.appendChild(exerciseModalDivider);
 
-    const io = Component.create("InteractiveTitle", { title: exercise.name, appendTo: exerciseModalTitle });
-    console.log(io.component)
+    Component.create("InteractiveTitle", { title: exercise.name, appendTo: exerciseModalTitle });
 
     const activeExerciseClone = document.getElementById("active-exercise").cloneNode(true);
     
