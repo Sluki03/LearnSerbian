@@ -1,17 +1,33 @@
 import { exercisesData } from "../../../../data/exercises/index.js";
 import { Component } from "../../Component.js";
+import createElement from "../../../functions/createElement.js";
 import getDifficultyColor from "../../../exercises/getDifficultyColor.js";
 import closeExerciseModal from "../../../exercises/closeExerciseModal.js";
 
-export default function ExercisesList() {
-    const tree = document.querySelector(".exercises-tree");
-    const treeEnd = document.getElementById("exercises-tree-end");
+export default function ExercisesList(componentProps) {
+    const list = document.querySelector(".exercises-list");
+    if(componentProps.params === undefined) return list;
+
+    createElement({
+        tag: "div",
+        attributes: { class: "exercises-list-line" },
+        appendTo: list
+    });
+
+    for(let i = 0; i < 2; i++) createElement({
+        tag: "strong",
+        attributes: { class: `exercises-list-${i === 0 ? "start" : "end"}` },
+        innerText: i === 0 ? "start" : "end",
+        appendTo: list
+    });
+    
+    const listEnd = document.getElementById("exercises-list-end");
 
     let activeExerciseId = 0;
 
     exercisesData.forEach((exercise, index) => {
         const exerciseHolder = document.querySelector("[data-template='exercise-holder']").content.firstElementChild.cloneNode(true);
-        tree.insertBefore(exerciseHolder, treeEnd);
+        list.insertBefore(exerciseHolder, listEnd);
 
         const [exerciseTitle, articleExercise] = [...exerciseHolder.children];
         const [exerciseDifficulty, exerciseP] = [...exerciseTitle.children];
@@ -25,6 +41,8 @@ export default function ExercisesList() {
 
         Component.create("InteractiveTitle", { title: index + 1, appendTo: exerciseContent });
     });
+
+    return list;
 
     function openExerciseModal(activeExercise, exercise, id) {
         const exerciseModal = document.querySelector(".exercise-modal");

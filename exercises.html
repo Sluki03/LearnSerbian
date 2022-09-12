@@ -46,13 +46,7 @@
             
             <section class="exercises-holder">
                 <div class="loading" data-component="loading"></div>
-                
-                <div class="exercises-tree">
-                    <div class="exercises-tree-line"></div>
-                    
-                    <strong id="exercises-tree-start">start</strong>
-                    <strong id="exercises-tree-end">end</strong>
-                </div>
+                <div class="exercises-list" data-component="exercises-list"></div>
             </section>
         </main>
 
@@ -87,18 +81,17 @@
             </div>
         </template>
 
-        <template data-template="task-stats">
-            <div class="task-stats">
+        <template data-template="task-lives">
+            <div class="task-lives"></div>
+        </template>
+        
+        <template data-template="task-progress-bar-holder">
+            <div class="task-progress-bar-holder">
                 <div class="task-progress-bar">
-                    <div class="progress-bar-line">
-                        <p></p>
-                    </div>
+                    <div class="progress-bar-line"></div>
                 </div>
-    
-                <div class="task-lives">
-                    <img src="./images/icons/lives-icon.png" alt="LIVES">
-                    <span></span>
-                </div>
+
+                <p></p>
             </div>
         </template>
 

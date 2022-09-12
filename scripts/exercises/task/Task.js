@@ -6,8 +6,9 @@ import createElement from "../../functions/createElement.js";
 import randomArray from "../../functions/randomArray.js";
 
 export class Task {
-    constructor(taskStats, taskElement, exercise) {
+    constructor(taskElement, exercise) {
         this.exercise = exercise;
+        this.exerciseModal = document.querySelector(".exercise-modal");
         
         this.taskElement = taskElement;
         this.tasks = randomArray(exercise.tasks, exercise.numberOfTasks);
@@ -17,15 +18,18 @@ export class Task {
         this.submitted = false;
         this.results = [];
 
-        this.progressBar = { value: 0, increase: 100 / this.tasks.length, inRow: 0 };
-        this.taskStatsElement = taskStats;
-
         this.currentLives = this.exercise.lives;
+        this.taskLives = document.querySelector(".task-lives");
+
+        this.progressBar = { value: 0, increase: 100 / this.tasks.length, inRow: 0 };
+        this.taskProgressBarHolder = document.querySelector(".task-progress-bar-holder");
 
         this.body = document.querySelector("body");
         this.elements = {};
 
         this.startNew = this.startNew.bind(this);
+        this.cancel = this.cancel.bind(this);
+        this.clearTaskElements = this.clearTaskElements.bind(this);
         this.check = this.check.bind(this);
         this.afterCheck = this.afterCheck.bind(this);
         this.answerChanged = this.answerChanged.bind(this);
@@ -40,17 +44,17 @@ export class Task {
         this.elements = {};
     }
 
-    resetAll() {
+    reset() {
         this.taskNumber = 0;
         this.currentTask = this.tasks[this.taskNumber];
         this.answer = "";
         this.submitted = false;
         this.results = [];
-        this.progressBar = { value: 0, increase: 100 / this.tasks.length, inRow: 0 };
         this.currentLives = this.exercise.lives;
+        this.progressBar = { value: 0, increase: 100 / this.tasks.length, inRow: 0 };
         this.elements = {};
 
-        const [progressBar] = [...this.taskStatsElement.children];
+        const [progressBar] = [...this.taskProgressBarHolder.children];
         const [progressBarLine] = [...progressBar.children];
 
         progressBarLine.style.width = "";
@@ -59,7 +63,8 @@ export class Task {
     start() {
         setTimeout(() => {
             this.taskElement.classList.add("active-exercise-modal-task");
-            this.taskStatsElement.classList.add("active-task-stats");
+            this.taskLives.classList.add("active-task-lives");
+            this.taskProgressBarHolder.classList.add("active-task-progress-bar-holder");
         }, 100);
         
         this.initializeElements();
@@ -69,38 +74,71 @@ export class Task {
 
         taskH3.innerText = this.currentTask.title;
 
-        const taskLives = [...this.taskStatsElement.children][1];
-        const taskLivesSpan = [...taskLives.children][1];
-
-        taskLivesSpan.innerText = this.currentLives;
-
         checkButton.onclick = this.check;
         window.addEventListener("keydown", this.check);
+
+        this.updateLives();
     }
 
     startNew(e) {
         if(e?.type === "keydown" && e?.key !== "Enter") return;
         
+        if(this.tasks.length - 1 === this.taskNumber) {
+            this.taskLives.classList.remove("active-task-lives");
+            this.taskProgressBarHolder.classList.remove("active-task-progress-bar-holder");
+        }
+
+        this.clearTaskElements(false);
+
+        setTimeout(() => {
+            if(this.currentLives === 0) {
+                this.reset();
+                this.start();
+            }
+            
+            else if(this.tasks.length - 1 > this.taskNumber) {
+                this.next();
+                this.start();
+            }
+
+            else {
+                this.taskLives.remove();
+                this.taskProgressBarHolder.remove();
+                this.taskElement.remove();
+                
+                Component.create("ExerciseModalFinished", { exercise: this.exercise, results: this.results, appendTo: this.exerciseModal });
+            }
+        }, 300);
+    }
+
+    cancel() {
+        this.taskLives.classList.remove("active-task-lives");
+        this.taskProgressBarHolder.classList.remove("active-task-progress-bar-holder");
+
+        this.clearTaskElements(true);
+    }
+
+    clearTaskElements(removeElements) {
         const { taskHolder, taskInfo, checkButton } = this.elements;
         const { setActiveButton } = TaskFunctions;
 
         window.removeEventListener("keydown", setActiveButton);
         window.removeEventListener("keydown", this.startNew);
 
-        const [progressBar] = [...this.taskStatsElement.children];
-        const [progressBarLine] = [...progressBar.children];
-        const [progressBarLineP] = [...progressBarLine.children];
+        const progressBarP = [...this.taskProgressBarHolder.children][1];
 
-        if(progressBarLineP.innerText) {
-            progressBarLineP.style.opacity = "";
-            setTimeout(() => { progressBarLineP.innerText = "" }, 300);
+        if(progressBarP.innerText) {
+            progressBarP.style.opacity = "";
+
+            setTimeout(() => {
+                progressBarP.style.left = "";
+                progressBarP.innerText = "";
+            }, 300);
         }
         
         taskInfo.style.bottom = "";
         checkButton.style.bottom = "";
 
-        if(this.tasks.length - 1 === this.taskNumber) this.taskStatsElement.classList.remove("active-task-stats");
-        
         this.taskElement.style.opacity = "0";
         this.taskElement.style.left = "-20px";
 
@@ -111,23 +149,37 @@ export class Task {
             this.taskElement.classList.remove("active-exercise-modal-task");
 
             taskHolder.innerHTML = "";
-            
-            if(this.currentLives === 0) {
-                this.resetAll();
-                this.start();
-            }
-            
-            else if(this.tasks.length - 1 > this.taskNumber) {
-                this.next();
-                this.start();
-            }
 
-            else {
-                this.taskStatsElement.remove();
+            if(removeElements) {
+                this.taskLives.remove();
+                this.taskProgressBarHolder.remove();
                 this.taskElement.remove();
-                
-                const exerciseModal = document.querySelector(".exercise-modal");
-                Component.create("ExerciseModalFinished", { exercise: this.exercise, results: this.results, appendTo: exerciseModal });
+
+                const exerciseModalContent = Component.create("ExerciseModalContent", {
+                    exercise: this.exercise,
+                    appendTo: this.exerciseModal,
+                    style: { opacity: "0", left: "20px" }
+                });
+
+                const exerciseModalTitle = document.querySelector(".exercise-modal-title");
+                const exerciseModalDivider = document.querySelector(".divider");
+
+                exerciseModalTitle.style.opacity = "0";
+                exerciseModalTitle.style.top = "-10px";
+
+                exerciseModalDivider.style.opacity = "0";
+                exerciseModalDivider.style.top = "-10px";
+
+                setTimeout(() => {
+                    exerciseModalContent.style.opacity = "";
+                    exerciseModalContent.style.left = "";
+
+                    exerciseModalTitle.style.opacity = "";
+                    exerciseModalTitle.style.top = "";
+
+                    exerciseModalDivider.style.opacity = "";
+                    exerciseModalDivider.style.top = "";
+                }, 300);
             }
         }, 300);
     }
@@ -153,6 +205,16 @@ export class Task {
             this.elements = {...this.elements, ...newElements};
         });
     }
+
+    updateLives() {
+        this.taskLives.innerHTML = "";
+        
+        for(let i = 0; i < this.currentLives; i++) createElement({
+            tag: "img",
+            attributes: { src: "./images/icons/lives-icon.png", alt: "LIVE" },
+            appendTo: this.taskLives
+        });
+    }
     
     check(e) {
         const { currentTask } = this;
@@ -162,10 +224,8 @@ export class Task {
             taskInfoButton
         } = this.elements;
 
-        const [progressBar, taskLives] = [...this.taskStatsElement.children];
+        const [progressBar, progressBarP] = [...this.taskProgressBarHolder.children];
         const [progressBarLine] = [...progressBar.children];
-        const [progressBarLineP] = [...progressBarLine.children];
-        const taskLivesSpan = [...taskLives.children][1];
         
         if(checkButton.classList.contains("disabled-flag-button")) return;
         if(e.type === "keydown" && e.key !== "Enter") return;
@@ -189,8 +249,10 @@ export class Task {
         progressBarLine.style.boxShadow = "30px 0 0 #f20707";
 
         if(this.progressBar.inRow > 1) {
-            progressBarLineP.innerText = `${this.progressBar.inRow} in a row!`;
-            progressBarLineP.style.opacity = "1";
+            progressBarP.innerText = `${this.progressBar.inRow} in a row!`;
+            
+            progressBarP.style.opacity = "1";
+            progressBarP.style.left = `${this.progressBar.value / 2}%`;
         }
 
         setTimeout(() => {
@@ -200,18 +262,14 @@ export class Task {
 
         if(!isCorrect) {
             this.currentLives--;
-            taskLivesSpan.innerText = this.currentLives;
+            this.updateLives();
 
-            if(this.currentLives === 0) {
-                const exerciseModal = document.querySelector(".exercise-modal");
-
-                return Component.create("ClassicModal", {
-                    text: "You have no more lives.",
-                    buttons: ["try again", "cancel"],
-                    functions: { tryAgain: this.startNew, cancel: () => console.log("cancel") },
-                    appendTo: exerciseModal
-                });
-            }
+            if(this.currentLives === 0) return Component.create("ClassicModal", {
+                text: "You have no more lives.",
+                buttons: ["try again", "cancel"],
+                functions: { tryAgain: this.startNew, cancel: this.cancel },
+                appendTo: this.exerciseModal
+            });
         }
         
         checkButton.style.bottom = "-100px";

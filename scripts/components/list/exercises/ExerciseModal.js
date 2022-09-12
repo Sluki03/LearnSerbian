@@ -24,21 +24,6 @@ export default function ExerciseModal(componentProps) {
         else exerciseModal.style.width = "";
     }
 
-    const exerciseModalTitleDivider = document.querySelector("[data-template='exercise-modal-title-divider']").content.firstElementChild.cloneNode(true);
-    const [exerciseModalTitle, exerciseModalDivider] = [...exerciseModalTitleDivider.children];
-
-    exerciseModal.appendChild(exerciseModalTitle);
-    exerciseModal.appendChild(exerciseModalDivider);
-
-    Component.create("InteractiveTitle", { title: exercise.name, appendTo: exerciseModalTitle });
-
-    const activeExerciseClone = document.getElementById("active-exercise").cloneNode(true);
-    
-    activeExerciseClone.id = "";
-    activeExerciseClone.classList.add("exercise-clone");
-    
-    exerciseModalTitle.appendChild(activeExerciseClone);
-
     Component.create("ExerciseModalContent", { exercise, appendTo: exerciseModal });
 
     return exerciseModal;

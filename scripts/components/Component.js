@@ -23,14 +23,19 @@ const components = {
 export const Component = { create, render, update };
 
 function create(componentName, params) {
-    let componentFunction;
+    let componentInfo;
 
     Object.keys(components).forEach((component, index) => {
-        if(componentName === component) componentFunction = Object.values(components)[index];
+        if(componentName === component) componentInfo = {
+            name: component,
+            function: Object.values(components)[index]
+        };
     });
 
     const componentProps = { builtIn: null, params };
-    const newComponent = componentFunction(componentProps);
+    const newComponent = componentInfo.function(componentProps);
+
+    newComponent.component = { name: componentInfo.name, params };
 
     return newComponent;
 }
@@ -49,10 +54,13 @@ function render(element) {
     }
 
     componentTypes.forEach((componentType, index) => {
-        let componentFunction;
+        let componentInfo;
         
         Object.keys(components).forEach((component, componentIndex) => {
-            if(componentType === component) componentFunction = Object.values(components)[componentIndex];
+            if(componentType === component) componentInfo = {
+                name: component,
+                function: Object.values(components)[componentIndex]
+            };
         });
         
         const { dataset } = componentElements[index];
@@ -64,7 +72,9 @@ function render(element) {
         });
 
         const componentProps = { builtIn: componentElements[index], params: validDataset };
-        componentFunction(componentProps);
+
+        const newComponent = componentInfo.function(componentProps);
+        newComponent.component = { name: componentInfo.name, params: validDataset };
     });
 }
 

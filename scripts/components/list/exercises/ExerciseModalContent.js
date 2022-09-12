@@ -1,12 +1,26 @@
 import { Component } from "../../Component.js";
-import createElement from "../../../functions/createElement.js";
-import getDifficultyColor from "../../../exercises/getDifficultyColor.js";
 import markup from "../../../functions/markup.js";
 import setStyles from "../../../functions/setStyles.js";
 import realParseInt from "../../../functions/realParseInt.js";
 
 export default function ExerciseModalContent(componentProps) {
     const { exercise, appendTo, style } = componentProps.params;
+
+    const exerciseModalTitleDivider = document.querySelector("[data-template='exercise-modal-title-divider']").content.firstElementChild.cloneNode(true);
+    const [exerciseModalTitle, exerciseModalDivider] = [...exerciseModalTitleDivider.children];
+
+    appendTo.appendChild(exerciseModalTitle);
+    appendTo.appendChild(exerciseModalDivider);
+
+    const io = Component.create("InteractiveTitle", { title: exercise.name, appendTo: exerciseModalTitle });
+    console.log(io.component)
+
+    const activeExerciseClone = document.getElementById("active-exercise").cloneNode(true);
+    
+    activeExerciseClone.id = "";
+    activeExerciseClone.classList.add("exercise-clone");
+    
+    exerciseModalTitle.appendChild(activeExerciseClone);
     
     const exerciseModalContent = document.querySelector("[data-template='exercise-modal-content']").content.firstElementChild.cloneNode(true);
     if(style !== undefined) setStyles(exerciseModalContent, style);
@@ -17,9 +31,6 @@ export default function ExerciseModalContent(componentProps) {
     contentP.innerHTML = exercise.tips ? markup(exercise.tips) : "This exercise has no tips.";
 
     const contentButton = document.querySelector(".exercise-modal-content button");
-
-    const exerciseModalTitle = document.querySelector(".exercise-modal-title");
-    const exerciseModalDivider = document.querySelector(".divider");
     
     let isExerciseStarted = false;
     

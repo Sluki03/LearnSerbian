@@ -14,6 +14,14 @@ body {
   overflow: hidden;
 }
 
+img {
+  pointer-events: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
 button {
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -447,37 +455,53 @@ main .exercise-modal #extended-exercise-modal-content {
 main .exercise-modal #extended-exercise-modal-content button {
   position: absolute;
 }
-main .exercise-modal .task-stats {
+main .exercise-modal .task-lives {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  gap: 10px;
-  width: 100%;
+  gap: 5px;
   opacity: 0;
   position: absolute;
-  top: 5%;
+  top: -10px;
+  left: 10px;
   transition: 300ms;
 }
-main .exercise-modal .task-stats .task-progress-bar {
+main .exercise-modal .task-lives img {
+  height: 35px;
+  width: 35px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+main .exercise-modal .active-task-lives {
+  opacity: 1;
+  top: 10px;
+}
+main .exercise-modal .task-progress-bar-holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  width: 70%;
+  opacity: 0;
+  position: relative;
+  top: 0;
+}
+main .exercise-modal .task-progress-bar-holder .task-progress-bar {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
   height: 25px;
-  width: 70%;
+  width: 100%;
   background-color: white;
-  border: 1px solid rgb(200, 200, 200);
+  border: 1px solid black;
   border-radius: 20px;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
   position: relative;
   overflow: hidden;
 }
-main .exercise-modal .task-stats .task-progress-bar .progress-bar-line {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
+main .exercise-modal .task-progress-bar-holder .task-progress-bar .progress-bar-line {
   height: 100%;
   width: 0;
   background-color: #0559f5;
@@ -487,35 +511,18 @@ main .exercise-modal .task-stats .task-progress-bar .progress-bar-line {
   left: 0;
   transition: 500ms;
 }
-main .exercise-modal .task-stats .task-progress-bar .progress-bar-line p {
-  color: white;
+main .exercise-modal .task-progress-bar-holder p {
+  color: #144eba;
   font-size: 20px;
   font-weight: bold;
   opacity: 0;
   position: absolute;
+  top: -100%;
   margin: 0;
+  transform: translateX(-50%);
   transition: 300ms;
 }
-main .exercise-modal .task-stats .task-lives {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  position: relative;
-}
-main .exercise-modal .task-stats .task-lives img {
-  height: 40px;
-  width: 40px;
-  -o-object-fit: contain;
-     object-fit: contain;
-}
-main .exercise-modal .task-stats .task-lives span {
-  color: white;
-  font-size: 25px;
-  font-weight: bold;
-  position: absolute;
-}
-main .exercise-modal .active-task-stats {
+main .exercise-modal .active-task-progress-bar-holder {
   opacity: 1;
   top: 10%;
 }
@@ -701,7 +708,7 @@ main .exercise-modal .exercise-modal-task .task-info .arrow-button {
   width: 70px;
   position: absolute;
   top: 50%;
-  right: 10px;
+  right: 20px;
   transform: translateY(-50%) rotate(-90deg);
 }
 main .exercise-modal .exercise-modal-task .task-info .arrow-button img {
@@ -1110,7 +1117,7 @@ main .exercises-holder {
 main .exercises-holder::-webkit-scrollbar {
   width: 0;
 }
-main .exercises-holder .exercises-tree {
+main .exercises-holder .exercises-list {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -1122,22 +1129,22 @@ main .exercises-holder .exercises-tree {
   margin: 20px 0;
   transition: 50ms;
 }
-main .exercises-holder .exercises-tree > div:nth-of-type(2) {
+main .exercises-holder .exercises-list > div:nth-of-type(2) {
   margin-top: 100px;
 }
-main .exercises-holder .exercises-tree > div:nth-last-of-type(1) {
+main .exercises-holder .exercises-list > div:nth-last-of-type(1) {
   margin-bottom: 100px;
 }
-main .exercises-holder .exercises-tree strong:last-of-type {
+main .exercises-holder .exercises-list strong:last-of-type {
   bottom: 0;
 }
-main .exercises-holder .exercises-tree .exercises-tree-line {
+main .exercises-holder .exercises-list .exercises-list-line {
   height: 100%;
   width: 3px;
   background: #5e5c5c;
   position: absolute;
 }
-main .exercises-holder .exercises-tree strong {
+main .exercises-holder .exercises-list strong {
   color: #5e5c5c;
   font-size: 30px;
   text-transform: capitalize;
@@ -1147,7 +1154,7 @@ main .exercises-holder .exercises-tree strong {
   padding: 5px;
   position: absolute;
 }
-main .exercises-holder .exercises-tree .interactive-title {
+main .exercises-holder .exercises-list .interactive-title {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1155,7 +1162,7 @@ main .exercises-holder .exercises-tree .interactive-title {
   position: relative;
   margin: 10px 0;
 }
-main .exercises-holder .exercises-tree .interactive-title span {
+main .exercises-holder .exercises-list .interactive-title span {
   color: white;
   font-size: 90px;
   text-transform: capitalize;
@@ -1170,39 +1177,39 @@ main .exercises-holder .exercises-tree .interactive-title span {
           user-select: none;
   z-index: 3;
 }
-main .exercises-holder .exercises-tree .interactive-title span:first-child, main .exercises-holder .exercises-tree .interactive-title span:last-child {
+main .exercises-holder .exercises-list .interactive-title span:first-child, main .exercises-holder .exercises-list .interactive-title span:last-child {
   position: absolute;
 }
-main .exercises-holder .exercises-tree .interactive-title span:first-child {
+main .exercises-holder .exercises-list .interactive-title span:first-child {
   color: #bd1330;
   top: -5px;
   left: -3px;
   z-index: 1;
 }
-main .exercises-holder .exercises-tree .interactive-title span:last-child {
+main .exercises-holder .exercises-list .interactive-title span:last-child {
   color: #144eba;
   top: 5px;
   left: 5px;
   z-index: 2;
 }
-main .exercises-holder .exercises-tree .interactive-title:hover span {
+main .exercises-holder .exercises-list .interactive-title:hover span {
   text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
-main .exercises-holder .exercises-tree .interactive-title:hover span:first-child {
+main .exercises-holder .exercises-list .interactive-title:hover span:first-child {
   color: #d91435;
   top: -7px;
   left: -5px;
   z-index: 2;
   text-shadow: 0px 0px 15px rgba(247, 72, 101, 0.5);
 }
-main .exercises-holder .exercises-tree .interactive-title:hover span:last-child {
+main .exercises-holder .exercises-list .interactive-title:hover span:last-child {
   color: #0559f5;
   top: 7px;
   left: 7px;
   z-index: 1;
   text-shadow: 0px 0px 15px rgba(82, 138, 242, 0.5);
 }
-main .exercises-holder .exercises-tree .exercise {
+main .exercises-holder .exercises-list .exercise {
   height: 180px;
   width: 180px;
   background: linear-gradient(135deg, #bd1330 35%, #144eba 65%);
@@ -1212,10 +1219,10 @@ main .exercises-holder .exercises-tree .exercise {
   position: relative;
   transition: 300ms;
 }
-main .exercises-holder .exercises-tree .exercise:hover {
+main .exercises-holder .exercises-list .exercise:hover {
   background: linear-gradient(135deg, #144eba 35%, #bd1330 65%);
 }
-main .exercises-holder .exercises-tree .exercise .exercise-content {
+main .exercises-holder .exercises-list .exercise .exercise-content {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1232,34 +1239,34 @@ main .exercises-holder .exercises-tree .exercise .exercise-content {
   transform: translate(-50%, -50%);
   transition: 300ms;
 }
-main .exercises-holder .exercises-tree .exercise:hover .exercise-content {
+main .exercises-holder .exercises-list .exercise:hover .exercise-content {
   height: 155px;
   width: 155px;
 }
-main .exercises-holder .exercises-tree #active-exercise {
+main .exercises-holder .exercises-list #active-exercise {
   background: linear-gradient(135deg, #144eba 35%, #bd1330 65%);
   cursor: default;
 }
-main .exercises-holder .exercises-tree #active-exercise .exercise-content {
+main .exercises-holder .exercises-list #active-exercise .exercise-content {
   height: 155px;
   width: 155px;
 }
-main .exercises-holder .exercises-tree .exercise-clone {
+main .exercises-holder .exercises-list .exercise-clone {
   height: 100px;
   width: 100px;
   cursor: default;
 }
-main .exercises-holder .exercises-tree .exercise-clone:hover {
+main .exercises-holder .exercises-list .exercise-clone:hover {
   background: linear-gradient(135deg, #bd1330 35%, #144eba 65%);
 }
-main .exercises-holder .exercises-tree .exercise-clone .exercise-content {
+main .exercises-holder .exercises-list .exercise-clone .exercise-content {
   height: 85px;
   width: 85px;
 }
-main .exercises-holder .exercises-tree .exercise-clone .exercise-content .interactive-title span {
+main .exercises-holder .exercises-list .exercise-clone .exercise-content .interactive-title span {
   font-size: 50px;
 }
-main .exercises-holder .exercises-tree .exercise-clone:hover .exercise-content {
+main .exercises-holder .exercises-list .exercise-clone:hover .exercise-content {
   height: 85px;
   width: 85px;
 }
@@ -1766,17 +1773,17 @@ footer div a {
   border-color: rgb(200, 200, 200);
   color: rgb(80, 80, 80);
 }
-.classic-modal .button-holder :first-child {
+.classic-modal .button-holder > button:first-child {
   background-color: rgba(139, 230, 121, 0.3);
 }
-.classic-modal .button-holder :first-child:hover {
+.classic-modal .button-holder > button:first-child:hover {
   background-color: rgba(0, 255, 21, 0.5);
   border: rgba(0, 255, 21, 0.5);
 }
-.classic-modal .button-holder :last-child {
+.classic-modal .button-holder > button:last-child {
   background-color: rgba(230, 121, 121, 0.3);
 }
-.classic-modal .button-holder :last-child:hover {
+.classic-modal .button-holder > button:last-child:hover {
   background-color: rgba(255, 0, 0, 0.5);
   border: rgba(255, 0, 0, 0.5);
 }
