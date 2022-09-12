@@ -1,4 +1,4 @@
-import setStyles from "./setStyles.js";
+import { Styles } from "./Styles.js";
 
 export default function createElement(element) {
     const newElement = document.createElement(element.tag);
@@ -10,7 +10,7 @@ export default function createElement(element) {
 
     attributes.keys.forEach((key, index) => newElement.setAttribute(key, attributes.values[index]));
 
-    if(element.style) setStyles(newElement, element.style);
+    if(element.style) Styles.set(newElement, element.style);
 
     if(element.innerText) newElement.innerText = element.innerText;
     if(element.innerHTML) newElement.innerHTML = element.innerHTML;

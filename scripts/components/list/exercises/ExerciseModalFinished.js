@@ -40,6 +40,8 @@ export default function ExerciseModalFinished(componentProps) {
 
     exerciseModalTitle.appendChild(activeExerciseClone);
 
+    const overviewHolder = [...finishedHolder.children][1];
+
     const reviewButton = document.querySelector(".finished-holder button");
 
     reviewButton.onclick = () => {

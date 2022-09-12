@@ -14,7 +14,11 @@ export class Task {
         this.tasks = randomArray(exercise.tasks, exercise.numberOfTasks);
         this.taskNumber = 0;
         this.currentTask = this.tasks[this.taskNumber];
+
         this.answer = "";
+        this.defaultXP = 10;
+        this.score = { xp: 0, mistakes: 0 };
+
         this.submitted = false;
         this.results = [];
 
@@ -82,6 +86,9 @@ export class Task {
 
     startNew(e) {
         if(e?.type === "keydown" && e?.key !== "Enter") return;
+
+        const { taskInfoButton } = this.elements;
+        taskInfoButton.style.display = "";
         
         if(this.tasks.length - 1 === this.taskNumber) {
             this.taskLives.classList.remove("active-task-lives");
@@ -106,7 +113,7 @@ export class Task {
                 this.taskProgressBarHolder.remove();
                 this.taskElement.remove();
                 
-                Component.create("ExerciseModalFinished", { exercise: this.exercise, results: this.results, appendTo: this.exerciseModal });
+                Component.create("ExerciseModalFinished", { exercise: this.exercise, results: {...this.results, ...this.score}, appendTo: this.exerciseModal });
             }
         }, 300);
     }
@@ -158,27 +165,13 @@ export class Task {
                 const exerciseModalContent = Component.create("ExerciseModalContent", {
                     exercise: this.exercise,
                     appendTo: this.exerciseModal,
-                    style: { opacity: "0", left: "20px" }
+                    style: { opacity: "0", left: "20px" },
+                    titleStyle: { opacity: "0", top: "-10px" }
                 });
-
-                const exerciseModalTitle = document.querySelector(".exercise-modal-title");
-                const exerciseModalDivider = document.querySelector(".divider");
-
-                exerciseModalTitle.style.opacity = "0";
-                exerciseModalTitle.style.top = "-10px";
-
-                exerciseModalDivider.style.opacity = "0";
-                exerciseModalDivider.style.top = "-10px";
 
                 setTimeout(() => {
                     exerciseModalContent.style.opacity = "";
                     exerciseModalContent.style.left = "";
-
-                    exerciseModalTitle.style.opacity = "";
-                    exerciseModalTitle.style.top = "";
-
-                    exerciseModalDivider.style.opacity = "";
-                    exerciseModalDivider.style.top = "";
                 }, 300);
             }
         }, 300);
@@ -241,6 +234,12 @@ export class Task {
 
         this.submitted = true;
 
+        const scoreScheme = isCorrect
+            ? { xp: this.currentTask.xp ? this.currentTask.xp : this.exercise.defaultXP ? this.exercise.defaultXP : this.defaultXP }
+        : { mistakes: this.score.mistakes++ };
+
+        this.score = {...this.score, ...scoreScheme};
+
         this.progressBar.value += this.progressBar.increase;
 
         progressBarLine.style.width = `${this.progressBar.value}%`;
@@ -259,18 +258,6 @@ export class Task {
             if(this.progressBar.value < 100) progressBarLine.style.backgroundColor = "";
             progressBarLine.style.boxShadow = "";
         }, 300);
-
-        if(!isCorrect) {
-            this.currentLives--;
-            this.updateLives();
-
-            if(this.currentLives === 0) return Component.create("ClassicModal", {
-                text: "You have no more lives.",
-                buttons: ["try again", "cancel"],
-                functions: { tryAgain: this.startNew, cancel: this.cancel },
-                appendTo: this.exerciseModal
-            });
-        }
         
         checkButton.style.bottom = "-100px";
         
@@ -299,6 +286,22 @@ export class Task {
 
         const validText = isCorrect ? text.correct : text.incorrect;
         taskInfoTextP.innerHTML = getText();
+
+        if(!isCorrect) {
+            this.currentLives--;
+            this.updateLives();
+
+            if(this.currentLives === 0) {
+                taskInfoButton.style.display = "none";
+                
+                return Component.create("ClassicModal", {
+                    text: "You have no more lives.",
+                    buttons: ["try again", "cancel"],
+                    functions: { tryAgain: this.startNew, cancel: this.cancel },
+                    appendTo: this.exerciseModal
+                });
+            }
+        }
 
         const taskResult = {
             title: currentTask.title,

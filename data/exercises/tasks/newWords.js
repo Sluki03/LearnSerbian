@@ -4,6 +4,7 @@ export const newWords = [
         title: "How to say \"color\" in Serbian?",
         acceptableAnswers: ["boja"],
         options: ["čemu", "to", "nešto", "boja"],
+        xp: 5,
         explanation: `
             #Reason#
             Why the answer is: **boja**?<br />
@@ -15,14 +16,16 @@ export const newWords = [
         type: "multipleChoice",
         title: "How to say \"dog\" in Serbian?",
         acceptableAnswers: ["pas"],
-        options: ["ae", "videćemo", "pas", "jako"]
+        options: ["ae", "videćemo", "pas", "jako"],
+        xp: 2
     },
 
     {
         type: "multipleChoice",
         title: "What is the translation of \"čemu to\"?",
         acceptableAnswers: ["why that"],
-        options: ["why that", "I don't know", "maybe", "tomorrow"]
+        options: ["why that", "I don't know", "maybe", "tomorrow"],
+        xp: 1
     },
 
     {

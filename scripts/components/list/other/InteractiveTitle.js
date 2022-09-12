@@ -2,7 +2,7 @@ import createElement from "../../../functions/createElement.js";
 
 export default function InteractiveTitle(componentProps) {
     const { builtIn } = componentProps;
-    const { title, appendTo } = componentProps.params;
+    const { title, renderDivider, appendTo } = componentProps.params;
 
     const interactiveTitle = builtIn ? builtIn : createElement({
         tag: "div",
@@ -13,6 +13,12 @@ export default function InteractiveTitle(componentProps) {
     for(let i = 0; i < 3; i++) createElement({
         tag: "span",
         innerText: title,
+        appendTo: interactiveTitle
+    });
+
+    if(renderDivider) createElement({
+        tag: "div",
+        attributes: { class: "divider" },
         appendTo: interactiveTitle
     });
 

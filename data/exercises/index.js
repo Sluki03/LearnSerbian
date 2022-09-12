@@ -22,7 +22,8 @@ export const exercisesData = [
         `,
         tasks: newWords,
         numberOfTasks: 5,
-        lives: 2
+        lives: 2,
+        defaultXP: 10
     },
 
     {
