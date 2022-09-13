@@ -1,7 +1,7 @@
 import { Component } from "../../Component.js";
 
 export default function ExerciseModalFinished(componentProps) {
-    const { exercise, results, appendTo } = componentProps.params;
+    const { exercise, results, score, appendTo } = componentProps.params;
 
     const exerciseModalFinished = document.querySelector("[data-template='exercise-modal-finished']").content.firstElementChild.cloneNode(true);
     appendTo.appendChild(exerciseModalFinished);
@@ -40,7 +40,19 @@ export default function ExerciseModalFinished(componentProps) {
 
     exerciseModalTitle.appendChild(activeExerciseClone);
 
-    const overviewHolder = [...finishedHolder.children][1];
+    const overviewBlockStrong = document.querySelectorAll(".overview-block strong");
+    const scorePropOrder = ["xp", "correct", "mistakes"];
+    const suffix = [" XP", "%"];
+
+    overviewBlockStrong.forEach((strong, index) => {
+        let scoreValue;
+
+        Object.keys(score).forEach((key, scoreIndex) => {
+            if(scorePropOrder[index] === key) scoreValue = Object.values(score)[scoreIndex];
+        });
+
+        strong.innerText = scoreValue + (suffix[index] ? suffix[index] : "");
+    });
 
     const reviewButton = document.querySelector(".finished-holder button");
 
@@ -61,7 +73,7 @@ export default function ExerciseModalFinished(componentProps) {
 
             exerciseModalFinished.remove();
 
-            Component.create("ExerciseModalReview", { exercise, results, appendTo });
+            Component.create("ExerciseModalReview", { exercise, results, score, appendTo });
         }, 300);
     }
 
@@ -70,6 +82,9 @@ export default function ExerciseModalFinished(componentProps) {
         continueButton.style.bottom = "-100px";
 
         setTimeout(() => {
+            exerciseModalTitle.remove();
+            exerciseModalDivider.remove();
+            
             exerciseModalFinished.remove();
             
             const exerciseModalContent = Component.create("ExerciseModalContent", {

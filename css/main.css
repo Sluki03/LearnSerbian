@@ -495,7 +495,7 @@ main .exercise-modal .task-progress-bar-holder .task-progress-bar {
   height: 25px;
   width: 100%;
   background-color: white;
-  border: 1px solid black;
+  border: 1px solid rgb(200, 200, 200);
   border-radius: 20px;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
   position: relative;
@@ -1405,6 +1405,7 @@ nav .interactive-title:hover span:last-child {
 }
 nav a {
   text-decoration: none;
+  cursor: pointer;
 }
 nav a .interactive-title {
   margin-left: 10px;

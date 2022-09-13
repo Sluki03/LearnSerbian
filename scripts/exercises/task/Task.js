@@ -4,6 +4,7 @@ import { Convert } from "../../functions/Convert.js";
 import { EventParams } from "../../functions/EventParams.js";
 import createElement from "../../functions/createElement.js";
 import randomArray from "../../functions/randomArray.js";
+import percentage from "../../functions/percentage.js";
 
 export class Task {
     constructor(taskElement, exercise) {
@@ -36,6 +37,7 @@ export class Task {
         this.clearTaskElements = this.clearTaskElements.bind(this);
         this.check = this.check.bind(this);
         this.afterCheck = this.afterCheck.bind(this);
+        this.calculateScore = this.calculateScore.bind(this);
         this.answerChanged = this.answerChanged.bind(this);
     }
 
@@ -113,7 +115,12 @@ export class Task {
                 this.taskProgressBarHolder.remove();
                 this.taskElement.remove();
                 
-                Component.create("ExerciseModalFinished", { exercise: this.exercise, results: {...this.results, ...this.score}, appendTo: this.exerciseModal });
+                Component.create("ExerciseModalFinished", {
+                    exercise: this.exercise,
+                    results: this.results,
+                    score: {...this.score, correct: percentage(this.exercise.numberOfTasks, this.exercise.numberOfTasks - this.score.mistakes)},
+                    appendTo: this.exerciseModal
+                });
             }
         }, 300);
     }
@@ -234,11 +241,7 @@ export class Task {
 
         this.submitted = true;
 
-        const scoreScheme = isCorrect
-            ? { xp: this.currentTask.xp ? this.currentTask.xp : this.exercise.defaultXP ? this.exercise.defaultXP : this.defaultXP }
-        : { mistakes: this.score.mistakes++ };
-
-        this.score = {...this.score, ...scoreScheme};
+        this.calculateScore(isCorrect);
 
         this.progressBar.value += this.progressBar.increase;
 
@@ -348,6 +351,23 @@ export class Task {
                 break;
             default: ;
         }
+    }
+
+    calculateScore(isCorrect) {
+        const scoreScheme = this.score;
+
+        if(isCorrect) {
+            let xpSource = this.defaultXP;
+
+            if(this.exercise.defaultXP) xpSource = this.exercise.defaultXP;
+            if(this.currentTask.xp) xpSource = this.currentTask.xp;
+
+            scoreScheme.xp += xpSource;
+        }
+
+        else scoreScheme.mistakes++;
+
+        this.score = scoreScheme;
     }
 
     answerChanged(newAnswer) {

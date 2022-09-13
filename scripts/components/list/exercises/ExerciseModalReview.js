@@ -3,7 +3,7 @@ import createElement from "../../../functions/createElement.js";
 import markup from "../../../functions/markup.js";
 
 export default function ExerciseModalReview(componentProps) {
-    const { exercise, results, appendTo } = componentProps.params;
+    const { exercise, results, score, appendTo } = componentProps.params;
 
     const exerciseModalReview = document.querySelector("[data-template='exercise-modal-review']").content.firstElementChild.cloneNode(true);
     appendTo.appendChild(exerciseModalReview);
@@ -117,7 +117,7 @@ export default function ExerciseModalReview(componentProps) {
 
         setTimeout(() => {
             exerciseModalReview.remove();
-            Component.create("ExerciseModalFinished", { exercise, results, appendTo });
+            Component.create("ExerciseModalFinished", { exercise, results, score, appendTo });
             
             Component.update(updatedModalOptions, {
                 options: null,
