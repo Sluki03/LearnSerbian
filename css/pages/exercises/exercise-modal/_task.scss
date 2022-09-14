@@ -11,6 +11,7 @@
         height: 35px;
         width: 35px;
         object-fit: contain;
+        filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.5));
     }
 }
 
@@ -25,6 +26,7 @@
     opacity: 0;
     position: relative;
     top: 0;
+    transition: 300ms;
     
     .task-progress-bar {
         @include add-flex;
@@ -96,6 +98,7 @@
             margin: 20px 0;
 
             .multiple-choice-button {
+                @include add-flex(column);
                 height: 100%;
                 width: 100%;
                 max-width: 330px;
@@ -125,10 +128,19 @@
                     border: 1px solid $defDarkGrey;
                     border-radius: 50%;
                     position: absolute;
-                    top: 50%;
                     left: 5px;
                     padding: 5px;
-                    transform: translateY(-50%);
+                }
+
+                img {
+                    height: 140px;
+                    width: 140px;
+                    object-fit: contain;
+                }
+
+                p {
+                    color: $defDarkGrey;
+                    font-size: set-size(lg);
                 }
             }
 
@@ -157,6 +169,50 @@
                 &:hover {
                     border: 1px solid $defDarkGrey;
                     box-shadow: none;
+                }
+            }
+
+            .multiple-choice-images-button {
+                width: auto;
+            }
+        }
+
+        .multiple-choice-images-holder {
+            width: auto;
+        }
+
+        .translate-holder {
+            @include add-flex(column);
+            width: 80%;
+            gap: 20px;
+            margin: 15px 0;
+
+            strong {
+                color: $defDarkGrey;
+                font-size: set-size(lg);
+                border: 1px solid $defDarkGrey;
+                padding: 5px;
+            }
+
+            textarea {
+                width: 80%;
+                color: $defDarkGrey;
+                font-size: set-size(lg);
+                border: 3px dashed $defGrey;
+                border-radius: 15px;
+                outline: none;
+                resize: none;
+                padding: 5px 10px;
+                transition: 300ms;
+
+                &:hover {
+                    border: 3px solid $defGrey;
+                }
+
+                &:focus {
+                    border: 3px solid $defGrey;
+                    border-radius: 20px;
+                    box-shadow: $defLighterShadow;
                 }
             }
         }

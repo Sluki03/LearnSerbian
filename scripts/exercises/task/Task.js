@@ -12,7 +12,8 @@ export class Task {
         this.exerciseModal = document.querySelector(".exercise-modal");
         
         this.taskElement = taskElement;
-        this.tasks = randomArray(exercise.tasks, exercise.numberOfTasks);
+        this.numberOfTasks = exercise.numberOfTasks || exercise.tasks.length;
+        this.tasks = randomArray(exercise.tasks, this.numberOfTasks);
         this.taskNumber = 0;
         this.currentTask = this.tasks[this.taskNumber];
 
@@ -54,16 +55,19 @@ export class Task {
         this.taskNumber = 0;
         this.currentTask = this.tasks[this.taskNumber];
         this.answer = "";
+        this.answerChanged(this.answer);
         this.submitted = false;
         this.results = [];
+        this.score = { xp: 0, mistakes: 0 };
         this.currentLives = this.exercise.lives;
         this.progressBar = { value: 0, increase: 100 / this.tasks.length, inRow: 0 };
         this.elements = {};
-
+        
         const [progressBar] = [...this.taskProgressBarHolder.children];
         const [progressBarLine] = [...progressBar.children];
 
         progressBarLine.style.width = "";
+        progressBarLine.style.boxShadow = "none";
     }
     
     start() {
@@ -88,11 +92,8 @@ export class Task {
 
     startNew(e) {
         if(e?.type === "keydown" && e?.key !== "Enter") return;
-
-        const { taskInfoButton } = this.elements;
-        taskInfoButton.style.display = "";
         
-        if(this.tasks.length - 1 === this.taskNumber) {
+        if(this.tasks.length - 1 === this.taskNumber && this.currentLives > 0) {
             this.taskLives.classList.remove("active-task-lives");
             this.taskProgressBarHolder.classList.remove("active-task-progress-bar-holder");
         }
@@ -100,6 +101,9 @@ export class Task {
         this.clearTaskElements(false);
 
         setTimeout(() => {
+            const { taskInfoButton } = this.elements;
+            taskInfoButton.style.display = "";
+            
             if(this.currentLives === 0) {
                 this.reset();
                 this.start();
@@ -118,7 +122,7 @@ export class Task {
                 Component.create("ExerciseModalFinished", {
                     exercise: this.exercise,
                     results: this.results,
-                    score: {...this.score, correct: percentage(this.exercise.numberOfTasks, this.exercise.numberOfTasks - this.score.mistakes)},
+                    score: {...this.score, correct: parseInt(percentage(this.numberOfTasks, this.numberOfTasks - this.score.mistakes))},
                     appendTo: this.exerciseModal
                 });
             }
@@ -290,6 +294,9 @@ export class Task {
         const validText = isCorrect ? text.correct : text.incorrect;
         taskInfoTextP.innerHTML = getText();
 
+        const audio = new Audio(`../../../sfx/${isCorrect ? "correct" : "wrong"}.mp3`);
+        audio.play();
+
         if(!isCorrect) {
             this.currentLives--;
             this.updateLives();
@@ -311,6 +318,7 @@ export class Task {
             acceptableAnswers: currentTask.acceptableAnswers,
             userAnswer: this.answer,
             isCorrect: currentTask.acceptableAnswers.indexOf(this.answer) > -1,
+            xp: currentTask.xp || this.exercise.defaultXP || this.defaultXP,
             explanation: currentTask.explanation || null
         };
 
@@ -357,11 +365,7 @@ export class Task {
         const scoreScheme = this.score;
 
         if(isCorrect) {
-            let xpSource = this.defaultXP;
-
-            if(this.exercise.defaultXP) xpSource = this.exercise.defaultXP;
-            if(this.currentTask.xp) xpSource = this.currentTask.xp;
-
+            let xpSource = this.currentTask.xp || this.exercise.defaultXP || this.defaultXP;
             scoreScheme.xp += xpSource;
         }
 
@@ -382,13 +386,14 @@ export class Task {
     construct() {
         const { answerChanged } = this;
         const { taskHolder } = this.elements;
-        const { setActiveButton } = TaskFunctions;
+        const { setActiveButton, getButtonImage } = TaskFunctions;
         
         switch(this.currentTask.type) {
-            case "multipleChoice": {
+            case "multipleChoice":
+            case "multipleChoiceImages": {
                 const multipleChoiceHolder = createElement({
                     tag: "div",
-                    attributes: { class: "multiple-choice-holder" },
+                    attributes: { class: `multiple-choice-holder ${this.currentTask.type === "multipleChoiceImages" ? "multiple-choice-images-holder" : ""}` },
                     appendTo: taskHolder
                 });
 
@@ -397,23 +402,70 @@ export class Task {
                 for(let i = 0; i < randomOptions.length; i++) {
                     const multipleChoiceButton = createElement({
                         tag: "button",
-                        attributes: { class: "multiple-choice-button", id: `multiple-choice-button-${i + 1}` },
-                        innerText: randomOptions[i],
+                        attributes: {
+                            class: `multiple-choice-button ${this.currentTask.type === "multipleChoiceImages" ? "multiple-choice-images-button" : ""}`,
+                            id: `multiple-choice-button-${i + 1}`
+                        },
+                        innerText: this.currentTask.type === "multipleChoice" ? randomOptions[i] : "",
                         events: [{ on: "click", call: setActiveButton }],
                         appendTo: multipleChoiceHolder
                     });
 
-                    createElement({
+                    if(this.currentTask.type === "multipleChoice") createElement({
                         tag: "span",
                         attributes: { class: "multiple-choice-span" },
                         innerText: i + 1,
                         appendTo: multipleChoiceButton
                     });
+
+                    else {
+                        createElement({
+                            tag: "img",
+                            attributes: {
+                                src: getButtonImage(this.currentTask.images, randomOptions[i]),
+                                alt: randomOptions[i]
+                            },
+                            appendTo: multipleChoiceButton
+                        });
+
+                        createElement({
+                            tag: "p",
+                            innerText: randomOptions[i],
+                            appendTo: multipleChoiceButton
+                        });
+                    }
                 }
 
                 EventParams.set("setActiveButton", { randomOptions, answerChanged });
                 window.addEventListener("keydown", setActiveButton);
                 
+                break;
+            }
+
+            case "translate": {
+                const translateHolder = createElement({
+                    tag: "div",
+                    attributes: { class: "translate-holder" },
+                    appendTo: taskHolder
+                });
+
+                createElement({
+                    tag: "strong",
+                    innerText: this.currentTask.text,
+                    appendTo: translateHolder
+                });
+
+                createElement({
+                    tag: "textarea",
+                    attributes: {
+                        rows: 4,
+                        cols: 2,
+                        type: "text",
+                        placeholder: "Write in Serbian...",
+                    },
+                    appendTo: translateHolder
+                });
+
                 break;
             }
             

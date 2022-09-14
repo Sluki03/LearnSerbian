@@ -24,7 +24,7 @@ export default function ExerciseModalReview(componentProps) {
         reviewHolder.appendChild(reviewTask);
 
         const [reviewTaskHolder, taskExplanation] = [...reviewTask.children];
-        const [reviewTaskInfo] = [...reviewTaskHolder.children];
+        const [reviewTaskInfo, reviewTaskStrong] = [...reviewTaskHolder.children];
 
         const green = { normal: "#059c20", light: "#07db2d", lighter: "#00ff2e" };
         const red = { normal: "#bd1330", light: "#d91435", lighter: "#f20707" };
@@ -51,7 +51,7 @@ export default function ExerciseModalReview(componentProps) {
         if(result.isCorrect) {
             createElement({
                 tag: "p",
-                innerHTML: `Answer: <span>${result.userAnswer}</span>.`,
+                innerHTML: `${result.acceptableAnswers.length > 1 ? "Your answer" : "Answer"}: <span>${result.userAnswer}</span>.`,
                 appendTo: infoAnswers
             });
             
@@ -61,7 +61,7 @@ export default function ExerciseModalReview(componentProps) {
 
                 createElement({
                     tag: "p",
-                    innerHTML: `Answer: <span>${otherAnswers[Math.floor(Math.random() * otherAnswers.length)]}</span>.`,
+                    innerHTML: `Another correct answer: <span>${otherAnswers[Math.floor(Math.random() * otherAnswers.length)]}</span>.`,
                     appendTo: infoAnswers
                 });
             }
@@ -81,6 +81,8 @@ export default function ExerciseModalReview(componentProps) {
                 innerHTML: `Your answer: <span>${result.userAnswer}</span>.`,
                 appendTo: infoAnswers
             });
+
+            reviewTaskStrong.remove();
         }
 
         if(result.explanation) {

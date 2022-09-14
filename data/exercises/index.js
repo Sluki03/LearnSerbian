@@ -1,7 +1,8 @@
 import { newWords } from "./tasks/newWords.js";
+import { test1 } from "./tasks/test1.js";
 
 // difficulty options: easy, medium, hard
-// task types: multipleChoice
+// task types: multipleChoice, multipleChoiceImages, translate
 
 export const exercisesData = [
     {
@@ -28,7 +29,11 @@ export const exercisesData = [
 
     {
         name: "Test 1",
-        difficulty: "hard"
+        difficulty: "hard",
+        tips: "#Multiple choice images preview.#",
+        tasks: test1,
+        numberOfTasks: 3,
+        lives: 1
     },
 
     {

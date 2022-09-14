@@ -61,5 +61,22 @@ export const newWords = [
         title: "How to say \"T-Shirt\" in Serbian?",
         acceptableAnswers: ["majica"],
         options: ["majica", "odelo", "pas", "krokodil"]
+    },
+
+    {
+        type: "multipleChoiceImages",
+        title: "Translate the word \"dog\".",
+        acceptableAnswers: ["pas"],
+        options: ["macka", "pas", "ptica", "zec"],
+        images: {
+            macka: "../../images/exercises/cat.png",
+            pas: "../../images/exercises/dog.png",
+            ptica: "../../images/exercises/bird.png",
+            zec: "../../images/exercises/rabbit.png"
+        },
+        xp: 15,
+        explanation: `
+            **Pas** is a **dog**.
+        `
     }
 ];

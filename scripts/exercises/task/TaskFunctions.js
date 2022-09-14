@@ -1,6 +1,6 @@
 import { EventParams } from "../../functions/EventParams.js";
 
-export const TaskFunctions = { setActiveButton };
+export const TaskFunctions = { setActiveButton, getButtonImage };
 
 function setActiveButton(e) {
     e.preventDefault();
@@ -17,7 +17,7 @@ function setActiveButton(e) {
 
     const id = e.type === "keydown" ? parseInt(e.key) : e.target.id.split("-")[3];
     
-    if(isNaN(id) || id > randomOptions) return;
+    if(isNaN(id) || id > randomOptions.length) return;
     
     const allButtons = document.querySelectorAll(".multiple-choice-button");
     const buttonId = `multiple-choice-button-${id}`;
@@ -30,4 +30,14 @@ function setActiveButton(e) {
             answerChanged(randomOptions[id - 1]);
         }
     });
+}
+
+function getButtonImage(images, option) {
+    let result;
+
+    Object.keys(images).forEach((image, index) => {
+        if(image === option) result = Object.values(images)[index];
+    });
+
+    return result;
 }
