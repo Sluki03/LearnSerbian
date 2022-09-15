@@ -61,7 +61,7 @@ export default function ExerciseModalReview(componentProps) {
 
                 createElement({
                     tag: "p",
-                    innerHTML: `Another correct answer: <span>${otherAnswers[Math.floor(Math.random() * otherAnswers.length)]}</span>.`,
+                    innerHTML: `Also correct: <span>${otherAnswers[Math.floor(Math.random() * otherAnswers.length)]}</span>.`,
                     appendTo: infoAnswers
                 });
             }

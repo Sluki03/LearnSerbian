@@ -5,6 +5,7 @@ import { EventParams } from "../../functions/EventParams.js";
 import createElement from "../../functions/createElement.js";
 import randomArray from "../../functions/randomArray.js";
 import percentage from "../../functions/percentage.js";
+import breakText from "../../functions/breakText.js";
 
 export class Task {
     constructor(taskElement, exercise) {
@@ -37,6 +38,7 @@ export class Task {
         this.cancel = this.cancel.bind(this);
         this.clearTaskElements = this.clearTaskElements.bind(this);
         this.check = this.check.bind(this);
+        this.isCorrect = this.isCorrect.bind(this);
         this.afterCheck = this.afterCheck.bind(this);
         this.calculateScore = this.calculateScore.bind(this);
         this.answerChanged = this.answerChanged.bind(this);
@@ -238,7 +240,7 @@ export class Task {
 
         window.removeEventListener("keydown", this.check);
 
-        const isCorrect = currentTask.acceptableAnswers.indexOf(this.answer) > -1;
+        const isCorrect = this.isCorrect();
 
         if(isCorrect) this.progressBar.inRow++;
         else this.progressBar.inRow = 0;
@@ -288,7 +290,11 @@ export class Task {
 
         const text = {
             correct: {},
-            incorrect: { multipleChoice: `Correct answer: <span>${randomCorrectAnswer}</span>.` }
+            
+            incorrect: {
+                multipleChoice: `Correct answer: <span>${randomCorrectAnswer}</span>.`,
+                multipleChoiceImages: `Correct answer: <span>${randomCorrectAnswer}</span>.`
+            }
         };
 
         const validText = isCorrect ? text.correct : text.incorrect;
@@ -344,6 +350,32 @@ export class Task {
 
             return result;
         }
+    }
+
+    isCorrect() {
+        let result;
+        
+        switch(this.currentTask.type) {
+            case "multipleChoice":
+            case "multipleChoiceImages": {
+                result = this.currentTask.acceptableAnswers.indexOf(this.answer) > -1;
+                break;
+            }
+
+            case "translate": {
+                let correctStatus = false;
+
+                this.currentTask.acceptableAnswers.forEach(answer => {
+                    if(breakText(this.answer, { join: true }) === breakText(answer, { join: true })) correctStatus = true;
+                });
+
+                result = correctStatus;
+
+                break;
+            }
+        }
+
+        return result;
     }
 
     afterCheck() {
@@ -448,21 +480,36 @@ export class Task {
                     attributes: { class: "translate-holder" },
                     appendTo: taskHolder
                 });
-
-                createElement({
-                    tag: "strong",
-                    innerText: this.currentTask.text,
+                
+                const translateHolderP = createElement({
+                    tag: "p",
                     appendTo: translateHolder
                 });
 
-                createElement({
+                const brokenText = breakText(this.currentTask.text, { lowerCase: false });
+                let updatedText = this.currentTask.text;
+                
+                brokenText.forEach(word => {
+                    const allTranslations = Object.keys(this.currentTask.translation);
+                    const translationIndex = allTranslations.indexOf(word.toLowerCase());
+
+                    if(translationIndex > -1) updatedText = updatedText.replace(word, `<span>${word}</span>`);
+                    translateHolderP.innerHTML = updatedText;
+                });
+
+                const translateHolderTextarea = createElement({
                     tag: "textarea",
                     attributes: {
                         rows: 4,
                         cols: 2,
                         type: "text",
-                        placeholder: "Write in Serbian...",
+                        placeholder: "Write the translation...",
+                        maxLength: 200
                     },
+                    events: [
+                        { on: "input", call: () => answerChanged(translateHolderTextarea.value) },
+                        { on: "keydown", call: e => { if(e.key === "Enter") e.preventDefault(); } }
+                    ],
                     appendTo: translateHolder
                 });
 

@@ -656,11 +656,17 @@ main .exercise-modal .exercise-modal-task .task-holder .translate-holder {
   gap: 20px;
   margin: 15px 0;
 }
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder strong {
+main .exercise-modal .exercise-modal-task .task-holder .translate-holder p {
   color: #5e5c5c;
   font-size: 25px;
   border: 1px solid #5e5c5c;
-  padding: 5px;
+  border-radius: 20px;
+  position: relative;
+  padding: 10px 15px;
+  overflow: hidden;
+}
+main .exercise-modal .exercise-modal-task .task-holder .translate-holder p span {
+  border-bottom: 3px dotted #5e5c5c;
 }
 main .exercise-modal .exercise-modal-task .task-holder .translate-holder textarea {
   width: 80%;

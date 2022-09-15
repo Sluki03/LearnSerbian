@@ -187,11 +187,18 @@
             gap: 20px;
             margin: 15px 0;
 
-            strong {
+            p {
                 color: $defDarkGrey;
                 font-size: set-size(lg);
                 border: 1px solid $defDarkGrey;
-                padding: 5px;
+                border-radius: 20px;
+                position: relative;
+                padding: 10px 15px;
+                overflow: hidden;
+
+                span {
+                    border-bottom: 3px dotted $defDarkGrey;
+                }
             }
 
             textarea {

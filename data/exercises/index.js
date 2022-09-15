@@ -33,7 +33,7 @@ export const exercisesData = [
         tips: "#Multiple choice images preview.#",
         tasks: test1,
         numberOfTasks: 3,
-        lives: 1
+        lives: 5
     },
 
     {
