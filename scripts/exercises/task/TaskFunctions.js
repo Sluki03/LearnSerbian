@@ -2,7 +2,7 @@ import { EventParams } from "../../functions/EventParams.js";
 import createElement from "../../functions/createElement.js";
 import breakText from "../../functions/breakText.js";
 
-export const TaskFunctions = { setActiveButton, getButtonImage, setTranslatableWords };
+export const TaskFunctions = { setActiveButton, getButtonImage, setTranslatableWords, textareaValueChanged };
 
 function setActiveButton(e) {
     e.preventDefault();
@@ -122,4 +122,18 @@ function setTranslatableWords(parent, text, translation) {
 
         return result;
     }
+}
+
+function textareaValueChanged(newValue) {
+    const buttonHolder = document.querySelector(".translate-holder .button-holder");
+    const [buttonHolderLetters, buttonHolderArrows] = [...buttonHolder.children];
+
+    [...buttonHolderLetters.children].forEach(button => {
+        if(newValue) button.innerText = button.innerText.toLowerCase();
+        else button.innerText = button.innerText.toUpperCase();
+    });
+
+    const arrowSymbols = ["🡡", "🡣"];
+
+    buttonHolderArrows.children[0].innerText = arrowSymbols[newValue ? 0 : 1];
 }

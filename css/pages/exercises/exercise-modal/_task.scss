@@ -258,6 +258,42 @@
                     box-shadow: $defLightShadow;
                 }
             }
+
+            .button-holder {
+                @include add-flex(row, flex-start);
+                gap: 20px;
+                width: 80%;
+
+                div {
+                    @include add-flex;
+                    gap: 5px;
+
+                    button {
+                        height: 35px;
+                        width: 35px;
+                        color: $defDarkGrey;
+                        font-size: set-size(sm);
+                        background-color: transparent;
+                        border: 1px solid $defGrey;
+                        border-radius: 5px;
+                        cursor: pointer;
+                        position: relative;
+                        top: 0;
+                        padding: 5px 10px;
+                        transition: 300ms;
+
+                        &:hover {
+                            border: 1px solid $defDarkGrey;
+                            top: -5px;
+                            box-shadow: $defLighterShadow;
+                        }
+                    }
+                }
+
+                .button-holder-letters {
+                    width: 200px;
+                }
+            }
         }
     }
 
