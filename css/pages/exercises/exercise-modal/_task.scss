@@ -187,17 +187,52 @@
             gap: 20px;
             margin: 15px 0;
 
-            p {
+            & > p {
                 color: $defDarkGrey;
                 font-size: set-size(lg);
                 border: 1px solid $defDarkGrey;
                 border-radius: 20px;
                 position: relative;
                 padding: 10px 15px;
-                overflow: hidden;
 
                 span {
-                    border-bottom: 3px dotted $defDarkGrey;
+                    border-bottom: 3px dotted $defGrey;
+                    cursor: pointer;
+                    position: relative;
+                    transition: 300ms;
+
+                    .word-translation-holder {
+                        @include add-flex;
+                        background-color: $defDarkGrey;
+                        border-top-left-radius: 10px;
+                        border-top-right-radius: 10px;
+                        clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 75% 90%, 50% 100%, 25% 90%, 0 90%);
+                        opacity: 0;
+                        position: absolute;
+                        top: calc(-100% - 15px);
+                        left: 50%;
+                        padding: 3px;
+                        transform: translateX(-50%);
+                        transition: 300ms;
+                        
+                        .word-translation {
+                            background-color: white;
+                            border-top-left-radius: 10px;
+                            border-top-right-radius: 10px;
+                            clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 75% 90%, 50% 100%, 25% 90%, 0 90%);
+
+                            p {
+                                color: $defDarkGrey;
+                                font-size: set-size(md);
+                                padding: 5px;
+                            }
+                        }
+                    }
+
+                    .active-word-translation-holder {
+                        opacity: 1;
+                        top: calc(-100% - 8px);
+                    }
                 }
             }
 
@@ -206,20 +241,21 @@
                 color: $defDarkGrey;
                 font-size: set-size(lg);
                 border: 3px dashed $defGrey;
-                border-radius: 15px;
+                border-radius: 20px;
+                box-shadow: $defLighterShadow;
                 outline: none;
                 resize: none;
-                padding: 5px 10px;
+                padding: 10px 15px;
                 transition: 300ms;
 
                 &:hover {
-                    border: 3px solid $defGrey;
+                    border: 3px dashed $defDarkGrey;
                 }
 
                 &:focus {
-                    border: 3px solid $defGrey;
+                    border: 3px solid $defDarkGrey;
                     border-radius: 20px;
-                    box-shadow: $defLighterShadow;
+                    box-shadow: $defLightShadow;
                 }
             }
         }

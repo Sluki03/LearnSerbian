@@ -418,7 +418,7 @@ export class Task {
     construct() {
         const { answerChanged } = this;
         const { taskHolder } = this.elements;
-        const { setActiveButton, getButtonImage } = TaskFunctions;
+        const { setActiveButton, getButtonImage, setTranslatableWords } = TaskFunctions;
         
         switch(this.currentTask.type) {
             case "multipleChoice":
@@ -486,16 +486,7 @@ export class Task {
                     appendTo: translateHolder
                 });
 
-                const brokenText = breakText(this.currentTask.text, { lowerCase: false });
-                let updatedText = this.currentTask.text;
-                
-                brokenText.forEach(word => {
-                    const allTranslations = Object.keys(this.currentTask.translation);
-                    const translationIndex = allTranslations.indexOf(word.toLowerCase());
-
-                    if(translationIndex > -1) updatedText = updatedText.replace(word, `<span>${word}</span>`);
-                    translateHolderP.innerHTML = updatedText;
-                });
+                setTranslatableWords(translateHolderP, this.currentTask.text, this.currentTask.translation);
 
                 const translateHolderTextarea = createElement({
                     tag: "textarea",

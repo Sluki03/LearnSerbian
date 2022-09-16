@@ -5,7 +5,7 @@ export default function breakText(text, options) {
         join: false
     };
 
-    const currentOptions = options ? options : defaultOptions;
+    const currentOptions = options ? {...defaultOptions, ...options} : defaultOptions;
     
     let brokenText = text.split(" ");
     const validText = [];

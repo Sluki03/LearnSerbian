@@ -1,6 +1,8 @@
 import { EventParams } from "../../functions/EventParams.js";
+import createElement from "../../functions/createElement.js";
+import breakText from "../../functions/breakText.js";
 
-export const TaskFunctions = { setActiveButton, getButtonImage };
+export const TaskFunctions = { setActiveButton, getButtonImage, setTranslatableWords };
 
 function setActiveButton(e) {
     e.preventDefault();
@@ -40,4 +42,84 @@ function getButtonImage(images, option) {
     });
 
     return result;
+}
+
+function setTranslatableWords(parent, text, translation) {
+    const brokenText = breakText(text, { lowerCase: false });
+    let updatedText = text;
+
+    const allTranslations = Object.keys(translation);
+
+    brokenText.forEach(word => {
+        const translationId = allTranslations.indexOf(word.toLowerCase());
+        if(translationId > -1) updatedText = updatedText.replace(word, `<span class="word word-${word.toLowerCase()}">${word}</span>`);
+    });
+
+    parent.innerHTML = updatedText;
+
+    let previousWord = "";
+
+    parent.onclick = e => {
+        if(!e.target.classList.contains("word")) return;
+        
+        const wordElement = e.target;
+        const word = wordElement.classList[1].split("-")[1];
+
+        const translatedWord = translate(word);
+
+        if(previousWord === translatedWord) return previousWord = "";
+        previousWord = translatedWord;
+
+        const translateHolderSpan = document.querySelector(`.translate-holder p .word-${word}`);
+        translateHolderSpan.style.borderBottom = "3px solid #5e5c5c";
+        
+        const wordTranslationHolder = createElement({
+            tag: "div",
+            attributes: { class: "word-translation-holder word-translation-element" },
+            appendTo: translateHolderSpan
+        });
+
+        const wordTranslation = createElement({
+            tag: "div",
+            attributes: { class: "word-translation word-translation-element" },
+            appendTo: wordTranslationHolder
+        });
+
+        createElement({
+            tag: "p",
+            attributes: { class: "word-translation-element" },
+            innerText: translatedWord,
+            appendTo: wordTranslation
+        });
+
+        let isOpened = false;
+
+        setTimeout(() => {
+            wordTranslationHolder.classList.add("active-word-translation-holder");
+            isOpened = true;
+        }, 100);
+
+        window.addEventListener("click", closeTranslationHolder);
+
+        function closeTranslationHolder(e) {
+            if(!isOpened || e.target.classList.contains("word-translation-element")) return;
+
+            translateHolderSpan.style.borderBottom = "";
+            
+            wordTranslationHolder.classList.remove("active-word-translation-holder");
+            setTimeout(() => { wordTranslationHolder.remove() }, 300);
+
+            window.removeEventListener("click", closeTranslationHolder);
+        }
+    }
+
+    function translate(word) {
+        let result = "";
+
+        Object.keys(translation).forEach((key, index) => {
+            if(key === word) result = Object.values(translation)[index]; 
+        });
+
+        return result;
+    }
 }

@@ -656,36 +656,73 @@ main .exercise-modal .exercise-modal-task .task-holder .translate-holder {
   gap: 20px;
   margin: 15px 0;
 }
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder p {
+main .exercise-modal .exercise-modal-task .task-holder .translate-holder > p {
   color: #5e5c5c;
   font-size: 25px;
   border: 1px solid #5e5c5c;
   border-radius: 20px;
   position: relative;
   padding: 10px 15px;
-  overflow: hidden;
 }
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder p span {
-  border-bottom: 3px dotted #5e5c5c;
+main .exercise-modal .exercise-modal-task .task-holder .translate-holder > p span {
+  border-bottom: 3px dotted rgba(200, 200, 200, 0.5);
+  cursor: pointer;
+  position: relative;
+  transition: 300ms;
+}
+main .exercise-modal .exercise-modal-task .task-holder .translate-holder > p span .word-translation-holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  background-color: #5e5c5c;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 75% 90%, 50% 100%, 25% 90%, 0 90%);
+          clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 75% 90%, 50% 100%, 25% 90%, 0 90%);
+  opacity: 0;
+  position: absolute;
+  top: calc(-100% - 15px);
+  left: 50%;
+  padding: 3px;
+  transform: translateX(-50%);
+  transition: 300ms;
+}
+main .exercise-modal .exercise-modal-task .task-holder .translate-holder > p span .word-translation-holder .word-translation {
+  background-color: white;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 75% 90%, 50% 100%, 25% 90%, 0 90%);
+          clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 75% 90%, 50% 100%, 25% 90%, 0 90%);
+}
+main .exercise-modal .exercise-modal-task .task-holder .translate-holder > p span .word-translation-holder .word-translation p {
+  color: #5e5c5c;
+  font-size: 20px;
+  padding: 5px;
+}
+main .exercise-modal .exercise-modal-task .task-holder .translate-holder > p span .active-word-translation-holder {
+  opacity: 1;
+  top: calc(-100% - 8px);
 }
 main .exercise-modal .exercise-modal-task .task-holder .translate-holder textarea {
   width: 80%;
   color: #5e5c5c;
   font-size: 25px;
   border: 3px dashed rgba(200, 200, 200, 0.5);
-  border-radius: 15px;
+  border-radius: 20px;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
   outline: none;
   resize: none;
-  padding: 5px 10px;
+  padding: 10px 15px;
   transition: 300ms;
 }
 main .exercise-modal .exercise-modal-task .task-holder .translate-holder textarea:hover {
-  border: 3px solid rgba(200, 200, 200, 0.5);
+  border: 3px dashed #5e5c5c;
 }
 main .exercise-modal .exercise-modal-task .task-holder .translate-holder textarea:focus {
-  border: 3px solid rgba(200, 200, 200, 0.5);
+  border: 3px solid #5e5c5c;
   border-radius: 20px;
-  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
 }
 main .exercise-modal .exercise-modal-task .flag-button {
   color: #144eba;
