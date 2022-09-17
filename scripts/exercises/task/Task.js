@@ -554,6 +554,9 @@ export class Task {
                 }
 
                 function changeCaseStatus() {
+                    const firstArrow = buttonHolderArrows.children[0];
+                    if(!firstArrow.classList.contains("locked-arrow")) firstArrow.classList.add("locked-arrow");
+                    
                     const firstButton = buttonHolderLetters.children[0].innerText;
                     const isUpperCase = firstButton === firstButton.toUpperCase();
 

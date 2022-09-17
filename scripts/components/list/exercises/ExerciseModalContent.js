@@ -43,7 +43,18 @@ export default function ExerciseModalContent(componentProps) {
     
     let isExerciseStarted = false;
     
-    contentButton.onclick = () => {
+    contentButton.onclick = startToTask;
+    window.addEventListener("keydown", startToTask);
+
+    if(appendTo.scrollHeight < window.innerHeight) exerciseModalContent.id = "extended-exercise-modal-content";
+    else exerciseModalContent.id = "";
+
+    return exerciseModalContent;
+
+    function startToTask(e) {
+        if(e.key !== "Enter" && e.type === "keydown") return;
+        window.removeEventListener("keydown", startToTask);
+        
         if(isExerciseStarted) return;
         isExerciseStarted = true;
         
@@ -67,19 +78,5 @@ export default function ExerciseModalContent(componentProps) {
                 Component.create("ExerciseModalTask", { exercise, appendTo });
             }, 300);
         }, buttonAnimation ? 300 : 0);
-    }
-
-    if(appendTo.scrollHeight < window.innerHeight) exerciseModalContent.id = "extended-exercise-modal-content";
-    else exerciseModalContent.id = "";
-
-    return exerciseModalContent;
-
-    function getDifficultyIndex() {
-        const difficultyRow = ["easy", "medium", "hard"];
-        
-        let index;
-        for(let i = 0; i < difficultyRow.length; i++) if(exercise.difficulty === difficultyRow[i]) index = i;
-
-        return index + 1;
     }
 }

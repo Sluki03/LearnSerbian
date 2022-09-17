@@ -9,7 +9,7 @@
     position: absolute;
     bottom: 40px;
     box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.3);
-    transition: 300ms;
+    transition: background-color 300ms;
 
     &:hover {
         background-color: rgb(220, 220, 220);

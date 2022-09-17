@@ -102,7 +102,10 @@ function setTranslatableWords(parent, text, translation) {
         window.addEventListener("click", closeTranslationHolder);
 
         function closeTranslationHolder(e) {
+            e.stopPropagation();
             if(!isOpened || e.target.classList.contains("word-translation-element")) return;
+
+            previousWord = "";
 
             translateHolderSpan.style.borderBottom = "";
             
@@ -128,12 +131,14 @@ function textareaValueChanged(newValue) {
     const buttonHolder = document.querySelector(".translate-holder .button-holder");
     const [buttonHolderLetters, buttonHolderArrows] = [...buttonHolder.children];
 
+    const firstArrow = buttonHolderArrows.children[0];
+    if(firstArrow.classList.contains("locked-arrow"))  return;
+
     [...buttonHolderLetters.children].forEach(button => {
         if(newValue) button.innerText = button.innerText.toLowerCase();
         else button.innerText = button.innerText.toUpperCase();
     });
 
     const arrowSymbols = ["🡡", "🡣"];
-
-    buttonHolderArrows.children[0].innerText = arrowSymbols[newValue ? 0 : 1];
+    firstArrow.innerText = arrowSymbols[newValue ? 0 : 1];
 }

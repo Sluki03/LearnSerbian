@@ -77,7 +77,13 @@ export default function ExerciseModalFinished(componentProps) {
         }, 300);
     }
 
-    continueButton.onclick = () => {
+    continueButton.onclick = continueToStart;
+    window.addEventListener("keydown", continueToStart);
+
+    function continueToStart(e) {     
+        if(e.key !== "Enter" && e.type === "keydown") return;
+        window.removeEventListener("keydown", continueToStart);
+        
         finishedHolder.classList.remove("active-finished-holder");
         continueButton.style.bottom = "-100px";
 

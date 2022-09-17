@@ -19,6 +19,8 @@ export default function ModalOptions(componentProps) {
         appendTo: modalOptionsElement
     }));
 
+    window.addEventListener("keydown", keyboardTrigger);
+
     return modalOptionsElement;
     
     function getClickFunction(option) {
@@ -50,5 +52,21 @@ export default function ModalOptions(componentProps) {
 
         if(modalResize.id) modalResize.id = "";
         else modalResize.id = "active-modal-resize";
+    }
+
+    function keyboardTrigger(e) {
+        const eKeys = {
+            return: "Backspace",
+            resize: "f",
+            x: "Escape"
+        };
+
+        let validKey = "";
+
+        Object.values(eKeys).forEach((value, index) => {
+            if(e.key === value) validKey = Object.keys(eKeys)[index];
+        });
+
+        if(validKey) getClickFunction(validKey);
     }
 }

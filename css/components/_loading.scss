@@ -9,7 +9,7 @@
     pointer-events: none;
     overflow: hidden;
     opacity: 1;
-    transition: 300ms;
+    transition: opacity 300ms;
     z-index: 100;
 
     .rotating {

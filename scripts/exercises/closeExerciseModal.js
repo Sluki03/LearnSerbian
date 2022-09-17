@@ -1,6 +1,6 @@
 import { Component } from "../components/Component.js";
 
-export default function closeExerciseModal(confirmed, openNew) {
+export default function closeExerciseModal(confirmed, openNew) {    
     const exerciseModal = document.querySelector(".exercise-modal");
     const activeExercise = document.getElementById("active-exercise");
 
