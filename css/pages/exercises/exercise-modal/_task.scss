@@ -141,6 +141,7 @@
                 p {
                     color: $defDarkGrey;
                     font-size: set-size(lg);
+                    border-radius: 30px;
                 }
             }
 
@@ -203,10 +204,8 @@
 
                     .word-translation-holder {
                         @include add-flex;
-                        background-color: $defDarkGrey;
-                        border-top-left-radius: 10px;
-                        border-top-right-radius: 10px;
-                        clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 75% 90%, 50% 100%, 25% 90%, 0 90%);
+                        background-color: transparent;
+                        border-radius: 20px;
                         cursor: default;
                         opacity: 0;
                         position: absolute;
@@ -217,16 +216,18 @@
                         transition: 300ms;
                         
                         .word-translation {
-                            background-color: white;
-                            border-top-left-radius: 10px;
-                            border-top-right-radius: 10px;
-                            clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 75% 90%, 50% 100%, 25% 90%, 0 90%);
+                            border-radius: 20px;
+                            background-color: rgba(255, 255, 255, 0.7);
+                            -webkit-backdrop-filter: blur(10px);
+                            backdrop-filter: blur(10px);
+                            box-shadow: $defLightShadow;
 
                             p {
                                 color: $defDarkGrey;
                                 font-size: set-size(md);
                                 white-space: nowrap;
                                 padding: 5px;
+                                margin: 10px;
                             }
                         }
                     }

@@ -11,7 +11,7 @@ export const test1 = [
         translation: {
             my: "moje",
             is: "je",
-            miki: "Miki (male name)"
+            miki: "Mickey (male name)"
         },
         xp: 20
     }
