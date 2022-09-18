@@ -32,20 +32,26 @@ button {
 }
 
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 15px;
 }
 
 ::-webkit-scrollbar-track {
-    background: white;
-    border-left: 1px solid $defBlue;
+    background: transparent;
+    border-left: 1px solid $defGrey;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: $defRed;
+    background: $defGrey;
+    border-radius: 10px;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: solid 1px $defGrey;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: $defLightRed;
+    background: #bebebe;
 }
 
 ::selection {
