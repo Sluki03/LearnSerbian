@@ -72,30 +72,18 @@ function setTranslatableWords(parent, text, translation) {
 
         const translateHolderSpan = document.querySelector(`.translate-holder p .word-${word}`);
         translateHolderSpan.style.borderBottom = "3px solid #5e5c5c";
-        
-        const wordTranslationHolder = createElement({
-            tag: "div",
-            attributes: { class: "word-translation-holder word-translation-element" },
-            appendTo: translateHolderSpan
-        });
 
         const wordTranslation = createElement({
-            tag: "div",
-            attributes: { class: "word-translation word-translation-element" },
-            appendTo: wordTranslationHolder
-        });
-
-        createElement({
             tag: "p",
-            attributes: { class: "word-translation-element" },
+            attributes: { class: "word-translation" },
             innerText: translatedWord,
-            appendTo: wordTranslation
+            appendTo: translateHolderSpan
         });
 
         let isOpened = false;
 
         setTimeout(() => {
-            wordTranslationHolder.classList.add("active-word-translation-holder");
+            wordTranslation.classList.add("active-word-translation");
             isOpened = true;
         }, 100);
 
@@ -109,8 +97,8 @@ function setTranslatableWords(parent, text, translation) {
 
             translateHolderSpan.style.borderBottom = "";
             
-            wordTranslationHolder.classList.remove("active-word-translation-holder");
-            setTimeout(() => { wordTranslationHolder.remove() }, 300);
+            wordTranslation.classList.remove("active-word-translation");
+            setTimeout(() => { wordTranslation.remove() }, 300);
 
             window.removeEventListener("click", closeTranslationHolder);
         }
