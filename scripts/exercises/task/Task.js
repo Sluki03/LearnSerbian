@@ -313,6 +313,7 @@ export class Task {
                 return Component.create("ClassicModal", {
                     text: "You have no more lives.",
                     buttons: ["try again", "cancel"],
+                    buttonsTrigger: { tryAgain: "Enter", cancel: "Escape" },
                     functions: { tryAgain: this.startNew, cancel: this.cancel },
                     appendTo: this.exerciseModal
                 });
@@ -357,12 +358,11 @@ export class Task {
         
         switch(this.currentTask.type) {
             case "multipleChoice":
-            case "multipleChoiceImages": {
+            case "multipleChoiceImages":
                 result = this.currentTask.acceptableAnswers.indexOf(this.answer) > -1;
+                
                 break;
-            }
-
-            case "translate": {
+            case "translate":
                 let correctStatus = false;
 
                 this.currentTask.acceptableAnswers.forEach(answer => {
@@ -372,7 +372,7 @@ export class Task {
                 result = correctStatus;
 
                 break;
-            }
+            default: ;
         }
 
         return result;
@@ -381,6 +381,7 @@ export class Task {
     afterCheck() {
         switch(this.currentTask.type) {
             case "multipleChoice":
+            case "multipleChoiceImages":
                 const allButtons = document.querySelectorAll(".multiple-choice-button");
                 
                 allButtons.forEach(button => {
@@ -388,6 +389,11 @@ export class Task {
                     button.classList.add("disabled-multiple-choice-button");
                 });
 
+                break;
+            case "translate":
+                const translateHolderTextarea = document.querySelector(".translate-holder textarea");
+                translateHolderTextarea.disabled = true;
+                
                 break;
             default: ;
         }
@@ -422,7 +428,7 @@ export class Task {
         
         switch(this.currentTask.type) {
             case "multipleChoice":
-            case "multipleChoiceImages": {
+            case "multipleChoiceImages":
                 const multipleChoiceHolder = createElement({
                     tag: "div",
                     attributes: { class: `multiple-choice-holder ${this.currentTask.type === "multipleChoiceImages" ? "multiple-choice-images-holder" : ""}` },
@@ -472,9 +478,7 @@ export class Task {
                 window.addEventListener("keydown", setActiveButton);
                 
                 break;
-            }
-
-            case "translate": {
+            case "translate":
                 const translateHolder = createElement({
                     tag: "div",
                     attributes: { class: "translate-holder" },
@@ -503,7 +507,13 @@ export class Task {
                             textareaValueChanged(translateHolderTextarea.value);
                         }},
 
-                        { on: "keydown", call: e => { if(e.key === "Enter") e.preventDefault() } }
+                        { on: "keydown", call: e => { if(e.key === "Enter") e.preventDefault() } },
+                        { on: "focus", call: () => translateHolderTextarea.classList.add("translate-holder-textarea-focused") },
+                        
+                        { on: "blur", call: e => {
+                            if(e.relatedTarget && e.relatedTarget.nodeName.toLowerCase() === "button") translateHolderTextarea.focus();
+                            else translateHolderTextarea.classList.remove("translate-holder-textarea-focused");
+                        }}
                     ],
                     appendTo: translateHolder
                 });
@@ -569,8 +579,6 @@ export class Task {
                 }
 
                 break;
-            }
-            
             default: return;
         }
     }

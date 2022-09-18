@@ -8,6 +8,9 @@ export default function ExerciseModalFinished(componentProps) {
 
     const [finishedHolder, continueButton] = [...exerciseModalFinished.children];
 
+    continueButton.onclick = continueToStart;
+    window.addEventListener("keydown", continueToStart);
+
     const exerciseModalTitleDivider = document.querySelector("[data-template='exercise-modal-title-divider']").content.firstElementChild.cloneNode(true);
     const [exerciseModalTitle, exerciseModalDivider] = [...exerciseModalTitleDivider.children];
 
@@ -72,13 +75,11 @@ export default function ExerciseModalFinished(componentProps) {
             exerciseModalDivider.remove();
 
             exerciseModalFinished.remove();
+            window.removeEventListener("keydown", continueToStart);
 
             Component.create("ExerciseModalReview", { exercise, results, score, appendTo });
         }, 300);
     }
-
-    continueButton.onclick = continueToStart;
-    window.addEventListener("keydown", continueToStart);
 
     function continueToStart(e) {     
         if(e.key !== "Enter" && e.type === "keydown") return;

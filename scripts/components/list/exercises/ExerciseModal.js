@@ -19,9 +19,12 @@ export default function ExerciseModal(componentProps) {
 
     function modalOptionsResize() {
         const exerciseModalWith = parseInt(getComputedStyle(exerciseModal).getPropertyValue("width"));
+        let isIconRotated = exerciseModalWith === window.innerWidth;
         
         if(exerciseModalWith !== window.innerWidth) exerciseModal.style.width = "100%";
         else exerciseModal.style.width = "";
+
+        return isIconRotated;
     }
 
     Component.create("ExerciseModalContent", { exercise, appendTo: exerciseModal });

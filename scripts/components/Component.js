@@ -22,7 +22,7 @@ const components = {
 
 export const Component = { create, render, update };
 
-function create(componentName, params) {
+function create(componentName, params, isUpdate) {
     let componentInfo;
 
     Object.keys(components).forEach((component, index) => {
@@ -32,7 +32,7 @@ function create(componentName, params) {
         };
     });
 
-    const componentProps = { builtIn: null, params };
+    const componentProps = { builtIn: null, params, firstRender: isUpdate ? true : !isUpdate };
     const newComponent = componentInfo.function(componentProps);
 
     newComponent.component = { name: componentInfo.name, params };
@@ -85,5 +85,5 @@ function update(componentElement, newParams) {
     const parent = componentElement.parentNode;
 
     componentElement.remove();
-    return create(name, {...params, ...newParams, appendTo: parent});
+    return create(name, {...params, ...newParams, appendTo: parent}, true);
 }

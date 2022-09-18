@@ -13,9 +13,7 @@ function setActiveButton(e) {
     if(taskInfoBottom === 0) return;
     
     const setActiveButtonParams = EventParams.get("setActiveButton");
-    const { randomOptions, answerChanged, submitted } = setActiveButtonParams;
-
-    if(submitted) return;
+    const { randomOptions, answerChanged } = setActiveButtonParams;
 
     const id = e.type === "keydown" ? parseInt(e.key) : e.target.id.split("-")[3];
     

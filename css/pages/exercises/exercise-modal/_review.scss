@@ -125,6 +125,19 @@
             border: none;
         }
     }
+
+    @include flag-button;
+
+    .flag-button {
+        width: 80%;
+        margin: 0;
+        position: absolute;
+        bottom: 5px;
+
+        &:hover {
+            box-shadow: $defShadow;
+        }
+    }
 }
 
 .active-exercise-modal-review {

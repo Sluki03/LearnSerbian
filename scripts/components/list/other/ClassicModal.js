@@ -2,7 +2,7 @@ import createElement from "../../../functions/createElement.js";
 import { Convert } from "../../../functions/Convert.js";
 
 export default function ClassicModal(componentProps) {
-    const { text, buttons, functions, appendTo } = componentProps.params;
+    const { text, buttons, buttonsTrigger, functions, appendTo } = componentProps.params;
 
     const existingClassicModal = document.querySelector(".classic-modal");
     if(existingClassicModal !== null) return;
@@ -29,10 +29,27 @@ export default function ClassicModal(componentProps) {
 
     buttons.forEach(button => createElement({
         tag: "button",
+        attributes: { class: `button-holder-${convertButtonText(button, "cssStandard")}` },
         innerText: button,
         events: [{ on: "click", call: () => cancelModal(button) }],
         appendTo: buttonHolder
     }));
+
+    if(buttonsTrigger) {
+        window.addEventListener("keydown", keyboardTrigger);
+
+        function keyboardTrigger(e) {
+            window.removeEventListener("keydown", keyboardTrigger);
+
+            let button;
+            
+            Object.values(buttonsTrigger).forEach((keyboardKey, index) => {
+                if(e.key === keyboardKey) button = Object.keys(buttonsTrigger)[index];
+            });
+
+            cancelModal(button);
+        }
+    }
 
     function cancelModal(button) {
         classicModal.style.opacity = "0";
@@ -41,14 +58,20 @@ export default function ClassicModal(componentProps) {
         setTimeout(() => {
             classicModal.remove();
 
-            const toCss = button.replaceAll(" ", "-");
-            const validButton = Convert.cssToJsStandard(toCss);
+            const validButton = convertButtonText(button, "jsStandard");
             
             const functionKeys = Object.keys(functions);
             const functionValues = Object.values(functions);
 
             if(functionKeys.indexOf(validButton) > -1) functionValues[functionKeys.indexOf(validButton)]();
         }, 300);
+    }
+
+    function convertButtonText(buttonText, type) {
+        const cssStandard = buttonText.replaceAll(" ", "-");
+        
+        if(type === "cssStandard") return cssStandard;
+        return Convert.cssToJsStandard(cssStandard);
     }
 
     return classicModal;

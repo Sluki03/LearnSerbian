@@ -243,11 +243,21 @@
                     border: 3px dashed $defDarkGrey;
                 }
 
+                &:disabled {
+                    border: 3px dashed $defGrey;
+                }
+
                 &:focus {
                     border: 3px solid $defDarkGrey;
                     border-radius: 20px;
                     box-shadow: $defLightShadow;
                 }
+            }
+
+            .translate-holder-textarea-focused {
+                border: 3px solid $defDarkGrey;
+                border-radius: 20px;
+                box-shadow: $defLightShadow;
             }
 
             .button-holder {

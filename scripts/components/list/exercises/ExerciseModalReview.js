@@ -114,7 +114,14 @@ export default function ExerciseModalReview(componentProps) {
         else taskExplanation.remove();
     });
 
+    const continueButton = document.querySelector(".exercise-modal-review .flag-button");
+    continueButton.onclick = modalOptionsReturn;
+
+    window.addEventListener("keydown", modalOptionsReturn);
+
     function modalOptionsReturn() {
+        window.removeEventListener("keydown", modalOptionsReturn);
+        
         exerciseModalReview.classList.remove("active-exercise-modal-review");
 
         setTimeout(() => {

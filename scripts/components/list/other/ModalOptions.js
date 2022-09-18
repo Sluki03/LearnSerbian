@@ -1,7 +1,7 @@
 import createElement from "../../../functions/createElement.js";
 
 export default function ModalOptions(componentProps) {
-    const { builtIn } = componentProps;
+    const { builtIn, firstRender } = componentProps;
     const { options, functions, resizeId, appendTo } = componentProps.params;
 
     const modalOptionsElement = builtIn ? builtIn : createElement({
@@ -19,7 +19,7 @@ export default function ModalOptions(componentProps) {
         appendTo: modalOptionsElement
     }));
 
-    window.addEventListener("keydown", keyboardTrigger);
+    if(firstRender) window.addEventListener("keydown", keyboardTrigger);
 
     return modalOptionsElement;
     
@@ -30,8 +30,8 @@ export default function ModalOptions(componentProps) {
             
                 break;
             case "resize":
-                changeResizeStatus();
-                functions.resize();
+                const isIconRotated = functions.resize();
+                changeResizeStatus(isIconRotated);
 
                 break;
             case "x":
@@ -42,7 +42,7 @@ export default function ModalOptions(componentProps) {
         }
     }
     
-    function changeResizeStatus() {
+    function changeResizeStatus(isIconRotated) {
         let modalResize = null;
         const children = [...modalOptionsElement.children];
 
@@ -50,7 +50,7 @@ export default function ModalOptions(componentProps) {
             if(child.className === "modal-resize") modalResize = child;
         });
 
-        if(modalResize.id) modalResize.id = "";
+        if(isIconRotated) modalResize.id = "";
         else modalResize.id = "active-modal-resize";
     }
 
@@ -67,6 +67,6 @@ export default function ModalOptions(componentProps) {
             if(e.key === value) validKey = Object.keys(eKeys)[index];
         });
 
-        if(validKey) getClickFunction(validKey);
+        if(validKey && validOptions.indexOf(validKey) > -1) getClickFunction(validKey);
     }
 }

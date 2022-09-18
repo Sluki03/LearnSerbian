@@ -49,6 +49,7 @@ export default function Nav(componentProps) {
             Component.create("ClassicModal", {
                 text: "Do you really want to close the exercise?",
                 buttons: ["no", "yes"],
+                buttonsTrigger: { no: "Escape", yes: "Enter" },
                 functions: { yes: () => resolve(true), no: () => resolve(false) },
                 appendTo: exerciseModal
             });
