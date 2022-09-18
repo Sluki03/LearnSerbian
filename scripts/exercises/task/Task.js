@@ -1,7 +1,6 @@
 import { TaskFunctions } from "./TaskFunctions.js";
 import { Component } from "../../components/Component.js";
 import { Convert } from "../../functions/Convert.js";
-import { EventParams } from "../../functions/EventParams.js";
 import createElement from "../../functions/createElement.js";
 import randomArray from "../../functions/randomArray.js";
 import percentage from "../../functions/percentage.js";
@@ -87,7 +86,7 @@ export class Task {
         taskH3.innerText = this.currentTask.title;
 
         checkButton.onclick = this.check;
-        window.addEventListener("keydown", this.check);
+        window.eventCollector.add({ id: "taskCheckKeyDown", type: "keydown", listener: this.check });
 
         this.updateLives();
     }
@@ -140,10 +139,9 @@ export class Task {
 
     clearTaskElements(removeElements) {
         const { taskHolder, taskInfo, checkButton } = this.elements;
-        const { setActiveButton } = TaskFunctions;
 
-        window.removeEventListener("keydown", setActiveButton);
-        window.removeEventListener("keydown", this.startNew);
+        window.eventCollector.remove("taskFunctionsSetActiveButton");
+        window.eventCollector.remove("taskStartNewKeyDown");
 
         const progressBarP = [...this.taskProgressBarHolder.children][1];
 
@@ -238,7 +236,7 @@ export class Task {
 
         this.afterCheck();
 
-        window.removeEventListener("keydown", this.check);
+        window.eventCollector.remove("taskCheckKeyDown");
 
         const isCorrect = this.isCorrect();
 
@@ -332,7 +330,7 @@ export class Task {
         this.results.push(taskResult);
 
         taskInfoButton.onclick = this.startNew;
-        window.addEventListener("keydown", this.startNew);
+        window.eventCollector.add({ id: "taskStartNewKeyDown", type: "keydown", listener: this.startNew });
 
         function getLinearGradient() {
             const color = isCorrect ? green : red;
@@ -474,8 +472,12 @@ export class Task {
                     }
                 }
 
-                EventParams.set("setActiveButton", { randomOptions, answerChanged });
-                window.addEventListener("keydown", setActiveButton);
+                window.eventCollector.add({
+                    id: "taskFunctionsSetActiveButton",
+                    type: "keydown",
+                    listener: setActiveButton,
+                    params: { randomOptions, answerChanged }
+                });
                 
                 break;
             case "translate":

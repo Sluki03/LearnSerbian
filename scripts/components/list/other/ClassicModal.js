@@ -36,10 +36,10 @@ export default function ClassicModal(componentProps) {
     }));
 
     if(buttonsTrigger) {
-        window.addEventListener("keydown", keyboardTrigger);
+        window.eventCollector.add({ id: "classicModalKeyDown", type: "keydown", listener: keyboardTrigger });
 
         function keyboardTrigger(e) {
-            window.removeEventListener("keydown", keyboardTrigger);
+            window.eventCollector("classicModalKeyDown");
 
             let button;
             

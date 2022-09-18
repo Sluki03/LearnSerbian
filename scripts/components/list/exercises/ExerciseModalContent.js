@@ -4,7 +4,7 @@ import { Styles } from "../../../functions/Styles.js";
 import realParseInt from "../../../functions/realParseInt.js";
 
 export default function ExerciseModalContent(componentProps) {
-    const { exercise, appendTo, style, titleStyle } = componentProps.params;
+    const { exercise, appendTo, style, titleStyle, classEventCollector } = componentProps.params;
 
     const exerciseModalTitleDivider = document.querySelector("[data-template='exercise-modal-title-divider']").content.firstElementChild.cloneNode(true);
     const [exerciseModalTitle, exerciseModalDivider] = [...exerciseModalTitleDivider.children];
@@ -44,7 +44,7 @@ export default function ExerciseModalContent(componentProps) {
     let isExerciseStarted = false;
     
     contentButton.onclick = startToTask;
-    window.addEventListener("keydown", startToTask);
+    window.eventCollector.add({ id: "exerciseModalContentKeyDown", type: "keydown", listener: startToTask });
 
     if(appendTo.scrollHeight < window.innerHeight) exerciseModalContent.id = "extended-exercise-modal-content";
     else exerciseModalContent.id = "";
@@ -53,7 +53,7 @@ export default function ExerciseModalContent(componentProps) {
 
     function startToTask(e) {
         if(e.key !== "Enter" && e.type === "keydown") return;
-        window.removeEventListener("keydown", startToTask);
+        window.eventCollector.remove("exerciseModalContentKeyDown");
         
         if(isExerciseStarted) return;
         isExerciseStarted = true;

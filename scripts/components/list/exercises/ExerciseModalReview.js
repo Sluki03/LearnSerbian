@@ -117,10 +117,10 @@ export default function ExerciseModalReview(componentProps) {
     const continueButton = document.querySelector(".exercise-modal-review .flag-button");
     continueButton.onclick = modalOptionsReturn;
 
-    window.addEventListener("keydown", modalOptionsReturn);
+    window.eventCollector.add({ id: "exerciseModalReviewKeyDown", type: "keydown", listener: modalOptionsReturn });
 
     function modalOptionsReturn() {
-        window.removeEventListener("keydown", modalOptionsReturn);
+        window.eventCollector.remove("exerciseModalReviewKeyDown");
         
         exerciseModalReview.classList.remove("active-exercise-modal-review");
 

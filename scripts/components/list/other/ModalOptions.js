@@ -1,7 +1,7 @@
 import createElement from "../../../functions/createElement.js";
 
 export default function ModalOptions(componentProps) {
-    const { builtIn, firstRender } = componentProps;
+    const { builtIn } = componentProps;
     const { options, functions, resizeId, appendTo } = componentProps.params;
 
     const modalOptionsElement = builtIn ? builtIn : createElement({
@@ -19,7 +19,8 @@ export default function ModalOptions(componentProps) {
         appendTo: modalOptionsElement
     }));
 
-    if(firstRender) window.addEventListener("keydown", keyboardTrigger);
+    window.eventCollector.remove("modalOptionsKeyDown");
+    window.eventCollector.add({ id: "modalOptionsKeyDown", type: "keydown", listener: keyboardTrigger });
 
     return modalOptionsElement;
     

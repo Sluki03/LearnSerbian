@@ -9,7 +9,7 @@ export default function ExerciseModalFinished(componentProps) {
     const [finishedHolder, continueButton] = [...exerciseModalFinished.children];
 
     continueButton.onclick = continueToStart;
-    window.addEventListener("keydown", continueToStart);
+    window.eventCollector.add({ id: "exerciseModalFinishedKeyDown", type: "keydown", listener: continueToStart });
 
     const exerciseModalTitleDivider = document.querySelector("[data-template='exercise-modal-title-divider']").content.firstElementChild.cloneNode(true);
     const [exerciseModalTitle, exerciseModalDivider] = [...exerciseModalTitleDivider.children];
@@ -75,7 +75,7 @@ export default function ExerciseModalFinished(componentProps) {
             exerciseModalDivider.remove();
 
             exerciseModalFinished.remove();
-            window.removeEventListener("keydown", continueToStart);
+            window.eventCollector.remove("exerciseModalFinishedKeyDown");
 
             Component.create("ExerciseModalReview", { exercise, results, score, appendTo });
         }, 300);
@@ -83,7 +83,7 @@ export default function ExerciseModalFinished(componentProps) {
 
     function continueToStart(e) {     
         if(e.key !== "Enter" && e.type === "keydown") return;
-        window.removeEventListener("keydown", continueToStart);
+        window.eventCollector.remove("exerciseModalFinishedKeyDown");
         
         finishedHolder.classList.remove("active-finished-holder");
         continueButton.style.bottom = "-100px";

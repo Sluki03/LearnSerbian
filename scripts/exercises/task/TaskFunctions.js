@@ -1,4 +1,3 @@
-import { EventParams } from "../../functions/EventParams.js";
 import createElement from "../../functions/createElement.js";
 import breakText from "../../functions/breakText.js";
 
@@ -12,7 +11,7 @@ function setActiveButton(e) {
 
     if(taskInfoBottom === 0) return;
     
-    const setActiveButtonParams = EventParams.get("setActiveButton");
+    const setActiveButtonParams = window.eventCollector.getParams("taskFunctionsSetActiveButton");
     const { randomOptions, answerChanged } = setActiveButtonParams;
 
     const id = e.type === "keydown" ? parseInt(e.key) : e.target.id.split("-")[3];
@@ -85,7 +84,7 @@ function setTranslatableWords(parent, text, translation) {
             isOpened = true;
         }, 100);
 
-        window.addEventListener("click", closeTranslationHolder);
+        window.eventCollector.add({ id: "taskFunctionsClick", type: "click", listener: closeTranslationHolder });
 
         function closeTranslationHolder(e) {
             e.stopPropagation();
@@ -98,7 +97,7 @@ function setTranslatableWords(parent, text, translation) {
             wordTranslation.classList.remove("active-word-translation");
             setTimeout(() => { wordTranslation.remove() }, 300);
 
-            window.removeEventListener("click", closeTranslationHolder);
+            window.eventCollector.remove("taskFunctionsClick");
         }
     }
 

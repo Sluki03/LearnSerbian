@@ -22,7 +22,7 @@ const components = {
 
 export const Component = { create, render, update };
 
-function create(componentName, params, isUpdate) {
+function create(componentName, params) {
     let componentInfo;
 
     Object.keys(components).forEach((component, index) => {
@@ -32,7 +32,7 @@ function create(componentName, params, isUpdate) {
         };
     });
 
-    const componentProps = { builtIn: null, params, firstRender: isUpdate ? true : !isUpdate };
+    const componentProps = { builtIn: null, params };
     const newComponent = componentInfo.function(componentProps);
 
     newComponent.component = { name: componentInfo.name, params };
