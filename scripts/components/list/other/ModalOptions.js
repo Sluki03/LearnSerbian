@@ -19,8 +19,7 @@ export default function ModalOptions(componentProps) {
         appendTo: modalOptionsElement
     }));
 
-    window.eventList.remove("modalOptionsKeyDown");
-    window.eventList.add({ id: "modalOptionsKeyDown", type: "keydown", listener: keyboardTrigger });
+    if(window.eventList.get("modalOptionsKeyDown") === null) window.eventList.add({ id: "modalOptionsKeyDown", type: "keydown", listener: keyboardTrigger });
 
     return modalOptionsElement;
     

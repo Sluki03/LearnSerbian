@@ -77,27 +77,26 @@ function setTranslatableWords(parent, text, translation) {
             appendTo: translateHolderSpan
         });
 
-        let isOpened = false;
+        setTimeout(() => { wordTranslation.classList.add("active-word-translation") }, 100);
 
-        setTimeout(() => {
-            wordTranslation.classList.add("active-word-translation");
-            isOpened = true;
-        }, 100);
+        if(window.eventList.get("taskFunctionsClick")) window.eventList.remove("taskFunctionsClick");
+        window.eventList.add({ id: "taskFunctionsClick", type: "click", listener: closeWordTranslation });
 
-        window.eventList.add({ id: "taskFunctionsClick", type: "click", listener: closeTranslationHolder });
-
-        function closeTranslationHolder(e) {
+        function closeWordTranslation(e) {
             e.stopPropagation();
-            if(!isOpened || e.target.classList.contains("word-translation-element")) return;
+
+            const existingWordTranslation = document.querySelector(".active-word-translation");
+            if(existingWordTranslation === null || e.target.classList.contains("word-translation")) return;
+
+            const existingTranslateHolderSpan = existingWordTranslation.parentNode;
+            existingTranslateHolderSpan.style.borderBottom = "";
 
             previousWord = "";
-
-            translateHolderSpan.style.borderBottom = "";
             
-            wordTranslation.classList.remove("active-word-translation");
-            setTimeout(() => { wordTranslation.remove() }, 300);
+            existingWordTranslation.classList.remove("active-word-translation");
+            setTimeout(() => { existingWordTranslation.remove() }, 300);
 
-            window.eventList.remove("taskFunctionsClick");
+            if(!e.target.classList.contains("word")) window.eventList.remove("taskFunctionsClick");
         }
     }
 

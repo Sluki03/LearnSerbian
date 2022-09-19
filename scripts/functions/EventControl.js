@@ -18,12 +18,23 @@ class EventControl {
                 if(eventId === id) event = Object.values(this.events)[index];
             });
 
-            if(event) window.removeEventListener(event.type, event.listener);
+            if(event) {
+                window.removeEventListener(event.type, event.listener);
+                this.#drop(eventId);
+            }
         });
     }
 
-    get() {
-        return this.events;
+    get(eventId) {
+        if(eventId === undefined) return this.events;
+
+        let event = null;
+
+        Object.keys(this.events).forEach((id, index) => {
+            if(eventId === id) event = Object.values(this.events)[index];
+        });
+
+        return event;
     }
     
     #collect(event) {
@@ -35,6 +46,17 @@ class EventControl {
         });
 
         this.events = {...this.events, [event.id]: eventObject};
+    }
+
+    #drop(eventId) {
+        let newEvents = {};
+
+        Object.keys(this.events).forEach((key, index) => {
+            if(eventId === key) return;
+            newEvents = {...newEvents, [key]: Object.values(this.events)[index]};
+        });
+
+        this.events = newEvents;
     }
 
     getParams(eventId) {
