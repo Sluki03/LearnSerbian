@@ -13,6 +13,20 @@ export const test1 = [
             is: "je",
             miki: "Mickey (male name)"
         },
-        xp: 20
+        xp: 5
+    },
+    {
+        type: "translate",
+        title: "Translate the following text:",
+        text: "Odakle si?",
+        acceptableAnswers: [
+            "Where are you from",
+            "Where are you from?"
+        ],
+        translation: {
+            odakle: "Where ... from",
+            si: "are you"
+        },
+        xp: 5
     }
 ];
