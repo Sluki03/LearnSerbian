@@ -11,7 +11,7 @@ function setActiveButton(e) {
 
     if(taskInfoBottom === 0) return;
     
-    const setActiveButtonParams = window.eventCollector.getParams("taskFunctionsSetActiveButton");
+    const setActiveButtonParams = window.eventList.getParams("taskFunctionsSetActiveButton");
     const { randomOptions, answerChanged } = setActiveButtonParams;
 
     const id = e.type === "keydown" ? parseInt(e.key) : e.target.id.split("-")[3];
@@ -84,7 +84,7 @@ function setTranslatableWords(parent, text, translation) {
             isOpened = true;
         }, 100);
 
-        window.eventCollector.add({ id: "taskFunctionsClick", type: "click", listener: closeTranslationHolder });
+        window.eventList.add({ id: "taskFunctionsClick", type: "click", listener: closeTranslationHolder });
 
         function closeTranslationHolder(e) {
             e.stopPropagation();
@@ -97,7 +97,7 @@ function setTranslatableWords(parent, text, translation) {
             wordTranslation.classList.remove("active-word-translation");
             setTimeout(() => { wordTranslation.remove() }, 300);
 
-            window.eventCollector.remove("taskFunctionsClick");
+            window.eventList.remove("taskFunctionsClick");
         }
     }
 

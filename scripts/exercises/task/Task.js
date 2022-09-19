@@ -86,7 +86,7 @@ export class Task {
         taskH3.innerText = this.currentTask.title;
 
         checkButton.onclick = this.check;
-        window.eventCollector.add({ id: "taskCheckKeyDown", type: "keydown", listener: this.check });
+        window.eventList.add({ id: "taskCheckKeyDown", type: "keydown", listener: this.check });
 
         this.updateLives();
     }
@@ -140,8 +140,7 @@ export class Task {
     clearTaskElements(removeElements) {
         const { taskHolder, taskInfo, checkButton } = this.elements;
 
-        window.eventCollector.remove("taskFunctionsSetActiveButton");
-        window.eventCollector.remove("taskStartNewKeyDown");
+        window.eventList.remove("taskFunctionsSetActiveButton", "taskStartNewKeyDown");
 
         const progressBarP = [...this.taskProgressBarHolder.children][1];
 
@@ -236,7 +235,7 @@ export class Task {
 
         this.afterCheck();
 
-        window.eventCollector.remove("taskCheckKeyDown");
+        window.eventList.remove("taskCheckKeyDown");
 
         const isCorrect = this.isCorrect();
 
@@ -330,7 +329,7 @@ export class Task {
         this.results.push(taskResult);
 
         taskInfoButton.onclick = this.startNew;
-        window.eventCollector.add({ id: "taskStartNewKeyDown", type: "keydown", listener: this.startNew });
+        window.eventList.add({ id: "taskStartNewKeyDown", type: "keydown", listener: this.startNew });
 
         function getLinearGradient() {
             const color = isCorrect ? green : red;
@@ -472,7 +471,7 @@ export class Task {
                     }
                 }
 
-                window.eventCollector.add({
+                window.eventList.add({
                     id: "taskFunctionsSetActiveButton",
                     type: "keydown",
                     listener: setActiveButton,

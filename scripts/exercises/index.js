@@ -1,11 +1,11 @@
 import loaded from "../functions/loaded.js";
 import { Component } from "../components/Component.js";
-import buildEventCollector from "../functions/EventCollector.js";
+import { buildEventList } from "../functions/EventControl.js";
 import scrollingParallax from "../functions/scrollingParallax.js";
 
 window.addEventListener("load", () => {
     loaded();
-    buildEventCollector();
+    buildEventList();
 
     Component.render();
     Component.create("ExercisesList");

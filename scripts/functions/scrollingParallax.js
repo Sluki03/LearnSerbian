@@ -3,7 +3,7 @@ export default function scrollingParallax(parallaxObj) {
     
     let scrollPosition = scroll.scrollTop;
 
-    scroll.addEventListener("scroll", makeParallax, { passive: true });
+    scroll.eventList.add({ id: "scrollingParallaxScroll", type: "scroll", listener: makeParallax, options: { passive: true } });
 
     function makeParallax() {
         const bgY = parseInt(getComputedStyle(bg).getPropertyValue("background-position-y"));

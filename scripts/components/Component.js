@@ -13,6 +13,7 @@ import ModalOptions from "./list/other/ModalOptions.js";
 import ArrowButton from "./list/other/ArrowButton.js";
 import ClassicModal from "./list/other/ClassicModal.js";
 import { Convert } from "../functions/Convert.js";
+import { buildEventList } from "../functions/EventControl.js";
 
 const components = {
     PanelsList, ExercisesList, ExerciseModal, ExerciseModalContent, ExerciseModalTask,
@@ -36,6 +37,7 @@ function create(componentName, params) {
     const newComponent = componentInfo.function(componentProps);
 
     newComponent.component = { name: componentInfo.name, params };
+    buildEventList(newComponent);
 
     return newComponent;
 }
@@ -74,7 +76,9 @@ function render(element) {
         const componentProps = { builtIn: componentElements[index], params: validDataset };
 
         const newComponent = componentInfo.function(componentProps);
+        
         newComponent.component = { name: componentInfo.name, params: validDataset };
+        buildEventList(newComponent);
     });
 }
 

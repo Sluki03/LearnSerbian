@@ -19,7 +19,7 @@ export default function closeExerciseModal(confirmed, openNew) {
 
     setTimeout(() => {        
         exerciseModal.remove();
-        window.eventCollector.cleanup();
+        window.eventList.remove("exerciseModalContentKeyDown", "modalOptionsKeyDown");
         
         if(openNew !== undefined) {
             const { activeExercise, exercise } = openNew;
