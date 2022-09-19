@@ -6,7 +6,7 @@ class EventControl {
     add(...events) {
         events.forEach(event => {
             window.addEventListener(event.type, event.listener, event.options);
-            this.collect(event);
+            this.#collect(event);
         });
     }
 
@@ -21,8 +21,12 @@ class EventControl {
             if(event) window.removeEventListener(event.type, event.listener);
         });
     }
+
+    get() {
+        return this.events;
+    }
     
-    collect(event) {
+    #collect(event) {
         let eventObject;
 
         Object.keys(event).forEach((key, index) => {
