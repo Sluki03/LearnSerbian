@@ -32,7 +32,7 @@ export const exercisesData = [
         difficulty: "hard",
         tips: "#Multiple choice images preview.#",
         tasks: test1,
-        numberOfTasks: 3,
+        numberOfTasks: 2,
         lives: 5
     },
 

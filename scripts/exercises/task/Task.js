@@ -12,7 +12,7 @@ export class Task {
         this.exerciseModal = document.querySelector(".exercise-modal");
         
         this.taskElement = taskElement;
-        this.numberOfTasks = exercise.numberOfTasks || exercise.tasks.length;
+        this.numberOfTasks = exercise.numberOfTasks ? exercise.numberOfTasks > exercise.tasks.length ? exercise.tasks.length : exercise.numberOfTasks : exercise.tasks.length;
         this.tasks = randomArray(exercise.tasks, this.numberOfTasks);
         this.taskNumber = 0;
         this.currentTask = this.tasks[this.taskNumber];

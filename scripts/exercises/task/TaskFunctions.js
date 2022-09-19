@@ -64,7 +64,7 @@ function setTranslatableWords(parent, text, translation) {
 
         const translatedWord = translate(word);
 
-        if(previousWord === translatedWord) return previousWord = "";
+        if(previousWord === translatedWord) return;
         previousWord = translatedWord;
 
         const translateHolderSpan = document.querySelector(`.translate-holder p .word-${word}`);
@@ -90,13 +90,12 @@ function setTranslatableWords(parent, text, translation) {
 
             const existingTranslateHolderSpan = existingWordTranslation.parentNode;
             existingTranslateHolderSpan.style.borderBottom = "";
-
-            previousWord = "";
             
             existingWordTranslation.classList.remove("active-word-translation");
             setTimeout(() => { existingWordTranslation.remove() }, 300);
 
-            if(!e.target.classList.contains("word")) window.eventList.remove("taskFunctionsClick");
+            if(!e.target.classList.contains("word") || previousWord === translatedWord) window.eventList.remove("taskFunctionsClick");
+            previousWord = "";
         }
     }
 
