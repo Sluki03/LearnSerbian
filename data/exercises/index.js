@@ -3,6 +3,7 @@ import { test1 } from "./tasks/test1.js";
 
 // difficulty options: easy, medium, hard
 // task types: multipleChoice, multipleChoiceImages, translate
+// translate modes: write (default), wordBank
 
 export const exercisesData = [
     {

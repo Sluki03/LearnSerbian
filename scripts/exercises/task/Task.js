@@ -388,8 +388,10 @@ export class Task {
 
                 break;
             case "translate":
-                const translateHolderTextarea = document.querySelector(".translate-holder textarea");
-                translateHolderTextarea.disabled = true;
+                if(this.currentTask.mode === undefined || this.currentTask.mode === "write") {
+                    const translateHolderTextarea = document.querySelector(".translate-holder textarea");
+                    translateHolderTextarea.disabled = true;
+                }
                 
                 break;
             default: ;
@@ -493,90 +495,153 @@ export class Task {
 
                 setTranslatableWords(translateHolderP, this.currentTask.text, this.currentTask.translation);
 
-                const translateHolderTextarea = createElement({
-                    tag: "textarea",
-                    attributes: {
-                        rows: 4,
-                        cols: 2,
-                        type: "text",
-                        placeholder: "Write the translation...",
-                        maxLength: 200
-                    },
-                    events: [
-                        { on: "input", call: () => {
-                            answerChanged(translateHolderTextarea.value);
-                            textareaValueChanged(translateHolderTextarea.value);
-                        }},
-
-                        { on: "keydown", call: e => { if(e.key === "Enter") e.preventDefault() } },
-                        { on: "focus", call: () => translateHolderTextarea.classList.add("translate-holder-textarea-focused") },
-                        
-                        { on: "blur", call: e => {
-                            if(e.relatedTarget && e.relatedTarget.nodeName.toLowerCase() === "button") translateHolderTextarea.focus();
-                            else translateHolderTextarea.classList.remove("translate-holder-textarea-focused");
-                        }}
-                    ],
-                    appendTo: translateHolder
-                });
-
-                translateHolderTextarea.focus();
-
-                const buttonHolder = createElement({
-                    tag: "div",
-                    attributes: { class: "button-holder" },
-                    appendTo: translateHolder
-                });
-
-                const holders = ["letters", "arrows"];
-                
-                const buttonOrder = {
-                    letters: ["č", "ć", "đ", "š", "ž"],
-                    arrows: ["🡡", "🡣"]
-                };
-
-                for(let i = 0; i < holders.length; i++) createElement({
-                    tag: "div",
-                    attributes: { class: `button-holder-${holders[i]}` },
-                    appendTo: buttonHolder
-                });
-
-                const [buttonHolderLetters, buttonHolderArrows] = [...buttonHolder.children];
-
-                buttonOrder.letters.forEach(letter => {
-                    const button = createElement({
-                        tag: "button",
-                        innerText: translateHolderTextarea.value ? letter : letter.toUpperCase(),
-                        events: [{ on: "click", call: () => updateTextareaOnButtonClick(button) }],
-                        appendTo: buttonHolderLetters
+                if(this.currentTask.mode === undefined || this.currentTask.mode === "write") {
+                    const translateHolderTextarea = createElement({
+                        tag: "textarea",
+                        attributes: {
+                            rows: 4,
+                            cols: 2,
+                            type: "text",
+                            placeholder: "Write the translation...",
+                            maxLength: 200
+                        },
+                        events: [
+                            { on: "input", call: () => {
+                                answerChanged(translateHolderTextarea.value);
+                                textareaValueChanged(translateHolderTextarea.value);
+                            }},
+    
+                            { on: "keydown", call: e => { if(e.key === "Enter") e.preventDefault() } },
+                            { on: "focus", call: () => translateHolderTextarea.classList.add("translate-holder-textarea-focused") },
+                            
+                            { on: "blur", call: e => {
+                                if(e.relatedTarget && e.relatedTarget.nodeName.toLowerCase() === "button") translateHolderTextarea.focus();
+                                else translateHolderTextarea.classList.remove("translate-holder-textarea-focused");
+                            }}
+                        ],
+                        appendTo: translateHolder
                     });
-                });
-                
-                const changeCaseButton = createElement({
-                    tag: "button",
-                    innerText: buttonOrder.arrows[translateHolderTextarea.value ? 0 : 1],
-                    events: [{ on: "click", call: changeCaseStatus }],
-                    appendTo: buttonHolderArrows
-                });
-
-                function updateTextareaOnButtonClick(button) {
-                    translateHolderTextarea.value += button.innerText;
-                    answerChanged(translateHolderTextarea.value);
-                    textareaValueChanged(translateHolderTextarea.value);
+    
+                    translateHolderTextarea.focus();
+    
+                    const buttonHolder = createElement({
+                        tag: "div",
+                        attributes: { class: "button-holder" },
+                        appendTo: translateHolder
+                    });
+    
+                    const holders = ["letters", "arrows"];
+                    
+                    const buttonOrder = {
+                        letters: ["č", "ć", "đ", "š", "ž"],
+                        arrows: ["🡡", "🡣"]
+                    };
+    
+                    for(let i = 0; i < holders.length; i++) createElement({
+                        tag: "div",
+                        attributes: { class: `button-holder-${holders[i]}` },
+                        appendTo: buttonHolder
+                    });
+    
+                    const [buttonHolderLetters, buttonHolderArrows] = [...buttonHolder.children];
+    
+                    buttonOrder.letters.forEach(letter => {
+                        const button = createElement({
+                            tag: "button",
+                            innerText: translateHolderTextarea.value ? letter : letter.toUpperCase(),
+                            events: [{ on: "click", call: () => updateTextareaOnButtonClick(button) }],
+                            appendTo: buttonHolderLetters
+                        });
+                    });
+                    
+                    const changeCaseButton = createElement({
+                        tag: "button",
+                        innerText: buttonOrder.arrows[translateHolderTextarea.value ? 0 : 1],
+                        events: [{ on: "click", call: changeCaseStatus }],
+                        appendTo: buttonHolderArrows
+                    });
+    
+                    function updateTextareaOnButtonClick(button) {
+                        translateHolderTextarea.value += button.innerText;
+                        answerChanged(translateHolderTextarea.value);
+                        textareaValueChanged(translateHolderTextarea.value);
+                    }
+    
+                    function changeCaseStatus() {
+                        const firstArrow = buttonHolderArrows.children[0];
+                        if(!firstArrow.classList.contains("locked-arrow")) firstArrow.classList.add("locked-arrow");
+                        
+                        const firstButton = buttonHolderLetters.children[0].innerText;
+                        const isUpperCase = firstButton === firstButton.toUpperCase();
+    
+                        changeCaseButton.innerText = buttonOrder.arrows[isUpperCase ? 0 : 1];
+    
+                        [...buttonHolderLetters.children].forEach(button => {
+                            if(isUpperCase) button.innerText = button.innerText.toLowerCase();
+                            else button.innerText = button.innerText.toUpperCase();
+                        });
+                    }
                 }
 
-                function changeCaseStatus() {
-                    const firstArrow = buttonHolderArrows.children[0];
-                    if(!firstArrow.classList.contains("locked-arrow")) firstArrow.classList.add("locked-arrow");
+                if(this.currentTask.mode === "wordBank") {
+                    let textArray = [];
                     
-                    const firstButton = buttonHolderLetters.children[0].innerText;
-                    const isUpperCase = firstButton === firstButton.toUpperCase();
-
-                    changeCaseButton.innerText = buttonOrder.arrows[isUpperCase ? 0 : 1];
-
-                    [...buttonHolderLetters.children].forEach(button => {
-                        if(isUpperCase) button.innerText = button.innerText.toLowerCase();
-                        else button.innerText = button.innerText.toUpperCase();
+                    const textHolder = createElement({
+                        tag: "div",
+                        attributes: { class: "text-holder" },
+                        appendTo: translateHolder
                     });
+                    
+                    const wordBankOptionsHolder = createElement({
+                        tag: "div",
+                        attributes: { class: "word-bank-options-holder" },
+                        appendTo: translateHolder
+                    });
+                    
+                    const randomOptions = randomArray(this.currentTask.options);
+
+                    randomOptions.forEach(option => createElement({
+                        tag: "button",
+                        attributes: { class: `word-bank-option word-bank-option-${option}` },
+                        innerText: option,
+                        events: [{ on: "click", call: () => moveOption(option, "select") }],
+                        appendTo: wordBankOptionsHolder
+                    }));
+
+                    function moveOption(option, type) {
+                        const selectedOption = document.querySelector(`.word-bank-option-${option}`);
+                        const selectedOptionClone = selectedOption.cloneNode(true);
+
+                        selectedOption.style.opacity = "0";
+                        selectedOption.style.top = type === "select" ? "-10px" : "10px";
+
+                        selectedOptionClone.style.opacity = "0";
+                        selectedOptionClone.style.top = type === "select" ? "10px" : "-10px";
+
+                        setTimeout(() => {
+                            selectedOption.remove();
+
+                            const appendElement = type === "select" ? textHolder : wordBankOptionsHolder;
+                            const invertedType = type === "select" ? "deselect" : "select";
+
+                            appendElement.appendChild(selectedOptionClone);
+                            
+                            setTimeout(() => {
+                                selectedOptionClone.style.opacity = "";
+                                selectedOptionClone.style.top = "";
+                            }, 100);
+                            
+                            selectedOptionClone.onclick = () => moveOption(option, invertedType);
+
+                            textArray = [];
+                            
+                            [...textHolder.children].forEach(child => {
+                                textArray.push(child.innerText);
+                            });
+
+                            answerChanged(textArray.join(" "));
+                        }, 300);
+                    }
                 }
 
                 break;
