@@ -25,10 +25,6 @@ export default function ModalOptions(componentProps) {
     
     function getClickFunction(option) {
         switch(option) {
-            case "return":
-                functions.return();
-            
-                break;
             case "resize":
                 const isIconRotated = functions.resize();
                 changeResizeStatus(isIconRotated);
@@ -56,7 +52,6 @@ export default function ModalOptions(componentProps) {
 
     function keyboardTrigger(e) {
         const eKeys = {
-            return: "Backspace",
             resize: "f",
             x: "Escape"
         };

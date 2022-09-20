@@ -1,19 +1,13 @@
 import { Component } from "../../Component.js";
 import createElement from "../../../functions/createElement.js";
 import markup from "../../../functions/markup.js";
+import breakText from "../../../functions/breakText.js";
 
 export default function ExerciseModalReview(componentProps) {
     const { exercise, results, score, appendTo } = componentProps.params;
 
     const exerciseModalReview = document.querySelector("[data-template='exercise-modal-review']").content.firstElementChild.cloneNode(true);
     appendTo.appendChild(exerciseModalReview);
-
-    const modalOptions = document.querySelector(".modal-options");
-    const updatedModalOptions = Component.update(modalOptions, {
-        options: ["return", "resize", "x"],
-        functions: {...modalOptions.component.params.functions, return: modalOptionsReturn},
-        resizeId: modalOptions.children[0].id ? "active-modal-resize" : ""
-    });
 
     setTimeout(() => { exerciseModalReview.classList.add("active-exercise-modal-review") }, 100);
 
@@ -51,17 +45,17 @@ export default function ExerciseModalReview(componentProps) {
         if(result.isCorrect) {
             createElement({
                 tag: "p",
-                innerHTML: `${result.acceptableAnswers.length > 1 ? "Your answer" : "Answer"}: <span>${result.userAnswer}</span>.`,
+                innerHTML: `${result.acceptableAnswers.length > 1 ? "Your answer" : "Answer"}: "<span>${result.userAnswer}</span>".`,
                 appendTo: infoAnswers
             });
             
             if(result.acceptableAnswers.length > 1) {
                 let otherAnswers = result.acceptableAnswers;
-                otherAnswers = otherAnswers.filter(answer => answer !== result.userAnswer);
+                otherAnswers = otherAnswers.filter(answer => breakText(answer, { join: true }) !== breakText(result.userAnswer, { join: true }));
 
-                createElement({
+                if(otherAnswers.length > 0) createElement({
                     tag: "p",
-                    innerHTML: `Also correct: <span>${otherAnswers[Math.floor(Math.random() * otherAnswers.length)]}</span>.`,
+                    innerHTML: `Also correct: "<span>${otherAnswers[Math.floor(Math.random() * otherAnswers.length)]}</span>".`,
                     appendTo: infoAnswers
                 });
             }
@@ -72,13 +66,13 @@ export default function ExerciseModalReview(componentProps) {
             
             createElement({
                 tag: "p",
-                innerHTML: `Correct answer: <span>${randomCorrectAnswer}</span>.`,
+                innerHTML: `Correct answer: "<span>${randomCorrectAnswer}</span>".`,
                 appendTo: infoAnswers
             });
 
             createElement({
                 tag: "p",
-                innerHTML: `Your answer: <span>${result.userAnswer}</span>.`,
+                innerHTML: `Your answer: "<span>${result.userAnswer}</span>".`,
                 appendTo: infoAnswers
             });
 
@@ -116,10 +110,16 @@ export default function ExerciseModalReview(componentProps) {
 
     const continueButton = document.querySelector(".exercise-modal-review .flag-button");
     continueButton.onclick = modalOptionsReturn;
+    let inProgress = false;
 
     window.eventList.add({ id: "exerciseModalReviewKeyDown", type: "keydown", listener: modalOptionsReturn });
 
-    function modalOptionsReturn() {
+    function modalOptionsReturn(e) {
+        if(e.type === "keydown" && e.key !== "Enter") return;
+
+        if(inProgress) return;
+        inProgress = true;
+        
         window.eventList.remove("exerciseModalReviewKeyDown");
         
         exerciseModalReview.classList.remove("active-exercise-modal-review");
@@ -127,12 +127,7 @@ export default function ExerciseModalReview(componentProps) {
         setTimeout(() => {
             exerciseModalReview.remove();
             Component.create("ExerciseModalFinished", { exercise, results, score, appendTo });
-            
-            Component.update(updatedModalOptions, {
-                options: null,
-                functions: {...updatedModalOptions.component.params.functions, return: null},
-                resizeId: updatedModalOptions.children[1].id ? "active-modal-resize" : ""
-            });
+            inProgress = false;
         }, 300);
     }
 

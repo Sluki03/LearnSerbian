@@ -58,8 +58,12 @@ export default function ExerciseModalFinished(componentProps) {
     });
 
     const reviewButton = document.querySelector(".finished-holder button");
+    let inProgress = false;
 
     reviewButton.onclick = () => {
+        if(inProgress) return;
+        inProgress = true;
+        
         exerciseModalTitle.classList.add("disabled-exercise-modal-title");
 
         exerciseModalDivider.style.opacity = "0";
@@ -78,6 +82,7 @@ export default function ExerciseModalFinished(componentProps) {
             window.eventList.remove("exerciseModalFinishedKeyDown");
 
             Component.create("ExerciseModalReview", { exercise, results, score, appendTo });
+            inProgress = false;
         }, 300);
     }
 

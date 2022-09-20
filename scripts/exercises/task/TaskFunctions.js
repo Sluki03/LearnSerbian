@@ -1,7 +1,7 @@
 import createElement from "../../functions/createElement.js";
 import breakText from "../../functions/breakText.js";
 
-export const TaskFunctions = { setActiveButton, getButtonImage, setTranslatableWords, textareaValueChanged };
+export const TaskFunctions = { setActiveButton, getButtonImage, setTranslatableWords, textareaValueChanged, moveOption };
 
 function setActiveButton(e) {
     e.preventDefault();
@@ -94,8 +94,10 @@ function setTranslatableWords(parent, text, translation) {
             existingWordTranslation.classList.remove("active-word-translation");
             setTimeout(() => { existingWordTranslation.remove() }, 300);
 
-            if(!e.target.classList.contains("word") || previousWord === translatedWord) window.eventList.remove("taskFunctionsClick");
-            previousWord = "";
+            if(!e.target.classList.contains("word") || existingWordTranslation.innerText === translatedWord) {
+                window.eventList.remove("taskFunctionsClick");
+                previousWord = "";
+            }
         }
     }
 
@@ -124,4 +126,49 @@ function textareaValueChanged(newValue) {
 
     const arrowSymbols = ["🡡", "🡣"];
     firstArrow.innerText = arrowSymbols[newValue ? 0 : 1];
+}
+
+function moveOption(option, type, answerChanged) {
+    const textHolder = document.querySelector(".text-holder");
+    const wordBankOptionsHolder = document.querySelector(".word-bank-options-holder");
+
+    const selectedOption = document.querySelector(`.word-bank-option-${option}`);
+
+    if(selectedOption.classList.contains("word-bank-option-selected")) selectedOption.classList.remove("word-bank-option-selected");
+    if(selectedOption.classList.contains("word-bank-option-deselected")) selectedOption.classList.remove("word-bank-option-deselected");
+    
+    const selectedOptionClone = selectedOption.cloneNode(true);
+    
+    selectedOption.classList.add(type === "select" ? "word-bank-option-selected" : "word-bank-option-deselected");
+    selectedOptionClone.classList.add(type !== "select" ? "word-bank-option-selected" : "word-bank-option-deselected");
+
+    selectedOption.style.opacity = "0";
+    selectedOption.style.top = type === "select" ? "-10px" : "10px";
+
+    selectedOptionClone.style.opacity = "0";
+    selectedOptionClone.style.top = type === "select" ? "10px" : "-10px";
+
+    setTimeout(() => {
+        selectedOption.remove();
+
+        const appendElement = type === "select" ? textHolder : wordBankOptionsHolder;
+        const invertedType = type === "select" ? "deselect" : "select";
+
+        appendElement.appendChild(selectedOptionClone);
+        
+        setTimeout(() => {
+            selectedOptionClone.style.opacity = "";
+            selectedOptionClone.style.top = "";
+        }, 100);
+        
+        selectedOptionClone.onclick = () => moveOption(option, invertedType, answerChanged);
+
+        let textArray = [];
+        
+        [...textHolder.children].forEach(child => {
+            textArray.push(child.innerText);
+        });
+
+        answerChanged(textArray.join(" "));
+    }, 300);
 }

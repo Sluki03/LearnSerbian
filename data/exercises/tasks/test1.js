@@ -22,8 +22,7 @@ export const test1 = [
         mode: "wordBank",
         options: ["where", "gang", "are", "who", "you", "from", "strong", "attitude"],
         acceptableAnswers: [
-            "Where are you from",
-            "Where are you from?"
+            "Where are you from"
         ],
         translation: {
             odakle: "Where ... from",

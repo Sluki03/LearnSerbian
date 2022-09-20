@@ -304,8 +304,7 @@
                 width: 100%;
                 border: 3px solid $defGrey;
                 border-radius: 20px;
-                margin: 10px 0;
-                padding: 5px 10px;
+                padding: 10px 15px;
             }
 
             .word-bank-options-holder {
@@ -313,12 +312,11 @@
                 flex-wrap: wrap;
                 gap: 10px;
                 width: 100%;
-                margin: 10px 0;
             }
 
             .word-bank-option {
                 color: $defDarkGrey;
-                font-size: set-size(lg);
+                font-size: set-size(md);
                 background-color: white;
                 border: 1px solid $defDarkGrey;
                 border-radius: 15px;
@@ -327,6 +325,35 @@
                 top: 0;
                 padding: 5px 10px;
                 transition: 300ms;
+            }
+
+            .word-bank-option-selected {
+                transition: 100ms;
+
+                &:hover {
+                    box-shadow: $defLighterShadow;
+                    top: 5px;
+                }
+            }
+
+            .word-bank-option-deselected {
+                transition: 100ms;
+
+                &:hover {
+                    box-shadow: $defLighterShadow;
+                    top: -5px;
+                }
+            }
+
+            .change-mode-button {
+                color: $defDarkGrey;
+                font-size: set-size(lg);
+                text-transform: capitalize;
+                background-color: white;
+                border: 1px solid $defDarkGrey;
+                border-radius: 15px;
+                cursor: pointer;
+                padding: 5px 10px;
             }
         }
     }

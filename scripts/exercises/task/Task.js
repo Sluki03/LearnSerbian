@@ -41,6 +41,7 @@ export class Task {
         this.afterCheck = this.afterCheck.bind(this);
         this.calculateScore = this.calculateScore.bind(this);
         this.answerChanged = this.answerChanged.bind(this);
+        this.construct = this.construct.bind(this);
     }
 
     next() {
@@ -321,7 +322,7 @@ export class Task {
             title: currentTask.title,
             acceptableAnswers: currentTask.acceptableAnswers,
             userAnswer: this.answer,
-            isCorrect: currentTask.acceptableAnswers.indexOf(this.answer) > -1,
+            isCorrect,
             xp: currentTask.xp || this.exercise.defaultXP || this.defaultXP,
             explanation: currentTask.explanation || null
         };
@@ -421,9 +422,9 @@ export class Task {
     }
 
     construct() {
-        const { answerChanged } = this;
+        const { currentTask, answerChanged, construct } = this;
         const { taskHolder } = this.elements;
-        const { setActiveButton, getButtonImage, setTranslatableWords, textareaValueChanged } = TaskFunctions;
+        const { setActiveButton, getButtonImage, setTranslatableWords, textareaValueChanged, moveOption } = TaskFunctions;
         
         switch(this.currentTask.type) {
             case "multipleChoice":
@@ -584,9 +585,7 @@ export class Task {
                 }
 
                 if(this.currentTask.mode === "wordBank") {
-                    let textArray = [];
-                    
-                    const textHolder = createElement({
+                    createElement({
                         tag: "div",
                         attributes: { class: "text-holder" },
                         appendTo: translateHolder
@@ -602,46 +601,29 @@ export class Task {
 
                     randomOptions.forEach(option => createElement({
                         tag: "button",
-                        attributes: { class: `word-bank-option word-bank-option-${option}` },
+                        attributes: { class: `word-bank-option word-bank-option-${option} word-bank-option-selected` },
                         innerText: option,
-                        events: [{ on: "click", call: () => moveOption(option, "select") }],
+                        events: [{ on: "click", call: () => moveOption(option, "select", answerChanged) }],
                         appendTo: wordBankOptionsHolder
                     }));
+                }
 
-                    function moveOption(option, type) {
-                        const selectedOption = document.querySelector(`.word-bank-option-${option}`);
-                        const selectedOptionClone = selectedOption.cloneNode(true);
+                const invertMode = this.currentTask.mode === undefined || this.currentTask.mode === "write" ? "word bank" : "write";
 
-                        selectedOption.style.opacity = "0";
-                        selectedOption.style.top = type === "select" ? "-10px" : "10px";
+                createElement({
+                    tag: "button",
+                    attributes: { class: "change-mode-button" },
+                    innerText: invertMode,
+                    events: [{ on: "click", call: swithModes }],
+                    appendTo: translateHolder
+                });
 
-                        selectedOptionClone.style.opacity = "0";
-                        selectedOptionClone.style.top = type === "select" ? "10px" : "-10px";
+                function swithModes() {
+                    if(currentTask.mode === undefined || currentTask.mode === "write") currentTask.mode = "wordBank";
+                    else currentTask.mode = "write";
 
-                        setTimeout(() => {
-                            selectedOption.remove();
-
-                            const appendElement = type === "select" ? textHolder : wordBankOptionsHolder;
-                            const invertedType = type === "select" ? "deselect" : "select";
-
-                            appendElement.appendChild(selectedOptionClone);
-                            
-                            setTimeout(() => {
-                                selectedOptionClone.style.opacity = "";
-                                selectedOptionClone.style.top = "";
-                            }, 100);
-                            
-                            selectedOptionClone.onclick = () => moveOption(option, invertedType);
-
-                            textArray = [];
-                            
-                            [...textHolder.children].forEach(child => {
-                                textArray.push(child.innerText);
-                            });
-
-                            answerChanged(textArray.join(" "));
-                        }, 300);
-                    }
+                    taskHolder.innerHTML = "";
+                    construct();
                 }
 
                 break;
