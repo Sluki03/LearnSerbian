@@ -16,6 +16,7 @@ export class Task {
         this.tasks = randomArray(exercise.tasks, this.numberOfTasks);
         this.taskNumber = 0;
         this.currentTask = this.tasks[this.taskNumber];
+        this.prevModeValues = {};
 
         this.answer = "";
         this.defaultXP = 10;
@@ -139,7 +140,7 @@ export class Task {
     }
 
     clearTaskElements(removeElements) {
-        const { taskHolder, taskInfo, checkButton } = this.elements;
+        const { taskHolder, taskInfo, taskButtonHolder } = this.elements;
 
         window.eventList.remove("taskFunctionsSetActiveButton", "taskStartNewKeyDown");
 
@@ -155,7 +156,7 @@ export class Task {
         }
         
         taskInfo.style.bottom = "";
-        checkButton.style.bottom = "";
+        taskButtonHolder.style.bottom = "";
 
         this.taskElement.style.opacity = "0";
         this.taskElement.style.left = "-20px";
@@ -189,11 +190,14 @@ export class Task {
     }
 
     initializeElements() {
+        const taskButtonHolder = document.querySelector("[data-name='task-button-holder']");
+        
         const taskInfo = document.querySelector("[data-name='task-info']");
         const taskInfoText = document.querySelector("[data-name='task-info-text']");
         
         const children = {
             taskElement: [...this.taskElement.children],
+            taskButtonHolder: [...taskButtonHolder.children],
             taskInfo: [...taskInfo.children],
             taskInfoText: [...taskInfoText.children]
         };
@@ -224,7 +228,7 @@ export class Task {
         const { currentTask } = this;
         
         const {
-            checkButton, taskInfo, taskInfoImg, taskInfoTextH4, taskInfoTextP,
+            taskButtonHolder, checkButton, taskInfo, taskInfoImg, taskInfoTextH4, taskInfoTextP,
             taskInfoButton
         } = this.elements;
 
@@ -266,7 +270,7 @@ export class Task {
             progressBarLine.style.boxShadow = "";
         }, 300);
         
-        checkButton.style.bottom = "-100px";
+        taskButtonHolder.style.bottom = "-100px";
         
         const image = { correct: "./images/icons/circle-check.svg", incorrect: "./images/icons/circle-x.svg" };
         
@@ -421,9 +425,9 @@ export class Task {
         else if(!checkButton.classList.contains("disabled-flag-button")) checkButton.classList.add("disabled-flag-button");
     }
 
-    construct() {
+    construct(clear) {
         const { currentTask, answerChanged, construct } = this;
-        const { taskHolder } = this.elements;
+        const { taskHolder, switchModesButton } = this.elements;
         const { setActiveButton, getButtonImage, setTranslatableWords, textareaValueChanged, moveOption } = TaskFunctions;
         
         switch(this.currentTask.type) {
@@ -483,6 +487,19 @@ export class Task {
                 
                 break;
             case "translate":
+                if(clear) {
+                    if(this.currentTask.mode === "write") {
+
+                    }
+
+                    else {
+                        const translateHolderTextarea = document.querySelector(".translate-holder textarea");
+                        this.prevModeValues = { textareaValue: translateHolderTextarea.value };
+                    }
+
+                    taskHolder.innerHTML = "";
+                }
+            
                 const translateHolder = createElement({
                     tag: "div",
                     attributes: { class: "translate-holder" },
@@ -523,6 +540,8 @@ export class Task {
                         appendTo: translateHolder
                     });
     
+                    translateHolderTextarea.value = this.prevModeValues.textareaValue ? this.prevModeValues.textareaValue : "";
+                    
                     translateHolderTextarea.focus();
     
                     const buttonHolder = createElement({
@@ -608,22 +627,34 @@ export class Task {
                     }));
                 }
 
-                const invertMode = this.currentTask.mode === undefined || this.currentTask.mode === "write" ? "word bank" : "write";
+                const icons = {
+                    write: { src: "../../../images/icons/write-icon.svg", alt: "Write" },
+                    wordBank: { src: "../../../images/icons/word-bank-icon.svg", alt: "Word Bank" }
+                };
+                
+                const invertedModeIcon = this.currentTask.mode === undefined || this.currentTask.mode === "write" ? icons.wordBank : icons.write;
 
-                createElement({
-                    tag: "button",
-                    attributes: { class: "change-mode-button" },
-                    innerText: invertMode,
-                    events: [{ on: "click", call: swithModes }],
-                    appendTo: translateHolder
+                switchModesButton.classList.add("active-switch-modes-button");
+                switchModesButton.onclick = swithModes;
+
+                const switchModesImg = document.querySelector(".active-switch-modes-button img");
+
+                if(switchModesImg === null) createElement({
+                    tag: "img",
+                    attributes: { src: invertedModeIcon.src, alt: invertedModeIcon.alt },
+                    appendTo: switchModesButton
                 });
+
+                else {
+                    switchModesImg.src = invertedModeIcon.src;
+                    switchModesImg.alt = invertedModeIcon.alt;
+                }
 
                 function swithModes() {
                     if(currentTask.mode === undefined || currentTask.mode === "write") currentTask.mode = "wordBank";
                     else currentTask.mode = "write";
 
-                    taskHolder.innerHTML = "";
-                    construct();
+                    construct(true);
                 }
 
                 break;

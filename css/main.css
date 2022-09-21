@@ -822,7 +822,18 @@ main .exercise-modal .exercise-modal-task .task-holder .translate-holder .change
   cursor: pointer;
   padding: 5px 10px;
 }
-main .exercise-modal .exercise-modal-task .flag-button {
+main .exercise-modal .exercise-modal-task .task-button-holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 10px;
+  width: 80%;
+  position: absolute;
+  bottom: -100px;
+  transition: 300ms;
+}
+main .exercise-modal .exercise-modal-task .task-button-holder .flag-button {
   color: #144eba;
   font-size: 30px;
   font-weight: bold;
@@ -836,25 +847,49 @@ main .exercise-modal .exercise-modal-task .flag-button {
   margin: 5px 0;
   transition: 300ms;
 }
-main .exercise-modal .exercise-modal-task .flag-button:hover {
+main .exercise-modal .exercise-modal-task .task-button-holder .flag-button:hover {
   color: white;
   background-position-x: 450px;
 }
-main .exercise-modal .exercise-modal-task .disabled-flag-button {
+main .exercise-modal .exercise-modal-task .task-button-holder .disabled-flag-button {
   cursor: default;
   opacity: 0.5;
 }
-main .exercise-modal .exercise-modal-task .disabled-flag-button:hover {
+main .exercise-modal .exercise-modal-task .task-button-holder .disabled-flag-button:hover {
   color: #144eba;
   background-position-x: 0;
 }
-main .exercise-modal .exercise-modal-task .flag-button {
-  width: 80%;
-  position: absolute;
-  bottom: -100px;
+main .exercise-modal .exercise-modal-task .task-button-holder .switch-modes-button {
+  display: none;
+}
+main .exercise-modal .exercise-modal-task .task-button-holder .switch-modes-button img {
+  height: 30px;
+  width: 30px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+main .exercise-modal .exercise-modal-task .task-button-holder .active-switch-modes-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  background-color: transparent;
+  border: 3px dashed black;
+  border-radius: 50%;
+  opacity: 0.5;
+  cursor: pointer;
+  padding: 10px;
+  transition: 300ms;
+}
+main .exercise-modal .exercise-modal-task .task-button-holder .active-switch-modes-button:hover {
+  border: 3px solid black;
+  opacity: 1;
+}
+main .exercise-modal .exercise-modal-task .task-button-holder .flag-button {
+  width: 100%;
   margin: 0;
 }
-main .exercise-modal .exercise-modal-task .flag-button:hover {
+main .exercise-modal .exercise-modal-task .task-button-holder .flag-button:hover {
   box-shadow: 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
 }
 main .exercise-modal .exercise-modal-task .task-info {
@@ -913,7 +948,7 @@ main .exercise-modal .active-exercise-modal-task {
   opacity: 1;
   left: 0;
 }
-main .exercise-modal .active-exercise-modal-task .flag-button {
+main .exercise-modal .active-exercise-modal-task .task-button-holder {
   bottom: 5px;
 }
 main .exercise-modal #extended-exercise-modal-task {

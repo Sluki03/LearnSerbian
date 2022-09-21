@@ -128,7 +128,12 @@ function textareaValueChanged(newValue) {
     firstArrow.innerText = arrowSymbols[newValue ? 0 : 1];
 }
 
+let inProgress = false;
+
 function moveOption(option, type, answerChanged) {
+    if(inProgress) return;
+    inProgress = true;
+    
     const textHolder = document.querySelector(".text-holder");
     const wordBankOptionsHolder = document.querySelector(".word-bank-options-holder");
 
@@ -170,5 +175,6 @@ function moveOption(option, type, answerChanged) {
         });
 
         answerChanged(textArray.join(" "));
+        inProgress = false;
     }, 300);
 }

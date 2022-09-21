@@ -358,16 +358,49 @@
         }
     }
 
-    @include flag-button;
-
-    .flag-button {
+    .task-button-holder {
+        @include add-flex;
+        gap: 10px;
         width: 80%;
         position: absolute;
         bottom: -100px;
-        margin: 0;
+        transition: 300ms;
 
-        &:hover {
-            box-shadow: $defShadow;
+        @include flag-button;
+
+        .switch-modes-button {
+            display: none;
+
+            img {
+                height: 30px;
+                width: 30px;
+                object-fit: contain;
+            }
+        }
+
+        .active-switch-modes-button {
+            @include add-flex;
+            background-color: transparent;
+            border: 3px dashed black;
+            border-radius: 50%;
+            opacity: 0.5;
+            cursor: pointer;
+            padding: 10px;
+            transition: 300ms;
+
+            &:hover {
+                border: 3px solid black;
+                opacity: 1;
+            }
+        }
+        
+        .flag-button {
+            width: 100%;
+            margin: 0;
+
+            &:hover {
+                box-shadow: $defShadow;
+            }
         }
     }
 
@@ -429,7 +462,7 @@
     opacity: 1;
     left: 0;
 
-    .flag-button {
+    .task-button-holder {
         bottom: 5px;
     }
 }

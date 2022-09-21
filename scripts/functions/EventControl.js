@@ -63,10 +63,7 @@ class EventControl {
         let params;
         
         Object.keys(this.events).forEach((id, index) => {
-            if(eventId === id) {
-                console.log(Object.values(this.events)[index])
-                params = Object.values(this.events)[index].params || null;
-            }
+            if(eventId === id) params = Object.values(this.events)[index].params || null;
         });
 
         return params;
