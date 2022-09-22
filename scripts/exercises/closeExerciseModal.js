@@ -31,5 +31,6 @@ export default function closeExerciseModal(confirmed, openNew) {
 
     function confirmFunction() {
         closeExerciseModal(true, openNew);
+        window.eventList.remove("taskCheckKeyDown", "taskFunctionsSetActiveButton");
     }
 }

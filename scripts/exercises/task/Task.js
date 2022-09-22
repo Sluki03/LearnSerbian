@@ -16,7 +16,7 @@ export class Task {
         this.tasks = randomArray(exercise.tasks, this.numberOfTasks);
         this.taskNumber = 0;
         this.currentTask = this.tasks[this.taskNumber];
-        this.prevModeValues = {};
+        this.prevModeValues = { textareaValue: "", options: { textHolder: [], wordBank: [] }  };
 
         this.answer = "";
         this.defaultXP = 10;
@@ -95,6 +95,8 @@ export class Task {
 
     startNew(e) {
         if(e?.type === "keydown" && e?.key !== "Enter") return;
+        
+        window.eventList.remove({ id: "taskCheckKeyDown" });
         
         if(this.tasks.length - 1 === this.taskNumber && this.currentLives > 0) {
             this.taskLives.classList.remove("active-task-lives");
@@ -226,6 +228,7 @@ export class Task {
     
     check(e) {
         const { currentTask } = this;
+        console.log("check")
         
         const {
             taskButtonHolder, checkButton, taskInfo, taskInfoImg, taskInfoTextH4, taskInfoTextP,
@@ -425,8 +428,8 @@ export class Task {
         else if(!checkButton.classList.contains("disabled-flag-button")) checkButton.classList.add("disabled-flag-button");
     }
 
-    construct(clear) {
-        const { currentTask, answerChanged, construct } = this;
+    construct() {
+        const { currentTask, prevModeValues, answerChanged, construct } = this;
         const { taskHolder, switchModesButton } = this.elements;
         const { setActiveButton, getButtonImage, setTranslatableWords, textareaValueChanged, moveOption } = TaskFunctions;
         
@@ -487,19 +490,6 @@ export class Task {
                 
                 break;
             case "translate":
-                if(clear) {
-                    if(this.currentTask.mode === "write") {
-
-                    }
-
-                    else {
-                        const translateHolderTextarea = document.querySelector(".translate-holder textarea");
-                        this.prevModeValues = { textareaValue: translateHolderTextarea.value };
-                    }
-
-                    taskHolder.innerHTML = "";
-                }
-            
                 const translateHolder = createElement({
                     tag: "div",
                     attributes: { class: "translate-holder" },
@@ -540,8 +530,7 @@ export class Task {
                         appendTo: translateHolder
                     });
     
-                    translateHolderTextarea.value = this.prevModeValues.textareaValue ? this.prevModeValues.textareaValue : "";
-                    
+                    if(this.prevModeValues.textareaValue) translateHolderTextarea.value = this.prevModeValues.textareaValue;
                     translateHolderTextarea.focus();
     
                     const buttonHolder = createElement({
@@ -604,7 +593,7 @@ export class Task {
                 }
 
                 if(this.currentTask.mode === "wordBank") {
-                    createElement({
+                    const textHolder = createElement({
                         tag: "div",
                         attributes: { class: "text-holder" },
                         appendTo: translateHolder
@@ -616,15 +605,32 @@ export class Task {
                         appendTo: translateHolder
                     });
                     
-                    const randomOptions = randomArray(this.currentTask.options);
+                    if(prevModeValues.options.textHolder.length > 0) {        
+                        prevModeValues.options.textHolder.forEach(option => createElement(getWordBankOption(option)));
+                        prevModeValues.options.wordBank.forEach(option => createElement(getWordBankOption(option)));
+                        
+                        function getWordBankOption(option) {
+                            return {
+                                tag: "button",
+                                attributes: { class: `word-bank-option word-bank-option-${option} word-bank-option-${isSelected(option)}` },
+                                innerText: option,
+                                events: [{ on: "click", call: () => moveOption(option, isSelected(option).substring(-2), answerChanged) }],
+                                appendTo: isSelected(option) === "selected" ? wordBankOptionsHolder : textHolder
+                            };
+                        }
+                    }
+                    
+                    else {
+                        const randomOptions = randomArray(this.currentTask.options);
 
-                    randomOptions.forEach(option => createElement({
-                        tag: "button",
-                        attributes: { class: `word-bank-option word-bank-option-${option} word-bank-option-selected` },
-                        innerText: option,
-                        events: [{ on: "click", call: () => moveOption(option, "select", answerChanged) }],
-                        appendTo: wordBankOptionsHolder
-                    }));
+                        randomOptions.forEach(option => createElement({
+                            tag: "button",
+                            attributes: { class: `word-bank-option word-bank-option-${option} word-bank-option-selected` },
+                            innerText: option,
+                            events: [{ on: "click", call: () => moveOption(option, "select", answerChanged) }],
+                            appendTo: wordBankOptionsHolder
+                        }));
+                    }
                 }
 
                 const icons = {
@@ -651,10 +657,48 @@ export class Task {
                 }
 
                 function swithModes() {
-                    if(currentTask.mode === undefined || currentTask.mode === "write") currentTask.mode = "wordBank";
-                    else currentTask.mode = "write";
+                    if(currentTask.mode === undefined || currentTask.mode === "write") {
+                        currentTask.mode = "wordBank";
 
-                    construct(true);
+                        const translateHolderTextarea = document.querySelector(".translate-holder textarea");
+                        prevModeValues.textareaValue = translateHolderTextarea.value;
+                    }
+                    
+                    else {
+                        currentTask.mode = "write";
+
+                        let words = {
+                            textHolder: [],
+                            wordBank: []
+                        };
+
+                        const textHolder = document.querySelector(".text-holder");
+                        const wordsBankOptionsHolder = document.querySelector(".word-bank-options-holder");
+
+                        [...textHolder.children].forEach(child => {
+                            const childText = child.innerText;
+                            words.textHolder.push(childText);
+                        });
+
+                        [...wordsBankOptionsHolder.children].forEach(child => {
+                            const childText = child.innerText;
+                            words.wordBank.push(childText);
+                        });
+
+                       prevModeValues.options = words;
+                    }
+
+                    taskHolder.innerHTML = "";
+                    construct();
+                }
+
+                function isSelected(option) {
+                    let result;
+
+                    if(prevModeValues.options.textHolder.indexOf(option) > -1) result = false;
+                    if(prevModeValues.options.wordBank.indexOf(option) > -1) result = true;
+
+                    return result ? "selected" : "deselected";
                 }
 
                 break;

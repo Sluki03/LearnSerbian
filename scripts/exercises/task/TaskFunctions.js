@@ -139,8 +139,11 @@ function moveOption(option, type, answerChanged) {
 
     const selectedOption = document.querySelector(`.word-bank-option-${option}`);
 
-    if(selectedOption.classList.contains("word-bank-option-selected")) selectedOption.classList.remove("word-bank-option-selected");
-    if(selectedOption.classList.contains("word-bank-option-deselected")) selectedOption.classList.remove("word-bank-option-deselected");
+    const removeableClasses = ["word-bank-option-selected", "word-bank-option-deselected"];
+    
+    removeableClasses.forEach(removeableClass => {
+        if(selectedOption.classList.contains(removeableClass)) selectedOption.classList.remove(removeableClass);
+    });
     
     const selectedOptionClone = selectedOption.cloneNode(true);
     

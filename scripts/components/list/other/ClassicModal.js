@@ -39,8 +39,6 @@ export default function ClassicModal(componentProps) {
         window.eventList.add({ id: "classicModalKeyDown", type: "keydown", listener: keyboardTrigger });
 
         function keyboardTrigger(e) {
-            window.eventList.remove("classicModalKeyDown");
-
             let button;
             
             Object.values(buttonsTrigger).forEach((keyboardKey, index) => {
@@ -52,6 +50,8 @@ export default function ClassicModal(componentProps) {
     }
 
     function cancelModal(button) {
+        if(window.eventList.get("classicModalKeyDown")) window.eventList.remove("classicModalKeyDown");
+        
         classicModal.style.opacity = "0";
         classicModal.style.top = "55%";
 
