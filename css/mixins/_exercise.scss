@@ -31,12 +31,21 @@
                 height: 100px;
                 width: 100px;
                 object-fit: contain;
+                filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.5));
+                transition: 150ms;
             }
         }
 
-        &:hover .exercise-content {
-            height: 155px;
-            width: 155px;
+        &:hover {
+            .exercise-content {
+                height: 155px;
+                width: 155px;
+
+                img {
+                    height: 90px;
+                    width: 90px;
+                }
+            }
         }
     }
 
@@ -47,6 +56,11 @@
         .exercise-content {
             height: 155px;
             width: 155px;
+
+            img {
+                height: 90px;
+                width: 90px;
+            }
         }
     }
 
@@ -73,9 +87,16 @@
             }
         }
 
-        &:hover .exercise-content {
-            height: 85px;
-            width: 85px;
+        &:hover {
+            .exercise-content {
+                height: 85px;
+                width: 85px;
+
+                img {
+                    height: 50px;
+                    width: 50px;
+                }
+            }
         }
     }
 }

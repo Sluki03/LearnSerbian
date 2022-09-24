@@ -359,10 +359,16 @@ main .exercise-modal .exercise-modal-title .exercise .exercise-content img {
   width: 100px;
   -o-object-fit: contain;
      object-fit: contain;
+  filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.5));
+  transition: 150ms;
 }
 main .exercise-modal .exercise-modal-title .exercise:hover .exercise-content {
   height: 155px;
   width: 155px;
+}
+main .exercise-modal .exercise-modal-title .exercise:hover .exercise-content img {
+  height: 90px;
+  width: 90px;
 }
 main .exercise-modal .exercise-modal-title #active-exercise {
   background: linear-gradient(135deg, #bd1330 45%, white 45% 55%, #144eba 55% 100%);
@@ -371,6 +377,10 @@ main .exercise-modal .exercise-modal-title #active-exercise {
 main .exercise-modal .exercise-modal-title #active-exercise .exercise-content {
   height: 155px;
   width: 155px;
+}
+main .exercise-modal .exercise-modal-title #active-exercise .exercise-content img {
+  height: 90px;
+  width: 90px;
 }
 main .exercise-modal .exercise-modal-title .exercise-clone {
   height: 100px;
@@ -394,6 +404,10 @@ main .exercise-modal .exercise-modal-title .exercise-clone .exercise-content .in
 main .exercise-modal .exercise-modal-title .exercise-clone:hover .exercise-content {
   height: 85px;
   width: 85px;
+}
+main .exercise-modal .exercise-modal-title .exercise-clone:hover .exercise-content img {
+  height: 50px;
+  width: 50px;
 }
 main .exercise-modal .disabled-exercise-modal-title {
   opacity: 0;
@@ -1510,10 +1524,16 @@ main .exercises-holder .exercises-list .exercise .exercise-content img {
   width: 100px;
   -o-object-fit: contain;
      object-fit: contain;
+  filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.5));
+  transition: 150ms;
 }
 main .exercises-holder .exercises-list .exercise:hover .exercise-content {
   height: 155px;
   width: 155px;
+}
+main .exercises-holder .exercises-list .exercise:hover .exercise-content img {
+  height: 90px;
+  width: 90px;
 }
 main .exercises-holder .exercises-list #active-exercise {
   background: linear-gradient(135deg, #bd1330 45%, white 45% 55%, #144eba 55% 100%);
@@ -1522,6 +1542,10 @@ main .exercises-holder .exercises-list #active-exercise {
 main .exercises-holder .exercises-list #active-exercise .exercise-content {
   height: 155px;
   width: 155px;
+}
+main .exercises-holder .exercises-list #active-exercise .exercise-content img {
+  height: 90px;
+  width: 90px;
 }
 main .exercises-holder .exercises-list .exercise-clone {
   height: 100px;
@@ -1545,6 +1569,10 @@ main .exercises-holder .exercises-list .exercise-clone .exercise-content .intera
 main .exercises-holder .exercises-list .exercise-clone:hover .exercise-content {
   height: 85px;
   width: 85px;
+}
+main .exercises-holder .exercises-list .exercise-clone:hover .exercise-content img {
+  height: 50px;
+  width: 50px;
 }
 
 .loading {
@@ -1961,10 +1989,16 @@ footer div a {
   width: 100px;
   -o-object-fit: contain;
      object-fit: contain;
+  filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.5));
+  transition: 150ms;
 }
 .exercise-holder .exercise:hover .exercise-content {
   height: 155px;
   width: 155px;
+}
+.exercise-holder .exercise:hover .exercise-content img {
+  height: 90px;
+  width: 90px;
 }
 .exercise-holder #active-exercise {
   background: linear-gradient(135deg, #bd1330 45%, white 45% 55%, #144eba 55% 100%);
@@ -1973,6 +2007,10 @@ footer div a {
 .exercise-holder #active-exercise .exercise-content {
   height: 155px;
   width: 155px;
+}
+.exercise-holder #active-exercise .exercise-content img {
+  height: 90px;
+  width: 90px;
 }
 .exercise-holder .exercise-clone {
   height: 100px;
@@ -1996,6 +2034,10 @@ footer div a {
 .exercise-holder .exercise-clone:hover .exercise-content {
   height: 85px;
   width: 85px;
+}
+.exercise-holder .exercise-clone:hover .exercise-content img {
+  height: 50px;
+  width: 50px;
 }
 
 .classic-modal {
