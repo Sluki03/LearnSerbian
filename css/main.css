@@ -798,29 +798,19 @@ main .exercise-modal .exercise-modal-task .task-holder .translate-holder .word-b
   padding: 5px 10px;
   transition: 300ms;
 }
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder .word-bank-option-selected {
+main .exercise-modal .exercise-modal-task .task-holder .translate-holder .word-bank-option-selective {
   transition: 100ms;
 }
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder .word-bank-option-selected:hover {
+main .exercise-modal .exercise-modal-task .task-holder .translate-holder .word-bank-option-selective:hover {
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
   top: 5px;
 }
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder .word-bank-option-deselected {
+main .exercise-modal .exercise-modal-task .task-holder .translate-holder .word-bank-option-deselective {
   transition: 100ms;
 }
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder .word-bank-option-deselected:hover {
+main .exercise-modal .exercise-modal-task .task-holder .translate-holder .word-bank-option-deselective:hover {
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
   top: -5px;
-}
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder .change-mode-button {
-  color: #5e5c5c;
-  font-size: 25px;
-  text-transform: capitalize;
-  background-color: white;
-  border: 1px solid #5e5c5c;
-  border-radius: 15px;
-  cursor: pointer;
-  padding: 5px 10px;
 }
 main .exercise-modal .exercise-modal-task .task-button-holder {
   display: flex;

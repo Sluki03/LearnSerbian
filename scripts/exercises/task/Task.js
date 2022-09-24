@@ -228,7 +228,6 @@ export class Task {
     
     check(e) {
         const { currentTask } = this;
-        console.log("check")
         
         const {
             taskButtonHolder, checkButton, taskInfo, taskInfoImg, taskInfoTextH4, taskInfoTextP,
@@ -396,7 +395,7 @@ export class Task {
 
                 break;
             case "translate":
-                if(this.currentTask.mode === undefined || this.currentTask.mode === "write") {
+                if(this.currentTask.mode.type === "write") {
                     const translateHolderTextarea = document.querySelector(".translate-holder textarea");
                     translateHolderTextarea.disabled = true;
                 }
@@ -503,7 +502,20 @@ export class Task {
 
                 setTranslatableWords(translateHolderP, this.currentTask.text, this.currentTask.translation);
 
-                if(this.currentTask.mode === undefined || this.currentTask.mode === "write") {
+                if(this.currentTask.mode === undefined) this.currentTask.mode = { type: "write", switch: false };
+                if(this.currentTask.mode.type === undefined) this.currentLives.mode = {...this.currentTask.mode, type: "write"};
+                if(this.currentTask.mode.switch === undefined) this.currentTask.mode = {...this.currentTask.mode, switch: false};
+                
+                const modeTypes = ["write", "wordBank"];
+
+                if(this.currentTask.mode.type === "random") {
+                    const randomModeType = modeTypes[Math.floor(Math.random() * modeTypes.length)];
+                    
+                    if(randomModeType === "wordBank" && this.currentTask.options === undefined) this.currentTask.mode.type = "write";
+                    else this.currentTask.mode.type = randomModeType;
+                }
+                
+                if(this.currentTask.mode.type === "write") {
                     const translateHolderTextarea = createElement({
                         tag: "textarea",
                         attributes: {
@@ -592,7 +604,7 @@ export class Task {
                     }
                 }
 
-                if(this.currentTask.mode === "wordBank") {
+                if(this.currentTask.mode.type === "wordBank") {
                     const textHolder = createElement({
                         tag: "div",
                         attributes: { class: "text-holder" },
@@ -606,30 +618,27 @@ export class Task {
                     });
                     
                     if(prevModeValues.options.textHolder.length > 0) {        
-                        prevModeValues.options.textHolder.forEach(option => createElement(getWordBankOption(option)));
-                        prevModeValues.options.wordBank.forEach(option => createElement(getWordBankOption(option)));
-                        
-                        function getWordBankOption(option) {
-                            return {
-                                tag: "button",
-                                attributes: { class: `word-bank-option word-bank-option-${option} word-bank-option-${isSelected(option)}` },
-                                innerText: option,
-                                events: [{ on: "click", call: () => moveOption(option, isSelected(option).substring(-2), answerChanged) }],
-                                appendTo: isSelected(option) === "selected" ? wordBankOptionsHolder : textHolder
-                            };
-                        }
+                        prevModeValues.options.textHolder.forEach(option => createElement(getWordBankOption(option, true)));
+                        prevModeValues.options.wordBank.forEach(option => createElement(getWordBankOption(option, true)));
                     }
                     
                     else {
                         const randomOptions = randomArray(this.currentTask.options);
+                        randomOptions.forEach(option => createElement(getWordBankOption(option)));
+                    }
 
-                        randomOptions.forEach(option => createElement({
+                    function getWordBankOption(option, isDynamic) {
+                        const optionSelectiveTypeClass = isDynamic ? `word-bank-option-${isSelective(option)}` : "word-bank-option-selective";
+                        const moveOptionType = isDynamic ? isSelective(option).substring(-2) : "select";
+                        const selectiveTypeAppendTo = isDynamic ? isSelective(option) === "selective" ? wordBankOptionsHolder : textHolder : wordBankOptionsHolder;
+                        
+                        return {
                             tag: "button",
-                            attributes: { class: `word-bank-option word-bank-option-${option} word-bank-option-selected` },
+                            attributes: { class: `word-bank-option word-bank-option-${option} ${optionSelectiveTypeClass}` },
                             innerText: option,
-                            events: [{ on: "click", call: () => moveOption(option, "select", answerChanged) }],
-                            appendTo: wordBankOptionsHolder
-                        }));
+                            events: [{ on: "click", call: () => moveOption(option, moveOptionType, answerChanged) }],
+                            appendTo: selectiveTypeAppendTo
+                        };
                     }
                 }
 
@@ -638,34 +647,38 @@ export class Task {
                     wordBank: { src: "../../../images/icons/word-bank-icon.svg", alt: "Word Bank" }
                 };
                 
-                const invertedModeIcon = this.currentTask.mode === undefined || this.currentTask.mode === "write" ? icons.wordBank : icons.write;
+                const invertedModeIcon = this.currentTask.mode.type === "write" ? icons.wordBank : icons.write;
 
-                switchModesButton.classList.add("active-switch-modes-button");
-                switchModesButton.onclick = swithModes;
+                if(currentTask.mode.switch) {
+                    if(currentTask.mode.type === "write" && currentTask.options === undefined) return;
+                    
+                    switchModesButton.classList.add("active-switch-modes-button");
+                    switchModesButton.onclick = swithModes;
 
-                const switchModesImg = document.querySelector(".active-switch-modes-button img");
+                    const switchModesImg = document.querySelector(".active-switch-modes-button img");
 
-                if(switchModesImg === null) createElement({
-                    tag: "img",
-                    attributes: { src: invertedModeIcon.src, alt: invertedModeIcon.alt },
-                    appendTo: switchModesButton
-                });
+                    if(switchModesImg === null) createElement({
+                        tag: "img",
+                        attributes: { src: invertedModeIcon.src, alt: invertedModeIcon.alt },
+                        appendTo: switchModesButton
+                    });
 
-                else {
-                    switchModesImg.src = invertedModeIcon.src;
-                    switchModesImg.alt = invertedModeIcon.alt;
+                    else {
+                        switchModesImg.src = invertedModeIcon.src;
+                        switchModesImg.alt = invertedModeIcon.alt;
+                    }
                 }
 
                 function swithModes() {
-                    if(currentTask.mode === undefined || currentTask.mode === "write") {
-                        currentTask.mode = "wordBank";
+                    if(currentTask.mode.type === "write") {
+                        currentTask.mode.type = "wordBank";
 
                         const translateHolderTextarea = document.querySelector(".translate-holder textarea");
                         prevModeValues.textareaValue = translateHolderTextarea.value;
                     }
                     
                     else {
-                        currentTask.mode = "write";
+                        currentTask.mode.type = "write";
 
                         let words = {
                             textHolder: [],
@@ -674,7 +687,7 @@ export class Task {
 
                         const textHolder = document.querySelector(".text-holder");
                         const wordsBankOptionsHolder = document.querySelector(".word-bank-options-holder");
-
+                        
                         [...textHolder.children].forEach(child => {
                             const childText = child.innerText;
                             words.textHolder.push(childText);
@@ -692,13 +705,13 @@ export class Task {
                     construct();
                 }
 
-                function isSelected(option) {
+                function isSelective(option) {
                     let result;
 
                     if(prevModeValues.options.textHolder.indexOf(option) > -1) result = false;
                     if(prevModeValues.options.wordBank.indexOf(option) > -1) result = true;
 
-                    return result ? "selected" : "deselected";
+                    return result ? "selective" : "deselective";
                 }
 
                 break;

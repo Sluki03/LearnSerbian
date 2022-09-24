@@ -139,7 +139,7 @@ function moveOption(option, type, answerChanged) {
 
     const selectedOption = document.querySelector(`.word-bank-option-${option}`);
 
-    const removeableClasses = ["word-bank-option-selected", "word-bank-option-deselected"];
+    const removeableClasses = ["word-bank-option-selective", "word-bank-option-deselective"];
     
     removeableClasses.forEach(removeableClass => {
         if(selectedOption.classList.contains(removeableClass)) selectedOption.classList.remove(removeableClass);
@@ -147,8 +147,8 @@ function moveOption(option, type, answerChanged) {
     
     const selectedOptionClone = selectedOption.cloneNode(true);
     
-    selectedOption.classList.add(type === "select" ? "word-bank-option-selected" : "word-bank-option-deselected");
-    selectedOptionClone.classList.add(type !== "select" ? "word-bank-option-selected" : "word-bank-option-deselected");
+    selectedOption.classList.add(type === "select" ? "word-bank-option-selective" : "word-bank-option-deselective");
+    selectedOptionClone.classList.add(type !== "select" ? "word-bank-option-selective" : "word-bank-option-deselective");
 
     selectedOption.style.opacity = "0";
     selectedOption.style.top = type === "select" ? "-10px" : "10px";

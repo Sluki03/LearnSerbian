@@ -327,7 +327,7 @@
                 transition: 300ms;
             }
 
-            .word-bank-option-selected {
+            .word-bank-option-selective {
                 transition: 100ms;
 
                 &:hover {
@@ -336,24 +336,13 @@
                 }
             }
 
-            .word-bank-option-deselected {
+            .word-bank-option-deselective {
                 transition: 100ms;
 
                 &:hover {
                     box-shadow: $defLighterShadow;
                     top: -5px;
                 }
-            }
-
-            .change-mode-button {
-                color: $defDarkGrey;
-                font-size: set-size(lg);
-                text-transform: capitalize;
-                background-color: white;
-                border: 1px solid $defDarkGrey;
-                border-radius: 15px;
-                cursor: pointer;
-                padding: 5px 10px;
             }
         }
     }
