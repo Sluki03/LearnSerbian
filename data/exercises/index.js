@@ -9,6 +9,7 @@ export const exercisesData = [
     {
         name: "New words",
         difficulty: "easy",
+        icon: "../images/exercises/cat.png",
         tips: `
             #This is pretty hard#
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br /><br />

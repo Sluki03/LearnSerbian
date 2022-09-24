@@ -354,6 +354,12 @@ main .exercise-modal .exercise-modal-title .exercise .exercise-content {
   transform: translate(-50%, -50%);
   transition: 300ms;
 }
+main .exercise-modal .exercise-modal-title .exercise .exercise-content img {
+  height: 100px;
+  width: 100px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
 main .exercise-modal .exercise-modal-title .exercise:hover .exercise-content {
   height: 155px;
   width: 155px;
@@ -377,6 +383,10 @@ main .exercise-modal .exercise-modal-title .exercise-clone:hover {
 main .exercise-modal .exercise-modal-title .exercise-clone .exercise-content {
   height: 85px;
   width: 85px;
+}
+main .exercise-modal .exercise-modal-title .exercise-clone .exercise-content img {
+  height: 50px;
+  width: 50px;
 }
 main .exercise-modal .exercise-modal-title .exercise-clone .exercise-content .interactive-title span {
   font-size: 50px;
@@ -1495,6 +1505,12 @@ main .exercises-holder .exercises-list .exercise .exercise-content {
   transform: translate(-50%, -50%);
   transition: 300ms;
 }
+main .exercises-holder .exercises-list .exercise .exercise-content img {
+  height: 100px;
+  width: 100px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
 main .exercises-holder .exercises-list .exercise:hover .exercise-content {
   height: 155px;
   width: 155px;
@@ -1518,6 +1534,10 @@ main .exercises-holder .exercises-list .exercise-clone:hover {
 main .exercises-holder .exercises-list .exercise-clone .exercise-content {
   height: 85px;
   width: 85px;
+}
+main .exercises-holder .exercises-list .exercise-clone .exercise-content img {
+  height: 50px;
+  width: 50px;
 }
 main .exercises-holder .exercises-list .exercise-clone .exercise-content .interactive-title span {
   font-size: 50px;
@@ -1936,6 +1956,12 @@ footer div a {
   transform: translate(-50%, -50%);
   transition: 300ms;
 }
+.exercise-holder .exercise .exercise-content img {
+  height: 100px;
+  width: 100px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
 .exercise-holder .exercise:hover .exercise-content {
   height: 155px;
   width: 155px;
@@ -1959,6 +1985,10 @@ footer div a {
 .exercise-holder .exercise-clone .exercise-content {
   height: 85px;
   width: 85px;
+}
+.exercise-holder .exercise-clone .exercise-content img {
+  height: 50px;
+  width: 50px;
 }
 .exercise-holder .exercise-clone .exercise-content .interactive-title span {
   font-size: 50px;

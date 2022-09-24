@@ -39,7 +39,8 @@ export default function ExercisesList(componentProps) {
 
         const [exerciseContent] = [...articleExercise.children];
 
-        Component.create("InteractiveTitle", { title: index + 1, appendTo: exerciseContent });
+        if(exercise.icon) createElement({ tag: "img", attributes: { src: exercise.icon, alt: exercise.name }, appendTo: exerciseContent });
+        else Component.create("InteractiveTitle", { title: index + 1, appendTo: exerciseContent });
     });
 
     return list;
