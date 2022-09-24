@@ -1,7 +1,10 @@
 import createElement from "../../functions/createElement.js";
 import breakText from "../../functions/breakText.js";
 
-export const TaskFunctions = { setActiveButton, getButtonImage, setTranslatableWords, textareaValueChanged, moveOption };
+export const TaskFunctions = {
+    setActiveButton, getButtonImage, setTranslatableWords,
+    textareaValueChanged, moveOption, messageGenerator
+};
 
 function setActiveButton(e) {
     e.preventDefault();
@@ -180,4 +183,23 @@ function moveOption(option, type, answerChanged) {
         answerChanged(textArray.join(" "));
         inProgress = false;
     }, 300);
+}
+
+function* messageGenerator(messages, conversationMessages) {
+    for(const message of messages) {
+        const messageHolder = createElement({
+            tag: "p",
+            attributes: { class: "participant-message-holder" },
+            appendTo: conversationMessages
+        });
+        
+        createElement({
+            tag: "p",
+            attributes: { class: "participant-message" },
+            innerText: message.text,
+            appendTo: messageHolder
+        });
+
+        yield message.acceptableAnswers;
+    }
 }

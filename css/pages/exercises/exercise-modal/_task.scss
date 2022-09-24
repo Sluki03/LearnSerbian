@@ -345,6 +345,57 @@
                 }
             }
         }
+
+        .conversation-holder {
+            @include add-flex(column, flex-start);
+            height: 100%;
+            width: 55%;
+            border: 1px solid $defGrey;
+            border-radius: 20px;
+            box-shadow: $defLighterShadow;
+
+            .conversation-participant {
+                @include add-flex(row, flex-start);
+                gap: 10px;
+                width: 100%;
+                background-color: $defLighterBlue;
+                border-top-left-radius: 20px;
+                border-top-right-radius: 20px;
+                padding: 5px 10px;
+
+                img {
+                    height: 60px;
+                    width: 60px;
+                    object-fit: contain;
+                    border-radius: 50%;
+                }
+
+                strong {
+                    color: white;
+                    font-size: set-size(xl);
+                }
+            }
+
+            .conversation-messages {
+                @include add-flex(column);
+                width: 100%;
+                padding: 15px;
+
+                .participant-message-holder {
+                    @include add-flex(row, flex-start);
+                    width: 100%;
+
+                    p {
+                        color: $defDarkGrey;
+                        font-size: set-size(lg);
+                        background-color: white;
+                        border: 1px solid $defGrey;
+                        border-radius: 15px;
+                        padding: 5px 10px;
+                    }
+                }
+            }
+        }
     }
 
     .task-button-holder {
@@ -391,6 +442,10 @@
                 box-shadow: $defShadow;
             }
         }
+    }
+
+    .active-task-button-holder {
+        bottom: 5px;
     }
 
     .task-info {
@@ -450,10 +505,6 @@
 .active-exercise-modal-task {
     opacity: 1;
     left: 0;
-
-    .task-button-holder {
-        bottom: 5px;
-    }
 }
 
 #extended-exercise-modal-task {

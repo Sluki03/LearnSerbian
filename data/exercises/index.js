@@ -2,7 +2,7 @@ import { newWords } from "./tasks/newWords.js";
 import { test1 } from "./tasks/test1.js";
 
 // difficulty options: easy, medium, hard
-// task types: multipleChoice, multipleChoiceImages, translate
+// task types: multipleChoice, multipleChoiceImages, translate, conversation
 // translate modes: write (default), wordBank
 
 export const exercisesData = [

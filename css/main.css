@@ -836,6 +836,63 @@ main .exercise-modal .exercise-modal-task .task-holder .translate-holder .word-b
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
   top: -5px;
 }
+main .exercise-modal .exercise-modal-task .task-holder .conversation-holder {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  height: 100%;
+  width: 55%;
+  border: 1px solid rgba(200, 200, 200, 0.5);
+  border-radius: 20px;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+}
+main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-participant {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
+  background-color: #0589f5;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  padding: 5px 10px;
+}
+main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-participant img {
+  height: 60px;
+  width: 60px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  border-radius: 50%;
+}
+main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-participant strong {
+  color: white;
+  font-size: 30px;
+}
+main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-messages {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  padding: 15px;
+}
+main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-messages .participant-message-holder {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  width: 100%;
+}
+main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-messages .participant-message-holder p {
+  color: #5e5c5c;
+  font-size: 25px;
+  background-color: white;
+  border: 1px solid rgba(200, 200, 200, 0.5);
+  border-radius: 15px;
+  padding: 5px 10px;
+}
 main .exercise-modal .exercise-modal-task .task-button-holder {
   display: flex;
   align-items: center;
@@ -906,6 +963,9 @@ main .exercise-modal .exercise-modal-task .task-button-holder .flag-button {
 main .exercise-modal .exercise-modal-task .task-button-holder .flag-button:hover {
   box-shadow: 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
 }
+main .exercise-modal .exercise-modal-task .active-task-button-holder {
+  bottom: 5px;
+}
 main .exercise-modal .exercise-modal-task .task-info {
   display: flex;
   align-items: center;
@@ -961,9 +1021,6 @@ main .exercise-modal .exercise-modal-task .task-info .arrow-button img {
 main .exercise-modal .active-exercise-modal-task {
   opacity: 1;
   left: 0;
-}
-main .exercise-modal .active-exercise-modal-task .task-button-holder {
-  bottom: 5px;
 }
 main .exercise-modal #extended-exercise-modal-task {
   height: 100%;

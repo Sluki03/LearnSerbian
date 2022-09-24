@@ -75,9 +75,13 @@ export class Task {
     
     start() {
         setTimeout(() => {
-            this.taskElement.classList.add("active-exercise-modal-task");
             this.taskLives.classList.add("active-task-lives");
             this.taskProgressBarHolder.classList.add("active-task-progress-bar-holder");
+
+            this.taskElement.classList.add("active-exercise-modal-task");
+
+            const taskButtonHolder = document.querySelector(".task-button-holder");
+            if(this.currentTask.type !== "conversation") taskButtonHolder.classList.add("active-task-button-holder");
         }, 100);
         
         this.initializeElements();
@@ -430,7 +434,7 @@ export class Task {
     construct() {
         const { currentTask, prevModeValues, answerChanged, construct } = this;
         const { taskHolder, switchModesButton } = this.elements;
-        const { setActiveButton, getButtonImage, setTranslatableWords, textareaValueChanged, moveOption } = TaskFunctions;
+        const { setActiveButton, getButtonImage, setTranslatableWords, textareaValueChanged, moveOption, messageGenerator } = TaskFunctions;
         
         switch(this.currentTask.type) {
             case "multipleChoice":
@@ -714,6 +718,21 @@ export class Task {
                     return result ? "selective" : "deselective";
                 }
 
+                break;
+            case "conversation":
+                taskHolder.style.height = "70%";
+            
+                const conversationHolder = document.querySelector("[data-template='exercise-modal-task-conversation']").content.firstElementChild.cloneNode(true);
+                taskHolder.appendChild(conversationHolder);
+
+                const [conversationParticipant, conversationMessages, conversationAnswer] = [...conversationHolder.children];
+                
+                const participantName = conversationParticipant.children[1];
+                participantName.innerText = this.currentTask.participant;
+
+                const messages = messageGenerator(this.currentTask.messages, conversationMessages);
+                console.log(messages.next().value)
+                
                 break;
             default: return;
         }
