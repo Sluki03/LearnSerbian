@@ -18,6 +18,19 @@ export const test1 = [
     {
         type: "translate",
         title: "Translate the following text:",
+        text: "Ja sam šef",
+        acceptableAnswers: [
+            "I am the boss",
+            "I'm the boss"
+        ],
+        translation: {
+            šef: "the boss"
+        },
+        xp: 5
+    },
+    {
+        type: "translate",
+        title: "Translate the following text:",
         text: "Odakle si?",
         mode: {
             type: "random",

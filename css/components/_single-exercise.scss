@@ -8,9 +8,11 @@
         max-width: 285px;
         background-color: white;
         border: 1px solid $defDarkGrey;
+        border-radius: 15px;
+        box-shadow: $defLightShadow;
         position: absolute;
         left: 35%;
-        padding: 0 5px;
+        padding: 3px 5px;
         transform: translate(-100%, 50%);
 
         .exercise-difficulty {

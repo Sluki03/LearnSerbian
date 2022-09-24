@@ -2,7 +2,7 @@
     .exercise {
         height: 180px;
         width: 180px;
-        background: $defRedBlue;
+        background: $defRedBlueWhite;
         border-radius: 50%;
         box-shadow: $defShadow;
         cursor: pointer;
@@ -10,7 +10,7 @@
         transition: 300ms;
 
         &:hover {
-            background: $defBlueRed;
+            background: $defWhiteBlueRed;
         }
 
         .exercise-content {
@@ -35,7 +35,7 @@
     }
 
     #active-exercise {
-        background: $defBlueRed;
+        background: $defRedBlueWhite;
         cursor: default;
 
         .exercise-content {
@@ -50,7 +50,7 @@
         cursor: default;
 
         &:hover {
-            background: $defRedBlue;
+            background: $defRedBlueWhite;
         }
 
         .exercise-content {
