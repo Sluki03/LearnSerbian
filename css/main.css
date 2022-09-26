@@ -874,7 +874,7 @@ main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .con
 }
 main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-participant strong {
   color: white;
-  font-size: 30px;
+  font-size: 25px;
 }
 main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-participant span {
   display: none;
@@ -915,7 +915,7 @@ main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .con
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 5px;
+  gap: 10px;
   width: 100%;
   padding: 15px;
 }
@@ -928,10 +928,10 @@ main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .con
 }
 main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-messages .participant-message-holder p {
   color: #5e5c5c;
-  font-size: 25px;
+  font-size: 20px;
   background-color: white;
   border: 1px solid rgba(200, 200, 200, 0.5);
-  border-radius: 15px;
+  border-radius: 0px 15px 15px 15px;
   padding: 5px 10px;
 }
 main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-messages .user-message-holder {
@@ -943,10 +943,10 @@ main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .con
 }
 main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-messages .user-message-holder p {
   color: white;
-  font-size: 25px;
+  font-size: 20px;
   background-color: #0589f5;
   border: 1px solid rgba(200, 200, 200, 0.5);
-  border-radius: 15px;
+  border-radius: 15px 15px 0px 15px;
   padding: 5px 10px;
 }
 main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-answer {
@@ -955,7 +955,9 @@ main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .con
   justify-content: flex-start;
   flex-direction: row;
   width: 100%;
-  background-color: #0589f5;
+  background-color: rgba(255, 255, 255, 0.7);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
   position: absolute;
@@ -984,12 +986,14 @@ main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .con
   height: 45px;
   width: 45px;
   opacity: 0;
+  background-color: #0589f5;
   right: 0;
   bottom: auto;
   transform: rotate(-90deg);
 }
 main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-answer .arrow-button img {
   height: 30px;
+  filter: invert(100%);
 }
 main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .active-conversation-answer input {
   width: 89%;

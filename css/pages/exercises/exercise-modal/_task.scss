@@ -373,7 +373,7 @@
 
                 strong {
                     color: white;
-                    font-size: set-size(xl);
+                    font-size: set-size(lg);
                 }
 
                 span {
@@ -398,7 +398,7 @@
 
             .conversation-messages {
                 @include add-flex(column);
-                gap: 5px;
+                gap: 10px;
                 width: 100%;
                 padding: 15px;
 
@@ -408,10 +408,10 @@
 
                     p {
                         color: $defDarkGrey;
-                        font-size: set-size(lg);
+                        font-size: set-size(md);
                         background-color: white;
                         border: 1px solid $defGrey;
-                        border-radius: 15px;
+                        border-radius: 0px 15px 15px 15px;
                         padding: 5px 10px;
                     }
                 }
@@ -422,10 +422,10 @@
 
                     p {
                         color: white;
-                        font-size: set-size(lg);
+                        font-size: set-size(md);
                         background-color: $defLighterBlue;
                         border: 1px solid $defGrey;
-                        border-radius: 15px;
+                        border-radius: 15px 15px 0px 15px;
                         padding: 5px 10px;
                     }
                 }
@@ -434,7 +434,8 @@
             .conversation-answer {
                 @include add-flex(row, flex-start);
                 width: 100%;
-                background-color: $defLighterBlue;
+                background-color: rgba(255, 255, 255, 0.7);
+                backdrop-filter: blur(10px);
                 border-bottom-left-radius: 20px;
                 border-bottom-right-radius: 20px;
                 position: absolute;
@@ -466,12 +467,14 @@
                     height: 45px;
                     width: 45px;
                     opacity: 0;
+                    background-color: $defLighterBlue;
                     right: 0;
                     bottom: auto;
                     transform: rotate(-90deg);
 
                     img {
                         height: 30px;
+                        filter: invert(100%);
                     }
                 }
             }
