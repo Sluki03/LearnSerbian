@@ -353,6 +353,7 @@
             border: 1px solid $defGrey;
             border-radius: 20px;
             box-shadow: $defLighterShadow;
+            position: relative;
 
             .conversation-participant {
                 @include add-flex(row, flex-start);
@@ -374,10 +375,30 @@
                     color: white;
                     font-size: set-size(xl);
                 }
+
+                span {
+                    display: none;
+                    color: white;
+                    font-size: set-size(md);
+                    font-style: italic;
+                    opacity: 0.5;
+                    animation: conversation-participant-typing 1.5s linear infinite;
+
+                    @keyframes conversation-participant-typing {
+                        0% { opacity: 0.5 };
+                        50% { opacity: 0 };
+                        100% { opacity: 0.5 };
+                    }
+                }
+
+                .active-conversation-participant-typing {
+                    display: block;
+                }
             }
 
             .conversation-messages {
                 @include add-flex(column);
+                gap: 5px;
                 width: 100%;
                 padding: 15px;
 
@@ -392,6 +413,87 @@
                         border: 1px solid $defGrey;
                         border-radius: 15px;
                         padding: 5px 10px;
+                    }
+                }
+
+                .user-message-holder {
+                    @include add-flex(row, flex-end);
+                    width: 100%;
+
+                    p {
+                        color: white;
+                        font-size: set-size(lg);
+                        background-color: $defLighterBlue;
+                        border: 1px solid $defGrey;
+                        border-radius: 15px;
+                        padding: 5px 10px;
+                    }
+                }
+            }
+
+            .conversation-answer {
+                @include add-flex(row, flex-start);
+                width: 100%;
+                background-color: $defLighterBlue;
+                border-bottom-left-radius: 20px;
+                border-bottom-right-radius: 20px;
+                position: absolute;
+                bottom: 0;
+                padding: 10px 5px;
+
+                input {
+                    width: 100%;
+                    color: $defDarkGrey;
+                    font-size: set-size(md);
+                    background-color: white;
+                    border: 2px solid $defGrey;
+                    border-radius: 15px;
+                    outline: none;
+                    padding: 5px 10px;
+                    transition: 150ms;
+
+                    &:hover {
+                        border: 2px solid $defDarkGrey;
+                    }
+
+                    &:focus {
+                        border: 2px solid $defDarkGrey;
+                        box-shadow: $defLightShadow;
+                    }
+                }
+
+                .arrow-button {
+                    height: 45px;
+                    width: 45px;
+                    opacity: 0;
+                    right: 0;
+                    bottom: auto;
+                    transform: rotate(-90deg);
+
+                    img {
+                        height: 30px;
+                    }
+                }
+            }
+
+            .active-conversation-answer {
+                input {
+                    width: 89%;
+                }
+
+                .arrow-button {
+                    opacity: 1;
+                    right: 5px;
+                }
+            }
+
+            .disabled-conversation-answer {
+                input {
+                    opacity: 0.5;
+                    cursor: default;
+
+                    &:hover {
+                        border: 2px solid $defGrey;
                     }
                 }
             }

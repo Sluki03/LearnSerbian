@@ -19,7 +19,12 @@ export default function ExerciseModal(componentProps) {
 
     function modalOptionsResize() {
         const textarea = document.querySelector("textarea");
-        if(textarea && textarea.isEqualNode(document.activeElement)) return true;
+        const input = document.querySelector("input");
+        
+        if(
+            textarea && textarea.isEqualNode(document.activeElement) ||
+            input && input.isEqualNode(document.activeElement)
+        ) return true;
         
         const exerciseModalWith = parseInt(getComputedStyle(exerciseModal).getPropertyValue("width"));
         let isIconRotated = exerciseModalWith === window.innerWidth;

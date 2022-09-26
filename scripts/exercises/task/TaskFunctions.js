@@ -3,7 +3,8 @@ import breakText from "../../functions/breakText.js";
 
 export const TaskFunctions = {
     setActiveButton, getButtonImage, setTranslatableWords,
-    textareaValueChanged, moveOption, messageGenerator
+    textareaValueChanged, moveOption, messageGenerator,
+    sendMessage
 };
 
 function setActiveButton(e) {
@@ -186,20 +187,41 @@ function moveOption(option, type, answerChanged) {
 }
 
 function* messageGenerator(messages, conversationMessages) {
+    const participantTyping = document.querySelector(".conversation-participant span");
+    
     for(const message of messages) {
-        const messageHolder = createElement({
-            tag: "p",
-            attributes: { class: "participant-message-holder" },
-            appendTo: conversationMessages
-        });
+        const conversationAnswerInput = document.querySelector(".conversation-answer input");
+        const typingDuration = message.text.length * 100;
         
-        createElement({
-            tag: "p",
-            attributes: { class: "participant-message" },
-            innerText: message.text,
-            appendTo: messageHolder
-        });
+        if(conversationAnswerInput !== null) conversationAnswerInput.disabled = true;
+        participantTyping.classList.add("active-conversation-participant-typing");
 
-        yield message.acceptableAnswers;
+        setTimeout(() => {
+            if(conversationAnswerInput !== null) {
+                conversationAnswerInput.disabled = false;
+                conversationAnswerInput.focus();
+            }
+            
+            participantTyping.classList.remove("active-conversation-participant-typing");
+
+            sendMessage("participant", message.text, conversationMessages);
+        }, typingDuration);
+
+        yield message;
     }
+}
+
+function sendMessage(role, text, conversationMessages) {
+    const messageHolder = createElement({
+        tag: "div",
+        attributes: { class: `${role}-message-holder` },
+        appendTo: conversationMessages
+    });
+    
+    createElement({
+        tag: "p",
+        attributes: { class: `${role}-message` },
+        innerText: text,
+        appendTo: messageHolder
+    });
 }

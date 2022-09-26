@@ -325,6 +325,10 @@ main .exercise-modal .exercise-modal-title .interactive-title:hover span:last-ch
   text-shadow: 0px 0px 15px rgba(82, 138, 242, 0.5);
 }
 main .exercise-modal .exercise-modal-title .exercise {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
   height: 180px;
   width: 180px;
   background: linear-gradient(135deg, #bd1330 45%, white 45% 55%, #144eba 55% 100%);
@@ -335,7 +339,7 @@ main .exercise-modal .exercise-modal-title .exercise {
   transition: 300ms;
 }
 main .exercise-modal .exercise-modal-title .exercise:hover {
-  background: linear-gradient(45deg, #144eba 45%, white 45% 55%, #bd1330 55% 100%);
+  transform: rotate(180deg);
 }
 main .exercise-modal .exercise-modal-title .exercise .exercise-content {
   display: flex;
@@ -349,9 +353,6 @@ main .exercise-modal .exercise-modal-title .exercise .exercise-content {
   box-shadow: inset 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
   cursor: inherit;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   transition: 300ms;
 }
 main .exercise-modal .exercise-modal-title .exercise .exercise-content img {
@@ -365,18 +366,20 @@ main .exercise-modal .exercise-modal-title .exercise .exercise-content img {
 main .exercise-modal .exercise-modal-title .exercise:hover .exercise-content {
   height: 155px;
   width: 155px;
+  transform: rotate(-180deg);
 }
 main .exercise-modal .exercise-modal-title .exercise:hover .exercise-content img {
   height: 90px;
   width: 90px;
 }
 main .exercise-modal .exercise-modal-title #active-exercise {
-  background: linear-gradient(135deg, #bd1330 45%, white 45% 55%, #144eba 55% 100%);
+  transform: rotate(0);
   cursor: default;
 }
 main .exercise-modal .exercise-modal-title #active-exercise .exercise-content {
   height: 155px;
   width: 155px;
+  transform: rotate(0);
 }
 main .exercise-modal .exercise-modal-title #active-exercise .exercise-content img {
   height: 90px;
@@ -388,11 +391,12 @@ main .exercise-modal .exercise-modal-title .exercise-clone {
   cursor: default;
 }
 main .exercise-modal .exercise-modal-title .exercise-clone:hover {
-  background: linear-gradient(135deg, #bd1330 45%, white 45% 55%, #144eba 55% 100%);
+  transform: rotate(0);
 }
 main .exercise-modal .exercise-modal-title .exercise-clone .exercise-content {
   height: 85px;
   width: 85px;
+  transform: rotate(0);
 }
 main .exercise-modal .exercise-modal-title .exercise-clone .exercise-content img {
   height: 50px;
@@ -404,6 +408,7 @@ main .exercise-modal .exercise-modal-title .exercise-clone .exercise-content .in
 main .exercise-modal .exercise-modal-title .exercise-clone:hover .exercise-content {
   height: 85px;
   width: 85px;
+  transform: rotate(0);
 }
 main .exercise-modal .exercise-modal-title .exercise-clone:hover .exercise-content img {
   height: 50px;
@@ -846,6 +851,7 @@ main .exercise-modal .exercise-modal-task .task-holder .conversation-holder {
   border: 1px solid rgba(200, 200, 200, 0.5);
   border-radius: 20px;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-participant {
   display: flex;
@@ -870,11 +876,46 @@ main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .con
   color: white;
   font-size: 30px;
 }
+main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-participant span {
+  display: none;
+  color: white;
+  font-size: 20px;
+  font-style: italic;
+  opacity: 0.5;
+  -webkit-animation: conversation-participant-typing 1.5s linear infinite;
+          animation: conversation-participant-typing 1.5s linear infinite;
+}
+@-webkit-keyframes conversation-participant-typing {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+@keyframes conversation-participant-typing {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-participant .active-conversation-participant-typing {
+  display: block;
+}
 main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-messages {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  gap: 5px;
   width: 100%;
   padding: 15px;
 }
@@ -892,6 +933,77 @@ main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .con
   border: 1px solid rgba(200, 200, 200, 0.5);
   border-radius: 15px;
   padding: 5px 10px;
+}
+main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-messages .user-message-holder {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: row;
+  width: 100%;
+}
+main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-messages .user-message-holder p {
+  color: white;
+  font-size: 25px;
+  background-color: #0589f5;
+  border: 1px solid rgba(200, 200, 200, 0.5);
+  border-radius: 15px;
+  padding: 5px 10px;
+}
+main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-answer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  width: 100%;
+  background-color: #0589f5;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  position: absolute;
+  bottom: 0;
+  padding: 10px 5px;
+}
+main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-answer input {
+  width: 100%;
+  color: #5e5c5c;
+  font-size: 20px;
+  background-color: white;
+  border: 2px solid rgba(200, 200, 200, 0.5);
+  border-radius: 15px;
+  outline: none;
+  padding: 5px 10px;
+  transition: 150ms;
+}
+main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-answer input:hover {
+  border: 2px solid #5e5c5c;
+}
+main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-answer input:focus {
+  border: 2px solid #5e5c5c;
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
+}
+main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-answer .arrow-button {
+  height: 45px;
+  width: 45px;
+  opacity: 0;
+  right: 0;
+  bottom: auto;
+  transform: rotate(-90deg);
+}
+main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-answer .arrow-button img {
+  height: 30px;
+}
+main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .active-conversation-answer input {
+  width: 89%;
+}
+main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .active-conversation-answer .arrow-button {
+  opacity: 1;
+  right: 5px;
+}
+main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .disabled-conversation-answer input {
+  opacity: 0.5;
+  cursor: default;
+}
+main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .disabled-conversation-answer input:hover {
+  border: 2px solid rgba(200, 200, 200, 0.5);
 }
 main .exercise-modal .exercise-modal-task .task-button-holder {
   display: flex;
@@ -1547,6 +1659,10 @@ main .exercises-holder .exercises-list .interactive-title:hover span:last-child 
   text-shadow: 0px 0px 15px rgba(82, 138, 242, 0.5);
 }
 main .exercises-holder .exercises-list .exercise {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
   height: 180px;
   width: 180px;
   background: linear-gradient(135deg, #bd1330 45%, white 45% 55%, #144eba 55% 100%);
@@ -1557,7 +1673,7 @@ main .exercises-holder .exercises-list .exercise {
   transition: 300ms;
 }
 main .exercises-holder .exercises-list .exercise:hover {
-  background: linear-gradient(45deg, #144eba 45%, white 45% 55%, #bd1330 55% 100%);
+  transform: rotate(180deg);
 }
 main .exercises-holder .exercises-list .exercise .exercise-content {
   display: flex;
@@ -1571,9 +1687,6 @@ main .exercises-holder .exercises-list .exercise .exercise-content {
   box-shadow: inset 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
   cursor: inherit;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   transition: 300ms;
 }
 main .exercises-holder .exercises-list .exercise .exercise-content img {
@@ -1587,18 +1700,20 @@ main .exercises-holder .exercises-list .exercise .exercise-content img {
 main .exercises-holder .exercises-list .exercise:hover .exercise-content {
   height: 155px;
   width: 155px;
+  transform: rotate(-180deg);
 }
 main .exercises-holder .exercises-list .exercise:hover .exercise-content img {
   height: 90px;
   width: 90px;
 }
 main .exercises-holder .exercises-list #active-exercise {
-  background: linear-gradient(135deg, #bd1330 45%, white 45% 55%, #144eba 55% 100%);
+  transform: rotate(0);
   cursor: default;
 }
 main .exercises-holder .exercises-list #active-exercise .exercise-content {
   height: 155px;
   width: 155px;
+  transform: rotate(0);
 }
 main .exercises-holder .exercises-list #active-exercise .exercise-content img {
   height: 90px;
@@ -1610,11 +1725,12 @@ main .exercises-holder .exercises-list .exercise-clone {
   cursor: default;
 }
 main .exercises-holder .exercises-list .exercise-clone:hover {
-  background: linear-gradient(135deg, #bd1330 45%, white 45% 55%, #144eba 55% 100%);
+  transform: rotate(0);
 }
 main .exercises-holder .exercises-list .exercise-clone .exercise-content {
   height: 85px;
   width: 85px;
+  transform: rotate(0);
 }
 main .exercises-holder .exercises-list .exercise-clone .exercise-content img {
   height: 50px;
@@ -1626,6 +1742,7 @@ main .exercises-holder .exercises-list .exercise-clone .exercise-content .intera
 main .exercises-holder .exercises-list .exercise-clone:hover .exercise-content {
   height: 85px;
   width: 85px;
+  transform: rotate(0);
 }
 main .exercises-holder .exercises-list .exercise-clone:hover .exercise-content img {
   height: 50px;
@@ -1967,7 +2084,7 @@ footer div a {
   position: absolute;
   bottom: 40px;
   box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.3);
-  transition: background-color 300ms;
+  transition: 300ms;
 }
 .arrow-button:hover {
   background-color: rgb(220, 220, 220);
@@ -2012,6 +2129,10 @@ footer div a {
   margin: 0;
 }
 .exercise-holder .exercise {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
   height: 180px;
   width: 180px;
   background: linear-gradient(135deg, #bd1330 45%, white 45% 55%, #144eba 55% 100%);
@@ -2022,7 +2143,7 @@ footer div a {
   transition: 300ms;
 }
 .exercise-holder .exercise:hover {
-  background: linear-gradient(45deg, #144eba 45%, white 45% 55%, #bd1330 55% 100%);
+  transform: rotate(180deg);
 }
 .exercise-holder .exercise .exercise-content {
   display: flex;
@@ -2036,9 +2157,6 @@ footer div a {
   box-shadow: inset 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
   cursor: inherit;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   transition: 300ms;
 }
 .exercise-holder .exercise .exercise-content img {
@@ -2052,18 +2170,20 @@ footer div a {
 .exercise-holder .exercise:hover .exercise-content {
   height: 155px;
   width: 155px;
+  transform: rotate(-180deg);
 }
 .exercise-holder .exercise:hover .exercise-content img {
   height: 90px;
   width: 90px;
 }
 .exercise-holder #active-exercise {
-  background: linear-gradient(135deg, #bd1330 45%, white 45% 55%, #144eba 55% 100%);
+  transform: rotate(0);
   cursor: default;
 }
 .exercise-holder #active-exercise .exercise-content {
   height: 155px;
   width: 155px;
+  transform: rotate(0);
 }
 .exercise-holder #active-exercise .exercise-content img {
   height: 90px;
@@ -2075,11 +2195,12 @@ footer div a {
   cursor: default;
 }
 .exercise-holder .exercise-clone:hover {
-  background: linear-gradient(135deg, #bd1330 45%, white 45% 55%, #144eba 55% 100%);
+  transform: rotate(0);
 }
 .exercise-holder .exercise-clone .exercise-content {
   height: 85px;
   width: 85px;
+  transform: rotate(0);
 }
 .exercise-holder .exercise-clone .exercise-content img {
   height: 50px;
@@ -2091,6 +2212,7 @@ footer div a {
 .exercise-holder .exercise-clone:hover .exercise-content {
   height: 85px;
   width: 85px;
+  transform: rotate(0);
 }
 .exercise-holder .exercise-clone:hover .exercise-content img {
   height: 50px;

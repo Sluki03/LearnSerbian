@@ -1,11 +1,12 @@
 class EventControl {
-    constructor() {
+    constructor(parent) {
+        this.parent = parent;
         this.events = {};
     }
 
     add(...events) {
         events.forEach(event => {
-            window.addEventListener(event.type, event.listener, event.options);
+            this.parent.addEventListener(event.type, event.listener, event.options);
             this.#collect(event);
         });
     }
@@ -19,7 +20,7 @@ class EventControl {
             });
 
             if(event) {
-                window.removeEventListener(event.type, event.listener);
+                this.parent.removeEventListener(event.type, event.listener);
                 this.#drop(eventId);
             }
         });
@@ -71,19 +72,19 @@ class EventControl {
 
     cleanup() {
         Object.values(this.events).forEach(event => {
-            window.removeEventListener(event.type, event.listener);
+            this.parent.removeEventListener(event.type, event.listener);
         });
     }
 }
 
 export function buildEventList(element) {
-    if(window.eventList === undefined) window.eventList = new EventControl();
+    if(window.eventList === undefined) window.eventList = new EventControl(window);
 
     const body = document.querySelector("body");
     childrenBuild(element || body);
 
     function childrenBuild(element) {
-        if(element.eventList === undefined) element.eventList = new EventControl();
+        if(element.eventList === undefined) element.eventList = new EventControl(element);
         [...element.children].forEach(child => childrenBuild(child));
     }
 }

@@ -55,6 +55,7 @@ export class Task {
     }
 
     reset() {
+        this.tasks = randomArray(this.exercise.tasks, this.numberOfTasks);
         this.taskNumber = 0;
         this.currentTask = this.tasks[this.taskNumber];
         this.answer = "";
@@ -146,7 +147,7 @@ export class Task {
     }
 
     clearTaskElements(removeElements) {
-        const { taskHolder, taskInfo, taskButtonHolder } = this.elements;
+        const { taskHolder, taskInfo, taskButtonHolder, switchModesButton } = this.elements;
 
         window.eventList.remove("taskFunctionsSetActiveButton", "taskStartNewKeyDown");
 
@@ -163,6 +164,8 @@ export class Task {
         
         taskInfo.style.bottom = "";
         taskButtonHolder.style.bottom = "";
+        
+        switchModesButton.classList.remove("active-switch-modes-button");
 
         this.taskElement.style.opacity = "0";
         this.taskElement.style.left = "-20px";
@@ -294,19 +297,16 @@ export class Task {
 
         taskInfoTextH4.innerText = `${validTitles[Math.floor(Math.random() * validTitles.length)]}!`;
 
-        const randomCorrectAnswer = currentTask.acceptableAnswers[Math.floor(Math.random() * currentTask.acceptableAnswers.length)];
+        const acceptableAnswers = getAcceptableAnswers();
+        const randomCorrectAnswer = acceptableAnswers[Math.floor(Math.random() * acceptableAnswers.length)];
 
         const text = {
-            correct: {},
-            
-            incorrect: {
-                multipleChoice: `Correct answer: <span>${randomCorrectAnswer}</span>.`,
-                multipleChoiceImages: `Correct answer: <span>${randomCorrectAnswer}</span>.`
-            }
+            correct: "",
+            incorrect: `Correct answer: "<span>${randomCorrectAnswer}</span>".`
         };
 
         const validText = isCorrect ? text.correct : text.incorrect;
-        taskInfoTextP.innerHTML = getText();
+        taskInfoTextP.innerHTML = validText;
 
         const audio = new Audio(`../../../sfx/${isCorrect ? "correct" : "wrong"}.mp3`);
         audio.play();
@@ -350,14 +350,26 @@ export class Task {
             return linearGradient;
         }
 
-        function getText() {
-            let result = "";
-            
-            Object.keys(validText).forEach((key, index) => {
-                if(currentTask.type === key) result = Object.values(validText)[index];
-            });
+        function getAcceptableAnswers() {
+            if(currentTask.type === "conversation") {
+                const conversationMessages = document.querySelector(".conversation-messages");
+                const messageHolderIndex = conversationMessages.lastChild.classList.contains("participant-message-holder") ? 2 : 1;
+                
+                const participantMessageHolders = document.querySelectorAll(".participant-message-holder");
+                
+                const lastMessageHolder = participantMessageHolders[participantMessageHolders.length - messageHolderIndex];
+                const lastMessage = [...lastMessageHolder.children][0].innerText;
 
-            return result;
+                let acceptableAnswers = [];
+
+                currentTask.messages.forEach(message => {
+                    if(lastMessage === message.text) acceptableAnswers = message.acceptableAnswers;
+                });
+
+                return acceptableAnswers;
+            }
+            
+            return currentTask.acceptableAnswers;
         }
     }
 
@@ -371,13 +383,20 @@ export class Task {
                 
                 break;
             case "translate":
-                let correctStatus = false;
+                result = false;
 
                 this.currentTask.acceptableAnswers.forEach(answer => {
-                    if(breakText(this.answer, { join: true }) === breakText(answer, { join: true })) correctStatus = true;
+                    if(breakText(this.answer, { join: true }) === breakText(answer, { join: true })) result = true;
                 });
 
-                result = correctStatus;
+                break;
+            case "conversation":
+                result = false;
+                let lastMessageAcceptableAnswers = this.currentTask.messages[this.currentTask.messages.length - 1].acceptableAnswers;
+
+                lastMessageAcceptableAnswers.forEach(answer => {
+                    if(breakText(this.answer, { join: true }) === breakText(answer, { join: true })) result = true;
+                });
 
                 break;
             default: ;
@@ -432,9 +451,14 @@ export class Task {
     }
 
     construct() {
-        const { currentTask, prevModeValues, answerChanged, construct } = this;
+        const { currentTask, prevModeValues, check, answerChanged, construct } = this;
         const { taskHolder, switchModesButton } = this.elements;
-        const { setActiveButton, getButtonImage, setTranslatableWords, textareaValueChanged, moveOption, messageGenerator } = TaskFunctions;
+        
+        const {
+            setActiveButton, getButtonImage, setTranslatableWords,
+            textareaValueChanged, moveOption, messageGenerator,
+            sendMessage
+        } = TaskFunctions;
         
         switch(this.currentTask.type) {
             case "multipleChoice":
@@ -724,15 +748,104 @@ export class Task {
             
                 const conversationHolder = document.querySelector("[data-template='exercise-modal-task-conversation']").content.firstElementChild.cloneNode(true);
                 taskHolder.appendChild(conversationHolder);
+                Component.render(conversationHolder);
 
                 const [conversationParticipant, conversationMessages, conversationAnswer] = [...conversationHolder.children];
                 
                 const participantName = conversationParticipant.children[1];
                 participantName.innerText = this.currentTask.participant;
 
+                const participantTyping = conversationParticipant.children[2];
+
                 const messages = messageGenerator(this.currentTask.messages, conversationMessages);
-                console.log(messages.next().value)
+                let message = messages.next().value;
+
+                const [conversationAnswerP, conversationAnswerCheckButton] = [...conversationAnswer.children];
                 
+                const conversationAnswerInput = createElement({
+                    tag: "input",
+                    attributes: { type: "text", placeholder: message.userText },
+                    events: [{ on: "input", call: changeConversationAnswerStatus }],
+                    appendTo: conversationAnswer,
+                    before: conversationAnswerCheckButton
+                });
+
+                conversationAnswerInput.focus();
+
+                conversationAnswerCheckButton.onclick = checkMessage;
+                window.eventList.add({ id: "taskCheckMessageKeyDown", type: "keydown", listener: checkMessage });
+
+                function changeConversationAnswerStatus() {
+                    if(conversationAnswerInput.value) conversationAnswer.classList.add("active-conversation-answer");
+                    else if(conversationAnswer.classList.contains("active-conversation-answer")) conversationAnswer.classList.remove("active-conversation-answer");
+                }
+                
+                function checkMessage(e) {
+                    if(e.type === "keydown" && e.key !== "Enter") return;
+                    
+                    let isCorrect = false;
+                    const userMessage = conversationAnswerInput.value;
+
+                    if(!userMessage) return;
+                    
+                    message.acceptableAnswers.forEach(acceptableAnswer => {
+                        if(breakText(userMessage, { join: true }) === breakText(acceptableAnswer, { join: true })) isCorrect = true;
+                    });
+
+                    sendMessage("user", userMessage, conversationMessages);
+                    
+                    conversationAnswerInput.value = "";
+                    if(conversationAnswer.classList.contains("active-conversation-answer")) conversationAnswer.classList.remove("active-conversation-answer");
+
+                    if(isCorrect) {
+                        message = messages.next().value;
+                        
+                        if(message === undefined) conversationEnd();
+                        else conversationAnswerInput.placeholder = message.userText;
+                    }
+
+                    else {
+                        const wrongAnswers = [
+                            "Šta?",
+                            "O čemu ti?",
+                            "O čemu ti pričaš?",
+                            "Ne razumem...",
+                            "Ne razumem šta si hteo da kažeš.",
+                            "Pričaj srpski.",
+                            "Molim?"
+                        ];
+
+                        const randomWrongAnswer = wrongAnswers[Math.floor(Math.random() * wrongAnswers.length)];
+                        const typingDuration = randomWrongAnswer.length * 100;
+                        
+                        conversationAnswerInput.disabled = true;
+                        participantTyping.classList.add("active-conversation-participant-typing");
+                        
+                        setTimeout(() => {
+                            conversationAnswerInput.disabled = true;
+                            conversationAnswerInput.focus();
+
+                            participantTyping.classList.remove("active-conversation-participant-typing");
+                            
+                            sendMessage("participant", randomWrongAnswer, conversationMessages);
+                            conversationEnd();
+                        }, typingDuration);
+                    }
+
+                    function conversationEnd() {
+                        window.eventList.remove("taskCheckMessageKeyDown");
+                        
+                        if(conversationAnswer.classList.contains("active-conversation-answer")) conversationAnswer.classList.remove("active-conversation-answer");
+                        conversationAnswer.classList.add("disabled-conversation-answer");
+                        
+                        conversationAnswerInput.placeholder = "Write a message...";
+                        conversationAnswerInput.disabled = true;
+                            
+                        answerChanged(userMessage);
+                        check(e);
+                    }
+                }
+
                 break;
             default: return;
         }

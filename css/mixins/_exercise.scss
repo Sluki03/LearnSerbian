@@ -1,5 +1,6 @@
 @mixin exercise {
     .exercise {
+        @include add-flex;
         height: 180px;
         width: 180px;
         background: $defRedBlueWhite;
@@ -10,7 +11,7 @@
         transition: 300ms;
 
         &:hover {
-            background: $defWhiteBlueRed;
+            transform: rotate(180deg);
         }
 
         .exercise-content {
@@ -22,9 +23,6 @@
             box-shadow: $defInnerShadow;
             cursor: inherit;
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
             transition: 300ms;
 
             img {
@@ -36,26 +34,26 @@
             }
         }
 
-        &:hover {
-            .exercise-content {
-                height: 155px;
-                width: 155px;
+        &:hover .exercise-content {
+            height: 155px;
+            width: 155px;
+            transform: rotate(-180deg);
 
-                img {
-                    height: 90px;
-                    width: 90px;
-                }
+            img {
+                height: 90px;
+                width: 90px;
             }
         }
     }
 
     #active-exercise {
-        background: $defRedBlueWhite;
+        transform: rotate(0);
         cursor: default;
 
         .exercise-content {
             height: 155px;
             width: 155px;
+            transform: rotate(0);
 
             img {
                 height: 90px;
@@ -70,12 +68,13 @@
         cursor: default;
 
         &:hover {
-            background: $defRedBlueWhite;
+            transform: rotate(0);
         }
 
         .exercise-content {
             height: 85px;
             width: 85px;
+            transform: rotate(0);
 
             img {
                 height: 50px;
@@ -87,15 +86,14 @@
             }
         }
 
-        &:hover {
-            .exercise-content {
-                height: 85px;
-                width: 85px;
+        &:hover .exercise-content {
+            height: 85px;
+            width: 85px;
+            transform: rotate(0);
 
-                img {
-                    height: 50px;
-                    width: 50px;
-                }
+            img {
+                height: 50px;
+                width: 50px;
             }
         }
     }
