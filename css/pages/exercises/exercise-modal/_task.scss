@@ -397,9 +397,11 @@
             }
 
             .conversation-messages {
-                @include add-flex(column);
+                @include add-flex(column, flex-start);
                 gap: 5px;
+                height: 100%;
                 width: 100%;
+                background-image: url("../../../../images/background.png");
                 padding: 15px;
 
                 .participant-message-holder {
@@ -437,8 +439,7 @@
                 background-color: $defLighterBlue;
                 border-bottom-left-radius: 20px;
                 border-bottom-right-radius: 20px;
-                position: absolute;
-                bottom: 0;
+                position: relative;
                 padding: 10px 5px;
 
                 input {
@@ -451,6 +452,7 @@
                     outline: none;
                     padding: 5px 10px;
                     transition: 150ms;
+                    z-index: 1;
 
                     &:hover {
                         border: 2px solid $defDarkGrey;
@@ -466,6 +468,7 @@
                     height: 45px;
                     width: 45px;
                     opacity: 0;
+                    cursor: default;
                     right: 0;
                     bottom: auto;
                     transform: rotate(-90deg);
@@ -478,11 +481,12 @@
 
             .active-conversation-answer {
                 input {
-                    width: 89%;
+                    width: calc(100% - 50px);
                 }
 
                 .arrow-button {
                     opacity: 1;
+                    cursor: pointer;
                     right: 5px;
                 }
             }
@@ -561,6 +565,7 @@
         bottom: -100px;
         padding: 10px 20px;
         transition: 300ms;
+        z-index: 5;
 
         & > img {
             height: 70px;

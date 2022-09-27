@@ -82,7 +82,12 @@ export class Task {
             this.taskElement.classList.add("active-exercise-modal-task");
 
             const taskButtonHolder = document.querySelector(".task-button-holder");
-            if(this.currentTask.type !== "conversation") taskButtonHolder.classList.add("active-task-button-holder");
+            taskButtonHolder.classList.add("active-task-button-holder");
+            
+            if(this.currentTask.type === "conversation") {
+                const checkButton = taskButtonHolder.children[1];
+                checkButton.style.display = "none";
+            }
         }, 100);
         
         this.initializeElements();
@@ -819,10 +824,14 @@ export class Task {
                         const typingDuration = randomWrongAnswer.length * 100;
                         
                         conversationAnswerInput.disabled = true;
+                        conversationAnswerInput.placeholder = `${currentTask.participant} is typing...`;
+
                         participantTyping.classList.add("active-conversation-participant-typing");
                         
                         setTimeout(() => {
                             conversationAnswerInput.disabled = true;
+                            conversationAnswerInput.placeholder = "";
+
                             conversationAnswerInput.focus();
 
                             participantTyping.classList.remove("active-conversation-participant-typing");

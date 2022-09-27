@@ -913,10 +913,12 @@ main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .con
 main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-messages {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
   gap: 5px;
+  height: 100%;
   width: 100%;
+  background-image: url("../../../../images/background.png");
   padding: 15px;
 }
 main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-messages .participant-message-holder {
@@ -958,8 +960,7 @@ main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .con
   background-color: #0589f5;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
-  position: absolute;
-  bottom: 0;
+  position: relative;
   padding: 10px 5px;
 }
 main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-answer input {
@@ -972,6 +973,7 @@ main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .con
   outline: none;
   padding: 5px 10px;
   transition: 150ms;
+  z-index: 1;
 }
 main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-answer input:hover {
   border: 2px solid #5e5c5c;
@@ -984,6 +986,7 @@ main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .con
   height: 45px;
   width: 45px;
   opacity: 0;
+  cursor: default;
   right: 0;
   bottom: auto;
   transform: rotate(-90deg);
@@ -992,10 +995,11 @@ main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .con
   height: 30px;
 }
 main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .active-conversation-answer input {
-  width: 89%;
+  width: calc(100% - 50px);
 }
 main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .active-conversation-answer .arrow-button {
   opacity: 1;
+  cursor: pointer;
   right: 5px;
 }
 main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .disabled-conversation-answer input {
@@ -1092,6 +1096,7 @@ main .exercise-modal .exercise-modal-task .task-info {
   bottom: -100px;
   padding: 10px 20px;
   transition: 300ms;
+  z-index: 5;
 }
 main .exercise-modal .exercise-modal-task .task-info > img {
   height: 70px;

@@ -193,7 +193,11 @@ function* messageGenerator(messages, conversationMessages) {
         const conversationAnswerInput = document.querySelector(".conversation-answer input");
         const typingDuration = message.text.length * 100;
         
-        if(conversationAnswerInput !== null) conversationAnswerInput.disabled = true;
+        if(conversationAnswerInput !== null) {
+            conversationAnswerInput.disabled = true;
+            conversationAnswerInput.placeholder = ``
+        }
+
         participantTyping.classList.add("active-conversation-participant-typing");
 
         setTimeout(() => {
