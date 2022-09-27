@@ -918,7 +918,7 @@ main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .con
   gap: 10px;
   height: 100%;
   width: 100%;
-  background-image: url("../../../../images/background.png");
+  background-image: url("../images/background.png");
   padding: 15px;
 }
 main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-messages .participant-message-holder {
