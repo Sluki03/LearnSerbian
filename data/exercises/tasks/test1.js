@@ -5,8 +5,8 @@ export const test1 = [
         participant: "John",
         messages: [
             {
-                text: "Zdravo!",
-                userText: "Hello! How are you?",
+                content: "Zdravo!",
+                userContent: "Hello! How are you?",
                 acceptableAnswers: [
                     "Zdravo! Kako si?",
                     "Cao! Kako si?"
@@ -17,8 +17,8 @@ export const test1 = [
             },
 
             {
-                text: "Dobro sam, a ti?",
-                userText: "Me too.",
+                content: "Dobro sam, a ti?",
+                userContent: "Me too.",
                 acceptableAnswers: [
                     "I ja.",
                     "I ja takodje."

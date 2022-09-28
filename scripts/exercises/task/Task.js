@@ -238,7 +238,7 @@ export class Task {
         });
     }
     
-    check(e) {
+    check(e, additionalPass) {
         const { currentTask } = this;
         
         const {
@@ -248,8 +248,10 @@ export class Task {
 
         const [progressBar, progressBarP] = [...this.taskProgressBarHolder.children];
         const [progressBarLine] = [...progressBar.children];
+
+        const classPass = (checkButton !== null && !checkButton.classList.contains("disabled-flag-button")) || additionalPass !== undefined;
         
-        if(checkButton.classList.contains("disabled-flag-button")) return;
+        if(!classPass) return;
         if(e.type === "keydown" && e.key !== "Enter") return;
 
         this.afterCheck();
@@ -368,7 +370,7 @@ export class Task {
                 let acceptableAnswers = [];
 
                 currentTask.messages.forEach(message => {
-                    if(lastMessage === message.text) acceptableAnswers = message.acceptableAnswers;
+                    if(lastMessage === message.content) acceptableAnswers = message.acceptableAnswers;
                 });
 
                 return acceptableAnswers;
@@ -461,8 +463,7 @@ export class Task {
         
         const {
             setActiveButton, getButtonImage, setTranslatableWords,
-            textareaValueChanged, moveOption, messageGenerator,
-            newMessage, sendMessage, conversationEnd
+            textareaValueChanged, moveOption, sendMessage
         } = TaskFunctions;
         
         switch(this.currentTask.type) {
@@ -785,20 +786,19 @@ export class Task {
                 const participantName = conversationParticipant.children[1];
                 participantName.innerText = this.currentTask.participant;
 
-                const messages = messageGenerator(this.currentTask);
-                let message = messages.next().value;
+                let messageNumber = 0;
+                let currentMessage = currentTask.messages[messageNumber];
 
-                const [conversationAnswerP, conversationAnswerCheckButton] = [...conversationAnswer.children];
+                sendMessage({
+                    author: currentTask.participant,
+                    role: "participant",
+                    content: currentMessage.content,
+                    userContent: currentMessage.userContent
+                }, { check, answerChanged });
+
+                const [conversationAnswerP, conversationAnswerInput, conversationAnswerCheckButton] = [...conversationAnswer.children];
                 
-                const conversationAnswerInput = createElement({
-                    tag: "input",
-                    attributes: { type: "text", placeholder: message.userText },
-                    events: [{ on: "input", call: changeConversationAnswerStatus }],
-                    appendTo: conversationAnswer,
-                    before: conversationAnswerCheckButton
-                });
-
-                conversationAnswerInput.focus();
+                conversationAnswerInput.oninput = changeConversationAnswerStatus;
 
                 conversationAnswerCheckButton.onclick = checkMessage;
                 window.eventList.add({ id: "taskCheckMessageKeyDown", type: "keydown", listener: checkMessage });
@@ -816,23 +816,32 @@ export class Task {
 
                     if(!userMessage) return;
                     
-                    message.acceptableAnswers.forEach(acceptableAnswer => {
+                    currentMessage.acceptableAnswers.forEach(acceptableAnswer => {
                         if(breakText(userMessage, { join: true }) === breakText(acceptableAnswer, { join: true })) isCorrect = true;
                     });
 
-                    sendMessage("user", userMessage, conversationMessages);
+                    sendMessage({ role: "user", content: conversationAnswerInput.value });
                     
                     conversationAnswerInput.value = "";
                     if(conversationAnswer.classList.contains("active-conversation-answer")) conversationAnswer.classList.remove("active-conversation-answer");
 
                     if(isCorrect) {
-                        message = messages.next().value;
-                        
-                        if(message === undefined) conversationEnd(check, answerChanged);
-                        else conversationAnswerInput.placeholder = message.userText;
+                        messageNumber++;
+                        currentMessage = currentTask.messages[messageNumber];
+
+                        if(messageNumber > currentTask.messages.length - 1) {
+                            answerChanged(userMessage);
+                            return check(e, true);
+                        }
                     }
 
-                    else newMessage(currentTask, {}, false, [check, answerChanged]);
+                    sendMessage({
+                        author: currentTask.participant,
+                        role: "participant",
+                        content: currentMessage.content,
+                        userContent: currentMessage.userContent,
+                        isCorrect
+                    }, { check, answerChanged }, e);
                 }
 
                 break;
