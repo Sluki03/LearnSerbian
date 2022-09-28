@@ -4,7 +4,7 @@ import breakText from "../../functions/breakText.js";
 export const TaskFunctions = {
     setActiveButton, getButtonImage, setTranslatableWords,
     textareaValueChanged, moveOption, messageGenerator,
-    sendMessage
+    newMessage, sendMessage, conversationEnd
 };
 
 function setActiveButton(e) {
@@ -186,36 +186,54 @@ function moveOption(option, type, answerChanged) {
     }, 300);
 }
 
-function* messageGenerator(messages, conversationMessages) {
-    const participantTyping = document.querySelector(".conversation-participant span");
-    
-    for(const message of messages) {
-        const conversationAnswerInput = document.querySelector(".conversation-answer input");
-        const typingDuration = message.text.length * 100;
-        
-        if(conversationAnswerInput !== null) {
-            conversationAnswerInput.disabled = true;
-            conversationAnswerInput.placeholder = ``
-        }
-
-        participantTyping.classList.add("active-conversation-participant-typing");
-
-        setTimeout(() => {
-            if(conversationAnswerInput !== null) {
-                conversationAnswerInput.disabled = false;
-                conversationAnswerInput.focus();
-            }
-            
-            participantTyping.classList.remove("active-conversation-participant-typing");
-
-            sendMessage("participant", message.text, conversationMessages);
-        }, typingDuration);
-
+function* messageGenerator(currentTask) {
+    for(const message of currentTask.messages) {
+        newMessage(currentTask, message, true);
         yield message;
     }
 }
 
-function sendMessage(role, text, conversationMessages) {
+function newMessage(currentTask, message, isCorrect, conversationEndParams) {
+    const participantTyping = document.querySelector(".conversation-participant span");
+    const conversationAnswerInput = document.querySelector(".conversation-answer input");
+
+    const wrongAnswers = [
+        "Šta?",
+        "O čemu ti?",
+        "O čemu ti pričaš?",
+        "Ne razumem...",
+        "Ne razumem šta si hteo da kažeš.",
+        "Pričaj srpski.",
+        "Molim?"
+    ];
+
+    const randomWrongAnswer = wrongAnswers[Math.floor(Math.random() * wrongAnswers.length)];
+
+    const typingDuration = (isCorrect ? message.text.length : randomWrongAnswer.length) * 100;
+        
+    if(conversationAnswerInput !== null) {
+        conversationAnswerInput.disabled = true;
+        conversationAnswerInput.placeholder = `${currentTask.participant} is typing...`;
+    }
+
+    participantTyping.classList.add("active-conversation-participant-typing");
+
+    setTimeout(() => {
+        if(conversationAnswerInput !== null) {
+            conversationAnswerInput.disabled = false;
+            conversationAnswerInput.focus();
+        }
+            
+        participantTyping.classList.remove("active-conversation-participant-typing");
+
+        sendMessage("participant", isCorrect ? message.text : randomWrongAnswer);
+        if(!isCorrect) conversationEnd(...conversationEndParams);
+    }, typingDuration);
+}
+
+function sendMessage(role, text) {
+    const conversationMessages = document.querySelector(".conversation-messages");
+    
     const messageHolder = createElement({
         tag: "div",
         attributes: { class: `${role}-message-holder` },
@@ -228,4 +246,22 @@ function sendMessage(role, text, conversationMessages) {
         innerText: text,
         appendTo: messageHolder
     });
+}
+
+function conversationEnd(check, answerChanged) {
+    window.eventList.remove("taskCheckMessageKeyDown");
+
+    const conversationAnswer = document.querySelector(".conversation-answer");
+    const conversationAnswerInput = conversationAnswer.children[1];
+
+    const userMessage = conversationAnswerInput.value;
+    
+    if(conversationAnswer.classList.contains("active-conversation-answer")) conversationAnswer.classList.remove("active-conversation-answer");
+    conversationAnswer.classList.add("disabled-conversation-answer");
+    
+    conversationAnswerInput.placeholder = "Write a message...";
+    conversationAnswerInput.disabled = true;
+        
+    answerChanged(userMessage);
+    check(e);
 }

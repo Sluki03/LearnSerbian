@@ -462,7 +462,7 @@ export class Task {
         const {
             setActiveButton, getButtonImage, setTranslatableWords,
             textareaValueChanged, moveOption, messageGenerator,
-            sendMessage
+            newMessage, sendMessage, conversationEnd
         } = TaskFunctions;
         
         switch(this.currentTask.type) {
@@ -760,9 +760,7 @@ export class Task {
                 const participantName = conversationParticipant.children[1];
                 participantName.innerText = this.currentTask.participant;
 
-                const participantTyping = conversationParticipant.children[2];
-
-                const messages = messageGenerator(this.currentTask.messages, conversationMessages);
+                const messages = messageGenerator(this.currentTask);
                 let message = messages.next().value;
 
                 const [conversationAnswerP, conversationAnswerCheckButton] = [...conversationAnswer.children];
@@ -805,54 +803,11 @@ export class Task {
                     if(isCorrect) {
                         message = messages.next().value;
                         
-                        if(message === undefined) conversationEnd();
+                        if(message === undefined) conversationEnd(check, answerChanged);
                         else conversationAnswerInput.placeholder = message.userText;
                     }
 
-                    else {
-                        const wrongAnswers = [
-                            "Šta?",
-                            "O čemu ti?",
-                            "O čemu ti pričaš?",
-                            "Ne razumem...",
-                            "Ne razumem šta si hteo da kažeš.",
-                            "Pričaj srpski.",
-                            "Molim?"
-                        ];
-
-                        const randomWrongAnswer = wrongAnswers[Math.floor(Math.random() * wrongAnswers.length)];
-                        const typingDuration = randomWrongAnswer.length * 100;
-                        
-                        conversationAnswerInput.disabled = true;
-                        conversationAnswerInput.placeholder = `${currentTask.participant} is typing...`;
-
-                        participantTyping.classList.add("active-conversation-participant-typing");
-                        
-                        setTimeout(() => {
-                            conversationAnswerInput.disabled = true;
-                            conversationAnswerInput.placeholder = "";
-
-                            conversationAnswerInput.focus();
-
-                            participantTyping.classList.remove("active-conversation-participant-typing");
-                            
-                            sendMessage("participant", randomWrongAnswer, conversationMessages);
-                            conversationEnd();
-                        }, typingDuration);
-                    }
-
-                    function conversationEnd() {
-                        window.eventList.remove("taskCheckMessageKeyDown");
-                        
-                        if(conversationAnswer.classList.contains("active-conversation-answer")) conversationAnswer.classList.remove("active-conversation-answer");
-                        conversationAnswer.classList.add("disabled-conversation-answer");
-                        
-                        conversationAnswerInput.placeholder = "Write a message...";
-                        conversationAnswerInput.disabled = true;
-                            
-                        answerChanged(userMessage);
-                        check(e);
-                    }
+                    else newMessage(currentTask, {}, false, [check, answerChanged]);
                 }
 
                 break;
