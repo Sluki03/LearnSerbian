@@ -28,5 +28,5 @@ export const test1 = [
                 }
             }
         ]
-    },
+    }
 ];

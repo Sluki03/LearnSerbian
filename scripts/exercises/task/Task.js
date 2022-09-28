@@ -313,7 +313,7 @@ export class Task {
         const validText = isCorrect ? text.correct : text.incorrect;
         taskInfoTextP.innerHTML = validText;
 
-        const audio = new Audio(`../../../sfx/${isCorrect ? "correct" : "wrong"}.mp3`);
+        const audio = new Audio(`./sfx/${isCorrect ? "correct" : "wrong"}.mp3`);
         audio.play();
 
         if(!isCorrect) {
@@ -676,8 +676,8 @@ export class Task {
                 }
 
                 const icons = {
-                    write: { src: "../../../images/icons/write-icon.svg", alt: "Write" },
-                    wordBank: { src: "../../../images/icons/word-bank-icon.svg", alt: "Word Bank" }
+                    write: { src: "./images/icons/write-icon.svg", alt: "Write" },
+                    wordBank: { src: "./images/icons/word-bank-icon.svg", alt: "Word Bank" }
                 };
                 
                 const invertedModeIcon = this.currentTask.mode.type === "write" ? icons.wordBank : icons.write;
@@ -708,12 +708,36 @@ export class Task {
 
                         const translateHolderTextarea = document.querySelector(".translate-holder textarea");
                         prevModeValues.textareaValue = translateHolderTextarea.value;
+
+                        let textHolderWords = [];
+
+                        textHolderWords = translateHolderTextarea.value.split(" ");
+
+                        const punctuationMarks = [".", ",", "?", "!", ":", ";"];
+                        textHolderWords = textHolderWords.filter(word => punctuationMarks.indexOf(word) === -1);
+
+                        for(let i = 0; i < textHolderWords.length; i++) textHolderWords[i] = textHolderWords[i].toLowerCase();
+
+                        const words = {
+                            textHolder: [],
+                            wordBank: []
+                        };
+
+                        textHolderWords.forEach(word => {
+                            if(currentTask.options.indexOf(word) > -1) words.textHolder.push(word);
+                        });
+
+                        currentTask.options.forEach(option => {
+                            if(words.textHolder.indexOf(option) === -1) words.wordBank.push(option);
+                        });
+
+                        prevModeValues.options = words;
                     }
                     
                     else {
                         currentTask.mode.type = "write";
 
-                        let words = {
+                        const words = {
                             textHolder: [],
                             wordBank: []
                         };
@@ -732,6 +756,7 @@ export class Task {
                         });
 
                        prevModeValues.options = words;
+                       prevModeValues.textareaValue = words.textHolder.join(" ");
                     }
 
                     taskHolder.innerHTML = "";

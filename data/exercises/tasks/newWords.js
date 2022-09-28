@@ -69,10 +69,10 @@ export const newWords = [
         acceptableAnswers: ["pas"],
         options: ["macka", "pas", "ptica", "zec"],
         images: {
-            macka: "../../images/exercises/cat.png",
-            pas: "../../images/exercises/dog.png",
-            ptica: "../../images/exercises/bird.png",
-            zec: "../../images/exercises/rabbit.png"
+            macka: "./images/exercises/cat.png",
+            pas: "./images/exercises/dog.png",
+            ptica: "./images/exercises/bird.png",
+            zec: "./images/exercises/rabbit.png"
         },
         xp: 15,
         explanation: `
