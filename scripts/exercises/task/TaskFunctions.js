@@ -194,8 +194,8 @@ async function sendMessage(message, methods, e) {
             conversationAnswerInput.disabled = true;
             conversationAnswerInput.placeholder = `${message.author} is typing...`;
 
-            const participantTyping = document.querySelector(".conversation-participant span");
-            participantTyping.classList.add("active-conversation-participant-typing");
+            const participantTyping = document.querySelector(".conversation-participant .typing");
+            participantTyping.classList.add("active-typing");
         
             const wrongAnswers = [
                 "Šta?",
@@ -219,7 +219,7 @@ async function sendMessage(message, methods, e) {
 
                 conversationAnswerInput.focus();
 
-                participantTyping.classList.remove("active-conversation-participant-typing");
+                participantTyping.classList.remove("active-typing");
                 resolve(isCorrect ? message.content : randomWrongAnswer);
             }, typingDuration);
         }),

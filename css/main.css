@@ -869,50 +869,29 @@ main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .con
   padding: 5px 10px;
   box-shadow: 0px 2px 2px 0px rgba(128, 128, 128, 0.3);
 }
-main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-participant img {
+main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-participant .avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
   height: 60px;
   width: 60px;
-  -o-object-fit: contain;
-     object-fit: contain;
+  background-color: white;
   border-radius: 50%;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-participant .avatar span {
+  color: #5e5c5c;
+  font-size: 40px;
+  font-weight: bold;
 }
 main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-participant strong {
   color: #5e5c5c;
   font-size: 25px;
-}
-main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-participant span {
-  display: none;
-  color: #5e5c5c;
-  font-size: 20px;
-  font-style: italic;
-  opacity: 0.5;
-  -webkit-animation: conversation-participant-typing 1.5s linear infinite;
-          animation: conversation-participant-typing 1.5s linear infinite;
-}
-@-webkit-keyframes conversation-participant-typing {
-  0% {
-    opacity: 0.5;
-  }
-  50% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0.5;
-  }
-}
-@keyframes conversation-participant-typing {
-  0% {
-    opacity: 0.5;
-  }
-  50% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0.5;
-  }
-}
-main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-participant .active-conversation-participant-typing {
-  display: block;
 }
 main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-messages {
   display: flex;
@@ -972,6 +951,18 @@ main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .con
   border-bottom-right-radius: 20px;
   position: relative;
   padding: 10px 5px;
+}
+main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-answer p {
+  width: 100%;
+  font-size: 18px;
+  color: white;
+  background-color: #0589f5;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 3px 5px;
+  transition: 300ms;
 }
 main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-answer input {
   width: 100%;
@@ -2318,4 +2309,81 @@ footer div a {
 .active-classic-modal {
   opacity: 1;
   top: 50%;
+}
+
+.typing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 5px;
+  display: none;
+}
+.typing .typing-dot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  height: 15px;
+  width: 15px;
+}
+.typing .typing-dot:nth-child(1)::after {
+  -webkit-animation-delay: 0;
+          animation-delay: 0;
+}
+.typing .typing-dot:nth-child(2)::after {
+  -webkit-animation-delay: 250ms;
+          animation-delay: 250ms;
+}
+.typing .typing-dot:nth-child(3)::after {
+  -webkit-animation-delay: 500ms;
+          animation-delay: 500ms;
+}
+.typing .typing-dot::after {
+  content: "";
+  display: block;
+  height: 15px;
+  width: 15px;
+  background-color: #5e5c5c;
+  border-radius: 50%;
+  -webkit-animation: conversation-participant-typing-animation 1.5s linear infinite;
+          animation: conversation-participant-typing-animation 1.5s linear infinite;
+}
+@-webkit-keyframes conversation-participant-typing-animation {
+  0% {
+    height: 15px;
+    width: 15px;
+    background-color: #5e5c5c;
+  }
+  50% {
+    height: 10px;
+    width: 10px;
+    background-color: rgba(200, 200, 200, 0.5);
+  }
+  100% {
+    height: 15px;
+    width: 15px;
+    background-color: #5e5c5c;
+  }
+}
+@keyframes conversation-participant-typing-animation {
+  0% {
+    height: 15px;
+    width: 15px;
+    background-color: #5e5c5c;
+  }
+  50% {
+    height: 10px;
+    width: 10px;
+    background-color: rgba(200, 200, 200, 0.5);
+  }
+  100% {
+    height: 15px;
+    width: 15px;
+    background-color: #5e5c5c;
+  }
+}
+
+.active-typing {
+  display: flex;
 }/*# sourceMappingURL=main.css.map */

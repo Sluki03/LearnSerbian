@@ -367,35 +367,25 @@
                 padding: 5px 10px;
                 box-shadow: 0px 2px 2px 0px rgba(128, 128, 128, 0.3);
 
-                img {
+                .avatar {
+                    @include add-flex;
                     height: 60px;
                     width: 60px;
-                    object-fit: contain;
+                    background-color: white;
                     border-radius: 50%;
+                    box-shadow: $defLighterShadow;
+                    user-select: none;
+                    
+                    span {
+                        color: $defDarkGrey;
+                        font-size: set-size(miniheading);
+                        font-weight: bold;
+                    }
                 }
 
                 strong {
                     color: $defDarkGrey;
                     font-size: set-size(lg);
-                }
-
-                span {
-                    display: none;
-                    color: $defDarkGrey;
-                    font-size: set-size(md);
-                    font-style: italic;
-                    opacity: 0.5;
-                    animation: conversation-participant-typing 1.5s linear infinite;
-
-                    @keyframes conversation-participant-typing {
-                        0% { opacity: 0.5 };
-                        50% { opacity: 0 };
-                        100% { opacity: 0.5 };
-                    }
-                }
-
-                .active-conversation-participant-typing {
-                    display: block;
                 }
             }
 
@@ -448,6 +438,19 @@
                 position: relative;
                 padding: 10px 5px;
 
+                p {
+                    width: 100%;
+                    font-size: 18px;
+                    color: white;
+                    background-color: $defLighterBlue;
+                    opacity: 0;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    padding: 3px 5px;
+                    transition: 300ms;
+                }
+                
                 input {
                     width: 100%;
                     color: $defDarkGrey;

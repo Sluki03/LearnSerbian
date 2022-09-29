@@ -1,0 +1,57 @@
+.typing {
+    @include add-flex;
+    gap: 5px;
+    display: none;
+
+    .typing-dot {
+        @include add-flex;
+        height: 15px;
+        width: 15px;
+
+        &:nth-child(1)::after {
+            animation-delay: 0;
+        }
+
+        &:nth-child(2)::after {
+            animation-delay: 250ms;
+        }
+
+        &:nth-child(3)::after {
+            animation-delay: 500ms;
+        }
+        
+        &::after {
+            content: "";
+            display: block;
+            height: 15px;
+            width: 15px;
+            background-color: $defDarkGrey;
+            border-radius: 50%;
+            animation: conversation-participant-typing-animation 1.5s linear infinite;
+            
+            @keyframes conversation-participant-typing-animation {
+                0% {
+                    height: 15px;
+                    width: 15px;
+                    background-color: $defDarkGrey;
+                }
+
+                50% {
+                    height: 10px;
+                    width: 10px;
+                    background-color: $defGrey;
+                }
+
+                100% {
+                    height: 15px;
+                    width: 15px;
+                    background-color: $defDarkGrey;
+                }
+            }
+        }
+    }
+}
+
+.active-typing {
+    display: flex;
+}

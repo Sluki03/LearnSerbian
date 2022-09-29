@@ -785,8 +785,11 @@ export class Task {
                 Component.render(conversationHolder);
 
                 const [conversationParticipant, conversationMessages, conversationAnswer] = [...conversationHolder.children];
+                const [participantAvatar, participantName] = [...conversationParticipant.children];
                 
-                const participantName = conversationParticipant.children[1];
+                const participantAvatarLetter = participantAvatar.children[0];
+                participantAvatarLetter.innerText = this.currentTask.participant[0].toUpperCase();
+
                 participantName.innerText = this.currentTask.participant;
 
                 let messageNumber = 0;
@@ -807,8 +810,19 @@ export class Task {
                 window.eventList.add({ id: "taskCheckMessageKeyDown", type: "keydown", listener: checkMessage });
 
                 function changeConversationAnswerStatus() {
-                    if(conversationAnswerInput.value) conversationAnswer.classList.add("active-conversation-answer");
-                    else if(conversationAnswer.classList.contains("active-conversation-answer")) conversationAnswer.classList.remove("active-conversation-answer");
+                    if(conversationAnswerInput.value) {
+                        conversationAnswer.classList.add("active-conversation-answer");
+                        
+                        conversationAnswerP.style.opacity = "1";
+                        conversationAnswerP.style.top = "-30px";
+                    }
+                    
+                    else if(conversationAnswer.classList.contains("active-conversation-answer")) {
+                        conversationAnswer.classList.remove("active-conversation-answer");
+
+                        conversationAnswerP.style.opacity = "";
+                        conversationAnswerP.style.top = "";
+                    }
                 }
                 
                 function checkMessage(e) {

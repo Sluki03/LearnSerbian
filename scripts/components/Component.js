@@ -12,13 +12,14 @@ import InteractiveTitle from "./list/other/InteractiveTitle.js"
 import ModalOptions from "./list/other/ModalOptions.js";
 import ArrowButton from "./list/other/ArrowButton.js";
 import ClassicModal from "./list/other/ClassicModal.js";
+import Typing from "./list/other/Typing.js";
 import { Convert } from "../functions/Convert.js";
 import { buildEventList } from "../functions/EventControl.js";
 
 const components = {
     PanelsList, ExercisesList, ExerciseModal, ExerciseModalContent, ExerciseModalTask,
     ExerciseModalFinished, ExerciseModalReview, Loading, Nav, Footer,
-    InteractiveTitle, ModalOptions, ArrowButton, ClassicModal
+    InteractiveTitle, ModalOptions, ArrowButton, ClassicModal, Typing
 };
 
 export const Component = { create, render, update };
