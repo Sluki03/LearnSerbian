@@ -442,7 +442,8 @@
                     width: 100%;
                     font-size: 18px;
                     color: white;
-                    background-color: $defLighterBlue;
+                    background-color: rgba(0, 132, 255, 0.7);
+                    backdrop-filter: blur(10px);
                     opacity: 0;
                     position: absolute;
                     top: 0;
