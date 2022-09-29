@@ -663,8 +663,11 @@ export class Task {
 
                     function getWordBankOption(option, isDynamic) {
                         const optionSelectiveTypeClass = isDynamic ? `word-bank-option-${isSelective(option)}` : "word-bank-option-selective";
-                        const moveOptionType = isDynamic ? isSelective(option).substring(-2) : "select";
-                        const selectiveTypeAppendTo = isDynamic ? isSelective(option) === "selective" ? wordBankOptionsHolder : textHolder : wordBankOptionsHolder;
+                        
+                        const selectiveType = isSelective(option);
+                        const moveOptionType = isDynamic ? selectiveType.substring(0, selectiveType.length - 3) : "select";
+                        
+                        const selectiveTypeAppendTo = isDynamic ? selectiveType === "selective" ? wordBankOptionsHolder : textHolder : wordBankOptionsHolder;
                         
                         return {
                             tag: "button",
