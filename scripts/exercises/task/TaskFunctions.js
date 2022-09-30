@@ -1,5 +1,6 @@
 import createElement from "../../functions/createElement.js";
 import breakText from "../../functions/breakText.js";
+import getVisiblePlaceholder from "../../functions/getVisiblePlaceholder.js";
 
 export const TaskFunctions = {
     setActiveButton, getButtonImage, setTranslatableWords,
@@ -216,6 +217,8 @@ async function sendMessage(message, methods, e) {
             setTimeout(() => {
                 conversationAnswerInput.disabled = false;
                 conversationAnswerInput.placeholder = message.userContent;
+
+                getVisiblePlaceholder(conversationAnswerInput);
 
                 conversationAnswerInput.focus();
 

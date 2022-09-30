@@ -983,6 +983,21 @@ main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .con
   border: 2px solid #5e5c5c;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
 }
+main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-answer input::-moz-placeholder {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-answer input:-ms-input-placeholder {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-answer input::placeholder {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
 main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-answer .arrow-button {
   height: 45px;
   width: 45px;

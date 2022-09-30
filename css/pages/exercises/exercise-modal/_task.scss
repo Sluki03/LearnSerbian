@@ -471,6 +471,12 @@
                         border: 2px solid $defDarkGrey;
                         box-shadow: $defLightShadow;
                     }
+
+                    &::placeholder {
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        white-space: nowrap;
+                    }
                 }
 
                 .arrow-button {

@@ -33,5 +33,35 @@ export const test1 = [
                 }
             }
         ]
+    },
+
+    {
+        type: "conversation",
+        title: "Have a conversation.",
+        participant: "Komsija Deki",
+        mode: {
+            type: "write",
+            switch: false
+        },
+        messages: [
+            {
+                content: "Sta ima doktore?",
+                userContent: "Oh, where are you man, what's up?",
+                acceptableAnswers: [
+                    "Oo, gde si ti covece, sta ima?",
+                    "O, pa gde si ti covece, sta ima?"
+                ]
+            },
+
+            {
+                content: "Na kojoj poziciji u firmi radis sada?",
+                userContent: "I am a CEO.",
+                acceptableAnswers: [
+                    "Ja sam direktor.",
+                    "Ja sam CEO.",
+                    "Ja sam generalni izvrsi direktor."
+                ]
+            }
+        ]
     }
 ];

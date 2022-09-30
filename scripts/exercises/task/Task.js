@@ -812,9 +812,13 @@ export class Task {
                 function changeConversationAnswerStatus() {
                     if(conversationAnswerInput.value) {
                         conversationAnswer.classList.add("active-conversation-answer");
+
+                        conversationAnswerP.innerText = currentMessage.userContent;
+
+                        const conversationAnswePHeight = getComputedStyle(conversationAnswerP).getPropertyValue("height");
                         
                         conversationAnswerP.style.opacity = "1";
-                        conversationAnswerP.style.top = "-30px";
+                        conversationAnswerP.style.top = `-${conversationAnswePHeight}`;
                     }
                     
                     else if(conversationAnswer.classList.contains("active-conversation-answer")) {
@@ -822,6 +826,8 @@ export class Task {
 
                         conversationAnswerP.style.opacity = "";
                         conversationAnswerP.style.top = "";
+
+                        setTimeout(() => { conversationAnswerP.innerText = "" }, 300);
                     }
                 }
                 
@@ -838,6 +844,11 @@ export class Task {
                     });
 
                     sendMessage({ role: "user", content: conversationAnswerInput.value });
+
+                    conversationAnswerP.style.opacity = "";
+                    conversationAnswerP.style.top = "";
+
+                    setTimeout(() => { conversationAnswerP.innerText = "" }, 300);
                     
                     conversationAnswerInput.value = "";
                     if(conversationAnswer.classList.contains("active-conversation-answer")) conversationAnswer.classList.remove("active-conversation-answer");
@@ -847,6 +858,12 @@ export class Task {
                         currentMessage = currentTask.messages[messageNumber];
 
                         if(messageNumber > currentTask.messages.length - 1) {
+                            if(conversationAnswer.classList.contains("active-conversation-answer")) conversationAnswer.classList.remove("active-conversation-answer");
+                            conversationAnswer.classList.add("disabled-conversation-answer");
+                            
+                            conversationAnswerInput.disabled = true;
+                            conversationAnswerInput.placeholder = "Write a message...";
+                            
                             answerChanged(userMessage);
                             return check(e, true);
                         }
