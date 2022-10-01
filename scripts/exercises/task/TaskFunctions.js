@@ -4,7 +4,8 @@ import getVisiblePlaceholder from "../../functions/getVisiblePlaceholder.js";
 
 export const TaskFunctions = {
     setActiveButton, getButtonImage, setTranslatableWords,
-    textareaValueChanged, moveOption, sendMessage
+    textareaValueChanged, moveOption, sendMessage,
+    participantBehavior, getInputMaxLength
 };
 
 function setActiveButton(e) {
@@ -197,6 +198,9 @@ async function sendMessage(message, methods, e) {
 
             const participantTyping = document.querySelector(".conversation-participant .typing");
             participantTyping.classList.add("active-typing");
+
+            const audio = new Audio("./sfx/typing.mp3");
+            audio.play();
         
             const wrongAnswers = [
                 "Šta?",
@@ -211,8 +215,7 @@ async function sendMessage(message, methods, e) {
             const randomWrongAnswer = wrongAnswers[Math.floor(Math.random() * wrongAnswers.length)];
 
             const isCorrect = message.isCorrect === undefined ? true : message.isCorrect;
-        
-            const typingDuration = (isCorrect ? message.content.length : randomWrongAnswer.length) * 100;
+            const typingDuration = participantBehavior(isCorrect ? message.content : randomWrongAnswer, "typing");
 
             setTimeout(() => {
                 conversationAnswerInput.disabled = false;
@@ -265,6 +268,41 @@ async function sendMessage(message, methods, e) {
         appendTo: messageHolder
     });
 
+    const audio = new Audio(`./sfx/${message.role === "user" ? "sent" : "received"}.mp3`);
+    audio.play();
+
     if(e === undefined) return;
     if(message.role === "participant" && !message.isCorrect) conversation.end();
+}
+
+function participantBehavior(message, action) {
+    const simulate = {
+        reading: randomTime(50, 25),
+        typing: randomTime(150, 50),
+        thinking: randomTime(1000, 500)
+    };
+    
+    switch(action) {
+        case "readingThinking":
+            const messageReading = message.length === 0 ? 0 : message.length * simulate.reading;
+            return messageReading + simulate.thinking;
+        case "typing":
+            const messageTyping = message.length * simulate.typing;
+            return messageTyping;
+        default: ;
+    }
+
+    function randomTime(max, min = 0) {
+        return Math.floor(Math.random() * (max - min) + min);
+    }
+}
+
+function getInputMaxLength(message) {
+    let longestAcceptableAnswer = "";
+
+    message.acceptableAnswers.forEach(answer => {
+        if(longestAcceptableAnswer.length < answer.length) longestAcceptableAnswer = answer;
+    });
+
+    return longestAcceptableAnswer.length;
 }

@@ -463,7 +463,8 @@ export class Task {
         
         const {
             setActiveButton, getButtonImage, setTranslatableWords,
-            textareaValueChanged, moveOption, sendMessage
+            textareaValueChanged, moveOption, sendMessage,
+            participantBehavior, getInputMaxLength
         } = TaskFunctions;
         
         switch(this.currentTask.type) {
@@ -794,7 +795,7 @@ export class Task {
 
                 let messageNumber = 0;
                 let currentMessage = currentTask.messages[messageNumber];
-
+                
                 sendMessage({
                     author: currentTask.participant,
                     role: "participant",
@@ -804,6 +805,7 @@ export class Task {
 
                 const [conversationAnswerP, conversationAnswerInput, conversationAnswerCheckButton] = [...conversationAnswer.children];
                 
+                conversationAnswerInput.maxLength = getInputMaxLength(currentMessage);
                 conversationAnswerInput.oninput = changeConversationAnswerStatus;
 
                 conversationAnswerCheckButton.onclick = checkMessage;
@@ -843,15 +845,20 @@ export class Task {
                         if(breakText(userMessage, { join: true }) === breakText(acceptableAnswer, { join: true })) isCorrect = true;
                     });
 
-                    sendMessage({ role: "user", content: conversationAnswerInput.value });
+                    sendMessage({ role: "user", content: userMessage });
 
                     conversationAnswerP.style.opacity = "";
                     conversationAnswerP.style.top = "";
 
                     setTimeout(() => { conversationAnswerP.innerText = "" }, 300);
-                    
+                        
                     conversationAnswerInput.value = "";
                     if(conversationAnswer.classList.contains("active-conversation-answer")) conversationAnswer.classList.remove("active-conversation-answer");
+
+                    conversationAnswerInput.disabled = true;
+                    conversationAnswerInput.placeholder = "Write a message...";
+                    
+                    const readingThinkingDuration = participantBehavior(userMessage, "readingThinking");
 
                     if(isCorrect) {
                         messageNumber++;
@@ -867,15 +874,20 @@ export class Task {
                             answerChanged(userMessage);
                             return check(e, true);
                         }
+
+                        else conversationAnswerInput.maxLength = getInputMaxLength(currentMessage);
                     }
 
-                    sendMessage({
-                        author: currentTask.participant,
-                        role: "participant",
-                        content: currentMessage.content,
-                        userContent: currentMessage.userContent,
-                        isCorrect
-                    }, { check, answerChanged }, e);
+                    setTimeout(() => sendMessage(
+                        {
+                            author: currentTask.participant,
+                            role: "participant",
+                            content: currentMessage.content,
+                            userContent: currentMessage.userContent,
+                            isCorrect
+                        },
+                        { check, answerChanged }, e
+                    ), readingThinkingDuration);
                 }
 
                 break;

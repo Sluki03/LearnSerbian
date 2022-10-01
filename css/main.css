@@ -902,6 +902,10 @@ main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .con
   height: 100%;
   width: 100%;
   padding: 15px;
+  overflow-y: auto;
+}
+main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-messages::-webkit-scrollbar {
+  display: none;
 }
 main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-messages .participant-message-holder {
   display: flex;
@@ -912,13 +916,8 @@ main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .con
 }
 main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-messages .participant-message-holder p {
   color: #5e5c5c;
-  font-size: 20px;
   background-color: rgba(255, 255, 255, 0.8);
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
-  border: 1px solid rgba(200, 200, 200, 0.5);
   border-radius: 0px 15px 15px 15px;
-  padding: 5px 10px;
 }
 main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-messages .user-message-holder {
   display: flex;
@@ -929,12 +928,15 @@ main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .con
 }
 main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-messages .user-message-holder p {
   color: white;
-  font-size: 20px;
   background-color: rgba(0, 140, 255, 0.8);
+  border-radius: 15px 15px 0px 15px;
+}
+main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-messages p {
+  font-size: 20px;
   -webkit-backdrop-filter: blur(10px);
           backdrop-filter: blur(10px);
   border: 1px solid rgba(200, 200, 200, 0.5);
-  border-radius: 15px 15px 0px 15px;
+  word-break: break-all;
   padding: 5px 10px;
 }
 main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-answer {
