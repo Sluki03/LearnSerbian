@@ -683,30 +683,13 @@ main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .
 main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-images-holder {
   width: auto;
 }
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  width: 80%;
-  gap: 20px;
-  margin: 15px 0;
-}
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder > p {
-  color: #5e5c5c;
-  font-size: 25px;
-  border: 1px solid #5e5c5c;
-  border-radius: 20px;
-  position: relative;
-  padding: 10px 15px;
-}
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder > p span {
+main .exercise-modal .exercise-modal-task .task-holder .word {
   border-bottom: 3px dotted rgba(200, 200, 200, 0.5);
   cursor: pointer;
   position: relative;
   transition: 300ms;
 }
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder > p span .word-translation {
+main .exercise-modal .exercise-modal-task .task-holder .word .word-translation {
   color: #5e5c5c;
   font-size: 20px;
   white-space: nowrap;
@@ -723,10 +706,28 @@ main .exercise-modal .exercise-modal-task .task-holder .translate-holder > p spa
   transform: translateX(-50%);
   transition: 300ms;
   padding: 15px;
+  overflow: visible;
 }
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder > p span .active-word-translation {
+main .exercise-modal .exercise-modal-task .task-holder .word .active-word-translation {
   opacity: 1;
   top: calc(-100% - 20px);
+}
+main .exercise-modal .exercise-modal-task .task-holder .translate-holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 80%;
+  gap: 20px;
+  margin: 15px 0;
+}
+main .exercise-modal .exercise-modal-task .task-holder .translate-holder > p {
+  color: #5e5c5c;
+  font-size: 25px;
+  border: 1px solid #5e5c5c;
+  border-radius: 20px;
+  position: relative;
+  padding: 10px 15px;
 }
 main .exercise-modal .exercise-modal-task .task-holder .translate-holder textarea {
   width: 80%;
@@ -902,7 +903,7 @@ main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .con
   height: 100%;
   width: 100%;
   padding: 15px;
-  overflow-y: auto;
+  overflow: visible;
 }
 main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-messages::-webkit-scrollbar {
   display: none;

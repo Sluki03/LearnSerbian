@@ -50,7 +50,11 @@ export const test1 = [
                 acceptableAnswers: [
                     "Oo, gde si ti covece, sta ima?",
                     "O, pa gde si ti covece, sta ima?"
-                ]
+                ],
+                translation: {
+                    sta: "what",
+                    doktore: "doctor"
+                }
             },
 
             {

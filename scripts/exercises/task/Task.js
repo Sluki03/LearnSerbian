@@ -800,7 +800,8 @@ export class Task {
                     author: currentTask.participant,
                     role: "participant",
                     content: currentMessage.content,
-                    userContent: currentMessage.userContent
+                    userContent: currentMessage.userContent,
+                    translation: currentMessage.translation
                 }, { check, answerChanged });
 
                 const [conversationAnswerP, conversationAnswerInput, conversationAnswerCheckButton] = [...conversationAnswer.children];
@@ -884,6 +885,7 @@ export class Task {
                             role: "participant",
                             content: currentMessage.content,
                             userContent: currentMessage.userContent,
+                            translation: currentMessage.translation,
                             isCorrect
                         },
                         { check, answerChanged }, e

@@ -73,14 +73,13 @@ function setTranslatableWords(parent, text, translation) {
         if(previousWord === translatedWord) return;
         previousWord = translatedWord;
 
-        const translateHolderSpan = document.querySelector(`.translate-holder p .word-${word}`);
-        translateHolderSpan.style.borderBottom = "3px solid #5e5c5c";
+        wordElement.style.borderBottom = "3px solid #5e5c5c";
 
         const wordTranslation = createElement({
             tag: "p",
             attributes: { class: "word-translation" },
             innerText: translatedWord,
-            appendTo: translateHolderSpan
+            appendTo: wordElement
         });
 
         setTimeout(() => { wordTranslation.classList.add("active-word-translation") }, 100);
@@ -270,8 +269,10 @@ async function sendMessage(message, methods, e) {
         participantAnswer = await conversation.pause();
         
         messageContent.innerHTML = "";
-        messageContent.innerText = participantAnswer;
         messageContent.style.height = "";
+
+        console.log(message.translation)
+        setTranslatableWords(messageContent, participantAnswer, message.translation);
     }
 
     const audio = new Audio(`./sfx/${message.role === "user" ? "sent" : "received"}.mp3`);
