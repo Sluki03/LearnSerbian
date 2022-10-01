@@ -932,6 +932,10 @@ main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .con
   border-radius: 15px 15px 0px 15px;
 }
 main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-messages p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
   font-size: 20px;
   -webkit-backdrop-filter: blur(10px);
           backdrop-filter: blur(10px);
@@ -2336,7 +2340,6 @@ footer div a {
   justify-content: center;
   flex-direction: row;
   gap: 5px;
-  display: none;
 }
 .typing .typing-dot {
   display: flex;
@@ -2401,8 +2404,4 @@ footer div a {
     width: 15px;
     background-color: gray;
   }
-}
-
-.active-typing {
-  display: flex;
 }/*# sourceMappingURL=main.css.map */

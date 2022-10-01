@@ -1,7 +1,6 @@
 .typing {
     @include add-flex;
     gap: 5px;
-    display: none;
 
     .typing-dot {
         @include add-flex;
@@ -50,8 +49,4 @@
             }
         }
     }
-}
-
-.active-typing {
-    display: flex;
 }

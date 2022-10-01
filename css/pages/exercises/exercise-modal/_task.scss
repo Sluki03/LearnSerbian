@@ -424,6 +424,7 @@
                 }
 
                 p {
+                    @include add-flex;
                     font-size: set-size(md);
                     backdrop-filter: blur(10px);
                     border: 1px solid $defGrey;

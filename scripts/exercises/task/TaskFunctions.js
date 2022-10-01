@@ -1,3 +1,4 @@
+import { Component } from "../../components/Component.js";
 import createElement from "../../functions/createElement.js";
 import breakText from "../../functions/breakText.js";
 import getVisiblePlaceholder from "../../functions/getVisiblePlaceholder.js";
@@ -196,9 +197,6 @@ async function sendMessage(message, methods, e) {
             conversationAnswerInput.disabled = true;
             conversationAnswerInput.placeholder = `${message.author} is typing...`;
 
-            const participantTyping = document.querySelector(".conversation-participant .typing");
-            participantTyping.classList.add("active-typing");
-
             const audio = new Audio("./sfx/typing.mp3");
             audio.play();
         
@@ -222,10 +220,8 @@ async function sendMessage(message, methods, e) {
                 conversationAnswerInput.placeholder = message.userContent;
 
                 getVisiblePlaceholder(conversationAnswerInput);
-
                 conversationAnswerInput.focus();
 
-                participantTyping.classList.remove("active-typing");
                 resolve(isCorrect ? message.content : randomWrongAnswer);
             }, typingDuration);
         }),
@@ -249,10 +245,6 @@ async function sendMessage(message, methods, e) {
         }
     };
     
-    let participantAnswer = "";
-    
-    if(message.role === "participant") participantAnswer = await conversation.pause();
-    
     const conversationMessages = document.querySelector(".conversation-messages");
     
     const messageHolder = createElement({
@@ -261,12 +253,26 @@ async function sendMessage(message, methods, e) {
         appendTo: conversationMessages
     });
     
-    createElement({
+    const messageContent = createElement({
         tag: "p",
         attributes: { class: `${message.role}-message` },
-        innerText: participantAnswer ? participantAnswer : message.content,
+        innerText: message.role === "user" ? message.content : "",
         appendTo: messageHolder
     });
+
+    if(message.role === "participant") {
+        messageContent.style.height = "40px";
+        Component.create("Typing", { appendTo: messageContent });
+    }
+
+    if(message.role === "participant") {
+        let participantAnswer = "";
+        participantAnswer = await conversation.pause();
+        
+        messageContent.innerHTML = "";
+        messageContent.innerText = participantAnswer;
+        messageContent.style.height = "";
+    }
 
     const audio = new Audio(`./sfx/${message.role === "user" ? "sent" : "received"}.mp3`);
     audio.play();
