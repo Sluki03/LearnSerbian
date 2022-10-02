@@ -683,35 +683,6 @@ main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .
 main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-images-holder {
   width: auto;
 }
-main .exercise-modal .exercise-modal-task .task-holder .word {
-  border-bottom: 3px dotted rgba(200, 200, 200, 0.5);
-  cursor: pointer;
-  position: relative;
-  transition: 300ms;
-}
-main .exercise-modal .exercise-modal-task .task-holder .word .word-translation {
-  color: #5e5c5c;
-  font-size: 20px;
-  white-space: nowrap;
-  background-color: rgba(255, 255, 255, 0.7);
-  border-radius: 20px;
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
-  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
-  cursor: default;
-  opacity: 0;
-  position: absolute;
-  top: calc(-100% - 25px);
-  left: 50%;
-  transform: translateX(-50%);
-  transition: 300ms;
-  padding: 15px;
-  overflow: visible;
-}
-main .exercise-modal .exercise-modal-task .task-holder .word .active-word-translation {
-  opacity: 1;
-  top: calc(-100% - 20px);
-}
 main .exercise-modal .exercise-modal-task .task-holder .translate-holder {
   display: flex;
   align-items: center;
@@ -903,7 +874,7 @@ main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .con
   height: 100%;
   width: 100%;
   padding: 15px;
-  overflow: visible;
+  overflow-y: auto;
 }
 main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-messages::-webkit-scrollbar {
   display: none;
@@ -915,7 +886,12 @@ main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .con
   flex-direction: row;
   width: 100%;
 }
-main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-messages .participant-message-holder p {
+main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-messages .participant-message-holder .participant-message {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: row;
+  gap: 5px;
   color: #5e5c5c;
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 0px 15px 15px 15px;
@@ -927,12 +903,13 @@ main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .con
   flex-direction: row;
   width: 100%;
 }
-main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-messages .user-message-holder p {
+main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-messages .user-message-holder .user-message {
   color: white;
   background-color: rgba(0, 140, 255, 0.8);
   border-radius: 15px 15px 0px 15px;
 }
-main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-messages p {
+main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-messages .participant-message,
+main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-messages .user-message {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2405,4 +2382,31 @@ footer div a {
     width: 15px;
     background-color: gray;
   }
+}
+
+.word {
+  border-bottom: 3px dotted rgba(200, 200, 200, 0.5);
+  cursor: pointer;
+  transition: 300ms;
+}
+
+.word-translation {
+  color: #5e5c5c;
+  font-size: 20px;
+  white-space: nowrap;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 20px;
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
+  cursor: default;
+  opacity: 0;
+  position: absolute;
+  padding: 15px;
+  transition: 300ms;
+  z-index: 10;
+}
+
+.active-word-translation {
+  opacity: 1;
 }/*# sourceMappingURL=main.css.map */
