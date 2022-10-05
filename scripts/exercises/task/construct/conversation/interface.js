@@ -28,6 +28,8 @@ export default function interace(thisTask) {
         conversationAnswerInput.oninput = changeConversationAnswerStatus;
 
         conversationAnswerCheckButton.onclick = e => checkMessage(e);
+        
+        if(window.eventList.get("taskCheckMessageKeyDown") !== null) window.eventList.remove("taskCheckMessageKeyDown");
         window.eventList.add({ id: "taskCheckMessageKeyDown", type: "keydown", listener: checkMessage });
 
         changeConversationAnswerStatus();
