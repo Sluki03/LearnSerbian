@@ -15,6 +15,7 @@ export const test1 = [
                     "Zdravo! Kako si?",
                     "Cao! Kako si?"
                 ],
+                options: ["Zdravo! Kako si?", "Dobro jutro, sta ima?"],
                 translation: {
                     zdravo: "hello"
                 }
@@ -28,6 +29,7 @@ export const test1 = [
                     "I ja sam.",
                     "I ja takodje."
                 ],
+                options: ["I ja.", "Ja ne."],
                 translation: {
                     zdravo: "hello"
                 }
@@ -51,6 +53,7 @@ export const test1 = [
                     "Oo, gde si ti covece, sta ima?",
                     "O, pa gde si ti covece, sta ima?"
                 ],
+                options: ["Oo, gde si ti covece, sta ima?", "Cek, ko je doktor?"],
                 translation: {
                     sta: "what",
                     doktore: "doctor"
@@ -64,8 +67,28 @@ export const test1 = [
                     "Ja sam direktor.",
                     "Ja sam CEO.",
                     "Ja sam generalni izvrsi direktor."
-                ]
+                ],
+                options: ["Ja sam direktor.", "Ja sam domar."]
             }
         ]
-    }
+    },
+
+    /*{
+        type: "translate",
+        title: "Translate the following text:",
+        text: "Odakle si?",
+        mode: {
+            type: "random",
+            switch: true
+        },
+        options: ["where", "gang", "are", "who", "you", "from", "strong", "attitude"],
+        acceptableAnswers: [
+            "Where are you from"
+        ],
+        translation: {
+            odakle: "Where ... from",
+            si: "are you"
+        },
+        xp: 5
+    }*/
 ];

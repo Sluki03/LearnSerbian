@@ -97,28 +97,9 @@
             max-width: 660px;
             margin: 20px 0;
 
+            @include multiple-choice-button;
+            
             .multiple-choice-button {
-                @include add-flex(column);
-                height: 100%;
-                width: 100%;
-                max-width: 330px;
-                color: $defDarkGrey;
-                font-size: set-size(lg);
-                background: white;
-                border: 1px solid $defDarkGrey;
-                border-radius: 20px;
-                cursor: pointer;
-                position: relative;
-                top: 0;
-                margin: 0 auto;
-                padding: 5px 10px;
-                transition: 300ms;
-                
-                &:hover {
-                    border: 1px solid transparent;
-                    box-shadow: $defRedBlueShadow;
-                }
-
                 span {
                     height: 35px;
                     width: 35px;
@@ -142,34 +123,6 @@
                     color: $defDarkGrey;
                     font-size: set-size(lg);
                     border-radius: 30px;
-                }
-            }
-
-            .active-multiple-choice-button {
-                animation: rotate-box-shadow 300ms linear forwards;
-
-                @keyframes rotate-box-shadow {
-                    0% {
-                        box-shadow: -3px -3px 5px 1px $defRed, 3px 3px 5px 1px $defBlue;
-                    }
-
-                    50% {
-                        box-shadow: 3px -3px 5px 1px $defRed, -3px 3px 5px 1px $defBlue;
-                    }
-
-                    100% {
-                        box-shadow: 3px 3px 5px 1px $defRed, -3px -3px 5px 1px $defBlue;
-                    }
-                }
-            }
-
-            .disabled-multiple-choice-button {
-                cursor: default;
-                opacity: 0.5;
-
-                &:hover {
-                    border: 1px solid $defDarkGrey;
-                    box-shadow: none;
                 }
             }
 
@@ -472,6 +425,23 @@
                     img {
                         height: 30px;
                         filter: invert(100%);
+                    }
+                }
+
+                .conversation-answer-button-holder {
+                    @include add-flex;
+                    gap: 10px;
+                    flex-wrap: wrap;
+                    width: 100%;
+
+                    @include multiple-choice-button;
+
+                    .multiple-choice-button {
+                        height: auto;
+                        width: auto;
+                        min-width: 45%;
+                        font-size: set-size(md);
+                        margin: 3px 0;
                     }
                 }
             }

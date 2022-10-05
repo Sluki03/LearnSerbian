@@ -1,7 +1,7 @@
-import { TaskFunctions } from "./TaskFunctions.js";
 import { Component } from "../../components/Component.js";
 import { Convert } from "../../functions/Convert.js";
 import createElement from "../../functions/createElement.js";
+import constructTask from "./construct/index.js";
 import randomArray from "../../functions/randomArray.js";
 import percentage from "../../functions/percentage.js";
 import breakText from "../../functions/breakText.js";
@@ -17,6 +17,18 @@ export class Task {
         this.taskNumber = 0;
         this.currentTask = this.tasks[this.taskNumber];
         this.prevModeValues = { textareaValue: "", options: { textHolder: [], wordBank: [] }  };
+        this.prevModeValues = {
+            write: {
+                translate: { textareaValue: "" },
+                conversation: { inputValue: "" }
+            },
+            wordBank: {
+                translate: { wordBank: [], textHolder: [] }
+            },
+            multipleChoice: {
+                conversation: {}
+            }
+        };
 
         this.answer = "";
         this.defaultXP = 10;
@@ -364,16 +376,10 @@ export class Task {
                 
                 const participantMessageHolders = document.querySelectorAll(".participant-message-holder");
                 
-                const lastMessageHolder = participantMessageHolders[participantMessageHolders.length - messageHolderIndex];
-                const lastMessage = [...lastMessageHolder.children][0].innerText;
+                const numberOfMessages = participantMessageHolders.length - messageHolderIndex;
+                const message = currentTask.messages[numberOfMessages];
 
-                let acceptableAnswers = [];
-
-                currentTask.messages.forEach(message => {
-                    if(lastMessage === message.content) acceptableAnswers = message.acceptableAnswers;
-                });
-
-                return acceptableAnswers;
+                return message.acceptableAnswers;
             }
             
             return currentTask.acceptableAnswers;
@@ -457,443 +463,143 @@ export class Task {
         else if(!checkButton.classList.contains("disabled-flag-button")) checkButton.classList.add("disabled-flag-button");
     }
 
-    construct() {
-        const { currentTask, prevModeValues, check, answerChanged, construct } = this;
-        const { taskHolder, switchModesButton } = this.elements;
+    construct(changeMode = false) {
+        constructTask(this.currentTask.type, this, changeMode);
+    }
+
+    switchModes(currentMessage) {
+        const { currentTask, prevModeValues, construct } = this;
+        const { switchModesButton } = this.elements;
+
+        const allModes = {
+            translate: ["write", "wordBank"],
+            conversation: ["write", "multipleChoice"]
+        };
         
-        const {
-            setActiveButton, getButtonImage, setTranslatableWords,
-            textareaValueChanged, moveOption, sendMessage,
-            participantBehavior, getInputMaxLength
-        } = TaskFunctions;
+        const icons = {
+            write: { src: "./images/icons/write-icon.svg", alt: "Write" },
+            wordBank: { src: "./images/icons/word-bank-icon.svg", alt: "Word Bank" },
+            multipleChoice: { src: "./images/icons/multiple-choice-icon.svg", alt: "Multiple Choice" }
+        };
         
-        switch(this.currentTask.type) {
-            case "multipleChoice":
-            case "multipleChoiceImages":
-                const multipleChoiceHolder = createElement({
-                    tag: "div",
-                    attributes: { class: `multiple-choice-holder ${this.currentTask.type === "multipleChoiceImages" ? "multiple-choice-images-holder" : ""}` },
-                    appendTo: taskHolder
-                });
+        const taskModes = getTaskModes();
+        const invertedTaskMode = currentTask.mode.type === taskModes[0] ? taskModes[1] : taskModes[0];
+        const invertedIcon = getInvertedIcon();
+        
+        if(currentTask.mode.switch) {
+            if(currentTask.mode.type === "write" && (currentTask.type === "conversation" ? currentMessage.options : currentTask.options) === undefined) return;
+            
+            switchModesButton.classList.add("active-switch-modes-button");
+            switchModesButton.onclick = changeMode;
 
-                const randomOptions = randomArray(this.currentTask.options);
-                
-                for(let i = 0; i < randomOptions.length; i++) {
-                    const multipleChoiceButton = createElement({
-                        tag: "button",
-                        attributes: {
-                            class: `multiple-choice-button ${this.currentTask.type === "multipleChoiceImages" ? "multiple-choice-images-button" : ""}`,
-                            id: `multiple-choice-button-${i + 1}`
-                        },
-                        innerText: this.currentTask.type === "multipleChoice" ? randomOptions[i] : "",
-                        events: [{ on: "click", call: setActiveButton }],
-                        appendTo: multipleChoiceHolder
-                    });
+            const switchModesImg = document.querySelector(".active-switch-modes-button img");
 
-                    if(this.currentTask.type === "multipleChoice") createElement({
-                        tag: "span",
-                        attributes: { class: "multiple-choice-span" },
-                        innerText: i + 1,
-                        appendTo: multipleChoiceButton
-                    });
+            if(switchModesImg === null) createElement({
+                tag: "img",
+                attributes: { src: invertedIcon.src, alt: invertedIcon.alt },
+                appendTo: switchModesButton
+            });
 
-                    else {
-                        createElement({
-                            tag: "img",
-                            attributes: {
-                                src: getButtonImage(this.currentTask.images, randomOptions[i]),
-                                alt: randomOptions[i]
-                            },
-                            appendTo: multipleChoiceButton
-                        });
+            else {
+                switchModesImg.src = invertedIcon.src;
+                switchModesImg.alt = invertedIcon.alt;
+            }
+        }
 
-                        createElement({
-                            tag: "p",
-                            innerText: randomOptions[i],
-                            appendTo: multipleChoiceButton
-                        });
-                    }
-                }
-
-                window.eventList.add({
-                    id: "taskFunctionsSetActiveButton",
-                    type: "keydown",
-                    listener: setActiveButton,
-                    params: { randomOptions, answerChanged }
-                });
-                
-                break;
-            case "translate":
-                const translateHolder = createElement({
-                    tag: "div",
-                    attributes: { class: "translate-holder" },
-                    appendTo: taskHolder
-                });
-                
-                const translateHolderP = createElement({
-                    tag: "p",
-                    appendTo: translateHolder
-                });
-
-                setTranslatableWords(translateHolderP, this.currentTask.text, this.currentTask.translation);
-
-                if(this.currentTask.mode === undefined) this.currentTask.mode = { type: "write", switch: false };
-                if(this.currentTask.mode.type === undefined) this.currentLives.mode = {...this.currentTask.mode, type: "write"};
-                if(this.currentTask.mode.switch === undefined) this.currentTask.mode = {...this.currentTask.mode, switch: false};
-                
-                const modeTypes = ["write", "wordBank"];
-
-                if(this.currentTask.mode.type === "random") {
-                    const randomModeType = modeTypes[Math.floor(Math.random() * modeTypes.length)];
-                    
-                    if(randomModeType === "wordBank" && this.currentTask.options === undefined) this.currentTask.mode.type = "write";
-                    else this.currentTask.mode.type = randomModeType;
-                }
-                
-                if(this.currentTask.mode.type === "write") {
-                    const translateHolderTextarea = createElement({
-                        tag: "textarea",
-                        attributes: {
-                            rows: 4,
-                            cols: 2,
-                            type: "text",
-                            placeholder: "Write the translation...",
-                            maxLength: 200
-                        },
-                        events: [
-                            { on: "input", call: () => {
-                                answerChanged(translateHolderTextarea.value);
-                                textareaValueChanged(translateHolderTextarea.value);
-                            }},
+        function changeMode() {
+            if(currentTask.type === "translate") {
+                if(currentTask.mode.type === "write") {
+                    currentTask.mode.type = "wordBank";
     
-                            { on: "keydown", call: e => { if(e.key === "Enter") e.preventDefault() } },
-                            { on: "focus", call: () => translateHolderTextarea.classList.add("translate-holder-textarea-focused") },
-                            
-                            { on: "blur", call: e => {
-                                if(e.relatedTarget && e.relatedTarget.nodeName.toLowerCase() === "button") translateHolderTextarea.focus();
-                                else translateHolderTextarea.classList.remove("translate-holder-textarea-focused");
-                            }}
-                        ],
-                        appendTo: translateHolder
-                    });
+                    const translateHolderTextarea = document.querySelector(".translate-holder textarea");
+                    prevModeValues.write.translate.textareaValue = translateHolderTextarea.value;
     
-                    if(this.prevModeValues.textareaValue) translateHolderTextarea.value = this.prevModeValues.textareaValue;
-                    translateHolderTextarea.focus();
+                    let textHolderWords = [];
     
-                    const buttonHolder = createElement({
-                        tag: "div",
-                        attributes: { class: "button-holder" },
-                        appendTo: translateHolder
-                    });
+                    textHolderWords = translateHolderTextarea.value.split(" ");
     
-                    const holders = ["letters", "arrows"];
-                    
-                    const buttonOrder = {
-                        letters: ["č", "ć", "đ", "š", "ž"],
-                        arrows: ["🡡", "🡣"]
+                    const punctuationMarks = [".", ",", "?", "!", ":", ";"];
+                    textHolderWords = textHolderWords.filter(word => punctuationMarks.indexOf(word) === -1);
+    
+                    for(let i = 0; i < textHolderWords.length; i++) textHolderWords[i] = textHolderWords[i].toLowerCase();
+    
+                    const words = {
+                        textHolder: [],
+                        wordBank: []
                     };
     
-                    for(let i = 0; i < holders.length; i++) createElement({
-                        tag: "div",
-                        attributes: { class: `button-holder-${holders[i]}` },
-                        appendTo: buttonHolder
+                    textHolderWords.forEach(word => {
+                        if(currentTask.options.indexOf(word) > -1) words.textHolder.push(word);
                     });
     
-                    const [buttonHolderLetters, buttonHolderArrows] = [...buttonHolder.children];
-    
-                    buttonOrder.letters.forEach(letter => {
-                        const button = createElement({
-                            tag: "button",
-                            innerText: translateHolderTextarea.value ? letter : letter.toUpperCase(),
-                            events: [{ on: "click", call: () => updateTextareaOnButtonClick(button) }],
-                            appendTo: buttonHolderLetters
-                        });
-                    });
-                    
-                    const changeCaseButton = createElement({
-                        tag: "button",
-                        innerText: buttonOrder.arrows[translateHolderTextarea.value ? 0 : 1],
-                        events: [{ on: "click", call: changeCaseStatus }],
-                        appendTo: buttonHolderArrows
+                    currentTask.options.forEach(option => {
+                        if(words.textHolder.indexOf(option) === -1) words.wordBank.push(option);
                     });
     
-                    function updateTextareaOnButtonClick(button) {
-                        translateHolderTextarea.value += button.innerText;
-                        answerChanged(translateHolderTextarea.value);
-                        textareaValueChanged(translateHolderTextarea.value);
-                    }
-    
-                    function changeCaseStatus() {
-                        const firstArrow = buttonHolderArrows.children[0];
-                        if(!firstArrow.classList.contains("locked-arrow")) firstArrow.classList.add("locked-arrow");
-                        
-                        const firstButton = buttonHolderLetters.children[0].innerText;
-                        const isUpperCase = firstButton === firstButton.toUpperCase();
-    
-                        changeCaseButton.innerText = buttonOrder.arrows[isUpperCase ? 0 : 1];
-    
-                        [...buttonHolderLetters.children].forEach(button => {
-                            if(isUpperCase) button.innerText = button.innerText.toLowerCase();
-                            else button.innerText = button.innerText.toUpperCase();
-                        });
-                    }
+                    prevModeValues.wordBank.translate = words;
                 }
-
-                if(this.currentTask.mode.type === "wordBank") {
-                    const textHolder = createElement({
-                        tag: "div",
-                        attributes: { class: "text-holder" },
-                        appendTo: translateHolder
-                    });
-                    
-                    const wordBankOptionsHolder = createElement({
-                        tag: "div",
-                        attributes: { class: "word-bank-options-holder" },
-                        appendTo: translateHolder
-                    });
-                    
-                    if(prevModeValues.options.textHolder.length > 0) {        
-                        prevModeValues.options.textHolder.forEach(option => createElement(getWordBankOption(option, true)));
-                        prevModeValues.options.wordBank.forEach(option => createElement(getWordBankOption(option, true)));
-                    }
-                    
-                    else {
-                        const randomOptions = randomArray(this.currentTask.options);
-                        randomOptions.forEach(option => createElement(getWordBankOption(option)));
-                    }
-
-                    function getWordBankOption(option, isDynamic) {
-                        const optionSelectiveTypeClass = isDynamic ? `word-bank-option-${isSelective(option)}` : "word-bank-option-selective";
-                        
-                        const selectiveType = isSelective(option);
-                        const moveOptionType = isDynamic ? selectiveType.substring(0, selectiveType.length - 3) : "select";
-                        
-                        const selectiveTypeAppendTo = isDynamic ? selectiveType === "selective" ? wordBankOptionsHolder : textHolder : wordBankOptionsHolder;
-                        
-                        return {
-                            tag: "button",
-                            attributes: { class: `word-bank-option word-bank-option-${option} ${optionSelectiveTypeClass}` },
-                            innerText: option,
-                            events: [{ on: "click", call: () => moveOption(option, moveOptionType, answerChanged) }],
-                            appendTo: selectiveTypeAppendTo
-                        };
-                    }
-                }
-
-                const icons = {
-                    write: { src: "./images/icons/write-icon.svg", alt: "Write" },
-                    wordBank: { src: "./images/icons/word-bank-icon.svg", alt: "Word Bank" }
-                };
                 
-                const invertedModeIcon = this.currentTask.mode.type === "write" ? icons.wordBank : icons.write;
-
-                if(currentTask.mode.switch) {
-                    if(currentTask.mode.type === "write" && currentTask.options === undefined) return;
+                else {
+                    currentTask.mode.type = "write";
+    
+                    const words = {
+                        textHolder: [],
+                        wordBank: []
+                    };
+    
+                    const textHolder = document.querySelector(".text-holder");
+                    const wordsBankOptionsHolder = document.querySelector(".word-bank-options-holder");
                     
-                    switchModesButton.classList.add("active-switch-modes-button");
-                    switchModesButton.onclick = swithModes;
-
-                    const switchModesImg = document.querySelector(".active-switch-modes-button img");
-
-                    if(switchModesImg === null) createElement({
-                        tag: "img",
-                        attributes: { src: invertedModeIcon.src, alt: invertedModeIcon.alt },
-                        appendTo: switchModesButton
+                    [...textHolder.children].forEach(child => {
+                        const childText = child.innerText;
+                        words.textHolder.push(childText);
                     });
+    
+                    [...wordsBankOptionsHolder.children].forEach(child => {
+                        const childText = child.innerText;
+                        words.wordBank.push(childText);
+                    });
+    
+                    prevModeValues.wordBank.translate = words;
+                    prevModeValues.write.translate.textareaValue = words.textHolder.join(" ");
+                }
+            }
 
-                    else {
-                        switchModesImg.src = invertedModeIcon.src;
-                        switchModesImg.alt = invertedModeIcon.alt;
-                    }
+            if(currentTask.type === "conversation") {
+                const conversationAnswerInput = document.querySelector(".conversation-answer input");
+
+                if(currentTask.mode.type === "write") {
+                    currentTask.mode.type = "multipleChoice";
+                    prevModeValues.write.conversation.inputValue = conversationAnswerInput.value;
                 }
 
-                function swithModes() {
-                    if(currentTask.mode.type === "write") {
-                        currentTask.mode.type = "wordBank";
+                else currentTask.mode.type = "write";
+            }
 
-                        const translateHolderTextarea = document.querySelector(".translate-holder textarea");
-                        prevModeValues.textareaValue = translateHolderTextarea.value;
+            const currentInterface = document.querySelector(".interface");
+            currentInterface.innerHTML = "";
 
-                        let textHolderWords = [];
+            construct(true);
+        }
 
-                        textHolderWords = translateHolderTextarea.value.split(" ");
+        function getTaskModes() {
+            let result;
 
-                        const punctuationMarks = [".", ",", "?", "!", ":", ";"];
-                        textHolderWords = textHolderWords.filter(word => punctuationMarks.indexOf(word) === -1);
+            Object.keys(allModes).forEach((key, index) => {
+                if(currentTask.type === key) result = Object.values(allModes)[index];
+            });
 
-                        for(let i = 0; i < textHolderWords.length; i++) textHolderWords[i] = textHolderWords[i].toLowerCase();
+            return result;
+        }
 
-                        const words = {
-                            textHolder: [],
-                            wordBank: []
-                        };
-
-                        textHolderWords.forEach(word => {
-                            if(currentTask.options.indexOf(word) > -1) words.textHolder.push(word);
-                        });
-
-                        currentTask.options.forEach(option => {
-                            if(words.textHolder.indexOf(option) === -1) words.wordBank.push(option);
-                        });
-
-                        prevModeValues.options = words;
-                    }
-                    
-                    else {
-                        currentTask.mode.type = "write";
-
-                        const words = {
-                            textHolder: [],
-                            wordBank: []
-                        };
-
-                        const textHolder = document.querySelector(".text-holder");
-                        const wordsBankOptionsHolder = document.querySelector(".word-bank-options-holder");
-                        
-                        [...textHolder.children].forEach(child => {
-                            const childText = child.innerText;
-                            words.textHolder.push(childText);
-                        });
-
-                        [...wordsBankOptionsHolder.children].forEach(child => {
-                            const childText = child.innerText;
-                            words.wordBank.push(childText);
-                        });
-
-                       prevModeValues.options = words;
-                       prevModeValues.textareaValue = words.textHolder.join(" ");
-                    }
-
-                    taskHolder.innerHTML = "";
-                    construct();
-                }
-
-                function isSelective(option) {
-                    let result;
-
-                    if(prevModeValues.options.textHolder.indexOf(option) > -1) result = false;
-                    if(prevModeValues.options.wordBank.indexOf(option) > -1) result = true;
-
-                    return result ? "selective" : "deselective";
-                }
-
-                break;
-            case "conversation":
-                taskHolder.style.height = "70%";
+        function getInvertedIcon() {
+            let result;
             
-                const conversationHolder = document.querySelector("[data-template='exercise-modal-task-conversation']").content.firstElementChild.cloneNode(true);
-                taskHolder.appendChild(conversationHolder);
-                Component.render(conversationHolder);
+            Object.keys(icons).forEach((key, index) => {
+                if(invertedTaskMode === key) result = Object.values(icons)[index];
+            });
 
-                const [conversationParticipant, conversationMessages, conversationAnswer] = [...conversationHolder.children];
-                const [participantAvatar, participantName] = [...conversationParticipant.children];
-                
-                const participantAvatarLetter = participantAvatar.children[0];
-                participantAvatarLetter.innerText = this.currentTask.participant[0].toUpperCase();
-
-                participantName.innerText = this.currentTask.participant;
-
-                let messageNumber = 0;
-                let currentMessage = currentTask.messages[messageNumber];
-                
-                sendMessage({
-                    author: currentTask.participant,
-                    role: "participant",
-                    content: currentMessage.content,
-                    userContent: currentMessage.userContent,
-                    translation: currentMessage.translation
-                }, { check, answerChanged });
-
-                const [conversationAnswerP, conversationAnswerInput, conversationAnswerCheckButton] = [...conversationAnswer.children];
-                
-                conversationAnswerInput.maxLength = getInputMaxLength(currentMessage);
-                conversationAnswerInput.oninput = changeConversationAnswerStatus;
-
-                conversationAnswerCheckButton.onclick = checkMessage;
-                window.eventList.add({ id: "taskCheckMessageKeyDown", type: "keydown", listener: checkMessage });
-
-                function changeConversationAnswerStatus() {
-                    if(conversationAnswerInput.value) {
-                        conversationAnswer.classList.add("active-conversation-answer");
-
-                        conversationAnswerP.innerText = currentMessage.userContent;
-
-                        const conversationAnswePHeight = getComputedStyle(conversationAnswerP).getPropertyValue("height");
-                        
-                        conversationAnswerP.style.opacity = "1";
-                        conversationAnswerP.style.top = `-${conversationAnswePHeight}`;
-                    }
-                    
-                    else if(conversationAnswer.classList.contains("active-conversation-answer")) {
-                        conversationAnswer.classList.remove("active-conversation-answer");
-
-                        conversationAnswerP.style.opacity = "";
-                        conversationAnswerP.style.top = "";
-
-                        setTimeout(() => { conversationAnswerP.innerText = "" }, 300);
-                    }
-                }
-                
-                function checkMessage(e) {
-                    if(e.type === "keydown" && e.key !== "Enter") return;
-                    
-                    let isCorrect = false;
-                    const userMessage = conversationAnswerInput.value;
-
-                    if(!userMessage) return;
-                    
-                    currentMessage.acceptableAnswers.forEach(acceptableAnswer => {
-                        if(breakText(userMessage, { join: true }) === breakText(acceptableAnswer, { join: true })) isCorrect = true;
-                    });
-
-                    sendMessage({ role: "user", content: userMessage });
-
-                    conversationAnswerP.style.opacity = "";
-                    conversationAnswerP.style.top = "";
-
-                    setTimeout(() => { conversationAnswerP.innerText = "" }, 300);
-                        
-                    conversationAnswerInput.value = "";
-                    if(conversationAnswer.classList.contains("active-conversation-answer")) conversationAnswer.classList.remove("active-conversation-answer");
-
-                    conversationAnswerInput.disabled = true;
-                    conversationAnswerInput.placeholder = "Write a message...";
-                    
-                    const readingThinkingDuration = participantBehavior(userMessage, "readingThinking");
-
-                    if(isCorrect) {
-                        messageNumber++;
-                        currentMessage = currentTask.messages[messageNumber];
-
-                        if(messageNumber > currentTask.messages.length - 1) {
-                            if(conversationAnswer.classList.contains("active-conversation-answer")) conversationAnswer.classList.remove("active-conversation-answer");
-                            conversationAnswer.classList.add("disabled-conversation-answer");
-                            
-                            conversationAnswerInput.disabled = true;
-                            conversationAnswerInput.placeholder = "Write a message...";
-                            
-                            answerChanged(userMessage);
-                            return check(e, true);
-                        }
-
-                        else conversationAnswerInput.maxLength = getInputMaxLength(currentMessage);
-                    }
-
-                    setTimeout(() => sendMessage(
-                        {
-                            author: currentTask.participant,
-                            role: "participant",
-                            content: currentMessage.content,
-                            userContent: currentMessage.userContent,
-                            translation: currentMessage.translation,
-                            isCorrect
-                        },
-                        { check, answerChanged }, e
-                    ), readingThinkingDuration);
-                }
-
-                break;
-            default: return;
+            return result;
         }
     }
 }
