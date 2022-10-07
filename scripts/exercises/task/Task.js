@@ -16,17 +16,16 @@ export class Task {
         this.tasks = randomArray(exercise.tasks, this.numberOfTasks);
         this.taskNumber = 0;
         this.currentTask = this.tasks[this.taskNumber];
-        this.prevModeValues = { textareaValue: "", options: { textHolder: [], wordBank: [] }  };
         this.prevModeValues = {
             write: {
                 translate: { textareaValue: "" },
-                conversation: { inputValue: "" }
+                conversation: { value: "" }
             },
             wordBank: {
                 translate: { wordBank: [], textHolder: [] }
             },
             multipleChoice: {
-                conversation: {}
+                conversation: { disabled: false, classes: [] }
             }
         };
 
@@ -567,13 +566,28 @@ export class Task {
 
             if(currentTask.type === "conversation") {
                 const conversationAnswerInput = document.querySelector(".conversation-answer input");
+                const conversationAnswerButtonHolder = document.querySelector(".conversation-answer-button-holder");
 
                 if(currentTask.mode.type === "write") {
                     currentTask.mode.type = "multipleChoice";
-                    prevModeValues.write.conversation.inputValue = conversationAnswerInput.value;
+                    prevModeValues.write.conversation.value = conversationAnswerInput.value;
                 }
 
-                else currentTask.mode.type = "write";
+                else {
+                    currentTask.mode.type = "write";
+
+                    /*const classes = [];
+
+                    [...conversationAnswerButtonHolder.children].forEach(child => {
+                        console.log([...child.classList]);
+                        [...child.classList].forEach(className => {
+                            if(className === "multiple-choice-button") return;
+                            classes.push(className);
+                        });
+                    });
+
+                    prevModeValues.multipleChoice.conversation.classes = classes;*/
+                }
             }
 
             const currentInterface = document.querySelector(".interface");

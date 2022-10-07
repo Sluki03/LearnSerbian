@@ -5,7 +5,7 @@ import breakText from "../../../../functions/breakText.js";
 
 let messageNumber = 0;
 
-export default function interace(thisTask) {
+export default function interace(thisTask, changeMode) {
     let currentMessage = thisTask.currentTask.messages[messageNumber];
     thisTask.switchModes(currentMessage);
     
@@ -18,9 +18,8 @@ export default function interace(thisTask) {
             attributes: { type: "text" },
             appendTo: conversationAnswer
         });
-
-        conversationAnswerInput.value = thisTask.prevModeValues.write.conversation.inputValue || "";
-        if(!conversationAnswerInput.placeholder) conversationAnswerInput.placeholder = currentMessage.userContent;
+        
+        if(changeMode) resetInput();
 
         const conversationAnswerCheckButton = Component.create("ArrowButton", { appendTo: conversationAnswer });
                 
@@ -55,6 +54,35 @@ export default function interace(thisTask) {
                 setTimeout(() => { conversationAnswerP.innerText = "" }, 300);
             }
         }
+
+        function resetInput() {
+            conversationAnswerInput.value = thisTask.prevModeValues.write.conversation.value;
+            
+            const conversationMessages = document.querySelector(".conversation-messages");
+            const lastMessageHolder = conversationMessages.children[conversationMessages.children.length - 1];
+            const lastMessage = lastMessageHolder.children[0];
+
+            const messageRole = lastMessage.classList[0].split("-")[0];
+
+            if(messageNumber > thisTask.currentTask.messages.length - 1) return;
+
+            conversationAnswerInput.disabled = true;
+            conversationAnswerInput.placeholder = getPlaceholder();
+
+            function getPlaceholder() {
+                let placeholder = "";
+                const typing = document.querySelector(".typing");
+                
+                if(messageRole === "user") placeholder = "Write a message...";
+                
+                if(messageRole === "participant") {
+                    if(typing !== null) placeholder = `${thisTask.currentTask.participant} is typing...`;
+                    else placeholder = currentMessage.userContent;
+                }
+
+                return placeholder;
+            }
+        }
     }
 
     if(thisTask.currentTask.mode.type === "multipleChoice") {
@@ -65,10 +93,36 @@ export default function interace(thisTask) {
         conversationAnswerP.style.opacity = "1";
         conversationAnswerP.style.top = `-${conversationAnswePHeight}`;
 
-        generateMultipleChoiceButtons();
+        const conversationMessages = document.querySelector(".conversation-messages");
+        const lastMessageHolder = conversationMessages.children[conversationMessages.children.length - 1];
+        const lastMessage = lastMessageHolder.children[0];
+
+        const messageRole = lastMessage.classList[0].split("-")[0];
+
+        const conversationAnswerButtonHolder = generateMultipleChoiceButtons(showValidButtons());
+
+        [...conversationAnswerButtonHolder.children].forEach((child, index) => {
+            const className = thisTask.prevModeValues.multipleChoice.conversation.classes[index];
+
+            if(className === "disabled-multiple-choice-button") child.disabled = true;
+            child.classList.add(className);
+        });
+
+        function showValidButtons() {
+            if(messageRole === "participant") {
+                const typing = document.querySelector(".typing");
+
+                if(typing !== null) return thisTask.currentTask.messages[messageNumber - 1];
+                return currentMessage;
+            }
+
+            return thisTask.currentTask.messages[messageNumber - 1];
+        }
     }
 
-    function generateMultipleChoiceButtons() {
+    function generateMultipleChoiceButtons(messageIndex) {    
+        const validButton = messageIndex ? messageIndex : currentMessage;
+        
         const buttonHolderSelector = document.querySelector(".conversation-answer-button-holder");
         if(buttonHolderSelector) buttonHolderSelector.innerHTML = "";
                     
@@ -78,13 +132,15 @@ export default function interace(thisTask) {
             appendTo: conversationAnswer
         });
                     
-        currentMessage.options.forEach(option => createElement({
+        validButton.options.forEach(option => createElement({
             tag: "button",
             attributes: { class: "multiple-choice-button" },
             innerText: option,
             events: [{ on: "click", call: e => optionChosen(e, option) }],
             appendTo: conversationAnswerButtonHolder
         }));
+
+        return conversationAnswerButtonHolder;
 
         function optionChosen(e, option) {
             const button = e.target;
@@ -150,7 +206,7 @@ export default function interace(thisTask) {
 
         setTimeout(async () => {
             await sendMessage(thisTask, { role: "participant", isCorrect, current: currentMessage }, e);
-            if(thisTask.currentTask.mode.type === "multipleChoice") generateMultipleChoiceButtons();
+            //if(thisTask.currentTask.mode.type === "multipleChoice") generateMultipleChoiceButtons();
 
         }, readingThinkingDuration);
     }

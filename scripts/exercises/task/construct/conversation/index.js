@@ -3,7 +3,7 @@ import { sendMessage } from "./functions.js";
 import { Component } from "../../../../components/Component.js";
 
 export default function conversation(thisTask, changeMode) {
-    if(changeMode) return interace(thisTask);
+    if(changeMode) return interace(thisTask, changeMode);
     
     const { taskHolder } = thisTask.elements;
 
@@ -15,12 +15,12 @@ export default function conversation(thisTask, changeMode) {
 
     const [conversationParticipant] = [...conversationHolder.children];
     const [participantAvatar, participantName] = [...conversationParticipant.children];
-                
+
     const participantAvatarLetter = participantAvatar.children[0];
     participantAvatarLetter.innerText = thisTask.currentTask.participant[0].toUpperCase();
 
     participantName.innerText = thisTask.currentTask.participant;
 
-    interace(thisTask);
+    interace(thisTask, changeMode);
     sendMessage(thisTask, { role: "participant", current: thisTask.currentTask.messages[0] });
 }
