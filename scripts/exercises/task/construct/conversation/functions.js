@@ -49,15 +49,20 @@ export async function sendMessage(thisTask, message, e) {
         end: () => {
             window.eventList.remove("taskCheckMessageKeyDown");
     
-            const conversationAnswer = document.querySelector(".conversation-answer");
-            const conversationAnswerInput = conversationAnswer.children[1];
+            if(thisTask.currentTask.mode.type === "write") {
+                const conversationAnswer = document.querySelector(".conversation-answer");
+                const conversationAnswerInput = conversationAnswer.children[1];
             
-            if(conversationAnswer.classList.contains("active-conversation-answer")) conversationAnswer.classList.remove("active-conversation-answer");
-            conversationAnswer.classList.add("disabled-conversation-answer");
+                if(conversationAnswer.classList.contains("active-conversation-answer")) conversationAnswer.classList.remove("active-conversation-answer");
+                conversationAnswer.classList.add("disabled-conversation-answer");
             
-            conversationAnswerInput.placeholder = "Write a message...";
+                conversationAnswerInput.disabled = true;
+                conversationAnswerInput.placeholder = "Write a message...";
+            }
 
-            thisTask.answerChanged(conversationAnswerInput.value);
+            const activeMultipleChoiceButton = document.querySelector(".conversation-answer-button-holder .active-multiple-choice-button");
+
+            thisTask.answerChanged(thisTask.currentTask.mode.type === "write" ? conversationAnswerInput.value : activeMultipleChoiceButton.innerText);
             thisTask.check(e, true);
         }
     };

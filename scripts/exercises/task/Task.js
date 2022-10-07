@@ -25,7 +25,7 @@ export class Task {
                 translate: { wordBank: [], textHolder: [] }
             },
             multipleChoice: {
-                conversation: { disabled: false, classes: [] }
+                conversation: { classes: [] }
             }
         };
 
@@ -575,18 +575,17 @@ export class Task {
 
                 else {
                     currentTask.mode.type = "write";
+                    
+                    const classes = [];
 
-                    /*const classes = [];
-
-                    [...conversationAnswerButtonHolder.children].forEach(child => {
-                        console.log([...child.classList]);
+                    [...conversationAnswerButtonHolder.children].forEach(child => {      
                         [...child.classList].forEach(className => {
                             if(className === "multiple-choice-button") return;
                             classes.push(className);
                         });
                     });
 
-                    prevModeValues.multipleChoice.conversation.classes = classes;*/
+                    prevModeValues.multipleChoice.conversation.classes = classes;
                 }
             }
 

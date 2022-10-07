@@ -31,7 +31,7 @@ export const test1 = [
                 ],
                 options: ["I ja.", "Ja ne."],
                 translation: {
-                    zdravo: "hello"
+                    dobro: "good"
                 }
             }
         ]

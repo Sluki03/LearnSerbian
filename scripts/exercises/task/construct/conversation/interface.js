@@ -36,22 +36,12 @@ export default function interace(thisTask, changeMode) {
         function changeConversationAnswerStatus() {
             if(conversationAnswerInput.value) {
                 conversationAnswer.classList.add("active-conversation-answer");
-    
-                conversationAnswerP.innerText = currentMessage.userContent;
-    
-                const conversationAnswePHeight = getComputedStyle(conversationAnswerP).getPropertyValue("height");
-                            
-                conversationAnswerP.style.opacity = "1";
-                conversationAnswerP.style.top = `-${conversationAnswePHeight}`;
+                translationModal("up");
             }
                         
             else if(conversationAnswer.classList.contains("active-conversation-answer")) {
                 conversationAnswer.classList.remove("active-conversation-answer");
-    
-                conversationAnswerP.style.opacity = "";
-                conversationAnswerP.style.top = "";
-    
-                setTimeout(() => { conversationAnswerP.innerText = "" }, 300);
+                translationModal("down");
             }
         }
 
@@ -66,32 +56,34 @@ export default function interace(thisTask, changeMode) {
 
             if(messageNumber > thisTask.currentTask.messages.length - 1) return;
 
-            conversationAnswerInput.disabled = true;
-            conversationAnswerInput.placeholder = getPlaceholder();
+            const { disabled, placeholder } = getInputValues();
+            
+            conversationAnswerInput.disabled = disabled;
+            conversationAnswerInput.placeholder = placeholder;
+            conversationAnswerInput.focus();
 
-            function getPlaceholder() {
-                let placeholder = "";
+            function getInputValues() {
+                let values = {
+                    disabled: true,
+                    placeholder: ""
+                };
+                
                 const typing = document.querySelector(".typing");
                 
-                if(messageRole === "user") placeholder = "Write a message...";
+                if(messageRole === "user") values.placeholder = "Write a message...";
                 
                 if(messageRole === "participant") {
-                    if(typing !== null) placeholder = `${thisTask.currentTask.participant} is typing...`;
-                    else placeholder = currentMessage.userContent;
+                    if(typing !== null) values.placeholder = `${thisTask.currentTask.participant} is typing...`;
+                    else values = { disabled: false, placeholder: currentMessage.userContent };
                 }
 
-                return placeholder;
+                return values;
             }
         }
     }
 
     if(thisTask.currentTask.mode.type === "multipleChoice") {
-        conversationAnswerP.innerText = currentMessage.userContent;
-
-        const conversationAnswePHeight = getComputedStyle(conversationAnswerP).getPropertyValue("height");
-                            
-        conversationAnswerP.style.opacity = "1";
-        conversationAnswerP.style.top = `-${conversationAnswePHeight}`;
+        translationModal("up");
 
         const conversationMessages = document.querySelector(".conversation-messages");
         const lastMessageHolder = conversationMessages.children[conversationMessages.children.length - 1];
@@ -103,8 +95,9 @@ export default function interace(thisTask, changeMode) {
 
         [...conversationAnswerButtonHolder.children].forEach((child, index) => {
             const className = thisTask.prevModeValues.multipleChoice.conversation.classes[index];
+            if(className === undefined) return;
 
-            if(className === "disabled-multiple-choice-button") child.disabled = true;
+            child.disabled = true;
             child.classList.add(className);
         });
 
@@ -164,11 +157,7 @@ export default function interace(thisTask, changeMode) {
         });
 
         sendMessage(thisTask, { role: "user", content: userMessage, current: currentMessage });
-
-        conversationAnswerP.style.opacity = "";
-        conversationAnswerP.style.top = "";
-
-        setTimeout(() => { conversationAnswerP.innerText = "" }, 300);
+        translationModal("down");
 
         if(conversationAnswer.classList.contains("active-conversation-answer")) conversationAnswer.classList.remove("active-conversation-answer");
 
@@ -206,8 +195,32 @@ export default function interace(thisTask, changeMode) {
 
         setTimeout(async () => {
             await sendMessage(thisTask, { role: "participant", isCorrect, current: currentMessage }, e);
-            //if(thisTask.currentTask.mode.type === "multipleChoice") generateMultipleChoiceButtons();
+            
+            if(!isCorrect) return;
+
+            if(thisTask.currentTask.mode.type === "multipleChoice") {
+                generateMultipleChoiceButtons();
+                translationModal("up");
+            }
 
         }, readingThinkingDuration);
+    }
+
+    function translationModal(direction) {
+        if(direction === "up") {
+            conversationAnswerP.innerText = currentMessage.userContent;
+
+            const conversationAnswePHeight = getComputedStyle(conversationAnswerP).getPropertyValue("height");
+                    
+            conversationAnswerP.style.opacity = "1";
+            conversationAnswerP.style.top = `-${conversationAnswePHeight}`;
+        }
+
+        else {
+            conversationAnswerP.style.opacity = "";
+            conversationAnswerP.style.top = "";
+    
+            setTimeout(() => { conversationAnswerP.innerText = "" }, 300);
+        }
     }
 }
