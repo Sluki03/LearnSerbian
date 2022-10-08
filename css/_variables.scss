@@ -30,6 +30,7 @@ $defGlowingBlue: 0px 0px 15px rgba(82,138,242,0.5);
 $defRedBlue: linear-gradient(135deg, $defRed 35%, $defBlue 65%);
 $defBlueRed: linear-gradient(135deg, $defBlue 35%, $defRed 65%);
 $defRedBlueWhite: linear-gradient(135deg, $defRed 45%, white 45% 55%, $defBlue 55% 100%);
+$defLightRedBlueWhite: linear-gradient(135deg, $defLightRed 45%, white 45% 55%, $defLightBlue 55% 100%);
 $defWhiteBlueRed: linear-gradient(45deg, $defBlue 45%, white 45% 55%, $defRed 55% 100%);
 $defCorrect: linear-gradient(135deg, $defGreen 65%, $defLightGreen 65% 85%, $defLighterGreen 85%);
 $defIncorrect: linear-gradient(135deg, $defRed 65%, $defLightRed 65% 85%, $defLighterRed 85%);

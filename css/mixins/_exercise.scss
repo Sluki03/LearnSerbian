@@ -26,8 +26,8 @@
             transition: 300ms;
 
             img {
-                height: 100px;
-                width: 100px;
+                height: 90px;
+                width: 90px;
                 object-fit: contain;
                 filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.5));
                 transition: 150ms;
@@ -38,27 +38,18 @@
             height: 155px;
             width: 155px;
             transform: rotate(-180deg);
-
-            img {
-                height: 90px;
-                width: 90px;
-            }
         }
     }
 
     #active-exercise {
-        transform: rotate(0);
+        background: $defLightRedBlueWhite;
+        transform: rotate(360deg);
         cursor: default;
 
         .exercise-content {
             height: 155px;
             width: 155px;
-            transform: rotate(0);
-
-            img {
-                height: 90px;
-                width: 90px;
-            }
+            transform: rotate(-360deg);
         }
     }
 
