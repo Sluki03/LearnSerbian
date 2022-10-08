@@ -251,7 +251,7 @@ export class Task {
         });
     }
     
-    check(e, additionalPass) {
+    check(e, additionalPass = false) {
         const { currentTask } = this;
         
         const {
@@ -262,10 +262,13 @@ export class Task {
         const [progressBar, progressBarP] = [...this.taskProgressBarHolder.children];
         const [progressBarLine] = [...progressBar.children];
 
-        const classPass = (checkButton !== null && !checkButton.classList.contains("disabled-flag-button")) || additionalPass !== undefined;
+        const classPass = (checkButton !== null && !checkButton.classList.contains("disabled-flag-button")) || additionalPass;
         
         if(!classPass) return;
-        if(e.type === "keydown" && e.key !== "Enter") return;
+
+        const keyPass = additionalPass ? e.key === "Enter" || !isNaN(parseInt(e.key)) : e.key === "Enter";
+        
+        if(e.type === "keydown" && !keyPass) return;
 
         this.afterCheck();
 
@@ -468,7 +471,7 @@ export class Task {
         constructTask(this.currentTask.type, this, changeMode);
     }
 
-    switchModes(currentMessage) {
+    switchModes() {
         const { currentTask, prevModeValues, construct } = this;
         const { switchModesButton } = this.elements;
 
@@ -488,7 +491,7 @@ export class Task {
         const invertedIcon = getInvertedIcon();
         
         if(currentTask.mode.switch) {
-            if(currentTask.mode.type === "write" && (currentTask.type === "conversation" ? currentMessage.options : currentTask.options) === undefined) return;
+            if(currentTask.mode.type === "write" && (currentTask.type === "conversation" ? this.currentTask.messages[this.messageNumber].options : currentTask.options) === undefined) return;
             
             switchModesButton.classList.add("active-switch-modes-button");
             switchModesButton.onclick = changeMode;
@@ -506,6 +509,8 @@ export class Task {
                 switchModesImg.alt = invertedIcon.alt;
             }
         }
+
+        this.randomMode(taskModes);
 
         function changeMode() {
             if(currentTask.type === "translate") {
@@ -615,6 +620,18 @@ export class Task {
             });
 
             return result;
+        }
+    }
+
+    randomMode(taskModes) {
+        if(this.currentTask.mode.type === "random") {
+            const randomModeType = taskModes[Math.floor(Math.random() * taskModes.length)];
+            const optionsRequired = ["wordBank", "multipleChoice"];
+
+            const optionsProp = this.currentTask.type === "conversation" ? this.currentTask.messages[this.messageNumber].options : this.currentTask.options;
+            
+            if(optionsRequired.indexOf(randomModeType) > -1 && optionsProp === undefined) this.currentTask.mode.type = "write";
+            else this.currentTask.mode.type = randomModeType;
         }
     }
 }

@@ -7,36 +7,16 @@ export async function sendMessage(thisTask, message, e) {
     const conversationMessages = document.querySelector(".conversation-messages");
     
     const conversationAnswer = document.querySelector(".conversation-answer");
-    const [conversationAnswerP, conversationAnswerInput] = [...conversationAnswer.children];
-
-    const conversationAnswerButtonHolder = document.querySelector(".conversation-answer-button-holder");
+    const conversationAnswerInput = conversationAnswer.children[1];
     
     const conversation = {
         pause: () => new Promise(resolve => {
-            const childrenInnerText = [];
-            let typingComponent;
-            
             if(thisTask.currentTask.mode.type === "write") {
                 conversationAnswerInput.disabled = true;
                 conversationAnswerInput.placeholder = `${thisTask.currentTask.participant} is typing...`;
             }
 
-            else if(conversationMessages.children.length === 1) {
-                conversationAnswerP.style.opacity = "";
-                conversationAnswerP.style.top = "";
-                
-                [...conversationAnswerButtonHolder.children].forEach(child => {
-                    child.disabled = true;
-                    
-                    child.classList.add("disabled-multiple-choice-button");
-                    child.style.height = "40px";
-                    
-                    childrenInnerText.push(child.innerText);
-                    child.innerText = "";
-                    
-                    typingComponent = Component.create("Typing", { appendTo: child });
-                });
-            }
+            else if(conversationMessages.children.length === 1) buttonTyping(message.current);
 
             const audio = new Audio("./sfx/typing.mp3");
             audio.play();
@@ -58,6 +38,8 @@ export async function sendMessage(thisTask, message, e) {
 
             setTimeout(() => {
                 if(thisTask.currentTask.mode.type === "write") {
+                    const conversationAnswerInput = conversationAnswer.children[1];
+                    
                     conversationAnswerInput.disabled = false;
                     conversationAnswerInput.placeholder = message.current.userContent;
                     conversationAnswerInput.maxLength = getInputMaxLength(message.current);
@@ -66,22 +48,7 @@ export async function sendMessage(thisTask, message, e) {
                     getVisiblePlaceholder(conversationAnswerInput);
                 }
 
-                else if(conversationMessages.children.length === 1) {
-                    const conversationAnswerPHeight = getComputedStyle(conversationAnswerP).getPropertyValue("height");
-                    
-                    conversationAnswerP.style.opacity = "1";
-                    conversationAnswerP.style.top = `-${conversationAnswerPHeight}`;
-                    
-                    [...conversationAnswerButtonHolder.children].forEach((child, index) => {
-                        child.disabled = false;
-                        
-                        child.classList.remove("disabled-multiple-choice-button");
-                        child.style.height = "";
-                        
-                        child.innerText = childrenInnerText[index];
-                        typingComponent.remove();
-                    });
-                }
+                else if(conversationMessages.children.length === 1) buttonTyping(message.current, false);
 
                 resolve(messageIsCorrect ? message.current.content : randomWrongAnswer);
             }, typingDuration);
@@ -102,17 +69,32 @@ export async function sendMessage(thisTask, message, e) {
             }
 
             const activeMultipleChoiceButton = document.querySelector(".conversation-answer-button-holder .active-multiple-choice-button");
-
-            thisTask.answerChanged(thisTask.currentTask.mode.type === "write" ? conversationAnswerInput.value : activeMultipleChoiceButton.innerText);
+            const activeMultipleChoiceButtonContent = activeMultipleChoiceButton ? activeMultipleChoiceButton.innerText : getUserMessage();
+            
+            thisTask.answerChanged(thisTask.currentTask.mode.type === "write" ? conversationAnswerInput.value : activeMultipleChoiceButtonContent);
             thisTask.check(e, true);
+
+            function getUserMessage() {
+                let lastUserMessageHolder;
+                
+                [...conversationMessages.children].forEach(child => {
+                    if(!child.classList.contains("user-message-holder")) return;
+                    lastUserMessageHolder = child;
+                });
+
+                const lastUserMessage = lastUserMessageHolder.children[0];
+                return lastUserMessage.innerText;
+            }
         }
     };
     
     const messageHolder = createElement({
         tag: "div",
-        attributes: { class: `${message.role}-message-holder` },
+        attributes: { class: `${message.role}-message-holder disabled-message-holder` },
         appendTo: conversationMessages
     });
+
+    setTimeout(() => { messageHolder.classList.remove("disabled-message-holder") }, 100);
     
     const messageContent = createElement({
         tag: "p",
@@ -177,4 +159,70 @@ export function getInputMaxLength(message) {
     });
 
     return longestAcceptableAnswer.length;
+}
+
+export function buttonTyping(currentMessage, status = true) {
+    const conversationAnswerButtonHolder = document.querySelector(".conversation-answer-button-holder");
+    
+    if(status) {
+        translationModal(currentMessage.userContent, "down");
+        
+        [...conversationAnswerButtonHolder.children].forEach(child => {
+            child.disabled = true;
+            
+            child.classList.add("disabled-multiple-choice-button");
+            child.style.height = "40px";
+            
+            child.prevInnerText = child.innerText;
+            child.innerText = "";
+            
+            Component.create("Typing", { appendTo: child });
+        });
+    }
+
+    else {
+        translationModal(currentMessage.userContent);
+        
+        [...conversationAnswerButtonHolder.children].forEach(child => {
+            child.disabled = false;
+            
+            child.classList.remove("disabled-multiple-choice-button");
+            child.style.height = "";
+            
+            child.innerText = child.prevInnerText;
+        });
+
+        const buttonTypingComponents = document.querySelectorAll("button .typing");
+        buttonTypingComponents.forEach(typingComponent => typingComponent.remove());
+    }
+}
+
+let inProgress = false;
+
+export function translationModal(content, direction = "up") {
+    if(inProgress) return;
+    inProgress = true;
+    
+    const conversationAnswerP = document.querySelector(".conversation-answer p");
+    
+    if(direction === "up") {
+        conversationAnswerP.innerText = content;
+
+        const conversationAnswePHeight = getComputedStyle(conversationAnswerP).getPropertyValue("height");
+                
+        conversationAnswerP.style.opacity = "1";
+        conversationAnswerP.style.top = `-${conversationAnswePHeight}`;
+
+        inProgress = false;
+    }
+
+    else {
+        conversationAnswerP.style.opacity = "";
+        conversationAnswerP.style.top = "";
+
+        setTimeout(() => {
+            conversationAnswerP.innerText = "";
+            inProgress = false;
+        }, 300);
+    }
 }

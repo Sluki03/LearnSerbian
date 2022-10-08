@@ -326,7 +326,6 @@
 
                 .participant-message-holder {
                     @include add-flex(row, flex-start);
-                    width: 100%;
 
                     .participant-message {
                         @include add-flex(row, center, flex-start);
@@ -339,13 +338,25 @@
 
                 .user-message-holder {
                     @include add-flex(row, flex-end);
-                    width: 100%;
 
                     .user-message {
                         color: white;
                         background-color: rgba(0, 140, 255, 0.8);
                         border-radius: 15px 15px 0px 15px;
                     }
+                }
+
+                .participant-message-holder,
+                .user-message-holder {
+                    width: 100%;
+                    position: relative;
+                    top: 0;
+                    transition: 300ms;
+                }
+
+                .disabled-message-holder {
+                    opacity: 0;
+                    top: 10px;
                 }
 
                 .participant-message,

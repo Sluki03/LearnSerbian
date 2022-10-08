@@ -1,14 +1,15 @@
 import { Component } from "../../../../components/Component.js";
-import { sendMessage, participantBehavior, getInputMaxLength } from "./functions.js";
+import { sendMessage, participantBehavior, getInputMaxLength, buttonTyping, translationModal } from "./functions.js";
 import createElement from "../../../../functions/createElement.js";
 import breakText from "../../../../functions/breakText.js";
+import randomArray from "../../../../functions/randomArray.js";
 
 export default async function interace(thisTask, changeMode) {
     let currentMessage = thisTask.currentTask.messages[thisTask.messageNumber];
     thisTask.switchModes(currentMessage);
     
     const conversationAnswer = document.querySelector(".conversation-answer");
-    const conversationAnswerP = createElement({ tag: "p", appendTo: conversationAnswer });
+    createElement({ tag: "p", appendTo: conversationAnswer });
     
     if(thisTask.currentTask.mode.type === "write") {
         const conversationAnswerInput = createElement({
@@ -34,12 +35,12 @@ export default async function interace(thisTask, changeMode) {
         function changeConversationAnswerStatus() {
             if(conversationAnswerInput.value) {
                 conversationAnswer.classList.add("active-conversation-answer");
-                translationModal("up");
+                translationModal(currentMessage.userContent);
             }
                         
             else if(conversationAnswer.classList.contains("active-conversation-answer")) {
                 conversationAnswer.classList.remove("active-conversation-answer");
-                translationModal("down");
+                translationModal(currentMessage.userContent, "down");
             }
         }
 
@@ -81,9 +82,11 @@ export default async function interace(thisTask, changeMode) {
     }
 
     if(thisTask.currentTask.mode.type === "multipleChoice") {        
-        translationModal("up");
-
+        const typing = document.querySelector(".typing");
         const messageRole = getMessageRole();
+
+        if(typing === null && messageRole === "participant") translationModal(currentMessage.userContent);
+
         const conversationAnswerButtonHolder = generateMultipleChoiceButtons(showValidButtons());
 
         [...conversationAnswerButtonHolder.children].forEach((child, index) => {
@@ -93,6 +96,9 @@ export default async function interace(thisTask, changeMode) {
             child.disabled = true;
             child.classList.add(className);
         });
+
+        const activeMultipleChoiceButton = document.querySelector(".active-multiple-choice-button");
+        if(activeMultipleChoiceButton === null && (typing !== null || messageRole === "user")) buttonTyping(currentMessage);
         
         function getMessageRole() {
             const conversationMessages = document.querySelector(".conversation-messages");
@@ -107,8 +113,6 @@ export default async function interace(thisTask, changeMode) {
         
         function showValidButtons() {
             if(messageRole === "participant") {
-                const typing = document.querySelector(".typing");
-
                 if(typing !== null) return thisTask.currentTask.messages[thisTask.messageNumber - 1];
                 return currentMessage;
             }
@@ -128,8 +132,10 @@ export default async function interace(thisTask, changeMode) {
             attributes: { class: "conversation-answer-button-holder" },
             appendTo: conversationAnswer
         });
+
+        const randomOptions = randomArray(validButton.options);
                     
-        validButton.options.forEach(option => createElement({
+        randomOptions.forEach(option => createElement({
             tag: "button",
             attributes: { class: "multiple-choice-button" },
             innerText: option,
@@ -137,18 +143,24 @@ export default async function interace(thisTask, changeMode) {
             appendTo: conversationAnswerButtonHolder
         }));
 
+        window.eventList.add({ id: "taskOptionChooseKeydown", type: "keydown", listener: optionChosen });
+
         return conversationAnswerButtonHolder;
 
         function optionChosen(e, option) {
-            const button = e.target;
+            const keyRules = (parseInt(e.key) <= validButton.options.length) && (parseInt(e.key) > 0) && !isNaN(parseInt(e.key));
+            if(e.type === "keydown" && !keyRules) return;
+            
+            const button = e.type === "keydown" ? conversationAnswerButtonHolder.children[parseInt(e.key) - 1] : e.target;
             button.classList.add("active-multiple-choice-button");
 
-            checkMessage(e, option);
+            checkMessage(e, e.type === "keydown" ? button.innerText : option, true);
+            window.eventList.remove("taskOptionChooseKeydown");
         }
     }
 
-    function checkMessage(e, option) {
-        if(e.type === "keydown" && e.key !== "Enter") return;
+    function checkMessage(e, option, additionalPass = false) {
+        if(e.type === "keydown" && e.key !== "Enter" && !additionalPass) return;
         
         const conversationAnswerInput = document.querySelector(".conversation-answer input");
         if((conversationAnswerInput === null || !conversationAnswerInput.value) && option === undefined) return;
@@ -161,7 +173,7 @@ export default async function interace(thisTask, changeMode) {
         });
 
         sendMessage(thisTask, { role: "user", content: userMessage, current: currentMessage });
-        translationModal("down");
+        translationModal(currentMessage.userContent, "down");
 
         if(conversationAnswer.classList.contains("active-conversation-answer")) conversationAnswer.classList.remove("active-conversation-answer");
 
@@ -204,27 +216,11 @@ export default async function interace(thisTask, changeMode) {
 
             if(thisTask.currentTask.mode.type === "multipleChoice") {
                 generateMultipleChoiceButtons();
-                translationModal("up");
+                translationModal(currentMessage.userContent);
             }
 
+            else thisTask.prevModeValues.multipleChoice.conversation.classes = [];
+
         }, readingThinkingDuration);
-    }
-
-    function translationModal(direction) {
-        if(direction === "up") {
-            conversationAnswerP.innerText = currentMessage.userContent;
-
-            const conversationAnswePHeight = getComputedStyle(conversationAnswerP).getPropertyValue("height");
-                    
-            conversationAnswerP.style.opacity = "1";
-            conversationAnswerP.style.top = `-${conversationAnswePHeight}`;
-        }
-
-        else {
-            conversationAnswerP.style.opacity = "";
-            conversationAnswerP.style.top = "";
-    
-            setTimeout(() => { conversationAnswerP.innerText = "" }, 300);
-        }
     }
 }

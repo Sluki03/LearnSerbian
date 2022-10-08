@@ -885,7 +885,6 @@ main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .con
   align-items: center;
   justify-content: flex-start;
   flex-direction: row;
-  width: 100%;
 }
 main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-messages .participant-message-holder .participant-message {
   display: flex;
@@ -902,12 +901,22 @@ main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .con
   align-items: center;
   justify-content: flex-end;
   flex-direction: row;
-  width: 100%;
 }
 main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-messages .user-message-holder .user-message {
   color: white;
   background-color: rgba(0, 140, 255, 0.8);
   border-radius: 15px 15px 0px 15px;
+}
+main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-messages .participant-message-holder,
+main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-messages .user-message-holder {
+  width: 100%;
+  position: relative;
+  top: 0;
+  transition: 300ms;
+}
+main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-messages .disabled-message-holder {
+  opacity: 0;
+  top: 10px;
 }
 main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-messages .participant-message,
 main .exercise-modal .exercise-modal-task .task-holder .conversation-holder .conversation-messages .user-message {

@@ -21,15 +21,8 @@ export default function translate(thisTask) {
     if(thisTask.currentTask.mode === undefined) thisTask.currentTask.mode = { type: "write", switch: false };
     if(thisTask.currentTask.mode.type === undefined) thisTask.currentLives.mode = {...thisTask.currentTask.mode, type: "write"};
     if(thisTask.currentTask.mode.switch === undefined) thisTask.currentTask.mode = {...thisTask.currentTask.mode, switch: false};
-    
-    const modeTypes = ["write", "wordBank"];
 
-    if(thisTask.currentTask.mode.type === "random") {
-        const randomModeType = modeTypes[Math.floor(Math.random() * modeTypes.length)];
-        
-        if(randomModeType === "wordBank" && thisTask.currentTask.options === undefined) thisTask.currentTask.mode.type = "write";
-        else thisTask.currentTask.mode.type = randomModeType;
-    }
+    thisTask.switchModes();
     
     if(thisTask.currentTask.mode.type === "write") {
         const translateHolderTextarea = createElement({
@@ -160,8 +153,6 @@ export default function translate(thisTask) {
             };
         }
     }
-
-    thisTask.switchModes();
 
     function isSelective(option) {
         let result;

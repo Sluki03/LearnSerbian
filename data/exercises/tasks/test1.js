@@ -5,7 +5,7 @@ export const test1 = [
         participant: "Gospodin",
         mode: {
             type: "write",
-            switch: true
+            switch: false
         },
         messages: [
             {
@@ -42,7 +42,7 @@ export const test1 = [
         title: "Have a conversation.",
         participant: "Komsija Deki",
         mode: {
-            type: "write",
+            type: "random",
             switch: true
         },
         messages: [
