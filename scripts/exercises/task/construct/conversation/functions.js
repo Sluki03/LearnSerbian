@@ -4,14 +4,38 @@ import setTranslatableWords from "../../setTranslatableWords.js";
 import getVisiblePlaceholder from "../../../../functions/getVisiblePlaceholder.js";
 
 export async function sendMessage(thisTask, message, e) {
+    const conversationMessages = document.querySelector(".conversation-messages");
+    
     const conversationAnswer = document.querySelector(".conversation-answer");
-    const conversationAnswerInput = conversationAnswer.children[1];
+    const [conversationAnswerP, conversationAnswerInput] = [...conversationAnswer.children];
+
+    const conversationAnswerButtonHolder = document.querySelector(".conversation-answer-button-holder");
     
     const conversation = {
         pause: () => new Promise(resolve => {
+            const childrenInnerText = [];
+            let typingComponent;
+            
             if(thisTask.currentTask.mode.type === "write") {
                 conversationAnswerInput.disabled = true;
                 conversationAnswerInput.placeholder = `${thisTask.currentTask.participant} is typing...`;
+            }
+
+            else if(conversationMessages.children.length === 1) {
+                conversationAnswerP.style.opacity = "";
+                conversationAnswerP.style.top = "";
+                
+                [...conversationAnswerButtonHolder.children].forEach(child => {
+                    child.disabled = true;
+                    
+                    child.classList.add("disabled-multiple-choice-button");
+                    child.style.height = "40px";
+                    
+                    childrenInnerText.push(child.innerText);
+                    child.innerText = "";
+                    
+                    typingComponent = Component.create("Typing", { appendTo: child });
+                });
             }
 
             const audio = new Audio("./sfx/typing.mp3");
@@ -42,6 +66,23 @@ export async function sendMessage(thisTask, message, e) {
                     getVisiblePlaceholder(conversationAnswerInput);
                 }
 
+                else if(conversationMessages.children.length === 1) {
+                    const conversationAnswerPHeight = getComputedStyle(conversationAnswerP).getPropertyValue("height");
+                    
+                    conversationAnswerP.style.opacity = "1";
+                    conversationAnswerP.style.top = `-${conversationAnswerPHeight}`;
+                    
+                    [...conversationAnswerButtonHolder.children].forEach((child, index) => {
+                        child.disabled = false;
+                        
+                        child.classList.remove("disabled-multiple-choice-button");
+                        child.style.height = "";
+                        
+                        child.innerText = childrenInnerText[index];
+                        typingComponent.remove();
+                    });
+                }
+
                 resolve(messageIsCorrect ? message.current.content : randomWrongAnswer);
             }, typingDuration);
         }),
@@ -66,8 +107,6 @@ export async function sendMessage(thisTask, message, e) {
             thisTask.check(e, true);
         }
     };
-    
-    const conversationMessages = document.querySelector(".conversation-messages");
     
     const messageHolder = createElement({
         tag: "div",

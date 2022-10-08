@@ -3,10 +3,8 @@ import { sendMessage, participantBehavior, getInputMaxLength } from "./functions
 import createElement from "../../../../functions/createElement.js";
 import breakText from "../../../../functions/breakText.js";
 
-let messageNumber = 0;
-
-export default function interace(thisTask, changeMode) {
-    let currentMessage = thisTask.currentTask.messages[messageNumber];
+export default async function interace(thisTask, changeMode) {
+    let currentMessage = thisTask.currentTask.messages[thisTask.messageNumber];
     thisTask.switchModes(currentMessage);
     
     const conversationAnswer = document.querySelector(".conversation-answer");
@@ -54,7 +52,7 @@ export default function interace(thisTask, changeMode) {
 
             const messageRole = lastMessage.classList[0].split("-")[0];
 
-            if(messageNumber > thisTask.currentTask.messages.length - 1) return;
+            if(thisTask.messageNumber > thisTask.currentTask.messages.length - 1) return;
 
             const { disabled, placeholder } = getInputValues();
             
@@ -82,15 +80,10 @@ export default function interace(thisTask, changeMode) {
         }
     }
 
-    if(thisTask.currentTask.mode.type === "multipleChoice") {
+    if(thisTask.currentTask.mode.type === "multipleChoice") {        
         translationModal("up");
 
-        const conversationMessages = document.querySelector(".conversation-messages");
-        const lastMessageHolder = conversationMessages.children[conversationMessages.children.length - 1];
-        const lastMessage = lastMessageHolder.children[0];
-
-        const messageRole = lastMessage.classList[0].split("-")[0];
-
+        const messageRole = getMessageRole();
         const conversationAnswerButtonHolder = generateMultipleChoiceButtons(showValidButtons());
 
         [...conversationAnswerButtonHolder.children].forEach((child, index) => {
@@ -100,16 +93,27 @@ export default function interace(thisTask, changeMode) {
             child.disabled = true;
             child.classList.add(className);
         });
+        
+        function getMessageRole() {
+            const conversationMessages = document.querySelector(".conversation-messages");
 
+            if(conversationMessages.children.length === 0) return "participant";
+
+            const lastMessageHolder = conversationMessages.children[conversationMessages.children.length - 1];
+            const lastMessage = lastMessageHolder.children[0];
+
+            return lastMessage.classList[0].split("-")[0];
+        }
+        
         function showValidButtons() {
             if(messageRole === "participant") {
                 const typing = document.querySelector(".typing");
 
-                if(typing !== null) return thisTask.currentTask.messages[messageNumber - 1];
+                if(typing !== null) return thisTask.currentTask.messages[thisTask.messageNumber - 1];
                 return currentMessage;
             }
 
-            return thisTask.currentTask.messages[messageNumber - 1];
+            return thisTask.currentTask.messages[thisTask.messageNumber - 1];
         }
     }
 
@@ -177,21 +181,21 @@ export default function interace(thisTask, changeMode) {
         const readingThinkingDuration = participantBehavior(userMessage, "readingThinking");
 
         if(isCorrect) {
-            messageNumber++;
-            currentMessage = thisTask.currentTask.messages[messageNumber];
+            thisTask.messageNumber++;
+            currentMessage = thisTask.currentTask.messages[thisTask.messageNumber];
 
-            if(messageNumber > thisTask.currentTask.messages.length - 1) {
+            if(thisTask.messageNumber > thisTask.currentTask.messages.length - 1) {
                 if(conversationAnswer.classList.contains("active-conversation-answer")) conversationAnswer.classList.remove("active-conversation-answer");
                 conversationAnswer.classList.add("disabled-conversation-answer");
                             
-                messageNumber = 0;
+                thisTask.messageNumber = 0;
                 
                 thisTask.answerChanged(userMessage);
                 return thisTask.check(e, true);
             }
         }
 
-        else messageNumber = 0;
+        else thisTask.messageNumber = 0;
 
         setTimeout(async () => {
             await sendMessage(thisTask, { role: "participant", isCorrect, current: currentMessage }, e);
