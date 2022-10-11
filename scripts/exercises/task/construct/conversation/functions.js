@@ -56,11 +56,11 @@ export async function sendMessage(thisTask, message, e) {
 
         end: () => {
             window.eventList.remove("taskCheckMessageKeyDown");
+
+            const conversationAnswer = document.querySelector(".conversation-answer");
+            const conversationAnswerInput = conversationAnswer.children[1];
     
             if(thisTask.currentTask.mode.type === "write") {
-                const conversationAnswer = document.querySelector(".conversation-answer");
-                const conversationAnswerInput = conversationAnswer.children[1];
-            
                 if(conversationAnswer.classList.contains("active-conversation-answer")) conversationAnswer.classList.remove("active-conversation-answer");
                 conversationAnswer.classList.add("disabled-conversation-answer");
             
@@ -71,7 +71,7 @@ export async function sendMessage(thisTask, message, e) {
             const activeMultipleChoiceButton = document.querySelector(".conversation-answer-button-holder .active-multiple-choice-button");
             const activeMultipleChoiceButtonContent = activeMultipleChoiceButton ? activeMultipleChoiceButton.innerText : getUserMessage();
             
-            thisTask.answerChanged(thisTask.currentTask.mode.type === "write" ? conversationAnswerInput.value : activeMultipleChoiceButtonContent);
+            thisTask.answerChanged(thisTask.currentTask.mode.type === "write" ? getUserMessage() : activeMultipleChoiceButtonContent);
             thisTask.check(e, true);
 
             function getUserMessage() {

@@ -5,7 +5,7 @@ import breakText from "../../../functions/breakText.js";
 
 export default function ExerciseModalReview(componentProps) {
     const { exercise, results, score, appendTo } = componentProps.params;
-
+    
     const exerciseModalReview = document.querySelector("[data-template='exercise-modal-review']").content.firstElementChild.cloneNode(true);
     appendTo.appendChild(exerciseModalReview);
 
@@ -42,7 +42,7 @@ export default function ExerciseModalReview(componentProps) {
 
         infoStrong.innerText = result.title;
 
-        if(result.isCorrect) {
+        if(result.isCorrect && result.type !== "conversation") {
             createElement({
                 tag: "p",
                 innerHTML: `${result.acceptableAnswers.length > 1 ? "Your answer" : "Answer"}: "<span>${result.userAnswer}</span>".`,
@@ -61,7 +61,7 @@ export default function ExerciseModalReview(componentProps) {
             }
         }
 
-        else {
+        else if(!result.isCorrect) {
             const randomCorrectAnswer = result.acceptableAnswers[Math.floor(Math.random() * result.acceptableAnswers.length)];
             
             createElement({

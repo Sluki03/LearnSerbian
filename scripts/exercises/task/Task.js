@@ -320,7 +320,7 @@ export class Task {
 
         taskInfoTextH4.innerText = `${validTitles[Math.floor(Math.random() * validTitles.length)]}!`;
 
-        const acceptableAnswers = getAcceptableAnswers();
+        const acceptableAnswers = currentTask.type === "conversation" ? currentTask.messages[this.messageNumber].acceptableAnswers : currentTask.acceptableAnswers;
         const randomCorrectAnswer = acceptableAnswers[Math.floor(Math.random() * acceptableAnswers.length)];
 
         const text = {
@@ -351,9 +351,12 @@ export class Task {
             }
         }
 
+        if(currentTask.type === "conversation") this.messageNumber = 0;
+
         const taskResult = {
             title: currentTask.title,
-            acceptableAnswers: currentTask.acceptableAnswers,
+            type: currentTask.type,
+            acceptableAnswers,
             userAnswer: this.answer,
             isCorrect,
             xp: currentTask.xp || this.exercise.defaultXP || this.defaultXP,
@@ -371,22 +374,6 @@ export class Task {
 
             const linearGradient = `linear-gradient(135deg, ${normal} 65%, ${light} 65% 85%, ${lighter} 85%)`;
             return linearGradient;
-        }
-
-        function getAcceptableAnswers() {
-            if(currentTask.type === "conversation") {
-                const conversationMessages = document.querySelector(".conversation-messages");
-                const messageHolderIndex = conversationMessages.lastChild.classList.contains("participant-message-holder") ? 2 : 1;
-                
-                const participantMessageHolders = document.querySelectorAll(".participant-message-holder");
-                
-                const numberOfMessages = participantMessageHolders.length - messageHolderIndex;
-                const message = currentTask.messages[numberOfMessages];
-
-                return message.acceptableAnswers;
-            }
-            
-            return currentTask.acceptableAnswers;
         }
     }
 

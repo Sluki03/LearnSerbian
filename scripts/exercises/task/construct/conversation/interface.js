@@ -193,21 +193,17 @@ export default async function interace(thisTask, changeMode) {
         const readingThinkingDuration = participantBehavior(userMessage, "readingThinking");
 
         if(isCorrect) {
-            thisTask.messageNumber++;
-            currentMessage = thisTask.currentTask.messages[thisTask.messageNumber];
-
-            if(thisTask.messageNumber > thisTask.currentTask.messages.length - 1) {
+            if(thisTask.messageNumber === thisTask.currentTask.messages.length - 1) {
                 if(conversationAnswer.classList.contains("active-conversation-answer")) conversationAnswer.classList.remove("active-conversation-answer");
                 conversationAnswer.classList.add("disabled-conversation-answer");
-                            
-                thisTask.messageNumber = 0;
                 
                 thisTask.answerChanged(userMessage);
                 return thisTask.check(e, true);
             }
-        }
 
-        else thisTask.messageNumber = 0;
+            thisTask.messageNumber++;
+            currentMessage = thisTask.currentTask.messages[thisTask.messageNumber];
+        }
 
         setTimeout(async () => {
             await sendMessage(thisTask, { role: "participant", isCorrect, current: currentMessage }, e);
