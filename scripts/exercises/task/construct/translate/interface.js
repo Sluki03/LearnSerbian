@@ -1,3 +1,4 @@
+import { Component } from "../../../../components/Component.js";
 import createElement from "../../../../functions/createElement.js";
 import randomArray from "../../../../functions/randomArray.js";
 
@@ -16,11 +17,7 @@ export default function taskInterface(thisTask) {
                 maxLength: 200
             },
             events: [
-                { on: "input", call: () => {
-                    thisTask.answerChanged(translateHolderTextarea.value);
-                    textareaValueChanged(translateHolderTextarea.value);
-                }},
-
+                { on: "input", call: () => thisTask.answerChanged(translateHolderTextarea.value)},
                 { on: "keydown", call: e => { if(e.key === "Enter") e.preventDefault() } },
                 { on: "focus", call: () => translateHolderTextarea.classList.add("translate-holder-textarea-focused") },
                 
@@ -35,63 +32,11 @@ export default function taskInterface(thisTask) {
         if(thisTask.prevModeValues.write.translate.textareaValue) translateHolderTextarea.value = thisTask.prevModeValues.write.translate.textareaValue;
         translateHolderTextarea.focus();
 
-        const buttonHolder = createElement({
-            tag: "div",
-            attributes: { class: "button-holder" },
+        Component.create("DiacriticKeyboard", {
+            input: translateHolderTextarea,
+            answerChanged: thisTask.answerChanged,
             appendTo: interfaceElement
         });
-
-        const holders = ["letters", "arrows"];
-        
-        const buttonOrder = {
-            letters: ["č", "ć", "đ", "š", "ž"],
-            arrows: ["🡡", "🡣"]
-        };
-
-        for(let i = 0; i < holders.length; i++) createElement({
-            tag: "div",
-            attributes: { class: `button-holder-${holders[i]}` },
-            appendTo: buttonHolder
-        });
-
-        const [buttonHolderLetters, buttonHolderArrows] = [...buttonHolder.children];
-
-        buttonOrder.letters.forEach(letter => {
-            const button = createElement({
-                tag: "button",
-                innerText: translateHolderTextarea.value ? letter : letter.toUpperCase(),
-                events: [{ on: "click", call: () => updateTextareaOnButtonClick(button) }],
-                appendTo: buttonHolderLetters
-            });
-        });
-        
-        const changeCaseButton = createElement({
-            tag: "button",
-            innerText: buttonOrder.arrows[translateHolderTextarea.value ? 0 : 1],
-            events: [{ on: "click", call: changeCaseStatus }],
-            appendTo: buttonHolderArrows
-        });
-
-        function updateTextareaOnButtonClick(button) {
-            translateHolderTextarea.value += button.innerText;
-            thisTask.answerChanged(translateHolderTextarea.value);
-            textareaValueChanged(translateHolderTextarea.value);
-        }
-
-        function changeCaseStatus() {
-            const firstArrow = buttonHolderArrows.children[0];
-            if(!firstArrow.classList.contains("locked-arrow")) firstArrow.classList.add("locked-arrow");
-            
-            const firstButton = buttonHolderLetters.children[0].innerText;
-            const isUpperCase = firstButton === firstButton.toUpperCase();
-
-            changeCaseButton.innerText = buttonOrder.arrows[isUpperCase ? 0 : 1];
-
-            [...buttonHolderLetters.children].forEach(button => {
-                if(isUpperCase) button.innerText = button.innerText.toLowerCase();
-                else button.innerText = button.innerText.toUpperCase();
-            });
-        }
     }
 
     if(thisTask.currentTask.mode.type === "wordBank") {
@@ -144,22 +89,6 @@ export default function taskInterface(thisTask) {
         if(thisTask.prevModeValues.wordBank.translate.wordBank.indexOf(option) > -1) result = true;
 
         return result ? "selective" : "deselective";
-    }
-
-    function textareaValueChanged(newValue) {
-        const buttonHolder = document.querySelector(".translate-holder .button-holder");
-        const [buttonHolderLetters, buttonHolderArrows] = [...buttonHolder.children];
-    
-        const firstArrow = buttonHolderArrows.children[0];
-        if(firstArrow.classList.contains("locked-arrow"))  return;
-    
-        [...buttonHolderLetters.children].forEach(button => {
-            if(newValue) button.innerText = button.innerText.toLowerCase();
-            else button.innerText = button.innerText.toUpperCase();
-        });
-    
-        const arrowSymbols = ["🡡", "🡣"];
-        firstArrow.innerText = arrowSymbols[newValue ? 0 : 1];
     }
 
     let inProgress = false;

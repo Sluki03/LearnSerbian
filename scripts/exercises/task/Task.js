@@ -96,12 +96,10 @@ export class Task {
 
             const taskButtonHolder = document.querySelector(".task-button-holder");
             taskButtonHolder.classList.add("active-task-button-holder");
-            
-            if(this.currentTask.type === "conversation") {
-                const checkButton = taskButtonHolder.children[1];
-                checkButton.style.display = "none";
-            }
 
+            const checkButton = taskButtonHolder.children[1];
+            
+            if(this.currentTask.type === "conversation") checkButton.style.display = "none";
             else checkButton.style.display = "";
         }, 100);
         

@@ -736,43 +736,6 @@ main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interf
   border-radius: 20px;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
 }
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface .button-holder {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-direction: row;
-  gap: 20px;
-  width: 80%;
-}
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface .button-holder div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  gap: 5px;
-}
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface .button-holder div button {
-  height: 35px;
-  width: 35px;
-  color: #5e5c5c;
-  font-size: 15px;
-  background-color: transparent;
-  border: 1px solid rgba(200, 200, 200, 0.5);
-  border-radius: 5px;
-  cursor: pointer;
-  position: relative;
-  top: 0;
-  padding: 5px 10px;
-  transition: 300ms;
-}
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface .button-holder div button:hover {
-  border: 1px solid #5e5c5c;
-  top: -5px;
-  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
-}
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface .button-holder .button-holder-letters {
-  width: 200px;
-}
 main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface .text-holder {
   display: flex;
   align-items: flex-start;
@@ -2476,4 +2439,42 @@ footer div a {
 
 .active-word-translation {
   opacity: 1;
+}
+
+.diacritic-keyboard {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 20px;
+  width: 80%;
+}
+.diacritic-keyboard div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 5px;
+}
+.diacritic-keyboard div button {
+  height: 35px;
+  width: 35px;
+  color: #5e5c5c;
+  font-size: 15px;
+  background-color: transparent;
+  border: 1px solid rgba(200, 200, 200, 0.5);
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative;
+  top: 0;
+  padding: 5px 10px;
+  transition: 300ms;
+}
+.diacritic-keyboard div button:hover {
+  border: 1px solid #5e5c5c;
+  top: -5px;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+}
+.diacritic-keyboard .diacritic-keyboard-letters {
+  width: 200px;
 }/*# sourceMappingURL=main.css.map */
