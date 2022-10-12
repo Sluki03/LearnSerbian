@@ -1,5 +1,5 @@
-import createElement from "../../../functions/createElement.js";
-import randomArray from "../../../functions/randomArray.js";
+import createElement from "../../../../functions/createElement.js";
+import randomArray from "../../../../functions/randomArray.js";
 
 export default function multipleChoice(thisTask) {
     const { taskHolder, taskInfo } = thisTask.elements;

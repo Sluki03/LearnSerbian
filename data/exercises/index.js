@@ -4,6 +4,7 @@ import { test1 } from "./tasks/test1.js";
 // difficulty options: easy, medium, hard
 // task types: multipleChoice, multipleChoiceImages, translate, conversation
 // translate modes: write (default), wordBank
+// conversation modes: write (default), multipleChoice
 
 export const exercisesData = [
     {
@@ -34,7 +35,6 @@ export const exercisesData = [
         difficulty: "hard",
         tips: "#Multiple choice images preview.#",
         tasks: test1,
-        numberOfTasks: 2,
         lives: 5
     },
 

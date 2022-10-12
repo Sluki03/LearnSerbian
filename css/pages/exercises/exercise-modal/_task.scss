@@ -88,6 +88,12 @@
         @include add-flex;
         width: 100%;
         
+        .interface {
+            position: relative;
+            top: 0;
+            transition: 200ms;
+        }
+        
         .multiple-choice-holder {
             display: grid;
             grid-template-rows: repeat(2, 1fr);
@@ -150,121 +156,128 @@
                 padding: 10px 15px;
             }
 
-            textarea {
-                width: 80%;
-                color: $defDarkGrey;
-                font-size: set-size(lg);
-                border: 3px dashed $defGrey;
-                border-radius: 20px;
-                box-shadow: $defLighterShadow;
-                outline: none;
-                resize: none;
-                padding: 10px 15px;
-                transition: 300ms;
-
-                &:hover {
-                    border: 3px dashed $defDarkGrey;
-                }
-
-                &:disabled {
+            .interface {
+                @include add-flex(column);
+                height: 220px;
+                width: 100%;
+                gap: 20px;
+                
+                textarea {
+                    width: 80%;
+                    color: $defDarkGrey;
+                    font-size: set-size(lg);
                     border: 3px dashed $defGrey;
+                    border-radius: 20px;
+                    box-shadow: $defLighterShadow;
+                    outline: none;
+                    resize: none;
+                    padding: 10px 15px;
+                    transition: 300ms;
+    
+                    &:hover {
+                        border: 3px dashed $defDarkGrey;
+                    }
+    
+                    &:disabled {
+                        border: 3px dashed $defGrey;
+                    }
+    
+                    &:focus {
+                        border: 3px solid $defDarkGrey;
+                        border-radius: 20px;
+                        box-shadow: $defLightShadow;
+                    }
                 }
-
-                &:focus {
+    
+                .translate-holder-textarea-focused {
                     border: 3px solid $defDarkGrey;
                     border-radius: 20px;
                     box-shadow: $defLightShadow;
                 }
-            }
-
-            .translate-holder-textarea-focused {
-                border: 3px solid $defDarkGrey;
-                border-radius: 20px;
-                box-shadow: $defLightShadow;
-            }
-
-            .button-holder {
-                @include add-flex(row, flex-start);
-                gap: 20px;
-                width: 80%;
-
-                div {
-                    @include add-flex;
-                    gap: 5px;
-
-                    button {
-                        height: 35px;
-                        width: 35px;
-                        color: $defDarkGrey;
-                        font-size: set-size(sm);
-                        background-color: transparent;
-                        border: 1px solid $defGrey;
-                        border-radius: 5px;
-                        cursor: pointer;
-                        position: relative;
-                        top: 0;
-                        padding: 5px 10px;
-                        transition: 300ms;
-
-                        &:hover {
-                            border: 1px solid $defDarkGrey;
-                            top: -5px;
-                            box-shadow: $defLighterShadow;
+    
+                .button-holder {
+                    @include add-flex(row, flex-start);
+                    gap: 20px;
+                    width: 80%;
+    
+                    div {
+                        @include add-flex;
+                        gap: 5px;
+    
+                        button {
+                            height: 35px;
+                            width: 35px;
+                            color: $defDarkGrey;
+                            font-size: set-size(sm);
+                            background-color: transparent;
+                            border: 1px solid $defGrey;
+                            border-radius: 5px;
+                            cursor: pointer;
+                            position: relative;
+                            top: 0;
+                            padding: 5px 10px;
+                            transition: 300ms;
+    
+                            &:hover {
+                                border: 1px solid $defDarkGrey;
+                                top: -5px;
+                                box-shadow: $defLighterShadow;
+                            }
                         }
                     }
+    
+                    .button-holder-letters {
+                        width: 200px;
+                    }
                 }
-
-                .button-holder-letters {
-                    width: 200px;
+    
+                .text-holder {
+                    @include add-flex(row, flex-start, flex-start);
+                    flex-wrap: wrap;
+                    gap: 5px;
+                    height: 150px;
+                    width: 100%;
+                    border: 3px solid $defGrey;
+                    border-radius: 20px;
+                    padding: 10px 15px;
                 }
-            }
-
-            .text-holder {
-                @include add-flex(row, flex-start, flex-start);
-                flex-wrap: wrap;
-                gap: 5px;
-                height: 150px;
-                width: 100%;
-                border: 3px solid $defGrey;
-                border-radius: 20px;
-                padding: 10px 15px;
-            }
-
-            .word-bank-options-holder {
-                @include add-flex;
-                flex-wrap: wrap;
-                gap: 10px;
-                width: 100%;
-            }
-
-            .word-bank-option {
-                color: $defDarkGrey;
-                font-size: set-size(md);
-                background-color: white;
-                border: 1px solid $defDarkGrey;
-                border-radius: 15px;
-                cursor: pointer;
-                position: relative;
-                top: 0;
-                padding: 5px 10px;
-                transition: 300ms;
-            }
-
-            .word-bank-option-selective {
-                transition: 100ms;
-
-                &:hover {
-                    box-shadow: $defLighterShadow;
-                    top: 5px;
+    
+                .word-bank-options-holder {
+                    @include add-flex;
+                    flex-wrap: wrap;
+                    gap: 10px;
+                    width: 100%;
                 }
-            }
-
-            .word-bank-option-deselective {
-                transition: 100ms;
-
-                &:hover {
-                    box-shadow: $defLighterShadow;
-                    top: -5px;
+    
+                .word-bank-option {
+                    color: $defDarkGrey;
+                    font-size: set-size(md);
+                    background-color: white;
+                    border: 1px solid $defDarkGrey;
+                    border-radius: 15px;
+                    cursor: pointer;
+                    position: relative;
+                    top: 0;
+                    padding: 5px 10px;
+                    transition: 300ms;
+                }
+    
+                .word-bank-option-selective {
+                    transition: 100ms;
+    
+                    &:hover {
+                        box-shadow: $defLighterShadow;
+                        top: 5px;
+                    }
+                }
+    
+                .word-bank-option-deselective {
+                    transition: 100ms;
+    
+                    &:hover {
+                        box-shadow: $defLighterShadow;
+                        top: -5px;
+                    }
                 }
             }
         }

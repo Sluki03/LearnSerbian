@@ -1,7 +1,7 @@
 import { Component } from "../../components/Component.js";
 import { Convert } from "../../functions/Convert.js";
 import createElement from "../../functions/createElement.js";
-import constructTask from "./construct/index.js";
+import { constructTask, changeMode } from "./construct/index.js";
 import randomArray from "../../functions/randomArray.js";
 import percentage from "../../functions/percentage.js";
 import breakText from "../../functions/breakText.js";
@@ -101,6 +101,8 @@ export class Task {
                 const checkButton = taskButtonHolder.children[1];
                 checkButton.style.display = "none";
             }
+
+            else checkButton.style.display = "";
         }, 100);
         
         this.initializeElements();
@@ -168,7 +170,7 @@ export class Task {
         const { taskHolder, taskInfo, taskButtonHolder, switchModesButton } = this.elements;
 
         window.eventList.remove("taskFunctionsSetActiveButton", "taskStartNewKeyDown");
-
+        
         const progressBarP = [...this.taskProgressBarHolder.children][1];
 
         if(progressBarP.innerText) {
@@ -195,6 +197,7 @@ export class Task {
             this.taskElement.classList.remove("active-exercise-modal-task");
 
             taskHolder.innerHTML = "";
+            taskHolder.style.height = "";
 
             if(removeElements) {
                 this.taskLives.remove();
@@ -455,17 +458,34 @@ export class Task {
     }
 
     construct(changeMode = false) {
+        const { currentTask, messageNumber } = this;
+        
+        const taskModes = this.getTaskModes();
+
+        if(taskModes) {
+            if(this.currentTask.mode === undefined) this.currentTask.mode = { type: "write", switch: false };
+            if(this.currentTask.mode.type === undefined) this.currentLives.mode = {...this.currentTask.mode, type: "write"};
+            if(this.currentTask.mode.switch === undefined) this.currentTask.mode = {...this.currentTask.mode, switch: false};
+        }
+        
+        if(this.currentTask.mode?.type === "random") randomMode(taskModes);
+
         constructTask(this.currentTask.type, this, changeMode);
+
+        function randomMode(taskModes) {
+            const randomModeType = taskModes[Math.floor(Math.random() * taskModes.length)];
+            const optionsRequired = ["wordBank", "multipleChoice"];
+    
+            const optionsProp = currentTask.type === "conversation" ? currentTask.messages[messageNumber].options : currentTask.options;
+                
+            if(optionsRequired.indexOf(randomModeType) > -1 && optionsProp === undefined) currentTask.mode.type = "write";
+            else currentTask.mode.type = randomModeType;
+        }
     }
 
     switchModes() {
-        const { currentTask, prevModeValues, construct } = this;
+        const { currentTask } = this;
         const { switchModesButton } = this.elements;
-
-        const allModes = {
-            translate: ["write", "wordBank"],
-            conversation: ["write", "multipleChoice"]
-        };
         
         const icons = {
             write: { src: "./images/icons/write-icon.svg", alt: "Write" },
@@ -473,7 +493,7 @@ export class Task {
             multipleChoice: { src: "./images/icons/multiple-choice-icon.svg", alt: "Multiple Choice" }
         };
         
-        const taskModes = getTaskModes();
+        const taskModes = this.getTaskModes();
         const invertedTaskMode = currentTask.mode.type === taskModes[0] ? taskModes[1] : taskModes[0];
         const invertedIcon = getInvertedIcon();
         
@@ -481,7 +501,7 @@ export class Task {
             if(currentTask.mode.type === "write" && (currentTask.type === "conversation" ? this.currentTask.messages[this.messageNumber].options : currentTask.options) === undefined) return;
             
             switchModesButton.classList.add("active-switch-modes-button");
-            switchModesButton.onclick = changeMode;
+            switchModesButton.onclick = () => changeMode(currentTask.type, this);
 
             const switchModesImg = document.querySelector(".active-switch-modes-button img");
 
@@ -497,108 +517,6 @@ export class Task {
             }
         }
 
-        this.randomMode(taskModes);
-
-        function changeMode() {
-            if(currentTask.type === "translate") {
-                if(currentTask.mode.type === "write") {
-                    currentTask.mode.type = "wordBank";
-    
-                    const translateHolderTextarea = document.querySelector(".translate-holder textarea");
-                    prevModeValues.write.translate.textareaValue = translateHolderTextarea.value;
-    
-                    let textHolderWords = [];
-    
-                    textHolderWords = translateHolderTextarea.value.split(" ");
-    
-                    const punctuationMarks = [".", ",", "?", "!", ":", ";"];
-                    textHolderWords = textHolderWords.filter(word => punctuationMarks.indexOf(word) === -1);
-    
-                    for(let i = 0; i < textHolderWords.length; i++) textHolderWords[i] = textHolderWords[i].toLowerCase();
-    
-                    const words = {
-                        textHolder: [],
-                        wordBank: []
-                    };
-    
-                    textHolderWords.forEach(word => {
-                        if(currentTask.options.indexOf(word) > -1) words.textHolder.push(word);
-                    });
-    
-                    currentTask.options.forEach(option => {
-                        if(words.textHolder.indexOf(option) === -1) words.wordBank.push(option);
-                    });
-    
-                    prevModeValues.wordBank.translate = words;
-                }
-                
-                else {
-                    currentTask.mode.type = "write";
-    
-                    const words = {
-                        textHolder: [],
-                        wordBank: []
-                    };
-    
-                    const textHolder = document.querySelector(".text-holder");
-                    const wordsBankOptionsHolder = document.querySelector(".word-bank-options-holder");
-                    
-                    [...textHolder.children].forEach(child => {
-                        const childText = child.innerText;
-                        words.textHolder.push(childText);
-                    });
-    
-                    [...wordsBankOptionsHolder.children].forEach(child => {
-                        const childText = child.innerText;
-                        words.wordBank.push(childText);
-                    });
-    
-                    prevModeValues.wordBank.translate = words;
-                    prevModeValues.write.translate.textareaValue = words.textHolder.join(" ");
-                }
-            }
-
-            if(currentTask.type === "conversation") {
-                const conversationAnswerInput = document.querySelector(".conversation-answer input");
-                const conversationAnswerButtonHolder = document.querySelector(".conversation-answer-button-holder");
-
-                if(currentTask.mode.type === "write") {
-                    currentTask.mode.type = "multipleChoice";
-                    prevModeValues.write.conversation.value = conversationAnswerInput.value;
-                }
-
-                else {
-                    currentTask.mode.type = "write";
-                    
-                    const classes = [];
-
-                    [...conversationAnswerButtonHolder.children].forEach(child => {      
-                        [...child.classList].forEach(className => {
-                            if(className === "multiple-choice-button") return;
-                            classes.push(className);
-                        });
-                    });
-
-                    prevModeValues.multipleChoice.conversation.classes = classes;
-                }
-            }
-
-            const currentInterface = document.querySelector(".interface");
-            currentInterface.innerHTML = "";
-
-            construct(true);
-        }
-
-        function getTaskModes() {
-            let result;
-
-            Object.keys(allModes).forEach((key, index) => {
-                if(currentTask.type === key) result = Object.values(allModes)[index];
-            });
-
-            return result;
-        }
-
         function getInvertedIcon() {
             let result;
             
@@ -610,15 +528,18 @@ export class Task {
         }
     }
 
-    randomMode(taskModes) {
-        if(this.currentTask.mode.type === "random") {
-            const randomModeType = taskModes[Math.floor(Math.random() * taskModes.length)];
-            const optionsRequired = ["wordBank", "multipleChoice"];
+    getTaskModes() {
+        const allModes = {
+            translate: ["write", "wordBank"],
+            conversation: ["write", "multipleChoice"]
+        };
+        
+        let result;
 
-            const optionsProp = this.currentTask.type === "conversation" ? this.currentTask.messages[this.messageNumber].options : this.currentTask.options;
-            
-            if(optionsRequired.indexOf(randomModeType) > -1 && optionsProp === undefined) this.currentTask.mode.type = "write";
-            else this.currentTask.mode.type = randomModeType;
-        }
+        Object.keys(allModes).forEach((key, index) => {
+            if(this.currentTask.type === key) result = Object.values(allModes)[index];
+        });
+
+        return result;
     }
 }

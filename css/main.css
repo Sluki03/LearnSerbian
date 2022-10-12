@@ -580,6 +580,11 @@ main .exercise-modal .exercise-modal-task .task-holder {
   flex-direction: row;
   width: 100%;
 }
+main .exercise-modal .exercise-modal-task .task-holder .interface {
+  position: relative;
+  top: 0;
+  transition: 200ms;
+}
 main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder {
   display: grid;
   grid-template-rows: repeat(2, 1fr);
@@ -694,7 +699,16 @@ main .exercise-modal .exercise-modal-task .task-holder .translate-holder > p {
   position: relative;
   padding: 10px 15px;
 }
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder textarea {
+main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 220px;
+  width: 100%;
+  gap: 20px;
+}
+main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface textarea {
   width: 80%;
   color: #5e5c5c;
   font-size: 25px;
@@ -706,23 +720,23 @@ main .exercise-modal .exercise-modal-task .task-holder .translate-holder textare
   padding: 10px 15px;
   transition: 300ms;
 }
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder textarea:hover {
+main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface textarea:hover {
   border: 3px dashed #5e5c5c;
 }
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder textarea:disabled {
+main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface textarea:disabled {
   border: 3px dashed rgba(200, 200, 200, 0.5);
 }
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder textarea:focus {
+main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface textarea:focus {
   border: 3px solid #5e5c5c;
   border-radius: 20px;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
 }
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder .translate-holder-textarea-focused {
+main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface .translate-holder-textarea-focused {
   border: 3px solid #5e5c5c;
   border-radius: 20px;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
 }
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder .button-holder {
+main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface .button-holder {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -730,14 +744,14 @@ main .exercise-modal .exercise-modal-task .task-holder .translate-holder .button
   gap: 20px;
   width: 80%;
 }
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder .button-holder div {
+main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface .button-holder div {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
   gap: 5px;
 }
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder .button-holder div button {
+main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface .button-holder div button {
   height: 35px;
   width: 35px;
   color: #5e5c5c;
@@ -751,15 +765,15 @@ main .exercise-modal .exercise-modal-task .task-holder .translate-holder .button
   padding: 5px 10px;
   transition: 300ms;
 }
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder .button-holder div button:hover {
+main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface .button-holder div button:hover {
   border: 1px solid #5e5c5c;
   top: -5px;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
 }
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder .button-holder .button-holder-letters {
+main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface .button-holder .button-holder-letters {
   width: 200px;
 }
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder .text-holder {
+main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface .text-holder {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
@@ -772,7 +786,7 @@ main .exercise-modal .exercise-modal-task .task-holder .translate-holder .text-h
   border-radius: 20px;
   padding: 10px 15px;
 }
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder .word-bank-options-holder {
+main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface .word-bank-options-holder {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -781,7 +795,7 @@ main .exercise-modal .exercise-modal-task .task-holder .translate-holder .word-b
   gap: 10px;
   width: 100%;
 }
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder .word-bank-option {
+main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface .word-bank-option {
   color: #5e5c5c;
   font-size: 20px;
   background-color: white;
@@ -793,17 +807,17 @@ main .exercise-modal .exercise-modal-task .task-holder .translate-holder .word-b
   padding: 5px 10px;
   transition: 300ms;
 }
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder .word-bank-option-selective {
+main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface .word-bank-option-selective {
   transition: 100ms;
 }
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder .word-bank-option-selective:hover {
+main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface .word-bank-option-selective:hover {
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
   top: 5px;
 }
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder .word-bank-option-deselective {
+main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface .word-bank-option-deselective {
   transition: 100ms;
 }
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder .word-bank-option-deselective:hover {
+main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface .word-bank-option-deselective:hover {
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
   top: -5px;
 }

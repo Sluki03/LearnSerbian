@@ -4,9 +4,8 @@ import createElement from "../../../../functions/createElement.js";
 import breakText from "../../../../functions/breakText.js";
 import randomArray from "../../../../functions/randomArray.js";
 
-export default async function interace(thisTask, changeMode) {
+export default async function taskInterface(thisTask, changeMode) {
     let currentMessage = thisTask.currentTask.messages[thisTask.messageNumber];
-    thisTask.switchModes(currentMessage);
     
     const conversationAnswer = document.querySelector(".conversation-answer");
     createElement({ tag: "p", appendTo: conversationAnswer });
@@ -120,6 +119,8 @@ export default async function interace(thisTask, changeMode) {
             return thisTask.currentTask.messages[thisTask.messageNumber - 1];
         }
     }
+
+    thisTask.switchModes(currentMessage);
 
     function generateMultipleChoiceButtons(messageIndex) {    
         const validButton = messageIndex ? messageIndex : currentMessage;

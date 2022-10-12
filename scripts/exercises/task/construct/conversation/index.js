@@ -1,9 +1,9 @@
-import interace from "./interface.js";
+import taskInterface from "./interface.js";
 import { sendMessage } from "./functions.js";
 import { Component } from "../../../../components/Component.js";
 
 export default function conversation(thisTask, changeMode) {
-    if(changeMode) return interace(thisTask, changeMode);
+    if(changeMode) return taskInterface(thisTask, changeMode);
     
     const { taskHolder } = thisTask.elements;
 
@@ -21,6 +21,6 @@ export default function conversation(thisTask, changeMode) {
 
     participantName.innerText = thisTask.currentTask.participant;
 
-    interace(thisTask, changeMode);
+    taskInterface(thisTask, changeMode);
     sendMessage(thisTask, { role: "participant", current: thisTask.currentTask.messages[0] });
 }

@@ -1,33 +1,14 @@
-import createElement from "../../../functions/createElement.js";
-import randomArray from "../../../functions/randomArray.js";
-import setTranslatableWords from "../setTranslatableWords.js";
+import createElement from "../../../../functions/createElement.js";
+import randomArray from "../../../../functions/randomArray.js";
 
-export default function translate(thisTask) {
-    const { taskHolder } = thisTask.elements;
-    
-    const translateHolder = createElement({
-        tag: "div",
-        attributes: { class: "translate-holder" },
-        appendTo: taskHolder
-    });
-    
-    const translateHolderP = createElement({
-        tag: "p",
-        appendTo: translateHolder
-    });
-
-    setTranslatableWords(translateHolderP, thisTask.currentTask.text, thisTask.currentTask.translation);
-
-    if(thisTask.currentTask.mode === undefined) thisTask.currentTask.mode = { type: "write", switch: false };
-    if(thisTask.currentTask.mode.type === undefined) thisTask.currentLives.mode = {...thisTask.currentTask.mode, type: "write"};
-    if(thisTask.currentTask.mode.switch === undefined) thisTask.currentTask.mode = {...thisTask.currentTask.mode, switch: false};
-
-    thisTask.switchModes();
+export default function taskInterface(thisTask) {
+    const interfaceElement = document.querySelector(".interface");
     
     if(thisTask.currentTask.mode.type === "write") {
         const translateHolderTextarea = createElement({
             tag: "textarea",
             attributes: {
+                class: "interface",
                 rows: 4,
                 cols: 2,
                 type: "text",
@@ -48,7 +29,7 @@ export default function translate(thisTask) {
                     else translateHolderTextarea.classList.remove("translate-holder-textarea-focused");
                 }}
             ],
-            appendTo: translateHolder
+            appendTo: interfaceElement
         });
 
         if(thisTask.prevModeValues.write.translate.textareaValue) translateHolderTextarea.value = thisTask.prevModeValues.write.translate.textareaValue;
@@ -57,7 +38,7 @@ export default function translate(thisTask) {
         const buttonHolder = createElement({
             tag: "div",
             attributes: { class: "button-holder" },
-            appendTo: translateHolder
+            appendTo: interfaceElement
         });
 
         const holders = ["letters", "arrows"];
@@ -117,13 +98,13 @@ export default function translate(thisTask) {
         const textHolder = createElement({
             tag: "div",
             attributes: { class: "text-holder" },
-            appendTo: translateHolder
+            appendTo: interfaceElement
         });
         
         const wordBankOptionsHolder = createElement({
             tag: "div",
             attributes: { class: "word-bank-options-holder" },
-            appendTo: translateHolder
+            appendTo: interfaceElement
         });
         
         if(thisTask.prevModeValues.wordBank.translate.textHolder.length > 0) {        
@@ -153,6 +134,8 @@ export default function translate(thisTask) {
             };
         }
     }
+
+    thisTask.switchModes();
 
     function isSelective(option) {
         let result;
