@@ -13,6 +13,11 @@
         object-fit: contain;
         filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.5));
     }
+
+    .task-lives-infinity {
+        height: 50px;
+        width: 50px;
+    }
 }
 
 .active-task-lives {
@@ -477,6 +482,19 @@
             .active-diacritic-keyboard {
                 opacity: 1;
                 bottom: 0;
+            }
+        }
+
+        .connect-holder {
+            @include add-flex;
+            gap: 20px;
+
+            .connect-button-holder {
+                @include add-flex(column);
+                gap: 10px;
+                padding: 10px 0;
+
+                @include multiple-choice-button;
             }
         }
     }

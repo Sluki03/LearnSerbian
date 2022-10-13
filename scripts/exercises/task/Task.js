@@ -37,7 +37,7 @@ export class Task {
         this.submitted = false;
         this.results = [];
 
-        this.currentLives = this.exercise.lives;
+        this.currentLives = this.exercise.lives || "infinity";
         this.taskLives = document.querySelector(".task-lives");
 
         this.progressBar = { value: 0, increase: 100 / this.tasks.length, inRow: 0 };
@@ -76,7 +76,7 @@ export class Task {
         this.submitted = false;
         this.results = [];
         this.score = { xp: 0, mistakes: 0 };
-        this.currentLives = this.exercise.lives;
+        this.currentLives = this.exercise.lives || "infinity";
         this.progressBar = { value: 0, increase: 100 / this.tasks.length, inRow: 0 };
         this.elements = {};
         
@@ -121,7 +121,7 @@ export class Task {
         
         window.eventList.remove({ id: "taskCheckKeyDown" });
         
-        if(this.tasks.length - 1 === this.taskNumber && this.currentLives > 0) {
+        if(this.tasks.length - 1 === this.taskNumber && (this.currentLives > 0 || this.currentLives === "infinity")) {
             this.taskLives.classList.remove("active-task-lives");
             this.taskProgressBarHolder.classList.remove("active-task-progress-bar-holder");
         }
@@ -245,7 +245,13 @@ export class Task {
     updateLives() {
         this.taskLives.innerHTML = "";
         
-        for(let i = 0; i < this.currentLives; i++) createElement({
+        if(this.currentLives === "infinity") createElement({
+            tag: "img",
+            attributes: { src: "./images/icons/infinity-icon.png", alt: "INFINITY", class: "task-lives-infinity" },
+            appendTo: this.taskLives
+        });
+        
+        else for(let i = 0; i < this.currentLives; i++) createElement({
             tag: "img",
             attributes: { src: "./images/icons/lives-icon.png", alt: "LIVE" },
             appendTo: this.taskLives
@@ -336,7 +342,7 @@ export class Task {
         audio.play();
 
         if(!isCorrect) {
-            this.currentLives--;
+            if(this.currentLives !== "infinity") this.currentLives--;
             this.updateLives();
 
             if(this.currentLives === 0) {
@@ -462,7 +468,7 @@ export class Task {
 
         if(taskModes) {
             if(this.currentTask.mode === undefined) this.currentTask.mode = { type: "write", switch: false };
-            if(this.currentTask.mode.type === undefined) this.currentLives.mode = {...this.currentTask.mode, type: "write"};
+            if(this.currentTask.mode.type === undefined) this.currentTask.mode = {...this.currentTask.mode, type: "write"};
             if(this.currentTask.mode.switch === undefined) this.currentTask.mode = {...this.currentTask.mode, switch: false};
         }
         

@@ -502,6 +502,10 @@ main .exercise-modal .task-lives img {
      object-fit: contain;
   filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.5));
 }
+main .exercise-modal .task-lives .task-lives-infinity {
+  height: 50px;
+  width: 50px;
+}
 main .exercise-modal .active-task-lives {
   opacity: 1;
   top: 10px;
@@ -1078,6 +1082,69 @@ main .exercise-modal .exercise-modal-task .task-holder .exercise-modal-task-conv
 main .exercise-modal .exercise-modal-task .task-holder .exercise-modal-task-conversation .active-diacritic-keyboard {
   opacity: 1;
   bottom: 0;
+}
+main .exercise-modal .exercise-modal-task .task-holder .connect-holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 20px;
+}
+main .exercise-modal .exercise-modal-task .task-holder .connect-holder .connect-button-holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px 0;
+}
+main .exercise-modal .exercise-modal-task .task-holder .connect-holder .connect-button-holder .multiple-choice-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  max-width: 330px;
+  color: #5e5c5c;
+  font-size: 25px;
+  background: white;
+  border: 1px solid #5e5c5c;
+  border-radius: 20px;
+  cursor: pointer;
+  position: relative;
+  top: 0;
+  margin: 0 auto;
+  padding: 5px 10px;
+  transition: 300ms;
+}
+main .exercise-modal .exercise-modal-task .task-holder .connect-holder .connect-button-holder .multiple-choice-button:hover {
+  border: 1px solid transparent;
+  box-shadow: -3px -3px 5px 1px #bd1330, 3px 3px 5px 1px #144eba;
+}
+main .exercise-modal .exercise-modal-task .task-holder .connect-holder .connect-button-holder .active-multiple-choice-button {
+  cursor: default;
+  -webkit-animation: rotate-box-shadow 300ms linear forwards;
+          animation: rotate-box-shadow 300ms linear forwards;
+}
+@keyframes rotate-box-shadow {
+  0% {
+    box-shadow: -3px -3px 5px 1px #bd1330, 3px 3px 5px 1px #144eba;
+  }
+  50% {
+    box-shadow: 3px -3px 5px 1px #bd1330, -3px 3px 5px 1px #144eba;
+  }
+  100% {
+    box-shadow: 3px 3px 5px 1px #bd1330, -3px -3px 5px 1px #144eba;
+  }
+}
+main .exercise-modal .exercise-modal-task .task-holder .connect-holder .connect-button-holder .disabled-multiple-choice-button {
+  cursor: default;
+  opacity: 0.5;
+}
+main .exercise-modal .exercise-modal-task .task-holder .connect-holder .connect-button-holder .disabled-multiple-choice-button:hover {
+  border: 1px solid #5e5c5c;
+  box-shadow: none;
 }
 main .exercise-modal .exercise-modal-task .task-button-holder {
   display: flex;
@@ -2304,6 +2371,7 @@ footer div a {
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
+  z-index: 5;
 }
 .classic-modal strong {
   color: #5e5c5c;

@@ -1,8 +1,9 @@
 import { newWords } from "./tasks/newWords.js";
 import { test1 } from "./tasks/test1.js";
+import { pastTense } from "./tasks/pastTense.js";
 
 // difficulty options: easy, medium, hard
-// task types: multipleChoice, multipleChoiceImages, translate, conversation
+// task types: multipleChoice, multipleChoiceImages, translate, conversation, connect
 // translate modes: write (default), wordBank
 // conversation modes: write (default), multipleChoice
 
@@ -40,6 +41,8 @@ export const exercisesData = [
 
     {
         name: "Past Tense",
-        difficulty: "medium"
+        difficulty: "medium",
+        tips: "#New types#**connect, completeSentence**",
+        tasks: pastTense,
     }
 ];
