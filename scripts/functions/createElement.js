@@ -1,4 +1,5 @@
 import { Styles } from "./Styles.js";
+import { buildEventList } from "./EventControl.js";
 
 export default function createElement(element) {
     const newElement = document.createElement(element.tag);
@@ -23,5 +24,6 @@ export default function createElement(element) {
     if(element.before) element.appendTo.insertBefore(newElement, element.before);
     else element.appendTo.appendChild(newElement);
 
+    buildEventList(newElement);
     return newElement;
 }

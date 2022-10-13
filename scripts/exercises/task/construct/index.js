@@ -18,7 +18,12 @@ export function constructTask(task, thisTask, changeMode) {
     constructFunction(thisTask, changeMode);
 }
 
+let inProgress = false;
+
 export function changeMode(task, thisTask) {
+    if(inProgress) return;
+    inProgress = true;
+    
     let modesFunction;
 
     Object.keys(ModeTypes).forEach((key, index) => {
@@ -43,6 +48,8 @@ export function changeMode(task, thisTask) {
         setTimeout(() => {
             currentInterface.style.opacity = "";
             currentInterface.style.top = "";
+
+            inProgress = false;
         }, 200);
     }, 200);
 }

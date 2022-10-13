@@ -2,6 +2,7 @@
     @include add-flex(row, flex-start);
     gap: 20px;
     width: 80%;
+    transition: 300ms;
 
     div {
         @include add-flex;

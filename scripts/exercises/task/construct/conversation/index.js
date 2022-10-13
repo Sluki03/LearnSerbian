@@ -9,8 +9,10 @@ export default function conversation(thisTask, changeMode) {
 
     taskHolder.style.height = "70%";
 
-    const conversationHolder = document.querySelector("[data-template='exercise-modal-task-conversation']").content.firstElementChild.cloneNode(true);
-    taskHolder.appendChild(conversationHolder);
+    const exerciseModalTaskConversation = document.querySelector("[data-template='exercise-modal-task-conversation']").content.firstElementChild.cloneNode(true);
+    taskHolder.appendChild(exerciseModalTaskConversation);
+
+    const [conversationHolder] = [...exerciseModalTaskConversation.children];
     Component.render(conversationHolder);
 
     const [conversationParticipant] = [...conversationHolder.children];

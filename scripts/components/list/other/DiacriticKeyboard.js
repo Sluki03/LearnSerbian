@@ -41,14 +41,15 @@ export default function DiacriticKeyboard(componentProps) {
         appendTo: diacriticKeyboardArrows
     });
 
-    input.oninput = () => textareaValueChanged(input.value);
+    if(input.eventList.get("diacriticKeyboard") !== null) input.eventList.remove("diacriticKeyboard");
+    input.eventList.add({ id: "diacriticKeyboard", type: "input", listener: inputValueChanged });
 
     return diacriticKeyboard;
 
     function updateInputOnButtonClick(button) {
         input.value += button.innerText;
         answerChanged(input.value);
-        textareaValueChanged(input.value);
+        inputValueChanged(input.value);
     }
 
     function changeCaseStatus() {
@@ -66,16 +67,16 @@ export default function DiacriticKeyboard(componentProps) {
         });
     }
 
-    function textareaValueChanged(newValue) {
+    function inputValueChanged() {
         const firstArrow = diacriticKeyboardArrows.children[0];
-        if(firstArrow.classList.contains("locked-arrow"))  return;
+        if(firstArrow.classList.contains("locked-arrow")) return;
     
         [...diacriticKeyboardLetters.children].forEach(button => {
-            if(newValue) button.innerText = button.innerText.toLowerCase();
+            if(input.value) button.innerText = button.innerText.toLowerCase();
             else button.innerText = button.innerText.toUpperCase();
         });
     
         const arrowSymbols = ["🡡", "🡣"];
-        firstArrow.innerText = arrowSymbols[newValue ? 0 : 1];
+        firstArrow.innerText = arrowSymbols[input.value ? 0 : 1];
     }
 }

@@ -7,8 +7,13 @@ import randomArray from "../../../../functions/randomArray.js";
 export default async function taskInterface(thisTask, changeMode) {
     let currentMessage = thisTask.currentTask.messages[thisTask.messageNumber];
     
+    const exerciseModalTaskConversation = document.querySelector(".exercise-modal-task-conversation");
     const conversationAnswer = document.querySelector(".conversation-answer");
+
     createElement({ tag: "p", appendTo: conversationAnswer });
+
+    const diacriticKeyboard = document.querySelector(".diacritic-keyboard");
+    if(diacriticKeyboard !== null) diacriticKeyboard.remove();
     
     if(thisTask.currentTask.mode.type === "write") {
         const conversationAnswerInput = createElement({
@@ -19,8 +24,14 @@ export default async function taskInterface(thisTask, changeMode) {
         
         if(changeMode) resetInput();
 
+        const diacriticKeyboard = Component.create("DiacriticKeyboard", {
+            input: conversationAnswerInput,
+            answerChanged: thisTask.answerChanged,
+            appendTo: exerciseModalTaskConversation
+        });
+
         const conversationAnswerCheckButton = Component.create("ArrowButton", { appendTo: conversationAnswer });
-                
+
         conversationAnswerInput.maxLength = getInputMaxLength(currentMessage);
         conversationAnswerInput.oninput = changeConversationAnswerStatus;
 
@@ -32,13 +43,26 @@ export default async function taskInterface(thisTask, changeMode) {
         changeConversationAnswerStatus();
 
         function changeConversationAnswerStatus() {
+            const conversationHolder = conversationAnswer.parentElement;
+            
             if(conversationAnswerInput.value) {
                 conversationAnswer.classList.add("active-conversation-answer");
+                diacriticKeyboard.classList.add("active-diacritic-keyboard");
+
+                const diacriticKeyboardHeight = parseInt(getComputedStyle(diacriticKeyboard).getPropertyValue("height"));
+                const gap = 10;
+                
+                conversationHolder.style.height = `calc(100% - ${diacriticKeyboardHeight + gap}px)`;
+
                 translationModal(currentMessage.userContent);
             }
                         
             else if(conversationAnswer.classList.contains("active-conversation-answer")) {
                 conversationAnswer.classList.remove("active-conversation-answer");
+                diacriticKeyboard.classList.remove("active-diacritic-keyboard");
+                
+                conversationHolder.style.height = "";
+                
                 translationModal(currentMessage.userContent, "down");
             }
         }
