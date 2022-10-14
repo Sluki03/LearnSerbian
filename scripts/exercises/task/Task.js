@@ -98,8 +98,9 @@ export class Task {
             taskButtonHolder.classList.add("active-task-button-holder");
 
             const checkButton = taskButtonHolder.children[1];
+            const blockedCheckButton = ["conversation", "connect"];
             
-            if(this.currentTask.type === "conversation") checkButton.style.display = "none";
+            if(blockedCheckButton.indexOf(this.currentTask.type) > -1) checkButton.style.display = "none";
             else checkButton.style.display = "";
         }, 100);
         
@@ -245,6 +246,8 @@ export class Task {
     updateLives() {
         this.taskLives.innerHTML = "";
         
+        if(this.currentLives === 0) return this.check({ type: "click" });
+        
         if(this.currentLives === "infinity") createElement({
             tag: "img",
             attributes: { src: "./images/icons/infinity-icon.png", alt: "INFINITY", class: "task-lives-infinity" },
@@ -259,7 +262,7 @@ export class Task {
     }
     
     check(e, additionalPass = false) {
-        const { currentTask } = this;
+        const { currentTask, messageNumber } = this;
         
         const {
             taskButtonHolder, checkButton, taskInfo, taskInfoImg, taskInfoTextH4, taskInfoTextP,
@@ -327,7 +330,7 @@ export class Task {
 
         taskInfoTextH4.innerText = `${validTitles[Math.floor(Math.random() * validTitles.length)]}!`;
 
-        const acceptableAnswers = currentTask.type === "conversation" ? currentTask.messages[this.messageNumber].acceptableAnswers : currentTask.acceptableAnswers;
+        const acceptableAnswers = getAcceptableAnswers();
         const randomCorrectAnswer = acceptableAnswers[Math.floor(Math.random() * acceptableAnswers.length)];
 
         const text = {
@@ -342,7 +345,7 @@ export class Task {
         audio.play();
 
         if(!isCorrect) {
-            if(this.currentLives !== "infinity") this.currentLives--;
+            if(this.currentLives !== "infinity" || this.currentLives > 0) this.currentLives--;
             this.updateLives();
 
             if(this.currentLives === 0) {
@@ -382,6 +385,27 @@ export class Task {
             const linearGradient = `linear-gradient(135deg, ${normal} 65%, ${light} 65% 85%, ${lighter} 85%)`;
             return linearGradient;
         }
+
+        function getAcceptableAnswers() {
+            switch(currentTask.type) {
+                case "conversation": return currentTask.messages[messageNumber].acceptableAnswers;
+                case "connect":
+                    const firstSelectedButton = document.querySelector(".first-selected-button")?.innerText;       
+                    const acceptableAnswers = [];
+
+                    if(currentTask.options.hasOwnProperty(firstSelectedButton)) Object.keys(currentTask.options).forEach((key, index) => {
+                        if(firstSelectedButton === key) acceptableAnswers.push(Object.values(currentTask.options)[index]);
+                    });
+
+                    else Object.values(currentTask.options).forEach((value, index) => {
+                        if(firstSelectedButton === value) acceptableAnswers.push(Object.keys(currentTask.options)[index]);
+                    });
+
+                    return acceptableAnswers;
+                
+                default: return currentTask.acceptableAnswers;
+            }
+        }
     }
 
     isCorrect() {
@@ -407,6 +431,20 @@ export class Task {
 
                 lastMessageAcceptableAnswers.forEach(answer => {
                     if(breakText(this.answer, { join: true }) === breakText(answer, { join: true })) result = true;
+                });
+
+                break;
+            case "connect":
+                result = false;
+            
+                const answerKey = this.currentTask.options.hasOwnProperty(this.answer[0]) ? this.answer[0] : this.answer[1];
+                const answerValue = answerKey === this.answer[0] ? this.answer[1] : this.answer[0];
+
+                Object.keys(this.currentTask.options).forEach((key, index) => {
+                    if(answerKey === key) {
+                        const value = Object.values(this.currentTask.options)[index];
+                        if(answerValue === value) result = true;
+                    }
                 });
 
                 break;

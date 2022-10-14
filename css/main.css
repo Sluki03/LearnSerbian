@@ -1146,6 +1146,12 @@ main .exercise-modal .exercise-modal-task .task-holder .connect-holder .connect-
   border: 1px solid #5e5c5c;
   box-shadow: none;
 }
+main .exercise-modal .exercise-modal-task .task-holder .connect-holder .connect-button-holder .correct-button {
+  background-color: rgba(0, 255, 46, 0.5);
+}
+main .exercise-modal .exercise-modal-task .task-holder .connect-holder .connect-button-holder .wrong-button {
+  background-color: rgba(242, 7, 7, 0.5);
+}
 main .exercise-modal .exercise-modal-task .task-button-holder {
   display: flex;
   align-items: center;
@@ -1720,14 +1726,11 @@ main .exercises-holder .exercises-list {
   margin: 20px 0;
   transition: 50ms;
 }
-main .exercises-holder .exercises-list > div:nth-of-type(2) {
+main .exercises-holder .exercises-list > div:nth-of-type(4) {
   margin-top: 100px;
 }
 main .exercises-holder .exercises-list > div:nth-last-of-type(1) {
   margin-bottom: 100px;
-}
-main .exercises-holder .exercises-list strong:last-of-type {
-  bottom: 0;
 }
 main .exercises-holder .exercises-list .exercises-list-line {
   height: 100%;
@@ -1735,15 +1738,34 @@ main .exercises-holder .exercises-list .exercises-list-line {
   background: #5e5c5c;
   position: absolute;
 }
-main .exercises-holder .exercises-list strong {
-  color: #5e5c5c;
-  font-size: 30px;
-  text-transform: capitalize;
+main .exercises-holder .exercises-list .exercises-list-start-end-holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 10px;
   background: white;
   border: 1px solid #5e5c5c;
   border-radius: 20px;
-  padding: 5px;
+  padding: 10px;
   position: absolute;
+}
+main .exercises-holder .exercises-list .exercises-list-start-end-holder img {
+  height: 40px;
+  width: 40px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+main .exercises-holder .exercises-list .exercises-list-start-end-holder strong {
+  color: #5e5c5c;
+  font-size: 30px;
+  text-transform: capitalize;
+}
+main .exercises-holder .exercises-list .start-holder {
+  top: 0;
+}
+main .exercises-holder .exercises-list .end-holder {
+  bottom: 0;
 }
 main .exercises-holder .exercises-list .interactive-title {
   display: flex;

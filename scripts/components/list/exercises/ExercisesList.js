@@ -14,12 +14,26 @@ export default function ExercisesList(componentProps) {
         appendTo: list
     });
 
-    for(let i = 0; i < 2; i++) createElement({
-        tag: "strong",
-        attributes: { class: `exercises-list-${i === 0 ? "start" : "end"}` },
-        innerText: i === 0 ? "start" : "end",
-        appendTo: list
-    });
+    for(let i = 0; i < 2; i++) {
+        const startEndHolder = createElement({
+            tag: "div",
+            attributes: { class: `exercises-list-start-end-holder ${i === 0 ? "start-holder" : "end-holder"}` },
+            appendTo: list
+        });
+
+        createElement({
+            tag: "img",
+            attributes: { src: `./images/icons/${i === 0 ? "start" : "end"}-icon.png`, alt: i === 0 ? "START" : "END" },
+            appendTo: startEndHolder
+        });
+        
+        createElement({
+            tag: "strong",
+            attributes: { class: `exercises-list-${i === 0 ? "start" : "end"}` },
+            innerText: i === 0 ? "start" : "end",
+            appendTo: startEndHolder
+        });
+    }
     
     const listEnd = document.getElementById("exercises-list-end");
 

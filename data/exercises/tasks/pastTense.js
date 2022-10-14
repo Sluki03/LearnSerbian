@@ -11,5 +11,17 @@ export const pastTense = [
         type: "connect",
         title: "Connect the right words.",
         options: { dog: "pas", cat: "macka", president: "predsednik", killer: "ubica" }
+    },
+
+    {
+        type: "connect",
+        title: "Connect the right words.",
+        options: { dog: "pas", cat: "macka", president: "predsednik", killer: "ubica" }
+    },
+
+    {
+        type: "connect",
+        title: "Connect the right words.",
+        options: { dog: "pas", cat: "macka", president: "predsednik", killer: "ubica" }
     }
 ];

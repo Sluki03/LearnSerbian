@@ -8,7 +8,7 @@ export default function connect(thisTask) {
     
     for(let i = 0; i < 2; i++) createElement({
         tag: "div",
-        attributes: { class: "connect-button-holder" },
+        attributes: { class: "connect-button-holder", id: `content-button-holder-${i}` },
         appendTo: connectHolder
     });
 
@@ -30,32 +30,128 @@ export default function connect(thisTask) {
         };
     }
 
+    let selectStatus = false;
+    
     function selectButton(e) {
         e.preventDefault();
 
         const button = e.target;
+        if(buttonAlreadyChecked(button)) return;
+
         const parent = button.parentElement;
-        
+     
         if(button.classList.contains("active-multiple-choice-button")) {
             button.classList.remove("active-multiple-choice-button");
+            
+            if(button.classList.contains("first-selected-button")) button.classList.remove("first-selected-button");
+            if(button.classList.contains("second-selected-button")) button.classList.remove("second-selected-button");
 
             [...parent.children].forEach(child => {
-                if(!child.classList.contains("disabled-multiple-choice-button")) return;
+                if(!child.classList.contains("disabled-multiple-choice-button") || buttonAlreadyChecked(child)) return;
                 
                 child.disabled = false;
                 child.classList.remove("disabled-multiple-choice-button");
             });
+
+            if(selectStatus) selectStatus = false;
         }
 
         else {
-            button.classList.add("active-multiple-choice-button");
+            button.classList.add("active-multiple-choice-button", `${selectStatus ? "second" : "first"}-selected-button`);
 
             [...parent.children].forEach(child => {
-                if(child.classList.contains("active-multiple-choice-button")) return;
+                if(child.classList.contains("active-multiple-choice-button") || buttonAlreadyChecked(child)) return;
                 
                 child.disabled = true;
                 child.classList.add("disabled-multiple-choice-button");
             });
+
+            if(selectStatus) {
+                selectStatus = false;
+                checkSelection();
+            }
+
+            else selectStatus = true;
         }
+    }
+
+    function checkSelection() {
+        const selectedButtons = {
+            first: document.querySelector(".first-selected-button"),
+            second: document.querySelector(".second-selected-button")
+        }
+        
+        const answer = [selectedButtons.first.innerText, selectedButtons.second.innerText];
+        thisTask.answerChanged(answer);
+
+        let isCorrect = false;
+
+        const answerKey = thisTask.currentTask.options.hasOwnProperty(answer[0]) ? answer[0] : answer[1];
+        const answerValue = answerKey === answer[0] ? answer[1] : answer[0];
+        
+        Object.keys(thisTask.currentTask.options).forEach((key, index) => {
+            if(answerKey === key) {
+                const value = Object.values(thisTask.currentTask.options)[index];
+                if(answerValue === value) isCorrect = true;
+            }
+        });
+
+        if(isCorrect) applyResult();
+        
+        else {
+            if(thisTask.currentLives !== "infinity") {
+                thisTask.currentLives--;
+                thisTask.updateLives();
+            }
+
+            applyResult();
+        }
+
+        let taskCompleted = true;
+        const buttonHolders = [firstButtonHolder, secondButtonHolder];
+
+        buttonHolders.forEach(buttonHolder => {
+            [...buttonHolder.children].forEach(button => {
+                if(!button.classList.contains("disabled-multiple-choice-button")) taskCompleted = false;
+            });
+        });
+
+        if(taskCompleted) thisTask.check({ type: "click" });
+
+        function applyResult() {
+            const buttonHolders = [firstButtonHolder, secondButtonHolder];
+
+            buttonHolders.forEach(buttonHolder => {
+                [...buttonHolder.children].forEach(button => {
+                    if(buttonAlreadyChecked(button)) return;
+                    
+                    if(button.classList.contains("active-multiple-choice-button")) {
+                        button.disabled = true;
+                        button.classList.add("disabled-multiple-choice-button", isCorrect ? "correct-button" : "wrong-button");
+                        
+                        button.classList.remove("active-multiple-choice-button");
+                        
+                        if(button.classList.contains("first-selected-button")) button.classList.remove("first-selected-button");
+                        if(button.classList.contains("second-selected-button")) button.classList.remove("second-selected-button");
+                    }
+    
+                    else {
+                        button.disabled = false;
+                        button.classList.remove("disabled-multiple-choice-button");
+                    }
+                });
+            });
+        }
+    }
+
+    function buttonAlreadyChecked(button) {
+        let status = false;
+        
+        if(
+            button.classList.contains("correct-button") ||
+            button.classList.contains("wrong-button")
+        ) status = true;
+
+        return status;
     }
 }
