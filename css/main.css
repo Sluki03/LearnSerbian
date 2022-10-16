@@ -54,12 +54,12 @@ button {
 
 ::-moz-selection {
   color: white;
-  background-color: #0559f5;
+  background-color: #0589f5;
 }
 
 ::selection {
   color: white;
-  background-color: #0559f5;
+  background-color: #0589f5;
 }
 
 #home {
@@ -207,7 +207,7 @@ img {
   color: white;
   font-size: 30px;
   background-color: #0559f5;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid lightgray;
   border-radius: 20px 20px 0px 0px;
   padding: 10px 0;
 }
@@ -1706,8 +1706,8 @@ main .exercises-holder {
   width: 45%;
   background-image: url("../images/background.png");
   background-position-y: 0;
-  border-left: 1px solid black;
-  box-shadow: -2px 0px 30px -2px rgba(0, 0, 0, 0.3);
+  border-left: 1px solid lightgray;
+  box-shadow: -2px 0px 5px -2px rgba(0, 0, 0, 0.1);
   position: relative;
   overflow: auto;
 }
@@ -1735,7 +1735,7 @@ main .exercises-holder .exercises-list > div:nth-last-of-type(1) {
 main .exercises-holder .exercises-list .exercises-list-line {
   height: 100%;
   width: 3px;
-  background: #5e5c5c;
+  background: rgb(200, 200, 200);
   position: absolute;
 }
 main .exercises-holder .exercises-list .exercises-list-start-end-holder {
@@ -1745,10 +1745,11 @@ main .exercises-holder .exercises-list .exercises-list-start-end-holder {
   flex-direction: row;
   gap: 10px;
   background: white;
-  border: 1px solid #5e5c5c;
+  border: 2px solid rgba(200, 200, 200, 0.5);
   border-radius: 20px;
   padding: 10px;
   position: absolute;
+  box-shadow: 0px 1px 5px rgba(128, 128, 128, 0.329);
 }
 main .exercises-holder .exercises-list .exercises-list-start-end-holder img {
   height: 40px;
@@ -2075,10 +2076,10 @@ nav .button-holder #current-page {
 #exercises-nav {
   position: relative;
   background-color: white;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid lightgray;
   -webkit-backdrop-filter: none;
           backdrop-filter: none;
-  box-shadow: none;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.1);
 }
 
 footer {
