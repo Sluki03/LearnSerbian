@@ -2266,9 +2266,9 @@ footer div a {
   gap: 10px;
   max-width: 285px;
   background-color: white;
-  border: 1px solid #5e5c5c;
+  border: 1px solid #dadada;
   border-radius: 15px;
-  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.3);
   position: absolute;
   left: 35%;
   padding: 3px 5px;
