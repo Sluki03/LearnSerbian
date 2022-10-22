@@ -44,6 +44,6 @@ export const exercisesData = [
         difficulty: "medium",
         tips: "#New types#**connect, completeSentence**",
         tasks: pastTense,
-        lives: 2
+        //lives: 2
     }
 ];

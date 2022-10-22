@@ -96,16 +96,8 @@ export default function connect(thisTask) {
             }
         });
 
-        if(isCorrect) applyResult();
-        
-        else {
-            if(thisTask.currentLives !== "infinity") {
-                thisTask.currentLives--;
-                thisTask.updateLives();
-            }
-
-            applyResult();
-        }
+        applyResult();
+        if(!isCorrect) thisTask.check({ type: "click" });
 
         let taskCompleted = true;
         const buttonHolders = [firstButtonHolder, secondButtonHolder];
@@ -113,6 +105,7 @@ export default function connect(thisTask) {
         buttonHolders.forEach(buttonHolder => {
             [...buttonHolder.children].forEach(button => {
                 if(!button.classList.contains("disabled-multiple-choice-button")) taskCompleted = false;
+                if(!isCorrect) button.classList.add("disabled-multiple-choice-button", "blocked-button");
             });
         });
 
@@ -131,8 +124,10 @@ export default function connect(thisTask) {
                         
                         button.classList.remove("active-multiple-choice-button");
                         
-                        if(button.classList.contains("first-selected-button")) button.classList.remove("first-selected-button");
-                        if(button.classList.contains("second-selected-button")) button.classList.remove("second-selected-button");
+                        if(isCorrect) {
+                            if(button.classList.contains("first-selected-button")) button.classList.remove("first-selected-button");
+                            if(button.classList.contains("second-selected-button")) button.classList.remove("second-selected-button");
+                        }
                     }
     
                     else {
@@ -149,7 +144,8 @@ export default function connect(thisTask) {
         
         if(
             button.classList.contains("correct-button") ||
-            button.classList.contains("wrong-button")
+            button.classList.contains("wrong-button") ||
+            button.classList.contains("blocked-button")
         ) status = true;
 
         return status;

@@ -42,10 +42,13 @@ export default function ExerciseModalReview(componentProps) {
 
         infoStrong.innerText = result.title;
 
-        if(result.isCorrect && result.type !== "conversation") {
+        const blockCorrectInfoAnswers = ["conversation", "connect"];
+
+        if(result.isCorrect && blockCorrectInfoAnswers.indexOf(result.type) === -1) {
+            console.log(result.userAnswer)
             createElement({
                 tag: "p",
-                innerHTML: `${result.acceptableAnswers.length > 1 ? "Your answer" : "Answer"}: "<span>${result.userAnswer}</span>".`,
+                innerHTML: `${result.acceptableAnswers.length > 1 ? "Your answer" : "Answer"}: "<span>${formatAnswer(result.userAnswer)}</span>".`,
                 appendTo: infoAnswers
             });
             
@@ -53,9 +56,11 @@ export default function ExerciseModalReview(componentProps) {
                 let otherAnswers = result.acceptableAnswers;
                 otherAnswers = otherAnswers.filter(answer => breakText(answer, { join: true }) !== breakText(result.userAnswer, { join: true }));
 
+                const randomOtherAnswer = otherAnswers[Math.floor(Math.random() * otherAnswers.length)];
+                
                 if(otherAnswers.length > 0) createElement({
                     tag: "p",
-                    innerHTML: `Also correct: "<span>${otherAnswers[Math.floor(Math.random() * otherAnswers.length)]}</span>".`,
+                    innerHTML: `Also correct: "<span>${formatAnswer(randomOtherAnswer)}</span>".`,
                     appendTo: infoAnswers
                 });
             }
@@ -66,13 +71,13 @@ export default function ExerciseModalReview(componentProps) {
             
             createElement({
                 tag: "p",
-                innerHTML: `Correct answer: "<span>${randomCorrectAnswer}</span>".`,
+                innerHTML: `Correct answer: "<span>${result.type === "connect" ? formatAnswer(result.acceptableAnswers) : formatAnswer(randomCorrectAnswer)}</span>".`,
                 appendTo: infoAnswers
             });
 
             createElement({
                 tag: "p",
-                innerHTML: `Your answer: "<span>${result.userAnswer}</span>".`,
+                innerHTML: `Your answer: "<span>${formatAnswer(result.userAnswer)}</span>".`,
                 appendTo: infoAnswers
             });
 
@@ -114,6 +119,11 @@ export default function ExerciseModalReview(componentProps) {
 
     window.eventList.add({ id: "exerciseModalReviewKeyDown", type: "keydown", listener: modalOptionsReturn });
 
+    function formatAnswer(answer) {
+        if(Array.isArray(answer)) return `${answer[0]} --> ${answer[1]}`
+        return answer;
+    }
+    
     function modalOptionsReturn(e) {
         if(e.type === "keydown" && e.key !== "Enter") return;
 

@@ -13,8 +13,8 @@ export default function Footer(componentProps) {
 
         section.links.forEach(link => createEelement({
             tag: "a",
-            attributes: { href: link.href },
             innerText: link.title,
+            events: [{ on: "click", call: () => window.open(link.href) }],
             appendTo: div
         }));
     });

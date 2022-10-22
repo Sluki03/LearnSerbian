@@ -335,7 +335,7 @@ export class Task {
 
         const text = {
             correct: "",
-            incorrect: `Correct answer: "<span>${randomCorrectAnswer}</span>".`
+            incorrect: `Correct answer: "<span>${this.currentTask.type === "connect" ? `${acceptableAnswers[0]} --> ${acceptableAnswers[1]}` : randomCorrectAnswer}</span>".`
         };
 
         const validText = isCorrect ? text.correct : text.incorrect;
@@ -390,19 +390,18 @@ export class Task {
             switch(currentTask.type) {
                 case "conversation": return currentTask.messages[messageNumber].acceptableAnswers;
                 case "connect":
-                    const firstSelectedButton = document.querySelector(".first-selected-button")?.innerText;       
-                    const acceptableAnswers = [];
-
+                    const firstSelectedButton = document.querySelector(".first-selected-button")?.innerText;
+                    let correctTranslation = "";
+                    
                     if(currentTask.options.hasOwnProperty(firstSelectedButton)) Object.keys(currentTask.options).forEach((key, index) => {
-                        if(firstSelectedButton === key) acceptableAnswers.push(Object.values(currentTask.options)[index]);
+                        if(firstSelectedButton === key) correctTranslation = Object.values(currentTask.options)[index];
                     });
 
                     else Object.values(currentTask.options).forEach((value, index) => {
-                        if(firstSelectedButton === value) acceptableAnswers.push(Object.keys(currentTask.options)[index]);
+                        if(firstSelectedButton === value) correctTranslation = Object.keys(currentTask.options)[index];
                     });
 
-                    return acceptableAnswers;
-                
+                    return [firstSelectedButton, correctTranslation];
                 default: return currentTask.acceptableAnswers;
             }
         }

@@ -2106,6 +2106,7 @@ footer div h3 {
 footer div a {
   color: #c72f2f;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .divider {
