@@ -1,6 +1,11 @@
 import { Component } from "../components/Component.js";
 
 export default function closeExerciseModal(confirmed, openNew) {    
+    const taskConnectKeydown = window.eventList.get("taskConnectKeydown");
+    const taskConnectActiveMultipleChoiceButton = document.querySelector(".active-multiple-choice-button");
+    
+    if(taskConnectKeydown !== null && taskConnectActiveMultipleChoiceButton !== null) return;
+    
     const exerciseModal = document.querySelector(".exercise-modal");
     const activeExercise = document.getElementById("active-exercise");
 

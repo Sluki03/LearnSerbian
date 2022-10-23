@@ -5,7 +5,7 @@ export default function ClassicModal(componentProps) {
     const { text, buttons, buttonsTrigger, functions, appendTo } = componentProps.params;
 
     const existingClassicModal = document.querySelector(".classic-modal");
-    if(existingClassicModal !== null) return;
+    if(existingClassicModal !== null) return existingClassicModal;
     
     const classicModal = createElement({
         tag: "div",

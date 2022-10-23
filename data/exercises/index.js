@@ -3,7 +3,7 @@ import { test1 } from "./tasks/test1.js";
 import { pastTense } from "./tasks/pastTense.js";
 
 // difficulty options: easy, medium, hard
-// task types: multipleChoice, multipleChoiceImages, translate, conversation, connect
+// task types: multipleChoice, multipleChoiceImages, translate, conversation, connect, completeText
 // translate modes: write (default), wordBank
 // conversation modes: write (default), multipleChoice
 
@@ -42,7 +42,7 @@ export const exercisesData = [
     {
         name: "Past Tense",
         difficulty: "medium",
-        tips: "#New types#**connect, completeSentence**",
+        tips: "#New types#**connect, completeText**",
         tasks: pastTense,
         //lives: 2
     }

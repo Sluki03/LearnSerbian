@@ -1152,6 +1152,39 @@ main .exercise-modal .exercise-modal-task .task-holder .connect-holder .connect-
 main .exercise-modal .exercise-modal-task .task-holder .connect-holder .connect-button-holder .wrong-button {
   background-color: rgba(242, 7, 7, 0.5);
 }
+main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  margin: 20px 0;
+}
+main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder p {
+  color: #5e5c5c;
+  font-size: 25px;
+  background-color: white;
+  border: 3px solid rgba(200, 200, 200, 0.5);
+  border-radius: 20px;
+  padding: 10px 15px;
+}
+main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder p input {
+  width: 100px;
+  color: #5e5c5c;
+  text-align: center;
+  font-size: 25px;
+  background-color: transparent;
+  border: 2px solid transparent;
+  border-bottom: 2px solid #5e5c5c;
+  outline: none;
+  padding: 3px 5px;
+  transition: 300ms;
+}
+main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder p input:hover {
+  border: 2px dashed #5e5c5c;
+}
+main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder p input:focus {
+  border: 2px solid #5e5c5c;
+}
 main .exercise-modal .exercise-modal-task .task-button-holder {
   display: flex;
   align-items: center;

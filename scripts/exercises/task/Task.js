@@ -417,6 +417,7 @@ export class Task {
                 
                 break;
             case "translate":
+            case "completeText":
                 result = false;
 
                 this.currentTask.acceptableAnswers.forEach(answer => {

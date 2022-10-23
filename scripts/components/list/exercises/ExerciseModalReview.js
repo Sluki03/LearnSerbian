@@ -45,7 +45,6 @@ export default function ExerciseModalReview(componentProps) {
         const blockCorrectInfoAnswers = ["conversation", "connect"];
 
         if(result.isCorrect && blockCorrectInfoAnswers.indexOf(result.type) === -1) {
-            console.log(result.userAnswer)
             createElement({
                 tag: "p",
                 innerHTML: `${result.acceptableAnswers.length > 1 ? "Your answer" : "Answer"}: "<span>${formatAnswer(result.userAnswer)}</span>".`,

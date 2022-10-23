@@ -505,6 +505,41 @@
                 }
             }
         }
+
+        .complete-text-holder {
+            @include add-flex;
+            margin: 20px 0;
+
+            p {
+                color: $defDarkGrey;
+                font-size: set-size(lg);
+                background-color: white;
+                border: 3px solid $defGrey;
+                border-radius: 20px;
+                padding: 10px 15px;
+            
+                input {
+                    width: 100px;
+                    color: $defDarkGrey;
+                    text-align: center;
+                    font-size: set-size(lg);
+                    background-color: transparent;
+                    border: 2px solid transparent;
+                    border-bottom: 2px solid $defDarkGrey;
+                    outline: none;
+                    padding: 3px 5px;
+                    transition: 300ms;
+
+                    &:hover {
+                        border: 2px dashed $defDarkGrey;
+                    }
+
+                    &:focus {
+                        border: 2px solid $defDarkGrey;
+                    }
+                }
+            }
+        }
     }
 
     .task-button-holder {

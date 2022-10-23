@@ -30,12 +30,36 @@ export default function connect(thisTask) {
         };
     }
 
+    window.eventList.add({ id: "taskConnectKeydown", type: "keydown", listener: selectButton });
+
     let selectStatus = false;
     
     function selectButton(e) {
         e.preventDefault();
 
-        const button = e.target;
+        const numberRange = randomKeys.length;
+        const validButtons = ["Escape"];
+
+        for(let i = 1; i <= numberRange; i++) validButtons.push(i.toString());
+        if(e.type === "keydown" && validButtons.indexOf(e.key) === -1) return;
+
+        const keydownId = parseInt(e.key);
+        let keydownButton = null;
+
+        if(e.key === "Escape") {
+            [...firstButtonHolder.children].forEach(child => {
+                if(child.classList.contains("active-multiple-choice-button")) keydownButton = child;
+            });
+
+            if(keydownButton === null) return;
+        }
+
+        else {
+            const targetButtonHolder = selectStatus ? secondButtonHolder : firstButtonHolder;
+            keydownButton = targetButtonHolder.children[keydownId - 1];
+        }
+        
+        const button = e.type === "keydown" ? keydownButton : e.target;
         if(buttonAlreadyChecked(button)) return;
 
         const parent = button.parentElement;

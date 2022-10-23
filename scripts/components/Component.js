@@ -39,7 +39,7 @@ function create(componentName, params) {
 
     const componentProps = { builtIn: null, params };
     const newComponent = componentInfo.function(componentProps);
-
+    
     newComponent.component = { name: componentInfo.name, params };
     buildEventList(newComponent);
 
