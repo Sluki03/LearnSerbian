@@ -42,7 +42,7 @@ export default function ExerciseModalReview(componentProps) {
 
         infoStrong.innerText = result.title;
 
-        const blockCorrectInfoAnswers = ["conversation", "connect"];
+        const blockCorrectInfoAnswers = ["conversation", "connect", "completeText"];
 
         if(result.isCorrect && blockCorrectInfoAnswers.indexOf(result.type) === -1) {
             createElement({

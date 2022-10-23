@@ -417,7 +417,6 @@ export class Task {
                 
                 break;
             case "translate":
-            case "completeText":
                 result = false;
 
                 this.currentTask.acceptableAnswers.forEach(answer => {
@@ -447,6 +446,31 @@ export class Task {
                     }
                 });
 
+                break;
+            case "completeText":
+                result = true;
+                
+                const allResults = [];
+                
+                Object.keys(this.answer).forEach((key, index) => {
+                    const value = Object.values(this.answer)[index];
+                    const acceptableValue = Object.values(this.currentTask.acceptableAnswers)[index];
+                    
+                    Object.keys(this.currentTask.acceptableAnswers).forEach(acceptableKey => {
+                        if(key === acceptableKey) {
+                            let currentResult = false;
+                            
+                            acceptableValue.forEach(acceptableAnswer => {
+                                if(breakText(value, { join: true }) === breakText(acceptableAnswer, { join: true })) currentResult = true;
+                            });
+
+                            allResults.push(currentResult);
+                        }
+                    });
+                });
+
+                allResults.forEach(r => { if(!r) result = false });
+                
                 break;
             default: ;
         }

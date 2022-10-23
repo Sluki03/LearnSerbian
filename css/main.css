@@ -1176,7 +1176,7 @@ main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder p i
   border: 2px solid transparent;
   border-bottom: 2px solid #5e5c5c;
   outline: none;
-  padding: 3px 5px;
+  padding: 0 5px;
   transition: 300ms;
 }
 main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder p input:hover {
