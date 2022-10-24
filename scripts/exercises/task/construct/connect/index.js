@@ -121,7 +121,11 @@ export default function connect(thisTask) {
         });
 
         applyResult();
-        if(!isCorrect) thisTask.check({ type: "click" });
+
+        if(!isCorrect) {
+            window.eventList.remove("taskConnectKeydown");
+            thisTask.check({ type: "click" });
+        }
 
         let taskCompleted = true;
         const buttonHolders = [firstButtonHolder, secondButtonHolder];
@@ -133,7 +137,10 @@ export default function connect(thisTask) {
             });
         });
 
-        if(taskCompleted) thisTask.check({ type: "click" });
+        if(taskCompleted) {
+            window.eventList.remove("taskConnectKeydown");
+            thisTask.check({ type: "click" });
+        }
 
         function applyResult() {
             const buttonHolders = [firstButtonHolder, secondButtonHolder];

@@ -40,7 +40,19 @@ export default function completeText(thisTask) {
         
         input.oninput = () => {
             inputValues = {...inputValues, [inputName]: input.value};
-            thisTask.answerChanged(inputValues);
+            const filledInputs = [];
+
+            Object.values(inputValues).forEach(value => {
+                let filled = false;
+                if(value) filled = true;
+
+                filledInputs.push(filled);
+            });
+
+            let setAnswer = true;
+            filledInputs.forEach(filledInput => { if(!filledInput) setAnswer = false });
+
+            thisTask.answerChanged(setAnswer ? inputValues : "");
         }
     });
 

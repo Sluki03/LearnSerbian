@@ -120,7 +120,7 @@ export class Task {
     startNew(e) {
         if(e?.type === "keydown" && e?.key !== "Enter") return;
         
-        window.eventList.remove({ id: "taskCheckKeyDown" });
+        window.eventList.remove("taskCheckKeyDown");
         
         if(this.tasks.length - 1 === this.taskNumber && (this.currentLives > 0 || this.currentLives === "infinity")) {
             this.taskLives.classList.remove("active-task-lives");

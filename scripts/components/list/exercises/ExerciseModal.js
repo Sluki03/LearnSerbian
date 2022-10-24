@@ -21,12 +21,15 @@ export default function ExerciseModal(componentProps) {
 
     function modalOptionsResize() {
         const textarea = document.querySelector("textarea");
-        const input = document.querySelector("input");
+        const allInputs = document.querySelectorAll("input");
+
+        let activeInput = false;
+
+        allInputs.forEach(input => {
+            if(input.isEqualNode(document.activeElement)) activeInput = true;
+        });
         
-        if(
-            textarea && textarea.isEqualNode(document.activeElement) ||
-            input && input.isEqualNode(document.activeElement)
-        ) return true;
+        if(textarea && textarea.isEqualNode(document.activeElement) || activeInput) return true;
         
         const exerciseModalWith = parseInt(getComputedStyle(exerciseModal).getPropertyValue("width"));
         let isIconRotated = exerciseModalWith === window.innerWidth;
@@ -34,11 +37,14 @@ export default function ExerciseModal(componentProps) {
         if(exerciseModalWith !== window.innerWidth) exerciseModal.style.width = "100%";
         else exerciseModal.style.width = "";
 
-        setTimeout(() => { if(input) getVisiblePlaceholder(input, getPlaceholderSource()) }, 300);
+        setTimeout(() => {
+            const conversationAnswer = document.querySelector(".conversation-answer");
+            if(conversationAnswer !== null && allInputs.length > 0) allInputs.forEach(input => getVisiblePlaceholder(input, getPlaceholderSource(input)));
+        }, 300);
 
         return isIconRotated;
 
-        function getPlaceholderSource() {
+        function getPlaceholderSource(input) {
             const conversationAnswer = document.querySelector(".conversation-answer");
             const conversationAnswerInput = conversationAnswer.children[1];
             

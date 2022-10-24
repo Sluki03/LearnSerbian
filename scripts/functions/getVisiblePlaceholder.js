@@ -13,4 +13,5 @@ export default function getVisiblePlaceholder(input, placeholderSource) {
 
     input.value = "";
     input.placeholder = `${placeholder}${input.scrollWidth > input.clientWidth ? "..." : ""}`;
+    console.log(placeholderSource)
 }
