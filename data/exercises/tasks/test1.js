@@ -48,7 +48,7 @@ export const test1 = [
         messages: [
             {
                 content: "Sta ima doktore?",
-                userContent: "Oh, where are you man, what's up? Ja sam najjaci covek u celo Vlasotince",
+                userContent: "Oh, where are you man, what's up? Ja sam najjaci covek u celom Beogradu",
                 acceptableAnswers: [
                     "Oo, gde si ti covece, sta ima?",
                     "O, pa gde si ti covece, sta ima?"
