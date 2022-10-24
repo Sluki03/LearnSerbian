@@ -35,17 +35,17 @@ button {
 
 ::-webkit-scrollbar-track {
   background: transparent;
-  border-left: 1px solid rgba(200, 200, 200, 0.5);
+  border-left: 1px solid rgb(200, 200, 200);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(200, 200, 200, 0.5);
+  background: rgb(200, 200, 200);
   border-radius: 10px;
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
-  border: solid 1px rgba(200, 200, 200, 0.5);
+  border: solid 1px rgb(200, 200, 200);
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -716,7 +716,7 @@ main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interf
   width: 80%;
   color: #5e5c5c;
   font-size: 25px;
-  border: 3px dashed rgba(200, 200, 200, 0.5);
+  border: 3px dashed rgb(200, 200, 200);
   border-radius: 20px;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
   outline: none;
@@ -728,7 +728,7 @@ main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interf
   border: 3px dashed #5e5c5c;
 }
 main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface textarea:disabled {
-  border: 3px dashed rgba(200, 200, 200, 0.5);
+  border: 3px dashed rgb(200, 200, 200);
 }
 main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface textarea:focus {
   border: 3px solid #5e5c5c;
@@ -749,7 +749,7 @@ main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interf
   gap: 5px;
   height: 150px;
   width: 100%;
-  border: 3px solid rgba(200, 200, 200, 0.5);
+  border: 3px solid rgb(200, 200, 200);
   border-radius: 20px;
   padding: 10px 15px;
 }
@@ -806,7 +806,7 @@ main .exercise-modal .exercise-modal-task .task-holder .exercise-modal-task-conv
   height: 100%;
   width: 100%;
   background-image: url("../images/background.png");
-  border: 1px solid rgba(200, 200, 200, 0.5);
+  border: 1px solid rgb(200, 200, 200);
   border-radius: 20px;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
   position: relative;
@@ -913,7 +913,7 @@ main .exercise-modal .exercise-modal-task .task-holder .exercise-modal-task-conv
   font-size: 20px;
   -webkit-backdrop-filter: blur(10px);
           backdrop-filter: blur(10px);
-  border: 1px solid rgba(200, 200, 200, 0.5);
+  border: 1px solid rgb(200, 200, 200);
   word-break: break-all;
   padding: 5px 10px;
 }
@@ -951,7 +951,7 @@ main .exercise-modal .exercise-modal-task .task-holder .exercise-modal-task-conv
   color: #5e5c5c;
   font-size: 20px;
   background-color: white;
-  border: 2px solid rgba(200, 200, 200, 0.5);
+  border: 2px solid rgb(200, 200, 200);
   border-radius: 15px;
   outline: none;
   padding: 5px 10px;
@@ -1071,7 +1071,7 @@ main .exercise-modal .exercise-modal-task .task-holder .exercise-modal-task-conv
   cursor: default;
 }
 main .exercise-modal .exercise-modal-task .task-holder .exercise-modal-task-conversation .conversation-holder .disabled-conversation-answer input:hover {
-  border: 2px solid rgba(200, 200, 200, 0.5);
+  border: 2px solid rgb(200, 200, 200);
 }
 main .exercise-modal .exercise-modal-task .task-holder .exercise-modal-task-conversation .diacritic-keyboard {
   opacity: 0;
@@ -1163,7 +1163,7 @@ main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder p {
   color: #5e5c5c;
   font-size: 25px;
   background-color: white;
-  border: 3px solid rgba(200, 200, 200, 0.5);
+  border: 3px solid gray;
   border-radius: 20px;
   padding: 10px 15px;
 }
@@ -1174,16 +1174,26 @@ main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder p i
   font-size: 25px;
   background-color: transparent;
   border: 2px solid transparent;
-  border-bottom: 2px solid #5e5c5c;
+  border-bottom: 2px solid gray;
   outline: none;
   padding: 0 5px;
+  border-radius: 3px;
   transition: 300ms;
 }
 main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder p input:hover {
-  border: 2px dashed #5e5c5c;
+  border-bottom: 2px dashed gray;
 }
 main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder p input:focus {
-  border: 2px solid #5e5c5c;
+  border-bottom: 2px solid #5e5c5c;
+}
+main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder p input::-moz-placeholder {
+  color: gray;
+}
+main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder p input:-ms-input-placeholder {
+  color: gray;
+}
+main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder p input::placeholder {
+  color: gray;
 }
 main .exercise-modal .exercise-modal-task .task-button-holder {
   display: flex;
@@ -1778,7 +1788,7 @@ main .exercises-holder .exercises-list .exercises-list-start-end-holder {
   flex-direction: row;
   gap: 10px;
   background: white;
-  border: 2px solid rgba(200, 200, 200, 0.5);
+  border: 2px solid rgb(200, 200, 200);
   border-radius: 20px;
   padding: 10px;
   position: absolute;
@@ -2562,7 +2572,7 @@ footer div a {
 }
 
 .word {
-  border-bottom: 3px dotted rgba(200, 200, 200, 0.5);
+  border-bottom: 3px dotted rgb(200, 200, 200);
   cursor: pointer;
   transition: 300ms;
 }
@@ -2610,7 +2620,7 @@ footer div a {
   color: #5e5c5c;
   font-size: 15px;
   background-color: transparent;
-  border: 1px solid rgba(200, 200, 200, 0.5);
+  border: 1px solid rgb(200, 200, 200);
   border-radius: 5px;
   cursor: pointer;
   position: relative;
