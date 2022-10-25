@@ -1,7 +1,7 @@
 import { Component } from "../../../../components/Component.js";
 import createElement from "../../../../functions/createElement.js";
 import setTranslatableWords from "../../setTranslatableWords.js";
-import getVisiblePlaceholder from "../../../../functions/getVisiblePlaceholder.js";
+import shortenPlaceholder from "../../../../functions/shortenPlaceholder.js";
 
 export async function sendMessage(thisTask, message, e) {
     const conversationMessages = document.querySelector(".conversation-messages");
@@ -45,7 +45,7 @@ export async function sendMessage(thisTask, message, e) {
                     conversationAnswerInput.maxLength = getInputMaxLength(message.current);
                     conversationAnswerInput.focus();
 
-                    getVisiblePlaceholder(conversationAnswerInput);
+                    shortenPlaceholder(conversationAnswerInput);
                 }
 
                 else if(conversationMessages.children.length === 1) buttonTyping(message.current, false);
