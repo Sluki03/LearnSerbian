@@ -5,6 +5,7 @@ import { constructTask, changeMode } from "./construct/index.js";
 import randomArray from "../../functions/randomArray.js";
 import percentage from "../../functions/percentage.js";
 import breakText from "../../functions/breakText.js";
+import formatAnswer from "./formatAnswer.js";
 
 export class Task {
     constructor(taskElement, exercise) {
@@ -246,8 +247,6 @@ export class Task {
     updateLives() {
         this.taskLives.innerHTML = "";
         
-        if(this.currentLives === 0) return this.check({ type: "click" });
-        
         if(this.currentLives === "infinity") createElement({
             tag: "img",
             attributes: { src: "./images/icons/infinity-icon.png", alt: "INFINITY", class: "task-lives-infinity" },
@@ -331,11 +330,13 @@ export class Task {
         taskInfoTextH4.innerText = `${validTitles[Math.floor(Math.random() * validTitles.length)]}!`;
 
         const acceptableAnswers = getAcceptableAnswers();
-        const randomCorrectAnswer = acceptableAnswers[Math.floor(Math.random() * acceptableAnswers.length)];
-
+        const [answers, random] = formatAnswer(this.currentTask.type, acceptableAnswers);
+        
+        const nonRandomAnswerTypes = ["connect", "completeText"];
+        
         const text = {
             correct: "",
-            incorrect: `Correct answer: "<span>${this.currentTask.type === "connect" ? `${acceptableAnswers[0]} --> ${acceptableAnswers[1]}` : randomCorrectAnswer}</span>".`
+            incorrect: `Correct answer${answers.correct.isPlural ? "s" : ""}: "<span>${nonRandomAnswerTypes.indexOf(this.currentTask.type) > -1 ? answers.correct.content : random.correctAnswer}</span>".`
         };
 
         const validText = isCorrect ? text.correct : text.incorrect;
@@ -343,11 +344,11 @@ export class Task {
 
         const audio = new Audio(`./sfx/${isCorrect ? "correct" : "wrong"}.mp3`);
         audio.play();
-
+        
         if(!isCorrect) {
             if(this.currentLives !== "infinity" || this.currentLives > 0) this.currentLives--;
             this.updateLives();
-
+            
             if(this.currentLives === 0) {
                 taskInfoButton.style.display = "none";
                 
@@ -377,7 +378,7 @@ export class Task {
 
         taskInfoButton.onclick = this.startNew;
         window.eventList.add({ id: "taskStartNewKeyDown", type: "keydown", listener: this.startNew });
-
+        
         function getLinearGradient() {
             const color = isCorrect ? green : red;
             const { normal, light, lighter } = color;
@@ -402,6 +403,15 @@ export class Task {
                     });
 
                     return [firstSelectedButton, correctTranslation];
+                case "completeText":
+                    let completeTextAcceptableAnswers = [];
+
+                    Object.values(currentTask.acceptableAnswers).forEach(value => {
+                        if(value.length === 1) completeTextAcceptableAnswers.push(value[0]);
+                        else completeTextAcceptableAnswers.push(value[Math.floor(Math.random() * value.length)]);
+                    });
+
+                    return completeTextAcceptableAnswers;
                 default: return currentTask.acceptableAnswers;
             }
         }

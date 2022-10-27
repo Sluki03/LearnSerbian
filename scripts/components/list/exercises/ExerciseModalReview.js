@@ -1,7 +1,7 @@
 import { Component } from "../../Component.js";
 import createElement from "../../../functions/createElement.js";
 import markup from "../../../functions/markup.js";
-import breakText from "../../../functions/breakText.js";
+import formatAnswer from "../../../exercises/task/formatAnswer.js";
 
 export default function ExerciseModalReview(componentProps) {
     const { exercise, results, score, appendTo } = componentProps.params;
@@ -44,39 +44,34 @@ export default function ExerciseModalReview(componentProps) {
 
         const blockCorrectInfoAnswers = ["conversation", "connect", "completeText"];
 
+        const [answers, random] = formatAnswer(result.type, result.acceptableAnswers, result.userAnswer);
+        
         if(result.isCorrect && blockCorrectInfoAnswers.indexOf(result.type) === -1) {
             createElement({
                 tag: "p",
-                innerHTML: `${result.acceptableAnswers.length > 1 ? "Your answer" : "Answer"}: "<span>${formatAnswer(result.userAnswer)}</span>".`,
+                innerHTML: `${(result.acceptableAnswers.length > 1 ? "Your answer" : "Answer") + (answers.user.isPlural ? "s" : "")}: "<span>${answers.user.content}</span>".`,
                 appendTo: infoAnswers
             });
             
-            if(result.acceptableAnswers.length > 1) {
-                let otherAnswers = result.acceptableAnswers;
-                otherAnswers = otherAnswers.filter(answer => breakText(answer, { join: true }) !== breakText(result.userAnswer, { join: true }));
-
-                const randomOtherAnswer = otherAnswers[Math.floor(Math.random() * otherAnswers.length)];
-                
-                if(otherAnswers.length > 0) createElement({
-                    tag: "p",
-                    innerHTML: `Also correct: "<span>${formatAnswer(randomOtherAnswer)}</span>".`,
-                    appendTo: infoAnswers
-                });
-            }
+            if(random.otherCorrectAnswer) createElement({
+                tag: "p",
+                innerHTML: `Also correct: "<span>${random.otherCorrectAnswer}</span>".`,
+                appendTo: infoAnswers
+            });
         }
 
         else if(!result.isCorrect) {
-            const randomCorrectAnswer = result.acceptableAnswers[Math.floor(Math.random() * result.acceptableAnswers.length)];
+            const nonRandomAnswerTypes = ["connect", "completeText"];
             
             createElement({
                 tag: "p",
-                innerHTML: `Correct answer: "<span>${result.type === "connect" ? formatAnswer(result.acceptableAnswers) : formatAnswer(randomCorrectAnswer)}</span>".`,
+                innerHTML: `Correct answer${answers.correct.isPlural ? "s" : ""}: "<span>${nonRandomAnswerTypes.indexOf(result.type) > -1 ? answers.correct.content : random.correctAnswer}</span>".`,
                 appendTo: infoAnswers
             });
 
             createElement({
                 tag: "p",
-                innerHTML: `Your answer: "<span>${formatAnswer(result.userAnswer)}</span>".`,
+                innerHTML: `Your answer${answers.user.isPlural ? "s" : ""}: "<span>${answers.user.content}</span>".`,
                 appendTo: infoAnswers
             });
 
@@ -117,11 +112,6 @@ export default function ExerciseModalReview(componentProps) {
     let inProgress = false;
 
     window.eventList.add({ id: "exerciseModalReviewKeyDown", type: "keydown", listener: modalOptionsReturn });
-
-    function formatAnswer(answer) {
-        if(Array.isArray(answer)) return `${answer[0]} --> ${answer[1]}`
-        return answer;
-    }
     
     function modalOptionsReturn(e) {
         if(e.type === "keydown" && e.key !== "Enter") return;

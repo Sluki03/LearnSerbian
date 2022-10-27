@@ -19,6 +19,8 @@ export default function ExerciseModal(componentProps) {
         appendTo: exerciseModal
     });
 
+    window.eventList.remove("exerciseModalReviewKeyDown");
+
     function modalOptionsResize() {
         const textarea = document.querySelector("textarea");
         const allInputs = document.querySelectorAll("input");

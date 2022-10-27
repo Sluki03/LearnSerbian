@@ -61,7 +61,7 @@ export async function sendMessage(thisTask, message, e) {
             const conversationAnswerInput = conversationAnswer.children[1];
     
             if(thisTask.currentTask.mode.type === "write") {
-                if(conversationAnswer.classList.contains("active-conversation-answer")) conversationAnswer.classList.remove("active-conversation-answer");
+                conversationAnswer.classList.remove("active-conversation-answer");
                 conversationAnswer.classList.add("disabled-conversation-answer");
             
                 conversationAnswerInput.disabled = true;

@@ -24,7 +24,7 @@ export default async function taskInterface(thisTask, changeMode) {
         
         if(changeMode) resetInput();
 
-        const diacriticKeyboard = Component.create("DiacriticKeyboard", {
+        Component.create("DiacriticKeyboard", {
             input: conversationAnswerInput,
             answerChanged: thisTask.answerChanged,
             appendTo: exerciseModalTaskConversation
@@ -37,35 +37,10 @@ export default async function taskInterface(thisTask, changeMode) {
 
         conversationAnswerCheckButton.onclick = e => checkMessage(e);
         
-        if(window.eventList.get("taskCheckMessageKeyDown") !== null) window.eventList.remove("taskCheckMessageKeyDown");
+        window.eventList.remove("taskCheckMessageKeyDown");
         window.eventList.add({ id: "taskCheckMessageKeyDown", type: "keydown", listener: checkMessage });
 
         changeConversationAnswerStatus();
-
-        function changeConversationAnswerStatus() {
-            const conversationHolder = conversationAnswer.parentElement;
-            
-            if(conversationAnswerInput.value) {
-                conversationAnswer.classList.add("active-conversation-answer");
-                diacriticKeyboard.classList.add("active-diacritic-keyboard");
-
-                const diacriticKeyboardHeight = parseInt(getComputedStyle(diacriticKeyboard).getPropertyValue("height"));
-                const gap = 10;
-                
-                conversationHolder.style.height = `calc(100% - ${diacriticKeyboardHeight + gap}px)`;
-
-                translationModal(currentMessage.userContent);
-            }
-                        
-            else if(conversationAnswer.classList.contains("active-conversation-answer")) {
-                conversationAnswer.classList.remove("active-conversation-answer");
-                diacriticKeyboard.classList.remove("active-diacritic-keyboard");
-                
-                conversationHolder.style.height = "";
-                
-                translationModal(currentMessage.userContent, "down");
-            }
-        }
 
         function resetInput() {
             conversationAnswerInput.value = thisTask.prevModeValues.write.conversation.value;
@@ -146,6 +121,34 @@ export default async function taskInterface(thisTask, changeMode) {
 
     thisTask.switchModes(currentMessage);
 
+    function changeConversationAnswerStatus() {
+        const conversationHolder = conversationAnswer.parentElement;
+
+        const conversationAnswerInput = document.querySelector(".conversation-answer input");
+        const diacriticKeyboard = document.querySelector(".diacritic-keyboard");
+        
+        if(conversationAnswerInput.value) {
+            conversationAnswer.classList.add("active-conversation-answer");
+            diacriticKeyboard.classList.add("active-diacritic-keyboard");
+
+            const diacriticKeyboardHeight = parseInt(getComputedStyle(diacriticKeyboard).getPropertyValue("height"));
+            const gap = 10;
+            
+            conversationHolder.style.height = `calc(100% - ${diacriticKeyboardHeight + gap}px)`;
+
+            translationModal(currentMessage.userContent);
+        }
+                    
+        else if(conversationAnswer.classList.contains("active-conversation-answer")) {
+            conversationAnswer.classList.remove("active-conversation-answer");
+            diacriticKeyboard.classList.remove("active-diacritic-keyboard");
+            
+            conversationHolder.style.height = "";
+            
+            translationModal(currentMessage.userContent, "down");
+        }
+    }
+    
     function generateMultipleChoiceButtons(messageIndex) {    
         const validButton = messageIndex ? messageIndex : currentMessage;
         
@@ -200,14 +203,14 @@ export default async function taskInterface(thisTask, changeMode) {
         sendMessage(thisTask, { role: "user", content: userMessage, current: currentMessage });
         translationModal(currentMessage.userContent, "down");
 
-        if(conversationAnswer.classList.contains("active-conversation-answer")) conversationAnswer.classList.remove("active-conversation-answer");
-
         const conversationAnswerButtonHolder = document.querySelector(".conversation-answer-button-holder");
                     
         if(thisTask.currentTask.mode.type === "write") {
             conversationAnswerInput.value = "";
             conversationAnswerInput.disabled = true;
             conversationAnswerInput.placeholder = "Write a message...";
+
+            changeConversationAnswerStatus();
         }
 
         else [...conversationAnswerButtonHolder.children].forEach(child => {
@@ -219,7 +222,7 @@ export default async function taskInterface(thisTask, changeMode) {
 
         if(isCorrect) {
             if(thisTask.messageNumber === thisTask.currentTask.messages.length - 1) {
-                if(conversationAnswer.classList.contains("active-conversation-answer")) conversationAnswer.classList.remove("active-conversation-answer");
+                conversationAnswer.classList.remove("active-conversation-answer");
                 conversationAnswer.classList.add("disabled-conversation-answer");
                 
                 thisTask.answerChanged(userMessage);

@@ -50,7 +50,7 @@ export default function ClassicModal(componentProps) {
     }
 
     function cancelModal(button) {
-        if(window.eventList.get("classicModalKeyDown")) window.eventList.remove("classicModalKeyDown");
+        window.eventList.remove("classicModalKeyDown");
         
         classicModal.style.opacity = "0";
         classicModal.style.top = "55%";

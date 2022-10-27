@@ -67,8 +67,8 @@ export default function connect(thisTask) {
         if(button.classList.contains("active-multiple-choice-button")) {
             button.classList.remove("active-multiple-choice-button");
             
-            if(button.classList.contains("first-selected-button")) button.classList.remove("first-selected-button");
-            if(button.classList.contains("second-selected-button")) button.classList.remove("second-selected-button");
+            button.classList.remove("first-selected-button");
+            button.classList.remove("second-selected-button");
 
             [...parent.children].forEach(child => {
                 if(!child.classList.contains("disabled-multiple-choice-button") || buttonAlreadyChecked(child)) return;
@@ -156,8 +156,8 @@ export default function connect(thisTask) {
                         button.classList.remove("active-multiple-choice-button");
                         
                         if(isCorrect) {
-                            if(button.classList.contains("first-selected-button")) button.classList.remove("first-selected-button");
-                            if(button.classList.contains("second-selected-button")) button.classList.remove("second-selected-button");
+                            button.classList.remove("first-selected-button");
+                            button.classList.remove("second-selected-button");
                         }
                     }
     

@@ -67,7 +67,7 @@ export default function setTranslatableWords(parent, text, translation) {
             wordTranslation.style.top = `${wordTranslationPositions.top}px`;
         }, 100);
 
-        if(window.eventList.get("taskFunctionsClick")) window.eventList.remove("taskFunctionsClick");
+        window.eventList.remove("taskFunctionsClick");
         window.eventList.add({ id: "taskFunctionsClick", type: "click", listener: closeWordTranslation });
 
         function closeWordTranslation(e) {
