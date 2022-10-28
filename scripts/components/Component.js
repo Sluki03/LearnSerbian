@@ -14,6 +14,7 @@ import ArrowButton from "./list/other/ArrowButton.js";
 import ClassicModal from "./list/other/ClassicModal.js";
 import Typing from "./list/other/Typing.js";
 import DiacriticKeyboard from "./list/other/DiacriticKeyboard.js";
+import MiniModal from "./list/other/MiniModal.js";
 
 import { Convert } from "../functions/Convert.js";
 import { buildEventList } from "../functions/EventControl.js";
@@ -22,7 +23,7 @@ const components = {
     PanelsList, ExercisesList, ExerciseModal, ExerciseModalContent, ExerciseModalTask,
     ExerciseModalFinished, ExerciseModalReview, Loading, Nav, Footer,
     InteractiveTitle, ModalOptions, ArrowButton, ClassicModal, Typing,
-    DiacriticKeyboard
+    DiacriticKeyboard, MiniModal
 };
 
 export const Component = { create, render, update };

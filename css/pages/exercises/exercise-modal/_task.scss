@@ -508,14 +508,17 @@
 
         .complete-text-holder {
             @include add-flex;
+            width: 80%;
             margin: 20px 0;
 
             p {
                 color: $defDarkGrey;
                 font-size: set-size(lg);
+                text-align: center;
                 background-color: white;
                 border: 3px solid $defGrey;
                 border-radius: 20px;
+                box-shadow: $defLightShadow;
                 padding: 10px 15px;
             
                 input {

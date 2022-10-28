@@ -1157,14 +1157,17 @@ main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder {
   align-items: center;
   justify-content: center;
   flex-direction: row;
+  width: 80%;
   margin: 20px 0;
 }
 main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder p {
   color: #5e5c5c;
   font-size: 25px;
+  text-align: center;
   background-color: white;
   border: 3px solid gray;
   border-radius: 20px;
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
   padding: 10px 15px;
 }
 main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder p input {
@@ -2635,4 +2638,25 @@ footer div a {
 }
 .diacritic-keyboard .diacritic-keyboard-letters {
   width: 200px;
+}
+
+.mini-modal {
+  color: #5e5c5c;
+  font-size: 20px;
+  white-space: nowrap;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 20px;
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
+  cursor: default;
+  opacity: 0;
+  position: absolute;
+  padding: 15px;
+  transition: 300ms;
+  z-index: 10;
+}
+
+.active-mini-modal {
+  opacity: 1;
 }/*# sourceMappingURL=main.css.map */
