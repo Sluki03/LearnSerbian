@@ -37,6 +37,9 @@ export default function MiniModal(componentProps) {
         left: (globalPositions.left + positions.target.width / 2) - positions.modal.width / 2
     };
 
+    const existingMiniModal = document.querySelector(".active-mini-modal");
+    if(existingMiniModal) closeMiniModal(existingMiniModal);
+
     miniModal.style.top = `${miniModalPositions.top - 10}px`;
     miniModal.style.left = `${miniModalPositions.left}px`;
 
@@ -49,10 +52,12 @@ export default function MiniModal(componentProps) {
     window.eventList.add({ id: "miniModalClick", type: "click", listener: closeMiniModal });
 
     function closeMiniModal(e) {
-        e.stopPropagation();
+        if(e.target) e.stopPropagation();
+
+        const currentTarget = e.target ? e.target : e;
             
         const existingMiniModal = document.querySelector(".active-mini-modal");
-        if(existingMiniModal === null || e.target.classList.contains("mini-modal")) return;
+        if(existingMiniModal === null || (e.target && currentTarget.classList.contains("mini-modal"))) return;
             
         const activeTarget = existingMiniModal.component.params.target;
         if(activeTarget !== null) activeTarget.style.borderBottom = "";
@@ -62,7 +67,7 @@ export default function MiniModal(componentProps) {
 
         setTimeout(() => { existingMiniModal.remove() }, 300);
 
-        if(e.target.className === activeTarget.className) window.eventList.remove("miniModalClick");
+        if(currentTarget.className === activeTarget.className) window.eventList.remove("miniModalClick");
     }
 
     return miniModal;

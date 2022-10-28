@@ -14,14 +14,58 @@ export default function completeText(thisTask) {
 
     const text = createElement({
         tag: "p",
+        attributes: { class: "complete-text-p" },
         innerText: thisTask.currentTask.text,
         appendTo: completeTextHolder
     });
+
+    const hintsButton = document.querySelector("[data-template='exercise-modal-task-complete-text-hints-button']").content.firstElementChild.cloneNode(true);
+    completeTextHolder.appendChild(hintsButton);
+
+    let hintsStatus = hintsButton.classList.contains("active-hints-button");
+    
+    const fullPlaceholders = [];
+
+    const Placeholders = {
+        set: () => {
+            const allInputs = document.querySelectorAll("p input");
+        
+            allInputs.forEach((input, index) => {
+                input.placeholder = fullPlaceholders[index];
+                shortenPlaceholder(input);
+            });
+        },
+
+        reset: () => {
+            const allInputs = document.querySelectorAll("p input");
+            allInputs.forEach(input => { input.placeholder = "" });
+        }
+    };
+
+    hintsButton.onclick = () => {
+        if(hintsStatus) {
+            hintsButton.classList.remove("active-hints-button");
+            hintsStatus = false;
+
+            Placeholders.reset();
+        }
+
+        else {
+            hintsButton.classList.add("active-hints-button");
+            hintsStatus = true;
+
+            Placeholders.set();
+        }
+
+        emptyInputSelector({ key: "Enter" });
+    }
 
     let innerText = text.innerText;
     let inputValues = {};
 
     getInputs().forEach(input => {
+        fullPlaceholders.push(input);
+
         let inputName = input;
 
         if(inputName.indexOf(" ") > -1) {
@@ -31,7 +75,7 @@ export default function completeText(thisTask) {
         
         const inputTemplate = `<input
             type='text'
-            placeholder='${input}'
+            placeholder='${hintsStatus ? input : ""}'
             id="complete-input-${inputName}"
             autocomplete="off"
         >`;
@@ -43,7 +87,7 @@ export default function completeText(thisTask) {
     text.innerHTML = innerText;
 
     const allInputs = document.querySelectorAll("p input");
-    const fullPlaceholders = [];
+    allInputs[0].focus();
 
     allInputs.forEach((input, index) => {
         const inputName = input.id.split("-")[2];
@@ -52,6 +96,8 @@ export default function completeText(thisTask) {
         shortenPlaceholder(input);
         
         input.onfocus = () => {
+            if(!hintsStatus) return;
+
             const miniModal = document.querySelector(".mini-modal");
             
             setTimeout(() => Component.create("MiniModal", {
@@ -78,6 +124,21 @@ export default function completeText(thisTask) {
             thisTask.answerChanged(setAnswer ? inputValues : "");
         }
     });
+
+    window.eventList.add({ id: "taskCompleteTextKeydown", type: "keydown", listener: emptyInputSelector });
+
+    function emptyInputSelector(e) {
+        if(thisTask.answer || e.key !== "Enter") return;
+
+        const allInputs = document.querySelectorAll("p input");
+        let targetInput = null;
+
+        allInputs.forEach(input => {
+            if(!input.value && targetInput === null) targetInput = input;
+        });
+
+        targetInput.focus();
+    }
 
     function getInputs() {
         const positions = [];

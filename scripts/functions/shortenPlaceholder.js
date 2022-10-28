@@ -1,4 +1,6 @@
 export default function shortenPlaceholder(input, placeholderSrc) {
+    const inputValueStorage = input.value ? input.value : "";
+
     let placeholder = "";
     let dots = false;
 
@@ -14,6 +16,6 @@ export default function shortenPlaceholder(input, placeholderSrc) {
 
     else placeholder = validPlaceholder;
 
-    input.value = "";
+    input.value = inputValueStorage;
     input.placeholder = `${placeholder}${dots ? "..." : ""}`;
 }

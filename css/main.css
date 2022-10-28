@@ -1156,11 +1156,12 @@ main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: row;
+  flex-direction: column;
+  gap: 30px;
   width: 80%;
   margin: 20px 0;
 }
-main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder p {
+main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .complete-text-p {
   color: #5e5c5c;
   font-size: 25px;
   text-align: center;
@@ -1170,7 +1171,7 @@ main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder p {
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
   padding: 10px 15px;
 }
-main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder p input {
+main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .complete-text-p input {
   width: 100px;
   color: #5e5c5c;
   text-align: center;
@@ -1183,20 +1184,53 @@ main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder p i
   border-radius: 3px;
   transition: 300ms;
 }
-main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder p input:hover {
+main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .complete-text-p input:hover {
   border-bottom: 2px dashed gray;
 }
-main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder p input:focus {
+main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .complete-text-p input:focus {
   border-bottom: 2px solid #5e5c5c;
 }
-main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder p input::-moz-placeholder {
+main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .complete-text-p input::-moz-placeholder {
   color: gray;
 }
-main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder p input:-ms-input-placeholder {
+main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .complete-text-p input:-ms-input-placeholder {
   color: gray;
 }
-main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder p input::placeholder {
+main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .complete-text-p input::placeholder {
   color: gray;
+}
+main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 10px;
+  background-color: white;
+  border: 3px solid gray;
+  border-radius: 20px;
+  cursor: pointer;
+  opacity: 0.5;
+  padding: 5px 10px;
+  transition: 300ms;
+}
+main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder button:hover {
+  opacity: 1;
+}
+main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder button img {
+  height: 40px;
+  width: 40px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder button p {
+  color: #5e5c5c;
+  font-size: 25px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .active-hints-button {
+  opacity: 1;
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
 }
 main .exercise-modal .exercise-modal-task .task-button-holder {
   display: flex;
@@ -2101,19 +2135,32 @@ nav .button-holder {
   margin-right: 15px;
 }
 nav .button-holder a {
-  color: #5e5c5c;
-  text-align: center;
-  font-size: 22px;
-  text-transform: capitalize;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 10px;
   text-decoration: none;
-  position: relative;
-  top: 0;
-  padding: 12px;
+  border-radius: 10px;
+  padding: 5px 10px;
   transition: 300ms;
 }
 nav .button-holder a:hover {
   background-color: rgba(129, 129, 129, 0.4);
-  border-radius: 15px;
+  border-radius: 20px;
+}
+nav .button-holder a img {
+  height: 25px;
+  width: 25px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+nav .button-holder a p {
+  color: #5e5c5c;
+  text-align: center;
+  font-size: 22px;
+  text-transform: capitalize;
+  margin: 0;
 }
 nav .button-holder #current-page {
   font-weight: bold;

@@ -22,13 +22,26 @@ export default function Nav(componentProps) {
     const pathname = window.location.pathname.substring(1).split(".")[0];
     const currentPage = (pathname === "index" || !pathname) ? "home" : pathname;
     
-    navButtonsData.forEach(button => createElement({
-        tag: "a",
-        attributes: { id: currentPage === button.title ? "current-page" : "" },
-        innerText: button.title,
-        events: [{ on: "click", call: () => navigate(button.link) }],
-        appendTo: buttonHolder
-    }));
+    navButtonsData.forEach(button => {
+        const anchor = createElement({
+            tag: "a",
+            attributes: { id: currentPage === button.title ? "current-page" : "" },
+            events: [{ on: "click", call: () => navigate(button.link) }],
+            appendTo: buttonHolder
+        });
+
+        createElement({
+            tag: "img",
+            attributes: { src: button.icon, alt: button.title },
+            appendTo: anchor
+        });
+
+        createElement({
+            tag: "p",
+            innerText: button.title,
+            appendTo: anchor
+        });
+    });
     
     function navigate(path) {
         let validPath = path;
