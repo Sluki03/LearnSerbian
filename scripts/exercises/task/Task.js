@@ -564,9 +564,9 @@ export class Task {
         const { switchModesButton } = this.elements;
         
         const icons = {
-            write: { src: "./images/icons/write-icon.svg", alt: "Write" },
-            wordBank: { src: "./images/icons/word-bank-icon.svg", alt: "Word Bank" },
-            multipleChoice: { src: "./images/icons/multiple-choice-icon.svg", alt: "Multiple Choice" }
+            write: { src: "./images/icons/write-icon.png", alt: "Write" },
+            wordBank: { src: "./images/icons/word-bank-icon.png", alt: "Word Bank" },
+            multipleChoice: { src: "./images/icons/multiple-choice-icon.png", alt: "Multiple Choice" }
         };
         
         const taskModes = this.getTaskModes();
