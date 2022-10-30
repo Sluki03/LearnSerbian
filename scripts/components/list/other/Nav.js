@@ -8,10 +8,12 @@ export default function Nav(componentProps) {
     
     const navElement = builtIn ? builtIn : createElement({ tag: "nav", attributes: { id }, appendTo });
 
+    const validHomeLink = window.location.pathname.includes("LearnSerbian") ? "/LearnSerbian" : "/";
+    
     const homeLink = createElement({
         tag: "a",
         attributes: { class: "nav-logo" },
-        events: [{ on: "click", call: () => navigate("/") }],
+        events: [{ on: "click", call: () => navigate(validHomeLink) }],
         appendTo: navElement
     });
 
