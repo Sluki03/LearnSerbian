@@ -1,0 +1,46 @@
+.multiple-choice-holder {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    width: 100%;
+    max-width: 660px;
+    margin: 20px 0;
+
+    @include multiple-choice-button;
+    
+    .multiple-choice-button {
+        span {
+            height: 35px;
+            width: 35px;
+            color: $defDarkGrey;
+            font-size: set-size(md);
+            line-height: 1.25;
+            border: 1px solid $defDarkGrey;
+            border-radius: 50%;
+            position: absolute;
+            left: 5px;
+            padding: 5px;
+        }
+
+        img {
+            height: 140px;
+            width: 140px;
+            object-fit: contain;
+        }
+
+        p {
+            color: $defDarkGrey;
+            font-size: set-size(lg);
+            border-radius: 30px;
+        }
+    }
+
+    .multiple-choice-images-button {
+        width: auto;
+    }
+}
+
+.multiple-choice-images-holder {
+    width: auto;
+}

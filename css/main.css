@@ -2142,7 +2142,7 @@ nav .button-holder a {
   gap: 10px;
   text-decoration: none;
   border-radius: 10px;
-  padding: 5px 10px;
+  padding: 12px;
   transition: 300ms;
 }
 nav .button-holder a:hover {

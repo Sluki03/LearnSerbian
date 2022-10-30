@@ -1,0 +1,104 @@
+.translate-holder {
+    @include add-flex(column);
+    width: 80%;
+    gap: 20px;
+    margin: 15px 0;
+
+    & > p {
+        color: $defDarkGrey;
+        font-size: set-size(lg);
+        border: 1px solid $defDarkGrey;
+        border-radius: 20px;
+        position: relative;
+        padding: 10px 15px;
+    }
+
+    .interface {
+        @include add-flex(column);
+        height: 220px;
+        width: 100%;
+        gap: 20px;
+        
+        textarea {
+            width: 80%;
+            color: $defDarkGrey;
+            font-size: set-size(lg);
+            border: 3px dashed $defLightGrey;
+            border-radius: 20px;
+            box-shadow: $defLighterShadow;
+            outline: none;
+            resize: none;
+            padding: 10px 15px;
+            transition: 300ms;
+
+            &:hover {
+                border: 3px dashed $defDarkGrey;
+            }
+
+            &:disabled {
+                border: 3px dashed $defLightGrey;
+            }
+
+            &:focus {
+                border: 3px solid $defDarkGrey;
+                border-radius: 20px;
+                box-shadow: $defLightShadow;
+            }
+        }
+
+        .translate-holder-textarea-focused {
+            border: 3px solid $defDarkGrey;
+            border-radius: 20px;
+            box-shadow: $defLightShadow;
+        }
+
+        .text-holder {
+            @include add-flex(row, flex-start, flex-start);
+            flex-wrap: wrap;
+            gap: 5px;
+            height: 150px;
+            width: 100%;
+            border: 3px solid $defLightGrey;
+            border-radius: 20px;
+            padding: 10px 15px;
+        }
+
+        .word-bank-options-holder {
+            @include add-flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .word-bank-option {
+            color: $defDarkGrey;
+            font-size: set-size(md);
+            background-color: white;
+            border: 1px solid $defDarkGrey;
+            border-radius: 15px;
+            cursor: pointer;
+            position: relative;
+            top: 0;
+            padding: 5px 10px;
+            transition: 300ms;
+        }
+
+        .word-bank-option-selective {
+            transition: 100ms;
+
+            &:hover {
+                box-shadow: $defLighterShadow;
+                top: 5px;
+            }
+        }
+
+        .word-bank-option-deselective {
+            transition: 100ms;
+
+            &:hover {
+                box-shadow: $defLighterShadow;
+                top: -5px;
+            }
+        }
+    }
+}

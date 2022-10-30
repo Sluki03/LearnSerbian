@@ -1,0 +1,77 @@
+.complete-text-holder {
+    @include add-flex(column);
+    gap: 30px;
+    width: 80%;
+    margin: 20px 0;
+
+    .complete-text-p {
+        color: $defDarkGrey;
+        font-size: set-size(lg);
+        text-align: center;
+        background-color: white;
+        border: 3px solid $defGrey;
+        border-radius: 20px;
+        box-shadow: $defLightShadow;
+        padding: 10px 15px;
+    
+        input {
+            width: 100px;
+            color: $defDarkGrey;
+            text-align: center;
+            font-size: set-size(lg);
+            background-color: transparent;
+            border: 2px solid transparent;
+            border-bottom: 2px solid $defGrey;
+            outline: none;
+            padding: 0 5px;
+            border-radius: 3px;
+            transition: 300ms;
+
+            &:hover {
+                border-bottom: 2px dashed $defGrey;
+            }
+
+            &:focus {
+                border-bottom: 2px solid $defDarkGrey;
+            }
+
+            &::placeholder {
+                color: $defGrey;
+            }
+        }
+    }
+
+    button {
+        @include add-flex;
+        gap: 10px;
+        background-color: white;
+        border: 3px solid $defGrey;
+        border-radius: 20px;
+        cursor: pointer;
+        opacity: 0.5;
+        padding: 5px 10px;
+        transition: 300ms;
+
+        &:hover {
+            opacity: 1;
+        }
+        
+        img {
+            height: 40px;
+            width: 40px;
+            object-fit: contain;
+        }
+
+        p {
+            color: $defDarkGrey;
+            font-size: set-size(lg);
+            font-weight: bold;
+            text-transform: capitalize;
+        }
+    }
+
+    .active-hints-button {
+        opacity: 1;
+        box-shadow: $defLightShadow;
+    }
+}
