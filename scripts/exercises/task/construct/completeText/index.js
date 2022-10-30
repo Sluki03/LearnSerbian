@@ -20,9 +20,10 @@ export default function completeText(thisTask) {
     });
 
     const hintsButton = document.querySelector("[data-template='exercise-modal-task-complete-text-hints-button']").content.firstElementChild.cloneNode(true);
-    completeTextHolder.appendChild(hintsButton);
+    if(thisTask.currentTask.hints?.switch) completeTextHolder.appendChild(hintsButton);
 
-    let hintsStatus = hintsButton.classList.contains("active-hints-button");
+    let hintsStatus = thisTask.currentTask.hints?.status;
+    if(hintsStatus) hintsButton.classList.add("active-hints-button");
     
     const fullPlaceholders = [];
 
