@@ -15,6 +15,7 @@
         padding: 10px 15px;
     
         input {
+            height: 40px;
             width: 100px;
             color: $defDarkGrey;
             text-align: center;
@@ -39,9 +40,43 @@
                 color: $defGrey;
             }
         }
+
+        .complete-field {
+            display: inline-block;
+            height: 40px;
+            width: 100px;
+            color: $defGrey;
+            font-size: set-size(lg);
+            background-color: transparent;
+            border: 2px solid transparent;
+            border-bottom: 2px solid $defGrey;
+            cursor: default;
+            padding: 0 5px;
+            white-space: nowrap;
+        }
     }
 
-    button {
+    .complete-text-word-bank {
+        @include add-flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        width: 100%;
+
+        button {
+            color: $defDarkGrey;
+            font-size: set-size(md);
+            background-color: white;
+            border: 1px solid $defDarkGrey;
+            border-radius: 15px;
+            cursor: pointer;
+            position: relative;
+            top: 0;
+            padding: 5px 10px;
+            transition: 300ms;
+        }
+    }
+
+    .hints-button {
         @include add-flex;
         gap: 10px;
         background-color: white;

@@ -1,9 +1,10 @@
-import { Component } from "../../../../components/Component.js";
-import { Convert } from "../../../../functions/Convert.js";
+import taskInterface from "./interface.js";
 import createElement from "../../../../functions/createElement.js";
-import shortenPlaceholder from "../../../../functions/shortenPlaceholder.js";
+import { Inputs, Spans } from "./functions.js";
 
-export default function completeText(thisTask) {
+export default function completeText(thisTask, changeMode) {
+    if(changeMode) return taskInterface(thisTask, changeMode);
+    
     const { taskHolder } = thisTask.elements;
 
     const completeTextHolder = createElement({
@@ -12,9 +13,9 @@ export default function completeText(thisTask) {
         appendTo: taskHolder
     });
 
-    const text = createElement({
+    createElement({
         tag: "p",
-        attributes: { class: "complete-text-p" },
+        attributes: { class: "complete-text-p interface" },
         innerText: thisTask.currentTask.text,
         appendTo: completeTextHolder
     });
@@ -22,114 +23,33 @@ export default function completeText(thisTask) {
     const hintsButton = document.querySelector("[data-template='exercise-modal-task-complete-text-hints-button']").content.firstElementChild.cloneNode(true);
     if(thisTask.currentTask.hints?.switch) completeTextHolder.appendChild(hintsButton);
 
-    let hintsStatus = thisTask.currentTask.hints?.status;
-    if(hintsStatus) hintsButton.classList.add("active-hints-button");
-    
-    const fullPlaceholders = [];
-
-    const Placeholders = {
-        set: () => {
-            const allInputs = document.querySelectorAll("p input");
-        
-            allInputs.forEach((input, index) => {
-                input.placeholder = fullPlaceholders[index];
-                shortenPlaceholder(input);
-            });
-        },
-
-        reset: () => {
-            const allInputs = document.querySelectorAll("p input");
-            allInputs.forEach(input => { input.placeholder = "" });
-        }
-    };
+    if(thisTask.currentTask.hints.status) hintsButton.classList.add("active-hints-button");
 
     hintsButton.onclick = () => {
-        if(hintsStatus) {
+        const Elements = thisTask.currentTask.mode.type === "write" ? Inputs : Spans;
+        
+        if(thisTask.currentTask.hints.status) {
             hintsButton.classList.remove("active-hints-button");
-            hintsStatus = false;
+            thisTask.currentTask.hints.status = false;
 
-            Placeholders.reset();
+            Elements.reset();
         }
 
         else {
             hintsButton.classList.add("active-hints-button");
-            hintsStatus = true;
+            thisTask.currentTask.hints.status = true;
 
-            Placeholders.set();
+            Elements.set(thisTask);
         }
 
-        emptyInputSelector({ key: "Enter" });
+        if(thisTask.currentTask.mode.type === "write") emptyInputSelector({ key: "Enter" });
     }
 
-    let innerText = text.innerText;
-    let inputValues = {};
-
-    getInputs().forEach(input => {
-        fullPlaceholders.push(input);
-
-        let inputName = input;
-
-        if(inputName.indexOf(" ") > -1) {
-            inputName = inputName.replaceAll(" ", "-");
-            inputName = Convert.cssToJsStandard(inputName);
-        }
-        
-        const inputTemplate = `<input
-            type='text'
-            placeholder='${hintsStatus ? input : ""}'
-            id="complete-input-${inputName}"
-            autocomplete="off"
-        >`;
-
-        innerText = innerText.replace(`<${input}>`, inputTemplate);
-        inputValues = {...inputValues, [inputName]: ""};
-    });
-
-    text.innerHTML = innerText;
-
-    const allInputs = document.querySelectorAll("p input");
-    allInputs[0].focus();
-
-    allInputs.forEach((input, index) => {
-        const inputName = input.id.split("-")[2];
-        
-        fullPlaceholders.push(input.placeholder);
-        shortenPlaceholder(input);
-        
-        input.onfocus = () => {
-            if(!hintsStatus) return;
-
-            const miniModal = document.querySelector(".mini-modal");
-            
-            setTimeout(() => Component.create("MiniModal", {
-                target: input,
-                id: inputName,
-                content: fullPlaceholders[index]
-            }), miniModal ? 300 : 0);
-        }
-        
-        input.oninput = () => {
-            inputValues = {...inputValues, [inputName]: input.value};
-            const filledInputs = [];
-
-            Object.values(inputValues).forEach(value => {
-                let filled = false;
-                if(value) filled = true;
-
-                filledInputs.push(filled);
-            });
-
-            let setAnswer = true;
-            filledInputs.forEach(filledInput => { if(!filledInput) setAnswer = false });
-
-            thisTask.answerChanged(setAnswer ? inputValues : "");
-        }
-    });
-
     window.eventList.add({ id: "taskCompleteTextKeydown", type: "keydown", listener: emptyInputSelector });
+    taskInterface(thisTask, changeMode);
 
     function emptyInputSelector(e) {
-        if(thisTask.answer || e.key !== "Enter") return;
+        if(thisTask.answer || e.key !== "Enter" || thisTask.currentTask.mode.type !== "write") return;
 
         const allInputs = document.querySelectorAll("p input");
         let targetInput = null;
@@ -139,32 +59,5 @@ export default function completeText(thisTask) {
         });
 
         targetInput.focus();
-    }
-
-    function getInputs() {
-        const positions = [];
-        let currentPosition = { start: -1, end: -1 };
-        
-        for(let i = 0; i < innerText.length; i++) {
-            if(innerText[i] === "<") currentPosition.start = i;
-
-            if(innerText[i] === ">") {
-                currentPosition.end = i;
-                positions.push(currentPosition);
-                currentPosition = { start: -1, end: -1 };
-            }
-        }
-
-        const inputs = [];
-        let currentInput = "";
-
-        positions.forEach(position => {
-            for(let i = position.start + 1; i < position.end; i++) currentInput += innerText[i];
-            
-            inputs.push(currentInput);
-            currentInput = "";
-        });
-
-        return inputs;
     }
 }

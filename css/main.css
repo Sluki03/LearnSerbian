@@ -1172,6 +1172,7 @@ main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .co
   padding: 10px 15px;
 }
 main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .complete-text-p input {
+  height: 40px;
   width: 100px;
   color: #5e5c5c;
   text-align: center;
@@ -1199,7 +1200,41 @@ main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .co
 main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .complete-text-p input::placeholder {
   color: gray;
 }
-main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder button {
+main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .complete-text-p .complete-field {
+  display: inline-block;
+  height: 40px;
+  width: 100px;
+  color: gray;
+  font-size: 25px;
+  background-color: transparent;
+  border: 2px solid transparent;
+  border-bottom: 2px solid gray;
+  cursor: default;
+  padding: 0 5px;
+  white-space: nowrap;
+}
+main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .complete-text-word-bank {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+}
+main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .complete-text-word-bank button {
+  color: #5e5c5c;
+  font-size: 20px;
+  background-color: white;
+  border: 1px solid #5e5c5c;
+  border-radius: 15px;
+  cursor: pointer;
+  position: relative;
+  top: 0;
+  padding: 5px 10px;
+  transition: 300ms;
+}
+main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .hints-button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1213,16 +1248,16 @@ main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder but
   padding: 5px 10px;
   transition: 300ms;
 }
-main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder button:hover {
+main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .hints-button:hover {
   opacity: 1;
 }
-main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder button img {
+main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .hints-button img {
   height: 40px;
   width: 40px;
   -o-object-fit: contain;
      object-fit: contain;
 }
-main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder button p {
+main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .hints-button p {
   color: #5e5c5c;
   font-size: 25px;
   font-weight: bold;
@@ -1284,7 +1319,7 @@ main .exercise-modal .exercise-modal-task .task-button-holder .active-switch-mod
   justify-content: center;
   flex-direction: row;
   background-color: transparent;
-  border: 3px dashed black;
+  border: 3px dashed #5e5c5c;
   border-radius: 50%;
   opacity: 0.5;
   cursor: pointer;
@@ -1292,7 +1327,7 @@ main .exercise-modal .exercise-modal-task .task-button-holder .active-switch-mod
   transition: 300ms;
 }
 main .exercise-modal .exercise-modal-task .task-button-holder .active-switch-modes-button:hover {
-  border: 3px solid black;
+  border: 3px solid #5e5c5c;
   opacity: 1;
 }
 main .exercise-modal .exercise-modal-task .task-button-holder .flag-button {

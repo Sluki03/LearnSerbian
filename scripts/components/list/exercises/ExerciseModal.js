@@ -1,7 +1,7 @@
 import { exercisesData } from "../../../../data/exercises/index.js";
 import { Component } from "../../Component.js";
 import closeExerciseModal from "../../../exercises/closeExerciseModal.js";
-import shortenPlaceholder from "../../../functions/shortenPlaceholder.js";
+import { Shorten } from "../../../functions/Shorten.js";
 
 export default function ExerciseModal(componentProps) {
     const { exercise } = componentProps.params;
@@ -41,7 +41,7 @@ export default function ExerciseModal(componentProps) {
 
         setTimeout(() => {
             const conversationAnswer = document.querySelector(".conversation-answer");
-            if(conversationAnswer !== null && allInputs.length > 0) allInputs.forEach(input => shortenPlaceholder(input, getConversationPlaceholder(input)));
+            if(conversationAnswer !== null && allInputs.length > 0) allInputs.forEach(input => Shorten.placeholder(input, getConversationPlaceholder(input)));
         }, 300);
 
         return isIconRotated;

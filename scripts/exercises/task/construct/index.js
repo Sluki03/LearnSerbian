@@ -6,9 +6,10 @@ import completeText from "./completeText/index.js";
 
 import translateModes from "./translate/modes.js";
 import conversationModes from "./conversation/modes.js";
+import completeTextModes from "./completeText/modes.js";
 
 const ConstructTypes = { multipleChoice, multipleChoiceImages: multipleChoice, translate, conversation, connect, completeText };
-const ModeTypes = { translate: translateModes, conversation: conversationModes };
+const ModeTypes = { translate: translateModes, conversation: conversationModes, completeText: completeTextModes };
 
 export function constructTask(task, thisTask, changeMode) {
     let constructFunction;

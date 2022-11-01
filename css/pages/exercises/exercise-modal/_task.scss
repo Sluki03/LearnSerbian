@@ -125,7 +125,7 @@
         .active-switch-modes-button {
             @include add-flex;
             background-color: transparent;
-            border: 3px dashed black;
+            border: 3px dashed $defDarkGrey;
             border-radius: 50%;
             opacity: 0.5;
             cursor: pointer;
@@ -133,7 +133,7 @@
             transition: 300ms;
 
             &:hover {
-                border: 3px solid black;
+                border: 3px solid $defDarkGrey;
                 opacity: 1;
             }
         }

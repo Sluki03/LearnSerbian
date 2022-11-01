@@ -607,7 +607,8 @@ export class Task {
     getTaskModes() {
         const allModes = {
             translate: ["write", "wordBank"],
-            conversation: ["write", "multipleChoice"]
+            conversation: ["write", "multipleChoice"],
+            completeText: ["write", "wordBank"]
         };
         
         let result;

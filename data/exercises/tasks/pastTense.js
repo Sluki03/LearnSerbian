@@ -23,6 +23,11 @@ export const pastTense = [
         type: "completeText",
         title: "Complete the following sentence:",
         text: "Deste ljudi, sta ima, <how> ste? Evo, evo, mi smo <good>. Inace, ja se <to be called> Milorad i dolazim iz <Belgrade>.",
+        mode: {
+            type: "write",
+            switch: true
+        },
+        options: ["kako", "Beograda", "dobro", "zovem"],
         acceptableAnswers: { how: ["kako"], good: ["dobro", "okej"], toBeCalled: ["zovem"], Belgrade: ["Beograda", "BGa"] },
         hints: {
             status: false,
