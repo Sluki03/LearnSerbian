@@ -24,7 +24,8 @@ export class Task {
                 conversation: { value: "" }
             },
             wordBank: {
-                translate: { wordBank: [], textHolder: [] }
+                translate: { wordBank: [], textHolder: [] },
+                completeText: { wordBank: []  }
             },
             multipleChoice: {
                 conversation: { classes: [] }

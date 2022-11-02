@@ -1,68 +1,83 @@
 .complete-text-holder {
     @include add-flex(column);
-    gap: 30px;
+    gap: 20px;
     width: 80%;
     margin: 20px 0;
 
-    .complete-text-p {
-        color: $defDarkGrey;
-        font-size: set-size(lg);
-        text-align: center;
-        background-color: white;
-        border: 3px solid $defGrey;
-        border-radius: 20px;
-        box-shadow: $defLightShadow;
-        padding: 10px 15px;
-    
-        input {
-            height: 40px;
-            width: 100px;
+    .interface {
+        @include add-flex(column);
+        gap: 20px;
+        
+        .complete-text-p {
             color: $defDarkGrey;
+            font-size: set-size(lg);
             text-align: center;
-            font-size: set-size(lg);
-            background-color: transparent;
-            border: 2px solid transparent;
-            border-bottom: 2px solid $defGrey;
-            outline: none;
-            padding: 0 5px;
-            border-radius: 3px;
-            transition: 300ms;
-
-            &:hover {
-                border-bottom: 2px dashed $defGrey;
+            background-color: white;
+            border: 3px solid $defGrey;
+            border-radius: 20px;
+            box-shadow: $defLightShadow;
+            padding: 10px 15px;
+        
+            input {
+                height: 40px;
+                width: 100px;
+                color: $defDarkGrey;
+                text-align: center;
+                font-size: set-size(lg);
+                background-color: transparent;
+                border: 2px solid transparent;
+                border-bottom: 2px solid $defGrey;
+                outline: none;
+                padding: 0 5px;
+                border-radius: 3px;
+                transition: 300ms;
+    
+                &:hover {
+                    border-bottom: 2px dashed $defGrey;
+                }
+    
+                &:focus {
+                    border-bottom: 2px solid $defDarkGrey;
+                }
+    
+                &::placeholder {
+                    color: $defGrey;
+                }
             }
-
-            &:focus {
-                border-bottom: 2px solid $defDarkGrey;
-            }
-
-            &::placeholder {
+            
+            .complete-text-field {
+                display: inline-block;
+                height: 40px;
+                min-width: 100px;
                 color: $defGrey;
+                font-size: set-size(lg);
+                background-color: transparent;
+                border: 2px solid transparent;
+                border-bottom: 2px solid $defGrey;
+                cursor: default;
+                padding: 0 5px;
+                white-space: nowrap;
+                transition: 300ms;
+            }
+
+            .active-complete-text-field {
+                border: 2px solid $defGrey;
+            }
+
+            .filled-complete-text-field {
+                color: $defDarkGrey;
+                cursor: pointer;
             }
         }
-
-        .complete-field {
-            display: inline-block;
-            height: 40px;
-            width: 100px;
-            color: $defGrey;
-            font-size: set-size(lg);
-            background-color: transparent;
-            border: 2px solid transparent;
-            border-bottom: 2px solid $defGrey;
-            cursor: default;
-            padding: 0 5px;
-            white-space: nowrap;
+    
+        .complete-text-word-bank {
+            @include add-flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            width: 100%;
         }
-    }
 
-    .complete-text-word-bank {
-        @include add-flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        width: 100%;
-
-        button {
+        .word-bank-option {
             color: $defDarkGrey;
             font-size: set-size(md);
             background-color: white;

@@ -1157,11 +1157,18 @@ main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 30px;
+  gap: 20px;
   width: 80%;
   margin: 20px 0;
 }
-main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .complete-text-p {
+main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+}
+main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .complete-text-p {
   color: #5e5c5c;
   font-size: 25px;
   text-align: center;
@@ -1171,7 +1178,7 @@ main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .co
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
   padding: 10px 15px;
 }
-main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .complete-text-p input {
+main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .complete-text-p input {
   height: 40px;
   width: 100px;
   color: #5e5c5c;
@@ -1185,25 +1192,25 @@ main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .co
   border-radius: 3px;
   transition: 300ms;
 }
-main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .complete-text-p input:hover {
+main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .complete-text-p input:hover {
   border-bottom: 2px dashed gray;
 }
-main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .complete-text-p input:focus {
+main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .complete-text-p input:focus {
   border-bottom: 2px solid #5e5c5c;
 }
-main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .complete-text-p input::-moz-placeholder {
+main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .complete-text-p input::-moz-placeholder {
   color: gray;
 }
-main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .complete-text-p input:-ms-input-placeholder {
+main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .complete-text-p input:-ms-input-placeholder {
   color: gray;
 }
-main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .complete-text-p input::placeholder {
+main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .complete-text-p input::placeholder {
   color: gray;
 }
-main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .complete-text-p .complete-field {
+main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .complete-text-p .complete-text-field {
   display: inline-block;
   height: 40px;
-  width: 100px;
+  min-width: 100px;
   color: gray;
   font-size: 25px;
   background-color: transparent;
@@ -1212,8 +1219,16 @@ main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .co
   cursor: default;
   padding: 0 5px;
   white-space: nowrap;
+  transition: 300ms;
 }
-main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .complete-text-word-bank {
+main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .complete-text-p .active-complete-text-field {
+  border: 2px solid gray;
+}
+main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .complete-text-p .filled-complete-text-field {
+  color: #5e5c5c;
+  cursor: pointer;
+}
+main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .complete-text-word-bank {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1222,7 +1237,7 @@ main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .co
   gap: 10px;
   width: 100%;
 }
-main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .complete-text-word-bank button {
+main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .word-bank-option {
   color: #5e5c5c;
   font-size: 20px;
   background-color: white;

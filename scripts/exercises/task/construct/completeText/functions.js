@@ -19,18 +19,24 @@ export const Inputs = {
 
 export const Spans = {
     set: (thisTask) => {
-        const allSpans = document.querySelectorAll(".complete-field");
+        const allSpans = document.querySelectorAll(".complete-text-field");
         const allPlaceholders = getAllPlaceholders(thisTask);
         
         allSpans.forEach((span, index) => {
+            if(span.classList.contains("filled-complete-text-field")) return;
+            
             span.innerText = allPlaceholders[index];
             Shorten.elementInnerText(span);
         });
     },
 
     reset: () => {
-        const allSpans = document.querySelectorAll(".complete-field");
-        allSpans.forEach(span => { span.innerHTML = "&#8205;" });
+        const allSpans = document.querySelectorAll(".complete-text-field");
+        
+        allSpans.forEach(span => {
+            if(span.classList.contains("filled-complete-text-field")) return;
+            span.innerHTML = "&#8205;";
+        });
     }
 };
 

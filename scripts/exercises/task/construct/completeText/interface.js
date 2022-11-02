@@ -6,6 +6,16 @@ import randomArray from "../../../../functions/randomArray.js";
 import { getAllPlaceholders, getFields } from "./functions.js";
 
 export default function taskInterface(thisTask) {
+    const interfaceElement = document.querySelector(".interface");
+    let inputValues = {};
+    
+    createElement({
+        tag: "p",
+        attributes: { class: "complete-text-p" },
+        innerText: thisTask.currentTask.text,
+        appendTo: interfaceElement
+    });
+
     const hintsStatus = thisTask.currentTask.hints.status;
     setFields();
     
@@ -51,25 +61,103 @@ export default function taskInterface(thisTask) {
     }
 
     else {
-        const allSpans = document.querySelectorAll(".complete-field");
-        allSpans.forEach(span => Shorten.elementInnerText(span));
+        const allSpans = document.querySelectorAll(".complete-text-field");
+        let activeCompleteTextFieldStatus = false;
         
-        const completeTextHolder = document.querySelector(".complete-text-holder");
+        allSpans.forEach(span => {
+            Shorten.elementInnerText(span);
+            span.onclick = () => setActiveCompleteTextField(span);
+
+            if(!activeCompleteTextFieldStatus && !span.classList.contains("filled-complete-text-field")) {
+                span.classList.add("active-complete-text-field");
+                activeCompleteTextFieldStatus = true;
+            }
+        });
         
         const wordBank = createElement({
             tag: "div",
             attributes: { class: "complete-text-word-bank" },
-            appendTo: completeTextHolder
+            appendTo: interfaceElement
         });
 
         const randomOptions = randomArray(thisTask.currentTask.options);
 
-        randomOptions.forEach(option => createElement({
-            tag: "button",
-            attributes: { id: `complete-text-word-bank-${option}` },
-            innerText: option,
-            appendTo: wordBank
-        }));
+        randomOptions.forEach(option => makeButton(option));
+
+        function setActiveCompleteTextField(span) {
+            if(span.classList.contains("active-complete-text-field")) {
+                if(!span.classList.contains("filled-complete-text-field")) return;
+                
+                makeButton(span.innerText);
+                span.innerHTML = hintsStatus ? span.classList[0].split("-")[3] : "&#8205;";
+            }
+            
+            else {
+                allSpans.forEach(span => {
+                    if(span.classList.contains("active-complete-text-field")) span.classList.remove("active-complete-text-field");
+                });
+    
+                span.classList.add("active-complete-text-field");
+                if(!activeCompleteTextFieldStatus) activeCompleteTextFieldStatus = true;
+            }
+        }
+
+        let inProgress = false;
+        
+        function selectOption(optionElement) {
+            if(inProgress) return;
+            inProgress = true;
+
+            const activeCompleteTextField = document.querySelector(".active-complete-text-field");
+            
+            if(activeCompleteTextField.classList.contains("filled-complete-text-field")) {
+                makeButton(activeCompleteTextField.innerText);
+
+                activeCompleteTextField.innerHTML = hintsStatus ? activeCompleteTextField.classList[0].split("-")[3] : "&#8205;";
+                activeCompleteTextField.classList.remove("filled-complete-text-field");
+            }
+            
+            activeCompleteTextField.classList.add("filled-complete-text-field");
+            activeCompleteTextField.innerText = optionElement.innerText;
+
+            optionElement.remove();
+            emptyFieldSelector();
+            
+            inProgress = false;
+        }
+
+        function makeButton(option) {
+            let optionName = option;
+
+            if(optionName.indexOf(" ") > -1) {
+                optionName = optionName.replaceAll(" ", "-");
+                optionName = Convert.cssToJsStandard(optionName);
+            }
+            
+            const optionElement = createElement({
+                tag: "button",
+                attributes: { class: "word-bank-option", id: `complete-text-word-bank-${optionName}` },
+                innerText: option,
+                events: [{ on: "click", call: () => selectOption(optionElement) }],
+                appendTo: wordBank
+            });
+        }
+
+        function emptyFieldSelector() {
+            const existingActiveCompleteTextField = document.querySelector(".active-complete-text-field");
+            existingActiveCompleteTextField.classList.remove("active-complete-text-field");
+
+            if(wordBank.children.length === 0) return;
+            
+            let targetField = null;
+
+            allSpans.forEach(span => {
+                if(targetField !== null || span.classList.contains("filled-complete-text-field")) return;
+                targetField = span;
+            });
+
+            targetField.classList.add("active-complete-text-field");
+        }
     }
 
     thisTask.switchModes();
@@ -79,7 +167,6 @@ export default function taskInterface(thisTask) {
         const allFields = [];
 
         let innerText = thisTask.currentTask.text;
-        let inputValues = {};
 
         getFields(thisTask).forEach(field => {
             allFields.push(field);
@@ -95,13 +182,16 @@ export default function taskInterface(thisTask) {
                 input: `<input
                     type='text'
                     placeholder='${hintsStatus ? field : ""}'
-                    id="complete-field-${fieldName}"
+                    id="complete-text-field-${fieldName}"
                     autocomplete="off"
                 >`,
-                div: `<span class="complete-field" id="complete-field-${fieldName}">${hintsStatus ? field : "&#8205;"}</span>`
+                span: `<span
+                    class="complete-text-field"
+                    id="complete-text-field-${fieldName}"
+                >${hintsStatus ? field : "&#8205;"}</span>`
             };
 
-            const validFieldTemplate = thisTask.currentTask.mode.type === "write" ? fieldTemplate.input : fieldTemplate.div;
+            const validFieldTemplate = thisTask.currentTask.mode.type === "write" ? fieldTemplate.input : fieldTemplate.span;
 
             innerText = innerText.replace(`<${field}>`, validFieldTemplate);
             if(thisTask.currentTask.mode.type === "wordBank") inputValues = {...inputValues, [fieldName]: ""};

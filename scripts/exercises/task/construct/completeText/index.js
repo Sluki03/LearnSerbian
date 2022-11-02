@@ -13,12 +13,7 @@ export default function completeText(thisTask, changeMode) {
         appendTo: taskHolder
     });
 
-    createElement({
-        tag: "p",
-        attributes: { class: "complete-text-p interface" },
-        innerText: thisTask.currentTask.text,
-        appendTo: completeTextHolder
-    });
+    createElement({ tag: "div", attributes: { class: "interface" }, appendTo: completeTextHolder });
 
     const hintsButton = document.querySelector("[data-template='exercise-modal-task-complete-text-hints-button']").content.firstElementChild.cloneNode(true);
     if(thisTask.currentTask.hints?.switch) completeTextHolder.appendChild(hintsButton);
