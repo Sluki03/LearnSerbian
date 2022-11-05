@@ -2,10 +2,10 @@ import { Component } from "../../../../components/Component.js";
 import createElement from "../../../../functions/createElement.js";
 import randomArray from "../../../../functions/randomArray.js";
 
-export default function taskInterface(thisTask) {
+export default function taskInterface(thisExercise) {
     const interfaceElement = document.querySelector(".interface");
     
-    if(thisTask.currentTask.mode.type === "write") {
+    if(thisExercise.currentTask.mode.type === "write") {
         const translateHolderTextarea = createElement({
             tag: "textarea",
             attributes: {
@@ -17,7 +17,7 @@ export default function taskInterface(thisTask) {
                 maxLength: 200
             },
             events: [
-                { on: "input", call: () => thisTask.answerChanged(translateHolderTextarea.value)},
+                { on: "input", call: () => thisExercise.answerChanged(translateHolderTextarea.value)},
                 { on: "keydown", call: e => { if(e.key === "Enter") e.preventDefault() } },
                 { on: "focus", call: () => translateHolderTextarea.classList.add("translate-holder-textarea-focused") },
                 
@@ -29,17 +29,17 @@ export default function taskInterface(thisTask) {
             appendTo: interfaceElement
         });
 
-        if(thisTask.prevModeValues.write.translate.textareaValue) translateHolderTextarea.value = thisTask.prevModeValues.write.translate.textareaValue;
+        if(thisExercise.prevModeValues.write.translate.textareaValue) translateHolderTextarea.value = thisExercise.prevModeValues.write.translate.textareaValue;
         translateHolderTextarea.focus();
 
         Component.create("DiacriticKeyboard", {
             input: translateHolderTextarea,
-            answerChanged: thisTask.answerChanged,
+            answerChanged: thisExercise.answerChanged,
             appendTo: interfaceElement
         });
     }
 
-    if(thisTask.currentTask.mode.type === "wordBank") {
+    if(thisExercise.currentTask.mode.type === "wordBank") {
         const textHolder = createElement({
             tag: "div",
             attributes: { class: "text-holder" },
@@ -52,13 +52,13 @@ export default function taskInterface(thisTask) {
             appendTo: interfaceElement
         });
         
-        if(thisTask.prevModeValues.wordBank.translate.textHolder.length > 0) {        
-            thisTask.prevModeValues.wordBank.translate.textHolder.forEach(option => createElement(getWordBankOption(option, true)));
-            thisTask.prevModeValues.wordBank.translate.wordBank.forEach(option => createElement(getWordBankOption(option, true)));
+        if(thisExercise.prevModeValues.wordBank.translate.textHolder.length > 0) {        
+            thisExercise.prevModeValues.wordBank.translate.textHolder.forEach(option => createElement(getWordBankOption(option, true)));
+            thisExercise.prevModeValues.wordBank.translate.wordBank.forEach(option => createElement(getWordBankOption(option, true)));
         }
         
         else {
-            const randomOptions = randomArray(thisTask.currentTask.options);
+            const randomOptions = randomArray(thisExercise.currentTask.options);
             randomOptions.forEach(option => createElement(getWordBankOption(option)));
         }
 
@@ -80,13 +80,13 @@ export default function taskInterface(thisTask) {
         }
     }
 
-    thisTask.switchModes();
+    thisExercise.switchModes();
 
     function isSelective(option) {
         let result;
 
-        if(thisTask.prevModeValues.wordBank.translate.textHolder.indexOf(option) > -1) result = false;
-        if(thisTask.prevModeValues.wordBank.translate.wordBank.indexOf(option) > -1) result = true;
+        if(thisExercise.prevModeValues.wordBank.translate.textHolder.indexOf(option) > -1) result = false;
+        if(thisExercise.prevModeValues.wordBank.translate.wordBank.indexOf(option) > -1) result = true;
 
         return result ? "selective" : "deselective";
     }
@@ -140,7 +140,7 @@ export default function taskInterface(thisTask) {
                 textArray.push(child.innerText);
             });
 
-            thisTask.answerChanged(textArray.join(" "));
+            thisExercise.answerChanged(textArray.join(" "));
             inProgress = false;
         }, 300);
     }

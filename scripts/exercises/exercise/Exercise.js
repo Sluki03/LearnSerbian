@@ -7,12 +7,12 @@ import percentage from "../../functions/percentage.js";
 import breakText from "../../functions/breakText.js";
 import formatAnswer from "./formatAnswer.js";
 
-export class Task {
-    constructor(taskElement, exercise) {
+export class Exercise {
+    constructor(exerciseElement, exercise) {
         this.exercise = exercise;
         this.exerciseModal = document.querySelector(".exercise-modal");
         
-        this.taskElement = taskElement;
+        this.exerciseElement = exerciseElement;
         this.numberOfTasks = exercise.numberOfTasks ? exercise.numberOfTasks > exercise.tasks.length ? exercise.tasks.length : exercise.numberOfTasks : exercise.tasks.length;
         this.tasks = randomArray(exercise.tasks, this.numberOfTasks);
         this.taskNumber = 0;
@@ -95,7 +95,7 @@ export class Task {
             this.taskLives.classList.add("active-task-lives");
             this.taskProgressBarHolder.classList.add("active-task-progress-bar-holder");
 
-            this.taskElement.classList.add("active-exercise-modal-task");
+            this.exerciseElement.classList.add("active-exercise-modal-task");
 
             const taskButtonHolder = document.querySelector(".task-button-holder");
             taskButtonHolder.classList.add("active-task-button-holder");
@@ -149,7 +149,7 @@ export class Task {
             else {
                 this.taskLives.remove();
                 this.taskProgressBarHolder.remove();
-                this.taskElement.remove();
+                this.exerciseElement.remove();
                 
                 Component.create("ExerciseModalFinished", {
                     exercise: this.exercise,
@@ -189,14 +189,14 @@ export class Task {
         
         switchModesButton.classList.remove("active-switch-modes-button");
 
-        this.taskElement.style.opacity = "0";
-        this.taskElement.style.left = "-20px";
+        this.exerciseElement.style.opacity = "0";
+        this.exerciseElement.style.left = "-20px";
 
         setTimeout(() => {
-            this.taskElement.style.opacity = "";
-            this.taskElement.style.left = "";
+            this.exerciseElement.style.opacity = "";
+            this.exerciseElement.style.left = "";
             
-            this.taskElement.classList.remove("active-exercise-modal-task");
+            this.exerciseElement.classList.remove("active-exercise-modal-task");
 
             taskHolder.innerHTML = "";
             taskHolder.style.height = "";
@@ -204,7 +204,7 @@ export class Task {
             if(removeElements) {
                 this.taskLives.remove();
                 this.taskProgressBarHolder.remove();
-                this.taskElement.remove();
+                this.exerciseElement.remove();
 
                 const exerciseModalContent = Component.create("ExerciseModalContent", {
                     exercise: this.exercise,
@@ -228,7 +228,7 @@ export class Task {
         const taskInfoText = document.querySelector("[data-name='task-info-text']");
         
         const children = {
-            taskElement: [...this.taskElement.children],
+            exerciseElement: [...this.exerciseElement.children],
             taskButtonHolder: [...taskButtonHolder.children],
             taskInfo: [...taskInfo.children],
             taskInfoText: [...taskInfoText.children]

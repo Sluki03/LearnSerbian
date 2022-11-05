@@ -1,9 +1,9 @@
-export default function modes(thisTask) {
-    if(thisTask.currentTask.mode.type === "write") {
-        thisTask.currentTask.mode.type = "wordBank";
+export default function modes(thisExercise) {
+    if(thisExercise.currentTask.mode.type === "write") {
+        thisExercise.currentTask.mode.type = "wordBank";
 
         const translateHolderTextarea = document.querySelector(".translate-holder textarea");
-        thisTask.prevModeValues.write.translate.textareaValue = translateHolderTextarea.value;
+        thisExercise.prevModeValues.write.translate.textareaValue = translateHolderTextarea.value;
 
         let textHolderWords = [];
 
@@ -20,18 +20,18 @@ export default function modes(thisTask) {
         };
 
         textHolderWords.forEach(word => {
-            if(thisTask.currentTask.options.indexOf(word) > -1) words.textHolder.push(word);
+            if(thisExercise.currentTask.options.indexOf(word) > -1) words.textHolder.push(word);
         });
 
-        thisTask.currentTask.options.forEach(option => {
+        thisExercise.currentTask.options.forEach(option => {
             if(words.textHolder.indexOf(option) === -1) words.wordBank.push(option);
         });
 
-        thisTask.prevModeValues.wordBank.translate = words;
+        thisExercise.prevModeValues.wordBank.translate = words;
     }
     
     else {
-        thisTask.currentTask.mode.type = "write";
+        thisExercise.currentTask.mode.type = "write";
 
         const words = {
             textHolder: [],
@@ -51,7 +51,7 @@ export default function modes(thisTask) {
             words.wordBank.push(childText);
         });
 
-        thisTask.prevModeValues.wordBank.translate = words;
-        thisTask.prevModeValues.write.translate.textareaValue = words.textHolder.join(" ");
+        thisExercise.prevModeValues.wordBank.translate = words;
+        thisExercise.prevModeValues.write.translate.textareaValue = words.textHolder.join(" ");
     }
 }

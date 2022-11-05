@@ -1,8 +1,8 @@
 import createElement from "../../../../functions/createElement.js";
 import randomArray from "../../../../functions/randomArray.js";
 
-export default function connect(thisTask) {
-    const { taskHolder } = thisTask.elements;
+export default function connect(thisExercise) {
+    const { taskHolder } = thisExercise.elements;
 
     const connectHolder = createElement({ tag: "div", attributes: { class: "connect-holder" }, appendTo: taskHolder });
     
@@ -14,8 +14,8 @@ export default function connect(thisTask) {
 
     const [firstButtonHolder, secondButtonHolder] = [...connectHolder.children];
     
-    const randomKeys = randomArray(Object.keys(thisTask.currentTask.options));
-    const randomValues = randomArray(Object.values(thisTask.currentTask.options));
+    const randomKeys = randomArray(Object.keys(thisExercise.currentTask.options));
+    const randomValues = randomArray(Object.values(thisExercise.currentTask.options));
     
     randomKeys.forEach(key => createElement(addButton(key, firstButtonHolder)));
     randomValues.forEach(value => createElement(addButton(value, secondButtonHolder)));
@@ -106,16 +106,16 @@ export default function connect(thisTask) {
         }
         
         const answer = [selectedButtons.first.innerText, selectedButtons.second.innerText];
-        thisTask.answerChanged(answer);
+        thisExercise.answerChanged(answer);
 
         let isCorrect = false;
 
-        const answerKey = thisTask.currentTask.options.hasOwnProperty(answer[0]) ? answer[0] : answer[1];
+        const answerKey = thisExercise.currentTask.options.hasOwnProperty(answer[0]) ? answer[0] : answer[1];
         const answerValue = answerKey === answer[0] ? answer[1] : answer[0];
         
-        Object.keys(thisTask.currentTask.options).forEach((key, index) => {
+        Object.keys(thisExercise.currentTask.options).forEach((key, index) => {
             if(answerKey === key) {
-                const value = Object.values(thisTask.currentTask.options)[index];
+                const value = Object.values(thisExercise.currentTask.options)[index];
                 if(answerValue === value) isCorrect = true;
             }
         });
@@ -124,7 +124,7 @@ export default function connect(thisTask) {
 
         if(!isCorrect) {
             window.eventList.remove("taskConnectKeydown");
-            thisTask.check({ type: "click" });
+            thisExercise.check({ type: "click" });
         }
 
         let taskCompleted = true;
@@ -139,7 +139,7 @@ export default function connect(thisTask) {
 
         if(taskCompleted) {
             window.eventList.remove("taskConnectKeydown");
-            thisTask.check({ type: "click" });
+            thisExercise.check({ type: "click" });
         }
 
         function applyResult() {

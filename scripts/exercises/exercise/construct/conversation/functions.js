@@ -3,7 +3,7 @@ import createElement from "../../../../functions/createElement.js";
 import setTranslatableWords from "../../setTranslatableWords.js";
 import { Shorten } from "../../../../functions/Shorten.js";
 
-export async function sendMessage(thisTask, message, e) {
+export async function sendMessage(thisExercise, message, e) {
     const conversationMessages = document.querySelector(".conversation-messages");
     
     const conversationAnswer = document.querySelector(".conversation-answer");
@@ -11,9 +11,9 @@ export async function sendMessage(thisTask, message, e) {
     
     const conversation = {
         pause: () => new Promise(resolve => {
-            if(thisTask.currentTask.mode.type === "write") {
+            if(thisExercise.currentTask.mode.type === "write") {
                 conversationAnswerInput.disabled = true;
-                conversationAnswerInput.placeholder = `${thisTask.currentTask.participant} is typing...`;
+                conversationAnswerInput.placeholder = `${thisExercise.currentTask.participant} is typing...`;
             }
 
             else if(conversationMessages.children.length === 1) buttonTyping(message.current);
@@ -37,7 +37,7 @@ export async function sendMessage(thisTask, message, e) {
             const typingDuration = participantBehavior(messageIsCorrect ? message.current.content : randomWrongAnswer, "typing");
 
             setTimeout(() => {
-                if(thisTask.currentTask.mode.type === "write") {
+                if(thisExercise.currentTask.mode.type === "write") {
                     const conversationAnswerInput = conversationAnswer.children[1];
                     
                     conversationAnswerInput.disabled = false;
@@ -60,7 +60,7 @@ export async function sendMessage(thisTask, message, e) {
             const conversationAnswer = document.querySelector(".conversation-answer");
             const conversationAnswerInput = conversationAnswer.children[1];
     
-            if(thisTask.currentTask.mode.type === "write") {
+            if(thisExercise.currentTask.mode.type === "write") {
                 conversationAnswer.classList.remove("active-conversation-answer");
                 conversationAnswer.classList.add("disabled-conversation-answer");
             
@@ -71,8 +71,8 @@ export async function sendMessage(thisTask, message, e) {
             const activeMultipleChoiceButton = document.querySelector(".conversation-answer-button-holder .active-multiple-choice-button");
             const activeMultipleChoiceButtonContent = activeMultipleChoiceButton ? activeMultipleChoiceButton.innerText : getUserMessage();
             
-            thisTask.answerChanged(thisTask.currentTask.mode.type === "write" ? getUserMessage() : activeMultipleChoiceButtonContent);
-            thisTask.check(e, true);
+            thisExercise.answerChanged(thisExercise.currentTask.mode.type === "write" ? getUserMessage() : activeMultipleChoiceButtonContent);
+            thisExercise.check(e, true);
 
             function getUserMessage() {
                 let lastUserMessageHolder;

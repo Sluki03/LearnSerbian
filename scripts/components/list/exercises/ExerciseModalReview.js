@@ -1,7 +1,7 @@
 import { Component } from "../../Component.js";
 import createElement from "../../../functions/createElement.js";
 import markup from "../../../functions/markup.js";
-import formatAnswer from "../../../exercises/task/formatAnswer.js";
+import formatAnswer from "../../../exercises/exercise/formatAnswer.js";
 
 export default function ExerciseModalReview(componentProps) {
     const { exercise, results, score, appendTo } = componentProps.params;

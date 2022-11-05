@@ -2,10 +2,10 @@ import taskInterface from "./interface.js";
 import { sendMessage } from "./functions.js";
 import { Component } from "../../../../components/Component.js";
 
-export default function conversation(thisTask, changeMode) {
-    if(changeMode) return taskInterface(thisTask, changeMode);
+export default function conversation(thisExercise, changeMode) {
+    if(changeMode) return taskInterface(thisExercise, changeMode);
     
-    const { taskHolder } = thisTask.elements;
+    const { taskHolder } = thisExercise.elements;
 
     taskHolder.style.height = "70%";
 
@@ -19,10 +19,10 @@ export default function conversation(thisTask, changeMode) {
     const [participantAvatar, participantName] = [...conversationParticipant.children];
 
     const participantAvatarLetter = participantAvatar.children[0];
-    participantAvatarLetter.innerText = thisTask.currentTask.participant[0].toUpperCase();
+    participantAvatarLetter.innerText = thisExercise.currentTask.participant[0].toUpperCase();
 
-    participantName.innerText = thisTask.currentTask.participant;
+    participantName.innerText = thisExercise.currentTask.participant;
 
-    taskInterface(thisTask, changeMode);
-    sendMessage(thisTask, { role: "participant", current: thisTask.currentTask.messages[0] });
+    taskInterface(thisExercise, changeMode);
+    sendMessage(thisExercise, { role: "participant", current: thisExercise.currentTask.messages[0] });
 }

@@ -1,14 +1,14 @@
-export default function modes(thisTask) {
+export default function modes(thisExercise) {
     const conversationAnswerInput = document.querySelector(".conversation-answer input");
     const conversationAnswerButtonHolder = document.querySelector(".conversation-answer-button-holder");
 
-    if(thisTask.currentTask.mode.type === "write") {
-        thisTask.currentTask.mode.type = "multipleChoice";
-        thisTask.prevModeValues.write.conversation.value = conversationAnswerInput.value;
+    if(thisExercise.currentTask.mode.type === "write") {
+        thisExercise.currentTask.mode.type = "multipleChoice";
+        thisExercise.prevModeValues.write.conversation.value = conversationAnswerInput.value;
     }
 
     else {
-        thisTask.currentTask.mode.type = "write";
+        thisExercise.currentTask.mode.type = "write";
                     
         const classes = [];
 
@@ -19,6 +19,6 @@ export default function modes(thisTask) {
             });
         });
 
-        thisTask.prevModeValues.multipleChoice.conversation.classes = classes;
+        thisExercise.prevModeValues.multipleChoice.conversation.classes = classes;
     }
 }

@@ -4,8 +4,8 @@ import createElement from "../../../../functions/createElement.js";
 import breakText from "../../../../functions/breakText.js";
 import randomArray from "../../../../functions/randomArray.js";
 
-export default async function taskInterface(thisTask, changeMode) {
-    let currentMessage = thisTask.currentTask.messages[thisTask.messageNumber];
+export default async function taskInterface(thisExercise, changeMode) {
+    let currentMessage = thisExercise.currentTask.messages[thisExercise.messageNumber];
     
     const exerciseModalTaskConversation = document.querySelector(".exercise-modal-task-conversation");
     const conversationAnswer = document.querySelector(".conversation-answer");
@@ -15,7 +15,7 @@ export default async function taskInterface(thisTask, changeMode) {
     const diacriticKeyboard = document.querySelector(".diacritic-keyboard");
     if(diacriticKeyboard !== null) diacriticKeyboard.remove();
     
-    if(thisTask.currentTask.mode.type === "write") {
+    if(thisExercise.currentTask.mode.type === "write") {
         const conversationAnswerInput = createElement({
             tag: "input",
             attributes: { type: "text" },
@@ -26,7 +26,7 @@ export default async function taskInterface(thisTask, changeMode) {
 
         Component.create("DiacriticKeyboard", {
             input: conversationAnswerInput,
-            answerChanged: thisTask.answerChanged,
+            answerChanged: thisExercise.answerChanged,
             appendTo: exerciseModalTaskConversation
         });
 
@@ -43,7 +43,7 @@ export default async function taskInterface(thisTask, changeMode) {
         changeConversationAnswerStatus();
 
         function resetInput() {
-            conversationAnswerInput.value = thisTask.prevModeValues.write.conversation.value;
+            conversationAnswerInput.value = thisExercise.prevModeValues.write.conversation.value;
             
             const conversationMessages = document.querySelector(".conversation-messages");
             const lastMessageHolder = conversationMessages.children[conversationMessages.children.length - 1];
@@ -51,7 +51,7 @@ export default async function taskInterface(thisTask, changeMode) {
 
             const messageRole = lastMessage.classList[0].split("-")[0];
 
-            if(thisTask.messageNumber > thisTask.currentTask.messages.length - 1) return;
+            if(thisExercise.messageNumber > thisExercise.currentTask.messages.length - 1) return;
 
             const { disabled, placeholder } = getInputValues();
             
@@ -70,7 +70,7 @@ export default async function taskInterface(thisTask, changeMode) {
                 if(messageRole === "user") values.placeholder = "Write a message...";
                 
                 if(messageRole === "participant") {
-                    if(typing !== null) values.placeholder = `${thisTask.currentTask.participant} is typing...`;
+                    if(typing !== null) values.placeholder = `${thisExercise.currentTask.participant} is typing...`;
                     else values = { disabled: false, placeholder: currentMessage.userContent };
                 }
 
@@ -79,7 +79,7 @@ export default async function taskInterface(thisTask, changeMode) {
         }
     }
 
-    if(thisTask.currentTask.mode.type === "multipleChoice") {        
+    if(thisExercise.currentTask.mode.type === "multipleChoice") {        
         const typing = document.querySelector(".typing");
         const messageRole = getMessageRole();
 
@@ -88,7 +88,7 @@ export default async function taskInterface(thisTask, changeMode) {
         const conversationAnswerButtonHolder = generateMultipleChoiceButtons(showValidButtons());
 
         [...conversationAnswerButtonHolder.children].forEach((child, index) => {
-            const className = thisTask.prevModeValues.multipleChoice.conversation.classes[index];
+            const className = thisExercise.prevModeValues.multipleChoice.conversation.classes[index];
             if(className === undefined) return;
 
             child.disabled = true;
@@ -111,15 +111,15 @@ export default async function taskInterface(thisTask, changeMode) {
         
         function showValidButtons() {
             if(messageRole === "participant") {
-                if(typing !== null) return thisTask.currentTask.messages[thisTask.messageNumber - 1];
+                if(typing !== null) return thisExercise.currentTask.messages[thisExercise.messageNumber - 1];
                 return currentMessage;
             }
 
-            return thisTask.currentTask.messages[thisTask.messageNumber - 1];
+            return thisExercise.currentTask.messages[thisExercise.messageNumber - 1];
         }
     }
 
-    thisTask.switchModes(currentMessage);
+    thisExercise.switchModes(currentMessage);
 
     function changeConversationAnswerStatus() {
         const conversationHolder = conversationAnswer.parentElement;
@@ -200,12 +200,12 @@ export default async function taskInterface(thisTask, changeMode) {
             if(breakText(userMessage, { join: true }) === breakText(acceptableAnswer, { join: true })) isCorrect = true;
         });
 
-        sendMessage(thisTask, { role: "user", content: userMessage, current: currentMessage });
+        sendMessage(thisExercise, { role: "user", content: userMessage, current: currentMessage });
         translationModal(currentMessage.userContent, "down");
 
         const conversationAnswerButtonHolder = document.querySelector(".conversation-answer-button-holder");
                     
-        if(thisTask.currentTask.mode.type === "write") {
+        if(thisExercise.currentTask.mode.type === "write") {
             conversationAnswerInput.value = "";
             conversationAnswerInput.disabled = true;
             conversationAnswerInput.placeholder = "Write a message...";
@@ -221,29 +221,29 @@ export default async function taskInterface(thisTask, changeMode) {
         const readingThinkingDuration = participantBehavior(userMessage, "readingThinking");
 
         if(isCorrect) {
-            if(thisTask.messageNumber === thisTask.currentTask.messages.length - 1) {
+            if(thisExercise.messageNumber === thisExercise.currentTask.messages.length - 1) {
                 conversationAnswer.classList.remove("active-conversation-answer");
                 conversationAnswer.classList.add("disabled-conversation-answer");
                 
-                thisTask.answerChanged(userMessage);
-                return thisTask.check(e, true);
+                thisExercise.answerChanged(userMessage);
+                return thisExercise.check(e, true);
             }
 
-            thisTask.messageNumber++;
-            currentMessage = thisTask.currentTask.messages[thisTask.messageNumber];
+            thisExercise.messageNumber++;
+            currentMessage = thisExercise.currentTask.messages[thisExercise.messageNumber];
         }
 
         setTimeout(async () => {
-            await sendMessage(thisTask, { role: "participant", isCorrect, current: currentMessage }, e);
+            await sendMessage(thisExercise, { role: "participant", isCorrect, current: currentMessage }, e);
             
             if(!isCorrect) return;
 
-            if(thisTask.currentTask.mode.type === "multipleChoice") {
+            if(thisExercise.currentTask.mode.type === "multipleChoice") {
                 generateMultipleChoiceButtons();
                 translationModal(currentMessage.userContent);
             }
 
-            else thisTask.prevModeValues.multipleChoice.conversation.classes = [];
+            else thisExercise.prevModeValues.multipleChoice.conversation.classes = [];
 
         }, readingThinkingDuration);
     }

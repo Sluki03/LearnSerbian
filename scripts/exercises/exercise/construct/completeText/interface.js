@@ -5,20 +5,20 @@ import { Shorten } from "../../../../functions/Shorten.js";
 import randomArray from "../../../../functions/randomArray.js";
 import { getAllPlaceholders, getFields, emptyFieldSelector } from "./functions.js";
 
-export default function taskInterface(thisTask, changeMode) {
+export default function taskInterface(thisExercise, changeMode) {
     const interfaceElement = document.querySelector(".interface");
 
     window.eventList.remove("taskCompleteTextKeydown");
-    window.eventList.add({ id: "taskCompleteTextKeydown", type: "keydown", listener: emptyFieldSelector, params: thisTask });
+    window.eventList.add({ id: "taskCompleteTextKeydown", type: "keydown", listener: emptyFieldSelector, params: thisExercise });
     
     createElement({
         tag: "p",
         attributes: { class: "complete-text-p" },
-        innerText: thisTask.currentTask.text,
+        innerText: thisExercise.currentTask.text,
         appendTo: interfaceElement
     });
 
-    const hintsStatus = thisTask.currentTask.hints.status;
+    const hintsStatus = thisExercise.currentTask.hints.status;
     setFields();
 
     let fieldValues = {};
@@ -26,16 +26,16 @@ export default function taskInterface(thisTask, changeMode) {
 
     if(changeMode) applyAnswerChanges();
     
-    if(thisTask.currentTask.mode.type === "write") {
-        const allPlaceholders = getAllPlaceholders(thisTask);
+    if(thisExercise.currentTask.mode.type === "write") {
+        const allPlaceholders = getAllPlaceholders(thisExercise);
         
         const allInputs = document.querySelectorAll("p input");
 
         allInputs.forEach((input, index) => {
             const inputName = input.id.split("-")[3];
             
-            const prevInputValue = Object.values(thisTask.prevModeValues.write.completeText)[index];
-            const prevValuesStatus = Object.keys(thisTask.prevModeValues.write.completeText).length > 0;
+            const prevInputValue = Object.values(thisExercise.prevModeValues.write.completeText)[index];
+            const prevValuesStatus = Object.keys(thisExercise.prevModeValues.write.completeText).length > 0;
             
             input.value = prevValuesStatus ? prevInputValue : "";
 
@@ -59,8 +59,8 @@ export default function taskInterface(thisTask, changeMode) {
         allSpans.forEach((span, index) => {
             span.onclick = () => setActiveCompleteTextField(span);
 
-            const prevFieldValue = Object.values(thisTask.prevModeValues.wordBank.completeText.completeTextP)[index];
-            const prevValueStatus = Object.keys(thisTask.prevModeValues.wordBank.completeText.completeTextP).length > 0;
+            const prevFieldValue = Object.values(thisExercise.prevModeValues.wordBank.completeText.completeTextP)[index];
+            const prevValueStatus = Object.keys(thisExercise.prevModeValues.wordBank.completeText.completeTextP).length > 0;
             
             if(prevValueStatus && prevFieldValue !== undefined) span.innerText = prevFieldValue;
 
@@ -78,7 +78,7 @@ export default function taskInterface(thisTask, changeMode) {
             appendTo: interfaceElement
         });
 
-        let randomOptions = randomArray(thisTask.prevModeValues.wordBank.completeText.wordBank.length > 0 ? thisTask.prevModeValues.wordBank.completeText.wordBank : thisTask.currentTask.options);
+        let randomOptions = randomArray(thisExercise.prevModeValues.wordBank.completeText.wordBank.length > 0 ? thisExercise.prevModeValues.wordBank.completeText.wordBank : thisExercise.currentTask.options);
 
         let allSpansFilledStatus = true;
         allSpans.forEach(span => { if(!span.classList.contains("filled-complete-text-field")) allSpansFilledStatus = false });
@@ -158,23 +158,23 @@ export default function taskInterface(thisTask, changeMode) {
         }
     }
 
-    thisTask.switchModes();
+    thisExercise.switchModes();
 
     function applyAnswerChanges() {        
         let setAnswer = true;
         Object.values(fieldValues).forEach(value => { if(!value) setAnswer = false });
 
-        thisTask.answerChanged(setAnswer ? fieldValues : "");
+        thisExercise.answerChanged(setAnswer ? fieldValues : "");
     }
     
     function setFieldValues() {        
-        const validSelector = thisTask.currentTask.mode.type === "write" ? "p input" : ".complete-text-field";
+        const validSelector = thisExercise.currentTask.mode.type === "write" ? "p input" : ".complete-text-field";
         const allFields = document.querySelectorAll(validSelector);
 
         allFields.forEach(field => {
             const fieldName = field.id.split("-")[3];
 
-            const validPrevModeValuesProp = thisTask.currentTask.mode.type === "write" ? thisTask.prevModeValues.write.completeText : thisTask.prevModeValues.wordBank.completeText.completeTextP;
+            const validPrevModeValuesProp = thisExercise.currentTask.mode.type === "write" ? thisExercise.prevModeValues.write.completeText : thisExercise.prevModeValues.wordBank.completeText.completeTextP;
             
             const prevFields = {
                 keys: Object.keys(validPrevModeValuesProp),
@@ -195,9 +195,9 @@ export default function taskInterface(thisTask, changeMode) {
         const text = document.querySelector(".complete-text-p");
         const allFields = [];
 
-        let innerText = thisTask.currentTask.text;
+        let innerText = thisExercise.currentTask.text;
 
-        getFields(thisTask).forEach(field => {
+        getFields(thisExercise).forEach(field => {
             allFields.push(field);
 
             let fieldName = field;
@@ -220,15 +220,15 @@ export default function taskInterface(thisTask, changeMode) {
                 >${hintsStatus ? field : "&#8205;"}</span>`
             };
 
-            const validFieldTemplate = thisTask.currentTask.mode.type === "write" ? fieldTemplate.input : fieldTemplate.span;
+            const validFieldTemplate = thisExercise.currentTask.mode.type === "write" ? fieldTemplate.input : fieldTemplate.span;
 
             innerText = innerText.replace(`<${field}>`, validFieldTemplate);
         });
 
         function filledClass(fieldName) {
             const prevFields = {
-                keys: Object.keys(thisTask.prevModeValues.wordBank.completeText.completeTextP),
-                values: Object.values(thisTask.prevModeValues.wordBank.completeText.completeTextP)
+                keys: Object.keys(thisExercise.prevModeValues.wordBank.completeText.completeTextP),
+                values: Object.values(thisExercise.prevModeValues.wordBank.completeText.completeTextP)
             };
 
             let result = false;
@@ -244,7 +244,7 @@ export default function taskInterface(thisTask, changeMode) {
     }
 
     function showMiniModal(target, content) {
-        if(!thisTask.currentTask.hints.status) return;
+        if(!thisExercise.currentTask.hints.status) return;
 
         const miniModal = document.querySelector(".mini-modal");
                 

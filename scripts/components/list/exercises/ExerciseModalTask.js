@@ -1,5 +1,5 @@
 import { Component } from "../../Component.js";
-import { Task } from "../../../exercises/task/Task.js";
+import { Exercise } from "../../../exercises/exercise/Exercise.js";
 
 export default function ExerciseModalTask(componentProps) {
     const { exercise, appendTo } = componentProps.params;
@@ -15,8 +15,8 @@ export default function ExerciseModalTask(componentProps) {
 
     Component.render(exerciseModalTask);
 
-    const classTask = new Task(exerciseModalTask, exercise);
-    classTask.start();
+    const classExercise = new Exercise(exerciseModalTask, exercise);
+    classExercise.start();
 
     if(appendTo.scrollHeight < window.innerHeight) exerciseModalTask.id = "extended-exercise-modal-task";
     else exerciseModalTask.id = "";

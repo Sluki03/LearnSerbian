@@ -1,30 +1,30 @@
 import createElement from "../../../../functions/createElement.js";
 import randomArray from "../../../../functions/randomArray.js";
 
-export default function multipleChoice(thisTask) {
-    const { taskHolder, taskInfo } = thisTask.elements;
+export default function multipleChoice(thisExercise) {
+    const { taskHolder, taskInfo } = thisExercise.elements;
     
     const multipleChoiceHolder = createElement({
         tag: "div",
-        attributes: { class: `multiple-choice-holder ${thisTask.currentTask.type === "multipleChoiceImages" ? "multiple-choice-images-holder" : ""}` },
+        attributes: { class: `multiple-choice-holder ${thisExercise.currentTask.type === "multipleChoiceImages" ? "multiple-choice-images-holder" : ""}` },
         appendTo: taskHolder
     });
 
-    const randomOptions = randomArray(thisTask.currentTask.options);
+    const randomOptions = randomArray(thisExercise.currentTask.options);
     
     for(let i = 0; i < randomOptions.length; i++) {
         const multipleChoiceButton = createElement({
             tag: "button",
             attributes: {
-                class: `multiple-choice-button ${thisTask.currentTask.type === "multipleChoiceImages" ? "multiple-choice-images-button" : ""}`,
+                class: `multiple-choice-button ${thisExercise.currentTask.type === "multipleChoiceImages" ? "multiple-choice-images-button" : ""}`,
                 id: `multiple-choice-button-${i + 1}`
             },
-            innerText: thisTask.currentTask.type === "multipleChoice" ? randomOptions[i] : "",
+            innerText: thisExercise.currentTask.type === "multipleChoice" ? randomOptions[i] : "",
             events: [{ on: "click", call: setActiveButton }],
             appendTo: multipleChoiceHolder
         });
 
-        if(thisTask.currentTask.type === "multipleChoice") createElement({
+        if(thisExercise.currentTask.type === "multipleChoice") createElement({
             tag: "span",
             attributes: { class: "multiple-choice-span" },
             innerText: i + 1,
@@ -35,7 +35,7 @@ export default function multipleChoice(thisTask) {
             createElement({
                 tag: "img",
                 attributes: {
-                    src: getButtonImage(thisTask.currentTask.images, randomOptions[i]),
+                    src: getButtonImage(thisExercise.currentTask.images, randomOptions[i]),
                     alt: randomOptions[i]
                 },
                 appendTo: multipleChoiceButton
@@ -73,7 +73,7 @@ export default function multipleChoice(thisTask) {
             
             if(button.id === buttonId) {
                 button.classList.add("active-multiple-choice-button");
-                thisTask.answerChanged(randomOptions[id - 1]);
+                thisExercise.answerChanged(randomOptions[id - 1]);
             }
         });
     }

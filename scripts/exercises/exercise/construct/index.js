@@ -11,19 +11,19 @@ import completeTextModes from "./completeText/modes.js";
 const ConstructTypes = { multipleChoice, multipleChoiceImages: multipleChoice, translate, conversation, connect, completeText };
 const ModeTypes = { translate: translateModes, conversation: conversationModes, completeText: completeTextModes };
 
-export function constructTask(task, thisTask, changeMode) {
+export function constructTask(task, thisExercise, changeMode) {
     let constructFunction;
     
     Object.keys(ConstructTypes).forEach((key, index) => {
         if(task === key) constructFunction = Object.values(ConstructTypes)[index];
     });
 
-    constructFunction(thisTask, changeMode);
+    constructFunction(thisExercise, changeMode);
 }
 
 let inProgress = false;
 
-export function changeMode(task, thisTask) {
+export function changeMode(task, thisExercise) {
     if(inProgress) return;
     inProgress = true;
     
@@ -33,7 +33,7 @@ export function changeMode(task, thisTask) {
         if(task === key) modesFunction = Object.values(ModeTypes)[index];
     });
 
-    modesFunction(thisTask);
+    modesFunction(thisExercise);
 
     const currentInterface = document.querySelector(".interface");
     
@@ -46,7 +46,7 @@ export function changeMode(task, thisTask) {
         currentInterface.style.opacity = "0";
         currentInterface.style.top = "-10px";
 
-        thisTask.construct(true);
+        thisExercise.construct(true);
 
         setTimeout(() => {
             currentInterface.style.opacity = "";

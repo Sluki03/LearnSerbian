@@ -2,10 +2,10 @@ import taskInterface from "./interface.js";
 import createElement from "../../../../functions/createElement.js";
 import setTranslatableWords from "../../setTranslatableWords.js";
 
-export default function translate(thisTask, changeMode) {
-    if(changeMode) return taskInterface(thisTask);
+export default function translate(thisExercise, changeMode) {
+    if(changeMode) return taskInterface(thisExercise);
     
-    const { taskHolder } = thisTask.elements;
+    const { taskHolder } = thisExercise.elements;
     
     const translateHolder = createElement({
         tag: "div",
@@ -20,6 +20,6 @@ export default function translate(thisTask, changeMode) {
 
     createElement({ tag: "div", attributes: { class: "interface" }, appendTo: translateHolder });
 
-    setTranslatableWords(translateHolderP, thisTask.currentTask.text, thisTask.currentTask.translation);
-    taskInterface(thisTask);
+    setTranslatableWords(translateHolderP, thisExercise.currentTask.text, thisExercise.currentTask.translation);
+    taskInterface(thisExercise);
 }

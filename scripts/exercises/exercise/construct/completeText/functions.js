@@ -1,9 +1,9 @@
 import { Shorten } from "../../../../functions/Shorten.js";
 
 export const Inputs = {
-    set: (thisTask) => {
+    set: (thisExercise) => {
         const allInputs = document.querySelectorAll("p input");
-        const allPlaceholders = getAllPlaceholders(thisTask);
+        const allPlaceholders = getAllPlaceholders(thisExercise);
         
         allInputs.forEach((input, index) => {
             input.placeholder = allPlaceholders[index];
@@ -18,9 +18,9 @@ export const Inputs = {
 };
 
 export const Spans = {
-    set: (thisTask) => {
+    set: (thisExercise) => {
         const allSpans = document.querySelectorAll(".complete-text-field");
-        const allPlaceholders = getAllPlaceholders(thisTask);
+        const allPlaceholders = getAllPlaceholders(thisExercise);
         
         allSpans.forEach((span, index) => {
             if(span.classList.contains("filled-complete-text-field")) return;
@@ -40,15 +40,15 @@ export const Spans = {
     }
 };
 
-export function getAllPlaceholders(thisTask) {
+export function getAllPlaceholders(thisExercise) {
     const allPlaceholders = [];
-    getFields(thisTask).forEach(field => allPlaceholders.push(field));
+    getFields(thisExercise).forEach(field => allPlaceholders.push(field));
 
     return allPlaceholders;
 }
 
-export function getFields(thisTask) {
-    let innerText = thisTask.currentTask.text;
+export function getFields(thisExercise) {
+    let innerText = thisExercise.currentTask.text;
     
     const positions = [];
     let currentPosition = { start: -1, end: -1 };
@@ -78,11 +78,11 @@ export function getFields(thisTask) {
 }
 
 export function emptyFieldSelector(e) {
-    const thisTask = window.eventList.getParams("taskCompleteTextKeydown");
+    const thisExercise = window.eventList.getParams("taskCompleteTextKeydown");
     
-    if(thisTask.answer || e.key !== "Enter") return;
+    if(thisExercise.answer || e.key !== "Enter") return;
     
-    if(thisTask.currentTask.mode.type === "write") {
+    if(thisExercise.currentTask.mode.type === "write") {
         const allInputs = document.querySelectorAll("p input");
         let targetInput = null;
 
