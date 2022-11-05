@@ -1,6 +1,6 @@
 import taskInterface from "./interface.js";
 import createElement from "../../../../functions/createElement.js";
-import { Inputs, Spans } from "./functions.js";
+import { Inputs, Spans, emptyFieldSelector } from "./functions.js";
 
 export default function completeText(thisTask, changeMode) {
     if(changeMode) return taskInterface(thisTask, changeMode);
@@ -37,22 +37,8 @@ export default function completeText(thisTask, changeMode) {
             Elements.set(thisTask);
         }
 
-        if(thisTask.currentTask.mode.type === "write") emptyInputSelector({ key: "Enter" });
+        if(thisTask.currentTask.mode.type === "write") emptyFieldSelector({ key: "Enter" });
     }
 
-    window.eventList.add({ id: "taskCompleteTextKeydown", type: "keydown", listener: emptyInputSelector });
     taskInterface(thisTask, changeMode);
-
-    function emptyInputSelector(e) {
-        if(thisTask.answer || e.key !== "Enter" || thisTask.currentTask.mode.type !== "write") return;
-
-        const allInputs = document.querySelectorAll("p input");
-        let targetInput = null;
-
-        allInputs.forEach(input => {
-            if(!input.value && targetInput === null) targetInput = input;
-        });
-
-        targetInput.focus();
-    }
 }

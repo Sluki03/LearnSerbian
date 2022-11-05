@@ -76,3 +76,36 @@ export function getFields(thisTask) {
 
     return fields;
 }
+
+export function emptyFieldSelector(e) {
+    const thisTask = window.eventList.getParams("taskCompleteTextKeydown");
+    
+    if(thisTask.answer || e.key !== "Enter") return;
+    
+    if(thisTask.currentTask.mode.type === "write") {
+        const allInputs = document.querySelectorAll("p input");
+        let targetInput = null;
+
+        allInputs.forEach(input => {
+            if(!input.value && targetInput === null) targetInput = input;
+        });
+
+        targetInput.focus();
+    }
+
+    else {
+        const allSpans = document.querySelectorAll(".complete-text-field");
+        
+        const existingActiveCompleteTextField = document.querySelector(".active-complete-text-field");
+        existingActiveCompleteTextField.classList.remove("active-complete-text-field");
+
+        let targetField = null;
+
+        allSpans.forEach(span => {
+            if(targetField !== null || span.classList.contains("filled-complete-text-field")) return;
+            targetField = span;
+        });
+
+        targetField.classList.add("active-complete-text-field");
+    }
+}

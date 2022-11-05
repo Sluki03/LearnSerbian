@@ -21,11 +21,12 @@ export class Task {
         this.prevModeValues = {
             write: {
                 translate: { textareaValue: "" },
-                conversation: { value: "" }
+                conversation: { value: "" },
+                completeText: {}
             },
             wordBank: {
                 translate: { wordBank: [], textHolder: [] },
-                completeText: { wordBank: []  }
+                completeText: { wordBank: [], completeTextP: {}  }
             },
             multipleChoice: {
                 conversation: { classes: [] }

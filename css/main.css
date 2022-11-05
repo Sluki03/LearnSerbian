@@ -1185,15 +1185,15 @@ main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .in
   text-align: center;
   font-size: 25px;
   background-color: transparent;
-  border: 2px solid transparent;
-  border-bottom: 2px solid gray;
+  border: none;
+  border-bottom: 2px dashed gray;
+  border-radius: 3px;
   outline: none;
   padding: 0 5px;
-  border-radius: 3px;
   transition: 300ms;
 }
 main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .complete-text-p input:hover {
-  border-bottom: 2px dashed gray;
+  border-bottom: 2px solid gray;
 }
 main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .complete-text-p input:focus {
   border-bottom: 2px solid #5e5c5c;
@@ -1215,14 +1215,15 @@ main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .in
   font-size: 25px;
   background-color: transparent;
   border: 2px solid transparent;
-  border-bottom: 2px solid gray;
+  border-bottom: 2px dashed gray;
+  border-radius: 3px;
   cursor: default;
   padding: 0 5px;
   white-space: nowrap;
   transition: 300ms;
 }
 main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .complete-text-p .active-complete-text-field {
-  border: 2px solid gray;
+  border-bottom: 2px solid gray;
 }
 main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .complete-text-p .filled-complete-text-field {
   color: #5e5c5c;
