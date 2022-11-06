@@ -95,7 +95,7 @@ export default function taskInterface(thisExercise, changeMode) {
                 if(!span.classList.contains("filled-complete-text-field")) return;
                 span.classList.remove("filled-complete-text-field");
 
-                makeButton(span.innerText);
+                makeButton(span.innerText, true);
                 span.innerHTML = hintsStatus ? fieldName : "&#8205;";
 
                 fieldValues = {...fieldValues, [fieldName]: ""};
@@ -118,29 +118,36 @@ export default function taskInterface(thisExercise, changeMode) {
             if(inProgress) return;
             inProgress = true;
             
-            const activeCompleteTextField = document.querySelector(".active-complete-text-field");
-            const fieldName = activeCompleteTextField.id.split("-")[3];
-            
-            if(activeCompleteTextField.classList.contains("filled-complete-text-field")) {
-                makeButton(activeCompleteTextField.innerText);
+            optionElement.classList.remove("word-bank-option-selective");
 
-                activeCompleteTextField.innerHTML = hintsStatus ? fieldName : "&#8205;";
-                activeCompleteTextField.classList.remove("filled-complete-text-field");
-            }
+            optionElement.style.opacity = "0";
+            optionElement.style.top = "-10px";
             
-            activeCompleteTextField.classList.add("filled-complete-text-field");
-            activeCompleteTextField.innerText = optionElement.innerText;
+            setTimeout(() => {
+                const activeCompleteTextField = document.querySelector(".active-complete-text-field");
+                const fieldName = activeCompleteTextField.id.split("-")[3];
+                
+                if(activeCompleteTextField.classList.contains("filled-complete-text-field")) {
+                    makeButton(activeCompleteTextField.innerText, true);
 
-            fieldValues = {...fieldValues, [fieldName]: optionElement.innerText};
-            applyAnswerChanges();
+                    activeCompleteTextField.innerHTML = hintsStatus ? fieldName : "&#8205;";
+                    activeCompleteTextField.classList.remove("filled-complete-text-field");
+                }
+                
+                activeCompleteTextField.classList.add("filled-complete-text-field");
+                activeCompleteTextField.innerText = optionElement.innerText;
 
-            optionElement.remove();
-            emptyFieldSelector({ key: "Enter" });
-            
-            inProgress = false;
+                fieldValues = {...fieldValues, [fieldName]: optionElement.innerText};
+                applyAnswerChanges();
+
+                optionElement.remove();
+                emptyFieldSelector({ key: "Enter" });
+                
+                inProgress = false;
+            }, 300);
         }
 
-        function makeButton(option) {
+        function makeButton(option, animation = false) {
             let optionName = option;
 
             if(optionName.indexOf(" ") > -1) {
@@ -150,11 +157,17 @@ export default function taskInterface(thisExercise, changeMode) {
             
             const optionElement = createElement({
                 tag: "button",
-                attributes: { class: "word-bank-option", id: `complete-text-word-bank-${optionName}` },
+                attributes: { class: "word-bank-option word-bank-option-selective", id: `complete-text-word-bank-${optionName}` },
                 innerText: option,
+                style: animation ? { opacity: "0", top: "-10px" } : {},
                 events: [{ on: "click", call: () => selectOption(optionElement) }],
                 appendTo: wordBank
             });
+
+            setTimeout(() => {
+                optionElement.style.opacity = "";
+                optionElement.style.top = "";
+            }, 100);
         }
     }
 

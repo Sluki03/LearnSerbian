@@ -772,17 +772,11 @@ main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interf
   position: relative;
   top: 0;
   padding: 5px 10px;
-  transition: 300ms;
-}
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface .word-bank-option-selective {
   transition: 100ms;
 }
 main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface .word-bank-option-selective:hover {
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
   top: 5px;
-}
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface .word-bank-option-deselective {
-  transition: 100ms;
 }
 main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface .word-bank-option-deselective:hover {
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
@@ -1248,7 +1242,11 @@ main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .in
   position: relative;
   top: 0;
   padding: 5px 10px;
-  transition: 300ms;
+  transition: 100ms;
+}
+main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .word-bank-option-selective:hover {
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+  top: 5px;
 }
 main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .hints-button {
   display: flex;

@@ -80,25 +80,17 @@
             position: relative;
             top: 0;
             padding: 5px 10px;
-            transition: 300ms;
+            transition: 100ms;
         }
 
-        .word-bank-option-selective {
-            transition: 100ms;
-
-            &:hover {
-                box-shadow: $defLighterShadow;
-                top: 5px;
-            }
+        .word-bank-option-selective:hover {
+            box-shadow: $defLighterShadow;
+            top: 5px;
         }
 
-        .word-bank-option-deselective {
-            transition: 100ms;
-
-            &:hover {
-                box-shadow: $defLighterShadow;
-                top: -5px;
-            }
+        .word-bank-option-deselective:hover {
+            box-shadow: $defLighterShadow;
+            top: -5px;
         }
     }
 }

@@ -88,7 +88,12 @@
             position: relative;
             top: 0;
             padding: 5px 10px;
-            transition: 300ms;
+            transition: 100ms;
+        }
+
+        .word-bank-option-selective:hover {
+            box-shadow: $defLighterShadow;
+            top: 5px;
         }
     }
 
