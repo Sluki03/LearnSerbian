@@ -1834,6 +1834,9 @@ main .exercises-info p {
   text-align: center;
   padding: 10px 30px;
 }
+main .loading {
+  z-index: 99;
+}
 main .exercises-holder {
   width: 45%;
   background-image: url("../images/background.png");
@@ -2059,41 +2062,113 @@ main .exercises-holder .exercises-list .exercise-clone:hover .exercise-content i
   transition: opacity 300ms;
   z-index: 100;
 }
-.loading .rotating {
+.loading .circle-holder {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  height: 100px;
-  width: 100px;
-  background: linear-gradient(135deg, #bd1330 45%, white 45% 55%, #144eba 55% 100%);
-  border-radius: 50%;
+  height: 150px;
+  width: 150px;
+  background-color: transparent;
   position: relative;
-  -webkit-animation: rotating-div 5s linear infinite;
-          animation: rotating-div 5s linear infinite;
 }
-@-webkit-keyframes rotating-div {
-  from {
-    transform: rotate(0);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.loading .circle-holder .circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  position: absolute;
+  background-color: transparent;
+  border-radius: 50%;
 }
-@keyframes rotating-div {
-  from {
-    transform: rotate(0);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-.loading .rotating .circle {
-  height: 80px;
-  width: 80px;
-  background-color: white;
+.loading .circle-holder .circle .circle-top-border,
+.loading .circle-holder .circle .circle-bottom-border {
   border-radius: 50%;
   position: absolute;
+}
+.loading .circle-holder .circle .circle-top-border {
+  outline: 1px solid gray;
+}
+.loading .circle-holder .circle .circle-bottom-border {
+  border: 1px solid gray;
+}
+.loading .circle-holder #loading-circle-1 {
+  height: 100px;
+  width: 100px;
+  border: 15px solid white;
+}
+.loading .circle-holder #loading-circle-1 .circle-loader {
+  height: 95px;
+  width: 95px;
+  border: 10px solid transparent;
+  border-top: 10px solid #bd1330;
+  border-radius: 50%;
+  position: absolute;
+  -webkit-animation: loading-circle-1-rotating 4s linear infinite;
+          animation: loading-circle-1-rotating 4s linear infinite;
+}
+@-webkit-keyframes loading-circle-1-rotating {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes loading-circle-1-rotating {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.loading .circle-holder #loading-circle-1 .circle-top-border {
+  height: 100px;
+  width: 100px;
+}
+.loading .circle-holder #loading-circle-1 .circle-bottom-border {
+  height: 70px;
+  width: 70px;
+}
+.loading .circle-holder #loading-circle-2 {
+  height: 50px;
+  width: 50px;
+  border: 10px solid white;
+}
+.loading .circle-holder #loading-circle-2 .circle-loader {
+  height: 45px;
+  width: 45px;
+  border: 5px solid transparent;
+  border-bottom: 5px solid #144eba;
+  border-radius: 50%;
+  position: absolute;
+  -webkit-animation: loading-circle-2-rotating 2s linear infinite;
+          animation: loading-circle-2-rotating 2s linear infinite;
+}
+@-webkit-keyframes loading-circle-2-rotating {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+@keyframes loading-circle-2-rotating {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+.loading .circle-holder #loading-circle-2 .circle-top-border {
+  height: 50px;
+  width: 50px;
+}
+.loading .circle-holder #loading-circle-2 .circle-bottom-border {
+  height: 30px;
+  width: 30px;
 }
 
 nav {

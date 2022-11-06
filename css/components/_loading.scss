@@ -12,26 +12,94 @@
     transition: opacity 300ms;
     z-index: 100;
 
-    .rotating {
+    .circle-holder {
         @include add-flex;
-        height: 100px;
-        width: 100px;
-        background: $defRedBlueWhite;
-        border-radius: 50%;
+        height: 150px;
+        width: 150px;
+        background-color: transparent;
         position: relative;
-        animation: rotating-div 5s linear infinite;
-        
-        @keyframes rotating-div {
-            from { transform: rotate(0) }
-            to { transform: rotate(360deg) }
-        }
 
         .circle {
-            height: 80px;
-            width: 80px;
-            background-color: white;
-            border-radius: 50%;
+            @include add-flex;
             position: absolute;
+            background-color: transparent;
+            border-radius: 50%;
+
+            .circle-top-border,
+            .circle-bottom-border {
+                border-radius: 50%;
+                position: absolute;
+            }
+
+            .circle-top-border {
+                outline: 1px solid $defGrey;
+            }
+
+            .circle-bottom-border {
+                border: 1px solid $defGrey;
+            }
+        }
+
+        #loading-circle-1 {
+            height: 100px;
+            width: 100px;
+            border: 15px solid white;
+
+            .circle-loader {
+                height: 95px;
+                width: 95px;
+                border: 10px solid transparent;
+                border-top: 10px solid $defRed;
+                border-radius: 50%;
+                position: absolute;
+                animation: loading-circle-1-rotating 4s linear infinite;
+
+                @keyframes loading-circle-1-rotating {
+                    from { transform: rotate(0); }
+                    to { transform: rotate(360deg); }
+                }
+            }
+
+            .circle-top-border {
+                height: 100px;
+                width: 100px;
+            }
+
+            .circle-bottom-border {
+                height: 70px;
+                width: 70px;
+            }
+        }
+
+        #loading-circle-2 {
+            height: 50px;
+            width: 50px;
+            border: 10px solid white;
+
+            .circle-loader {
+                height: 45px;
+                width: 45px;
+                border: 5px solid transparent;
+                border-bottom: 5px solid $defBlue;
+                border-radius: 50%;
+                position: absolute;
+                animation: loading-circle-2-rotating 2s linear infinite;
+
+                @keyframes loading-circle-2-rotating {
+                    from { transform: rotate(0); }
+                    to { transform: rotate(-360deg); }
+                }
+            }
+
+            .circle-top-border {
+                height: 50px;
+                width: 50px;
+            }
+
+            .circle-bottom-border {
+                height: 30px;
+                width: 30px;
+            }
         }
     }
 }

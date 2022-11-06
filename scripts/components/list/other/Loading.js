@@ -10,8 +10,37 @@ export default function Loading(componentProps) {
         appendTo
     });
 
-    const rotating = createElement({ tag: "div", attributes: { class: "rotating" }, appendTo: loadingElement });
-    createElement({ tag: "div", attributes: { class: "circle" }, appendTo: rotating });
+    const circleHolder = createElement({
+        tag: "div",
+        attributes: { class: "circle-holder" },
+        appendTo: loadingElement
+    });
+
+    for(let i = 0; i < 2; i++) {
+        const circle = createElement({
+            tag: "div",
+            attributes: { class: "circle", id: `loading-circle-${i + 1}` },
+            appendTo: circleHolder
+        });
+
+        createElement({
+            tag: "div",
+            attributes: { class: "circle-loader" },
+            appendTo: circle
+        });
+
+        createElement({
+            tag: "div",
+            attributes: { class: "circle-top-border" },
+            appendTo: circle
+        });
+
+        createElement({
+            tag: "div",
+            attributes: { class: "circle-bottom-border" },
+            appendTo: circle
+        });
+    }
 
     return loadingElement;
 }
