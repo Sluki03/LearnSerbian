@@ -6,6 +6,7 @@ import randomArray from "../../functions/randomArray.js";
 import percentage from "../../functions/percentage.js";
 import breakText from "../../functions/breakText.js";
 import formatAnswer from "./formatAnswer.js";
+import formatTime from "../../functions/formatTime.js";
 
 export class Exercise {
     constructor(exerciseElement, exercise) {
@@ -35,7 +36,7 @@ export class Exercise {
 
         this.answer = "";
         this.defaultXP = 10;
-        this.score = { xp: 0, mistakes: 0 };
+        this.score = { xp: 0, mistakes: 0, time: new Date().getTime() };
 
         this.submitted = false;
         this.results = [];
@@ -154,7 +155,11 @@ export class Exercise {
                 Component.create("ExerciseModalFinished", {
                     exercise: this.exercise,
                     results: this.results,
-                    score: {...this.score, correct: parseInt(percentage(this.numberOfTasks, this.numberOfTasks - this.score.mistakes))},
+                    score: {
+                        ...this.score,
+                        correct: parseInt(percentage(this.numberOfTasks, this.numberOfTasks - this.score.mistakes)),
+                        time: formatTime(new Date().getTime() - this.score.time)
+                    },
                     appendTo: this.exerciseModal
                 });
             }

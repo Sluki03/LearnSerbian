@@ -1082,7 +1082,7 @@ main .exercise-modal .exercise-modal-task .task-holder .connect-holder {
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  gap: 20px;
+  gap: 50px;
 }
 main .exercise-modal .exercise-modal-task .task-holder .connect-holder .connect-button-holder {
   display: flex;
@@ -1139,6 +1139,9 @@ main .exercise-modal .exercise-modal-task .task-holder .connect-holder .connect-
 main .exercise-modal .exercise-modal-task .task-holder .connect-holder .connect-button-holder .disabled-multiple-choice-button:hover {
   border: 1px solid #5e5c5c;
   box-shadow: none;
+}
+main .exercise-modal .exercise-modal-task .task-holder .connect-holder .connect-button-holder .multiple-choice-button {
+  padding: 10px 15px;
 }
 main .exercise-modal .exercise-modal-task .task-holder .connect-holder .connect-button-holder .correct-button {
   background-color: rgba(0, 255, 46, 0.5);

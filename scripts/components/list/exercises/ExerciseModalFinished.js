@@ -44,7 +44,7 @@ export default function ExerciseModalFinished(componentProps) {
     exerciseModalTitle.appendChild(activeExerciseClone);
 
     const overviewBlockStrong = document.querySelectorAll(".overview-block strong");
-    const scorePropOrder = ["xp", "correct", "mistakes"];
+    const scorePropOrder = ["xp", "correct", "time"];
     const suffix = [" XP", "%"];
 
     overviewBlockStrong.forEach((strong, index) => {

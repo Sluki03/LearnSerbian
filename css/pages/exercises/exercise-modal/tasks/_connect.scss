@@ -1,6 +1,6 @@
 .connect-holder {
     @include add-flex;
-    gap: 20px;
+    gap: 50px;
 
     .connect-button-holder {
         @include add-flex(column);
@@ -9,6 +9,10 @@
 
         @include multiple-choice-button;
 
+        .multiple-choice-button {
+            padding: 10px 15px;
+        }
+        
         .correct-button {
             background-color: $defLighterGreenRGB;
         }
