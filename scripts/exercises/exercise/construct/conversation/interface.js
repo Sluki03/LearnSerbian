@@ -37,7 +37,6 @@ export default async function taskInterface(thisExercise, changeMode) {
 
         conversationAnswerCheckButton.onclick = e => checkMessage(e);
         
-        window.eventList.remove("taskCheckMessageKeyDown");
         window.eventList.add({ id: "taskCheckMessageKeyDown", type: "keydown", listener: checkMessage });
 
         changeConversationAnswerStatus();

@@ -5,8 +5,18 @@ class EventControl {
     }
 
     add(...events) {
+        let alreadyExists = false;
+
+        Object.keys(this.get()).forEach(eventId => {
+            events.forEach(event => {
+                if(eventId === event.id) alreadyExists = true;
+            });
+        });
+        
         events.forEach(event => {
+            if(alreadyExists) this.parent.removeEventListener(event.type, event.listener);
             this.parent.addEventListener(event.type, event.listener, event.options);
+
             this.#collect(event);
         });
     }

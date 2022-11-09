@@ -41,7 +41,6 @@ export default function DiacriticKeyboard(componentProps) {
         appendTo: diacriticKeyboardArrows
     });
 
-    input.eventList.remove("diacriticKeyboard");
     input.eventList.add({ id: "diacriticKeyboard", type: "input", listener: inputValueChanged });
 
     return diacriticKeyboard;

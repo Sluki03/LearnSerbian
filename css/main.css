@@ -30,7 +30,7 @@ button {
 }
 
 ::-webkit-scrollbar {
-  width: 15px;
+  display: none;
 }
 
 ::-webkit-scrollbar-track {
@@ -2833,4 +2833,40 @@ footer div a {
 
 .active-mini-modal {
   opacity: 1;
+}
+
+.scrollbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  height: 70%;
+  position: fixed;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  margin-right: 5px;
+  padding: 20px 0;
+  z-index: 95;
+}
+.scrollbar .scrollbar-line {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: row;
+  height: 100%;
+  width: 3px;
+  background-color: gray;
+  border-radius: 20px;
+  position: relative;
+}
+.scrollbar .scrollbar-line button {
+  width: 15px;
+  background: linear-gradient(rgb(200, 200, 200) 40%, gray 95%);
+  border: 1px solid #e6e3e3;
+  border-radius: 10px;
+  position: absolute;
+}
+.scrollbar .scrollbar-line button:hover {
+  background: linear-gradient(rgb(200, 200, 200) 30%, gray 80%);
 }/*# sourceMappingURL=main.css.map */

@@ -1,0 +1,32 @@
+.scrollbar {
+    @include add-flex;
+    height: 70%;
+    position: fixed;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    margin-right: 5px;
+    padding: 20px 0;
+    z-index: 95;
+
+    .scrollbar-line {
+        @include add-flex(row, center, flex-start);
+        height: 100%;
+        width: 3px;
+        background-color: $defGrey;
+        border-radius: 20px;
+        position: relative;
+
+        button {
+            width: 15px;
+            background: linear-gradient($defLightGrey 40%, $defGrey 95%);
+            border: 1px solid $defLighterGrey;
+            border-radius: 10px;
+            position: absolute;
+
+            &:hover {
+                background: linear-gradient($defLightGrey 30%, $defGrey 80%);
+            }
+        }
+    }
+}

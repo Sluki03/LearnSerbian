@@ -48,7 +48,6 @@ export default function MiniModal(componentProps) {
         miniModal.style.top = `${miniModalPositions.top}px`;
     }, 300);
 
-    window.eventList.remove("miniModalClick");
     window.eventList.add({ id: "miniModalClick", type: "click", listener: closeMiniModal });
 
     function closeMiniModal(e) {

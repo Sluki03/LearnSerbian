@@ -8,7 +8,6 @@ import { getAllPlaceholders, getFields, emptyFieldSelector } from "./functions.j
 export default function taskInterface(thisExercise, changeMode) {
     const interfaceElement = document.querySelector(".interface");
 
-    window.eventList.remove("taskCompleteTextKeydown");
     window.eventList.add({ id: "taskCompleteTextKeydown", type: "keydown", listener: emptyFieldSelector, params: thisExercise });
     
     createElement({

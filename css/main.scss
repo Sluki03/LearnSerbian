@@ -32,7 +32,8 @@ button {
 }
 
 ::-webkit-scrollbar {
-    width: 15px;
+    display: none;
+    //width: 15px;
 }
 
 ::-webkit-scrollbar-track {

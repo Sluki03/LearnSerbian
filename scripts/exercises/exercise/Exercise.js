@@ -1,9 +1,9 @@
 import { Component } from "../../components/Component.js";
 import { Convert } from "../../functions/Convert.js";
+import { Percentage } from "../../functions/percentage.js";
 import createElement from "../../functions/createElement.js";
 import { constructTask, changeMode } from "./construct/index.js";
 import randomArray from "../../functions/randomArray.js";
-import percentage from "../../functions/percentage.js";
 import breakText from "../../functions/breakText.js";
 import formatAnswer from "./formatAnswer.js";
 import formatTime from "../../functions/formatTime.js";
@@ -157,7 +157,7 @@ export class Exercise {
                     results: this.results,
                     score: {
                         ...this.score,
-                        correct: parseInt(percentage(this.numberOfTasks, this.numberOfTasks - this.score.mistakes)),
+                        correct: parseInt(Percentage.calc(this.numberOfTasks, this.numberOfTasks - this.score.mistakes)),
                         time: formatTime(new Date().getTime() - this.score.time)
                     },
                     appendTo: this.exerciseModal
