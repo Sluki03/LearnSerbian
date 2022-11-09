@@ -2856,17 +2856,23 @@ footer div a {
   flex-direction: row;
   height: 100%;
   width: 3px;
-  background-color: gray;
+  background-color: rgb(200, 200, 200);
   border-radius: 20px;
   position: relative;
+  transition: background-color 0.3s;
+}
+.scrollbar .scrollbar-line:hover {
+  background-color: gray;
 }
 .scrollbar .scrollbar-line button {
-  width: 15px;
-  background: linear-gradient(rgb(200, 200, 200) 40%, gray 95%);
-  border: 1px solid #e6e3e3;
-  border-radius: 10px;
+  width: 10px;
+  background: #144eba;
+  border: none;
+  border-radius: 15px;
   position: absolute;
+  transition: background 0.2s, width 0.2s;
 }
-.scrollbar .scrollbar-line button:hover {
-  background: linear-gradient(rgb(200, 200, 200) 30%, gray 80%);
+.scrollbar .scrollbar-line button:hover, .scrollbar .scrollbar-line button:focus {
+  background: #0589f5;
+  width: 15px;
 }/*# sourceMappingURL=main.css.map */

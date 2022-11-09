@@ -13,19 +13,26 @@
         @include add-flex(row, center, flex-start);
         height: 100%;
         width: 3px;
-        background-color: $defGrey;
+        background-color: $defLightGrey;
         border-radius: 20px;
         position: relative;
+        transition: background-color .3s;
+
+        &:hover {
+            background-color: $defGrey;
+        }
 
         button {
-            width: 15px;
-            background: linear-gradient($defLightGrey 40%, $defGrey 95%);
-            border: 1px solid $defLighterGrey;
-            border-radius: 10px;
+            width: 10px;
+            background: $defBlue;
+            border: none;
+            border-radius: 15px;
             position: absolute;
+            transition: background .2s, width .2s;
 
-            &:hover {
-                background: linear-gradient($defLightGrey 30%, $defGrey 80%);
+            &:hover, &:focus {
+                background: $defLighterBlue;
+                width: 15px;
             }
         }
     }
