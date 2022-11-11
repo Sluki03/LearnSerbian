@@ -35,11 +35,11 @@ export default function Scrollbar(componentProps) {
 
     function buttonScrolling(e) {
         buttonScrollingStatus = true;
-        
-        window.eventList.add(
-            { id: "scrollbarMouseMove", type: "mousemove", listener: mouseMove },
-            { id: "scrollbarMouseUp", type: "mouseup", listener: mouseUp }
-        );
+
+        window.eventList.add({
+            scrollbarMouseMove: { type: "mousemove", listener: mouseMove },
+            scrollbarMouseUp: { type: "mouseup", listener: mouseUp }
+        });
 
         let clientY = e.clientY;
 

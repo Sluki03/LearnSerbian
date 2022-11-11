@@ -5,20 +5,55 @@ class EventControl {
     }
 
     add(...events) {
-        let alreadyExists = false;
-
-        Object.keys(this.get()).forEach(eventId => {
-            events.forEach(event => {
-                if(eventId === event.id) alreadyExists = true;
-            });
-        });
-        
         events.forEach(event => {
-            if(alreadyExists) this.parent.removeEventListener(event.type, event.listener);
-            this.parent.addEventListener(event.type, event.listener, event.options);
+            const addingType = this.#getAddingType(event);
 
-            this.#collect(event);
+            if(addingType === "advanced") {
+                Object.keys(event).forEach((key, index) => {
+                    const value = Object.values(event)[index];
+
+                    const validEvent = { id: key, ...value };
+                    applyEvent(this, validEvent);
+                });
+            }
+
+            else applyEvent(this, event);
         });
+
+        function applyEvent(thisEvent, event) {
+            const alreadyExists = checkExistence();
+            
+            if(alreadyExists) thisEvent.parent.removeEventListener(event.type, event.listener);
+            thisEvent.parent.addEventListener(event.type, event.listener, event.options);
+
+            thisEvent.#collect(event);
+
+            function checkExistence() {
+                let result = false;
+
+                Object.keys(thisEvent.get()).forEach(eventId => {
+                    events.forEach(event => {
+                        if(eventId === event.id) result = true;
+                    });
+                });
+
+                return result;
+            }
+        }
+    }
+
+    #getAddingType(event) {
+        let hasId = false;
+
+        Object.keys(event).forEach((key, index) => {
+            if(key === "id") {
+                const value = Object.values(event)[index];
+                if(typeof value === "string") hasId = true;
+            }
+        });
+
+        const type = hasId ? "classic" : "advanced";
+        return type;
     }
 
     remove(...eventIds) {
