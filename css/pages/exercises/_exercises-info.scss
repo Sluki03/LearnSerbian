@@ -2,6 +2,7 @@
     @include add-flex(column, flex-start);
     width: 55%;
     position: relative;
+    transform: scale(1);
     overflow: auto;
 
     @include interactive-title(70px);

@@ -3,8 +3,13 @@ import { Percentage } from "../../../functions/percentage.js";
 
 export default function Scrollbar(componentProps) {
     const { builtIn } = componentProps;
-    const { appendTo } = componentProps.params;
+    const { target, ignoreTarget, appendTo } = componentProps.params;
 
+    const validTarget = builtIn ? builtIn.parentElement : target;
+    const targetElement = ignoreTarget ? document.documentElement : validTarget ? validTarget : document.documentElement;
+
+    const relativeToViewport = targetElement.isEqualNode(document.documentElement);
+    
     const scrollbarElement = builtIn ? builtIn : createElement({
         tag: "div",
         attributes: { class: "scrollbar" },
@@ -19,18 +24,22 @@ export default function Scrollbar(componentProps) {
 
     const scrollbarButton = createElement({
         tag: "button",
-        style: { height: `${Percentage.calc(document.documentElement.scrollHeight, document.documentElement.clientHeight)}%` },
+        style: { height: `${Percentage.calc(targetElement.scrollHeight, targetElement.clientHeight)}%` },
         events: [{ on: "mousedown", call: buttonScrolling }],
         appendTo: scrollbarLine
     });
 
-    window.eventList.add({ id: "scrollbarScroll", type: "scroll", listener: scrolling });
+    (relativeToViewport ? window : targetElement).eventList.add({ id: "scrollbarScroll", type: "scroll", listener: scrolling });
 
     let buttonScrollingStatus = false;
 
+    absoluteScrollbar();
+
     function scrolling() {
+        absoluteScrollbar();
+        
         if(buttonScrollingStatus) return;
-        scrollbarButton.style.top = `${Percentage.calc(document.documentElement.scrollHeight, document.documentElement.scrollTop)}%`;
+        scrollbarButton.style.top = `${Percentage.calc(targetElement.scrollHeight, targetElement.scrollTop)}%`;
     }
 
     function buttonScrolling(e) {
@@ -70,15 +79,22 @@ export default function Scrollbar(componentProps) {
 
             const buttonTopPercentage = Percentage.calc(scrollbarLineHeight, scrollbarButtonTop);
                 
-            document.documentElement.style.scrollBehavior = "auto";
-            document.documentElement.scrollTop = Percentage.of(document.documentElement.scrollHeight, buttonTopPercentage);
-            document.documentElement.style.scrollBehavior = "smooth";
+            targetElement.style.scrollBehavior = "auto";
+            targetElement.scrollTop = Percentage.of(targetElement.scrollHeight, buttonTopPercentage);
+            targetElement.style.scrollBehavior = "smooth";
         }
 
         function mouseUp() {
             buttonScrollingStatus = false;
             window.eventList.remove("scrollbarMouseMove", "scrollbarMouseUp");
         }
+    }
+
+    function absoluteScrollbar() {
+        if(relativeToViewport) return;
+        if(!scrollbarElement.classList.contains("absolute-scrollbar")) scrollbarElement.classList.add("absolute-scrollbar");
+    
+        scrollbarElement.style.top = `${Percentage.of(validTarget.clientHeight, 50) + validTarget.scrollTop}px`;
     }
 
     return scrollbarElement;
