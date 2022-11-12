@@ -26,11 +26,15 @@ export default function setTranslatableWords(parent, text, translation) {
         const miniModal = document.querySelector(".mini-modal");
         if(miniModal && miniModal.id === `mini-modal-word-${word}`) return;
         
-        setTimeout(() => Component.create("MiniModal", {
-            target: e.target,
-            id: `word-${word}`,
-            content: translatedWord
-        }), miniModal ? 300 : 0);
+        setTimeout(() => {
+            Component.create("MiniModal", {
+                target: e.target,
+                id: `word-${word}`,
+                content: translatedWord
+            });
+
+            if(!responsiveVoice.isPlaying()) responsiveVoice.speak(word);
+        }, miniModal ? 300 : 0);
     }
 
     function translate(word) {

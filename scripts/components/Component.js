@@ -16,6 +16,7 @@ import Typing from "./list/other/Typing.js";
 import DiacriticKeyboard from "./list/other/DiacriticKeyboard.js";
 import MiniModal from "./list/other/MiniModal.js";
 import Scrollbar from "./list/other/Scrollbar.js";
+import SpeakButton from "./list/other/SpeakButton.js";
 
 import { Convert } from "../functions/Convert.js";
 import { buildEventList } from "../functions/EventControl.js";
@@ -24,7 +25,7 @@ const components = {
     PanelsList, ExercisesList, ExerciseModal, ExerciseModalContent, ExerciseModalTask,
     ExerciseModalFinished, ExerciseModalReview, Loading, Nav, Footer,
     InteractiveTitle, ModalOptions, ArrowButton, ClassicModal, Typing,
-    DiacriticKeyboard, MiniModal, Scrollbar
+    DiacriticKeyboard, MiniModal, Scrollbar, SpeakButton
 };
 
 export const Component = { create, render, update };

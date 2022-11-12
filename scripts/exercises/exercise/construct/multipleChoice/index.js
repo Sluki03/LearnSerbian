@@ -74,6 +74,8 @@ export default function multipleChoice(thisExercise) {
             if(button.id === buttonId) {
                 button.classList.add("active-multiple-choice-button");
                 thisExercise.answerChanged(randomOptions[id - 1]);
+
+                if(thisExercise.currentTask.speak && !responsiveVoice.isPlaying()) responsiveVoice.speak(randomOptions[id - 1]);
             }
         });
     }

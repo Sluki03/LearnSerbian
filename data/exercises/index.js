@@ -1,6 +1,6 @@
 import { newWords } from "./tasks/newWords.js";
 import { test1 } from "./tasks/test1.js";
-import { pastTense } from "./tasks/pastTense.js";
+import { hearing } from "./tasks/hearing.js";
 
 // difficulty options: easy, medium, hard
 // task types: multipleChoice, multipleChoiceImages, translate, conversation, connect, completeText
@@ -40,10 +40,10 @@ export const exercisesData = [
     },
 
     {
-        name: "Past Tense",
+        name: "Hearing",
         difficulty: "medium",
-        tips: "#New types#**connect, completeText**",
-        tasks: pastTense,
+        tips: "#Responsive Voice API#**This API has been successfully implemented into the all types of tasks!**",
+        tasks: hearing,
         //lives: 2
     }
 ];

@@ -1,4 +1,5 @@
 import taskInterface from "./interface.js";
+import { Component } from "../../../../components/Component.js";
 import createElement from "../../../../functions/createElement.js";
 import setTranslatableWords from "../../setTranslatableWords.js";
 
@@ -13,9 +14,24 @@ export default function translate(thisExercise, changeMode) {
         appendTo: taskHolder
     });
     
+    const translateHolderDisplay = createElement({
+        tag: "div",
+        attributes: { class: "translate-holder-display" },
+        appendTo: translateHolder
+    });
+
+    if(thisExercise.currentTask.speak) {
+        if(!responsiveVoice.isPlaying()) responsiveVoice.speak(thisExercise.currentTask.text);
+        
+        Component.create("SpeakButton", {
+            speak: thisExercise.currentTask.text,
+            appendTo: translateHolderDisplay
+        });
+    }
+    
     const translateHolderP = createElement({
         tag: "p",
-        appendTo: translateHolder
+        appendTo: translateHolderDisplay
     });
 
     createElement({ tag: "div", attributes: { class: "interface" }, appendTo: translateHolder });

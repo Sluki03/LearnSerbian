@@ -16,18 +16,31 @@ export default function connect(thisExercise) {
     
     const randomKeys = randomArray(Object.keys(thisExercise.currentTask.options));
     const randomValues = randomArray(Object.values(thisExercise.currentTask.options));
-    
-    randomKeys.forEach(key => createElement(addButton(key, firstButtonHolder)));
-    randomValues.forEach(value => createElement(addButton(value, secondButtonHolder)));
+
+    const random = randomArray([randomKeys, randomValues]);
+    let buttonCount = 0;
+
+    random.forEach((optionsArray, index) => {
+        const validHolder = index === 0 ? firstButtonHolder : secondButtonHolder;
+        optionsArray.forEach(option => addButton(option, validHolder));
+    });
 
     function addButton(innerText, appendTo) {
-        return {
+        buttonCount++;
+        
+        const button = createElement({
             tag: "button",
             attributes: { class: "multiple-choice-button" },
             innerText,
             events: [{ on: "click", call: selectButton }],
             appendTo
-        };
+        });
+
+        createElement({
+            tag: "span",
+            innerText: buttonCount,
+            appendTo: button
+        });
     }
 
     window.eventList.add({ id: "taskConnectKeydown", type: "keydown", listener: selectButton });
@@ -37,10 +50,9 @@ export default function connect(thisExercise) {
     function selectButton(e) {
         e.preventDefault();
 
-        const numberRange = randomKeys.length;
         const validButtons = ["Escape"];
 
-        for(let i = 1; i <= numberRange; i++) validButtons.push(i.toString());
+        for(let i = 1; i <= buttonCount; i++) validButtons.push(i.toString());
         if(e.type === "keydown" && validButtons.indexOf(e.key) === -1) return;
 
         const keydownId = parseInt(e.key);
@@ -55,13 +67,21 @@ export default function connect(thisExercise) {
         }
 
         else {
-            const targetButtonHolder = selectStatus ? secondButtonHolder : firstButtonHolder;
-            keydownButton = targetButtonHolder.children[keydownId - 1];
+            const allButtons = document.querySelectorAll(".multiple-choice-button");
+            keydownButton = allButtons[keydownId - 1];
         }
         
         const button = e.type === "keydown" ? keydownButton : e.target;
         if(buttonAlreadyChecked(button)) return;
-
+        
+        const speakStatus = randomValues.indexOf(button.innerText.split("\n")[0]) > -1;
+        
+        if(
+            thisExercise.currentTask.speak &&
+            speakStatus &&
+            !responsiveVoice.isPlaying()
+        ) responsiveVoice.speak(button.innerText.split("\n")[0]);
+        
         const parent = button.parentElement;
      
         if(button.classList.contains("active-multiple-choice-button")) {
@@ -105,7 +125,7 @@ export default function connect(thisExercise) {
             second: document.querySelector(".second-selected-button")
         }
         
-        const answer = [selectedButtons.first.innerText, selectedButtons.second.innerText];
+        const answer = [selectedButtons.first.innerText.split("\n")[0], selectedButtons.second.innerText.split("\n")[0]];
         thisExercise.answerChanged(answer);
 
         let isCorrect = false;

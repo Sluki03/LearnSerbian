@@ -4,13 +4,18 @@
     gap: 20px;
     margin: 15px 0;
 
-    & > p {
-        color: $defDarkGrey;
-        font-size: set-size(lg);
-        border: 1px solid $defDarkGrey;
-        border-radius: 20px;
-        position: relative;
-        padding: 10px 15px;
+    .translate-holder-display {
+        @include add-flex;
+        gap: 10px;
+
+        p {
+            color: $defDarkGrey;
+            font-size: set-size(lg);
+            border: 1px solid $defDarkGrey;
+            border-radius: 20px;
+            position: relative;
+            padding: 10px 15px;
+        }
     }
 
     .interface {
@@ -56,11 +61,13 @@
             @include add-flex(row, flex-start, flex-start);
             flex-wrap: wrap;
             gap: 5px;
-            height: 150px;
+            max-height: 200px;
+            min-height: 150px;
             width: 100%;
             border: 3px solid $defLightGrey;
             border-radius: 20px;
             padding: 10px 15px;
+            overflow-y: auto;
         }
 
         .word-bank-options-holder {

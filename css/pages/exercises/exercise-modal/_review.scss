@@ -26,10 +26,6 @@
         margin-bottom: 50px;
         overflow: auto;
 
-        &::-webkit-scrollbar {
-            width: 0;
-        }
-
         .exercise-modal-review-task {
             @include add-flex(column);
             width: 100%;

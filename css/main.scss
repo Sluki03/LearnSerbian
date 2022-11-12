@@ -33,26 +33,6 @@ button {
 
 ::-webkit-scrollbar {
     display: none;
-    //width: 15px;
-}
-
-::-webkit-scrollbar-track {
-    background: transparent;
-    border-left: 1px solid $defLightGrey;
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-}
-
-::-webkit-scrollbar-thumb {
-    background: $defLightGrey;
-    border-radius: 10px;
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    border: solid 1px $defLightGrey;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #bebebe;
 }
 
 ::selection {

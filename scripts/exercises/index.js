@@ -12,4 +12,6 @@ window.addEventListener("load", () => {
     
     const exercisesHolder = document.querySelector(".exercises-holder");
     scrollingParallax({ scroll: exercisesHolder, bg: exercisesHolder });
+
+    responsiveVoice.setDefaultVoice("Serbian Male");
 });

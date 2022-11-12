@@ -1,0 +1,21 @@
+.speak-button {
+    @include add-flex;
+    background-color: $defLightBlue;
+    border: 1px solid white;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 5px;
+    transition: 300ms;
+
+    &:hover {
+        background-color: $defLighterBlue;
+        box-shadow: $defLightShadow;
+    }
+
+    img {
+        height: 35px;
+        width: 35px;
+        object-fit: contain;
+        filter: invert(1);
+    }
+}

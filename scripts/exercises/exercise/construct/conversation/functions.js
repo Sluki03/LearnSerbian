@@ -120,6 +120,11 @@ export async function sendMessage(thisExercise, message, e) {
         messageContent.style.alignItems = "";
 
         setTranslatableWords(messageContent, participantAnswer, message.current.translation);
+
+        if(thisExercise.currentTask.speak && !responsiveVoice.isPlaying()) {
+            responsiveVoice.speak(participantAnswer);
+            Component.create("SpeakButton", { speak: participantAnswer, appendTo: messageHolder });
+        }
     }
 
     const audio = new Audio(`./sfx/${message.role === "user" ? "sent" : "received"}.mp3`);

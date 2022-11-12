@@ -7,8 +7,10 @@ import { getAllPlaceholders, getFields, emptyFieldSelector } from "./functions.j
 
 export default function taskInterface(thisExercise, changeMode) {
     const interfaceElement = document.querySelector(".interface");
+    const { checkButton } = thisExercise.elements;
 
     window.eventList.add({ id: "taskCompleteTextKeydown", type: "keydown", listener: emptyFieldSelector, params: thisExercise });
+    checkButton.onclick = () => window.eventList.remove("taskCompleteTextKeydown");
     
     createElement({
         tag: "p",
@@ -141,6 +143,8 @@ export default function taskInterface(thisExercise, changeMode) {
 
                 optionElement.remove();
                 emptyFieldSelector({ key: "Enter" });
+
+                if(thisExercise.currentTask.speak && !responsiveVoice.isPlaying()) responsiveVoice.speak(optionElement.innerText);
                 
                 inProgress = false;
             }, 300);

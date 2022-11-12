@@ -398,7 +398,7 @@ export class Exercise {
             switch(currentTask.type) {
                 case "conversation": return currentTask.messages[messageNumber].acceptableAnswers;
                 case "connect":
-                    const firstSelectedButton = document.querySelector(".first-selected-button")?.innerText;
+                    const firstSelectedButton = document.querySelector(".first-selected-button")?.innerText.split("\n")[0];
                     let correctTranslation = "";
                     
                     if(currentTask.options.hasOwnProperty(firstSelectedButton)) Object.keys(currentTask.options).forEach((key, index) => {

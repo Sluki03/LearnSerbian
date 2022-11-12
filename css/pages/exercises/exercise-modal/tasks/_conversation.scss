@@ -58,19 +58,29 @@
             padding: 15px;
             overflow-y: auto;
 
-            &::-webkit-scrollbar {
-                display: none;
-            }
-
             .participant-message-holder {
                 @include add-flex(row, flex-start);
-
+                gap: 10px;
+                
                 .participant-message {
                     @include add-flex(row, center, flex-start);
                     gap: 5px;
                     color: $defDarkGrey;
                     background-color: rgba(255, 255, 255, 0.8);
                     border-radius: 0px 15px 15px 15px;
+                }
+
+                .speak-button {
+                    opacity: 0;
+
+                    img {
+                        height: 30px;
+                        width: 30px;
+                    }
+                }
+
+                &:hover .speak-button {
+                    opacity: 1;
                 }
             }
 
