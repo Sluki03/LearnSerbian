@@ -4,10 +4,11 @@
         height: 100%;
         width: 100%;
         max-width: 330px;
+        min-height: 60px;
         color: $defDarkGrey;
         font-size: set-size(lg);
         background: white;
-        border: 1px solid $defDarkGrey;
+        border: 1px solid $defGrey;
         border-radius: 20px;
         cursor: pointer;
         position: relative;

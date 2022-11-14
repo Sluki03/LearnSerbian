@@ -587,10 +587,11 @@ main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .
   height: 100%;
   width: 100%;
   max-width: 330px;
+  min-height: 60px;
   color: #5e5c5c;
   font-size: 25px;
   background: white;
-  border: 1px solid #5e5c5c;
+  border: 1px solid gray;
   border-radius: 20px;
   cursor: pointer;
   position: relative;
@@ -1003,10 +1004,11 @@ main .exercise-modal .exercise-modal-task .task-holder .exercise-modal-task-conv
   height: 100%;
   width: 100%;
   max-width: 330px;
+  min-height: 60px;
   color: #5e5c5c;
   font-size: 25px;
   background: white;
-  border: 1px solid #5e5c5c;
+  border: 1px solid gray;
   border-radius: 20px;
   cursor: pointer;
   position: relative;
@@ -1101,10 +1103,11 @@ main .exercise-modal .exercise-modal-task .task-holder .connect-holder .connect-
   height: 100%;
   width: 100%;
   max-width: 330px;
+  min-height: 60px;
   color: #5e5c5c;
   font-size: 25px;
   background: white;
-  border: 1px solid #5e5c5c;
+  border: 1px solid gray;
   border-radius: 20px;
   cursor: pointer;
   position: relative;
@@ -2898,11 +2901,11 @@ footer div a {
   justify-content: center;
   flex-direction: row;
   background-color: #0559f5;
-  border: 1px solid white;
+  border: none;
   border-radius: 50%;
   cursor: pointer;
   padding: 5px;
-  transition: 300ms;
+  transition: background-color 0.3s, box-shadow 0.3s;
 }
 .speak-button:hover {
   background-color: #0589f5;
