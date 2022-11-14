@@ -1,15 +1,17 @@
 import { Component } from "../../components/Component.js";
 import breakText from "../../functions/breakText.js";
 
-export default function setTranslatableWords(parent, text, translation) {
+export default function setTranslatableWords(parent, text, translation, englishSerbian = false) {
     const brokenText = breakText(text, { lowerCase: false });
     let updatedText = text;
 
     const allTranslations = Object.keys(translation || {});
 
     brokenText.forEach(word => {
-        const translationId = allTranslations.indexOf(word.toLowerCase());
-        if(translationId > -1) updatedText = updatedText.replace(word, `<span class="word word-${word.toLowerCase()}">${word}</span>`);
+        const translationId = allTranslations.indexOf(word.toLowerCase()) === -1 ? allTranslations.indexOf(word) : allTranslations.indexOf(word.toLowerCase());
+        const lowerCaseStatus = allTranslations.indexOf(word.toLowerCase()) > -1;
+        
+        if(translationId > -1) updatedText = updatedText.replace(word, `<span class="word word-${lowerCaseStatus ? word.toLowerCase() : word}">${word}</span>`);
     });
 
     parent.innerHTML = updatedText;
@@ -33,7 +35,7 @@ export default function setTranslatableWords(parent, text, translation) {
                 content: translatedWord
             });
 
-            if(!responsiveVoice.isPlaying()) responsiveVoice.speak(word);
+            if(!responsiveVoice.isPlaying()) responsiveVoice.speak(englishSerbian ? translatedWord : word);
         }, miniModal ? 300 : 0);
     }
 

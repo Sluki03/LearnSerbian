@@ -1,5 +1,5 @@
 export const hearing = [
-    {
+    /*{
         type: "multipleChoice",
         title: "How to say \"color\" in Serbian?",
         acceptableAnswers: ["boja"],
@@ -29,7 +29,7 @@ export const hearing = [
             **Pas** is a **dog**.
         `,
         speak: true
-    },
+    },*/
 
     {
         type: "translate",
@@ -51,17 +51,37 @@ export const hearing = [
         speak: true
     },
 
+    /*{
+        type: "translate",
+        title: "Translate the following text:",
+        text: "What is your name?",
+        mode: {
+            type: "random",
+            switch: true
+        },
+        options: ["Kako", "se", "zoveš"],
+        acceptableAnswers: ["Kako se zoves", "Kako se zoveš", "Kako je tvoje ime"],
+        translation: {
+            What: "Šta? / Kako?",
+            is: "je",
+            your: "tvoje",
+            name: "ime"
+        },
+        englishSerbian: true,
+        speak: false
+    },
+
     {
         type: "conversation",
         title: "Have a conversation.",
-        participant: "Komsija Deki",
+        participant: "Komšija Deki",
         mode: {
             type: "random",
             switch: true
         },
         messages: [
             {
-                content: "Sta ima doktore?",
+                content: "Šta ima doktore?",
                 userContent: "Oh, where are you man, what's up?",
                 acceptableAnswers: [
                     "Oo, gde si ti covece, sta ima?",
@@ -75,12 +95,12 @@ export const hearing = [
             },
 
             {
-                content: "Na kojoj poziciji u firmi radis sada?",
+                content: "Na kojoj poziciji u firmi radiš sada?",
                 userContent: "I am a CEO.",
                 acceptableAnswers: [
                     "Ja sam direktor.",
                     "Ja sam CEO.",
-                    "Ja sam generalni izvrsi direktor."
+                    "Ja sam generalni izvrsni direktor."
                 ],
                 options: ["Ja sam direktor.", "Ja sam domar."]
             }
@@ -91,11 +111,11 @@ export const hearing = [
     {
         type: "connect",
         title: "Connect the right words.",
-        options: { dog: "pas", cat: "macka", president: "predsednik", killer: "ubica" },
+        options: { dog: "pas", cat: "mačka", president: "predsednik", killer: "ubica" },
         speak: true
-    },
+    },*/
 
-    {
+    /*{
         type: "completeText",
         title: "Complete the following sentence:",
         text: "Deste ljudi, sta ima, <how> ste? Evo, evo, mi smo <good>. Inace, ja se <to be called> Milorad i dolazim iz <Belgrade>.",
@@ -110,5 +130,5 @@ export const hearing = [
             switch: true
         },
         speak: true
-    }
+    }*/
 ]

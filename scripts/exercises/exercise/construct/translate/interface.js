@@ -39,7 +39,7 @@ export default function taskInterface(thisExercise) {
         });
     }
 
-    if(thisExercise.currentTask.mode.type === "wordBank") {
+    else {
         const textHolder = createElement({
             tag: "div",
             attributes: { class: "text-holder" },
@@ -53,13 +53,13 @@ export default function taskInterface(thisExercise) {
         });
         
         if(thisExercise.prevModeValues.wordBank.translate.textHolder.length > 0) {        
-            thisExercise.prevModeValues.wordBank.translate.textHolder.forEach(option => createElement(getWordBankOption(option, true)));
-            thisExercise.prevModeValues.wordBank.translate.wordBank.forEach(option => createElement(getWordBankOption(option, true)));
+            thisExercise.prevModeValues.wordBank.translate.textHolder.forEach(option => getWordBankOption(option, true));
+            thisExercise.prevModeValues.wordBank.translate.wordBank.forEach(option => getWordBankOption(option, true));
         }
         
         else {
             const randomOptions = randomArray(thisExercise.currentTask.options);
-            randomOptions.forEach(option => createElement(getWordBankOption(option)));
+            randomOptions.forEach(option => getWordBankOption(option));
         }
 
         function getWordBankOption(option, isDynamic) {
@@ -69,14 +69,28 @@ export default function taskInterface(thisExercise) {
             const moveOptionType = isDynamic ? selectiveType.substring(0, selectiveType.length - 3) : "select";
             
             const selectiveTypeAppendTo = isDynamic ? selectiveType === "selective" ? wordBankOptionsHolder : textHolder : wordBankOptionsHolder;
+            const optionHolderStatus = selectiveTypeAppendTo.classList.contains("word-bank-options-holder");
             
-            return {
+            const optionHolder = optionHolderStatus ? createElement({
+                tag: "div",
+                attributes: { class: `word-bank-option-holder word-bank-option-holder-${option}` },
+                appendTo: selectiveTypeAppendTo
+            }) : null;
+            
+            const optionElement = createElement({
                 tag: "button",
                 attributes: { class: `word-bank-option word-bank-option-${option} ${optionSelectiveTypeClass}` },
                 innerText: option,
                 events: [{ on: "click", call: () => moveOption(option, moveOptionType) }],
-                appendTo: selectiveTypeAppendTo
-            };
+                appendTo: optionHolderStatus ? optionHolder : selectiveTypeAppendTo
+            });
+
+            if(optionHolder) {
+                const { height, width } = optionElement.getBoundingClientRect();
+
+                optionHolder.style.height = `${height}px`;
+                optionHolder.style.width = `${width}px`;
+            }
         }
     }
 
@@ -98,9 +112,9 @@ export default function taskInterface(thisExercise) {
         inProgress = true;
         
         const textHolder = document.querySelector(".text-holder");
-        const wordBankOptionsHolder = document.querySelector(".word-bank-options-holder");
 
         const selectedOption = document.querySelector(`.word-bank-option-${option}`);
+        const selectedOptionHolder = document.querySelector(`.word-bank-option-holder-${option}`);
 
         const removeableClasses = ["word-bank-option-selective", "word-bank-option-deselective"];
         
@@ -122,7 +136,7 @@ export default function taskInterface(thisExercise) {
         setTimeout(() => {
             selectedOption.remove();
 
-            const appendElement = type === "select" ? textHolder : wordBankOptionsHolder;
+            const appendElement = type === "select" ? textHolder : selectedOptionHolder;
             const invertedType = type === "select" ? "deselect" : "select";
 
             appendElement.appendChild(selectedOptionClone);

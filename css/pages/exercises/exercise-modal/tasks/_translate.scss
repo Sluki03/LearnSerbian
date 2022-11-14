@@ -7,14 +7,14 @@
     .translate-holder-display {
         @include add-flex;
         gap: 10px;
+        border: 1px solid $defDarkGrey;
+        border-radius: 20px;
+        padding: 10px;
 
         p {
             color: $defDarkGrey;
             font-size: set-size(lg);
-            border: 1px solid $defDarkGrey;
-            border-radius: 20px;
             position: relative;
-            padding: 10px 15px;
         }
     }
 
@@ -75,6 +75,11 @@
             flex-wrap: wrap;
             gap: 10px;
             width: 100%;
+        }
+
+        .word-bank-option-holder {
+            background-color: $defLightGrey;
+            border-radius: 15px;
         }
 
         .word-bank-option {

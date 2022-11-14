@@ -289,6 +289,7 @@ export class Exercise {
         this.afterCheck();
 
         window.eventList.remove("taskCheckKeyDown");
+        if(window.eventList.get("taskCompleteTextKeydown")) window.eventList.remove("taskCompleteTextKeydown");
 
         const isCorrect = this.isCorrect();
 

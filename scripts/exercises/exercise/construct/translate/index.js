@@ -36,6 +36,6 @@ export default function translate(thisExercise, changeMode) {
 
     createElement({ tag: "div", attributes: { class: "interface" }, appendTo: translateHolder });
 
-    setTranslatableWords(translateHolderP, thisExercise.currentTask.text, thisExercise.currentTask.translation);
+    setTranslatableWords(translateHolderP, thisExercise.currentTask.text, thisExercise.currentTask.translation, thisExercise.currentTask.englishSerbian);
     taskInterface(thisExercise);
 }

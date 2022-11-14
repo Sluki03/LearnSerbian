@@ -72,7 +72,7 @@ export default function connect(thisExercise) {
         }
         
         const button = e.type === "keydown" ? keydownButton : e.target;
-        if(buttonAlreadyChecked(button)) return;
+        if(buttonAlreadyChecked(button) || button.disabled) return;
         
         const speakStatus = randomValues.indexOf(button.innerText.split("\n")[0]) > -1;
         

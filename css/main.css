@@ -682,14 +682,14 @@ main .exercise-modal .exercise-modal-task .task-holder .translate-holder .transl
   justify-content: center;
   flex-direction: row;
   gap: 10px;
+  border: 1px solid #5e5c5c;
+  border-radius: 20px;
+  padding: 10px;
 }
 main .exercise-modal .exercise-modal-task .task-holder .translate-holder .translate-holder-display p {
   color: #5e5c5c;
   font-size: 25px;
-  border: 1px solid #5e5c5c;
-  border-radius: 20px;
   position: relative;
-  padding: 10px 15px;
 }
 main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface {
   display: flex;
@@ -751,6 +751,10 @@ main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interf
   flex-wrap: wrap;
   gap: 10px;
   width: 100%;
+}
+main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface .word-bank-option-holder {
+  background-color: rgb(200, 200, 200);
+  border-radius: 15px;
 }
 main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface .word-bank-option {
   color: #5e5c5c;
@@ -866,10 +870,6 @@ main .exercise-modal .exercise-modal-task .task-holder .exercise-modal-task-conv
 }
 main .exercise-modal .exercise-modal-task .task-holder .exercise-modal-task-conversation .conversation-holder .conversation-messages .participant-message-holder .speak-button {
   opacity: 0;
-}
-main .exercise-modal .exercise-modal-task .task-holder .exercise-modal-task-conversation .conversation-holder .conversation-messages .participant-message-holder .speak-button img {
-  height: 30px;
-  width: 30px;
 }
 main .exercise-modal .exercise-modal-task .task-holder .exercise-modal-task-conversation .conversation-holder .conversation-messages .participant-message-holder:hover .speak-button {
   opacity: 1;
@@ -2909,8 +2909,8 @@ footer div a {
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
 }
 .speak-button img {
-  height: 35px;
-  width: 35px;
+  height: 30px;
+  width: 30px;
   -o-object-fit: contain;
      object-fit: contain;
   filter: invert(1);
