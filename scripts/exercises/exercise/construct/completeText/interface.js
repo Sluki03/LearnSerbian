@@ -156,14 +156,29 @@ export default function taskInterface(thisExercise, changeMode) {
                 optionName = Convert.cssToJsStandard(optionName);
             }
             
+            const optionHolderSelector = document.querySelector(`.word-bank-option-holder-${optionName}`);
+            
+            const optionHolder = optionHolderSelector ? optionHolderSelector : createElement({
+                tag: "div",
+                attributes: { class: `word-bank-option-holder word-bank-option-holder-${optionName}` },
+                appendTo: wordBank
+            });
+            
             const optionElement = createElement({
                 tag: "button",
                 attributes: { class: "word-bank-option word-bank-option-selective", id: `complete-text-word-bank-${optionName}` },
                 innerText: option,
                 style: animation ? { opacity: "0", top: "-10px" } : {},
                 events: [{ on: "click", call: () => selectOption(optionElement) }],
-                appendTo: wordBank
+                appendTo: optionHolder
             });
+
+            if(optionHolderSelector === null) {
+                const { height, width } = optionElement.getBoundingClientRect();
+
+                optionHolder.style.height = `${height}px`;
+                optionHolder.style.width = `${width}px`;
+            }
 
             setTimeout(() => {
                 optionElement.style.opacity = "";

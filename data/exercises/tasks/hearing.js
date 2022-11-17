@@ -29,7 +29,7 @@ export const hearing = [
             **Pas** is a **dog**.
         `,
         speak: true
-    },*/
+    },
 
     {
         type: "translate",
@@ -51,7 +51,7 @@ export const hearing = [
         speak: true
     },
 
-    /*{
+    {
         type: "translate",
         title: "Translate the following text:",
         text: "What is your name?",
@@ -115,7 +115,7 @@ export const hearing = [
         speak: true
     },*/
 
-    /*{
+    {
         type: "completeText",
         title: "Complete the following sentence:",
         text: "Deste ljudi, sta ima, <how> ste? Evo, evo, mi smo <good>. Inace, ja se <to be called> Milorad i dolazim iz <Belgrade>.",
@@ -130,5 +130,5 @@ export const hearing = [
             switch: true
         },
         speak: true
-    }*/
+    }
 ]

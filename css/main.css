@@ -1252,6 +1252,10 @@ main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .in
   gap: 10px;
   width: 100%;
 }
+main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .word-bank-option-holder {
+  background-color: rgb(200, 200, 200);
+  border-radius: 15px;
+}
 main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .word-bank-option {
   color: #5e5c5c;
   font-size: 20px;

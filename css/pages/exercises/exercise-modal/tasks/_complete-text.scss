@@ -78,6 +78,11 @@
             width: 100%;
         }
 
+        .word-bank-option-holder {
+            background-color: $defLightGrey;
+            border-radius: 15px;
+        }
+
         .word-bank-option {
             color: $defDarkGrey;
             font-size: set-size(md);
