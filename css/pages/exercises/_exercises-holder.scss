@@ -11,6 +11,43 @@
     position: relative;
     overflow: auto;
     
+    .exercises-search {
+        @include add-flex;
+        gap: 10px;
+        margin-top: 10px;
+        position: relative;
+        transition: 300ms;
+        
+        input {
+            color: $defDarkGrey;
+            font-size: set-size(lg);
+            border: 2px solid $defLightGrey;
+            border-radius: 10px;
+            box-shadow: $defLighterShadow;
+            outline: none;
+            padding: 5px 10px;
+            transition: 300ms;
+
+            &:hover, &:focus {
+                border: 2px solid $defGrey;
+                box-shadow: $defLightShadow;
+            }
+
+            &::placeholder {
+                text-transform: capitalize;
+            }
+        }
+
+        img {
+            height: 35px;
+            width: 35px;
+            object-fit: contain;
+            background-color: rgba(255, 255, 255, 0.7);
+            position: absolute;
+            right: 5px;
+        }
+    }
+    
     .exercises-list {
         @include add-flex(column, flex-start);
         gap: 100px;

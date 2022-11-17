@@ -1865,6 +1865,48 @@ main .exercises-holder {
   position: relative;
   overflow: auto;
 }
+main .exercises-holder .exercises-search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 10px;
+  margin-top: 10px;
+  position: relative;
+  transition: 300ms;
+}
+main .exercises-holder .exercises-search input {
+  color: #5e5c5c;
+  font-size: 25px;
+  border: 2px solid rgb(200, 200, 200);
+  border-radius: 10px;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+  outline: none;
+  padding: 5px 10px;
+  transition: 300ms;
+}
+main .exercises-holder .exercises-search input:hover, main .exercises-holder .exercises-search input:focus {
+  border: 2px solid gray;
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
+}
+main .exercises-holder .exercises-search input::-moz-placeholder {
+  text-transform: capitalize;
+}
+main .exercises-holder .exercises-search input:-ms-input-placeholder {
+  text-transform: capitalize;
+}
+main .exercises-holder .exercises-search input::placeholder {
+  text-transform: capitalize;
+}
+main .exercises-holder .exercises-search img {
+  height: 35px;
+  width: 35px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  background-color: rgba(255, 255, 255, 0.7);
+  position: absolute;
+  right: 5px;
+}
 main .exercises-holder .exercises-list {
   display: flex;
   align-items: center;

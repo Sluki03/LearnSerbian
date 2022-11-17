@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="images/logo.png" type="image/x-icon"/>
         <link rel="stylesheet" href="./css/main.css">
-        <script defer>console.log = () => {}</script>
+        <!--<script defer>console.log = () => {}</script>-->
         <script defer src="https://code.responsivevoice.org/responsivevoice.js?key=Y8q6gksp"></script>
         <script defer type="module" src="./scripts/exercises/index.js"></script>
         <title>Learn Serbian - Exercises</title>
@@ -50,6 +50,16 @@
             
             <section class="exercises-holder">
                 <div class="loading" data-component="loading"></div>
+
+                <div class="exercises-search">
+                    <img src="./images/icons/search-icon.png" alt="SEARCH">
+                    
+                    <input
+                        type="text"
+                        placeholder="search exercises..."
+                    >
+                </div>
+
                 <div class="exercises-list" data-component="exercises-list"></div>
             </section>
         </main>

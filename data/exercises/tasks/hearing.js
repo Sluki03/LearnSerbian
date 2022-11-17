@@ -1,5 +1,5 @@
 export const hearing = [
-    /*{
+    {
         type: "multipleChoice",
         title: "How to say \"color\" in Serbian?",
         acceptableAnswers: ["boja"],
@@ -113,7 +113,7 @@ export const hearing = [
         title: "Connect the right words.",
         options: { dog: "pas", cat: "mačka", president: "predsednik", killer: "ubica" },
         speak: true
-    },*/
+    },
 
     {
         type: "completeText",
