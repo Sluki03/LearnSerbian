@@ -5,12 +5,11 @@
         font-size: set-size(xl);
         font-weight: bold;
         text-transform: uppercase;
-        background-position-x: 0;
         border: none;
         border-radius: 30px;
         cursor: pointer;
-        padding: 5px 10px;
-        margin: 5px 0;
+        padding: 10px 10px;
+        margin: 20px 0;
         transition: 300ms;
     
         &:hover {
@@ -25,7 +24,7 @@
 
         &:hover {
             text-shadow: none;
-            background-color: $defDarkRed;
+            background-color: $defRed;
         }
     }
 }

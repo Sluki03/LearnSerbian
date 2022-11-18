@@ -425,12 +425,11 @@ main .exercise-modal .exercise-modal-content .flag-button {
   font-size: 30px;
   font-weight: bold;
   text-transform: uppercase;
-  background-position-x: 0;
   border: none;
   border-radius: 30px;
   cursor: pointer;
-  padding: 5px 10px;
-  margin: 5px 0;
+  padding: 10px 10px;
+  margin: 20px 0;
   transition: 300ms;
 }
 main .exercise-modal .exercise-modal-content .flag-button:hover {
@@ -449,7 +448,7 @@ main .exercise-modal .exercise-modal-content .flag-button {
   width: 100%;
   position: -webkit-sticky;
   position: sticky;
-  bottom: 5px;
+  bottom: 15px;
 }
 main .exercise-modal .exercise-modal-content .flag-button:hover {
   box-shadow: 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
@@ -1310,7 +1309,7 @@ main .exercise-modal .exercise-modal-task .task-button-holder {
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  gap: 10px;
+  gap: 20px;
   width: 80%;
   position: absolute;
   bottom: -100px;
@@ -1322,12 +1321,11 @@ main .exercise-modal .exercise-modal-task .task-button-holder .flag-button {
   font-size: 30px;
   font-weight: bold;
   text-transform: uppercase;
-  background-position-x: 0;
   border: none;
   border-radius: 30px;
   cursor: pointer;
-  padding: 5px 10px;
-  margin: 5px 0;
+  padding: 10px 10px;
+  margin: 20px 0;
   transition: 300ms;
 }
 main .exercise-modal .exercise-modal-task .task-button-holder .flag-button:hover {
@@ -1542,21 +1540,20 @@ main .exercise-modal .exercise-modal-finished .finished-holder .overview-holder 
   padding-top: 50px;
 }
 main .exercise-modal .exercise-modal-finished .finished-holder button {
-  color: #144eba;
+  color: white;
   font-size: 25px;
   font-weight: bold;
   text-transform: capitalize;
-  background-color: transparent;
-  border: 1px solid #bd1330;
+  background-color: #059c20;
+  border: none;
   cursor: pointer;
   margin-top: 30px;
-  padding: 5px 10px;
+  padding: 10px 20px;
   transition: 300ms;
 }
 main .exercise-modal .exercise-modal-finished .finished-holder button:hover {
   color: white;
-  background-color: #bd1330;
-  border: 1px solid #144eba;
+  background-color: #0559f5;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
 }
 main .exercise-modal .exercise-modal-finished .finished-holder button {
@@ -1572,12 +1569,11 @@ main .exercise-modal .exercise-modal-finished .flag-button {
   font-size: 30px;
   font-weight: bold;
   text-transform: uppercase;
-  background-position-x: 0;
   border: none;
   border-radius: 30px;
   cursor: pointer;
-  padding: 5px 10px;
-  margin: 5px 0;
+  padding: 10px 10px;
+  margin: 20px 0;
   transition: 300ms;
 }
 main .exercise-modal .exercise-modal-finished .flag-button:hover {
@@ -1739,12 +1735,11 @@ main .exercise-modal .exercise-modal-review .flag-button {
   font-size: 30px;
   font-weight: bold;
   text-transform: uppercase;
-  background-position-x: 0;
   border: none;
   border-radius: 30px;
   cursor: pointer;
-  padding: 5px 10px;
-  margin: 5px 0;
+  padding: 10px 10px;
+  margin: 20px 0;
   transition: 300ms;
 }
 main .exercise-modal .exercise-modal-review .flag-button:hover {
@@ -1879,7 +1874,7 @@ main .exercises-holder .exercises-search input {
   color: #5e5c5c;
   font-size: 25px;
   border: 2px solid rgb(200, 200, 200);
-  border-radius: 10px;
+  border-radius: 30px;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
   outline: none;
   padding: 5px 10px;
@@ -1899,13 +1894,12 @@ main .exercises-holder .exercises-search input::placeholder {
   text-transform: capitalize;
 }
 main .exercises-holder .exercises-search img {
-  height: 35px;
-  width: 35px;
+  height: 30px;
+  width: 30px;
   -o-object-fit: contain;
      object-fit: contain;
-  background-color: rgba(255, 255, 255, 0.7);
   position: absolute;
-  right: 5px;
+  right: 13px;
 }
 main .exercises-holder .exercises-list {
   display: flex;
@@ -2391,7 +2385,7 @@ footer div a {
 .divider {
   min-height: 3px;
   width: 80%;
-  background: linear-gradient(135deg, #bd1330 35%, #144eba 65%);
+  background: transparent;
   position: relative;
   top: 0;
   margin: 5px 0;
@@ -2706,21 +2700,20 @@ footer div a {
   width: 80%;
 }
 .classic-modal .button-holder button {
-  color: #144eba;
+  color: white;
   font-size: 25px;
   font-weight: bold;
   text-transform: capitalize;
-  background-color: transparent;
-  border: 1px solid #bd1330;
+  background-color: #059c20;
+  border: none;
   cursor: pointer;
   margin-top: 30px;
-  padding: 5px 10px;
+  padding: 10px 20px;
   transition: 300ms;
 }
 .classic-modal .button-holder button:hover {
   color: white;
-  background-color: #bd1330;
-  border: 1px solid #144eba;
+  background-color: #0559f5;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
 }
 .classic-modal .button-holder button {
