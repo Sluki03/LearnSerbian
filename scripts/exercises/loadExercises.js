@@ -13,17 +13,17 @@ export default function loadExercises() {
 
     let activeExerciseId = 0;
 
-    search();
-    searchInput.oninput = search;
+    load();
+    searchInput.oninput = load;
 
-    function search() {
+    function load() {
         let exercises = exercisesData;
         const exerciseHolders = document.querySelectorAll(".exercise-holder");
 
         if((exerciseHolders.length > 0) && (searchInput.value === prevSearchInputValue)) return;
         prevSearchInputValue = searchInput.value;
 
-        if(searchInput.value) exercises = getMatches();
+        if(searchInput.value) exercises = search();
 
         [...list.children].forEach(child => {
             if(child.classList.contains("exercise-holder")) child.remove();
@@ -36,25 +36,50 @@ export default function loadExercises() {
             const [exerciseTitle, articleExercise] = [...exerciseHolder.children];
             const [exerciseDifficulty, exerciseP] = [...exerciseTitle.children];
 
-            exerciseDifficulty.style.backgroundColor = getDifficultyColor(exercise.difficulty);
-            exerciseP.innerText = exercise.name;
+            exerciseDifficulty.style.backgroundColor = getDifficultyColor(exercise.difficulty || "none");
+            exerciseP.innerHTML = exercise.name;
 
-            articleExercise.onclick = () => openExerciseModal(articleExercise, exercise, index + 1);
+            if(exercise.noResults) exerciseHolder.id = "exercise-holder-error";
+            else articleExercise.onclick = () => openExerciseModal(articleExercise, exercise, index + 1);
 
             const [exerciseContent] = [...articleExercise.children];
 
             if(exercise.icon) createElement({ tag: "img", attributes: { src: exercise.icon, alt: exercise.name }, appendTo: exerciseContent });
-            else Component.create("InteractiveTitle", { title: index + 1, appendTo: exerciseContent });
+            else Component.create("InteractiveTitle", { title: exercise.searchIndex ? exercise.searchIndex : index + 1, appendTo: exerciseContent });
         });
 
-        function getMatches() {
-            const newExercisesList = [];
+        function search() {
+            const newExercises = [];
 
-            exercises.forEach(exercise => {
-                if(exercise.name.indexOf(searchInput.value) > -1) newExercisesList.push(exercise);
+            exercises.forEach((exercise, index) => {
+                const matches = [...exercise.name.toLowerCase().matchAll(searchInput.value.toLowerCase())];
+                if(matches.length === 0) return;
+
+                const validCaseMatches = [];
+
+                matches.forEach(match => {
+                    let validCaseMatch = "";
+                    for(let i = match.index; i < match.index + searchInput.value.length; i++) validCaseMatch += exercise.name[i];
+                
+                    validCaseMatches.push(validCaseMatch);
+                });
+
+                let newName = exercise.name;
+
+                validCaseMatches.forEach(validMatch => {
+                    newName = exercise.name.replaceAll(validMatch, `<mark>${validMatch}</mark>`);
+                });
+
+                newExercises.push({...exercise, name: newName, searchIndex: index + 1});
             });
 
-            return newExercisesList;
+            if(newExercises.length === 0) newExercises.push({
+                name: "No results",
+                icon: "./images/icons/exclamation-icon.png",
+                noResults: true
+            });
+
+            return newExercises;
         }
     }
     

@@ -2550,7 +2550,7 @@ footer div a {
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
   position: absolute;
   left: 35%;
-  padding: 3px 5px;
+  padding: 5px 10px;
   transform: translate(-100%, 50%);
 }
 .exercise-holder .exercise-title .exercise-difficulty {
@@ -2564,6 +2564,10 @@ footer div a {
   color: #5e5c5c;
   font-size: 25px;
   margin: 0;
+}
+.exercise-holder .exercise-title p mark {
+  color: white;
+  background-color: #0589f5;
 }
 .exercise-holder .exercise {
   display: flex;
@@ -2647,6 +2651,19 @@ footer div a {
 .exercise-holder .exercise-clone:hover .exercise-content img {
   height: 50px;
   width: 50px;
+}
+
+#exercise-holder-error .exercise {
+  background: linear-gradient(135deg, rgb(200, 200, 200) 45%, white 45% 55%, #5e5c5c 55% 100%);
+  cursor: default;
+}
+#exercise-holder-error .exercise:hover {
+  transform: rotate(0);
+}
+#exercise-holder-error .exercise:hover .exercise-content {
+  height: 165px;
+  width: 165px;
+  transform: rotate(0);
 }
 
 .classic-modal {

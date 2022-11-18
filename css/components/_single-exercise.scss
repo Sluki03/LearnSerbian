@@ -12,7 +12,7 @@
         box-shadow: $defLightShadow;
         position: absolute;
         left: 35%;
-        padding: 3px 5px;
+        padding: 5px 10px;
         transform: translate(-100%, 50%);
 
         .exercise-difficulty {
@@ -27,8 +27,28 @@
             color: $defDarkGrey;
             font-size: set-size(lg);
             margin: 0;
+
+            mark {
+                color: white;
+                background-color: $defLighterBlue;
+            }
         }
     }
 
     @include exercise;
+}
+
+#exercise-holder-error .exercise {
+    background: $defGreyGradient;
+    cursor: default;
+    
+    &:hover {
+        transform: rotate(0);
+    }
+
+    &:hover .exercise-content {
+        height: 165px;
+        width: 165px;
+        transform: rotate(0);
+    }
 }
