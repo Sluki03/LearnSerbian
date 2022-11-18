@@ -2857,16 +2857,16 @@ footer div a {
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  gap: 5px;
+  gap: 10px;
 }
 .diacritic-keyboard div button {
-  height: 35px;
-  width: 35px;
+  height: 45px;
+  width: 45px;
   color: #5e5c5c;
-  font-size: 15px;
+  font-size: 20px;
   background-color: transparent;
-  border: 1px solid rgb(200, 200, 200);
-  border-radius: 5px;
+  border: 2px solid rgb(200, 200, 200);
+  border-radius: 15px;
   cursor: pointer;
   position: relative;
   top: 0;
@@ -2874,12 +2874,11 @@ footer div a {
   transition: 300ms;
 }
 .diacritic-keyboard div button:hover {
-  border: 1px solid #5e5c5c;
-  top: -5px;
+  border: 2px solid #5e5c5c;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
 }
 .diacritic-keyboard .diacritic-keyboard-letters {
-  width: 200px;
+  width: 250px;
 }
 
 .mini-modal {
