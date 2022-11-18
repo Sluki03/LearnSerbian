@@ -1,12 +1,12 @@
 @mixin flag-button {
     .flag-button {
-        color: $defBlue;
+        color: white;
+        background-color: $defBlue;
         font-size: set-size(xl);
         font-weight: bold;
         text-transform: uppercase;
-        background: linear-gradient(-45deg, $defBlue 35%, white 35% 65%, $defRed 65%);
         background-position-x: 0;
-        border: 1px solid $defBlue;
+        border: none;
         border-radius: 30px;
         cursor: pointer;
         padding: 5px 10px;
@@ -14,18 +14,18 @@
         transition: 300ms;
     
         &:hover {
-            color: white;
-            background-position-x: 450px;
+            text-shadow: white 0px 0px 2px;
+            background-color: $defLightBlue;
         }
     }
 
     .disabled-flag-button {
-        cursor: default;
+        cursor: not-allowed;
         opacity: 0.5;
 
         &:hover {
-            color: $defBlue;
-            background-position-x: 0;
+            text-shadow: none;
+            background-color: $defDarkRed;
         }
     }
 }

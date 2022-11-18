@@ -420,13 +420,13 @@ main .exercise-modal .exercise-modal-content p {
   font-size: 20px;
 }
 main .exercise-modal .exercise-modal-content .flag-button {
-  color: #144eba;
+  color: white;
+  background-color: #144eba;
   font-size: 30px;
   font-weight: bold;
   text-transform: uppercase;
-  background: linear-gradient(-45deg, #144eba 35%, white 35% 65%, #bd1330 65%);
   background-position-x: 0;
-  border: 1px solid #144eba;
+  border: none;
   border-radius: 30px;
   cursor: pointer;
   padding: 5px 10px;
@@ -434,16 +434,16 @@ main .exercise-modal .exercise-modal-content .flag-button {
   transition: 300ms;
 }
 main .exercise-modal .exercise-modal-content .flag-button:hover {
-  color: white;
-  background-position-x: 450px;
+  text-shadow: white 0px 0px 2px;
+  background-color: #0559f5;
 }
 main .exercise-modal .exercise-modal-content .disabled-flag-button {
-  cursor: default;
+  cursor: not-allowed;
   opacity: 0.5;
 }
 main .exercise-modal .exercise-modal-content .disabled-flag-button:hover {
-  color: #144eba;
-  background-position-x: 0;
+  text-shadow: none;
+  background-color: #bd1330;
 }
 main .exercise-modal .exercise-modal-content .flag-button {
   width: 100%;
@@ -1317,13 +1317,13 @@ main .exercise-modal .exercise-modal-task .task-button-holder {
   transition: 300ms;
 }
 main .exercise-modal .exercise-modal-task .task-button-holder .flag-button {
-  color: #144eba;
+  color: white;
+  background-color: #144eba;
   font-size: 30px;
   font-weight: bold;
   text-transform: uppercase;
-  background: linear-gradient(-45deg, #144eba 35%, white 35% 65%, #bd1330 65%);
   background-position-x: 0;
-  border: 1px solid #144eba;
+  border: none;
   border-radius: 30px;
   cursor: pointer;
   padding: 5px 10px;
@@ -1331,16 +1331,16 @@ main .exercise-modal .exercise-modal-task .task-button-holder .flag-button {
   transition: 300ms;
 }
 main .exercise-modal .exercise-modal-task .task-button-holder .flag-button:hover {
-  color: white;
-  background-position-x: 450px;
+  text-shadow: white 0px 0px 2px;
+  background-color: #0559f5;
 }
 main .exercise-modal .exercise-modal-task .task-button-holder .disabled-flag-button {
-  cursor: default;
+  cursor: not-allowed;
   opacity: 0.5;
 }
 main .exercise-modal .exercise-modal-task .task-button-holder .disabled-flag-button:hover {
-  color: #144eba;
-  background-position-x: 0;
+  text-shadow: none;
+  background-color: #bd1330;
 }
 main .exercise-modal .exercise-modal-task .task-button-holder .switch-modes-button {
   display: none;
@@ -1567,13 +1567,13 @@ main .exercise-modal .exercise-modal-finished .active-finished-holder {
   left: 0;
 }
 main .exercise-modal .exercise-modal-finished .flag-button {
-  color: #144eba;
+  color: white;
+  background-color: #144eba;
   font-size: 30px;
   font-weight: bold;
   text-transform: uppercase;
-  background: linear-gradient(-45deg, #144eba 35%, white 35% 65%, #bd1330 65%);
   background-position-x: 0;
-  border: 1px solid #144eba;
+  border: none;
   border-radius: 30px;
   cursor: pointer;
   padding: 5px 10px;
@@ -1581,16 +1581,16 @@ main .exercise-modal .exercise-modal-finished .flag-button {
   transition: 300ms;
 }
 main .exercise-modal .exercise-modal-finished .flag-button:hover {
-  color: white;
-  background-position-x: 450px;
+  text-shadow: white 0px 0px 2px;
+  background-color: #0559f5;
 }
 main .exercise-modal .exercise-modal-finished .disabled-flag-button {
-  cursor: default;
+  cursor: not-allowed;
   opacity: 0.5;
 }
 main .exercise-modal .exercise-modal-finished .disabled-flag-button:hover {
-  color: #144eba;
-  background-position-x: 0;
+  text-shadow: none;
+  background-color: #bd1330;
 }
 main .exercise-modal .exercise-modal-finished .flag-button {
   width: 80%;
@@ -1734,13 +1734,13 @@ main .exercise-modal .exercise-modal-review .review-holder > div:last-of-type {
   border: none;
 }
 main .exercise-modal .exercise-modal-review .flag-button {
-  color: #144eba;
+  color: white;
+  background-color: #144eba;
   font-size: 30px;
   font-weight: bold;
   text-transform: uppercase;
-  background: linear-gradient(-45deg, #144eba 35%, white 35% 65%, #bd1330 65%);
   background-position-x: 0;
-  border: 1px solid #144eba;
+  border: none;
   border-radius: 30px;
   cursor: pointer;
   padding: 5px 10px;
@@ -1748,16 +1748,16 @@ main .exercise-modal .exercise-modal-review .flag-button {
   transition: 300ms;
 }
 main .exercise-modal .exercise-modal-review .flag-button:hover {
-  color: white;
-  background-position-x: 450px;
+  text-shadow: white 0px 0px 2px;
+  background-color: #0559f5;
 }
 main .exercise-modal .exercise-modal-review .disabled-flag-button {
-  cursor: default;
+  cursor: not-allowed;
   opacity: 0.5;
 }
 main .exercise-modal .exercise-modal-review .disabled-flag-button:hover {
-  color: #144eba;
-  background-position-x: 0;
+  text-shadow: none;
+  background-color: #bd1330;
 }
 main .exercise-modal .exercise-modal-review .flag-button {
   width: 80%;
