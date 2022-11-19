@@ -3,9 +3,9 @@ import { Percentage } from "../../../functions/percentage.js";
 
 export default function Scrollbar(componentProps) {
     const { builtIn } = componentProps;
-    const { target, ignoreTarget, appendTo } = componentProps.params;
+    const { ignoreTarget, appendTo } = componentProps.params;
 
-    const validTarget = builtIn ? builtIn.parentElement : target;
+    const validTarget = builtIn ? builtIn.parentElement : appendTo;
     const targetElement = ignoreTarget ? document.documentElement : validTarget ? validTarget : document.documentElement;
 
     const relativeToViewport = targetElement.isEqualNode(document.documentElement);
@@ -21,25 +21,36 @@ export default function Scrollbar(componentProps) {
         attributes: { class: "scrollbar-line" },
         appendTo: scrollbarElement
     });
-
+    
     const scrollbarButton = createElement({
         tag: "button",
-        style: { height: `${Percentage.calc(targetElement.scrollHeight, targetElement.clientHeight)}%` },
         events: [{ on: "mousedown", call: buttonScrolling }],
         appendTo: scrollbarLine
     });
 
     (relativeToViewport ? window : targetElement).eventList.add({ id: "scrollbarScroll", type: "scroll", listener: scrolling });
-
+    
+    window.eventList.add({ id: "scrollbarResize", type: "resize", listener: resizing });
+    resizing();
+    
     let buttonScrollingStatus = false;
 
     absoluteScrollbar();
+
+    return scrollbarElement;
 
     function scrolling() {
         absoluteScrollbar();
         
         if(buttonScrollingStatus) return;
         scrollbarButton.style.top = `${Percentage.calc(targetElement.scrollHeight, targetElement.scrollTop)}%`;
+    }
+
+    function resizing() {
+        absoluteScrollbar();
+        
+        scrollbarElement.style.display = targetElement.scrollHeight === targetElement.clientHeight ? "none" : "";
+        scrollbarButton.style.height = `${Percentage.calc(targetElement.scrollHeight, targetElement.clientHeight)}%`;
     }
 
     function buttonScrolling(e) {
@@ -96,6 +107,4 @@ export default function Scrollbar(componentProps) {
     
         scrollbarElement.style.top = `${Percentage.of(validTarget.clientHeight, 50) + validTarget.scrollTop}px`;
     }
-
-    return scrollbarElement;
 }
