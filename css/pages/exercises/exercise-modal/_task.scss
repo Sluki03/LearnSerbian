@@ -112,6 +112,11 @@
 
         @include wide-button;
 
+        .wide-button {
+            position: relative;
+            bottom: 15px;
+        }
+
         .switch-modes-button {
             display: none;
 
