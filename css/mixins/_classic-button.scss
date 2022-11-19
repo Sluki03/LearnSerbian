@@ -1,20 +1,19 @@
 @mixin classic-button {
     button {
-        color: $defBlue;
+        color: white;
         font-size: set-size(lg);
         font-weight: bold;
         text-transform: capitalize;
-        background-color: transparent;
-        border: 1px solid $defRed;
+        background-color: $defGreen;
+        border: none;
         cursor: pointer;
         margin-top: 30px;
-        padding: 5px 10px;
+        padding: 10px 20px;
         transition: 300ms;
 
         &:hover {
             color: white;
-            background-color: $defRed;
-            border: 1px solid $defBlue;
+            background-color: $defLightBlue;
             box-shadow: $defLightShadow;
         }
     }

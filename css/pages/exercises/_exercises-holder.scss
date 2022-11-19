@@ -22,7 +22,7 @@
             color: $defDarkGrey;
             font-size: set-size(lg);
             border: 2px solid $defLightGrey;
-            border-radius: 10px;
+            border-radius: 30px;
             box-shadow: $defLighterShadow;
             outline: none;
             padding: 5px 10px;
@@ -39,12 +39,11 @@
         }
 
         img {
-            height: 35px;
-            width: 35px;
+            height: 30px;
+            width: 30px;
             object-fit: contain;
-            background-color: rgba(255, 255, 255, 0.7);
             position: absolute;
-            right: 5px;
+            right: 13px;
         }
     }
     

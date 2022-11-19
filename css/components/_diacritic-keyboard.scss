@@ -6,16 +6,16 @@
 
     div {
         @include add-flex;
-        gap: 5px;
+        gap: 10px;
 
         button {
-            height: 35px;
-            width: 35px;
+            height: 45px;
+            width: 45px;
             color: $defDarkGrey;
-            font-size: set-size(sm);
+            font-size: set-size(md);
             background-color: transparent;
-            border: 1px solid $defLightGrey;
-            border-radius: 5px;
+            border: 2px solid $defLightGrey;
+            border-radius: 15px;
             cursor: pointer;
             position: relative;
             top: 0;
@@ -23,14 +23,13 @@
             transition: 300ms;
 
             &:hover {
-                border: 1px solid $defDarkGrey;
-                top: -5px;
+                border: 2px solid $defDarkGrey;
                 box-shadow: $defLighterShadow;
             }
         }
     }
 
     .diacritic-keyboard-letters {
-        width: 200px;
+        width: 250px;
     }
 }
