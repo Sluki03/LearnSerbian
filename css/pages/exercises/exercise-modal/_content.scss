@@ -27,9 +27,9 @@
         font-size: set-size(md);
     }
 
-    @include flag-button;
+    @include wide-button;
 
-    .flag-button {
+    .wide-button {
         width: 100%;
         position: sticky;
         bottom: 15px;
@@ -50,5 +50,6 @@
 
     button {
         position: absolute;
+        bottom: 0;
     }
 }

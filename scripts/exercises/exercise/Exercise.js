@@ -278,7 +278,7 @@ export class Exercise {
         const [progressBar, progressBarP] = [...this.taskProgressBarHolder.children];
         const [progressBarLine] = [...progressBar.children];
 
-        const classPass = (checkButton !== null && !checkButton.classList.contains("disabled-flag-button")) || additionalPass;
+        const classPass = (checkButton !== null && !checkButton.classList.contains("disabled-wide-button")) || additionalPass;
         
         if(!classPass) return;
 
@@ -537,8 +537,8 @@ export class Exercise {
         
         this.answer = newAnswer;
 
-        if(this.answer) checkButton.classList.remove("disabled-flag-button");
-        else if(!checkButton.classList.contains("disabled-flag-button")) checkButton.classList.add("disabled-flag-button");
+        if(this.answer) checkButton.classList.remove("disabled-wide-button");
+        else if(!checkButton.classList.contains("disabled-wide-button")) checkButton.classList.add("disabled-wide-button");
     }
 
     construct(changeMode = false) {

@@ -107,7 +107,7 @@ export default function ExerciseModalReview(componentProps) {
         else taskExplanation.remove();
     });
 
-    const continueButton = document.querySelector(".exercise-modal-review .flag-button");
+    const continueButton = document.querySelector(".exercise-modal-review .wide-button");
     continueButton.onclick = modalOptionsReturn;
     let inProgress = false;
 

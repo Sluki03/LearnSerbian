@@ -419,7 +419,7 @@ main .exercise-modal .exercise-modal-content p {
   color: #5e5c5c;
   font-size: 20px;
 }
-main .exercise-modal .exercise-modal-content .flag-button {
+main .exercise-modal .exercise-modal-content .wide-button {
   color: white;
   background-color: #144eba;
   font-size: 30px;
@@ -432,25 +432,25 @@ main .exercise-modal .exercise-modal-content .flag-button {
   margin: 20px 0;
   transition: 300ms;
 }
-main .exercise-modal .exercise-modal-content .flag-button:hover {
+main .exercise-modal .exercise-modal-content .wide-button:hover {
   text-shadow: white 0px 0px 2px;
   background-color: #0559f5;
 }
-main .exercise-modal .exercise-modal-content .disabled-flag-button {
+main .exercise-modal .exercise-modal-content .disabled-wide-button {
   cursor: not-allowed;
   opacity: 0.5;
 }
-main .exercise-modal .exercise-modal-content .disabled-flag-button:hover {
+main .exercise-modal .exercise-modal-content .disabled-wide-button:hover {
   text-shadow: none;
   background-color: #bd1330;
 }
-main .exercise-modal .exercise-modal-content .flag-button {
+main .exercise-modal .exercise-modal-content .wide-button {
   width: 100%;
   position: -webkit-sticky;
   position: sticky;
   bottom: 15px;
 }
-main .exercise-modal .exercise-modal-content .flag-button:hover {
+main .exercise-modal .exercise-modal-content .wide-button:hover {
   box-shadow: 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
 }
 main .exercise-modal .started-exercise-modal-content {
@@ -462,6 +462,7 @@ main .exercise-modal #extended-exercise-modal-content {
 }
 main .exercise-modal #extended-exercise-modal-content button {
   position: absolute;
+  bottom: 0;
 }
 main .exercise-modal .task-lives {
   display: flex;
@@ -1315,7 +1316,7 @@ main .exercise-modal .exercise-modal-task .task-button-holder {
   bottom: -100px;
   transition: 300ms;
 }
-main .exercise-modal .exercise-modal-task .task-button-holder .flag-button {
+main .exercise-modal .exercise-modal-task .task-button-holder .wide-button {
   color: white;
   background-color: #144eba;
   font-size: 30px;
@@ -1328,15 +1329,15 @@ main .exercise-modal .exercise-modal-task .task-button-holder .flag-button {
   margin: 20px 0;
   transition: 300ms;
 }
-main .exercise-modal .exercise-modal-task .task-button-holder .flag-button:hover {
+main .exercise-modal .exercise-modal-task .task-button-holder .wide-button:hover {
   text-shadow: white 0px 0px 2px;
   background-color: #0559f5;
 }
-main .exercise-modal .exercise-modal-task .task-button-holder .disabled-flag-button {
+main .exercise-modal .exercise-modal-task .task-button-holder .disabled-wide-button {
   cursor: not-allowed;
   opacity: 0.5;
 }
-main .exercise-modal .exercise-modal-task .task-button-holder .disabled-flag-button:hover {
+main .exercise-modal .exercise-modal-task .task-button-holder .disabled-wide-button:hover {
   text-shadow: none;
   background-color: #bd1330;
 }
@@ -1366,11 +1367,11 @@ main .exercise-modal .exercise-modal-task .task-button-holder .active-switch-mod
   border: 3px solid #5e5c5c;
   opacity: 1;
 }
-main .exercise-modal .exercise-modal-task .task-button-holder .flag-button {
+main .exercise-modal .exercise-modal-task .task-button-holder .wide-button {
   width: 100%;
   margin: 0;
 }
-main .exercise-modal .exercise-modal-task .task-button-holder .flag-button:hover {
+main .exercise-modal .exercise-modal-task .task-button-holder .wide-button:hover {
   box-shadow: 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
 }
 main .exercise-modal .exercise-modal-task .active-task-button-holder {
@@ -1563,7 +1564,7 @@ main .exercise-modal .exercise-modal-finished .active-finished-holder {
   opacity: 1;
   left: 0;
 }
-main .exercise-modal .exercise-modal-finished .flag-button {
+main .exercise-modal .exercise-modal-finished .wide-button {
   color: white;
   background-color: #144eba;
   font-size: 30px;
@@ -1576,25 +1577,25 @@ main .exercise-modal .exercise-modal-finished .flag-button {
   margin: 20px 0;
   transition: 300ms;
 }
-main .exercise-modal .exercise-modal-finished .flag-button:hover {
+main .exercise-modal .exercise-modal-finished .wide-button:hover {
   text-shadow: white 0px 0px 2px;
   background-color: #0559f5;
 }
-main .exercise-modal .exercise-modal-finished .disabled-flag-button {
+main .exercise-modal .exercise-modal-finished .disabled-wide-button {
   cursor: not-allowed;
   opacity: 0.5;
 }
-main .exercise-modal .exercise-modal-finished .disabled-flag-button:hover {
+main .exercise-modal .exercise-modal-finished .disabled-wide-button:hover {
   text-shadow: none;
   background-color: #bd1330;
 }
-main .exercise-modal .exercise-modal-finished .flag-button {
+main .exercise-modal .exercise-modal-finished .wide-button {
   width: 80%;
   margin: 0;
   position: absolute;
   bottom: 5px;
 }
-main .exercise-modal .exercise-modal-finished .flag-button:hover {
+main .exercise-modal .exercise-modal-finished .wide-button:hover {
   box-shadow: 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
 }
 main .exercise-modal .exercise-modal-review {
@@ -1729,7 +1730,7 @@ main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-revie
 main .exercise-modal .exercise-modal-review .review-holder > div:last-of-type {
   border: none;
 }
-main .exercise-modal .exercise-modal-review .flag-button {
+main .exercise-modal .exercise-modal-review .wide-button {
   color: white;
   background-color: #144eba;
   font-size: 30px;
@@ -1742,25 +1743,25 @@ main .exercise-modal .exercise-modal-review .flag-button {
   margin: 20px 0;
   transition: 300ms;
 }
-main .exercise-modal .exercise-modal-review .flag-button:hover {
+main .exercise-modal .exercise-modal-review .wide-button:hover {
   text-shadow: white 0px 0px 2px;
   background-color: #0559f5;
 }
-main .exercise-modal .exercise-modal-review .disabled-flag-button {
+main .exercise-modal .exercise-modal-review .disabled-wide-button {
   cursor: not-allowed;
   opacity: 0.5;
 }
-main .exercise-modal .exercise-modal-review .disabled-flag-button:hover {
+main .exercise-modal .exercise-modal-review .disabled-wide-button:hover {
   text-shadow: none;
   background-color: #bd1330;
 }
-main .exercise-modal .exercise-modal-review .flag-button {
+main .exercise-modal .exercise-modal-review .wide-button {
   width: 80%;
   margin: 0;
   position: absolute;
   bottom: 5px;
 }
-main .exercise-modal .exercise-modal-review .flag-button:hover {
+main .exercise-modal .exercise-modal-review .wide-button:hover {
   box-shadow: 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
 }
 main .exercise-modal .active-exercise-modal-review {

@@ -1,5 +1,5 @@
-@mixin flag-button {
-    .flag-button {
+@mixin wide-button {
+    .wide-button {
         color: white;
         background-color: $defBlue;
         font-size: set-size(xl);
@@ -18,7 +18,7 @@
         }
     }
 
-    .disabled-flag-button {
+    .disabled-wide-button {
         cursor: not-allowed;
         opacity: 0.5;
 

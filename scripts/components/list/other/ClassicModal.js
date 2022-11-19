@@ -39,13 +39,13 @@ export default function ClassicModal(componentProps) {
         window.eventList.add({ id: "classicModalKeyDown", type: "keydown", listener: keyboardTrigger });
 
         function keyboardTrigger(e) {
-            let button;
+            let button = "";
             
             Object.values(buttonsTrigger).forEach((keyboardKey, index) => {
                 if(e.key === keyboardKey) button = Object.keys(buttonsTrigger)[index];
             });
 
-            cancelModal(button);
+            if(button) cancelModal(button);
         }
     }
 

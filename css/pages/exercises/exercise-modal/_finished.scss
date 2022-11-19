@@ -101,9 +101,9 @@
         left: 0;
     }
 
-    @include flag-button;
+    @include wide-button;
 
-    .flag-button {
+    .wide-button {
         width: 80%;
         margin: 0;
         position: absolute;
