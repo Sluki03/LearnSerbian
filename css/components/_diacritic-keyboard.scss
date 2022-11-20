@@ -9,6 +9,7 @@
         gap: 10px;
 
         button {
+            @include add-flex;
             height: 45px;
             width: 45px;
             color: $defDarkGrey;

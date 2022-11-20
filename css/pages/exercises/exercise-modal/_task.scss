@@ -104,18 +104,13 @@
 
     .task-button-holder {
         @include add-flex;
-        gap: 20px;
+        gap: 15px;
         width: 80%;
         position: absolute;
         bottom: -100px;
         transition: 300ms;
 
         @include wide-button;
-
-        .wide-button {
-            position: relative;
-            bottom: 15px;
-        }
 
         .switch-modes-button {
             display: none;
@@ -151,10 +146,6 @@
                 box-shadow: $defShadow;
             }
         }
-    }
-
-    .active-task-button-holder {
-        bottom: 5px;
     }
 
     .task-info {

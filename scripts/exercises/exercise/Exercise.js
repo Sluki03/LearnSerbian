@@ -99,13 +99,19 @@ export class Exercise {
             this.exerciseElement.classList.add("active-exercise-modal-task");
 
             const taskButtonHolder = document.querySelector(".task-button-holder");
-            taskButtonHolder.classList.add("active-task-button-holder");
 
             const checkButton = taskButtonHolder.children[1];
             const blockedCheckButton = ["conversation", "connect"];
             
-            if(blockedCheckButton.indexOf(this.currentTask.type) > -1) checkButton.style.display = "none";
-            else checkButton.style.display = "";
+            if(blockedCheckButton.indexOf(this.currentTask.type) > -1) {
+                taskButtonHolder.style.bottom = "5px";
+                checkButton.style.display = "none";
+            }
+
+            else {
+                taskButtonHolder.style.bottom = "15px";
+                checkButton.style.display = "";
+            }
         }, 100);
         
         this.initializeElements();
@@ -278,8 +284,10 @@ export class Exercise {
         const [progressBar, progressBarP] = [...this.taskProgressBarHolder.children];
         const [progressBarLine] = [...progressBar.children];
 
+        const blockedKeydownCheck = ["connect"];
+        if(e.type === "keydown" && blockedKeydownCheck.indexOf(this.currentTask.type) > -1) return;
+
         const classPass = (checkButton !== null && !checkButton.classList.contains("disabled-wide-button")) || additionalPass;
-        
         if(!classPass) return;
 
         const keyPass = additionalPass ? e.key === "Enter" || !isNaN(parseInt(e.key)) : e.key === "Enter";

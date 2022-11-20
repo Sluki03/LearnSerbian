@@ -587,7 +587,6 @@ main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .
   height: 100%;
   width: 100%;
   max-width: 330px;
-  min-height: 60px;
   color: #5e5c5c;
   font-size: 25px;
   background: white;
@@ -638,6 +637,9 @@ main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .
 main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .disabled-multiple-choice-button:hover {
   border: 1px solid #5e5c5c;
   box-shadow: none;
+}
+main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .multiple-choice-button {
+  min-height: 60px;
 }
 main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .multiple-choice-button span {
   height: 35px;
@@ -1004,7 +1006,6 @@ main .exercise-modal .exercise-modal-task .task-holder .exercise-modal-task-conv
   height: 100%;
   width: 100%;
   max-width: 330px;
-  min-height: 60px;
   color: #5e5c5c;
   font-size: 25px;
   background: white;
@@ -1103,7 +1104,6 @@ main .exercise-modal .exercise-modal-task .task-holder .connect-holder .connect-
   height: 100%;
   width: 100%;
   max-width: 330px;
-  min-height: 60px;
   color: #5e5c5c;
   font-size: 25px;
   background: white;
@@ -1310,7 +1310,7 @@ main .exercise-modal .exercise-modal-task .task-button-holder {
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  gap: 20px;
+  gap: 15px;
   width: 80%;
   position: absolute;
   bottom: -100px;
@@ -1340,10 +1340,6 @@ main .exercise-modal .exercise-modal-task .task-button-holder .disabled-wide-but
 main .exercise-modal .exercise-modal-task .task-button-holder .disabled-wide-button:hover {
   text-shadow: none;
   background-color: #bd1330;
-}
-main .exercise-modal .exercise-modal-task .task-button-holder .wide-button {
-  position: relative;
-  bottom: 15px;
 }
 main .exercise-modal .exercise-modal-task .task-button-holder .switch-modes-button {
   display: none;
@@ -1377,9 +1373,6 @@ main .exercise-modal .exercise-modal-task .task-button-holder .wide-button {
 }
 main .exercise-modal .exercise-modal-task .task-button-holder .wide-button:hover {
   box-shadow: 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
-}
-main .exercise-modal .exercise-modal-task .active-task-button-holder {
-  bottom: 5px;
 }
 main .exercise-modal .exercise-modal-task .task-info {
   display: flex;
@@ -1763,7 +1756,7 @@ main .exercise-modal .exercise-modal-review .wide-button {
   width: 80%;
   margin: 0;
   position: absolute;
-  bottom: 15px;
+  bottom: 5px;
 }
 main .exercise-modal .exercise-modal-review .wide-button:hover {
   box-shadow: 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
@@ -2865,6 +2858,10 @@ footer div a {
   gap: 10px;
 }
 .diacritic-keyboard div button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
   height: 45px;
   width: 45px;
   color: #5e5c5c;

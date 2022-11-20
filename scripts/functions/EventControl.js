@@ -5,6 +5,8 @@ class EventControl {
     }
 
     add(...events) {
+        const classicEvents = [];
+        
         events.forEach(event => {
             const addingType = this.#getAddingType(event);
 
@@ -13,33 +15,21 @@ class EventControl {
                     const value = Object.values(event)[index];
 
                     const validEvent = { id: key, ...value };
-                    applyEvent(this, validEvent);
+                    classicEvents.push(validEvent);
                 });
             }
 
-            else applyEvent(this, event);
+            else classicEvents.push(event);
         });
 
-        function applyEvent(thisEvent, event) {
-            const alreadyExists = checkExistence();
+        classicEvents.forEach(classicEvent => {
+            const alreadyExists = Object.keys(this.get()).indexOf(classicEvent.id) > -1;
             
-            if(alreadyExists) thisEvent.parent.removeEventListener(event.type, event.listener);
-            thisEvent.parent.addEventListener(event.type, event.listener, event.options);
+            if(alreadyExists) this.remove(classicEvent.id);
+            this.parent.addEventListener(classicEvent.type, classicEvent.listener, classicEvent.options);
 
-            thisEvent.#collect(event);
-
-            function checkExistence() {
-                let result = false;
-
-                Object.keys(thisEvent.get()).forEach(eventId => {
-                    events.forEach(event => {
-                        if(eventId === event.id) result = true;
-                    });
-                });
-
-                return result;
-            }
-        }
+            this.#collect(classicEvent);
+        });
     }
 
     #getAddingType(event) {

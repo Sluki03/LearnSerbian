@@ -58,8 +58,8 @@ export default function taskInterface(thisExercise, changeMode) {
         allSpans.forEach((span, index) => {
             span.onclick = () => setActiveCompleteTextField(span);
 
-            const prevFieldValue = Object.values(thisExercise.prevModeValues.wordBank.completeText.completeTextP)[index];
             const prevValueStatus = Object.keys(thisExercise.prevModeValues.wordBank.completeText.completeTextP).length > 0;
+            const prevFieldValue = Object.values(thisExercise.prevModeValues.wordBank.completeText.completeTextP)[index];
             
             if(prevValueStatus && prevFieldValue !== undefined) span.innerText = prevFieldValue;
 

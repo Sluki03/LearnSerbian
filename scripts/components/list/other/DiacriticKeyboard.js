@@ -2,7 +2,7 @@ import createElement from "../../../functions/createElement.js";
 
 export default function DiacriticKeyboard(componentProps) {
     const { builtIn } = componentProps;
-    const { input, answerChanged, appendTo } = componentProps.params;
+    const { input, answerChanged, smaller, appendTo } = componentProps.params;
     
     const diacriticKeyboard = builtIn ? builtIn : createElement({
         tag: "div",
@@ -29,6 +29,7 @@ export default function DiacriticKeyboard(componentProps) {
         const button = createElement({
             tag: "button",
             innerText: input.value ? letter : letter.toUpperCase(),
+            style: smaller ? { height: "35px", width: "35px" } : null,
             events: [{ on: "click", call: () => updateInputOnButtonClick(button) }],
             appendTo: diacriticKeyboardLetters
         });
@@ -37,6 +38,7 @@ export default function DiacriticKeyboard(componentProps) {
     const changeCaseButton = createElement({
         tag: "button",
         innerText: buttonOrder.arrows[input.value ? 0 : 1],
+        style: smaller ? { height: "35px", width: "35px" } : null,
         events: [{ on: "click", call: changeCaseStatus }],
         appendTo: diacriticKeyboardArrows
     });

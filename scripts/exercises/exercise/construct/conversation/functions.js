@@ -55,7 +55,7 @@ export async function sendMessage(thisExercise, message, e) {
         }),
 
         end: () => {
-            window.eventList.remove("taskCheckMessageKeyDown");
+            window.eventList.remove("taskOptionChooseKeydown", "taskCheckMessageKeyDown");
 
             const conversationAnswer = document.querySelector(".conversation-answer");
             const conversationAnswerInput = conversationAnswer.children[1];

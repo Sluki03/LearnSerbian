@@ -27,6 +27,7 @@ export default async function taskInterface(thisExercise, changeMode) {
         Component.create("DiacriticKeyboard", {
             input: conversationAnswerInput,
             answerChanged: thisExercise.answerChanged,
+            smaller: true,
             appendTo: exerciseModalTaskConversation
         });
 
@@ -78,7 +79,7 @@ export default async function taskInterface(thisExercise, changeMode) {
         }
     }
 
-    if(thisExercise.currentTask.mode.type === "multipleChoice") {        
+    else {
         const typing = document.querySelector(".typing");
         const messageRole = getMessageRole();
 
@@ -224,6 +225,8 @@ export default async function taskInterface(thisExercise, changeMode) {
                 conversationAnswer.classList.remove("active-conversation-answer");
                 conversationAnswer.classList.add("disabled-conversation-answer");
                 
+                window.eventList.remove("taskOptionChooseKeydown", "taskCheckMessageKeyDown");
+
                 thisExercise.answerChanged(userMessage);
                 return thisExercise.check(e, true);
             }

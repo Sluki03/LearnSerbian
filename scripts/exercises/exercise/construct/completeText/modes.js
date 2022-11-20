@@ -10,7 +10,7 @@ export default function modes(thisExercise) {
 
         allInputs.forEach(input => {
             const inputName = input.id.split("-")[3];
-            thisExercise.prevModeValues.write.completeText = {...thisExercise.prevModeValues.write.completeText, [inputName]: input.value};
+            if(input.value) thisExercise.prevModeValues.write.completeText = {...thisExercise.prevModeValues.write.completeText, [inputName]: input.value};
 
             const optionIndex = thisExercise.currentTask.options.indexOf(input.value);
             const option = thisExercise.currentTask.options[optionIndex] ? thisExercise.currentTask.options[optionIndex] : "";
@@ -42,15 +42,17 @@ export default function modes(thisExercise) {
         allSpans.forEach(span => {
             const fieldName = span.id.split("-")[3];
             
-            thisExercise.prevModeValues.wordBank.completeText.completeTextP = {
-                ...thisExercise.prevModeValues.wordBank.completeText.completeTextP,
-                [fieldName]: span.classList.contains("filled-complete-text-field") ? span.innerText : ""
-            };
+            if(span.classList.contains("filled-complete-text-field")) {
+                thisExercise.prevModeValues.wordBank.completeText.completeTextP = {
+                    ...thisExercise.prevModeValues.wordBank.completeText.completeTextP,
+                    [fieldName]: span.innerText
+                };
 
-            if(span.classList.contains("filled-complete-text-field")) thisExercise.prevModeValues.write.completeText = {
-                ...thisExercise.prevModeValues.write.completeText,
-                [fieldName]: span.innerText
-            };
+                thisExercise.prevModeValues.write.completeText = {
+                    ...thisExercise.prevModeValues.write.completeText,
+                    [fieldName]: span.innerText
+                };
+            }
         });
 
         let wordBankOptions = thisExercise.currentTask.options;
@@ -60,6 +62,6 @@ export default function modes(thisExercise) {
         thisExercise.prevModeValues.wordBank.completeText.wordBank = wordBankOptions;
         
         const wordBank = document.querySelector(".complete-text-word-bank");
-        wordBank.remove();
+        setTimeout(() => wordBank.remove(), 300);
     }
 }
