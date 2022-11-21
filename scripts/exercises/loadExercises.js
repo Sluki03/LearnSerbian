@@ -36,6 +36,9 @@ export default function loadExercises() {
             const [exerciseTitle, articleExercise] = [...exerciseHolder.children];
             const [exerciseDifficulty, exerciseP] = [...exerciseTitle.children];
 
+            articleExercise.onmouseover = e => changeExerciseTitle(e, true);
+            articleExercise.onmouseleave = e => changeExerciseTitle(e, false);
+
             exerciseDifficulty.style.backgroundColor = getDifficultyColor(exercise.difficulty || "none");
             exerciseP.innerHTML = exercise.name;
 
@@ -97,5 +100,23 @@ export default function loadExercises() {
         }
 
         activeExerciseId = id;
+    }
+
+    function changeExerciseTitle(e, status) {
+        const exerciseTitle = getExerciseTitle();
+        
+        if(status) exerciseTitle.classList.add("active-exercise-title");
+        else exerciseTitle.classList.remove("active-exercise-title");
+
+        function getExerciseTitle() {
+            let result = null;
+            
+            e.path.forEach(pathElement => {
+                if(!pathElement.classList?.contains("exercise")) return;
+                result = pathElement.parentNode.children[0];
+            });
+
+            return result;
+        }
     }
 }

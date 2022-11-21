@@ -2586,6 +2586,7 @@ footer div a {
   justify-content: center;
   flex-direction: row;
   width: 100%;
+  position: relative;
 }
 .exercise-holder .exercise-title {
   display: flex;
@@ -2593,15 +2594,18 @@ footer div a {
   justify-content: center;
   flex-direction: row;
   gap: 10px;
+  height: 50px;
   max-width: 285px;
   background-color: white;
   border: 1px solid #5e5c5c;
   border-radius: 15px;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
+  opacity: 0;
   position: absolute;
-  left: 35%;
+  bottom: -65px;
   padding: 5px 10px;
-  transform: translate(-100%, 50%);
+  transition: 300ms;
+  z-index: 1;
 }
 .exercise-holder .exercise-title .exercise-difficulty {
   height: 20px;
@@ -2618,6 +2622,10 @@ footer div a {
 .exercise-holder .exercise-title p mark {
   color: white;
   background-color: #0589f5;
+}
+.exercise-holder .active-exercise-title {
+  opacity: 1;
+  bottom: -60px;
 }
 .exercise-holder .exercise {
   display: flex;
