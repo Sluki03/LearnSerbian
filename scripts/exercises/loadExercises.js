@@ -42,7 +42,7 @@ export default function loadExercises() {
             if(exercise.noResults) exerciseHolder.id = "exercise-holder-error";
             else articleExercise.onclick = () => openExerciseModal(articleExercise, exercise, index + 1);
 
-            const [exerciseContent] = [...articleExercise.children];
+            const exerciseContent = articleExercise.children[1];
 
             if(exercise.icon) createElement({ tag: "img", attributes: { src: exercise.icon, alt: exercise.name }, appendTo: exerciseContent });
             else Component.create("InteractiveTitle", { title: exercise.searchIndex ? exercise.searchIndex : index + 1, appendTo: exerciseContent });
