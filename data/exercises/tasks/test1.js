@@ -89,7 +89,8 @@ export const test1 = [
             odakle: "Where ... from",
             si: "are you"
         },
-        xp: 5
+        xp: 5,
+        diacriticKeyboard: false
     },
 
     /*{

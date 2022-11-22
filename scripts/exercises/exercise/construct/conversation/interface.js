@@ -24,7 +24,7 @@ export default async function taskInterface(thisExercise, changeMode) {
         
         if(changeMode) resetInput();
 
-        Component.create("DiacriticKeyboard", {
+        if(thisExercise.currentTask.diacriticKeyboard || thisExercise.currentTask.diacriticKeyboard === undefined) Component.create("DiacriticKeyboard", {
             input: conversationAnswerInput,
             answerChanged: thisExercise.answerChanged,
             smaller: true,
@@ -129,19 +129,22 @@ export default async function taskInterface(thisExercise, changeMode) {
         
         if(conversationAnswerInput.value) {
             conversationAnswer.classList.add("active-conversation-answer");
-            diacriticKeyboard.classList.add("active-diacritic-keyboard");
-
-            const diacriticKeyboardHeight = parseInt(getComputedStyle(diacriticKeyboard).getPropertyValue("height"));
-            const gap = 10;
             
-            conversationHolder.style.height = `calc(100% - ${diacriticKeyboardHeight + gap}px)`;
+            if(diacriticKeyboard) {
+                diacriticKeyboard.classList.add("active-diacritic-keyboard");
+
+                const diacriticKeyboardHeight = parseInt(getComputedStyle(diacriticKeyboard).getPropertyValue("height"));
+                const gap = 10;
+                
+                conversationHolder.style.height = `calc(100% - ${diacriticKeyboardHeight + gap}px)`;
+            }
 
             translationModal(currentMessage.userContent);
         }
                     
         else if(conversationAnswer.classList.contains("active-conversation-answer")) {
             conversationAnswer.classList.remove("active-conversation-answer");
-            diacriticKeyboard.classList.remove("active-diacritic-keyboard");
+            if(diacriticKeyboard) diacriticKeyboard.classList.remove("active-diacritic-keyboard");
             
             conversationHolder.style.height = "";
             

@@ -32,7 +32,7 @@ export default function taskInterface(thisExercise) {
         if(thisExercise.prevModeValues.write.translate.textareaValue) translateHolderTextarea.value = thisExercise.prevModeValues.write.translate.textareaValue;
         translateHolderTextarea.focus();
 
-        Component.create("DiacriticKeyboard", {
+        if(thisExercise.currentTask.diacriticKeyboard || thisExercise.currentTask.diacriticKeyboard === undefined) Component.create("DiacriticKeyboard", {
             input: translateHolderTextarea,
             answerChanged: thisExercise.answerChanged,
             appendTo: interfaceElement
