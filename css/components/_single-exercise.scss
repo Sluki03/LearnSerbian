@@ -6,7 +6,7 @@
     .exercise-title {
         @include add-flex;
         gap: 10px;
-        height: 100px;
+        height: 60px;
         min-width: 250px;
         max-width: 350px;
         background-color: rgba(255, 255, 255, 0.3);
@@ -15,13 +15,11 @@
         border-radius: 30px;
         box-shadow: $defLightShadow;
         opacity: 0;
-        pointer-events: none;
         position: absolute;
-        bottom: -65px;
+        bottom: -30px;
         padding: 5px 10px;
         user-select: none;
         transition: 300ms;
-        z-index: 1;
 
         .exercise-difficulty {
             height: 20px;
@@ -46,7 +44,7 @@
 
     .active-exercise-title {
         opacity: 1;
-        bottom: -110px;
+        bottom: -60px;
     }
 
     @include exercise;

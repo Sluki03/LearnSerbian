@@ -36,8 +36,7 @@ export default function loadExercises() {
             const [exerciseTitle, articleExercise] = [...exerciseHolder.children];
             const [exerciseDifficulty, exerciseP] = [...exerciseTitle.children];
 
-            articleExercise.onmouseover = e => changeExerciseTitle(e, true);
-            articleExercise.onmouseleave = e => changeExerciseTitle(e, false);
+            articleExercise.onmouseover = trackExerciseTitle;
 
             exerciseDifficulty.style.backgroundColor = getDifficultyColor(exercise.difficulty || "none");
             exerciseP.innerHTML = exercise.name;
@@ -102,18 +101,32 @@ export default function loadExercises() {
         activeExerciseId = id;
     }
 
-    function changeExerciseTitle(e, status) {
-        const exerciseTitle = getExerciseTitle();
+    function trackExerciseTitle(e) {
+        const exerciseTitle = getElementFromEventPath(e, "exercise").parentNode.children[0];
         
-        if(status) exerciseTitle.classList.add("active-exercise-title");
-        else exerciseTitle.classList.remove("active-exercise-title");
+        window.eventList.add({ id: "exerciseMouseMove", type: "mousemove", listener: mouseTracking });
+        mouseTracking(e);
 
-        function getExerciseTitle() {
+        function mouseTracking(e) {
+            const requestedTargets = {
+                exercise: getElementFromEventPath(e, "exercise"),
+                exerciseTitle: getElementFromEventPath(e, "exercise-title")
+            }
+            
+            if(requestedTargets.exercise) exerciseTitle.classList.add("active-exercise-title");
+
+            else if(requestedTargets.exerciseTitle === null) {
+                window.eventList.remove("exerciseMouseMove");
+                exerciseTitle.classList.remove("active-exercise-title");
+            }
+        }
+
+        function getElementFromEventPath(e, elementClass) {
             let result = null;
             
-            e.path.forEach(pathElement => {
-                if(!pathElement.classList?.contains("exercise")) return;
-                result = pathElement.parentNode.children[0];
+            e.composedPath().forEach(pathElement => {
+                if(!pathElement.classList?.contains(elementClass)) return;
+                result = pathElement;
             });
 
             return result;
