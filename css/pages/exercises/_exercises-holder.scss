@@ -22,6 +22,8 @@
             color: $defDarkGrey;
             font-size: set-size(lg);
             border: 2px solid $defLightGrey;
+            background-color: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
             border-radius: 30px;
             box-shadow: $defLighterShadow;
             outline: none;
@@ -44,6 +46,7 @@
             object-fit: contain;
             position: absolute;
             right: 13px;
+            z-index: 2;
         }
     }
     
@@ -74,7 +77,8 @@
         .exercises-list-start-end-holder {
             @include add-flex;
             gap: 10px;
-            background: white;
+            background-color: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
             border: 2px solid $defLightGrey;
             border-radius: 20px;
             padding: 10px;
