@@ -112,6 +112,9 @@ export default function loadExercises() {
                 exercise: getElementFromEventPath(e, "exercise"),
                 exerciseTitle: getElementFromEventPath(e, "exercise-title")
             }
+
+            const allActiveExerciseTitles = document.querySelectorAll(".active-exercise-titles");
+            allActiveExerciseTitles.forEach(activeExerciseTitle => activeExerciseTitle.classList.remove("active-exercise-title"));
             
             if(requestedTargets.exercise) exerciseTitle.classList.add("active-exercise-title");
 

@@ -1,5 +1,5 @@
 export const hearing = [
-    {
+    /*{
         type: "multipleChoice",
         title: "How to say \"color\" in Serbian?",
         acceptableAnswers: ["boja"],
@@ -106,7 +106,7 @@ export const hearing = [
             }
         ],
         speak: true
-    },
+    },*/
 
     {
         type: "connect",
@@ -115,7 +115,7 @@ export const hearing = [
         speak: true
     },
 
-    {
+    /*{
         type: "completeText",
         title: "Complete the following sentence:",
         text: "Deste ljudi, sta ima, <how> ste? Evo, evo, mi smo <good>. Inace, ja se <to be called> Milorad i dolazim iz <Belgrade>.",
@@ -130,5 +130,5 @@ export const hearing = [
             switch: true
         },
         speak: true
-    }
+    }*/
 ]
