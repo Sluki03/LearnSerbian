@@ -123,6 +123,13 @@ export default function taskInterface(thisExercise) {
         });
         
         const selectedOptionClone = selectedOption.cloneNode(true);
+
+        if(
+            thisExercise.currentTask.speak &&
+            thisExercise.currentTask.englishSerbian &&
+            type === "select" &&
+            !responsiveVoice.isPlaying()
+        ) responsiveVoice.speak(option);
         
         selectedOption.classList.add(type === "select" ? "word-bank-option-selective" : "word-bank-option-deselective");
         selectedOptionClone.classList.add(type !== "select" ? "word-bank-option-selective" : "word-bank-option-deselective");

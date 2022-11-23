@@ -2639,7 +2639,7 @@ footer div a {
 }
 .exercise-holder .active-exercise-title {
   opacity: 1;
-  bottom: -65px;
+  bottom: -60px;
 }
 .exercise-holder .exercise {
   display: flex;

@@ -91,7 +91,9 @@ export class Exercise {
         progressBarLine.style.boxShadow = "none";
     }
     
-    start() {
+    async start() {
+        await this.loadVoices();
+        
         setTimeout(() => {
             this.taskLives.classList.add("active-task-lives");
             this.taskProgressBarHolder.classList.add("active-task-progress-bar-holder");
@@ -634,5 +636,50 @@ export class Exercise {
         });
 
         return result;
+    }
+
+    loadVoices() {
+        return new Promise(resolve => {
+            const loading = Component.create("Loading", {
+                style: { backgroundImage: "none" },
+                appendTo: this.exerciseModal
+            });
+            
+            const speakTasks = [];
+
+            this.tasks.forEach(task => {
+                if(task.speak) speakTasks.push(task);
+            });
+
+            speakTasks.forEach(task => {
+                switch(task.type) {
+                    case "multipleChoice":
+                    case "multipleChoiceImages":
+                        task.options.forEach(option => prerenderVoice(option));
+                        break;
+                    case "translate":
+                        if(!task.englishSerbian) prerenderVoice(task.text);
+                        else task.options?.forEach(option => prerenderVoice(option));
+                        break;
+                    case "conversation":
+                        task.messages.forEach(message => prerenderVoice(message.content));
+                        break;
+                    case "connect":
+                        Object.values(task.options).forEach(value => prerenderVoice(value));
+                        break;
+                    case "completeText":
+                        task.options.forEach(option => prerenderVoice(option));
+                        break;
+                    default: ;
+                }
+            });
+
+            loading.remove();
+            resolve(true);
+        });
+
+        function prerenderVoice(...texts) {
+            texts.forEach(text => responsiveVoice.speak(text, "Serbian Male", { volume: 0 }));
+        }
     }
 }

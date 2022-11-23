@@ -2,11 +2,12 @@ import createElement from "../../../functions/createElement.js";
 
 export default function Loading(componentProps) {
     const { builtIn } = componentProps;
-    const { appendTo } = componentProps.params;
+    const { style, appendTo } = componentProps.params;
 
     const loadingElement = builtIn ? builtIn : createElement({
         tag: "div",
         attributes: { class: "loading" },
+        style,
         appendTo
     });
 
