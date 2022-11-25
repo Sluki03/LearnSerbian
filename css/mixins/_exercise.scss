@@ -13,11 +13,7 @@
             border-radius: 50%;
             box-shadow: $defShadow;
             position: absolute;
-            transition: 300ms;
-        }
-
-        &:hover .exercise-border {
-            transform: rotate(180deg);
+            transform: rotate(0);
         }
         
         .exercise-content {
@@ -41,20 +37,6 @@
         }
 
         &:hover .exercise-content {
-            height: 155px;
-            width: 155px;
-        }
-    }
-
-    #active-exercise {
-        cursor: default;
-
-        .exercise-border {
-            background: $defLightRedBlueWhite;
-            transform: rotate(360deg);
-        }
-        
-        .exercise-content {
             height: 155px;
             width: 155px;
         }

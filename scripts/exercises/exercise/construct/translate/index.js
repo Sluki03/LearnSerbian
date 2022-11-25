@@ -20,8 +20,12 @@ export default function translate(thisExercise, changeMode) {
         appendTo: translateHolder
     });
 
-    if(thisExercise.currentTask.speak) {
-        if(!thisExercise.currentTask.englishSerbian && !responsiveVoice.isPlaying()) responsiveVoice.speak(thisExercise.currentTask.text);
+    if(
+        thisExercise.currentTask.speak &&
+        !thisExercise.currentTask.englishSerbian &&
+        !responsiveVoice.isPlaying()
+    ) {
+        responsiveVoice.speak(thisExercise.currentTask.text);
         
         Component.create("SpeakButton", {
             speak: thisExercise.currentTask.text,

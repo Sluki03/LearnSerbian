@@ -3,6 +3,7 @@ import { exercisesData } from "../../data/exercises/index.js";
 import createElement from "../functions/createElement.js";
 import getDifficultyColor from "./getDifficultyColor.js";
 import closeExerciseModal from "./closeExerciseModal.js";
+import getRotateValue from "../functions/getRotateValue.js";
 
 export default function loadExercises() {
     const list = document.querySelector(".exercises-list");
@@ -33,10 +34,10 @@ export default function loadExercises() {
             const exerciseHolder = document.querySelector("[data-template='exercise-holder']").content.firstElementChild.cloneNode(true);
             list.insertBefore(exerciseHolder, listEnd);
 
-            const [exerciseTitle, articleExercise] = [...exerciseHolder.children];
+            const [articleExercise, exerciseTitle] = [...exerciseHolder.children];
             const [exerciseDifficulty, exerciseP] = [...exerciseTitle.children];
 
-            articleExercise.onmouseover = trackExerciseTitle;
+            articleExercise.onmouseenter = exerciseHover;
 
             exerciseDifficulty.style.backgroundColor = getDifficultyColor(exercise.difficulty || "none");
             exerciseP.innerHTML = exercise.name;
@@ -86,53 +87,88 @@ export default function loadExercises() {
     }
     
     function openExerciseModal(activeExercise, exercise, id) {
+        const [exerciseBorder, exerciseContent] = [...activeExercise.children];
+
+        exerciseBorder.style.transform = "";
+
+        exerciseContent.style.height = "";
+        exerciseContent.style.width = "";
+        
         const exerciseModal = document.querySelector(".exercise-modal");
+        const exerciseHolder = activeExercise.parentNode;
 
         if(exerciseModal === null && activeExerciseId > 0) activeExerciseId = 0;
         if(activeExerciseId === id) return;
         
-        if(activeExerciseId !== 0) closeExerciseModal(false, { activeExercise, exercise });
+        if(activeExerciseId !== 0) closeExerciseModal(false, { exerciseHolder, exercise });
         
         else {
-            activeExercise.setAttribute("id", "active-exercise");
+            exerciseHolder.id = "active-exercise-holder";
             Component.create("ExerciseModal", { exercise });
         }
 
         activeExerciseId = id;
     }
 
-    function trackExerciseTitle(e) {
-        const exerciseTitle = getElementFromEventPath(e, "exercise").parentNode.children[0];
-        
-        window.eventList.add({ id: "exerciseMouseMove", type: "mousemove", listener: mouseTracking });
-        mouseTracking(e);
+    let intervals = {
+        over: null,
+        leave: null
+    };
 
-        function mouseTracking(e) {
-            const requestedTargets = {
-                exercise: getElementFromEventPath(e, "exercise"),
-                exerciseTitle: getElementFromEventPath(e, "exercise-title")
-            }
-
-            const allActiveExerciseTitles = document.querySelectorAll(".active-exercise-titles");
-            allActiveExerciseTitles.forEach(activeExerciseTitle => activeExerciseTitle.classList.remove("active-exercise-title"));
-            
-            if(requestedTargets.exercise) exerciseTitle.classList.add("active-exercise-title");
-
-            else if(requestedTargets.exerciseTitle === null) {
-                window.eventList.remove("exerciseMouseMove");
-                exerciseTitle.classList.remove("active-exercise-title");
-            }
+    function exerciseHover(e) {
+        if(intervals.leave) {
+            clearInterval(intervals.leave);
+            intervals.leave = null;
         }
 
-        function getElementFromEventPath(e, elementClass) {
-            let result = null;
-            
-            e.composedPath().forEach(pathElement => {
-                if(!pathElement.classList?.contains(elementClass)) return;
-                result = pathElement;
-            });
+        const exercise = e.target;
+        const [exerciseBorder, exerciseContent] = [...exercise.children];
+        const exerciseHolder = exercise.parentNode;
 
-            return result;
+        let angle = getRotateValue(exerciseBorder);
+
+        exerciseBorder.style.transform = `rotate(${angle}deg)`;
+        
+        intervals.over = setInterval(() => {
+            if(exerciseHolder.id === "active-exercise-holder") return mouseLeave();
+            if(angle === 360) angle = 0;
+            
+            exerciseBorder.style.transform = `rotate(${angle}deg)`;
+            angle++;
+        }, 10);
+
+        exerciseContent.style.height = "150px";
+        exerciseContent.style.width = "150px";
+        
+        const exerciseTitle = exerciseHolder.children[1];
+        exerciseTitle.classList.add("active-exercise-title");
+        
+        exercise.onmouseleave = mouseLeave;
+
+        function mouseLeave() {
+            clearInterval(intervals.over);
+            intervals.over = null;
+    
+            exerciseBorder.style.transform = `rotate(${angle}deg)`;
+            exerciseTitle.classList.remove("active-exercise-title");
+    
+            intervals.leave = setInterval(() => {
+                if(angle === 0) {
+                    clearInterval(intervals.leave);
+                    intervals.leave = null;
+    
+                    exerciseBorder.style.transition = "";
+                    exerciseBorder.style.transform = "";
+    
+                    exerciseContent.style.height = "";
+                    exerciseContent.style.width = "";
+                }
+
+                else {
+                    exerciseBorder.style.transform = `rotate(${angle}deg)`;
+                    angle--;
+                }
+            }, 1);
         }
     }
 }

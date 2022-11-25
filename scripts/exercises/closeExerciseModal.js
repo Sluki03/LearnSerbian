@@ -7,7 +7,7 @@ export default function closeExerciseModal(confirmed, openNew) {
     if(taskConnectKeydown !== null && taskConnectActiveMultipleChoiceButton !== null) return;
     
     const exerciseModal = document.querySelector(".exercise-modal");
-    const activeExercise = document.getElementById("active-exercise");
+    const activeExerciseHolder = document.getElementById("active-exercise-holder");
 
     const exerciseModalTask = document.querySelector(".active-exercise-modal-task");
 
@@ -20,16 +20,16 @@ export default function closeExerciseModal(confirmed, openNew) {
     });
 
     exerciseModal.id = "";
-    activeExercise.id = "";
+    activeExerciseHolder.id = "";
 
     setTimeout(() => {        
         exerciseModal.remove();
         window.eventList.remove("exerciseModalContentKeyDown", "modalOptionsKeyDown");
         
         if(openNew !== undefined) {
-            const { activeExercise, exercise } = openNew;
+            const { exerciseHolder, exercise } = openNew;
 
-            activeExercise.setAttribute("id", "active-exercise");
+            exerciseHolder.id = "active-exercise-holder";
             Component.create("ExerciseModal", { exercise });
         }
     }, 300);

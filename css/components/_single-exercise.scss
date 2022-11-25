@@ -3,8 +3,14 @@
     width: 100%;
     position: relative;
 
+    @include exercise;
+
+    .exercise {
+        z-index: 1;
+    }
+    
     .exercise-title {
-        @include add-flex;
+        @include add-flex(row, flex-start);
         gap: 10px;
         height: 60px;
         min-width: 250px;
@@ -14,9 +20,8 @@
         border: none;
         border-radius: 30px;
         box-shadow: $defLightShadow;
-        opacity: 0;
         position: absolute;
-        bottom: -30px;
+        right: 55px;
         padding: 5px 10px;
         user-select: none;
         transition: 300ms;
@@ -27,12 +32,16 @@
             border: none;
             border-radius: 50%;
             background: $defRed;
+            position: relative;
+            left: 50px;
         }
 
         p {
             color: $defDarkGrey;
             font-size: set-size(lg);
             font-weight: bold;
+            position: relative;
+            left: 50px;
             margin: 0;
 
             mark {
@@ -43,11 +52,34 @@
     }
 
     .active-exercise-title {
-        opacity: 1;
-        bottom: -60px;
+        background-color: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(15px);
+        box-shadow: $defShadow;
+        right: 40px;
+    }
+}
+
+#active-exercise-holder {
+    .exercise {
+        cursor: default;
+
+        .exercise-border {
+            background: $defLightRedBlueWhite;
+            transform: rotate(360deg);
+        }
+        
+        .exercise-content {
+            height: 155px;
+            width: 155px;
+        }
     }
 
-    @include exercise;
+    .exercise-title {
+        background-color: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(15px);
+        box-shadow: $defShadow;
+        right: 40px;
+    }
 }
 
 #exercise-holder-error .exercise {

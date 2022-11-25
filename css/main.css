@@ -325,10 +325,7 @@ main .exercise-modal .exercise-modal-title .exercise .exercise-border {
   border-radius: 50%;
   box-shadow: 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
   position: absolute;
-  transition: 300ms;
-}
-main .exercise-modal .exercise-modal-title .exercise:hover .exercise-border {
-  transform: rotate(180deg);
+  transform: rotate(0);
 }
 main .exercise-modal .exercise-modal-title .exercise .exercise-content {
   display: flex;
@@ -353,17 +350,6 @@ main .exercise-modal .exercise-modal-title .exercise .exercise-content img {
   transition: 150ms;
 }
 main .exercise-modal .exercise-modal-title .exercise:hover .exercise-content {
-  height: 155px;
-  width: 155px;
-}
-main .exercise-modal .exercise-modal-title #active-exercise {
-  cursor: default;
-}
-main .exercise-modal .exercise-modal-title #active-exercise .exercise-border {
-  background: linear-gradient(135deg, #d91435 45%, white 45% 55%, #0559f5 55% 100%);
-  transform: rotate(360deg);
-}
-main .exercise-modal .exercise-modal-title #active-exercise .exercise-content {
   height: 155px;
   width: 155px;
 }
@@ -903,6 +889,7 @@ main .exercise-modal .exercise-modal-task .task-holder .exercise-modal-task-conv
 }
 main .exercise-modal .exercise-modal-task .task-holder .exercise-modal-task-conversation .conversation-holder .conversation-messages .participant-message-holder .speak-button {
   opacity: 0;
+  transition: 300ms;
 }
 main .exercise-modal .exercise-modal-task .task-holder .exercise-modal-task-conversation .conversation-holder .conversation-messages .participant-message-holder:hover .speak-button {
   opacity: 1;
@@ -2064,10 +2051,7 @@ main .exercises-holder .exercises-list .exercise .exercise-border {
   border-radius: 50%;
   box-shadow: 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
   position: absolute;
-  transition: 300ms;
-}
-main .exercises-holder .exercises-list .exercise:hover .exercise-border {
-  transform: rotate(180deg);
+  transform: rotate(0);
 }
 main .exercises-holder .exercises-list .exercise .exercise-content {
   display: flex;
@@ -2092,17 +2076,6 @@ main .exercises-holder .exercises-list .exercise .exercise-content img {
   transition: 150ms;
 }
 main .exercises-holder .exercises-list .exercise:hover .exercise-content {
-  height: 155px;
-  width: 155px;
-}
-main .exercises-holder .exercises-list #active-exercise {
-  cursor: default;
-}
-main .exercises-holder .exercises-list #active-exercise .exercise-border {
-  background: linear-gradient(135deg, #d91435 45%, white 45% 55%, #0559f5 55% 100%);
-  transform: rotate(360deg);
-}
-main .exercises-holder .exercises-list #active-exercise .exercise-content {
   height: 155px;
   width: 155px;
 }
@@ -2595,52 +2568,6 @@ footer div a {
   width: 100%;
   position: relative;
 }
-.exercise-holder .exercise-title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  gap: 10px;
-  height: 60px;
-  min-width: 250px;
-  max-width: 350px;
-  background-color: rgba(255, 255, 255, 0.3);
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
-  border: none;
-  border-radius: 30px;
-  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
-  opacity: 0;
-  position: absolute;
-  bottom: -30px;
-  padding: 5px 10px;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  transition: 300ms;
-}
-.exercise-holder .exercise-title .exercise-difficulty {
-  height: 20px;
-  width: 20px;
-  border: none;
-  border-radius: 50%;
-  background: #bd1330;
-}
-.exercise-holder .exercise-title p {
-  color: #5e5c5c;
-  font-size: 25px;
-  font-weight: bold;
-  margin: 0;
-}
-.exercise-holder .exercise-title p mark {
-  color: white;
-  background-color: #0589f5;
-}
-.exercise-holder .active-exercise-title {
-  opacity: 1;
-  bottom: -60px;
-}
 .exercise-holder .exercise {
   display: flex;
   align-items: center;
@@ -2661,10 +2588,7 @@ footer div a {
   border-radius: 50%;
   box-shadow: 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
   position: absolute;
-  transition: 300ms;
-}
-.exercise-holder .exercise:hover .exercise-border {
-  transform: rotate(180deg);
+  transform: rotate(0);
 }
 .exercise-holder .exercise .exercise-content {
   display: flex;
@@ -2689,17 +2613,6 @@ footer div a {
   transition: 150ms;
 }
 .exercise-holder .exercise:hover .exercise-content {
-  height: 155px;
-  width: 155px;
-}
-.exercise-holder #active-exercise {
-  cursor: default;
-}
-.exercise-holder #active-exercise .exercise-border {
-  background: linear-gradient(135deg, #d91435 45%, white 45% 55%, #0559f5 55% 100%);
-  transform: rotate(360deg);
-}
-.exercise-holder #active-exercise .exercise-content {
   height: 155px;
   width: 155px;
 }
@@ -2752,6 +2665,80 @@ footer div a {
   left: 7px;
   z-index: 1;
   text-shadow: 0px 0px 15px rgba(82, 138, 242, 0.5);
+}
+.exercise-holder .exercise {
+  z-index: 1;
+}
+.exercise-holder .exercise-title {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 10px;
+  height: 60px;
+  min-width: 250px;
+  max-width: 350px;
+  background-color: rgba(255, 255, 255, 0.3);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  border: none;
+  border-radius: 30px;
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
+  position: absolute;
+  right: 55px;
+  padding: 5px 10px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  transition: 300ms;
+}
+.exercise-holder .exercise-title .exercise-difficulty {
+  height: 20px;
+  width: 20px;
+  border: none;
+  border-radius: 50%;
+  background: #bd1330;
+  position: relative;
+  left: 50px;
+}
+.exercise-holder .exercise-title p {
+  color: #5e5c5c;
+  font-size: 25px;
+  font-weight: bold;
+  position: relative;
+  left: 50px;
+  margin: 0;
+}
+.exercise-holder .exercise-title p mark {
+  color: white;
+  background-color: #0589f5;
+}
+.exercise-holder .active-exercise-title {
+  background-color: rgba(255, 255, 255, 0.5);
+  -webkit-backdrop-filter: blur(15px);
+          backdrop-filter: blur(15px);
+  box-shadow: 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
+  right: 40px;
+}
+
+#active-exercise-holder .exercise {
+  cursor: default;
+}
+#active-exercise-holder .exercise .exercise-border {
+  background: linear-gradient(135deg, #d91435 45%, white 45% 55%, #0559f5 55% 100%);
+  transform: rotate(360deg);
+}
+#active-exercise-holder .exercise .exercise-content {
+  height: 155px;
+  width: 155px;
+}
+#active-exercise-holder .exercise-title {
+  background-color: rgba(255, 255, 255, 0.5);
+  -webkit-backdrop-filter: blur(15px);
+          backdrop-filter: blur(15px);
+  box-shadow: 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
+  right: 40px;
 }
 
 #exercise-holder-error .exercise {
