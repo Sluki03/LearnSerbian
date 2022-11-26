@@ -326,6 +326,10 @@ main .exercise-modal .exercise-modal-title .exercise .exercise-border {
   box-shadow: 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
   position: absolute;
   transform: rotate(0);
+  transition: 600ms;
+}
+main .exercise-modal .exercise-modal-title .exercise:hover .exercise-border {
+  transform: rotate(180deg);
 }
 main .exercise-modal .exercise-modal-title .exercise .exercise-content {
   display: flex;
@@ -378,30 +382,25 @@ main .exercise-modal .exercise-modal-title .exercise-clone .exercise-content img
 }
 main .exercise-modal .exercise-modal-title .exercise-clone .exercise-content .interactive-title span {
   font-size: 50px;
-}
-main .exercise-modal .exercise-modal-title .exercise-clone:hover .exercise-content {
-  height: 85px;
-  width: 85px;
-}
-main .exercise-modal .exercise-modal-title #active-exercise .interactive-title span,
-main .exercise-modal .exercise-modal-title .exercise-clone .interactive-title span {
   text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
-main .exercise-modal .exercise-modal-title #active-exercise .interactive-title span:first-child,
-main .exercise-modal .exercise-modal-title .exercise-clone .interactive-title span:first-child {
+main .exercise-modal .exercise-modal-title .exercise-clone .exercise-content .interactive-title span:first-child {
   color: #d91435;
   top: -7px;
   left: -5px;
   z-index: 2;
   text-shadow: 0px 0px 15px rgba(247, 72, 101, 0.5);
 }
-main .exercise-modal .exercise-modal-title #active-exercise .interactive-title span:last-child,
-main .exercise-modal .exercise-modal-title .exercise-clone .interactive-title span:last-child {
+main .exercise-modal .exercise-modal-title .exercise-clone .exercise-content .interactive-title span:last-child {
   color: #0559f5;
   top: 7px;
   left: 7px;
   z-index: 1;
   text-shadow: 0px 0px 15px rgba(82, 138, 242, 0.5);
+}
+main .exercise-modal .exercise-modal-title .exercise-clone:hover .exercise-content {
+  height: 85px;
+  width: 85px;
 }
 main .exercise-modal .disabled-exercise-modal-title {
   opacity: 0;
@@ -2052,6 +2051,10 @@ main .exercises-holder .exercises-list .exercise .exercise-border {
   box-shadow: 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
   position: absolute;
   transform: rotate(0);
+  transition: 600ms;
+}
+main .exercises-holder .exercises-list .exercise:hover .exercise-border {
+  transform: rotate(180deg);
 }
 main .exercises-holder .exercises-list .exercise .exercise-content {
   display: flex;
@@ -2104,30 +2107,25 @@ main .exercises-holder .exercises-list .exercise-clone .exercise-content img {
 }
 main .exercises-holder .exercises-list .exercise-clone .exercise-content .interactive-title span {
   font-size: 50px;
-}
-main .exercises-holder .exercises-list .exercise-clone:hover .exercise-content {
-  height: 85px;
-  width: 85px;
-}
-main .exercises-holder .exercises-list #active-exercise .interactive-title span,
-main .exercises-holder .exercises-list .exercise-clone .interactive-title span {
   text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
-main .exercises-holder .exercises-list #active-exercise .interactive-title span:first-child,
-main .exercises-holder .exercises-list .exercise-clone .interactive-title span:first-child {
+main .exercises-holder .exercises-list .exercise-clone .exercise-content .interactive-title span:first-child {
   color: #d91435;
   top: -7px;
   left: -5px;
   z-index: 2;
   text-shadow: 0px 0px 15px rgba(247, 72, 101, 0.5);
 }
-main .exercises-holder .exercises-list #active-exercise .interactive-title span:last-child,
-main .exercises-holder .exercises-list .exercise-clone .interactive-title span:last-child {
+main .exercises-holder .exercises-list .exercise-clone .exercise-content .interactive-title span:last-child {
   color: #0559f5;
   top: 7px;
   left: 7px;
   z-index: 1;
   text-shadow: 0px 0px 15px rgba(82, 138, 242, 0.5);
+}
+main .exercises-holder .exercises-list .exercise-clone:hover .exercise-content {
+  height: 85px;
+  width: 85px;
 }
 
 .loading {
@@ -2589,6 +2587,10 @@ footer div a {
   box-shadow: 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
   position: absolute;
   transform: rotate(0);
+  transition: 600ms;
+}
+.exercise-holder .exercise:hover .exercise-border {
+  transform: rotate(180deg);
 }
 .exercise-holder .exercise .exercise-content {
   display: flex;
@@ -2641,51 +2643,49 @@ footer div a {
 }
 .exercise-holder .exercise-clone .exercise-content .interactive-title span {
   font-size: 50px;
-}
-.exercise-holder .exercise-clone:hover .exercise-content {
-  height: 85px;
-  width: 85px;
-}
-.exercise-holder #active-exercise .interactive-title span,
-.exercise-holder .exercise-clone .interactive-title span {
   text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
-.exercise-holder #active-exercise .interactive-title span:first-child,
-.exercise-holder .exercise-clone .interactive-title span:first-child {
+.exercise-holder .exercise-clone .exercise-content .interactive-title span:first-child {
   color: #d91435;
   top: -7px;
   left: -5px;
   z-index: 2;
   text-shadow: 0px 0px 15px rgba(247, 72, 101, 0.5);
 }
-.exercise-holder #active-exercise .interactive-title span:last-child,
-.exercise-holder .exercise-clone .interactive-title span:last-child {
+.exercise-holder .exercise-clone .exercise-content .interactive-title span:last-child {
   color: #0559f5;
   top: 7px;
   left: 7px;
   z-index: 1;
   text-shadow: 0px 0px 15px rgba(82, 138, 242, 0.5);
 }
+.exercise-holder .exercise-clone:hover .exercise-content {
+  height: 85px;
+  width: 85px;
+}
 .exercise-holder .exercise {
   z-index: 1;
 }
-.exercise-holder .exercise-title {
+.exercise-holder .exercise-info {
+  filter: drop-shadow(1px 1px 10px rgba(0, 0, 0, 0.3));
+  position: absolute;
+  right: 55px;
+  transition: 300ms;
+}
+.exercise-holder .exercise-info .exercise-title {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   flex-direction: row;
   gap: 10px;
-  height: 60px;
+  height: 75px;
   min-width: 250px;
   max-width: 350px;
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.9);
   -webkit-backdrop-filter: blur(10px);
           backdrop-filter: blur(10px);
   border: none;
   border-radius: 30px;
-  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
-  position: absolute;
-  right: 55px;
   padding: 5px 10px;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -2693,7 +2693,7 @@ footer div a {
           user-select: none;
   transition: 300ms;
 }
-.exercise-holder .exercise-title .exercise-difficulty {
+.exercise-holder .exercise-info .exercise-title .exercise-difficulty {
   height: 20px;
   width: 20px;
   border: none;
@@ -2702,7 +2702,7 @@ footer div a {
   position: relative;
   left: 50px;
 }
-.exercise-holder .exercise-title p {
+.exercise-holder .exercise-info .exercise-title p {
   color: #5e5c5c;
   font-size: 25px;
   font-weight: bold;
@@ -2710,16 +2710,90 @@ footer div a {
   left: 50px;
   margin: 0;
 }
-.exercise-holder .exercise-title p mark {
+.exercise-holder .exercise-info .exercise-title p mark {
   color: white;
   background-color: #0589f5;
 }
-.exercise-holder .active-exercise-title {
-  background-color: rgba(255, 255, 255, 0.5);
-  -webkit-backdrop-filter: blur(15px);
-          backdrop-filter: blur(15px);
-  box-shadow: 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
+.exercise-holder .exercise-info .exercise-title-with-stats {
+  border-bottom-right-radius: 0;
+}
+.exercise-holder .exercise-info .exercise-stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  height: 70px;
+  width: 170px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 0 0 20px 20px;
+  opacity: 0;
+  position: absolute;
+  left: 100%;
+  bottom: -60px;
+  padding: 3px 5px;
+  transform: translateX(-100%);
+  transition: 300ms;
+}
+.exercise-holder .exercise-info .exercise-stats .trophy-holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  height: 80%;
+  width: 30%;
+  border-right: 1px solid #5e5c5c;
+}
+.exercise-holder .exercise-info .exercise-stats .trophy-holder img {
+  height: 35px;
+  width: 35px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.exercise-holder .exercise-info .exercise-stats .stats-holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 70%;
+}
+.exercise-holder .exercise-info .exercise-stats .stats-holder .stat {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 10px;
+  width: 90%;
+  padding: 0 5px;
+}
+.exercise-holder .exercise-info .exercise-stats .stats-holder .stat:first-child {
+  border-bottom: 1px solid #5e5c5c;
+  padding-bottom: 5px;
+}
+.exercise-holder .exercise-info .exercise-stats .stats-holder .stat:last-child {
+  margin-top: 5px;
+}
+.exercise-holder .exercise-info .exercise-stats .stats-holder .stat img {
+  height: 25px;
+  width: 25px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.exercise-holder .exercise-info .exercise-stats .stats-holder .stat p {
+  color: #5e5c5c;
+  font-size: 20px;
+  font-weight: bold;
+}
+.exercise-holder .active-exercise-info {
   right: 40px;
+}
+.exercise-holder .active-exercise-info .exercise-title {
+  background-color: white;
+  border-radius: 30px !important;
+}
+.exercise-holder .active-exercise-info .exercise-stats {
+  background-color: white;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 #active-exercise-holder .exercise {
@@ -2733,12 +2807,34 @@ footer div a {
   height: 155px;
   width: 155px;
 }
-#active-exercise-holder .exercise-title {
-  background-color: rgba(255, 255, 255, 0.5);
-  -webkit-backdrop-filter: blur(15px);
-          backdrop-filter: blur(15px);
-  box-shadow: 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
+#active-exercise-holder .exercise .exercise-content .interactive-title span {
+  text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+#active-exercise-holder .exercise .exercise-content .interactive-title span:first-child {
+  color: #d91435;
+  top: -7px;
+  left: -5px;
+  z-index: 2;
+  text-shadow: 0px 0px 15px rgba(247, 72, 101, 0.5);
+}
+#active-exercise-holder .exercise .exercise-content .interactive-title span:last-child {
+  color: #0559f5;
+  top: 7px;
+  left: 7px;
+  z-index: 1;
+  text-shadow: 0px 0px 15px rgba(82, 138, 242, 0.5);
+}
+#active-exercise-holder .exercise-info {
   right: 40px;
+}
+#active-exercise-holder .exercise-info .exercise-title {
+  background-color: white;
+  border-radius: 30px;
+}
+#active-exercise-holder .exercise-info .exercise-stats {
+  background-color: white;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 #exercise-holder-error .exercise {

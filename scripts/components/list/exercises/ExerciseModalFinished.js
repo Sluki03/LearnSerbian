@@ -1,7 +1,13 @@
 import { Component } from "../../Component.js";
+import initializeStats from "../../../exercises/initializeStats.js";
 
 export default function ExerciseModalFinished(componentProps) {
     const { exercise, results, score, appendTo } = componentProps.params;
+
+    const stats = JSON.parse(localStorage.getItem("exerciseStats"));
+
+    if(stats === null) setStats(stats);
+    else checkStats();
 
     const exerciseModalFinished = document.querySelector("[data-template='exercise-modal-finished']").content.firstElementChild.cloneNode(true);
     appendTo.appendChild(exerciseModalFinished);
@@ -36,7 +42,8 @@ export default function ExerciseModalFinished(componentProps) {
 
     Component.create("InteractiveTitle", { title: exercise.name, appendTo: exerciseModalTitle });
     
-    const activeExerciseClone = document.getElementById("active-exercise").cloneNode(true);
+    const activeExercise = document.getElementById("active-exercise-holder").children[0];
+    const activeExerciseClone = activeExercise.cloneNode(true);
     
     activeExerciseClone.id = "";
     activeExerciseClone.classList.add("exercise-clone");
@@ -110,6 +117,70 @@ export default function ExerciseModalFinished(componentProps) {
                 exerciseModalContent.style.left = "";
             }, 100);
         }, 300);
+    }
+
+    function setStats(updates) {
+        const validStats = getValidStats();
+        
+        localStorage.setItem("exerciseStats", JSON.stringify({...stats, [exercise.id]: {...validStats, ...updates}}));
+        initializeStats();
+    }
+    
+    function checkStats() {
+        const validStats = getValidStats();
+        
+        if((score.xp > (validStats === null ? 0 : validStats.xp)) && isQuicker()) setStats(score);
+
+        else {
+            if((score.xp > (validStats === null ? 0 : validStats.xp))) setStats({ xp: score.xp });
+            if(isQuicker()) setStats({ time: score.time });
+        }
+        
+        function isQuicker() {
+            let result = false;
+            if(validStats === null) return true;
+            
+            const dividedTime = {
+                score: divideTime(score.time),
+                stats: divideTime(validStats.time)
+            };
+
+            const scoreTime = {
+                minutes: dividedTime.score[0],
+                seconds: dividedTime.score[1]
+            };
+
+            const statsTime = {
+                minutes: dividedTime.stats[0],
+                seconds: dividedTime.stats[1]
+            };
+
+            if(
+                (scoreTime.minutes === statsTime.minutes) &&
+                (scoreTime.seconds < statsTime.seconds)
+            ) result = true;
+
+            else if(scoreTime.minutes < statsTime.minutes) result = true;
+
+            return result;
+
+            function divideTime(time) {
+                let timeArray = time.split(":");
+                for(let i = 0; i < timeArray.length; i++) timeArray[i] = parseInt(timeArray[i]);
+
+                return timeArray;
+            }
+        }
+    }
+
+    function getValidStats() {
+        let validStats = null;
+
+        if(stats) Object.keys(stats).forEach((key, index) => {
+            if(exercise.id === key) validStats = Object.values(stats)[index];
+        });
+
+        return validStats;
     }
 
     return exerciseModalFinished;

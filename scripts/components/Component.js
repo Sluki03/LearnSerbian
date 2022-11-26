@@ -1,10 +1,4 @@
 import PanelsList from "./list/index/PanelsList.js";
-import ExercisesList from "./list/exercises/ExercisesList.js";
-import ExerciseModal from "./list/exercises/ExerciseModal.js";
-import ExerciseModalContent from "./list/exercises/ExerciseModalContent.js";
-import ExerciseModalTask from "./list/exercises/ExerciseModalTask.js";
-import ExerciseModalFinished from "./list/exercises/ExerciseModalFinished.js";
-import ExerciseModalReview from "./list/exercises/ExerciseModalReview.js";
 import Loading from "./list/other/Loading.js";
 import Nav from "./list/other/Nav.js"
 import Footer from "./list/other/Footer.js";
@@ -17,15 +11,22 @@ import DiacriticKeyboard from "./list/other/DiacriticKeyboard.js";
 import MiniModal from "./list/other/MiniModal.js";
 import Scrollbar from "./list/other/Scrollbar.js";
 import SpeakButton from "./list/other/SpeakButton.js";
+import ExercisesList from "./list/exercises/ExercisesList.js";
+import ExerciseStats from "./list/exercises/ExerciseStats.js";
+import ExerciseModal from "./list/exercises/ExerciseModal.js";
+import ExerciseModalContent from "./list/exercises/ExerciseModalContent.js";
+import ExerciseModalTask from "./list/exercises/ExerciseModalTask.js";
+import ExerciseModalFinished from "./list/exercises/ExerciseModalFinished.js";
+import ExerciseModalReview from "./list/exercises/ExerciseModalReview.js";
 
 import { Convert } from "../functions/Convert.js";
 import { buildEventList } from "../functions/EventControl.js";
 
 const components = {
-    PanelsList, ExercisesList, ExerciseModal, ExerciseModalContent, ExerciseModalTask,
-    ExerciseModalFinished, ExerciseModalReview, Loading, Nav, Footer,
-    InteractiveTitle, ModalOptions, ArrowButton, ClassicModal, Typing,
-    DiacriticKeyboard, MiniModal, Scrollbar, SpeakButton
+    PanelsList, Loading, Nav, Footer, InteractiveTitle,
+    ModalOptions, ArrowButton, ClassicModal, Typing, DiacriticKeyboard,
+    MiniModal, Scrollbar, SpeakButton, ExercisesList, ExerciseStats,
+    ExerciseModal, ExerciseModalContent, ExerciseModalTask, ExerciseModalFinished, ExerciseModalReview
 };
 
 export const Component = { create, render, update };

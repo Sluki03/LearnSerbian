@@ -8,54 +8,133 @@
     .exercise {
         z-index: 1;
     }
-    
-    .exercise-title {
-        @include add-flex(row, flex-start);
-        gap: 10px;
-        height: 60px;
-        min-width: 250px;
-        max-width: 350px;
-        background-color: rgba(255, 255, 255, 0.3);
-        backdrop-filter: blur(10px);
-        border: none;
-        border-radius: 30px;
-        box-shadow: $defLightShadow;
+
+    .exercise-info {
+        filter: drop-shadow(1px 1px 10px rgba(0, 0, 0, 0.3));
         position: absolute;
         right: 55px;
-        padding: 5px 10px;
-        user-select: none;
         transition: 300ms;
 
-        .exercise-difficulty {
-            height: 20px;
-            width: 20px;
+        .exercise-title {
+            @include add-flex(row, flex-start);
+            gap: 10px;
+            height: 75px;
+            min-width: 250px;
+            max-width: 350px;
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
             border: none;
-            border-radius: 50%;
-            background: $defRed;
-            position: relative;
-            left: 50px;
+            border-radius: 30px;
+            padding: 5px 10px;
+            user-select: none;
+            transition: 300ms;
+            
+            .exercise-difficulty {
+                height: 20px;
+                width: 20px;
+                border: none;
+                border-radius: 50%;
+                background: $defRed;
+                position: relative;
+                left: 50px;
+            }
+    
+            p {
+                color: $defDarkGrey;
+                font-size: set-size(lg);
+                font-weight: bold;
+                position: relative;
+                left: 50px;
+                margin: 0;
+    
+                mark {
+                    color: white;
+                    background-color: $defLighterBlue;
+                }
+            }
         }
 
-        p {
-            color: $defDarkGrey;
-            font-size: set-size(lg);
-            font-weight: bold;
-            position: relative;
-            left: 50px;
-            margin: 0;
-
-            mark {
-                color: white;
-                background-color: $defLighterBlue;
+        .exercise-title-with-stats {
+            border-bottom-right-radius: 0;
+        }
+    
+        .exercise-stats {
+            @include add-flex;
+            height: 70px;
+            width: 170px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 0 0 20px 20px;
+            opacity: 0;
+            position: absolute;
+            left: 100%;
+            bottom: -60px;
+            padding: 3px 5px;
+            transform: translateX(-100%);
+            transition: 300ms;
+    
+            .trophy-holder {
+                @include add-flex;
+                height: 80%;
+                width: 30%;
+    
+                border-right: 1px solid $defDarkGrey;
+    
+                img {
+                    height: 35px;
+                    width: 35px;
+                    object-fit: contain;
+                }
+            }
+    
+            .stats-holder {
+                @include add-flex(column);
+                width: 70%;
+    
+                .stat {
+                    @include add-flex(row, flex-start);
+                    gap: 10px;
+                    width: 90%;
+                    padding: 0 5px;
+    
+                    &:first-child {
+                        border-bottom: 1px solid $defDarkGrey;
+                        padding-bottom: 5px;
+                    }
+    
+                    &:last-child {
+                        margin-top: 5px;
+                    }
+    
+                    img {
+                        height: 25px;
+                        width: 25px;
+                        object-fit: contain;
+                    }
+    
+                    p {
+                        color: $defDarkGrey;
+                        font-size: set-size(md);
+                        font-weight: bold;
+                    }
+                }
             }
         }
     }
 
-    .active-exercise-title {
-        background-color: rgba(255, 255, 255, 0.5);
-        backdrop-filter: blur(15px);
-        box-shadow: $defShadow;
+    .active-exercise-info {
         right: 40px;
+
+        .exercise-title {
+            background-color: white;
+            border-radius: 30px !important;
+        }
+
+        .exercise-stats {
+            background-color: white;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
     }
 }
 
@@ -71,14 +150,43 @@
         .exercise-content {
             height: 155px;
             width: 155px;
+
+            .interactive-title span {
+                text-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+
+                &:first-child {
+                    color: $defLightRed;
+                    top: -7px;
+                    left: -5px;
+                    z-index: 2;
+                    text-shadow: $defGlowingRed;
+                }
+
+                &:last-child {
+                    color: $defLightBlue;
+                    top: 7px;
+                    left: 7px;
+                    z-index: 1;
+                    text-shadow: $defGlowingBlue;
+                }
+            }
         }
     }
 
-    .exercise-title {
-        background-color: rgba(255, 255, 255, 0.5);
-        backdrop-filter: blur(15px);
-        box-shadow: $defShadow;
+    .exercise-info {
         right: 40px;
+
+        .exercise-title {
+            background-color: white;
+            border-radius: 30px;
+        }
+
+        .exercise-stats {
+            background-color: white;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
     }
 }
 

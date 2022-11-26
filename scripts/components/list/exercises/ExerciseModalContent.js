@@ -37,7 +37,7 @@ export default function ExerciseModalContent(componentProps) {
     appendTo.appendChild(exerciseModalContent);
 
     const contentP = document.querySelector(".exercise-modal-content .content-p");
-    contentP.innerHTML = exercise.tips ? markup(exercise.tips) : "This exercise has no tips.";
+    if(contentP !== null) contentP.innerHTML = exercise.tips ? markup(exercise.tips) : "This exercise has no tips.";
 
     const contentButton = document.querySelector(".exercise-modal-content button");
     

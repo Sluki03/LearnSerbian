@@ -14,6 +14,11 @@
             box-shadow: $defShadow;
             position: absolute;
             transform: rotate(0);
+            transition: 600ms;
+        }
+
+        &:hover .exercise-border {
+            transform: rotate(180deg);
         }
         
         .exercise-content {
@@ -70,33 +75,29 @@
             
             .interactive-title span {
                 font-size: set-size(heading);
+                text-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+
+                &:first-child {
+                    color: $defLightRed;
+                    top: -7px;
+                    left: -5px;
+                    z-index: 2;
+                    text-shadow: $defGlowingRed;
+                }
+
+                &:last-child {
+                    color: $defLightBlue;
+                    top: 7px;
+                    left: 7px;
+                    z-index: 1;
+                    text-shadow: $defGlowingBlue;
+                }
             }
         }
 
         &:hover .exercise-content {
             height: 85px;
             width: 85px;
-        }
-    }
-
-    #active-exercise .interactive-title span,
-    .exercise-clone .interactive-title span {
-        text-shadow: 0px 0px 10px rgba(0,0,0,0.5);
-
-        &:first-child {
-            color: $defLightRed;
-            top: -7px;
-            left: -5px;
-            z-index: 2;
-            text-shadow: $defGlowingRed;
-        }
-
-        &:last-child {
-            color: $defLightBlue;
-            top: 7px;
-            left: 7px;
-            z-index: 1;
-            text-shadow: $defGlowingBlue;
         }
     }
 }

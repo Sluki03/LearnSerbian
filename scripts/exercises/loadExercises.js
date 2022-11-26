@@ -1,11 +1,19 @@
 import { Component } from "../components/Component.js";
 import { exercisesData } from "../../data/exercises/index.js";
+import { Convert } from "../functions/Convert.js";
 import createElement from "../functions/createElement.js";
+import initializeStats from "./initializeStats.js";
 import getDifficultyColor from "./getDifficultyColor.js";
 import closeExerciseModal from "./closeExerciseModal.js";
-import getRotateValue from "../functions/getRotateValue.js";
 
 export default function loadExercises() {
+    const data = [];
+
+    exercisesData.forEach((exercise, index) => {
+        const id = `${Convert.cssToJsStandard(exercise.name.replaceAll(" ", "-").toLowerCase())}_${index}`;
+        data.push({...exercise, id});
+    });
+    
     const list = document.querySelector(".exercises-list");
     const listEnd = document.getElementById("exercises-list-end");
 
@@ -13,12 +21,14 @@ export default function loadExercises() {
     let prevSearchInputValue = searchInput.value;
 
     let activeExerciseId = 0;
-
+    
     load();
     searchInput.oninput = load;
 
+    initializeStats();
+
     function load() {
-        let exercises = exercisesData;
+        let exercises = data;
         const exerciseHolders = document.querySelectorAll(".exercise-holder");
 
         if((exerciseHolders.length > 0) && (searchInput.value === prevSearchInputValue)) return;
@@ -34,9 +44,11 @@ export default function loadExercises() {
             const exerciseHolder = document.querySelector("[data-template='exercise-holder']").content.firstElementChild.cloneNode(true);
             list.insertBefore(exerciseHolder, listEnd);
 
-            const [articleExercise, exerciseTitle] = [...exerciseHolder.children];
+            const [articleExercise, exerciseInfo] = [...exerciseHolder.children];
+            const [exerciseTitle] = [...exerciseInfo.children];
             const [exerciseDifficulty, exerciseP] = [...exerciseTitle.children];
 
+            articleExercise.id = exercise.id;
             articleExercise.onmouseenter = exerciseHover;
 
             exerciseDifficulty.style.backgroundColor = getDifficultyColor(exercise.difficulty || "none");
@@ -110,65 +122,11 @@ export default function loadExercises() {
         activeExerciseId = id;
     }
 
-    let intervals = {
-        over: null,
-        leave: null
-    };
-
     function exerciseHover(e) {
-        if(intervals.leave) {
-            clearInterval(intervals.leave);
-            intervals.leave = null;
-        }
-
         const exercise = e.target;
-        const [exerciseBorder, exerciseContent] = [...exercise.children];
-        const exerciseHolder = exercise.parentNode;
+        const exerciseInfo = exercise.parentNode.children[1];
 
-        let angle = getRotateValue(exerciseBorder);
-
-        exerciseBorder.style.transform = `rotate(${angle}deg)`;
-        
-        intervals.over = setInterval(() => {
-            if(exerciseHolder.id === "active-exercise-holder") return mouseLeave();
-            if(angle === 360) angle = 0;
-            
-            exerciseBorder.style.transform = `rotate(${angle}deg)`;
-            angle++;
-        }, 10);
-
-        exerciseContent.style.height = "150px";
-        exerciseContent.style.width = "150px";
-        
-        const exerciseTitle = exerciseHolder.children[1];
-        exerciseTitle.classList.add("active-exercise-title");
-        
-        exercise.onmouseleave = mouseLeave;
-
-        function mouseLeave() {
-            clearInterval(intervals.over);
-            intervals.over = null;
-    
-            exerciseBorder.style.transform = `rotate(${angle}deg)`;
-            exerciseTitle.classList.remove("active-exercise-title");
-    
-            intervals.leave = setInterval(() => {
-                if(angle === 0) {
-                    clearInterval(intervals.leave);
-                    intervals.leave = null;
-    
-                    exerciseBorder.style.transition = "";
-                    exerciseBorder.style.transform = "";
-    
-                    exerciseContent.style.height = "";
-                    exerciseContent.style.width = "";
-                }
-
-                else {
-                    exerciseBorder.style.transform = `rotate(${angle}deg)`;
-                    angle--;
-                }
-            }, 1);
-        }
+        exerciseInfo.classList.add("active-exercise-info");
+        exercise.onmouseleave = () => { exerciseInfo.classList.remove("active-exercise-info") };
     }
 }
