@@ -30,14 +30,6 @@
                 border-radius: 50%;
                 position: absolute;
             }
-
-            .circle-top-border {
-                outline: 1px solid $defGrey;
-            }
-
-            .circle-bottom-border {
-                border: 1px solid $defGrey;
-            }
         }
 
         #loading-circle-1 {
@@ -49,7 +41,7 @@
                 height: 95px;
                 width: 95px;
                 border: 10px solid transparent;
-                border-top: 10px solid $defRed;
+                border-top: 10px solid $defLightRed;
                 border-radius: 50%;
                 position: absolute;
                 animation: loading-circle-1-rotating 4s linear infinite;
@@ -80,7 +72,7 @@
                 height: 45px;
                 width: 45px;
                 border: 5px solid transparent;
-                border-bottom: 5px solid $defBlue;
+                border-bottom: 5px solid $defLightBlue;
                 border-radius: 50%;
                 position: absolute;
                 animation: loading-circle-2-rotating 2s linear infinite;
