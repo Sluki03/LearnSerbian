@@ -2741,7 +2741,6 @@ footer div a {
   flex-direction: row;
   height: 80%;
   width: 30%;
-  border-right: 1px solid #5e5c5c;
 }
 .exercise-holder .exercise-info .exercise-stats .trophy-holder img {
   height: 35px;
@@ -2755,6 +2754,7 @@ footer div a {
   justify-content: center;
   flex-direction: column;
   width: 70%;
+  gap: 5px;
 }
 .exercise-holder .exercise-info .exercise-stats .stats-holder .stat {
   display: flex;
@@ -2764,13 +2764,6 @@ footer div a {
   gap: 10px;
   width: 90%;
   padding: 0 5px;
-}
-.exercise-holder .exercise-info .exercise-stats .stats-holder .stat:first-child {
-  border-bottom: 1px solid #5e5c5c;
-  padding-bottom: 5px;
-}
-.exercise-holder .exercise-info .exercise-stats .stats-holder .stat:last-child {
-  margin-top: 5px;
 }
 .exercise-holder .exercise-info .exercise-stats .stats-holder .stat img {
   height: 25px;
@@ -2782,6 +2775,7 @@ footer div a {
   color: #5e5c5c;
   font-size: 20px;
   font-weight: bold;
+  margin: 0;
 }
 .exercise-holder .active-exercise-info {
   right: 40px;

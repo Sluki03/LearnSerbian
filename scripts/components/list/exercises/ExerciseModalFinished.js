@@ -6,7 +6,7 @@ export default function ExerciseModalFinished(componentProps) {
 
     const stats = JSON.parse(localStorage.getItem("exerciseStats"));
 
-    if(stats === null) setStats(stats);
+    if(stats === null) setStats({ xp: score.xp, time: score.time });
     else checkStats();
 
     const exerciseModalFinished = document.querySelector("[data-template='exercise-modal-finished']").content.firstElementChild.cloneNode(true);
@@ -121,6 +121,7 @@ export default function ExerciseModalFinished(componentProps) {
 
     function setStats(updates) {
         const validStats = getValidStats();
+        console.log(updates)
         
         localStorage.setItem("exerciseStats", JSON.stringify({...stats, [exercise.id]: {...validStats, ...updates}}));
         initializeStats();
@@ -129,7 +130,7 @@ export default function ExerciseModalFinished(componentProps) {
     function checkStats() {
         const validStats = getValidStats();
         
-        if((score.xp > (validStats === null ? 0 : validStats.xp)) && isQuicker()) setStats(score);
+        if((score.xp > (validStats === null ? 0 : validStats.xp)) && isQuicker()) setStats({ xp: score.xp, time: score.time });
 
         else {
             if((score.xp > (validStats === null ? 0 : validStats.xp))) setStats({ xp: score.xp });

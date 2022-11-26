@@ -77,8 +77,6 @@
                 height: 80%;
                 width: 30%;
     
-                border-right: 1px solid $defDarkGrey;
-    
                 img {
                     height: 35px;
                     width: 35px;
@@ -89,21 +87,13 @@
             .stats-holder {
                 @include add-flex(column);
                 width: 70%;
+                gap: 5px;
     
                 .stat {
                     @include add-flex(row, flex-start);
                     gap: 10px;
                     width: 90%;
                     padding: 0 5px;
-    
-                    &:first-child {
-                        border-bottom: 1px solid $defDarkGrey;
-                        padding-bottom: 5px;
-                    }
-    
-                    &:last-child {
-                        margin-top: 5px;
-                    }
     
                     img {
                         height: 25px;
@@ -115,6 +105,7 @@
                         color: $defDarkGrey;
                         font-size: set-size(md);
                         font-weight: bold;
+                        margin: 0;
                     }
                 }
             }
