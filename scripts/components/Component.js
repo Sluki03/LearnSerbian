@@ -18,6 +18,7 @@ import ExerciseModalContent from "./list/exercises/ExerciseModalContent.js";
 import ExerciseModalTask from "./list/exercises/ExerciseModalTask.js";
 import ExerciseModalFinished from "./list/exercises/ExerciseModalFinished.js";
 import ExerciseModalReview from "./list/exercises/ExerciseModalReview.js";
+import TrophyCounter from "./list/exercises/TrophyCounter.js";
 
 import { Convert } from "../functions/Convert.js";
 import { buildEventList } from "../functions/EventControl.js";
@@ -26,7 +27,8 @@ const components = {
     PanelsList, Loading, Nav, Footer, InteractiveTitle,
     ModalOptions, ArrowButton, ClassicModal, Typing, DiacriticKeyboard,
     MiniModal, Scrollbar, SpeakButton, ExercisesList, ExerciseStats,
-    ExerciseModal, ExerciseModalContent, ExerciseModalTask, ExerciseModalFinished, ExerciseModalReview
+    ExerciseModal, ExerciseModalContent, ExerciseModalTask, ExerciseModalFinished, ExerciseModalReview,
+    TrophyCounter
 };
 
 export const Component = { create, render, update };

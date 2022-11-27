@@ -1874,49 +1874,97 @@ main .exercises-holder {
   position: relative;
   overflow: auto;
 }
-main .exercises-holder .exercises-search {
+main .exercises-holder .exercises-list-top {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: row;
+  width: 100%;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 10px;
+  margin-top: 10px;
+  padding: 3px 5px;
+  z-index: 5;
+}
+main .exercises-holder .exercises-list-top .trophy-counter {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
   gap: 10px;
-  margin-top: 10px;
-  position: relative;
-  transition: 300ms;
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 2px solid rgb(200, 200, 200);
+  border-radius: 30px;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  position: absolute;
+  top: 3px;
+  left: 5px;
+  padding: 5px 10px;
 }
-main .exercises-holder .exercises-search input {
+main .exercises-holder .exercises-list-top .trophy-counter img {
+  height: 40px;
+  width: 40px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+main .exercises-holder .exercises-list-top .trophy-counter p {
   color: #5e5c5c;
   font-size: 25px;
-  border: 2px solid rgb(200, 200, 200);
+  font-weight: bold;
+}
+main .exercises-holder .exercises-list-top .exercises-search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
   background-color: rgba(255, 255, 255, 0.3);
+  border: 2px solid rgb(200, 200, 200);
   -webkit-backdrop-filter: blur(10px);
           backdrop-filter: blur(10px);
   border-radius: 30px;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
-  outline: none;
+  position: relative;
   padding: 5px 10px;
   transition: 300ms;
 }
-main .exercises-holder .exercises-search input:hover, main .exercises-holder .exercises-search input:focus {
-  border: 2px solid gray;
-  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
+main .exercises-holder .exercises-list-top .exercises-search input {
+  width: 0;
+  color: #5e5c5c;
+  font-size: 25px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border: none;
+  outline: none;
+  transition: 300ms;
 }
-main .exercises-holder .exercises-search input::-moz-placeholder {
+main .exercises-holder .exercises-list-top .exercises-search input:not(:-moz-placeholder-shown) {
+  width: 300px;
+}
+main .exercises-holder .exercises-list-top .exercises-search input:not(:-ms-input-placeholder) {
+  width: 300px;
+}
+main .exercises-holder .exercises-list-top .exercises-search input:focus, main .exercises-holder .exercises-list-top .exercises-search input:not(:placeholder-shown) {
+  width: 300px;
+}
+main .exercises-holder .exercises-list-top .exercises-search input::-moz-placeholder {
   text-transform: capitalize;
 }
-main .exercises-holder .exercises-search input:-ms-input-placeholder {
+main .exercises-holder .exercises-list-top .exercises-search input:-ms-input-placeholder {
   text-transform: capitalize;
 }
-main .exercises-holder .exercises-search input::placeholder {
+main .exercises-holder .exercises-list-top .exercises-search input::placeholder {
   text-transform: capitalize;
 }
-main .exercises-holder .exercises-search img {
-  height: 30px;
-  width: 30px;
+main .exercises-holder .exercises-list-top .exercises-search:hover input {
+  width: 300px;
+}
+main .exercises-holder .exercises-list-top .exercises-search img {
+  height: 35px;
+  width: 35px;
   -o-object-fit: contain;
      object-fit: contain;
-  position: absolute;
-  right: 13px;
   z-index: 2;
 }
 main .exercises-holder .exercises-list {
@@ -2826,10 +2874,12 @@ footer div a {
 }
 
 #exercise-holder-error .exercise {
-  background: linear-gradient(135deg, rgb(200, 200, 200) 45%, white 45% 55%, #5e5c5c 55% 100%);
   cursor: default;
 }
-#exercise-holder-error .exercise:hover {
+#exercise-holder-error .exercise .exercise-border {
+  background: linear-gradient(135deg, rgb(200, 200, 200) 45%, white 45% 55%, #5e5c5c 55% 100%);
+}
+#exercise-holder-error .exercise:hover .exercise-border {
   transform: rotate(0);
 }
 #exercise-holder-error .exercise:hover .exercise-content {

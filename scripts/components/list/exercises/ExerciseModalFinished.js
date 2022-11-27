@@ -4,7 +4,7 @@ import initializeStats from "../../../exercises/initializeStats.js";
 export default function ExerciseModalFinished(componentProps) {
     const { exercise, results, score, appendTo } = componentProps.params;
 
-    const stats = JSON.parse(localStorage.getItem("exerciseStats"));
+    const stats = JSON.parse(localStorage.getItem("exercisesStats"));
 
     if(stats === null) setStats({ xp: score.xp, time: score.time });
     else checkStats();
@@ -121,9 +121,8 @@ export default function ExerciseModalFinished(componentProps) {
 
     function setStats(updates) {
         const validStats = getValidStats();
-        console.log(updates)
         
-        localStorage.setItem("exerciseStats", JSON.stringify({...stats, [exercise.id]: {...validStats, ...updates}}));
+        localStorage.setItem("exercisesStats", JSON.stringify({...stats, [exercise.id]: {...validStats, ...updates}}));
         initializeStats();
     }
     

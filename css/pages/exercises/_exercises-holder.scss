@@ -11,42 +11,81 @@
     position: relative;
     overflow: auto;
     
-    .exercises-search {
-        @include add-flex;
-        gap: 10px;
+    .exercises-list-top {
+        @include add-flex(row, flex-end);
+        width: 100%;
+        position: sticky;
+        top: 10px;
         margin-top: 10px;
-        position: relative;
-        transition: 300ms;
+        padding: 3px 5px;
+        z-index: 5;
         
-        input {
-            color: $defDarkGrey;
-            font-size: set-size(lg);
+        .trophy-counter {
+            @include add-flex;
+            gap: 10px;
+            background-color: rgba(255, 255, 255, 0.7);
             border: 2px solid $defLightGrey;
+            border-radius: 30px;
+            box-shadow: $defLighterShadow;
+            backdrop-filter: blur(10px);
+            position: absolute;
+            top: 3px;
+            left: 5px;
+            padding: 5px 10px;
+
+            img {
+                height: 40px;
+                width: 40px;
+                object-fit: contain;
+            }
+
+            p {
+                color: $defDarkGrey;
+                font-size: set-size(lg);
+                font-weight: bold;
+            }
+        }
+        
+        .exercises-search {
+            @include add-flex;
             background-color: rgba(255, 255, 255, 0.3);
+            border: 2px solid $defLightGrey;
             backdrop-filter: blur(10px);
             border-radius: 30px;
             box-shadow: $defLighterShadow;
-            outline: none;
+            position: relative;
             padding: 5px 10px;
             transition: 300ms;
-
-            &:hover, &:focus {
-                border: 2px solid $defGrey;
-                box-shadow: $defLightShadow;
+            
+            input {
+                width: 0;
+                color: $defDarkGrey;
+                font-size: set-size(lg);
+                background-color: rgba(255, 255, 255, 0.3);
+                border: none;
+                outline: none;
+                transition: 300ms;
+    
+                &:focus,
+                &:not(:placeholder-shown) {
+                    width: 300px;
+                }
+                
+                &::placeholder {
+                    text-transform: capitalize;
+                }
             }
 
-            &::placeholder {
-                text-transform: capitalize;
+            &:hover input {
+                width: 300px;
             }
-        }
-
-        img {
-            height: 30px;
-            width: 30px;
-            object-fit: contain;
-            position: absolute;
-            right: 13px;
-            z-index: 2;
+    
+            img {
+                height: 35px;
+                width: 35px;
+                object-fit: contain;
+                z-index: 2;
+            }
         }
     }
     

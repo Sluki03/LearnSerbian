@@ -1,7 +1,8 @@
 import { Component } from "../components/Component.js";
+import { exercisesData } from "../../data/exercises/index.js";
 
 export default function initializeStats() {
-    const stats = JSON.parse(localStorage.getItem("exerciseStats"));
+    const stats = JSON.parse(localStorage.getItem("exercisesStats"));
     const articleExercises = document.querySelectorAll(".exercise");
 
     articleExercises.forEach(articleExercise => {
@@ -25,7 +26,7 @@ export default function initializeStats() {
         else if(validStats) {
             if(exerciseStats === undefined) {
                 const newExerciseStats = Component.create("ExerciseStats", { score: validStats, appendTo: exerciseInfo });
-                
+
                 exerciseTitle.classList.add("exercise-title-with-stats");
                 
                 setTimeout(() => {
@@ -44,4 +45,9 @@ export default function initializeStats() {
             });
         }
     });
+
+    const trophyCounterP = document.querySelector(".trophy-counter p");
+    const numberOfTrophies = Object.keys(stats ? stats : {}).length;
+
+    trophyCounterP.innerText = `${numberOfTrophies} / ${exercisesData.length}`;
 }

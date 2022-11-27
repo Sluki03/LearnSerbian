@@ -30,7 +30,7 @@ export default function setTranslatableWords(parent, text, translation, englishS
         
         setTimeout(() => {
             Component.create("MiniModal", {
-                target: e.target,
+                target: wordElement,
                 id: `word-${word}`,
                 content: translatedWord
             });

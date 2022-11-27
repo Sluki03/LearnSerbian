@@ -25,8 +25,6 @@ export default function loadExercises() {
     load();
     searchInput.oninput = load;
 
-    initializeStats();
-
     function load() {
         let exercises = data;
         const exerciseHolders = document.querySelectorAll(".exercise-holder");
@@ -48,7 +46,7 @@ export default function loadExercises() {
             const [exerciseTitle] = [...exerciseInfo.children];
             const [exerciseDifficulty, exerciseP] = [...exerciseTitle.children];
 
-            articleExercise.id = exercise.id;
+            articleExercise.id = exercise.noResults ? "" : exercise.id;
             articleExercise.onmouseenter = exerciseHover;
 
             exerciseDifficulty.style.backgroundColor = getDifficultyColor(exercise.difficulty || "none");
@@ -62,6 +60,8 @@ export default function loadExercises() {
             if(exercise.icon) createElement({ tag: "img", attributes: { src: exercise.icon, alt: exercise.name }, appendTo: exerciseContent });
             else Component.create("InteractiveTitle", { title: exercise.searchIndex ? exercise.searchIndex : index + 1, appendTo: exerciseContent });
         });
+
+        initializeStats();
 
         function search() {
             const newExercises = [];
