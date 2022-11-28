@@ -27,7 +27,7 @@
             border: 2px solid $defLightGrey;
             border-radius: 30px;
             box-shadow: $defLighterShadow;
-            backdrop-filter: blur(10px);
+            backdrop-filter: $defBlurFilter;
             position: absolute;
             top: 3px;
             left: 5px;
@@ -48,9 +48,9 @@
         
         .exercises-search {
             @include add-flex;
-            background-color: rgba(255, 255, 255, 0.3);
+            background-color: $defBlurBg;
             border: 2px solid $defLightGrey;
-            backdrop-filter: blur(10px);
+            backdrop-filter: $defBlurFilter;
             border-radius: 30px;
             box-shadow: $defLighterShadow;
             position: relative;
@@ -61,7 +61,7 @@
                 width: 0;
                 color: $defDarkGrey;
                 font-size: set-size(lg);
-                background-color: rgba(255, 255, 255, 0.3);
+                background-color: $defBlurBg;
                 border: none;
                 outline: none;
                 transition: 300ms;
@@ -116,8 +116,8 @@
         .exercises-list-start-end-holder {
             @include add-flex;
             gap: 10px;
-            background-color: rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(10px);
+            background-color: $defBlurBg;
+            backdrop-filter: $defBlurFilter;
             border: 2px solid $defLightGrey;
             border-radius: 20px;
             padding: 10px;

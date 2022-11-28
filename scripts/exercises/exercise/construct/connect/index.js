@@ -50,7 +50,7 @@ export default function connect(thisExercise) {
                 keydownButton = allButtons[keydownId - 1];
             }
             
-            const button = e.type === "keydown" ? keydownButton : e.target;
+            const button = e.type === "keydown" ? keydownButton : e.currentTarget;
             if(connectOption.alreadyChecked(button) || button.disabled) return;
             
             const speakStatus = randomValues.indexOf(button.innerText.split("\n")[0]) > -1;
@@ -194,7 +194,7 @@ export default function connect(thisExercise) {
     
     for(let i = 0; i < 2; i++) createElement({
         tag: "div",
-        attributes: { class: "connect-button-holder", id: `content-button-holder-${i}` },
+        attributes: { class: "connect-button-holder", id: `content-button-holder-${i + 1}` },
         appendTo: connectHolder
     });
 

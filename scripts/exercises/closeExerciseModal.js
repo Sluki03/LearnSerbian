@@ -1,8 +1,9 @@
 import { Component } from "../components/Component.js";
+import openExerciseModal from "./openExerciseModal.js";
 
 export default function closeExerciseModal(confirmed, openNew) {    
     const taskConnectKeydown = window.eventList.get("taskConnectKeydown");
-    const taskConnectActiveMultipleChoiceButton = document.querySelector(".active-multiple-choice-button");
+    const taskConnectActiveMultipleChoiceButton = document.querySelector(".connect-holder .active-multiple-choice-button");
     
     if(taskConnectKeydown !== null && taskConnectActiveMultipleChoiceButton !== null) return;
     
@@ -27,10 +28,8 @@ export default function closeExerciseModal(confirmed, openNew) {
         window.eventList.remove("exerciseModalContentKeyDown", "modalOptionsKeyDown");
         
         if(openNew !== undefined) {
-            const { exerciseHolder, exercise } = openNew;
-
-            exerciseHolder.id = "active-exercise-holder";
-            Component.create("ExerciseModal", { exercise });
+            const { activeExercise, exercise } = openNew;
+            openExerciseModal(activeExercise, exercise);
         }
     }, 300);
 

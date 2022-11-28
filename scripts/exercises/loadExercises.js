@@ -4,7 +4,7 @@ import { Convert } from "../functions/Convert.js";
 import createElement from "../functions/createElement.js";
 import initializeStats from "./initializeStats.js";
 import getDifficultyColor from "./getDifficultyColor.js";
-import closeExerciseModal from "./closeExerciseModal.js";
+import openExerciseModal from "./openExerciseModal.js";
 
 export default function loadExercises() {
     const data = [];
@@ -19,8 +19,6 @@ export default function loadExercises() {
 
     const searchInput = document.querySelector(".exercises-search input");
     let prevSearchInputValue = searchInput.value;
-
-    let activeExerciseId = 0;
     
     load();
     searchInput.oninput = load;
@@ -96,30 +94,6 @@ export default function loadExercises() {
 
             return newExercises;
         }
-    }
-    
-    function openExerciseModal(activeExercise, exercise, id) {
-        const [exerciseBorder, exerciseContent] = [...activeExercise.children];
-
-        exerciseBorder.style.transform = "";
-
-        exerciseContent.style.height = "";
-        exerciseContent.style.width = "";
-        
-        const exerciseModal = document.querySelector(".exercise-modal");
-        const exerciseHolder = activeExercise.parentNode;
-
-        if(exerciseModal === null && activeExerciseId > 0) activeExerciseId = 0;
-        if(activeExerciseId === id) return;
-        
-        if(activeExerciseId !== 0) closeExerciseModal(false, { exerciseHolder, exercise });
-        
-        else {
-            exerciseHolder.id = "active-exercise-holder";
-            Component.create("ExerciseModal", { exercise });
-        }
-
-        activeExerciseId = id;
     }
 
     function exerciseHover(e) {

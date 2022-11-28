@@ -19,7 +19,7 @@
 
     .review-holder {
         @include add-flex(column, flex-start);
-        max-height: 100%;
+        max-height: 75%;
         width: 80%;
         border-radius: 40px;
         box-shadow: $defShadow;
@@ -129,7 +129,7 @@
         width: 80%;
         margin: 0;
         position: absolute;
-        bottom: 5px;
+        bottom: 15px;
 
         &:hover {
             box-shadow: $defShadow;

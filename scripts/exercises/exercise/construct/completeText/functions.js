@@ -90,7 +90,7 @@ export function emptyFieldSelector(e) {
             if(!input.value && targetInput === null) targetInput = input;
         });
 
-        targetInput.focus();
+        if(targetInput) targetInput.focus();
     }
 
     else {

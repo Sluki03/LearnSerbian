@@ -24,20 +24,22 @@ export default function initializeStats() {
         }
 
         else if(validStats) {
+            let validExerciseStats = exerciseStats;
+            
             if(exerciseStats === undefined) {
-                const newExerciseStats = Component.create("ExerciseStats", { score: validStats, appendTo: exerciseInfo });
+                validExerciseStats = Component.create("ExerciseStats", { score: validStats, appendTo: exerciseInfo });
 
                 exerciseTitle.classList.add("exercise-title-with-stats");
                 
                 setTimeout(() => {
-                    newExerciseStats.style.opacity = "1";
-                    newExerciseStats.style.bottom = "-70px";
+                    validExerciseStats.style.opacity = "1";
+                    validExerciseStats.style.bottom = "-70px";
                 }, 100);
             }
 
-            const allStats = document.querySelectorAll(".stats-holder .stat");
+            const allStats = validExerciseStats.children[1].children;
 
-            allStats.forEach((stat, index) => {
+            [...allStats].forEach((stat, index) => {
                 const statProp = index ? validStats.time : validStats.xp;
                 const statP = stat.children[1];
 

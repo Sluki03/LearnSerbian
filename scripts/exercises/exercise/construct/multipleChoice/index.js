@@ -61,7 +61,7 @@ export default function multipleChoice(thisExercise) {
         const taskInfoBottom = parseInt(getComputedStyle(taskInfo).getPropertyValue("bottom"));
         if(taskInfoBottom === 0) return;
     
-        const id = e.type === "keydown" ? parseInt(e.key) : e.target.id.split("-")[3];
+        const id = e.type === "keydown" ? parseInt(e.key) : e.currentTarget.id.split("-")[3];
         
         if(isNaN(id) || id > randomOptions.length) return;
         

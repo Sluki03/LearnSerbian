@@ -1637,7 +1637,7 @@ main .exercise-modal .exercise-modal-review .review-holder {
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
-  max-height: 100%;
+  max-height: 75%;
   width: 80%;
   border-radius: 40px;
   box-shadow: 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
@@ -1772,7 +1772,7 @@ main .exercise-modal .exercise-modal-review .wide-button {
   width: 80%;
   margin: 0;
   position: absolute;
-  bottom: 5px;
+  bottom: 15px;
 }
 main .exercise-modal .exercise-modal-review .wide-button:hover {
   box-shadow: 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
@@ -2905,7 +2905,7 @@ footer div a {
   transition: opacity 300ms, top 300ms;
   background-color: rgba(255, 255, 255, 0.7);
   -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
   border-radius: 40px;
   padding: 50px;
   -webkit-user-select: none;

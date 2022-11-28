@@ -22,7 +22,7 @@
             gap: 10px;
             width: 100%;
             background-color: transparent;
-            backdrop-filter: blur(10px);
+            backdrop-filter: $defBlurFilter;
             border-top-left-radius: 20px;
             border-top-right-radius: 20px;
             padding: 5px 10px;
@@ -107,7 +107,7 @@
             .user-message {
                 @include add-flex;
                 font-size: set-size(md);
-                backdrop-filter: blur(10px);
+                backdrop-filter: $defBlurFilter;
                 border: 1px solid $defLightGrey;
                 word-break: break-all;
                 padding: 5px 10px;
@@ -118,7 +118,7 @@
             @include add-flex(row, flex-start);
             width: 100%;
             background-color: transparent;
-            backdrop-filter: blur(10px);
+            backdrop-filter: $defBlurFilter;
             box-shadow: 0px -2px 2px 0px rgba(128, 128, 128, 0.3);
             border-bottom-left-radius: 20px;
             border-bottom-right-radius: 20px;
@@ -130,7 +130,7 @@
                 font-size: 18px;
                 color: white;
                 background-color: rgba(0, 132, 255, 0.7);
-                backdrop-filter: blur(10px);
+                backdrop-filter: $defBlurFilter;
                 opacity: 0;
                 position: absolute;
                 top: 0;

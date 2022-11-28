@@ -120,7 +120,7 @@ export default function ExerciseModalFinished(componentProps) {
     }
 
     function setStats(updates) {
-        const validStats = getValidStats();
+        const validStats = getValidStats() === null ? { xp: 0, time: "00:00" } : getValidStats();
         
         localStorage.setItem("exercisesStats", JSON.stringify({...stats, [exercise.id]: {...validStats, ...updates}}));
         initializeStats();

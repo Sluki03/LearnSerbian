@@ -10,7 +10,7 @@
     white-space: nowrap;
     background-color: rgba(255, 255, 255, 0.7);
     border-radius: 20px;
-    backdrop-filter: blur(10px);
+    backdrop-filter: $defBlurFilter;
     box-shadow: $defLightShadow;
     cursor: default;
     opacity: 0;

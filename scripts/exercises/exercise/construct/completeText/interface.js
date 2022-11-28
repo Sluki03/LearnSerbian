@@ -36,7 +36,7 @@ export default function taskInterface(thisExercise, changeMode) {
             const prevInputValue = Object.values(thisExercise.prevModeValues.write.completeText)[index];
             const prevValuesStatus = Object.keys(thisExercise.prevModeValues.write.completeText).length > 0;
             
-            input.value = prevValuesStatus ? prevInputValue : "";
+            input.value = prevValuesStatus && prevInputValue ? prevInputValue : "";
 
             Shorten.placeholder(input);
             
