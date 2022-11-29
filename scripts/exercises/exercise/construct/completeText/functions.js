@@ -77,7 +77,11 @@ export function getFields(thisExercise) {
     return fields;
 }
 
+let inProgress = false;
+
 export function emptyFieldSelector(e) {
+    if(inProgress) return;
+
     const thisExercise = window.eventList.getParams("taskCompleteTextKeydown");
     
     if(thisExercise.answer || e.key !== "Enter") return;
@@ -108,4 +112,6 @@ export function emptyFieldSelector(e) {
 
         targetField.classList.add("active-complete-text-field");
     }
+
+    inProgress = false;
 }

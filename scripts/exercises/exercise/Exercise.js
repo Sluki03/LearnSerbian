@@ -525,6 +525,20 @@ export class Exercise {
                 }
                 
                 break;
+            case "completeText":
+                const wordMiniModals = document.querySelectorAll(".complete-text-word");
+                console.log(wordMiniModals)
+                
+                wordMiniModals.forEach(wordMiniModal => {
+                    const wordMiniModalTop = parseFloat(getComputedStyle(wordMiniModal).getPropertyValue("top"));
+
+                    wordMiniModal.classList.remove("active-mini-modal");
+                    wordMiniModal.style.top = `${wordMiniModalTop - 10}px`;
+                    
+                    setTimeout(() => wordMiniModal.remove(), 300);
+                });
+
+                break;
             default: ;
         }
     }

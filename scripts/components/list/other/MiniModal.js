@@ -2,13 +2,13 @@ import createElement from "../../../functions/createElement.js";
 
 export default function MiniModal(componentProps) {
     const { builtIn } = componentProps;
-    const { target, id, content } = componentProps.params;
+    const { target, id, className, content, blockKeydownClose } = componentProps.params;
 
     const body = document.querySelector("body");
     
     const miniModal = builtIn ? builtIn : createElement({
         tag: "p",
-        attributes: { class: "mini-modal", id: `mini-modal-${id}` },
+        attributes: { class: `mini-modal ${className}`, id: `mini-modal-${id}` },
         innerText: content,
         appendTo: body
     });
@@ -48,9 +48,17 @@ export default function MiniModal(componentProps) {
         miniModal.style.top = `${miniModalPositions.top}px`;
     }, 300);
 
-    window.eventList.add({ id: "miniModalClick", type: "click", listener: closeMiniModal });
+    window.eventList.add({
+        miniModalClick: { type: "click", listener: closeMiniModal },
+        miniModalKeydown: { type: "keydown", listener: closeMiniModal }
+    });
 
     function closeMiniModal(e) {
+        if(
+            blockKeydownClose &&
+            e.type === "keydown" &&
+            e.key !== "Enter"
+        ) return;
         if(e.target) e.stopPropagation();
 
         const currentTarget = e.target ? e.target : e;
@@ -66,7 +74,7 @@ export default function MiniModal(componentProps) {
 
         setTimeout(() => { existingMiniModal.remove() }, 300);
 
-        if(currentTarget.className === activeTarget.className) window.eventList.remove("miniModalClick");
+        if(currentTarget.className === activeTarget.className) window.eventList.remove("miniModalClick", "miniModalKeydown");
     }
 
     return miniModal;

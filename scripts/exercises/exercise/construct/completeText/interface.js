@@ -280,7 +280,9 @@ export default function taskInterface(thisExercise, changeMode) {
         setTimeout(() => Component.create("MiniModal", {
             target: target.element,
             id: target.id,
-            content
+            className: "complete-text-word",
+            content,
+            blockKeydownClose: true
         }), miniModal ? 300 : 0);
     }
 }
