@@ -28,6 +28,7 @@ export default function loadExercises() {
         const exerciseHolders = document.querySelectorAll(".exercise-holder");
 
         if((exerciseHolders.length > 0) && (searchInput.value === prevSearchInputValue)) return;
+
         prevSearchInputValue = searchInput.value;
 
         if(searchInput.value) exercises = search();
@@ -42,6 +43,7 @@ export default function loadExercises() {
 
             const [articleExercise, exerciseInfo] = [...exerciseHolder.children];
             const [exerciseTitle] = [...exerciseInfo.children];
+
             const [exerciseDifficulty, exerciseP] = [...exerciseTitle.children];
 
             articleExercise.id = exercise.noResults ? "" : exercise.id;

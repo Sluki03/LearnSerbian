@@ -37,7 +37,7 @@ export const test1 = [
         ]
     },*/
 
-    {
+    /*{
         type: "conversation",
         title: "Have a conversation.",
         participant: "Komsija Deki",
@@ -105,4 +105,11 @@ export const test1 = [
             Well, the reason is *simple*, that is how we say \"color\" in Serbian language...
         `
     }*/
+
+    {
+        type: "listen",
+        title: "Enter what you hear.",
+        listenTo: "Na traci je Simi.",
+        xp: 20
+    }
 ];

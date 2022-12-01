@@ -1,17 +1,19 @@
 import breakText from "../../functions/breakText.js";
 
-export default function formatAnswer(type, acceptableAnswers, userAnswer = "") {
-    let otherAnswers = acceptableAnswers;
+export default function formatAnswer(thisExercise, type, acceptableAnswers, userAnswer = "") {
+    const validAcceptableAnswers = thisExercise.currentTask.type === "listen" ? [thisExercise.currentTask.listenTo] : acceptableAnswers;
+    
+    let otherAnswers = validAcceptableAnswers;
     if(userAnswer && typeof userAnswer === "string") otherAnswers = otherAnswers.filter(answer => breakText(answer, { join: true }) !== breakText(userAnswer, { join: true }));
-
+    
     const random = {
-        correctAnswer: acceptableAnswers[Math.floor(Math.random() * acceptableAnswers.length)],
+        correctAnswer: validAcceptableAnswers[Math.floor(Math.random() * validAcceptableAnswers.length)],
         otherCorrectAnswer: otherAnswers.length > 0 ? otherAnswers[Math.floor(Math.random() * otherAnswers.length)] : ""
     };
     
     const answers = {
         user: getFormattedAnswer(userAnswer),
-        correct: getFormattedAnswer(acceptableAnswers)
+        correct: getFormattedAnswer(validAcceptableAnswers)
     };
 
     return [answers, random];
@@ -31,6 +33,10 @@ export default function formatAnswer(type, acceptableAnswers, userAnswer = "") {
                     formattedAnswer = `${answerSrc.join(", ")}`;
                     isPlural = true;
                 }
+
+                break;
+            case "listen":
+                formattedAnswer = [thisExercise.currentTask.listenTo];
                 break;
             default: formattedAnswer = answerSrc;
         }

@@ -1,0 +1,49 @@
+.listen-holder {
+    @include add-flex;
+    width: 100%;
+    margin: 10px;
+
+    .listen-interface {
+        @include add-flex(column);
+        gap: 15px;
+        width: 80%;
+
+        .speak-button {
+            border-radius: 30%;
+            padding: 10px;
+            
+            img {
+                height: 50px;
+                width: 50px;
+            }
+        }
+    
+        textarea {
+            height: 155px;
+            width: 80%;
+            color: $defDarkGrey;
+            font-size: set-size(lg);
+            border: 3px dashed $defLightGrey;
+            border-radius: 20px;
+            box-shadow: $defLighterShadow;
+            outline: none;
+            resize: none;
+            padding: 10px 15px;
+            transition: 300ms;
+    
+            &:hover {
+                border: 3px dashed $defDarkGrey;
+            }
+    
+            &:disabled {
+                border: 3px dashed $defLightGrey;
+            }
+    
+            &:focus {
+                border: 3px solid $defDarkGrey;
+                border-radius: 20px;
+                box-shadow: $defLightShadow;
+            }
+        }
+    }
+}

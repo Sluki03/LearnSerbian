@@ -92,7 +92,7 @@ export class Exercise {
     }
     
     async start() {
-        await this.loadVoices();
+        await this.loadVoices(this);
         
         setTimeout(() => {
             this.taskLives.classList.add("active-task-lives");
@@ -131,7 +131,8 @@ export class Exercise {
 
     startNew(e) {
         if(e?.type === "keydown" && e?.key !== "Enter") return;
-        
+        responsiveVoice.pause();
+
         window.eventList.remove("taskCheckKeyDown");
         
         if(this.tasks.length - 1 === this.taskNumber && (this.currentLives > 0 || this.currentLives === "infinity")) {
@@ -348,7 +349,7 @@ export class Exercise {
         taskInfoTextH4.innerText = `${validTitles[Math.floor(Math.random() * validTitles.length)]}!`;
 
         const acceptableAnswers = getAcceptableAnswers();
-        const [answers, random] = formatAnswer(this.currentTask.type, acceptableAnswers);
+        const [answers, random] = formatAnswer(this, this.currentTask.type, acceptableAnswers);
         
         const nonRandomAnswerTypes = ["connect", "completeText"];
         
@@ -397,6 +398,10 @@ export class Exercise {
         taskInfoButton.onclick = this.startNew;
         window.eventList.add({ id: "taskStartNewKeyDown", type: "keydown", listener: this.startNew });
         
+        function generateCorrectAnswer() {
+            
+        }
+        
         function getLinearGradient() {
             const color = isCorrect ? green : red;
             const { normal, light, lighter } = color;
@@ -430,6 +435,8 @@ export class Exercise {
                     });
 
                     return completeTextAcceptableAnswers;
+                case "listen":
+                    return currentTask.listenTo;
                 default: return currentTask.acceptableAnswers;
             }
         }
@@ -446,7 +453,7 @@ export class Exercise {
                 break;
             case "translate":
                 result = false;
-
+                
                 this.currentTask.acceptableAnswers.forEach(answer => {
                     if(breakText(this.answer, { join: true }) === breakText(answer, { join: true })) result = true;
                 });
@@ -499,6 +506,11 @@ export class Exercise {
 
                 allResults.forEach(r => { if(!r) result = false });
                 
+                break;
+            case "listen":
+                result = false;
+                if(breakText(this.currentTask.listenTo, { join: true }) === breakText(this.answer, { join: true })) result = true;
+
                 break;
             default: ;
         }
@@ -652,12 +664,14 @@ export class Exercise {
         return result;
     }
 
-    loadVoices() {
+    loadVoices({ currentTask }) {
         return new Promise(resolve => {
             const loading = Component.create("Loading", {
                 style: { backgroundImage: "none" },
                 appendTo: this.exerciseModal
             });
+
+            if(!currentTask.speak) resolve(true);
             
             const speakTasks = [];
 
@@ -669,31 +683,47 @@ export class Exercise {
                 switch(task.type) {
                     case "multipleChoice":
                     case "multipleChoiceImages":
-                        task.options.forEach(option => prerenderVoice(option));
+                        prerenderVoices(task.options);
                         break;
                     case "translate":
-                        if(!task.englishSerbian) prerenderVoice(task.text);
-                        else task.options?.forEach(option => prerenderVoice(option));
+                        if(!task.englishSerbian) prerenderVoices([task.text]);
+                        else prerenderVoices(task?.options);
                         break;
                     case "conversation":
-                        task.messages.forEach(message => prerenderVoice(message.content));
+                        prerenderVoices(task.messages);
                         break;
                     case "connect":
-                        Object.values(task.options).forEach(value => prerenderVoice(value));
+                        prerenderVoices(Object.values(task.options));
                         break;
                     case "completeText":
-                        task.options.forEach(option => prerenderVoice(option));
+                        prerenderVoices(task.options);
+                        break;
+                    case "listen":
+                        prerenderVoices([task.listenTo]);
                         break;
                     default: ;
                 }
             });
 
             loading.remove();
-            resolve(true);
-        });
 
-        function prerenderVoice(...texts) {
-            texts.forEach(text => responsiveVoice.speak(text, "Serbian Male", { volume: 0 }));
-        }
+            function prerenderVoices(voices) {
+                console.log(voices)
+                let counter = 0;
+                renderVoice();
+
+                async function renderVoice() {
+                    if(counter === voices.length) resolve(true);
+                    
+                    else {
+                        const validVoice = typeof voices[counter] === "object" ? voices[counter].content : voices[counter];
+                        await responsiveVoice.speak(validVoice, "Serbian Male", { volume: 0 });
+                    
+                        counter++;
+                        renderVoice();
+                    }
+                }
+            }
+        });
     }
 }

@@ -121,8 +121,8 @@ export async function sendMessage(thisExercise, message, e) {
 
         setTranslatableWords(messageContent, participantAnswer, message.current.translation);
 
-        if(thisExercise.currentTask.speak && !responsiveVoice.isPlaying()) {
-            responsiveVoice.speak(participantAnswer);
+        if(thisExercise.currentTask.speak) {
+            if(!responsiveVoice.isPlaying()) responsiveVoice.speak(participantAnswer);
             Component.create("SpeakButton", { speak: participantAnswer, appendTo: messageHolder });
         }
     }

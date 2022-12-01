@@ -13,6 +13,8 @@ export default function initializeStats() {
         });
 
         const exerciseHolder = articleExercise.parentNode;
+        if(!exerciseHolder.classList.contains("exercise-holder")) return;
+        
         const exerciseInfo = exerciseHolder.children[1];
         const [exerciseTitle, exerciseStats] = [...exerciseInfo.children];
         

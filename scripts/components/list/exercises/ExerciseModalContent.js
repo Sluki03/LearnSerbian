@@ -12,7 +12,8 @@ export default function ExerciseModalContent(componentProps) {
     appendTo.appendChild(exerciseModalTitle);
     appendTo.appendChild(exerciseModalDivider);
 
-    Component.create("InteractiveTitle", { title: exercise.name, appendTo: exerciseModalTitle });
+    const markFreeExerciseName = exercise.name.replaceAll("<mark>", "").replaceAll("</mark>", "");
+    Component.create("InteractiveTitle", { title: markFreeExerciseName, appendTo: exerciseModalTitle });
 
     const activeExerciseClone = document.getElementById("active-exercise-holder").children[0].cloneNode(true);
     

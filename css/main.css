@@ -1321,6 +1321,54 @@ main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .ac
   opacity: 1;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
 }
+main .exercise-modal .exercise-modal-task .task-holder .listen-holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  width: 100%;
+  margin: 10px;
+}
+main .exercise-modal .exercise-modal-task .task-holder .listen-holder .listen-interface {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 15px;
+  width: 80%;
+}
+main .exercise-modal .exercise-modal-task .task-holder .listen-holder .listen-interface .speak-button {
+  border-radius: 30%;
+  padding: 10px;
+}
+main .exercise-modal .exercise-modal-task .task-holder .listen-holder .listen-interface .speak-button img {
+  height: 50px;
+  width: 50px;
+}
+main .exercise-modal .exercise-modal-task .task-holder .listen-holder .listen-interface textarea {
+  height: 155px;
+  width: 80%;
+  color: #5e5c5c;
+  font-size: 25px;
+  border: 3px dashed rgb(200, 200, 200);
+  border-radius: 20px;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+  outline: none;
+  resize: none;
+  padding: 10px 15px;
+  transition: 300ms;
+}
+main .exercise-modal .exercise-modal-task .task-holder .listen-holder .listen-interface textarea:hover {
+  border: 3px dashed #5e5c5c;
+}
+main .exercise-modal .exercise-modal-task .task-holder .listen-holder .listen-interface textarea:disabled {
+  border: 3px dashed rgb(200, 200, 200);
+}
+main .exercise-modal .exercise-modal-task .task-holder .listen-holder .listen-interface textarea:focus {
+  border: 3px solid #5e5c5c;
+  border-radius: 20px;
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
+}
 main .exercise-modal .exercise-modal-task .task-button-holder {
   display: flex;
   align-items: center;
