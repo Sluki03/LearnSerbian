@@ -142,7 +142,7 @@ export default function taskInterface(thisExercise, changeMode) {
                 optionElement.remove();
                 emptyFieldSelector({ key: "Enter" });
 
-                if(thisExercise.currentTask.speak && !responsiveVoice.isPlaying()) responsiveVoice.speak(optionElement.innerText);
+                if(thisExercise.currentTask.speak) responsiveVoice.speak(optionElement.innerText);
                 
                 inProgress = false;
             }, 300);

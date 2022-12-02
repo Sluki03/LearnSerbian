@@ -75,7 +75,7 @@ export default function multipleChoice(thisExercise) {
                 button.classList.add("active-multiple-choice-button");
                 thisExercise.answerChanged(randomOptions[id - 1]);
 
-                if(thisExercise.currentTask.speak && !responsiveVoice.isPlaying()) responsiveVoice.speak(randomOptions[id - 1]);
+                if(thisExercise.currentTask.speak) responsiveVoice.speak(randomOptions[id - 1]);
             }
         });
     }

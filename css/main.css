@@ -3252,4 +3252,37 @@ footer div a {
   -o-object-fit: contain;
      object-fit: contain;
   filter: invert(1);
+  opacity: 1;
+  transition: 300ms;
+}
+
+.active-speak-button {
+  background-color: #0589f5;
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
+}
+.active-speak-button img {
+  -webkit-animation: speak-button-animation 3s linear infinite;
+          animation: speak-button-animation 3s linear infinite;
+}
+@-webkit-keyframes speak-button-animation {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes speak-button-animation {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+  }
 }/*# sourceMappingURL=main.css.map */

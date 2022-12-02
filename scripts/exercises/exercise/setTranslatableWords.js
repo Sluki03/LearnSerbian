@@ -35,7 +35,7 @@ export default function setTranslatableWords(parent, text, translation, englishS
                 content: translatedWord
             });
 
-            if(!responsiveVoice.isPlaying()) responsiveVoice.speak(englishSerbian ? translatedWord : word);
+            responsiveVoice.speak(englishSerbian ? translatedWord : word);
         }, miniModal ? 300 : 0);
     }
 

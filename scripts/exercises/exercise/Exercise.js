@@ -349,8 +349,8 @@ export class Exercise {
         taskInfoTextH4.innerText = `${validTitles[Math.floor(Math.random() * validTitles.length)]}!`;
 
         const acceptableAnswers = getAcceptableAnswers();
-        const [answers, random] = formatAnswer(this, this.currentTask.type, acceptableAnswers);
-        
+        const [answers, random] = formatAnswer(this.currentTask.type, acceptableAnswers);
+
         const nonRandomAnswerTypes = ["connect", "completeText"];
         
         const text = {
@@ -435,8 +435,7 @@ export class Exercise {
                     });
 
                     return completeTextAcceptableAnswers;
-                case "listen":
-                    return currentTask.listenTo;
+                case "listen": return currentTask.acceptableAnswer;
                 default: return currentTask.acceptableAnswers;
             }
         }
@@ -509,7 +508,7 @@ export class Exercise {
                 break;
             case "listen":
                 result = false;
-                if(breakText(this.currentTask.listenTo, { join: true }) === breakText(this.answer, { join: true })) result = true;
+                if(breakText(this.currentTask.acceptableAnswer, { join: true }) === breakText(this.answer, { join: true })) result = true;
 
                 break;
             default: ;
@@ -539,7 +538,6 @@ export class Exercise {
                 break;
             case "completeText":
                 const wordMiniModals = document.querySelectorAll(".complete-text-word");
-                console.log(wordMiniModals)
                 
                 wordMiniModals.forEach(wordMiniModal => {
                     const wordMiniModalTop = parseFloat(getComputedStyle(wordMiniModal).getPropertyValue("top"));
@@ -699,7 +697,7 @@ export class Exercise {
                         prerenderVoices(task.options);
                         break;
                     case "listen":
-                        prerenderVoices([task.listenTo]);
+                        prerenderVoices([task.acceptableAnswers]);
                         break;
                     default: ;
                 }
@@ -708,7 +706,6 @@ export class Exercise {
             loading.remove();
 
             function prerenderVoices(voices) {
-                console.log(voices)
                 let counter = 0;
                 renderVoice();
 

@@ -17,5 +17,22 @@
         width: 30px;
         object-fit: contain;
         filter: invert(1);
+        opacity: 1;
+        transition: 300ms;
+    }
+}
+
+.active-speak-button {
+    background-color: $defLighterBlue;
+    box-shadow: $defLightShadow;
+    
+    img {
+        animation: speak-button-animation 3s linear infinite;
+    
+        @keyframes speak-button-animation {
+            0% { opacity: 1 }
+            50% { opacity: 0.3 }
+            100% { opacity: 1 }
+        }
     }
 }

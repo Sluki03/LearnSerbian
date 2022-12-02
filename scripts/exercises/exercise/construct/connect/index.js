@@ -55,11 +55,7 @@ export default function connect(thisExercise) {
             
             const speakStatus = randomValues.indexOf(button.innerText.split("\n")[0]) > -1;
             
-            if(
-                thisExercise.currentTask.speak &&
-                speakStatus &&
-                !responsiveVoice.isPlaying()
-            ) responsiveVoice.speak(button.innerText.split("\n")[0]);
+            if(thisExercise.currentTask.speak && speakStatus) responsiveVoice.speak(button.innerText.split("\n")[0]);
             
             const parent = button.parentElement;
         
@@ -115,7 +111,6 @@ export default function connect(thisExercise) {
             Object.keys(thisExercise.currentTask.options).forEach((key, index) => {
                 if(answerKey === key) {
                     const value = Object.values(thisExercise.currentTask.options)[index];
-                    console.log(answerKey, answerValue)
                     if(answerValue === value) isCorrect = true;
                 }
             });

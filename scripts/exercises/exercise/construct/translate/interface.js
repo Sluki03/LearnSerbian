@@ -127,8 +127,7 @@ export default function taskInterface(thisExercise) {
         if(
             thisExercise.currentTask.speak &&
             thisExercise.currentTask.englishSerbian &&
-            type === "select" &&
-            !responsiveVoice.isPlaying()
+            type === "select"
         ) responsiveVoice.speak(option);
         
         selectedOption.classList.add(type === "select" ? "word-bank-option-selective" : "word-bank-option-deselective");

@@ -23,14 +23,10 @@ export default function translate(thisExercise, changeMode) {
     if(
         thisExercise.currentTask.speak &&
         !thisExercise.currentTask.englishSerbian
-    ) {
-        if(!responsiveVoice.isPlaying()) responsiveVoice.speak(thisExercise.currentTask.text);
-        
-        Component.create("SpeakButton", {
-            speak: thisExercise.currentTask.text,
-            appendTo: translateHolderDisplay
-        });
-    }
+    ) Component.create("SpeakButton", {
+        speak: thisExercise.currentTask.text,
+        appendTo: translateHolderDisplay
+    });
     
     const translateHolderP = createElement({
         tag: "p",

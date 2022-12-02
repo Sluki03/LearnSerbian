@@ -3,7 +3,7 @@ import createElement from "../../../functions/createElement.js";
 export default function SpeakButton(componentProps) {
     const { builtIn } = componentProps;
     const { speak, appendTo } = componentProps.params;
-
+    
     const speakButtonElement = builtIn ? builtIn : createElement({
         tag: "button",
         attributes: { class: "speak-button" },
@@ -17,9 +17,16 @@ export default function SpeakButton(componentProps) {
         appendTo: speakButtonElement
     });
 
+    speakFunction();
+
     function speakFunction() {
-        if(responsiveVoice.isPlaying()) return;
-        responsiveVoice.speak(speak);
+        speakButtonElement.classList.add("active-speak-button");
+        
+        responsiveVoice.speak(
+            speak,
+            "Serbian Male",
+            { onend: () => speakButtonElement.classList.remove("active-speak-button") }
+        );
     }
 
     return speakButtonElement;

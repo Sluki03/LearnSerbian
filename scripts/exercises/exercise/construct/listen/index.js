@@ -15,7 +15,7 @@ export default function listen(thisExercise) {
     });
 
     Component.create("SpeakButton", {
-        speak: thisExercise.currentTask.listenTo,
+        speak: thisExercise.currentTask.acceptableAnswer,
         appendTo: listenInterface
     });
 
@@ -35,4 +35,6 @@ export default function listen(thisExercise) {
         ],
         appendTo: listenInterface
     });
+
+    textarea.focus();
 }

@@ -1,7 +1,7 @@
 import breakText from "../../functions/breakText.js";
 
-export default function formatAnswer(thisExercise, type, acceptableAnswers, userAnswer = "") {
-    const validAcceptableAnswers = thisExercise.currentTask.type === "listen" ? [thisExercise.currentTask.listenTo] : acceptableAnswers;
+export default function formatAnswer(type, acceptableAnswers, userAnswer = "") {
+    const validAcceptableAnswers = type === "listen" ? [acceptableAnswers] : acceptableAnswers;
     
     let otherAnswers = validAcceptableAnswers;
     if(userAnswer && typeof userAnswer === "string") otherAnswers = otherAnswers.filter(answer => breakText(answer, { join: true }) !== breakText(userAnswer, { join: true }));
@@ -36,7 +36,7 @@ export default function formatAnswer(thisExercise, type, acceptableAnswers, user
 
                 break;
             case "listen":
-                formattedAnswer = [thisExercise.currentTask.listenTo];
+                formattedAnswer = [acceptableAnswers];
                 break;
             default: formattedAnswer = answerSrc;
         }

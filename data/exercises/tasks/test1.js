@@ -71,9 +71,9 @@ export const test1 = [
                 options: ["Ja sam direktor.", "Ja sam domar."]
             }
         ]
-    },
+    },*/
 
-    {
+    /*{
         type: "translate",
         title: "Translate the following text:",
         text: "Odakle si?",
@@ -90,8 +90,9 @@ export const test1 = [
             si: "are you"
         },
         xp: 5,
-        diacriticKeyboard: false
-    },
+        diacriticKeyboard: false,
+        speak: true
+    },*/
 
     /*{
         type: "multipleChoice",
@@ -109,7 +110,7 @@ export const test1 = [
     {
         type: "listen",
         title: "Enter what you hear.",
-        listenTo: "Na traci je Simi.",
+        acceptableAnswer: "Na traci je Simi.",
         xp: 20
     }
 ];
