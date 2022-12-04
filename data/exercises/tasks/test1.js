@@ -110,7 +110,10 @@ export const test1 = [
     {
         type: "listen",
         title: "Enter what you hear.",
-        acceptableAnswer: "Na traci je Simi.",
-        xp: 20
+        text: "Na traci je Simi.",
+        acceptableAnswers: ["Simi is on the track."],
+        translation: {
+            traci: "track"
+        }
     }
 ];

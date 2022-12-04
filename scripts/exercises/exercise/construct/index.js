@@ -14,13 +14,16 @@ const ConstructTypes = {
     conversation, connect, completeText, listen
 };
 
-const ModeTypes = { translate: translateModes, conversation: conversationModes, completeText: completeTextModes };
+const ModeTypes = {
+    translate: translateModes, conversation: conversationModes, completeText: completeTextModes,
+    listen: () => {}
+};
 
-export function constructTask(task, thisExercise, changeMode) {
+export function constructTask(thisExercise, changeMode) {
     let constructFunction;
     
     Object.keys(ConstructTypes).forEach((key, index) => {
-        if(task === key) constructFunction = Object.values(ConstructTypes)[index];
+        if(thisExercise.currentTask.type === key) constructFunction = Object.values(ConstructTypes)[index];
     });
 
     constructFunction(thisExercise, changeMode);
@@ -28,14 +31,14 @@ export function constructTask(task, thisExercise, changeMode) {
 
 let inProgress = false;
 
-export function changeMode(task, thisExercise) {
+export function changeMode(thisExercise) {
     if(inProgress) return;
     inProgress = true;
     
     let modesFunction;
 
     Object.keys(ModeTypes).forEach((key, index) => {
-        if(task === key) modesFunction = Object.values(ModeTypes)[index];
+        if(thisExercise.currentTask.type === key) modesFunction = Object.values(ModeTypes)[index];
     });
 
     modesFunction(thisExercise);

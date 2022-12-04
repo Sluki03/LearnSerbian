@@ -3,7 +3,7 @@
     width: 100%;
     margin: 10px;
 
-    .listen-interface {
+    .interface {
         @include add-flex(column);
         gap: 15px;
         width: 80%;
@@ -43,6 +43,36 @@
                 border: 3px solid $defDarkGrey;
                 border-radius: 20px;
                 box-shadow: $defLightShadow;
+            }
+        }
+
+        .cant-hear-button {
+            color: $defLightGrey;
+            font-size: set-size(xl);
+            text-transform: uppercase;
+            font-weight: bold;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            margin: 10px 0;
+            transition: 300ms;
+
+            &:hover {
+                color: $defGrey;
+            }
+        }
+
+        .translate-holder-display {
+            @include add-flex;
+            gap: 10px;
+            border: 1px solid $defDarkGrey;
+            border-radius: 20px;
+            padding: 10px;
+    
+            p {
+                color: $defDarkGrey;
+                font-size: set-size(lg);
+                position: relative;
             }
         }
     }

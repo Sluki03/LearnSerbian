@@ -148,4 +148,8 @@
         @include interactive-title(90px);
         @include exercise;
     }
+
+    .scrollbar {
+        z-index: 9;
+    }
 }

@@ -18,8 +18,5 @@ export default function ExerciseModalTask(componentProps) {
     const classExercise = new Exercise(exerciseModalTask, exercise);
     classExercise.start();
 
-    if(appendTo.scrollHeight < window.innerHeight) exerciseModalTask.id = "extended-exercise-modal-task";
-    else exerciseModalTask.id = "";
-
     return exerciseModalTask;
 }

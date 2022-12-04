@@ -6,11 +6,8 @@ import realParseInt from "../../../functions/realParseInt.js";
 export default function ExerciseModalContent(componentProps) {
     const { exercise, appendTo, style, titleStyle } = componentProps.params;
 
-    const exerciseModalTitleDivider = document.querySelector("[data-template='exercise-modal-title-divider']").content.firstElementChild.cloneNode(true);
-    const [exerciseModalTitle, exerciseModalDivider] = [...exerciseModalTitleDivider.children];
-
+    const exerciseModalTitle = document.querySelector("[data-template='exercise-modal-title']").content.firstElementChild.cloneNode(true);
     appendTo.appendChild(exerciseModalTitle);
-    appendTo.appendChild(exerciseModalDivider);
 
     const markFreeExerciseName = exercise.name.replaceAll("<mark>", "").replaceAll("</mark>", "");
     Component.create("InteractiveTitle", { title: markFreeExerciseName, appendTo: exerciseModalTitle });
@@ -24,12 +21,7 @@ export default function ExerciseModalContent(componentProps) {
 
     if(titleStyle) {
         Styles.set(exerciseModalTitle, titleStyle);
-        Styles.set(exerciseModalDivider, titleStyle);
-
-        setTimeout(() => {
-            Styles.remove(exerciseModalTitle, titleStyle);
-            Styles.remove(exerciseModalDivider, titleStyle);
-        }, 300);
+        setTimeout(() => Styles.remove(exerciseModalTitle, titleStyle), 300);
     }
     
     const exerciseModalContent = document.querySelector("[data-template='exercise-modal-content']").content.firstElementChild.cloneNode(true);
@@ -68,13 +60,9 @@ export default function ExerciseModalContent(componentProps) {
             exerciseModalContent.classList.add("started-exercise-modal-content");
             exerciseModalTitle.classList.add("disabled-exercise-modal-title");
 
-            exerciseModalDivider.style.opacity = "0";
-            exerciseModalDivider.style.top = "-10px";
-
             setTimeout(() => {
                 exerciseModalContent.remove();
                 exerciseModalTitle.remove();
-                exerciseModalDivider.remove();
 
                 Component.create("ExerciseModalTask", { exercise, appendTo });
             }, 300);

@@ -1329,7 +1329,7 @@ main .exercise-modal .exercise-modal-task .task-holder .listen-holder {
   width: 100%;
   margin: 10px;
 }
-main .exercise-modal .exercise-modal-task .task-holder .listen-holder .listen-interface {
+main .exercise-modal .exercise-modal-task .task-holder .listen-holder .interface {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1337,15 +1337,15 @@ main .exercise-modal .exercise-modal-task .task-holder .listen-holder .listen-in
   gap: 15px;
   width: 80%;
 }
-main .exercise-modal .exercise-modal-task .task-holder .listen-holder .listen-interface .speak-button {
+main .exercise-modal .exercise-modal-task .task-holder .listen-holder .interface .speak-button {
   border-radius: 30%;
   padding: 10px;
 }
-main .exercise-modal .exercise-modal-task .task-holder .listen-holder .listen-interface .speak-button img {
+main .exercise-modal .exercise-modal-task .task-holder .listen-holder .interface .speak-button img {
   height: 50px;
   width: 50px;
 }
-main .exercise-modal .exercise-modal-task .task-holder .listen-holder .listen-interface textarea {
+main .exercise-modal .exercise-modal-task .task-holder .listen-holder .interface textarea {
   height: 155px;
   width: 80%;
   color: #5e5c5c;
@@ -1358,16 +1358,45 @@ main .exercise-modal .exercise-modal-task .task-holder .listen-holder .listen-in
   padding: 10px 15px;
   transition: 300ms;
 }
-main .exercise-modal .exercise-modal-task .task-holder .listen-holder .listen-interface textarea:hover {
+main .exercise-modal .exercise-modal-task .task-holder .listen-holder .interface textarea:hover {
   border: 3px dashed #5e5c5c;
 }
-main .exercise-modal .exercise-modal-task .task-holder .listen-holder .listen-interface textarea:disabled {
+main .exercise-modal .exercise-modal-task .task-holder .listen-holder .interface textarea:disabled {
   border: 3px dashed rgb(200, 200, 200);
 }
-main .exercise-modal .exercise-modal-task .task-holder .listen-holder .listen-interface textarea:focus {
+main .exercise-modal .exercise-modal-task .task-holder .listen-holder .interface textarea:focus {
   border: 3px solid #5e5c5c;
   border-radius: 20px;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
+}
+main .exercise-modal .exercise-modal-task .task-holder .listen-holder .interface .cant-hear-button {
+  color: rgb(200, 200, 200);
+  font-size: 30px;
+  text-transform: uppercase;
+  font-weight: bold;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin: 10px 0;
+  transition: 300ms;
+}
+main .exercise-modal .exercise-modal-task .task-holder .listen-holder .interface .cant-hear-button:hover {
+  color: gray;
+}
+main .exercise-modal .exercise-modal-task .task-holder .listen-holder .interface .translate-holder-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 10px;
+  border: 1px solid #5e5c5c;
+  border-radius: 20px;
+  padding: 10px;
+}
+main .exercise-modal .exercise-modal-task .task-holder .listen-holder .interface .translate-holder-display p {
+  color: #5e5c5c;
+  font-size: 25px;
+  position: relative;
 }
 main .exercise-modal .exercise-modal-task .task-button-holder {
   display: flex;
@@ -2223,6 +2252,9 @@ main .exercises-holder .exercises-list .exercise-clone:hover .exercise-content {
   height: 85px;
   width: 85px;
 }
+main .exercises-holder .scrollbar {
+  z-index: 9;
+}
 
 .loading {
   display: flex;
@@ -2504,16 +2536,6 @@ footer div a {
   color: #c72f2f;
   text-decoration: none;
   cursor: pointer;
-}
-
-.divider {
-  min-height: 3px;
-  width: 80%;
-  background: transparent;
-  position: relative;
-  top: 0;
-  margin: 5px 0;
-  transition: 300ms;
 }
 
 .modal-options {

@@ -92,7 +92,10 @@ export class Exercise {
     }
     
     async start() {
-        await this.loadVoices(this);
+        await this.loadVoices();
+
+        const exerciseModalTask = document.querySelector(".exercise-modal-task");
+        exerciseModalTask.id = "extended-exercise-modal-task";
         
         setTimeout(() => {
             this.taskLives.classList.add("active-task-lives");
@@ -435,7 +438,9 @@ export class Exercise {
                     });
 
                     return completeTextAcceptableAnswers;
-                case "listen": return currentTask.acceptableAnswer;
+                case "listen":
+                    if(currentTask.cantHear === undefined) return [currentTask.text];
+                    else return currentTask.acceptableAnswers;
                 default: return currentTask.acceptableAnswers;
             }
         }
@@ -508,8 +513,14 @@ export class Exercise {
                 break;
             case "listen":
                 result = false;
-                if(breakText(this.currentTask.acceptableAnswer, { join: true }) === breakText(this.answer, { join: true })) result = true;
+                
+                if(this.currentTask.cantHear === undefined) {
+                    if(breakText(this.currentTask.text, { join: true }) === breakText(this.answer, { join: true })) result = true;
+                }
 
+                else this.currentTask.acceptableAnswers.forEach(answer => {
+                    if(breakText(this.answer, { join: true }) === breakText(answer, { join: true })) result = true;
+                });
                 break;
             default: ;
         }
@@ -588,7 +599,7 @@ export class Exercise {
         
         if(this.currentTask.mode?.type === "random") randomMode(taskModes);
 
-        constructTask(this.currentTask.type, this, changeMode);
+        constructTask(this, changeMode);
 
         function randomMode(taskModes) {
             const randomModeType = taskModes[Math.floor(Math.random() * taskModes.length)];
@@ -619,7 +630,7 @@ export class Exercise {
             if(currentTask.mode.type === "write" && (currentTask.type === "conversation" ? this.currentTask.messages[this.messageNumber].options : currentTask.options) === undefined) return;
             
             switchModesButton.classList.add("active-switch-modes-button");
-            switchModesButton.onclick = () => changeMode(currentTask.type, this);
+            switchModesButton.onclick = () => changeMode(this);
 
             const switchModesImg = document.querySelector(".active-switch-modes-button img");
 
@@ -662,20 +673,23 @@ export class Exercise {
         return result;
     }
 
-    loadVoices({ currentTask }) {
+    loadVoices() {
         return new Promise(resolve => {
             const loading = Component.create("Loading", {
                 style: { backgroundImage: "none" },
                 appendTo: this.exerciseModal
             });
-
-            if(!currentTask.speak) resolve(true);
             
             const speakTasks = [];
 
             this.tasks.forEach(task => {
-                if(task.speak) speakTasks.push(task);
+                if(task.type === "listen" || task.speak) speakTasks.push(task);
             });
+
+            if(speakTasks.length === 0) {
+                loading.remove();
+                resolve(true);
+            }
 
             speakTasks.forEach(task => {
                 switch(task.type) {
@@ -697,27 +711,30 @@ export class Exercise {
                         prerenderVoices(task.options);
                         break;
                     case "listen":
-                        prerenderVoices([task.acceptableAnswers]);
+                        prerenderVoices([task.text]);
                         break;
                     default: ;
                 }
             });
 
-            loading.remove();
-
             function prerenderVoices(voices) {
                 let counter = 0;
                 renderVoice();
 
-                async function renderVoice() {
-                    if(counter === voices.length) resolve(true);
+                function renderVoice() {
+                    if(counter === voices.length) {
+                        loading.remove();
+                        resolve(true);
+                    }
                     
                     else {
                         const validVoice = typeof voices[counter] === "object" ? voices[counter].content : voices[counter];
-                        await responsiveVoice.speak(validVoice, "Serbian Male", { volume: 0 });
+                        responsiveVoice.speak(validVoice, "Serbian Male", { volume: 0, onend: nextVoice });
                     
-                        counter++;
-                        renderVoice();
+                        function nextVoice() {
+                            counter++;
+                            renderVoice();
+                        }
                     }
                 }
             }

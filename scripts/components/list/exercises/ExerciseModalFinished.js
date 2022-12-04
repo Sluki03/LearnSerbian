@@ -17,25 +17,16 @@ export default function ExerciseModalFinished(componentProps) {
     continueButton.onclick = continueToStart;
     window.eventList.add({ id: "exerciseModalFinishedKeyDown", type: "keydown", listener: continueToStart });
 
-    const exerciseModalTitleDivider = document.querySelector("[data-template='exercise-modal-title-divider']").content.firstElementChild.cloneNode(true);
-    const [exerciseModalTitle, exerciseModalDivider] = [...exerciseModalTitleDivider.children];
-
+    const exerciseModalTitle = document.querySelector("[data-template='exercise-modal-title']").content.firstElementChild.cloneNode(true);
     exerciseModalTitle.classList.add("disabled-exercise-modal-title");
 
     appendTo.insertBefore(exerciseModalTitle, exerciseModalFinished);
-    appendTo.insertBefore(exerciseModalDivider, exerciseModalFinished);
-    
-    exerciseModalDivider.style.opacity = "0";
-    exerciseModalDivider.style.top = "-10px";
 
     continueButton.style.bottom = "-100px";
 
     setTimeout(() => {
         exerciseModalTitle.classList.remove("disabled-exercise-modal-title");
         finishedHolder.classList.add("active-finished-holder");
-
-        exerciseModalDivider.style.opacity = "";
-        exerciseModalDivider.style.top = "";
 
         continueButton.style.bottom = "";
     }, 100);
@@ -73,9 +64,6 @@ export default function ExerciseModalFinished(componentProps) {
         
         exerciseModalTitle.classList.add("disabled-exercise-modal-title");
 
-        exerciseModalDivider.style.opacity = "0";
-        exerciseModalDivider.style.top = "-10px";
-
         finishedHolder.style.opacity = "0";
         finishedHolder.style.left = "-20px";
 
@@ -83,9 +71,8 @@ export default function ExerciseModalFinished(componentProps) {
 
         setTimeout(() => {
             exerciseModalTitle.remove();
-            exerciseModalDivider.remove();
-
             exerciseModalFinished.remove();
+
             window.eventList.remove("exerciseModalFinishedKeyDown");
 
             Component.create("ExerciseModalReview", { exercise, results, score, appendTo });
@@ -102,8 +89,6 @@ export default function ExerciseModalFinished(componentProps) {
 
         setTimeout(() => {
             exerciseModalTitle.remove();
-            exerciseModalDivider.remove();
-            
             exerciseModalFinished.remove();
             
             const exerciseModalContent = Component.create("ExerciseModalContent", {
