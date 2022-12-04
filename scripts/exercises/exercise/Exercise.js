@@ -50,6 +50,7 @@ export class Exercise {
         this.body = document.querySelector("body");
         this.elements = {};
 
+        this.livesLoaded = false;
         this.voicesLoaded = false;
 
         this.startNew = this.startNew.bind(this);
@@ -82,6 +83,7 @@ export class Exercise {
         this.submitted = false;
         this.results = [];
         this.score = { xp: 0, mistakes: 0 };
+        this.livesLoaded = false;
         this.currentLives = this.exercise.lives || "infinity";
         this.progressBar = { value: 0, increase: 100 / this.tasks.length, inRow: 0 };
         this.elements = {};
@@ -132,7 +134,7 @@ export class Exercise {
         checkButton.onclick = this.check;
         window.eventList.add({ id: "taskCheckKeyDown", type: "keydown", listener: this.check });
 
-        this.updateLives();
+        this.updateLives(true);
     }
 
     startNew(e) {
@@ -266,20 +268,111 @@ export class Exercise {
         });
     }
 
-    updateLives() {
-        this.taskLives.innerHTML = "";
+    updateLives(start = false) {
+        const { exercise, taskLives, currentLives } = this;
         
-        if(this.currentLives === "infinity") createElement({
-            tag: "img",
-            attributes: { src: "./images/icons/infinity-icon.png", alt: "INFINITY", class: "task-lives-infinity" },
-            appendTo: this.taskLives
-        });
+        if(!start) {
+            const liveLines = document.querySelectorAll(".task-lives-line");
+            
+            if(this.currentLives < liveLines.length) {
+                const heartStrong = document.querySelector(".heart-holder strong");
+                const targetLiveLine = liveLines[liveLines.length - 1];
+                
+                heartStrong.style.opacity = "0";
+                heartStrong.style.top = "60%";
+                
+                targetLiveLine.style.width = "0";
+                targetLiveLine.style.opacity = "0";
+
+                setTimeout(setLives, 300);
+            }
+        }
+
+        else {
+            setLives();
+
+            if(!this.livesLoaded) {
+                this.livesLoaded = true;
+                
+                const heartHolder = document.querySelector(".heart-holder");
+                const livesLineHolder = document.querySelector(".task-lives-line-holder");
+
+                heartHolder.style.opacity = "0";
+                heartHolder.style.top = "-5px";
+
+                livesLineHolder.style.width = "0";
+                livesLineHolder.style.opacity = "0";
+
+                setTimeout(() => {
+                    heartHolder.style.opacity = "";
+                    heartHolder.style.top = "";
+
+                    livesLineHolder.style.width = `${50 * this.exercise.lives}px`;
+                    livesLineHolder.style.opacity = "";
+                }, 100);
+            }
+        }
         
-        else for(let i = 0; i < this.currentLives; i++) createElement({
-            tag: "img",
-            attributes: { src: "./images/icons/lives-icon.png", alt: "LIVE" },
-            appendTo: this.taskLives
-        });
+        function setLives() {
+            taskLives.innerHTML = "";
+            const isInfinity = currentLives === "infinity";
+            
+            const heartHolder = createElement({
+                tag: "div",
+                attributes: { class: "heart-holder" },
+                appendTo: taskLives
+            });
+            
+            createElement({
+                tag: "img",
+                attributes: {
+                    src: `./images/icons/${isInfinity ? "infinity" : "lives"}-icon.png`,
+                    alt: isInfinity ? "INFINITY" : "LIVE",
+                    class: isInfinity ? "task-lives-infinity" : ""
+                },
+                appendTo: heartHolder
+            });
+            
+            if(!isInfinity) {
+                taskLives.style.filter = "";
+                
+                const heartStrong = createElement({
+                    tag: "strong",
+                    innerText: currentLives,
+                    style: start ? null : { opacity: "0", top: "40%" },
+                    appendTo: heartHolder
+                });
+
+                setTimeout(() => {
+                    if(!start) {
+                        heartStrong.style.opacity = "";
+                        heartStrong.style.top = "";
+                    }
+                }, 100);
+                
+                const livesLineHolder = createElement({
+                    tag: "div",
+                    attributes: { class: "task-lives-line-holder" },
+                    style: { width: `${50 * exercise.lives}px` },
+                    appendTo: taskLives
+                });
+
+                if(currentLives === 0) setTimeout(() => {
+                    livesLineHolder.style.width = "0";
+
+                    setTimeout(() => {
+                        heartHolder.style.opacity = "0";
+                        heartHolder.style.top = "5px";
+                    }, 300);
+                }, 100);
+                
+                for(let i = 0; i < currentLives; i++) createElement({
+                    tag: "div",
+                    attributes: { class: "task-lives-line" },
+                    appendTo: livesLineHolder
+                });
+            }
+        }
     }
     
     check(e, additionalPass = false) {

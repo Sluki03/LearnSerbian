@@ -1,5 +1,5 @@
 export const test1 = [
-    /*{
+    {
         type: "conversation",
         title: "Have a conversation.",
         participant: "Gospodin",
@@ -35,9 +35,9 @@ export const test1 = [
                 }
             }
         ]
-    },*/
+    },
 
-    /*{
+    {
         type: "conversation",
         title: "Have a conversation.",
         participant: "Komsija Deki",
@@ -71,9 +71,9 @@ export const test1 = [
                 options: ["Ja sam direktor.", "Ja sam domar."]
             }
         ]
-    },*/
+    },
 
-    /*{
+    {
         type: "translate",
         title: "Translate the following text:",
         text: "Odakle si?",
@@ -92,9 +92,9 @@ export const test1 = [
         xp: 5,
         diacriticKeyboard: false,
         speak: true
-    },*/
+    },
 
-    /*{
+    {
         type: "multipleChoice",
         title: "How to say \"color\" in Serbian?",
         acceptableAnswers: ["boja"],
@@ -105,7 +105,7 @@ export const test1 = [
             Why the answer is: **boja**?<br />
             Well, the reason is *simple*, that is how we say \"color\" in Serbian language...
         `
-    }*/
+    },
 
     {
         type: "listen",

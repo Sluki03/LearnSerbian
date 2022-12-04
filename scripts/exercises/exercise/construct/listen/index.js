@@ -3,6 +3,7 @@ import createElement from "../../../../functions/createElement.js";
 
 export default function listen(thisExercise, changeMode) {
     if(changeMode) return taskInterface(thisExercise);
+    thisExercise.currentTask.cantHear = undefined;
     
     const { taskHolder } = thisExercise.elements;
     

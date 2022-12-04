@@ -1,22 +1,64 @@
 .task-lives {
     @include add-flex;
-    gap: 5px;
     opacity: 0;
     position: absolute;
     top: -10px;
     left: 10px;
+    filter: drop-shadow(1px 1px 3px $defLightRed);
     transition: 300ms;
 
-    img {
-        height: 35px;
-        width: 35px;
-        object-fit: contain;
-        filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.5));
+    .heart-holder {
+        @include add-flex;
+        position: relative;
+        top: 0;
+        filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.3));
+        transition: 300ms;
+        z-index: 1;
+        
+        img {
+            height: 45px;
+            width: 45px;
+            object-fit: contain;
+        }
+    
+        .task-lives-infinity {
+            height: 50px;
+            width: 50px;
+        }
+
+        strong {
+            color: white;
+            font-size: set-size(lg);
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: 300ms;
+        }
     }
 
-    .task-lives-infinity {
-        height: 50px;
+    .task-lives-line-holder {
+        @include add-flex(row, flex-start);
+        height: 15px;
+        background-color: rgba($color: $defLighterRed, $alpha: 0.3);
+        border-top-right-radius: 7px;
+        border-bottom-right-radius: 7px;
+        position: relative;
+        left: -10px;
+        transition: 300ms;
+    }
+
+    .task-lives-line {
+        height: 15px;
         width: 50px;
+        background-color: $defLightRed;
+        border: 3px solid white;
+        border-radius: 0;
+        transition: 300ms;
+
+        &:last-child {
+            border-top-right-radius: 7px;
+            border-bottom-right-radius: 7px;
+        }
     }
 }
 
