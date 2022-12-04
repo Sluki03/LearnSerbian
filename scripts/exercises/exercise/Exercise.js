@@ -50,6 +50,8 @@ export class Exercise {
         this.body = document.querySelector("body");
         this.elements = {};
 
+        this.voicesLoaded = false;
+
         this.startNew = this.startNew.bind(this);
         this.cancel = this.cancel.bind(this);
         this.clearTaskElements = this.clearTaskElements.bind(this);
@@ -92,7 +94,8 @@ export class Exercise {
     }
     
     async start() {
-        await this.loadVoices();
+        if(!this.voicesLoaded) await this.loadVoices();
+        this.voicesLoaded = true;
 
         const exerciseModalTask = document.querySelector(".exercise-modal-task");
         exerciseModalTask.id = "extended-exercise-modal-task";
@@ -691,51 +694,43 @@ export class Exercise {
                 resolve(true);
             }
 
-            speakTasks.forEach(task => {
+            speakTasks.forEach((task, index) => {
+                const lastTask = speakTasks.length - 1 === index;
+                
                 switch(task.type) {
                     case "multipleChoice":
                     case "multipleChoiceImages":
-                        prerenderVoices(task.options);
+                        prerenderVoices(task.options, lastTask);
                         break;
                     case "translate":
-                        if(!task.englishSerbian) prerenderVoices([task.text]);
-                        else prerenderVoices(task?.options);
+                        if(!task.englishSerbian) prerenderVoices([task.text], lastTask);
+                        else prerenderVoices(task?.options, lastTask);
                         break;
                     case "conversation":
-                        prerenderVoices(task.messages);
+                        prerenderVoices(task.messages, lastTask);
                         break;
                     case "connect":
-                        prerenderVoices(Object.values(task.options));
+                        prerenderVoices(Object.values(task.options), lastTask);
                         break;
                     case "completeText":
-                        prerenderVoices(task.options);
+                        prerenderVoices(task.options, lastTask);
                         break;
                     case "listen":
-                        prerenderVoices([task.text]);
+                        prerenderVoices([task.text], lastTask);
                         break;
                     default: ;
                 }
             });
 
-            function prerenderVoices(voices) {
-                let counter = 0;
-                renderVoice();
+            function prerenderVoices(voices, lastTask) {
+                voices.forEach(voice => {
+                    const validVoice = typeof voice === "object" ? voice.content : voice;
+                    responsiveVoice.speak(validVoice, "Serbian Male", { volume: 0, onend: lastTask ? renderedVoices : null });
+                });
 
-                function renderVoice() {
-                    if(counter === voices.length) {
-                        loading.remove();
-                        resolve(true);
-                    }
-                    
-                    else {
-                        const validVoice = typeof voices[counter] === "object" ? voices[counter].content : voices[counter];
-                        responsiveVoice.speak(validVoice, "Serbian Male", { volume: 0, onend: nextVoice });
-                    
-                        function nextVoice() {
-                            counter++;
-                            renderVoice();
-                        }
-                    }
+                function renderedVoices() {
+                    loading.remove();
+                    resolve(true);
                 }
             }
         });
