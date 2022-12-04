@@ -1,5 +1,6 @@
 .loading {
-    @include add-flex;
+    @include add-flex(column);
+    gap: 10px;
     height: 100vh;
     width: 100%;
     background-image: url("../images/background.png");
@@ -93,5 +94,11 @@
                 width: 30px;
             }
         }
+    }
+
+    p {
+        color: $defDarkGrey;
+        font-size: set-size(lg);
+        font-style: italic;
     }
 }

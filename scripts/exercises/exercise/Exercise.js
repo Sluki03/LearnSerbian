@@ -772,6 +772,7 @@ export class Exercise {
     loadVoices() {
         return new Promise(resolve => {
             const loading = Component.create("Loading", {
+                tips: true,
                 style: { backgroundImage: "none" },
                 appendTo: this.exerciseModal
             });

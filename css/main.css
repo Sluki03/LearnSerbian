@@ -2303,7 +2303,8 @@ main .exercises-holder .scrollbar {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: row;
+  flex-direction: column;
+  gap: 10px;
   height: 100vh;
   width: 100%;
   background-image: url("../images/background.png");
@@ -2420,6 +2421,11 @@ main .exercises-holder .scrollbar {
 .loading .circle-holder #loading-circle-2 .circle-bottom-border {
   height: 30px;
   width: 30px;
+}
+.loading p {
+  color: #5e5c5c;
+  font-size: 25px;
+  font-style: italic;
 }
 
 nav {

@@ -1,8 +1,9 @@
+import { loadingTipsData } from "../../../../data/loadingTipsData.js";
 import createElement from "../../../functions/createElement.js";
 
 export default function Loading(componentProps) {
     const { builtIn } = componentProps;
-    const { style, appendTo } = componentProps.params;
+    const { tips, style, appendTo } = componentProps.params;
 
     const loadingElement = builtIn ? builtIn : createElement({
         tag: "div",
@@ -42,6 +43,12 @@ export default function Loading(componentProps) {
             appendTo: circle
         });
     }
+
+    if(tips) createElement({
+        tag: "p",
+        innerText: loadingTipsData[Math.floor(Math.random() * loadingTipsData.length)],
+        appendTo: loadingElement
+    });
 
     return loadingElement;
 }
