@@ -7,6 +7,7 @@ import randomArray from "../../functions/randomArray.js";
 import breakText from "../../functions/breakText.js";
 import formatAnswer from "./formatAnswer.js";
 import formatTime from "../../functions/formatTime.js";
+import getDefaultTitle from "../getDefaultTitle.js";
 
 export class Exercise {
     constructor(exerciseElement, exercise) {
@@ -129,7 +130,7 @@ export class Exercise {
         
         const { taskH3, checkButton } = this.elements;
 
-        taskH3.innerText = this.currentTask.title;
+        taskH3.innerText = this.currentTask.title || getDefaultTitle(this.currentTask.type);
 
         checkButton.onclick = this.check;
         window.eventList.add({ id: "taskCheckKeyDown", type: "keydown", listener: this.check });
@@ -300,15 +301,19 @@ export class Exercise {
                 heartHolder.style.opacity = "0";
                 heartHolder.style.top = "-5px";
 
-                livesLineHolder.style.width = "0";
-                livesLineHolder.style.opacity = "0";
+                if(livesLineHolder !== null) {
+                    livesLineHolder.style.width = "0";
+                    livesLineHolder.style.opacity = "0";
+                }
 
                 setTimeout(() => {
                     heartHolder.style.opacity = "";
                     heartHolder.style.top = "";
 
-                    livesLineHolder.style.width = `${50 * this.exercise.lives}px`;
-                    livesLineHolder.style.opacity = "";
+                    if(livesLineHolder !== null) {
+                        livesLineHolder.style.width = `${50 * this.exercise.lives}px`;
+                        livesLineHolder.style.opacity = "";
+                    }
                 }, 100);
             }
         }

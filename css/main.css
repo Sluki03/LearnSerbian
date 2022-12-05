@@ -2436,6 +2436,7 @@ main .exercises-holder .scrollbar {
   color: #5e5c5c;
   font-size: 25px;
   font-style: italic;
+  text-align: center;
 }
 
 nav {
