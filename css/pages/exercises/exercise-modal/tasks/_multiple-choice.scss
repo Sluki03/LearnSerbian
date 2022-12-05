@@ -46,3 +46,13 @@
 .multiple-choice-images-holder {
     width: auto;
 }
+
+.multiple-choice-of-image {
+    height: 150px;
+    width: 150px;
+    object-fit: contain;
+    border: 3px solid $defDarkGrey;
+    border-radius: 20px;
+    box-shadow: $defLightShadow;
+    padding: 10px;
+}

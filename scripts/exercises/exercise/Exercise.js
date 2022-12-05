@@ -547,6 +547,7 @@ export class Exercise {
         
         switch(this.currentTask.type) {
             case "multipleChoice":
+            case "multipleChoiceOfImage":
             case "multipleChoiceImages":
                 result = this.currentTask.acceptableAnswers.indexOf(this.answer) > -1;
                 

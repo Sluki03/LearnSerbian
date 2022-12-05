@@ -4,6 +4,20 @@ import randomArray from "../../../../functions/randomArray.js";
 export default function multipleChoice(thisExercise) {
     const { taskHolder, taskInfo } = thisExercise.elements;
     
+    if(thisExercise.currentTask.type === "multipleChoiceOfImage") {
+        taskHolder.style.flexDirection = "column";
+        
+        createElement({
+            tag: "img",
+            attributes: {
+                src: thisExercise.currentTask.image,
+                alt: thisExercise.currentTask.acceptableAnswers[0].toUpperCase(),
+                class: "multiple-choice-of-image"
+            },
+            appendTo: taskHolder
+        });
+    }
+    
     const multipleChoiceHolder = createElement({
         tag: "div",
         attributes: { class: `multiple-choice-holder ${thisExercise.currentTask.type === "multipleChoiceImages" ? "multiple-choice-images-holder" : ""}` },
@@ -19,12 +33,12 @@ export default function multipleChoice(thisExercise) {
                 class: `multiple-choice-button ${thisExercise.currentTask.type === "multipleChoiceImages" ? "multiple-choice-images-button" : ""}`,
                 id: `multiple-choice-button-${i + 1}`
             },
-            innerText: thisExercise.currentTask.type === "multipleChoice" ? randomOptions[i] : "",
+            innerText: thisExercise.currentTask.type !== "multipleChoiceImages" ? randomOptions[i] : "",
             events: [{ on: "click", call: setActiveButton }],
             appendTo: multipleChoiceHolder
         });
 
-        if(thisExercise.currentTask.type === "multipleChoice") createElement({
+        if(thisExercise.currentTask.type !== "multipleChoiceImages") createElement({
             tag: "span",
             attributes: { class: "multiple-choice-span" },
             innerText: i + 1,

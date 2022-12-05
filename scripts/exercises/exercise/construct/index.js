@@ -10,8 +10,9 @@ import conversationModes from "./conversation/modes.js";
 import completeTextModes from "./completeText/modes.js";
 
 const ConstructTypes = {
-    multipleChoice, multipleChoiceImages: multipleChoice, translate,
-    conversation, connect, completeText, listen
+    multipleChoice, multipleChoiceImages: multipleChoice, multipleChoiceOfImage: multipleChoice,
+    translate, conversation, connect, completeText,
+    listen
 };
 
 const ModeTypes = {

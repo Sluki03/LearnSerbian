@@ -727,6 +727,16 @@ main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .
 main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-images-holder {
   width: auto;
 }
+main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-of-image {
+  height: 150px;
+  width: 150px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  border: 3px solid #5e5c5c;
+  border-radius: 20px;
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
+  padding: 10px;
+}
 main .exercise-modal .exercise-modal-task .task-holder .translate-holder {
   display: flex;
   align-items: center;

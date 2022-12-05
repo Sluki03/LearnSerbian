@@ -3,7 +3,7 @@ import { test1 } from "./tasks/test1.js";
 import { hearing } from "./tasks/hearing.js";
 
 // difficulty options: easy, medium, hard
-// task types: multipleChoice, multipleChoiceImages, translate, conversation, connect, completeText, listen
+// task types: multipleChoice, multipleChoiceOfImage, multipleChoiceImages, translate, conversation, connect, completeText, listen
 // translate modes: write (default), wordBank
 // conversation modes: write (default), multipleChoice
 

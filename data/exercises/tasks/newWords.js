@@ -81,6 +81,14 @@ export const newWords = [
     },
 
     {
+        type: "multipleChoiceOfImage",
+        title: "What is on the image?",
+        image: "./images/exercises/cat.png",
+        acceptableAnswers: ["macka"],
+        options: ["macka", "pas", "ptica", "zec"]
+    },
+
+    {
         type: "translate",
         title: "Translate the following text:",
         text: "My name is Miki",
