@@ -82,10 +82,10 @@ export const newWords = [
 
     {
         type: "multipleChoiceOfImage",
-        title: "What is on the image?",
+        title: "What is in the picture?",
         image: "./images/exercises/cat.png",
-        acceptableAnswers: ["macka"],
-        options: ["macka", "pas", "ptica", "zec"]
+        acceptableAnswers: ["mačka"],
+        options: ["mačka", "pas", "ptica", "zec"]
     },
 
     {

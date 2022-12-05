@@ -13,9 +13,9 @@ export const test1 = [
                 userContent: "Hello! How are you?",
                 acceptableAnswers: [
                     "Zdravo! Kako si?",
-                    "Cao! Kako si?"
+                    "Ćao! Kako si?"
                 ],
-                options: ["Zdravo! Kako si?", "Dobro jutro, sta ima?"],
+                options: ["Zdravo! Kako si?", "Dobro jutro, šta ima?"],
                 translation: {
                     zdravo: "hello"
                 }
@@ -40,33 +40,33 @@ export const test1 = [
     {
         type: "conversation",
         title: "Have a conversation.",
-        participant: "Komsija Deki",
+        participant: "Komšija Deki",
         mode: {
             type: "random",
             switch: true
         },
         messages: [
             {
-                content: "Sta ima doktore?",
+                content: "Šta ima doktore?",
                 userContent: "Oh, where are you man, what's up?",
                 acceptableAnswers: [
                     "Oo, gde si ti covece, sta ima?",
-                    "O, pa gde si ti covece, sta ima?"
+                    "O, pa gde si ti čoveče, šta ima?"
                 ],
-                options: ["Oo, gde si ti covece, sta ima?", "Cek, ko je doktor?"],
+                options: ["Oo, gde si ti čovece, šta ima?", "Ček, ko je doktor?"],
                 translation: {
-                    sta: "what",
+                    šta: "what",
                     doktore: "doctor"
                 }
             },
 
             {
-                content: "Na kojoj poziciji u firmi radis sada?",
+                content: "Na kojoj poziciji u firmi radiš sada?",
                 userContent: "I am a CEO.",
                 acceptableAnswers: [
                     "Ja sam direktor.",
                     "Ja sam CEO.",
-                    "Ja sam generalni izvrsi direktor."
+                    "Ja sam generalni izvršni direktor."
                 ],
                 options: ["Ja sam direktor.", "Ja sam domar."]
             }
