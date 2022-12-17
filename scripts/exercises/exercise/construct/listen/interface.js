@@ -46,6 +46,22 @@ export default function taskInterface(thisExercise) {
     }
 
     else {
+        const newTitle = "Translate the following text.";
+        
+        thisExercise.currentTask.title = newTitle;
+
+        const { taskH3 } = thisExercise.elements;
+
+        taskH3.style.opacity = "0";
+        taskH3.style.top = "-10px";
+
+        setTimeout(() => {
+            taskH3.innerText = newTitle;
+            
+            taskH3.style.opacity = "";
+            taskH3.style.top = "";
+        }, 300);
+        
         const translateHolderDisplay = createElement({
             tag: "div",
             attributes: { class: "translate-holder-display" },

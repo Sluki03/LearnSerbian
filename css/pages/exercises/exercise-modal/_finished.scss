@@ -88,12 +88,6 @@
                 padding-top: 50px;
             }
         }
-
-        @include classic-button;
-
-        button {
-            border-radius: 30px;
-        }
     }
 
     .active-finished-holder {

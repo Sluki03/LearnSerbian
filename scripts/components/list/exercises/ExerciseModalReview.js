@@ -3,7 +3,7 @@ import createElement from "../../../functions/createElement.js";
 import review from "../../../exercises/review/index.js";
 
 export default function ExerciseModalReview(componentProps) {
-    const { exercise, results, score, appendTo } = componentProps.params;
+    const { exercise, results, appendTo } = componentProps.params;
     
     const exerciseModalReview = document.querySelector("[data-template='exercise-modal-review']").content.firstElementChild.cloneNode(true);
     appendTo.appendChild(exerciseModalReview);
@@ -101,25 +101,38 @@ export default function ExerciseModalReview(componentProps) {
     });
 
     const continueButton = document.querySelector(".exercise-modal-review .wide-button");
-    continueButton.onclick = modalOptionsReturn;
+    continueButton.onclick = continueToStart;
+
+    window.eventList.add({ id: "exerciseModalReviewKeyDown", type: "keydown", listener: continueToStart });
+
     let inProgress = false;
 
-    window.eventList.add({ id: "exerciseModalReviewKeyDown", type: "keydown", listener: modalOptionsReturn });
-    
-    function modalOptionsReturn(e) {
-        if(e.type === "keydown" && e.key !== "Enter") return;
+    function continueToStart(e) {     
+        if(e.key !== "Enter" && e.type === "keydown") return;
 
         if(inProgress) return;
         inProgress = true;
-        
+
         window.eventList.remove("exerciseModalReviewKeyDown");
-        
         exerciseModalReview.classList.remove("active-exercise-modal-review");
 
         setTimeout(() => {
             exerciseModalReview.remove();
-            Component.create("ExerciseModalFinished", { exercise, results, score, appendTo });
-            inProgress = false;
+            
+            const exerciseModalContent = Component.create("ExerciseModalContent", {
+                exercise,
+                appendTo,
+                style: { opacity: "0", left: "-20px" },
+                titleStyle: { opacity: "0", top: "-10px" },
+                buttonStyle: { opacity: "0", bottom: "-100px" }
+            });
+
+            setTimeout(() => {
+                exerciseModalContent.style.opacity = "";
+                exerciseModalContent.style.left = "";
+
+                inProgress = false;
+            }, 100);
         }, 300);
     }
 

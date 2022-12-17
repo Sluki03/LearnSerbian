@@ -129,6 +129,9 @@
         color: $defDarkGrey;
         font-size: set-size(xxl);
         text-align: center;
+        position: relative;
+        top: 0;
+        transition: 300ms;
     }
 
     .task-holder {

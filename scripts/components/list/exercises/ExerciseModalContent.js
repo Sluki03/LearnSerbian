@@ -4,7 +4,7 @@ import { Styles } from "../../../functions/Styles.js";
 import realParseInt from "../../../functions/realParseInt.js";
 
 export default function ExerciseModalContent(componentProps) {
-    const { exercise, appendTo, style, titleStyle } = componentProps.params;
+    const { exercise, appendTo, style, titleStyle, buttonStyle } = componentProps.params;
 
     const exerciseModalTitle = document.querySelector("[data-template='exercise-modal-title']").content.firstElementChild.cloneNode(true);
     appendTo.appendChild(exerciseModalTitle);
@@ -33,6 +33,11 @@ export default function ExerciseModalContent(componentProps) {
     if(contentP !== null) contentP.innerHTML = exercise.tips ? markup(exercise.tips) : "This exercise has no tips.";
 
     const contentButton = document.querySelector(".exercise-modal-content button");
+
+    if(buttonStyle) {
+        Styles.set(contentButton, buttonStyle);
+        setTimeout(() => Styles.remove(contentButton, buttonStyle), 300);
+    }
     
     let isExerciseStarted = false;
     

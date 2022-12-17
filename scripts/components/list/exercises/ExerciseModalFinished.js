@@ -14,8 +14,8 @@ export default function ExerciseModalFinished(componentProps) {
 
     const [finishedHolder, continueButton] = [...exerciseModalFinished.children];
 
-    continueButton.onclick = continueToStart;
-    window.eventList.add({ id: "exerciseModalFinishedKeyDown", type: "keydown", listener: continueToStart });
+    continueButton.onclick = continueToRYA;
+    window.eventList.add({ id: "exerciseModalFinishedKeyDown", type: "keydown", listener: continueToRYA });
 
     const exerciseModalTitle = document.querySelector("[data-template='exercise-modal-title']").content.firstElementChild.cloneNode(true);
     exerciseModalTitle.classList.add("disabled-exercise-modal-title");
@@ -55,15 +55,19 @@ export default function ExerciseModalFinished(componentProps) {
         strong.innerText = scoreValue + (suffix[index] ? suffix[index] : "");
     });
 
-    const reviewButton = document.querySelector(".finished-holder button");
     let inProgress = false;
 
-    reviewButton.onclick = () => {
+    function continueToRYA(e) {
+        if(e.key !== "Enter" && e.type === "keydown") return;
+        
         if(inProgress) return;
         inProgress = true;
-        
-        exerciseModalTitle.classList.add("disabled-exercise-modal-title");
 
+        window.eventList.remove("exerciseModalFinishedKeyDown");
+
+        exerciseModalTitle.classList.add("disabled-exercise-modal-title");
+        
+        finishedHolder.classList.remove("active-finished-holder");
         finishedHolder.style.opacity = "0";
         finishedHolder.style.left = "-20px";
 
@@ -73,34 +77,8 @@ export default function ExerciseModalFinished(componentProps) {
             exerciseModalTitle.remove();
             exerciseModalFinished.remove();
 
-            window.eventList.remove("exerciseModalFinishedKeyDown");
-
-            Component.create("ExerciseModalReview", { exercise, results, score, appendTo });
+            Component.create("ExerciseModalReview", { exercise, results, appendTo });
             inProgress = false;
-        }, 300);
-    }
-
-    function continueToStart(e) {     
-        if(e.key !== "Enter" && e.type === "keydown") return;
-        window.eventList.remove("exerciseModalFinishedKeyDown");
-        
-        finishedHolder.classList.remove("active-finished-holder");
-        continueButton.style.bottom = "-100px";
-
-        setTimeout(() => {
-            exerciseModalTitle.remove();
-            exerciseModalFinished.remove();
-            
-            const exerciseModalContent = Component.create("ExerciseModalContent", {
-                exercise,
-                appendTo,
-                style: { opacity: "0", left: "-20px" }
-            });
-
-            setTimeout(() => {
-                exerciseModalContent.style.opacity = "";
-                exerciseModalContent.style.left = "";
-            }, 100);
         }, 300);
     }
 

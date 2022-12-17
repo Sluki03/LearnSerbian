@@ -149,13 +149,13 @@ export default function answer(reviewProps) {
             
             createElement({
                 tag: "p",
-                innerHTML: `${yourAnswerText} "${answers.user.content}".`,
+                innerHTML: `${yourAnswerText} "${answers.user.content}"`,
                 appendTo: answerInfo
             });
                     
             if(random.otherCorrectAnswer) createElement({
                 tag: "p",
-                innerHTML: `<span>Also correct:</span> "${random.otherCorrectAnswer}".`,
+                innerHTML: `<span>Also correct:</span> "${random.otherCorrectAnswer}"`,
                 appendTo: answerInfo
             });
         }
@@ -166,13 +166,13 @@ export default function answer(reviewProps) {
 
             createElement({
                 tag: "p",
-                innerHTML: `${correctAnswerText} "${random.correctAnswer}".`,
+                innerHTML: `${correctAnswerText} "${random.correctAnswer}"`,
                 appendTo: answerInfo
             });
 
             createElement({
                 tag: "p",
-                innerHTML: `${yourAnswerText} "${answers.user.content}".`,
+                innerHTML: `${yourAnswerText} "${answers.user.content}"`,
                 appendTo: answerInfo
             });
         }

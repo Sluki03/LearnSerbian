@@ -460,7 +460,7 @@ export class Exercise {
         
         const text = {
             correct: "",
-            incorrect: `Correct answer${answers.correct.isPlural ? "s" : ""}: "<span>${nonRandomAnswerTypes.indexOf(this.currentTask.type) > -1 ? answers.correct.content : random.correctAnswer}</span>".`
+            incorrect: `Correct answer${answers.correct.isPlural ? "s" : ""}: "<span>${nonRandomAnswerTypes.indexOf(this.currentTask.type) > -1 ? answers.correct.content : random.correctAnswer}</span>"`
         };
 
         const validText = isCorrect ? text.correct : text.incorrect;

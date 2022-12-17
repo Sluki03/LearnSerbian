@@ -87,7 +87,7 @@ export default function xp(reviewProps) {
         
         {
             color: "#0559f5",
-            text: "Your XP"
+            text: "Total Earned XP"
         },
 
         {
