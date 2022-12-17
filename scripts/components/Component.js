@@ -11,6 +11,7 @@ import DiacriticKeyboard from "./list/other/DiacriticKeyboard.js";
 import MiniModal from "./list/other/MiniModal.js";
 import Scrollbar from "./list/other/Scrollbar.js";
 import SpeakButton from "./list/other/SpeakButton.js";
+import StatisticProgressBar from "./list/other/StatisticProgressBar.js";
 import ExercisesList from "./list/exercises/ExercisesList.js";
 import ExerciseStats from "./list/exercises/ExerciseStats.js";
 import ExerciseModal from "./list/exercises/ExerciseModal.js";
@@ -19,6 +20,8 @@ import ExerciseModalTask from "./list/exercises/ExerciseModalTask.js";
 import ExerciseModalFinished from "./list/exercises/ExerciseModalFinished.js";
 import ExerciseModalReview from "./list/exercises/ExerciseModalReview.js";
 import TrophyCounter from "./list/exercises/TrophyCounter.js";
+import OptionImage from "./list/exercises/OptionImage.js";
+import ConversationHolder from "./list/exercises/ConversationHolder.js";
 
 import { Convert } from "../functions/Convert.js";
 import { buildEventList } from "../functions/EventControl.js";
@@ -26,9 +29,9 @@ import { buildEventList } from "../functions/EventControl.js";
 const components = {
     PanelsList, Loading, Nav, Footer, InteractiveTitle,
     ModalOptions, ArrowButton, ClassicModal, Typing, DiacriticKeyboard,
-    MiniModal, Scrollbar, SpeakButton, ExercisesList, ExerciseStats,
-    ExerciseModal, ExerciseModalContent, ExerciseModalTask, ExerciseModalFinished, ExerciseModalReview,
-    TrophyCounter
+    MiniModal, Scrollbar, SpeakButton, StatisticProgressBar, ExercisesList,
+    ExerciseStats, ExerciseModal, ExerciseModalContent, ExerciseModalTask, ExerciseModalFinished,
+    ExerciseModalReview, TrophyCounter, OptionImage, ConversationHolder
 };
 
 export const Component = { create, render, update };

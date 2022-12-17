@@ -1,4 +1,4 @@
-export default function breakText(text, options) {
+export default function breakText(text, options) {    
     const defaultOptions = {
         lowerCase: true,
         removePuncuation: true,

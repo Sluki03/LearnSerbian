@@ -1,7 +1,7 @@
-import { Component } from "../../components/Component.js";
-import breakText from "../../functions/breakText.js";
+import { Component } from "../components/Component.js";
+import breakText from "../functions/breakText.js";
 
-export default function setTranslatableWords(parent, text, translation, englishSerbian = false) {
+export default function setTranslatableWords(parent, text, translation, englishSerbian = false, speak = true) {
     const brokenText = breakText(text, { lowerCase: false });
     let updatedText = text;
 
@@ -35,7 +35,7 @@ export default function setTranslatableWords(parent, text, translation, englishS
                 content: translatedWord
             });
 
-            responsiveVoice.speak(englishSerbian ? translatedWord : word);
+            if(speak) responsiveVoice.speak(englishSerbian ? translatedWord : word);
         }, miniModal ? 300 : 0);
     }
 

@@ -49,8 +49,10 @@ export default function DiacriticKeyboard(componentProps) {
 
     function updateInputOnButtonClick(button) {
         input.value += button.innerText;
-        answerChanged(input.value);
+        if(answerChanged) answerChanged(input.value);
         inputValueChanged(input.value);
+
+        input.focus();
     }
 
     function changeCaseStatus() {

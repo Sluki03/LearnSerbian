@@ -1,11 +1,11 @@
 import { Component } from "../../components/Component.js";
 import { Convert } from "../../functions/Convert.js";
-import { Percentage } from "../../functions/percentage.js";
+import { Percentage } from "../../functions/Percentage.js";
 import createElement from "../../functions/createElement.js";
 import { constructTask, changeMode } from "./construct/index.js";
 import randomArray from "../../functions/randomArray.js";
 import breakText from "../../functions/breakText.js";
-import formatAnswer from "./formatAnswer.js";
+import formatAnswer from "../formatAnswer.js";
 import formatTime from "../../functions/formatTime.js";
 import getDefaultTitle from "../getDefaultTitle.js";
 
@@ -37,7 +37,7 @@ export class Exercise {
 
         this.answer = "";
         this.defaultXP = 10;
-        this.score = { xp: 0, mistakes: 0, time: new Date().getTime() };
+        this.score = { xp: 0, mistakes: 0, taskTimes: [] };
 
         this.submitted = false;
         this.results = [];
@@ -83,7 +83,7 @@ export class Exercise {
         this.answerChanged(this.answer);
         this.submitted = false;
         this.results = [];
-        this.score = { xp: 0, mistakes: 0 };
+        this.score = { xp: 0, mistakes: 0, taskTimes: [] };
         this.livesLoaded = false;
         this.currentLives = this.exercise.lives || "infinity";
         this.progressBar = { value: 0, increase: 100 / this.tasks.length, inRow: 0 };
@@ -136,6 +136,7 @@ export class Exercise {
         window.eventList.add({ id: "taskCheckKeyDown", type: "keydown", listener: this.check });
 
         this.updateLives(true);
+        this.score = {...this.score, taskTimes: [...this.score.taskTimes, new Date().getTime()]};
     }
 
     startNew(e) {
@@ -176,7 +177,7 @@ export class Exercise {
                     score: {
                         ...this.score,
                         correct: parseInt(Percentage.calc(this.numberOfTasks, this.numberOfTasks - this.score.mistakes)),
-                        time: formatTime(new Date().getTime() - this.score.time)
+                        time: formatTime(new Date().getTime() - this.score.taskTimes[0])
                     },
                     appendTo: this.exerciseModal
                 });
@@ -485,15 +486,24 @@ export class Exercise {
             }
         }
 
-        if(currentTask.type === "conversation") this.messageNumber = 0;
+        let messageId = null;
+
+        if(currentTask.type === "conversation") {
+            messageId = this.currentTask.messages[this.messageNumber].id;
+            this.messageNumber = 0;
+        }
 
         const taskResult = {
+            id: currentTask.id,
+            messageId,
             title: currentTask.title,
             type: currentTask.type,
             acceptableAnswers,
             userAnswer: this.answer,
             isCorrect,
             xp: currentTask.xp || this.exercise.defaultXP || this.defaultXP,
+            startTime: this.score.taskTimes[this.taskNumber],
+            endTime: this.taskNumber === this.tasks.length - 1 ? new Date().getTime() : null,
             explanation: currentTask.explanation || null
         };
 
@@ -501,10 +511,6 @@ export class Exercise {
 
         taskInfoButton.onclick = this.startNew;
         window.eventList.add({ id: "taskStartNewKeyDown", type: "keydown", listener: this.startNew });
-        
-        function generateCorrectAnswer() {
-            
-        }
         
         function getLinearGradient() {
             const color = isCorrect ? green : red;
@@ -567,18 +573,20 @@ export class Exercise {
                 break;
             case "conversation":
                 result = false;
-                let lastMessageAcceptableAnswers = this.currentTask.messages[this.currentTask.messages.length - 1].acceptableAnswers;
-
+                
+                const lastMessageAcceptableAnswers = this.currentTask.messages[this.messageNumber].acceptableAnswers;
+                const lastUserAnswer = this.answer[this.answer.length - 1];
+                
                 lastMessageAcceptableAnswers.forEach(answer => {
-                    if(breakText(this.answer, { join: true }) === breakText(answer, { join: true })) result = true;
+                    if(breakText(lastUserAnswer, { join: true }) === breakText(answer, { join: true })) result = true;
                 });
 
                 break;
             case "connect":
                 result = false;
-            
-                const answerKey = this.currentTask.options.hasOwnProperty(this.answer[0]) ? this.answer[0] : this.answer[1];
-                const answerValue = answerKey === this.answer[0] ? this.answer[1] : this.answer[0];
+                
+                const answerKey = this.answer.answer[this.currentTask.options.hasOwnProperty(this.answer.answer[0]) ? 0 : 1];
+                const answerValue = this.answer.answer[answerKey === this.answer.answer[0] ? 1 : 0];
 
                 Object.keys(this.currentTask.options).forEach((key, index) => {
                     if(answerKey === key) {
@@ -662,6 +670,9 @@ export class Exercise {
                 });
 
                 break;
+            case "listen":
+                const listenHolderTextarea = document.querySelector(".listen-holder textarea");
+                listenHolderTextarea.disabled = true;
             default: ;
         }
     }

@@ -118,13 +118,13 @@ export const hearing = [
     {
         type: "completeText",
         title: "Complete the following sentence:",
-        text: "Deste ljudi, sta ima, <how> ste? Evo, evo, mi smo <good>. Inace, ja se <to be called> Milorad i dolazim iz <Belgrade>.",
+        text: "Deste ljudi, sta ima, <how> ste? Evo, evo, mi smo <good>. Inace, ja se <to be called> Milorad i dolazim iz <belgrade>.",
         mode: {
             type: "write",
             switch: true
         },
         options: ["kako", "Beograda", "dobro", "zovem"],
-        acceptableAnswers: { how: ["kako"], good: ["dobro", "okej"], toBeCalled: ["zovem"], Belgrade: ["Beograda", "BGa"] },
+        acceptableAnswers: { how: ["kako"], good: ["dobro", "okej"], toBeCalled: ["zovem"], belgrade: ["Beograda", "BGa"] },
         hints: {
             status: false,
             switch: true

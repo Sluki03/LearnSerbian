@@ -1,19 +1,17 @@
-import breakText from "../../functions/breakText.js";
+import breakText from "../functions/breakText.js";
 
 export default function formatAnswer(type, acceptableAnswers, userAnswer = "") {
-    const validAcceptableAnswers = type === "listen" ? [acceptableAnswers] : acceptableAnswers;
-    
-    let otherAnswers = validAcceptableAnswers;
+    let otherAnswers = acceptableAnswers;
     if(userAnswer && typeof userAnswer === "string") otherAnswers = otherAnswers.filter(answer => breakText(answer, { join: true }) !== breakText(userAnswer, { join: true }));
     
     const random = {
-        correctAnswer: validAcceptableAnswers[Math.floor(Math.random() * validAcceptableAnswers.length)],
+        correctAnswer: acceptableAnswers[Math.floor(Math.random() * acceptableAnswers.length)],
         otherCorrectAnswer: otherAnswers.length > 0 ? otherAnswers[Math.floor(Math.random() * otherAnswers.length)] : ""
     };
     
     const answers = {
         user: getFormattedAnswer(userAnswer),
-        correct: getFormattedAnswer(validAcceptableAnswers)
+        correct: getFormattedAnswer(acceptableAnswers)
     };
 
     return [answers, random];
@@ -34,9 +32,6 @@ export default function formatAnswer(type, acceptableAnswers, userAnswer = "") {
                     isPlural = true;
                 }
 
-                break;
-            case "listen":
-                formattedAnswer = [acceptableAnswers];
                 break;
             default: formattedAnswer = answerSrc;
         }

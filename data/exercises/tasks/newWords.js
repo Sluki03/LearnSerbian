@@ -139,6 +139,42 @@ export const newWords = [
     },
 
     {
+        type: "conversation",
+        title: "Have a conversation.",
+        participant: "Komšija Deki",
+        mode: {
+            type: "random",
+            switch: true
+        },
+        messages: [
+            {
+                content: "Šta ima doktore?",
+                userContent: "Oh, where are you man, what's up?",
+                acceptableAnswers: [
+                    "Oo, gde si ti čoveče, šta ima?",
+                    "O, pa gde si ti čoveče, šta ima?"
+                ],
+                options: ["Oo, gde si ti čoveče, šta ima?", "Ček, ko je doktor?"],
+                translation: {
+                    šta: "what",
+                    doktore: "doctor"
+                }
+            },
+
+            {
+                content: "Na kojoj poziciji u firmi radiš sada?",
+                userContent: "I am a CEO.",
+                acceptableAnswers: [
+                    "Ja sam direktor.",
+                    "Ja sam CEO.",
+                    "Ja sam generalni izvršni direktor."
+                ],
+                options: ["Ja sam direktor.", "Ja sam domar."]
+            }
+        ]
+    },
+
+    {
         type: "connect",
         title: "Connect the right words.",
         options: { dog: "pas", cat: "macka", president: "predsednik", killer: "ubica" }
@@ -147,13 +183,13 @@ export const newWords = [
     {
         type: "completeText",
         title: "Complete the following sentence:",
-        text: "Deste ljudi, sta ima, <how> ste? Evo, evo, mi smo <good>. Inace, ja se <to be called> Milorad i dolazim iz <Belgrade>.",
+        text: "Deste ljudi, sta ima, <how> ste? Evo, evo, mi smo <good>. Inace, ja se <to be called> Milorad i dolazim iz <belgrade>.",
         mode: {
             type: "write",
             switch: true
         },
         options: ["kako", "Beograda", "dobro", "zovem"],
-        acceptableAnswers: { how: ["kako"], good: ["dobro", "okej"], toBeCalled: ["zovem"], Belgrade: ["Beograda", "BGa"] },
+        acceptableAnswers: { how: ["kako"], good: ["dobro", "okej"], toBeCalled: ["zovem"], belgrade: ["Beograda", "BGa"] },
         hints: {
             status: false,
             switch: true

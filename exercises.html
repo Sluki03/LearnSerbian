@@ -140,15 +140,7 @@
 
         <template data-template="exercise-modal-task-conversation">
             <div class="exercise-modal-task-conversation">
-                <div class="conversation-holder">
-                    <div class="conversation-participant">
-                        <div class="avatar"><span></span></div>
-                        <strong></strong>
-                    </div>
-    
-                    <div class="conversation-messages"></div>
-                    <div class="conversation-answer interface"></div>
-                </div>
+                <div class="conversation-holder" data-component="conversation-holder" data-conversation-answer-status="true"></div>
             </div>
         </template>
 
@@ -219,19 +211,14 @@
                 <div class="review-task-holder">
                     <div class="review-task-info">
                         <strong></strong>
-                        <div class="review-task-answers"></div>
                     </div>
-
-                    <strong class="task-xp"></strong>
                 </div>
 
-                <div class="task-explanation">
-                    <div class="explanation-title">
+                <div class="task-view-more">
+                    <div class="view-more-title">
                         <button class="arrow-button" data-component="arrow-button"></button>
-                        <p>explanation</p>
+                        <p>view more</p>
                     </div>
-
-                    <p class="explanation-p"></p>
                 </div>
             </div>
         </template>

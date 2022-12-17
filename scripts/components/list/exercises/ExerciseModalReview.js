@@ -1,7 +1,6 @@
 import { Component } from "../../Component.js";
 import createElement from "../../../functions/createElement.js";
-import markup from "../../../functions/markup.js";
-import formatAnswer from "../../../exercises/exercise/formatAnswer.js";
+import review from "../../../exercises/review/index.js";
 
 export default function ExerciseModalReview(componentProps) {
     const { exercise, results, score, appendTo } = componentProps.params;
@@ -17,8 +16,8 @@ export default function ExerciseModalReview(componentProps) {
         const reviewTask = document.querySelector("[data-template='exercise-modal-review-task']").content.firstElementChild.cloneNode(true);
         reviewHolder.appendChild(reviewTask);
 
-        const [reviewTaskHolder, taskExplanation] = [...reviewTask.children];
-        const [reviewTaskInfo, reviewTaskStrong] = [...reviewTaskHolder.children];
+        const [reviewTaskHolder, taskViewMore] = [...reviewTask.children];
+        const [reviewTaskInfo] = [...reviewTaskHolder.children];
 
         const green = { normal: "#059c20", light: "#07db2d", lighter: "#00ff2e" };
         const red = { normal: "#bd1330", light: "#d91435", lighter: "#f20707" };
@@ -38,73 +37,67 @@ export default function ExerciseModalReview(componentProps) {
             before: reviewTaskInfo
         });
         
-        const [infoStrong, infoAnswers] = [...reviewTaskInfo.children]; 
+        const [infoStrong] = [...reviewTaskInfo.children]; 
 
         infoStrong.innerText = result.title;
 
-        const blockCorrectInfoAnswers = ["conversation", "connect", "completeText"];
+        Component.render(taskViewMore);
 
-        const [answers, random] = formatAnswer(result.type, result.acceptableAnswers, result.userAnswer);
-        
-        if(result.isCorrect && blockCorrectInfoAnswers.indexOf(result.type) === -1) {
-            createElement({
-                tag: "p",
-                innerHTML: `${(result.acceptableAnswers.length > 1 ? "Your answer" : "Answer") + (answers.user.isPlural ? "s" : "")}: "<span>${answers.user.content}</span>".`,
-                appendTo: infoAnswers
-            });
+        const [viewMoreTitle] = [...taskViewMore.children];
+        const [titleButton, viewMoreP] = [...viewMoreTitle.children];
+
+        viewMoreTitle.id = result.id;
+
+        viewMoreTitle.onclick = () => {
+            const titleButtonTransform = getComputedStyle(titleButton).getPropertyValue("transform");
             
-            if(random.otherCorrectAnswer) createElement({
-                tag: "p",
-                innerHTML: `Also correct: "<span>${random.otherCorrectAnswer}</span>".`,
-                appendTo: infoAnswers
-            });
-        }
-
-        else if(!result.isCorrect) {
-            const nonRandomAnswerTypes = ["connect", "completeText"];
+            const activeTaskViewMore = document.getElementById("active-task-view-more");
+            const activeViewMoreTitle = activeTaskViewMore ? activeTaskViewMore.children[0] : null;
             
-            createElement({
-                tag: "p",
-                innerHTML: `Correct answer${answers.correct.isPlural ? "s" : ""}: "<span>${nonRandomAnswerTypes.indexOf(result.type) > -1 ? answers.correct.content : random.correctAnswer}</span>".`,
-                appendTo: infoAnswers
-            });
+            if(activeTaskViewMore && (activeViewMoreTitle.id !== viewMoreTitle.id)) closeViewMore(true);
+            else if(titleButtonTransform !== "none" && (activeViewMoreTitle.id === viewMoreTitle.id)) closeViewMore();
+            else openViewMore();
+            
+            function openViewMore() {
+                taskViewMore.id = "active-task-view-more";
 
-            createElement({
-                tag: "p",
-                innerHTML: `Your answer${answers.user.isPlural ? "s" : ""}: "<span>${answers.user.content}</span>".`,
-                appendTo: infoAnswers
-            });
+                titleButton.style.transform = "rotate(180deg)";
+                viewMoreP.innerText = "view less";
 
-            reviewTaskStrong.remove();
-        }
+                const current = {
+                    task: null,
+                    result: null
+                };
 
-        if(result.explanation) {
-            Component.render(taskExplanation);
-
-            const [explanationTitle, explanationP] = [...taskExplanation.children];
-            const [titleButton] = [...explanationTitle.children];
-
-            explanationTitle.onclick = () => {
-                const titleButtonTransform = getComputedStyle(titleButton).getPropertyValue("transform");
+                exercise.tasks.forEach(task => {
+                    if(viewMoreTitle.id === task.id) current.task = task;
+                });
                 
-                if(titleButtonTransform === "none") {
-                    titleButton.style.transform = "rotate(180deg)";
+                results.forEach(result => {
+                    if(viewMoreTitle.id === result.id) current.result = result;
+                });
 
-                    explanationP.innerHTML = markup(result.explanation);
-                    explanationP.classList.add("active-explanation-p");
-                }
-                
+                review(results, current);
+            }
 
-                else {
-                    titleButton.style.transform = "";
-                    explanationP.classList.remove("active-explanation-p");
+            function closeViewMore(openNew = false) {
+                const validViewMoreTitle = openNew ? activeViewMoreTitle : viewMoreTitle;
+                const [validTitleButton, validViewMoreP] = [...validViewMoreTitle.children];
 
-                    setTimeout(() => { explanationP.innerHTML = "" }, 300);
-                }
+                activeTaskViewMore.id = "";
+                activeTaskViewMore.style.height = "";
+
+                validTitleButton.style.transform = "";
+                validViewMoreP.innerText = "view more";
+
+                setTimeout(() => {
+                    const activeTaskReview = activeTaskViewMore.children[1];
+                    activeTaskReview.remove();
+
+                    if(openNew) openViewMore();
+                }, 300);
             }
         }
-        
-        else taskExplanation.remove();
     });
 
     const continueButton = document.querySelector(".exercise-modal-review .wide-button");

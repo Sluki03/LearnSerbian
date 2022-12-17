@@ -1,5 +1,5 @@
 import createElement from "../../../functions/createElement.js";
-import { Percentage } from "../../../functions/percentage.js";
+import { Percentage } from "../../../functions/Percentage.js";
 
 export default function Scrollbar(componentProps) {
     const { builtIn } = componentProps;

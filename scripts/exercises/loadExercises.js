@@ -11,7 +11,13 @@ export default function loadExercises() {
 
     exercisesData.forEach((exercise, index) => {
         const id = `${Convert.cssToJsStandard(exercise.name.replaceAll(" ", "-").toLowerCase())}_${index}`;
-        data.push({...exercise, id});
+        const tasks = [];
+
+        exercise.tasks.forEach((task, index) => {
+            tasks.push({...task, id: `${id}_${index}`});
+        });
+        
+        data.push({...exercise, id, tasks});
     });
     
     const list = document.querySelector(".exercises-list");

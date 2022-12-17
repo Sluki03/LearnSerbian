@@ -1,0 +1,20 @@
+.option-image {
+    @include add-flex(column);
+    gap: 5px;
+    background-color: white;
+    border: 2px solid $defLightGrey;
+    border-radius: 10px;
+    box-shadow: $defLightShadow;
+    padding: 10px;
+
+    img {
+        height: 70px;
+        width: 70px;
+        object-fit: contain;
+    }
+
+    p {
+        color: $defDarkGrey;
+        font-size: set-size(md);
+    }
+}

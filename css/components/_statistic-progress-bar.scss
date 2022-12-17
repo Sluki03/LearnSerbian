@@ -1,0 +1,45 @@
+.statistic-progress-bar {
+    @include add-flex(row, flex-start);
+    width: 100%;
+    gap: 15px;
+    
+    .progress-bar {
+        height: 25px;
+        width: 50%;
+        background-color: white;
+        border-radius: 20px;
+        box-shadow: $defLightShadow;
+        position: relative;
+
+        .progress-bar-line {
+            height: 25px;
+            background-color: $defLightBlue;
+            border-radius: 20px;
+            box-shadow: $defLightShadow;
+        }
+
+        .progress-bar-stats-holder {
+            @include add-flex;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        
+            .progress-bar-stat {
+                height: 25px;
+                border-radius: 20px;
+            }
+
+            #active-progress-bar-stat {
+                background-color: $defLightRed;
+                box-shadow: $defLightShadow;
+            }
+        }
+    }
+
+    p {
+        color: $defDarkGrey;
+        font-size: set-size(md);
+        font-weight: bold;
+    }
+}

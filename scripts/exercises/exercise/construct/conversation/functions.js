@@ -1,7 +1,9 @@
 import { Component } from "../../../../components/Component.js";
 import createElement from "../../../../functions/createElement.js";
-import setTranslatableWords from "../../setTranslatableWords.js";
+import setTranslatableWords from "../../../setTranslatableWords.js";
 import { Shorten } from "../../../../functions/Shorten.js";
+
+const userAnswers = [];
 
 export async function sendMessage(thisExercise, message, e) {
     const conversationMessages = document.querySelector(".conversation-messages");
@@ -68,25 +70,12 @@ export async function sendMessage(thisExercise, message, e) {
                 conversationAnswerInput.placeholder = "Write a message...";
             }
 
-            const activeMultipleChoiceButton = document.querySelector(".conversation-answer-button-holder .active-multiple-choice-button");
-            const activeMultipleChoiceButtonContent = activeMultipleChoiceButton ? activeMultipleChoiceButton.innerText : getUserMessage();
-            
-            thisExercise.answerChanged(thisExercise.currentTask.mode.type === "write" ? getUserMessage() : activeMultipleChoiceButtonContent);
+            thisExercise.answerChanged(userAnswers);
             thisExercise.check(e, true);
-
-            function getUserMessage() {
-                let lastUserMessageHolder;
-                
-                [...conversationMessages.children].forEach(child => {
-                    if(!child.classList.contains("user-message-holder")) return;
-                    lastUserMessageHolder = child;
-                });
-
-                const lastUserMessage = lastUserMessageHolder.children[0];
-                return lastUserMessage.innerText;
-            }
         }
     };
+
+    if(message.role === "user") userAnswers.push(message.content);
     
     const messageHolder = createElement({
         tag: "div",
@@ -119,7 +108,7 @@ export async function sendMessage(thisExercise, message, e) {
         messageContent.style.height = "";
         messageContent.style.alignItems = "";
 
-        setTranslatableWords(messageContent, participantAnswer, message.current.translation);
+        setTranslatableWords(messageContent, participantAnswer, message.current.translation, false);
 
         if(thisExercise.currentTask.speak) Component.create("SpeakButton", { speak: participantAnswer, appendTo: messageHolder });
     }

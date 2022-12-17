@@ -1,0 +1,301 @@
+.task-review {
+    @include add-flex(column, center, flex-start);
+    gap: 10px;
+    width: 100%;
+    position: relative;
+    margin: 10px 0;
+    padding: 0 20px;
+    transition: 300ms;
+
+    .mini-title {
+        color: $defDarkGrey;
+        font-size: 17px;
+        font-style: italic;
+        position: absolute;
+        top: -10px;
+    }
+    
+    strong {
+        color: $defDarkGrey;
+        font-size: set-size(lg);
+        margin-top: 10px;
+    }
+
+    p {
+        color: $defDarkGrey;
+        font-size: set-size(md);
+        
+        span {
+            font-weight: bold;
+        }
+    }
+
+    .answer-info,
+    .xp-info,
+    .time-info,
+    .mode-info,
+    .explanation-holder {
+        @include add-flex(column, center, flex-start);
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    .answer-info {
+        @include add-flex(column, center, flex-start);
+        
+        .option-image {
+            @include add-flex(column);
+            gap: 5px;
+            background-color: white;
+            border: 2px solid $defLightGrey;
+            border-radius: 10px;
+            box-shadow: $defLightShadow;
+            padding: 10px;
+
+            img {
+                height: 70px;
+                width: 70px;
+                object-fit: contain;
+            }
+
+            p {
+                color: $defDarkGrey;
+                font-size: set-size(md);
+            }
+        }
+
+        .arrow-down {
+            height: 50px;
+            width: 50px;
+            object-fit: contain;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-bottom: 10px;
+        }
+
+        .acceptable-answers-holder,
+        .user-answers-holder {
+            @include multiple-choice-button;
+            @include add-flex;
+            gap: 10px;
+            width: 70%;
+
+            .multiple-choice-button {
+                width: 100%;
+                font-size: set-size(md);
+                cursor: default;
+                padding: 3px 5px;
+                
+                &:hover {
+                    border: 1px solid $defGrey;
+                    box-shadow: none;
+                }
+
+                span {
+                    @include add-flex;
+                    height: 25px;
+                    width: 25px;
+                    color: $defDarkGrey;
+                    font-size: 17px;
+                    line-height: 1.25;
+                    border: 1px solid $defDarkGrey;
+                    border-radius: 50%;
+                    position: absolute;
+                    left: 5px;
+                    padding: 5px;
+                }
+            }
+        }
+    }
+
+    .xp-info,
+    .time-info,
+    .mode-info {
+        gap: 10px;
+        border-top: 1px solid $defDarkGrey;
+
+        .progress-bar-about {
+            @include add-flex;
+            gap: 15px;
+
+            .single-progress-bar-about {
+                @include add-flex;
+                gap: 10px;
+
+                .about-circle {
+                    height: 25px;
+                    width: 25px;
+                    border: 1px solid $defDarkGrey;
+                    border-radius: 50%;
+                    box-shadow: $defLightShadow;
+                }
+
+                p {
+                    color: $defDarkGrey;
+                    font-size: set-size(md);
+                }
+            }
+        }
+
+        .info-text {
+            color: $defDarkGrey;
+            font-size: 17px;
+        }
+    }
+
+    .time-info .statistic-progress-bar .progress-bar {
+        .progress-bar-line {
+            background-color: white;
+        }
+
+        .progress-bar-stats-holder #active-progress-bar-stat {
+            background-color: $defLightBlue;
+        }
+    }
+
+    .mode-info .mode-info-holder {
+        @include add-flex;
+        gap: 10px;
+
+        img {
+            height: 30px;
+            width: 30px;
+            object-fit: contain;
+        }
+    }
+
+    .explanation-holder {
+        border-top: 1px solid $defDarkGrey;
+    }
+}
+
+.multiple-choice-images-review {
+    .options-holder {
+        @include add-flex(column, center, flex-start);
+        gap: 5px;
+        
+        .options-images-holder {
+            @include add-flex;
+            gap: 10px;
+
+            .option-image-user {
+                border: 2px solid $defDarkGrey;
+            }
+
+            .option-image-correct {
+                border: 2px solid $defLightGreen;
+            }
+        }
+    }
+}
+
+.answer-info .text-p,
+.translate-review .text-p,
+.complete-text-review .text-p,
+.listen-review .text-p {
+    color: $defDarkGrey;
+    font-size: set-size(md);
+    background-color: white;
+    border: 1px solid $defDarkGrey;
+    border-radius: 10px;
+    box-shadow: $defLightShadow;
+    padding: 10px;
+
+    span {
+        font-weight: normal;
+    }
+}
+
+.conversation-review .conversation-holder {
+    max-height: 350px;
+    width: 70%;
+    background-color: white;
+
+    .conversation-participant {
+        .avatar {
+            height: 50px;
+            width: 50px;
+    
+            span {
+                font-size: set-size(xxl);
+            }
+        }
+
+        strong {
+            font-size: set-size(lg);
+            margin: 0;
+        }
+    }
+
+    .conversation-messages .user-message-holder {
+        p {
+            color: white;
+        }
+
+        .invalid-message {
+            background-color: $defLightRed;
+        }
+    }
+}
+
+.connect-review .connect-holder {
+    @include add-flex;
+    gap: 10px;
+    width: 85%;
+
+    .connection {
+        @include multiple-choice-button;
+        @include add-flex(column);
+        gap: 5px;
+        width: 100%;
+
+        .multiple-choice-button {
+            width: 100%;
+            cursor: default;
+            
+            &:hover {
+                border: 1px solid $defGrey;
+                box-shadow: none;
+            }
+
+            span {
+                @include add-flex;
+                height: 35px;
+                width: 35px;
+                color: $defDarkGrey;
+                font-size: set-size(md);
+                line-height: 1.25;
+                border: 1px solid $defDarkGrey;
+                border-radius: 50%;
+                position: absolute;
+                left: 5px;
+                padding: 5px;
+            }
+        }
+    }
+}
+
+.complete-text-review .text-p {
+    strong {
+        font-size: set-size(md);
+    }
+
+    .correct-answer {
+        color: $defLightGreen;
+    }
+
+    .incorrect-answer {
+        color: $defLightRed;
+    }
+}
+
+.listen-review .listen-holder {
+    @include add-flex;
+    gap: 10px;
+
+    .speak-button img {
+        height: 40px;
+        width: 40px;
+    }
+}

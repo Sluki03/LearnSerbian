@@ -101,7 +101,9 @@ export default function connect(thisExercise) {
             }
             
             const answer = [selectedButtons.first.innerText.split("\n")[0], selectedButtons.second.innerText.split("\n")[0]];
-            thisExercise.answerChanged(answer);
+            const { connectScheme } = window.eventList.getParams("taskConnectKeydown");
+
+            thisExercise.answerChanged({ answer, scheme: connectScheme });
     
             let isCorrect = false;
     
@@ -199,12 +201,50 @@ export default function connect(thisExercise) {
     const randomValues = randomArray(Object.values(thisExercise.currentTask.options));
 
     const random = randomArray([randomKeys, randomValues]);
+    
     let buttonCount = 0;
 
     random.forEach((optionsArray, index) => {
-        const validHolder = index === 0 ? firstButtonHolder : secondButtonHolder;
+        const validHolder = index ? secondButtonHolder : firstButtonHolder;
         optionsArray.forEach(option => connectOption.add(option, validHolder));
     });
 
-    window.eventList.add({ id: "taskConnectKeydown", type: "keydown", listener: connectOption.select });
+    let connectScheme = {};
+    formatConnectSchemeObject();
+
+    window.eventList.add({
+        id: "taskConnectKeydown",
+        type: "keydown",
+        listener: connectOption.select,
+        params: { connectScheme }
+    });
+
+    function formatConnectSchemeObject() {
+        const connectButtonHolders = document.querySelectorAll(".connect-button-holder");
+        const connectButtonHoldersValues = { keys: [], values: [] };
+        
+        setConnectButtonHoldersValues("keys");
+        setConnectButtonHoldersValues("values");
+
+        connectButtonHoldersValues.keys.forEach((key, index) => {
+            let schemeObject = {};
+            const value = connectButtonHoldersValues.values[index];
+
+            schemeObject = { [key]: value };
+            connectScheme = {...connectScheme, ...schemeObject};
+        });
+
+        function setConnectButtonHoldersValues(prop) {
+            const validHolder = connectButtonHoldersValues.keys.length === 0 ? 0 : 1;
+            const connectButtonHolderClone = connectButtonHolders[validHolder].cloneNode(true);
+            
+            [...connectButtonHolderClone.children].forEach(button => {
+                const span = button.children[0];
+                span.remove();
+                
+                const validProp = prop === "keys" ? connectButtonHoldersValues.keys : connectButtonHoldersValues.values;
+                validProp.push(button.innerText);
+            });
+        }
+    }
 }

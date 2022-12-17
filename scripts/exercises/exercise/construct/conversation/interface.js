@@ -4,6 +4,8 @@ import createElement from "../../../../functions/createElement.js";
 import breakText from "../../../../functions/breakText.js";
 import randomArray from "../../../../functions/randomArray.js";
 
+const userAnswers = [];
+
 export default async function taskInterface(thisExercise, changeMode) {
     let currentMessage = thisExercise.currentTask.messages[thisExercise.messageNumber];
     
@@ -26,7 +28,6 @@ export default async function taskInterface(thisExercise, changeMode) {
 
         if(thisExercise.currentTask.diacriticKeyboard || thisExercise.currentTask.diacriticKeyboard === undefined) Component.create("DiacriticKeyboard", {
             input: conversationAnswerInput,
-            answerChanged: thisExercise.answerChanged,
             smaller: true,
             appendTo: exerciseModalTaskConversation
         });
@@ -197,6 +198,8 @@ export default async function taskInterface(thisExercise, changeMode) {
         if((conversationAnswerInput === null || !conversationAnswerInput.value) && option === undefined) return;
 
         const userMessage = conversationAnswerInput ? conversationAnswerInput.value : option;
+        userAnswers.push(userMessage);
+
         let isCorrect = false;
                     
         currentMessage.acceptableAnswers.forEach(acceptableAnswer => {
@@ -230,7 +233,7 @@ export default async function taskInterface(thisExercise, changeMode) {
                 
                 window.eventList.remove("taskOptionChooseKeydown", "taskCheckMessageKeyDown");
 
-                thisExercise.answerChanged(userMessage);
+                thisExercise.answerChanged(userAnswers);
                 return thisExercise.check(e, true);
             }
 

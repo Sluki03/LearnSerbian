@@ -51,34 +51,23 @@
                         color: white;
                         font-size: set-size(xl);
                     }
-    
-                    .review-task-answers {
-                        @include add-flex(column, center, flex-start);
-    
-                        p {
-                            color: white;
-                            font-size: set-size(md);
-                        
-                            span {
-                                font-weight: bold;
-                            }
-                        }
-                    }
                 }
             }
 
-            .task-explanation {
-                @include add-flex(column, center, flex-start);
+            .task-view-more {
+                @include add-flex(column, flex-start, flex-start);
+                height: 0;
                 width: 100%;
                 background-color: rgba(255, 255, 255, 0.7);
-                border-top: 1px solid white;
-                padding: 5px 0;
+                transition: 300ms;
+                overflow: hidden;
 
-                .explanation-title {
+                .view-more-title {
                     @include add-flex(row, flex-start);
                     gap: 10px;
                     width: 100%;
                     cursor: pointer;
+                    margin: 5px 0;
                     
                     .arrow-button {
                         height: 25px;
@@ -101,20 +90,17 @@
                     }
                 }
 
-                .explanation-p {
-                    color: $defDarkGrey;
-                    font-size: set-size(md);
-                    opacity: 0;
-                    position: relative;
-                    top: 10px;
-                    padding: 0 20px;
-                    transition: 300ms;
-                }
+                @import "./task-review";
+            }
 
-                .active-explanation-p {
-                    opacity: 1;
-                    top: 0;
-                }
+            &:hover .task-view-more {
+                height: 40px;
+                border-top: 1px solid white;
+            }
+
+            #active-task-view-more {
+                height: 40px;
+                border-top: 1px solid white;
             }
         }
 

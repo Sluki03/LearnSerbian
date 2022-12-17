@@ -1,7 +1,7 @@
 import taskInterface from "./interface.js";
 import { Component } from "../../../../components/Component.js";
 import createElement from "../../../../functions/createElement.js";
-import setTranslatableWords from "../../setTranslatableWords.js";
+import setTranslatableWords from "../../../setTranslatableWords.js";
 
 export default function translate(thisExercise, changeMode) {
     if(changeMode) return taskInterface(thisExercise);
