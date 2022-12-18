@@ -4,21 +4,23 @@ import createElement from "../../../../functions/createElement.js";
 import { Shorten } from "../../../../functions/Shorten.js";
 import randomArray from "../../../../functions/randomArray.js";
 import { getAllPlaceholders, getFields, emptyFieldSelector } from "./functions.js";
+import setTranslatableWords from "../../../setTranslatableWords.js";
 
 export default function taskInterface(thisExercise, changeMode) {
     const interfaceElement = document.querySelector(".interface");
 
     window.eventList.add({ id: "taskCompleteTextKeydown", type: "keydown", listener: emptyFieldSelector, params: thisExercise });
     
-    createElement({
+    const completeTextP = createElement({
         tag: "p",
         attributes: { class: "complete-text-p" },
-        innerText: thisExercise.currentTask.text,
         appendTo: interfaceElement
     });
 
     const hintsStatus = thisExercise.currentTask.hints.status;
     setFields();
+
+    setTranslatableWords(completeTextP, completeTextP.innerHTML, thisExercise.currentTask.translation, thisExercise.currentTask.englishSerbian);
 
     let fieldValues = {};
     setFieldValues();

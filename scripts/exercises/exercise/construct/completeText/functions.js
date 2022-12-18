@@ -24,6 +24,7 @@ export const Spans = {
         
         allSpans.forEach((span, index) => {
             if(span.classList.contains("filled-complete-text-field")) return;
+            if(span.classList.contains("active-complete-text-field")) span.click();
             
             span.innerText = allPlaceholders[index];
             Shorten.elementInnerText(span);

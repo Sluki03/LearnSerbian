@@ -125,6 +125,11 @@ export const hearing = [
         },
         options: ["kako", "Beograda", "dobro", "zovem"],
         acceptableAnswers: { how: ["kako"], good: ["dobro", "okej"], toBeCalled: ["zovem"], belgrade: ["Beograda", "BGa"] },
+        translation: {
+            ljudi: "people",
+            mi: "we",
+            Inace: "By the way"
+        },
         hints: {
             status: false,
             switch: true
