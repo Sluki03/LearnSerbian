@@ -2666,6 +2666,10 @@ footer div a {
   top: 10px;
   right: 10px;
   z-index: 5;
+  transition: opacity 0.3s;
+}
+.modal-x:hover {
+  opacity: 1;
 }
 
 .arrow-button {
