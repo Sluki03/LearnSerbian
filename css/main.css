@@ -2054,7 +2054,8 @@ main .exercises-info .exercises-search input {
   width: 100%;
   color: #5e5c5c;
   font-size: 25px;
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: transparent;
+  padding: 0px 5px;
   border: none;
   outline: none;
   transition: 300ms;
@@ -2069,11 +2070,12 @@ main .exercises-info .exercises-search input::placeholder {
   text-transform: capitalize;
 }
 main .exercises-info .exercises-search img {
-  height: 35px;
-  width: 35px;
+  height: 30px;
+  width: 30px;
   -o-object-fit: contain;
      object-fit: contain;
   z-index: 2;
+  opacity: 0.8;
 }
 main .exercises-info .info-other {
   display: flex;
