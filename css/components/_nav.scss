@@ -9,6 +9,7 @@ nav {
     position: fixed;
     top: 0;
     padding: 3px;
+    transition: 500ms;
     z-index: 10;
     
     @include interactive-title(40px);
@@ -59,12 +60,4 @@ nav {
             font-weight: bold;
         }
     }
-}
-
-#exercises-nav {
-    position: relative;
-    background-color: white;
-    border-bottom: 1px solid lightgray;
-    backdrop-filter: none;
-    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.1);
 }

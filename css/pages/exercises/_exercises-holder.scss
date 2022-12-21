@@ -3,108 +3,18 @@
 }
 
 .exercises-holder {
-    width: 45%;
-    background-image: url("../images/background.png");
-    background-position-y: 0;
+    width: 50%;
     border-left: 1px solid lightgray;
     box-shadow: -2px 0px 5px -2px rgba(0,0,0,0.1);
     position: relative;
-    overflow: auto;
-    
-    .exercises-list-top {
-        @include add-flex(row, flex-end);
-        width: 100%;
-        position: sticky;
-        top: 10px;
-        margin-top: 10px;
-        padding: 3px 5px;
-        z-index: 5;
-        
-        .trophy-counter {
-            @include add-flex;
-            gap: 10px;
-            background-color: rgba(255, 255, 255, 0.7);
-            border: 2px solid $defLightGrey;
-            border-radius: 30px;
-            box-shadow: $defLighterShadow;
-            backdrop-filter: $defBlurFilter;
-            position: absolute;
-            top: 3px;
-            left: 5px;
-            padding: 5px 10px;
-
-            img {
-                height: 40px;
-                width: 40px;
-                object-fit: contain;
-            }
-
-            p {
-                color: $defDarkGrey;
-                font-size: set-size(lg);
-                font-weight: bold;
-            }
-        }
-        
-        .exercises-search {
-            @include add-flex;
-            background-color: $defBlurBg;
-            border: 2px solid $defLightGrey;
-            backdrop-filter: $defBlurFilter;
-            border-radius: 30px;
-            box-shadow: $defLighterShadow;
-            position: relative;
-            padding: 5px 10px;
-            transition: 300ms;
-            
-            input {
-                width: 0;
-                color: $defDarkGrey;
-                font-size: set-size(lg);
-                background-color: $defBlurBg;
-                border: none;
-                outline: none;
-                transition: 300ms;
-    
-                &:focus,
-                &:not(:placeholder-shown) {
-                    width: 300px;
-                }
-                
-                &::placeholder {
-                    text-transform: capitalize;
-                }
-            }
-
-            &:hover input {
-                width: 300px;
-            }
-    
-            img {
-                height: 35px;
-                width: 35px;
-                object-fit: contain;
-                z-index: 2;
-            }
-        }
-    }
     
     .exercises-list {
         @include add-flex(column, flex-start);
-        gap: 100px;
         width: 100%;
         position: relative;
         top: 0;
         margin: 20px 0;
         transition: 50ms;
-        
-        & > div:nth-of-type(4) {
-            margin-top: 100px;
-        }
-        
-        & > div:nth-last-of-type(1) {
-            margin-bottom: 100px;
-        }
 
         .exercises-list-line {
             height: 100%;
@@ -121,7 +31,7 @@
             border: 2px solid $defLightGrey;
             border-radius: 20px;
             padding: 10px;
-            position: absolute;
+            position: relative;
             box-shadow: 0px 1px 5px rgba(128, 128, 128, 0.329);
         
             img {
@@ -137,19 +47,11 @@
             }
         }
 
-        .start-holder {
-            top: 0;
-        }
-
-        .end-holder {
-            bottom: 0;
-        }
-
         @include interactive-title(90px);
         @include exercise;
-    }
 
-    .scrollbar {
-        z-index: 9;
+        .exercise-holder {
+            margin: 50px 0;
+        }
     }
 }

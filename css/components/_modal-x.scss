@@ -1,0 +1,12 @@
+.modal-x {
+    height: 40px;
+    width: 40px;
+    object-fit: contain;
+    opacity: 0.7;
+    cursor: pointer;
+    pointer-events: all;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 5;
+}

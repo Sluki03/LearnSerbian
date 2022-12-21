@@ -1,20 +1,128 @@
 .exercises-info {
     @include add-flex(column, flex-start);
-    width: 55%;
-    position: relative;
-    transform: scale(1);
-    overflow: auto;
+    gap: 20px;
+    width: 50%;
+    position: sticky;
+    top: 115px;
+    margin-top: 50px;
 
-    @include interactive-title(70px);
+    .exercises-search {
+        @include add-flex;
+        width: 50%;
+        background-color: $defBlurBg;
+        border: 2px solid $defLightGrey;
+        backdrop-filter: $defBlurFilter;
+        border-radius: 30px;
+        box-shadow: $defLighterShadow;
+        position: relative;
+        padding: 5px 10px;
+        transition: 300ms;
+        
+        input {
+            width: 100%;
+            color: $defDarkGrey;
+            font-size: set-size(lg);
+            background-color: $defBlurBg;
+            border: none;
+            outline: none;
+            transition: 300ms;
+            
+            &::placeholder {
+                text-transform: capitalize;
+            }
+        }
 
-    .mini-title span {
-        font-size: set-size(miniheading);
+        img {
+            height: 35px;
+            width: 35px;
+            object-fit: contain;
+            z-index: 2;
+        }
     }
 
-    p {
-        color: $defDarkGrey;
-        font-size: set-size(md);
-        text-align: center;
-        padding: 10px 30px;
+    .info-other {
+        @include add-flex(column);
+        width: 50%;
+        background-color: white;
+        border: 2px solid $defLightGrey;
+        border-radius: 20px;
+        box-shadow: $defLighterShadow;
+
+        .other-title {
+            @include add-flex(row, flex-start);
+            gap: 5px;
+            width: 100%;
+            padding: 5px 10px;
+            
+            img {
+                height: 20px;
+                width: 20px;
+                object-fit: contain;
+            }
+            
+            strong {
+                color: $defDarkGrey;
+                font-size: set-size(md);
+                text-transform: capitalize;
+            }
+        }
+
+        .other-button-holder {
+            @include add-flex(column);
+            gap: 5px;
+            width: 100%;
+            padding: 10px 15px;
+            padding-top: 0;
+
+            a {
+                @include add-flex(row, flex-start);
+                gap: 10px;
+                width: 100%;
+                text-decoration: none;
+                background-color: white;
+                border: 2px solid $defLightGrey;
+                border-radius: 20px;
+                box-shadow: $defLighterShadow;
+                cursor: pointer;
+                padding: 5px 10px;
+                transition: 300ms;
+
+                &:hover {
+                    border: 2px solid $defGrey;
+                    box-shadow: $defLightShadow;
+                }
+
+                img {
+                    height: 30px;
+                    width: 30px;
+                    object-fit: contain;
+                    position: relative;
+                    left: 0;
+                    transition: 300ms;
+                }
+
+                &:hover img {
+                    left: 15px;
+                }
+
+                p {
+                    color: $defDarkGrey;
+                    font-size: set-size(lg);
+                    position: relative;
+                    left: 0;
+                    margin: 0;
+                    transition: 300ms;
+                }
+
+                &:hover p {
+                    left: 15px;
+                }
+            }
+
+            .support-us:hover {
+                border: 2px solid $defLightRed;
+                box-shadow: $defLightRedShadow;
+            }
+        }
     }
 }

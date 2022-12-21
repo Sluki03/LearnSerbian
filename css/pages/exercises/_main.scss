@@ -1,19 +1,22 @@
 #exercises {
     height: 100vh;
-    background-color: white;
+    background-image: url("../images/background.png");
+    position: relative;
+    padding-top: 65px;
+    overflow: auto;
 }
+
+@import "./exercise-modal/main";
 
 main {
     @include add-flex(row, center, flex-start);
-    height: calc(100% - 65px);
+    min-height: 100%;
     position: relative;
 
     section {
         @include add-flex(column, flex-start);
-        height: 100%;
     }
 
-    @import "./exercise-modal/main";
     @import "./exercises-info";
     @import "./exercises-holder";
 }

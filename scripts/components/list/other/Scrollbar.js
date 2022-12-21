@@ -3,7 +3,7 @@ import { Percentage } from "../../../functions/Percentage.js";
 
 export default function Scrollbar(componentProps) {
     const { builtIn } = componentProps;
-    const { ignoreTarget, appendTo } = componentProps.params;
+    const { ignoreTarget, trigger, appendTo } = componentProps.params;
 
     const validTarget = builtIn ? builtIn.parentElement : appendTo;
     const targetElement = ignoreTarget ? document.documentElement : validTarget ? validTarget : document.documentElement;
@@ -28,23 +28,23 @@ export default function Scrollbar(componentProps) {
         appendTo: scrollbarLine
     });
 
-    (relativeToViewport ? window : targetElement).eventList.add({ id: "scrollbarScroll", type: "scroll", listener: scrolling });
+    (relativeToViewport ? window : targetElement).eventList.add({ id: "scrollbarScroll", type: "scroll", listener: buttonMover });
     
     window.eventList.add({ id: "scrollbarResize", type: "resize", listener: resizing });
     resizing();
     
     let buttonScrollingStatus = false;
 
+    window.eventList.add({ id: "scrollbarMouseWheel", type: "mousewheel", listener: mouseScrolling, options: { passive: false } });
+
+    if(trigger) {
+        const observer = new MutationObserver(resizing);
+        observer.observe(trigger, { childList: true });
+    }
+    
     absoluteScrollbar();
 
     return scrollbarElement;
-
-    function scrolling() {
-        absoluteScrollbar();
-        
-        if(buttonScrollingStatus) return;
-        scrollbarButton.style.top = `${Percentage.calc(targetElement.scrollHeight, targetElement.scrollTop)}%`;
-    }
 
     function resizing() {
         absoluteScrollbar();
@@ -53,6 +53,10 @@ export default function Scrollbar(componentProps) {
         scrollbarButton.style.height = `${Percentage.calc(targetElement.scrollHeight, targetElement.clientHeight)}%`;
     }
 
+    function mouseScrolling(e) {
+        if(buttonScrollingStatus) e.preventDefault();
+    }
+    
     function buttonScrolling(e) {
         buttonScrollingStatus = true;
 
@@ -99,6 +103,13 @@ export default function Scrollbar(componentProps) {
             buttonScrollingStatus = false;
             window.eventList.remove("scrollbarMouseMove", "scrollbarMouseUp");
         }
+    }
+
+    function buttonMover() {
+        absoluteScrollbar();
+        
+        if(buttonScrollingStatus) return;
+        scrollbarButton.style.top = `${Percentage.calc(targetElement.scrollHeight, targetElement.scrollTop)}%`;
     }
 
     function absoluteScrollbar() {

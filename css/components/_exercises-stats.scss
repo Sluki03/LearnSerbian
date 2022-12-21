@@ -1,0 +1,63 @@
+.exercises-stats {
+    @include add-flex(column);
+    width: 50%;
+    background-color: white;
+    border: 2px solid $defLightGrey;
+    border-radius: 20px;
+    box-shadow: $defLighterShadow;
+
+    .stats-title {
+        @include add-flex(row, flex-start);
+        gap: 5px;
+        width: 100%;
+        padding: 5px 10px;
+        
+        img {
+            height: 20px;
+            width: 20px;
+            object-fit: contain;
+        }
+        
+        strong {
+            color: $defDarkGrey;
+            font-size: set-size(md);
+            text-transform: capitalize;
+        }
+    }
+
+    .stats-holder {
+        @include add-flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        width: 100%;
+        padding: 10px;
+        padding-top: 0;
+
+        .stat {
+            @include add-flex;
+            gap: 10px;
+            width: 48%;
+            border: 2px solid $defLightGrey;
+            border-radius: 20px;
+            box-shadow: $defLighterShadow;
+            padding: 3px 5px;
+
+            &:first-child {
+                width: 98%;
+            }
+
+            img {
+                height: 40px;
+                width: 40px;
+                object-fit: contain;
+            }
+
+            p {
+                color: $defDarkGrey;
+                font-size: set-size(md);
+                font-weight: bold;
+                margin: 0;
+            }
+        }
+    }
+}

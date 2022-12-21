@@ -1,76 +1,25 @@
-import { exercisesData } from "../../../../data/exercises/index.js";
 import { Component } from "../../Component.js";
-import closeExerciseModal from "../../../exercises/closeExerciseModal.js";
-import { Shorten } from "../../../functions/Shorten.js";
+import { ExerciseModalStatus } from "../../../exercises/ExerciseModalStatus.js";
 
 export default function ExerciseModal(componentProps) {
     const { exercise } = componentProps.params;
 
+    const body = document.querySelector("body");
     const main = document.querySelector("main");
+
     const exerciseModal = document.querySelector("[data-template='exercise-modal']").content.firstElementChild.cloneNode(true);
-    main.insertBefore(exerciseModal, main.firstChild);
+    body.insertBefore(exerciseModal, main);
 
     Component.render(exerciseModal);
 
     setTimeout(() => exerciseModal.setAttribute("id", "active-exercise-modal"), 100);
 
-    Component.create("ModalOptions", {
-        functions: { resize: modalOptionsResize, x: closeExerciseModal },
+    Component.create("ModalX", {
+        onClick: ExerciseModalStatus.close,
         appendTo: exerciseModal
     });
 
     window.eventList.remove("exerciseModalReviewKeyDown");
-
-    function modalOptionsResize() {
-        const textarea = document.querySelector("textarea");
-        const allInputs = document.querySelectorAll("input");
-
-        let activeInput = false;
-
-        allInputs.forEach(input => {
-            if(input.isEqualNode(document.activeElement)) activeInput = true;
-        });
-        
-        if(textarea && textarea.isEqualNode(document.activeElement) || activeInput) return true;
-        
-        const exerciseModalWith = parseInt(getComputedStyle(exerciseModal).getPropertyValue("width"));
-        let isIconRotated = exerciseModalWith === window.innerWidth;
-        
-        if(exerciseModalWith !== window.innerWidth) exerciseModal.style.width = "100%";
-        else exerciseModal.style.width = "";
-
-        setTimeout(() => {
-            const conversationAnswer = document.querySelector(".conversation-answer");
-            if(conversationAnswer !== null && allInputs.length > 0) allInputs.forEach(input => Shorten.placeholder(input, getConversationPlaceholder(input)));
-        }, 300);
-
-        return isIconRotated;
-
-        function getConversationPlaceholder(input) {
-            const conversationAnswer = document.querySelector(".conversation-answer");
-            const conversationAnswerInput = conversationAnswer.children[1];
-            
-            if(!input.isEqualNode(conversationAnswerInput)) return;
-
-            let placeholderSource = "";
-
-            exercisesData.forEach(exercise => {
-                if(exercise.tasks === undefined) return;
-
-                exercise.tasks.forEach(task => {
-                    if(task.type !== "conversation") return;
-
-                    task.messages.forEach(message => {
-                        const inputPlaceholder = input.placeholder.substring(0, input.placeholder.length - 3);
-                        if(message.userContent.includes(inputPlaceholder)) placeholderSource = message.userContent;
-                    });
-                });
-            });
-
-            return placeholderSource;
-        }
-    }
-
     Component.create("ExerciseModalContent", { exercise, appendTo: exerciseModal });
 
     return exerciseModal;

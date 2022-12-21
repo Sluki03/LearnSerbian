@@ -1,5 +1,7 @@
 import { Component } from "../components/Component.js";
-import { exercisesData } from "../../data/exercises/index.js";
+import setExercisesStats from "./setExercisesStats.js";
+
+let initalLoad = true;
 
 export default function initializeStats() {
     const stats = JSON.parse(localStorage.getItem("exercisesStats"));
@@ -50,8 +52,13 @@ export default function initializeStats() {
         }
     });
 
-    const trophyCounterP = document.querySelector(".trophy-counter p");
-    const numberOfTrophies = Object.keys(stats ? stats : {}).length;
+    if(initalLoad) return initalLoad = false;
+    
+    const statsContent = setExercisesStats();
+    const statsHolder = document.querySelector(".exercises-stats .stats-holder");
 
-    trophyCounterP.innerText = `${numberOfTrophies} / ${exercisesData.length}`;
+    Object.values(statsContent).forEach((value, index) => {
+        const statsHolderP = statsHolder.children[index].children[1];
+        statsHolderP.innerText = value;
+    });
 }

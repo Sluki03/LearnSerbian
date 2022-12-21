@@ -12,7 +12,7 @@
     .exercise-info {
         filter: drop-shadow(1px 1px 10px rgba(0, 0, 0, 0.3));
         position: absolute;
-        right: 55px;
+        right: 90px;
         transition: 300ms;
 
         .exercise-title {
@@ -113,7 +113,7 @@
     }
 
     .active-exercise-info {
-        right: 40px;
+        right: 80px;
 
         .exercise-title {
             background-color: white;

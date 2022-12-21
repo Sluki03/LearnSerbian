@@ -10,8 +10,8 @@ window.addEventListener("load", () => {
     Component.render();
     Component.create("ExercisesList");
     
-    const exercisesHolder = document.querySelector(".exercises-holder");
-    scrollingParallax({ scroll: exercisesHolder, bg: exercisesHolder });
+    const body = document.querySelector("body");
+    scrollingParallax({ scroll: window, bg: body });
 
     responsiveVoice.setDefaultVoice("Serbian Male");
 });

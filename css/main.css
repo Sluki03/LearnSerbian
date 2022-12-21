@@ -14,14 +14,6 @@ body {
   overflow: hidden;
 }
 
-img {
-  pointer-events: none;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-}
-
 button {
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -206,40 +198,29 @@ img {
 
 #exercises {
   height: 100vh;
-  background-color: white;
+  background-image: url("../images/background.png");
+  position: relative;
+  padding-top: 65px;
+  overflow: auto;
 }
 
-main {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  flex-direction: row;
-  height: calc(100% - 65px);
-  position: relative;
-}
-main section {
+.exercise-modal {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
   height: 100%;
-}
-main .exercise-modal {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-direction: column;
-  height: 100%;
-  width: 55%;
+  width: 100%;
   background: white;
-  position: absolute;
-  left: -100%;
-  transition: 300ms;
+  opacity: 0;
+  position: fixed;
+  bottom: -100%;
+  transition: 500ms;
   overflow-x: hidden;
   overflow-y: auto;
   z-index: 10;
 }
-main .exercise-modal .exercise-modal-title {
+.exercise-modal .exercise-modal-title {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -250,7 +231,7 @@ main .exercise-modal .exercise-modal-title {
   top: 0;
   transition: 300ms;
 }
-main .exercise-modal .exercise-modal-title .interactive-title {
+.exercise-modal .exercise-modal-title .interactive-title {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -258,7 +239,7 @@ main .exercise-modal .exercise-modal-title .interactive-title {
   position: relative;
   margin: 10px 0;
 }
-main .exercise-modal .exercise-modal-title .interactive-title span {
+.exercise-modal .exercise-modal-title .interactive-title span {
   color: white;
   font-size: 70px;
   text-transform: capitalize;
@@ -273,39 +254,39 @@ main .exercise-modal .exercise-modal-title .interactive-title span {
           user-select: none;
   z-index: 3;
 }
-main .exercise-modal .exercise-modal-title .interactive-title span:first-child, main .exercise-modal .exercise-modal-title .interactive-title span:last-child {
+.exercise-modal .exercise-modal-title .interactive-title span:first-child, .exercise-modal .exercise-modal-title .interactive-title span:last-child {
   position: absolute;
 }
-main .exercise-modal .exercise-modal-title .interactive-title span:first-child {
+.exercise-modal .exercise-modal-title .interactive-title span:first-child {
   color: #bd1330;
   top: -5px;
   left: -3px;
   z-index: 1;
 }
-main .exercise-modal .exercise-modal-title .interactive-title span:last-child {
+.exercise-modal .exercise-modal-title .interactive-title span:last-child {
   color: #144eba;
   top: 5px;
   left: 5px;
   z-index: 2;
 }
-main .exercise-modal .exercise-modal-title .interactive-title:hover span {
+.exercise-modal .exercise-modal-title .interactive-title:hover span {
   text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
-main .exercise-modal .exercise-modal-title .interactive-title:hover span:first-child {
+.exercise-modal .exercise-modal-title .interactive-title:hover span:first-child {
   color: #d91435;
   top: -7px;
   left: -5px;
   z-index: 2;
   text-shadow: 0px 0px 15px rgba(247, 72, 101, 0.5);
 }
-main .exercise-modal .exercise-modal-title .interactive-title:hover span:last-child {
+.exercise-modal .exercise-modal-title .interactive-title:hover span:last-child {
   color: #0559f5;
   top: 7px;
   left: 7px;
   z-index: 1;
   text-shadow: 0px 0px 15px rgba(82, 138, 242, 0.5);
 }
-main .exercise-modal .exercise-modal-title .exercise {
+.exercise-modal .exercise-modal-title .exercise {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -314,7 +295,7 @@ main .exercise-modal .exercise-modal-title .exercise {
   width: 180px;
   cursor: pointer;
 }
-main .exercise-modal .exercise-modal-title .exercise .exercise-border {
+.exercise-modal .exercise-modal-title .exercise .exercise-border {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -328,10 +309,10 @@ main .exercise-modal .exercise-modal-title .exercise .exercise-border {
   transform: rotate(0);
   transition: 600ms;
 }
-main .exercise-modal .exercise-modal-title .exercise:hover .exercise-border {
+.exercise-modal .exercise-modal-title .exercise:hover .exercise-border {
   transform: rotate(180deg);
 }
-main .exercise-modal .exercise-modal-title .exercise .exercise-content {
+.exercise-modal .exercise-modal-title .exercise .exercise-content {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -345,7 +326,7 @@ main .exercise-modal .exercise-modal-title .exercise .exercise-content {
   position: absolute;
   transition: 300ms;
 }
-main .exercise-modal .exercise-modal-title .exercise .exercise-content img {
+.exercise-modal .exercise-modal-title .exercise .exercise-content img {
   height: 90px;
   width: 90px;
   -o-object-fit: contain;
@@ -353,60 +334,60 @@ main .exercise-modal .exercise-modal-title .exercise .exercise-content img {
   filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.5));
   transition: 150ms;
 }
-main .exercise-modal .exercise-modal-title .exercise:hover .exercise-content {
+.exercise-modal .exercise-modal-title .exercise:hover .exercise-content {
   height: 155px;
   width: 155px;
 }
-main .exercise-modal .exercise-modal-title .exercise-clone {
+.exercise-modal .exercise-modal-title .exercise-clone {
   height: 100px;
   width: 100px;
   cursor: default;
 }
-main .exercise-modal .exercise-modal-title .exercise-clone .exercise-border {
+.exercise-modal .exercise-modal-title .exercise-clone .exercise-border {
   height: 100px;
   width: 100px;
   background: linear-gradient(135deg, #d91435 45%, white 45% 55%, #0559f5 55% 100%);
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
 }
-main .exercise-modal .exercise-modal-title .exercise-clone:hover .exercise-border {
+.exercise-modal .exercise-modal-title .exercise-clone:hover .exercise-border {
   transform: rotate(0);
 }
-main .exercise-modal .exercise-modal-title .exercise-clone .exercise-content {
+.exercise-modal .exercise-modal-title .exercise-clone .exercise-content {
   height: 85px;
   width: 85px;
   transform: rotate(0);
 }
-main .exercise-modal .exercise-modal-title .exercise-clone .exercise-content img {
+.exercise-modal .exercise-modal-title .exercise-clone .exercise-content img {
   height: 50px;
   width: 50px;
 }
-main .exercise-modal .exercise-modal-title .exercise-clone .exercise-content .interactive-title span {
+.exercise-modal .exercise-modal-title .exercise-clone .exercise-content .interactive-title span {
   font-size: 50px;
   text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
-main .exercise-modal .exercise-modal-title .exercise-clone .exercise-content .interactive-title span:first-child {
+.exercise-modal .exercise-modal-title .exercise-clone .exercise-content .interactive-title span:first-child {
   color: #d91435;
   top: -7px;
   left: -5px;
   z-index: 2;
   text-shadow: 0px 0px 15px rgba(247, 72, 101, 0.5);
 }
-main .exercise-modal .exercise-modal-title .exercise-clone .exercise-content .interactive-title span:last-child {
+.exercise-modal .exercise-modal-title .exercise-clone .exercise-content .interactive-title span:last-child {
   color: #0559f5;
   top: 7px;
   left: 7px;
   z-index: 1;
   text-shadow: 0px 0px 15px rgba(82, 138, 242, 0.5);
 }
-main .exercise-modal .exercise-modal-title .exercise-clone:hover .exercise-content {
+.exercise-modal .exercise-modal-title .exercise-clone:hover .exercise-content {
   height: 85px;
   width: 85px;
 }
-main .exercise-modal .disabled-exercise-modal-title {
+.exercise-modal .disabled-exercise-modal-title {
   opacity: 0;
   top: -10px;
 }
-main .exercise-modal .exercise-modal-content {
+.exercise-modal .exercise-modal-content {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -417,23 +398,23 @@ main .exercise-modal .exercise-modal-content {
   margin-top: 10px;
   transition: 300ms;
 }
-main .exercise-modal .exercise-modal-content h1 {
+.exercise-modal .exercise-modal-content h1 {
   font-size: 40px;
 }
-main .exercise-modal .exercise-modal-content h2 {
+.exercise-modal .exercise-modal-content h2 {
   font-size: 35px;
 }
-main .exercise-modal .exercise-modal-content h3 {
+.exercise-modal .exercise-modal-content h3 {
   font-size: 30px;
 }
-main .exercise-modal .exercise-modal-content h4 {
+.exercise-modal .exercise-modal-content h4 {
   font-size: 25px;
 }
-main .exercise-modal .exercise-modal-content p {
+.exercise-modal .exercise-modal-content p {
   color: #5e5c5c;
   font-size: 20px;
 }
-main .exercise-modal .exercise-modal-content .wide-button {
+.exercise-modal .exercise-modal-content .wide-button {
   color: white;
   background-color: #144eba;
   font-size: 30px;
@@ -446,39 +427,39 @@ main .exercise-modal .exercise-modal-content .wide-button {
   margin: 20px 0;
   transition: 300ms;
 }
-main .exercise-modal .exercise-modal-content .wide-button:hover {
+.exercise-modal .exercise-modal-content .wide-button:hover {
   text-shadow: white 0px 0px 2px;
   background-color: #0559f5;
 }
-main .exercise-modal .exercise-modal-content .disabled-wide-button {
+.exercise-modal .exercise-modal-content .disabled-wide-button {
   cursor: not-allowed;
   opacity: 0.5;
 }
-main .exercise-modal .exercise-modal-content .disabled-wide-button:hover {
+.exercise-modal .exercise-modal-content .disabled-wide-button:hover {
   text-shadow: none;
   background-color: #bd1330;
 }
-main .exercise-modal .exercise-modal-content .wide-button {
+.exercise-modal .exercise-modal-content .wide-button {
   width: 100%;
   position: -webkit-sticky;
   position: sticky;
   bottom: 15px;
 }
-main .exercise-modal .exercise-modal-content .wide-button:hover {
+.exercise-modal .exercise-modal-content .wide-button:hover {
   box-shadow: 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
 }
-main .exercise-modal .started-exercise-modal-content {
+.exercise-modal .started-exercise-modal-content {
   opacity: 0;
   left: -20px;
 }
-main .exercise-modal #extended-exercise-modal-content {
+.exercise-modal #extended-exercise-modal-content {
   height: 100%;
 }
-main .exercise-modal #extended-exercise-modal-content button {
+.exercise-modal #extended-exercise-modal-content button {
   position: absolute;
   bottom: 0;
 }
-main .exercise-modal .task-lives {
+.exercise-modal .task-lives {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -490,7 +471,7 @@ main .exercise-modal .task-lives {
   filter: drop-shadow(1px 1px 3px #d91435);
   transition: 300ms;
 }
-main .exercise-modal .task-lives .heart-holder {
+.exercise-modal .task-lives .heart-holder {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -501,17 +482,17 @@ main .exercise-modal .task-lives .heart-holder {
   transition: 300ms;
   z-index: 1;
 }
-main .exercise-modal .task-lives .heart-holder img {
+.exercise-modal .task-lives .heart-holder img {
   height: 45px;
   width: 45px;
   -o-object-fit: contain;
      object-fit: contain;
 }
-main .exercise-modal .task-lives .heart-holder .task-lives-infinity {
+.exercise-modal .task-lives .heart-holder .task-lives-infinity {
   height: 50px;
   width: 50px;
 }
-main .exercise-modal .task-lives .heart-holder strong {
+.exercise-modal .task-lives .heart-holder strong {
   color: white;
   font-size: 25px;
   position: absolute;
@@ -519,7 +500,7 @@ main .exercise-modal .task-lives .heart-holder strong {
   transform: translateY(-50%);
   transition: 300ms;
 }
-main .exercise-modal .task-lives .task-lives-line-holder {
+.exercise-modal .task-lives .task-lives-line-holder {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -532,7 +513,7 @@ main .exercise-modal .task-lives .task-lives-line-holder {
   left: -10px;
   transition: 300ms;
 }
-main .exercise-modal .task-lives .task-lives-line {
+.exercise-modal .task-lives .task-lives-line {
   height: 15px;
   width: 50px;
   background-color: #d91435;
@@ -540,15 +521,15 @@ main .exercise-modal .task-lives .task-lives-line {
   border-radius: 0;
   transition: 300ms;
 }
-main .exercise-modal .task-lives .task-lives-line:last-child {
+.exercise-modal .task-lives .task-lives-line:last-child {
   border-top-right-radius: 7px;
   border-bottom-right-radius: 7px;
 }
-main .exercise-modal .active-task-lives {
+.exercise-modal .active-task-lives {
   opacity: 1;
   top: 10px;
 }
-main .exercise-modal .task-progress-bar-holder {
+.exercise-modal .task-progress-bar-holder {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -559,7 +540,7 @@ main .exercise-modal .task-progress-bar-holder {
   top: 0;
   transition: 300ms;
 }
-main .exercise-modal .task-progress-bar-holder .task-progress-bar {
+.exercise-modal .task-progress-bar-holder .task-progress-bar {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -573,7 +554,7 @@ main .exercise-modal .task-progress-bar-holder .task-progress-bar {
   position: relative;
   overflow: hidden;
 }
-main .exercise-modal .task-progress-bar-holder .task-progress-bar .progress-bar-line {
+.exercise-modal .task-progress-bar-holder .task-progress-bar .progress-bar-line {
   height: 100%;
   width: 0;
   background-color: #0559f5;
@@ -583,7 +564,7 @@ main .exercise-modal .task-progress-bar-holder .task-progress-bar .progress-bar-
   left: 0;
   transition: 500ms;
 }
-main .exercise-modal .task-progress-bar-holder p {
+.exercise-modal .task-progress-bar-holder p {
   color: #144eba;
   font-size: 20px;
   font-weight: bold;
@@ -594,11 +575,11 @@ main .exercise-modal .task-progress-bar-holder p {
   transform: translateX(-50%);
   transition: 300ms;
 }
-main .exercise-modal .active-task-progress-bar-holder {
+.exercise-modal .active-task-progress-bar-holder {
   opacity: 1;
   top: 10%;
 }
-main .exercise-modal .exercise-modal-task {
+.exercise-modal .exercise-modal-task {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -610,7 +591,7 @@ main .exercise-modal .exercise-modal-task {
   transition: 300ms;
   overflow: hidden;
 }
-main .exercise-modal .exercise-modal-task h3 {
+.exercise-modal .exercise-modal-task h3 {
   color: #5e5c5c;
   font-size: 35px;
   text-align: center;
@@ -618,19 +599,19 @@ main .exercise-modal .exercise-modal-task h3 {
   top: 0;
   transition: 300ms;
 }
-main .exercise-modal .exercise-modal-task .task-holder {
+.exercise-modal .exercise-modal-task .task-holder {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
   width: 100%;
 }
-main .exercise-modal .exercise-modal-task .task-holder .interface {
+.exercise-modal .exercise-modal-task .task-holder .interface {
   position: relative;
   top: 0;
   transition: 200ms;
 }
-main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder {
+.exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder {
   display: grid;
   grid-template-rows: repeat(2, 1fr);
   grid-template-columns: repeat(2, 1fr);
@@ -639,7 +620,7 @@ main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder {
   max-width: 660px;
   margin: 20px 0;
 }
-main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .multiple-choice-button {
+.exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .multiple-choice-button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -659,11 +640,11 @@ main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .
   padding: 5px 10px;
   transition: 300ms;
 }
-main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .multiple-choice-button:hover {
+.exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .multiple-choice-button:hover {
   border: 1px solid transparent;
   box-shadow: -3px -3px 5px 1px #bd1330, 3px 3px 5px 1px #144eba;
 }
-main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .active-multiple-choice-button {
+.exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .active-multiple-choice-button {
   cursor: default;
   -webkit-animation: rotate-box-shadow 300ms linear forwards;
           animation: rotate-box-shadow 300ms linear forwards;
@@ -690,18 +671,18 @@ main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .
     box-shadow: 3px 3px 5px 1px #bd1330, -3px -3px 5px 1px #144eba;
   }
 }
-main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .disabled-multiple-choice-button {
+.exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .disabled-multiple-choice-button {
   cursor: default;
   opacity: 0.5;
 }
-main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .disabled-multiple-choice-button:hover {
+.exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .disabled-multiple-choice-button:hover {
   border: 1px solid #5e5c5c;
   box-shadow: none;
 }
-main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .multiple-choice-button {
+.exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .multiple-choice-button {
   min-height: 60px;
 }
-main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .multiple-choice-button span {
+.exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .multiple-choice-button span {
   height: 35px;
   width: 35px;
   color: #5e5c5c;
@@ -713,24 +694,24 @@ main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .
   left: 5px;
   padding: 5px;
 }
-main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .multiple-choice-button img {
+.exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .multiple-choice-button img {
   height: 140px;
   width: 140px;
   -o-object-fit: contain;
      object-fit: contain;
 }
-main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .multiple-choice-button p {
+.exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .multiple-choice-button p {
   color: #5e5c5c;
   font-size: 25px;
   border-radius: 30px;
 }
-main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .multiple-choice-images-button {
+.exercise-modal .exercise-modal-task .task-holder .multiple-choice-holder .multiple-choice-images-button {
   width: auto;
 }
-main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-images-holder {
+.exercise-modal .exercise-modal-task .task-holder .multiple-choice-images-holder {
   width: auto;
 }
-main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-of-image {
+.exercise-modal .exercise-modal-task .task-holder .multiple-choice-of-image {
   height: 150px;
   width: 150px;
   -o-object-fit: contain;
@@ -738,7 +719,7 @@ main .exercise-modal .exercise-modal-task .task-holder .multiple-choice-of-image
   border-radius: 20px;
   padding: 10px;
 }
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder {
+.exercise-modal .exercise-modal-task .task-holder .translate-holder {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -747,7 +728,7 @@ main .exercise-modal .exercise-modal-task .task-holder .translate-holder {
   gap: 20px;
   margin: 0;
 }
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder .translate-holder-display {
+.exercise-modal .exercise-modal-task .task-holder .translate-holder .translate-holder-display {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -757,12 +738,12 @@ main .exercise-modal .exercise-modal-task .task-holder .translate-holder .transl
   border-radius: 20px;
   padding: 10px;
 }
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder .translate-holder-display p {
+.exercise-modal .exercise-modal-task .task-holder .translate-holder .translate-holder-display p {
   color: #5e5c5c;
   font-size: 25px;
   position: relative;
 }
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface {
+.exercise-modal .exercise-modal-task .task-holder .translate-holder .interface {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -771,7 +752,7 @@ main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interf
   width: 100%;
   gap: 20px;
 }
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface textarea {
+.exercise-modal .exercise-modal-task .task-holder .translate-holder .interface textarea {
   height: 155px;
   width: 80%;
   color: #5e5c5c;
@@ -784,23 +765,23 @@ main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interf
   padding: 10px 15px;
   transition: 300ms;
 }
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface textarea:hover {
+.exercise-modal .exercise-modal-task .task-holder .translate-holder .interface textarea:hover {
   border: 3px dashed #5e5c5c;
 }
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface textarea:disabled {
+.exercise-modal .exercise-modal-task .task-holder .translate-holder .interface textarea:disabled {
   border: 3px dashed rgb(200, 200, 200);
 }
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface textarea:focus {
+.exercise-modal .exercise-modal-task .task-holder .translate-holder .interface textarea:focus {
   border: 3px solid #5e5c5c;
   border-radius: 20px;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
 }
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface .translate-holder-textarea-focused {
+.exercise-modal .exercise-modal-task .task-holder .translate-holder .interface .translate-holder-textarea-focused {
   border: 3px solid #5e5c5c;
   border-radius: 20px;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
 }
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface .text-holder {
+.exercise-modal .exercise-modal-task .task-holder .translate-holder .interface .text-holder {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
@@ -815,7 +796,7 @@ main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interf
   padding: 10px 15px;
   overflow-y: auto;
 }
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface .word-bank-options-holder {
+.exercise-modal .exercise-modal-task .task-holder .translate-holder .interface .word-bank-options-holder {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -824,11 +805,11 @@ main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interf
   gap: 10px;
   width: 100%;
 }
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface .word-bank-option-holder {
+.exercise-modal .exercise-modal-task .task-holder .translate-holder .interface .word-bank-option-holder {
   background-color: rgb(200, 200, 200);
   border-radius: 15px;
 }
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface .word-bank-option {
+.exercise-modal .exercise-modal-task .task-holder .translate-holder .interface .word-bank-option {
   color: #5e5c5c;
   font-size: 20px;
   background-color: white;
@@ -840,15 +821,15 @@ main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interf
   padding: 5px 10px;
   transition: 100ms;
 }
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface .word-bank-option-selective:hover {
+.exercise-modal .exercise-modal-task .task-holder .translate-holder .interface .word-bank-option-selective:hover {
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
   top: 5px;
 }
-main .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface .word-bank-option-deselective:hover {
+.exercise-modal .exercise-modal-task .task-holder .translate-holder .interface .word-bank-option-deselective:hover {
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
   top: -5px;
 }
-main .exercise-modal .exercise-modal-task .task-holder .exercise-modal-task-conversation {
+.exercise-modal .exercise-modal-task .task-holder .exercise-modal-task-conversation {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -858,17 +839,17 @@ main .exercise-modal .exercise-modal-task .task-holder .exercise-modal-task-conv
   width: 55%;
   position: relative;
 }
-main .exercise-modal .exercise-modal-task .task-holder .exercise-modal-task-conversation .diacritic-keyboard {
+.exercise-modal .exercise-modal-task .task-holder .exercise-modal-task-conversation .diacritic-keyboard {
   opacity: 0;
   position: absolute;
   left: 0;
   bottom: 5px;
 }
-main .exercise-modal .exercise-modal-task .task-holder .exercise-modal-task-conversation .active-diacritic-keyboard {
+.exercise-modal .exercise-modal-task .task-holder .exercise-modal-task-conversation .active-diacritic-keyboard {
   opacity: 1;
   bottom: 0;
 }
-main .exercise-modal .exercise-modal-task .task-holder .connect-holder {
+.exercise-modal .exercise-modal-task .task-holder .connect-holder {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -877,7 +858,7 @@ main .exercise-modal .exercise-modal-task .task-holder .connect-holder {
   max-width: 700px;
   width: 80%;
 }
-main .exercise-modal .exercise-modal-task .task-holder .connect-holder .connect-button-holder {
+.exercise-modal .exercise-modal-task .task-holder .connect-holder .connect-button-holder {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -886,7 +867,7 @@ main .exercise-modal .exercise-modal-task .task-holder .connect-holder .connect-
   width: 100%;
   padding: 10px 0;
 }
-main .exercise-modal .exercise-modal-task .task-holder .connect-holder .connect-button-holder .multiple-choice-button {
+.exercise-modal .exercise-modal-task .task-holder .connect-holder .connect-button-holder .multiple-choice-button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -906,11 +887,11 @@ main .exercise-modal .exercise-modal-task .task-holder .connect-holder .connect-
   padding: 5px 10px;
   transition: 300ms;
 }
-main .exercise-modal .exercise-modal-task .task-holder .connect-holder .connect-button-holder .multiple-choice-button:hover {
+.exercise-modal .exercise-modal-task .task-holder .connect-holder .connect-button-holder .multiple-choice-button:hover {
   border: 1px solid transparent;
   box-shadow: -3px -3px 5px 1px #bd1330, 3px 3px 5px 1px #144eba;
 }
-main .exercise-modal .exercise-modal-task .task-holder .connect-holder .connect-button-holder .active-multiple-choice-button {
+.exercise-modal .exercise-modal-task .task-holder .connect-holder .connect-button-holder .active-multiple-choice-button {
   cursor: default;
   -webkit-animation: rotate-box-shadow 300ms linear forwards;
           animation: rotate-box-shadow 300ms linear forwards;
@@ -926,19 +907,19 @@ main .exercise-modal .exercise-modal-task .task-holder .connect-holder .connect-
     box-shadow: 3px 3px 5px 1px #bd1330, -3px -3px 5px 1px #144eba;
   }
 }
-main .exercise-modal .exercise-modal-task .task-holder .connect-holder .connect-button-holder .disabled-multiple-choice-button {
+.exercise-modal .exercise-modal-task .task-holder .connect-holder .connect-button-holder .disabled-multiple-choice-button {
   cursor: default;
   opacity: 0.5;
 }
-main .exercise-modal .exercise-modal-task .task-holder .connect-holder .connect-button-holder .disabled-multiple-choice-button:hover {
+.exercise-modal .exercise-modal-task .task-holder .connect-holder .connect-button-holder .disabled-multiple-choice-button:hover {
   border: 1px solid #5e5c5c;
   box-shadow: none;
 }
-main .exercise-modal .exercise-modal-task .task-holder .connect-holder .connect-button-holder .multiple-choice-button {
+.exercise-modal .exercise-modal-task .task-holder .connect-holder .connect-button-holder .multiple-choice-button {
   width: 80%;
   padding: 10px 15px;
 }
-main .exercise-modal .exercise-modal-task .task-holder .connect-holder .connect-button-holder .multiple-choice-button span {
+.exercise-modal .exercise-modal-task .task-holder .connect-holder .connect-button-holder .multiple-choice-button span {
   height: 35px;
   width: 35px;
   color: #5e5c5c;
@@ -950,13 +931,13 @@ main .exercise-modal .exercise-modal-task .task-holder .connect-holder .connect-
   left: 5px;
   padding: 5px;
 }
-main .exercise-modal .exercise-modal-task .task-holder .connect-holder .connect-button-holder .correct-button {
+.exercise-modal .exercise-modal-task .task-holder .connect-holder .connect-button-holder .correct-button {
   background-color: rgba(0, 255, 46, 0.5);
 }
-main .exercise-modal .exercise-modal-task .task-holder .connect-holder .connect-button-holder .wrong-button {
+.exercise-modal .exercise-modal-task .task-holder .connect-holder .connect-button-holder .wrong-button {
   background-color: rgba(242, 7, 7, 0.5);
 }
-main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder {
+.exercise-modal .exercise-modal-task .task-holder .complete-text-holder {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -965,14 +946,14 @@ main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder {
   width: 80%;
   margin: 20px 0;
 }
-main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface {
+.exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   gap: 20px;
 }
-main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .complete-text-p {
+.exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .complete-text-p {
   color: #5e5c5c;
   font-size: 25px;
   text-align: center;
@@ -982,7 +963,7 @@ main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .in
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
   padding: 10px 15px;
 }
-main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .complete-text-p input {
+.exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .complete-text-p input {
   height: 40px;
   width: 100px;
   color: #5e5c5c;
@@ -996,22 +977,22 @@ main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .in
   padding: 0 5px;
   transition: 300ms;
 }
-main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .complete-text-p input:hover {
+.exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .complete-text-p input:hover {
   border-bottom: 2px solid gray;
 }
-main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .complete-text-p input:focus {
+.exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .complete-text-p input:focus {
   border-bottom: 2px solid #5e5c5c;
 }
-main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .complete-text-p input::-moz-placeholder {
+.exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .complete-text-p input::-moz-placeholder {
   color: gray;
 }
-main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .complete-text-p input:-ms-input-placeholder {
+.exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .complete-text-p input:-ms-input-placeholder {
   color: gray;
 }
-main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .complete-text-p input::placeholder {
+.exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .complete-text-p input::placeholder {
   color: gray;
 }
-main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .complete-text-p .complete-text-field {
+.exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .complete-text-p .complete-text-field {
   display: inline-block;
   height: 40px;
   min-width: 100px;
@@ -1026,14 +1007,14 @@ main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .in
   white-space: nowrap;
   transition: 300ms;
 }
-main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .complete-text-p .active-complete-text-field {
+.exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .complete-text-p .active-complete-text-field {
   border-bottom: 2px solid gray;
 }
-main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .complete-text-p .filled-complete-text-field {
+.exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .complete-text-p .filled-complete-text-field {
   color: #5e5c5c;
   cursor: pointer;
 }
-main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .complete-text-word-bank {
+.exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .complete-text-word-bank {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1042,11 +1023,11 @@ main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .in
   gap: 10px;
   width: 100%;
 }
-main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .word-bank-option-holder {
+.exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .word-bank-option-holder {
   background-color: rgb(200, 200, 200);
   border-radius: 15px;
 }
-main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .word-bank-option {
+.exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .word-bank-option {
   color: #5e5c5c;
   font-size: 20px;
   background-color: white;
@@ -1058,11 +1039,11 @@ main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .in
   padding: 5px 10px;
   transition: 100ms;
 }
-main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .word-bank-option-selective:hover {
+.exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface .word-bank-option-selective:hover {
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
   top: 5px;
 }
-main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .hints-button {
+.exercise-modal .exercise-modal-task .task-holder .complete-text-holder .hints-button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1076,26 +1057,26 @@ main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .hi
   padding: 5px 10px;
   transition: 300ms;
 }
-main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .hints-button:hover {
+.exercise-modal .exercise-modal-task .task-holder .complete-text-holder .hints-button:hover {
   opacity: 1;
 }
-main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .hints-button img {
+.exercise-modal .exercise-modal-task .task-holder .complete-text-holder .hints-button img {
   height: 40px;
   width: 40px;
   -o-object-fit: contain;
      object-fit: contain;
 }
-main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .hints-button p {
+.exercise-modal .exercise-modal-task .task-holder .complete-text-holder .hints-button p {
   color: #5e5c5c;
   font-size: 25px;
   font-weight: bold;
   text-transform: capitalize;
 }
-main .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .active-hints-button {
+.exercise-modal .exercise-modal-task .task-holder .complete-text-holder .active-hints-button {
   opacity: 1;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
 }
-main .exercise-modal .exercise-modal-task .task-holder .listen-holder {
+.exercise-modal .exercise-modal-task .task-holder .listen-holder {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1103,7 +1084,7 @@ main .exercise-modal .exercise-modal-task .task-holder .listen-holder {
   width: 100%;
   margin: 10px;
 }
-main .exercise-modal .exercise-modal-task .task-holder .listen-holder .interface {
+.exercise-modal .exercise-modal-task .task-holder .listen-holder .interface {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1111,15 +1092,15 @@ main .exercise-modal .exercise-modal-task .task-holder .listen-holder .interface
   gap: 15px;
   width: 80%;
 }
-main .exercise-modal .exercise-modal-task .task-holder .listen-holder .interface .speak-button {
+.exercise-modal .exercise-modal-task .task-holder .listen-holder .interface .speak-button {
   border-radius: 30%;
   padding: 10px;
 }
-main .exercise-modal .exercise-modal-task .task-holder .listen-holder .interface .speak-button img {
+.exercise-modal .exercise-modal-task .task-holder .listen-holder .interface .speak-button img {
   height: 50px;
   width: 50px;
 }
-main .exercise-modal .exercise-modal-task .task-holder .listen-holder .interface textarea {
+.exercise-modal .exercise-modal-task .task-holder .listen-holder .interface textarea {
   height: 155px;
   width: 80%;
   color: #5e5c5c;
@@ -1132,18 +1113,18 @@ main .exercise-modal .exercise-modal-task .task-holder .listen-holder .interface
   padding: 10px 15px;
   transition: 300ms;
 }
-main .exercise-modal .exercise-modal-task .task-holder .listen-holder .interface textarea:hover {
+.exercise-modal .exercise-modal-task .task-holder .listen-holder .interface textarea:hover {
   border: 3px dashed #5e5c5c;
 }
-main .exercise-modal .exercise-modal-task .task-holder .listen-holder .interface textarea:disabled {
+.exercise-modal .exercise-modal-task .task-holder .listen-holder .interface textarea:disabled {
   border: 3px dashed rgb(200, 200, 200);
 }
-main .exercise-modal .exercise-modal-task .task-holder .listen-holder .interface textarea:focus {
+.exercise-modal .exercise-modal-task .task-holder .listen-holder .interface textarea:focus {
   border: 3px solid #5e5c5c;
   border-radius: 20px;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
 }
-main .exercise-modal .exercise-modal-task .task-holder .listen-holder .interface .cant-hear-button {
+.exercise-modal .exercise-modal-task .task-holder .listen-holder .interface .cant-hear-button {
   color: rgb(200, 200, 200);
   font-size: 30px;
   text-transform: uppercase;
@@ -1154,10 +1135,10 @@ main .exercise-modal .exercise-modal-task .task-holder .listen-holder .interface
   margin: 10px 0;
   transition: 300ms;
 }
-main .exercise-modal .exercise-modal-task .task-holder .listen-holder .interface .cant-hear-button:hover {
+.exercise-modal .exercise-modal-task .task-holder .listen-holder .interface .cant-hear-button:hover {
   color: gray;
 }
-main .exercise-modal .exercise-modal-task .task-holder .listen-holder .interface .translate-holder-display {
+.exercise-modal .exercise-modal-task .task-holder .listen-holder .interface .translate-holder-display {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1167,12 +1148,12 @@ main .exercise-modal .exercise-modal-task .task-holder .listen-holder .interface
   border-radius: 20px;
   padding: 10px;
 }
-main .exercise-modal .exercise-modal-task .task-holder .listen-holder .interface .translate-holder-display p {
+.exercise-modal .exercise-modal-task .task-holder .listen-holder .interface .translate-holder-display p {
   color: #5e5c5c;
   font-size: 25px;
   position: relative;
 }
-main .exercise-modal .exercise-modal-task .task-button-holder {
+.exercise-modal .exercise-modal-task .task-button-holder {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1183,7 +1164,7 @@ main .exercise-modal .exercise-modal-task .task-button-holder {
   bottom: -100px;
   transition: 300ms;
 }
-main .exercise-modal .exercise-modal-task .task-button-holder .wide-button {
+.exercise-modal .exercise-modal-task .task-button-holder .wide-button {
   color: white;
   background-color: #144eba;
   font-size: 30px;
@@ -1196,28 +1177,28 @@ main .exercise-modal .exercise-modal-task .task-button-holder .wide-button {
   margin: 20px 0;
   transition: 300ms;
 }
-main .exercise-modal .exercise-modal-task .task-button-holder .wide-button:hover {
+.exercise-modal .exercise-modal-task .task-button-holder .wide-button:hover {
   text-shadow: white 0px 0px 2px;
   background-color: #0559f5;
 }
-main .exercise-modal .exercise-modal-task .task-button-holder .disabled-wide-button {
+.exercise-modal .exercise-modal-task .task-button-holder .disabled-wide-button {
   cursor: not-allowed;
   opacity: 0.5;
 }
-main .exercise-modal .exercise-modal-task .task-button-holder .disabled-wide-button:hover {
+.exercise-modal .exercise-modal-task .task-button-holder .disabled-wide-button:hover {
   text-shadow: none;
   background-color: #bd1330;
 }
-main .exercise-modal .exercise-modal-task .task-button-holder .switch-modes-button {
+.exercise-modal .exercise-modal-task .task-button-holder .switch-modes-button {
   display: none;
 }
-main .exercise-modal .exercise-modal-task .task-button-holder .switch-modes-button img {
+.exercise-modal .exercise-modal-task .task-button-holder .switch-modes-button img {
   height: 30px;
   width: 30px;
   -o-object-fit: contain;
      object-fit: contain;
 }
-main .exercise-modal .exercise-modal-task .task-button-holder .active-switch-modes-button {
+.exercise-modal .exercise-modal-task .task-button-holder .active-switch-modes-button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1230,18 +1211,18 @@ main .exercise-modal .exercise-modal-task .task-button-holder .active-switch-mod
   padding: 10px;
   transition: 300ms;
 }
-main .exercise-modal .exercise-modal-task .task-button-holder .active-switch-modes-button:hover {
+.exercise-modal .exercise-modal-task .task-button-holder .active-switch-modes-button:hover {
   border: 3px solid #5e5c5c;
   opacity: 1;
 }
-main .exercise-modal .exercise-modal-task .task-button-holder .wide-button {
+.exercise-modal .exercise-modal-task .task-button-holder .wide-button {
   width: 100%;
   margin: 0;
 }
-main .exercise-modal .exercise-modal-task .task-button-holder .wide-button:hover {
+.exercise-modal .exercise-modal-task .task-button-holder .wide-button:hover {
   box-shadow: 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
 }
-main .exercise-modal .exercise-modal-task .task-info {
+.exercise-modal .exercise-modal-task .task-info {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -1257,33 +1238,33 @@ main .exercise-modal .exercise-modal-task .task-info {
   transition: 300ms;
   z-index: 5;
 }
-main .exercise-modal .exercise-modal-task .task-info > img {
+.exercise-modal .exercise-modal-task .task-info > img {
   height: 70px;
   width: 70px;
   -o-object-fit: contain;
      object-fit: contain;
   filter: invert(1);
 }
-main .exercise-modal .exercise-modal-task .task-info .task-info-text {
+.exercise-modal .exercise-modal-task .task-info .task-info-text {
   display: flex;
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
 }
-main .exercise-modal .exercise-modal-task .task-info .task-info-text h4 {
+.exercise-modal .exercise-modal-task .task-info .task-info-text h4 {
   color: white;
   font-size: 30px;
   text-transform: capitalize;
 }
-main .exercise-modal .exercise-modal-task .task-info .task-info-text p {
+.exercise-modal .exercise-modal-task .task-info .task-info-text p {
   color: white;
   font-size: 20px;
   margin: 0;
 }
-main .exercise-modal .exercise-modal-task .task-info .task-info-text p span {
+.exercise-modal .exercise-modal-task .task-info .task-info-text p span {
   font-weight: bold;
 }
-main .exercise-modal .exercise-modal-task .task-info .arrow-button {
+.exercise-modal .exercise-modal-task .task-info .arrow-button {
   height: 70px;
   width: 70px;
   position: absolute;
@@ -1291,20 +1272,20 @@ main .exercise-modal .exercise-modal-task .task-info .arrow-button {
   right: 20px;
   transform: translateY(-50%) rotate(-90deg);
 }
-main .exercise-modal .exercise-modal-task .task-info .arrow-button img {
+.exercise-modal .exercise-modal-task .task-info .arrow-button img {
   height: 40px;
 }
-main .exercise-modal .active-exercise-modal-task {
+.exercise-modal .active-exercise-modal-task {
   opacity: 1;
   left: 0;
 }
-main .exercise-modal #extended-exercise-modal-task {
+.exercise-modal #extended-exercise-modal-task {
   height: 100%;
 }
-main .exercise-modal #extended-exercise-modal-task .task-info {
+.exercise-modal #extended-exercise-modal-task .task-info {
   position: absolute;
 }
-main .exercise-modal .exercise-modal-finished {
+.exercise-modal .exercise-modal-finished {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -1315,7 +1296,7 @@ main .exercise-modal .exercise-modal-finished {
   transition: 300ms;
   overflow: hidden;
 }
-main .exercise-modal .exercise-modal-finished .finished-holder {
+.exercise-modal .exercise-modal-finished .finished-holder {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -1327,7 +1308,7 @@ main .exercise-modal .exercise-modal-finished .finished-holder {
   margin-top: 40px;
   transition: 300ms;
 }
-main .exercise-modal .exercise-modal-finished .finished-holder .exercise-finished {
+.exercise-modal .exercise-modal-finished .finished-holder .exercise-finished {
   width: 395px;
   color: #5e5c5c;
   font-size: 40px;
@@ -1335,10 +1316,10 @@ main .exercise-modal .exercise-modal-finished .finished-holder .exercise-finishe
   letter-spacing: 3px;
   line-height: 0.5;
 }
-main .exercise-modal .exercise-modal-finished .finished-holder .exercise-finished span {
+.exercise-modal .exercise-modal-finished .finished-holder .exercise-finished span {
   color: #144eba;
 }
-main .exercise-modal .exercise-modal-finished .finished-holder .overview-holder {
+.exercise-modal .exercise-modal-finished .finished-holder .overview-holder {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
@@ -1347,7 +1328,7 @@ main .exercise-modal .exercise-modal-finished .finished-holder .overview-holder 
   gap: 70px;
   position: relative;
 }
-main .exercise-modal .exercise-modal-finished .finished-holder .overview-holder .overview-holder-line {
+.exercise-modal .exercise-modal-finished .finished-holder .overview-holder .overview-holder-line {
   height: 100%;
   width: 100%;
   width: 5px;
@@ -1355,7 +1336,7 @@ main .exercise-modal .exercise-modal-finished .finished-holder .overview-holder 
   position: absolute;
   left: 3px;
 }
-main .exercise-modal .exercise-modal-finished .finished-holder .overview-holder .overview-block {
+.exercise-modal .exercise-modal-finished .finished-holder .overview-holder .overview-block {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -1365,7 +1346,7 @@ main .exercise-modal .exercise-modal-finished .finished-holder .overview-holder 
   line-height: 1;
   position: relative;
 }
-main .exercise-modal .exercise-modal-finished .finished-holder .overview-holder .overview-block .overview-dot {
+.exercise-modal .exercise-modal-finished .finished-holder .overview-holder .overview-block .overview-dot {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1378,7 +1359,7 @@ main .exercise-modal .exercise-modal-finished .finished-holder .overview-holder 
   position: absolute;
   left: -20px;
 }
-main .exercise-modal .exercise-modal-finished .finished-holder .overview-holder .overview-block .overview-dot .img-holder {
+.exercise-modal .exercise-modal-finished .finished-holder .overview-holder .overview-block .overview-dot .img-holder {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1388,7 +1369,7 @@ main .exercise-modal .exercise-modal-finished .finished-holder .overview-holder 
   background-color: #bd1330;
   border-radius: 50%;
 }
-main .exercise-modal .exercise-modal-finished .finished-holder .overview-holder .overview-block .overview-dot .img-holder img {
+.exercise-modal .exercise-modal-finished .finished-holder .overview-holder .overview-block .overview-dot .img-holder img {
   height: 35px;
   width: 35px;
   -o-object-fit: contain;
@@ -1396,19 +1377,19 @@ main .exercise-modal .exercise-modal-finished .finished-holder .overview-holder 
   filter: invert(1);
   padding: 5px;
 }
-main .exercise-modal .exercise-modal-finished .finished-holder .overview-holder .overview-block strong {
+.exercise-modal .exercise-modal-finished .finished-holder .overview-holder .overview-block strong {
   color: #5e5c5c;
   font-size: 30px;
   margin-left: 50px;
 }
-main .exercise-modal .exercise-modal-finished .finished-holder .overview-holder > div:nth-child(2) {
+.exercise-modal .exercise-modal-finished .finished-holder .overview-holder > div:nth-child(2) {
   padding-top: 50px;
 }
-main .exercise-modal .exercise-modal-finished .active-finished-holder {
+.exercise-modal .exercise-modal-finished .active-finished-holder {
   opacity: 1;
   left: 0;
 }
-main .exercise-modal .exercise-modal-finished .wide-button {
+.exercise-modal .exercise-modal-finished .wide-button {
   color: white;
   background-color: #144eba;
   font-size: 30px;
@@ -1421,28 +1402,28 @@ main .exercise-modal .exercise-modal-finished .wide-button {
   margin: 20px 0;
   transition: 300ms;
 }
-main .exercise-modal .exercise-modal-finished .wide-button:hover {
+.exercise-modal .exercise-modal-finished .wide-button:hover {
   text-shadow: white 0px 0px 2px;
   background-color: #0559f5;
 }
-main .exercise-modal .exercise-modal-finished .disabled-wide-button {
+.exercise-modal .exercise-modal-finished .disabled-wide-button {
   cursor: not-allowed;
   opacity: 0.5;
 }
-main .exercise-modal .exercise-modal-finished .disabled-wide-button:hover {
+.exercise-modal .exercise-modal-finished .disabled-wide-button:hover {
   text-shadow: none;
   background-color: #bd1330;
 }
-main .exercise-modal .exercise-modal-finished .wide-button {
+.exercise-modal .exercise-modal-finished .wide-button {
   width: 80%;
   margin: 0;
   position: absolute;
   bottom: 15px;
 }
-main .exercise-modal .exercise-modal-finished .wide-button:hover {
+.exercise-modal .exercise-modal-finished .wide-button:hover {
   box-shadow: 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
 }
-main .exercise-modal .exercise-modal-review {
+.exercise-modal .exercise-modal-review {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -1458,12 +1439,12 @@ main .exercise-modal .exercise-modal-review {
   transition: 300ms;
   overflow: hidden;
 }
-main .exercise-modal .exercise-modal-review h3 {
+.exercise-modal .exercise-modal-review h3 {
   color: #5e5c5c;
   font-size: 40px;
   text-transform: capitalize;
 }
-main .exercise-modal .exercise-modal-review .review-holder {
+.exercise-modal .exercise-modal-review .review-holder {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -1475,7 +1456,7 @@ main .exercise-modal .exercise-modal-review .review-holder {
   margin-bottom: 50px;
   overflow: auto;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1483,7 +1464,7 @@ main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-revie
   width: 100%;
   border-bottom: 1px solid white;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .review-task-holder {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .review-task-holder {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -1491,25 +1472,25 @@ main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-revie
   width: 100%;
   padding: 10px 15px;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .review-task-holder img {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .review-task-holder img {
   height: 70px;
   width: 70px;
   -o-object-fit: contain;
      object-fit: contain;
   filter: invert(1);
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .review-task-holder .review-task-info {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .review-task-holder .review-task-info {
   display: flex;
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
   margin-left: 15px;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .review-task-holder .review-task-info strong {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .review-task-holder .review-task-info strong {
   color: white;
   font-size: 30px;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
@@ -1520,7 +1501,7 @@ main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-revie
   transition: 300ms;
   overflow: hidden;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .view-more-title {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .view-more-title {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -1530,24 +1511,24 @@ main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-revie
   cursor: pointer;
   margin: 5px 0;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .view-more-title .arrow-button {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .view-more-title .arrow-button {
   height: 25px;
   width: 25px;
   position: relative;
   bottom: auto;
   margin-left: 20px;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .view-more-title .arrow-button img {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .view-more-title .arrow-button img {
   height: 15px;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .view-more-title p {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .view-more-title p {
   color: #5e5c5c;
   font-size: 20px;
   text-transform: capitalize;
   font-weight: bold;
   margin: 0;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review {
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -1559,30 +1540,30 @@ main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-revie
   padding: 0 20px;
   transition: 300ms;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .mini-title {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .mini-title {
   color: #5e5c5c;
   font-size: 17px;
   font-style: italic;
   position: absolute;
   top: -10px;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review strong {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review strong {
   color: #5e5c5c;
   font-size: 25px;
   margin-top: 10px;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review p {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review p {
   color: #5e5c5c;
   font-size: 20px;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review p span {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review p span {
   font-weight: bold;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info,
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .xp-info,
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .time-info,
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .mode-info,
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .explanation-holder {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info,
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .xp-info,
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .time-info,
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .mode-info,
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .explanation-holder {
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -1590,13 +1571,13 @@ main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-revie
   width: 100%;
   padding: 10px 0;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info {
   display: flex;
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .option-image {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .option-image {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1608,17 +1589,17 @@ main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-revie
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
   padding: 10px;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .option-image img {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .option-image img {
   height: 70px;
   width: 70px;
   -o-object-fit: contain;
      object-fit: contain;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .option-image p {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .option-image p {
   color: #5e5c5c;
   font-size: 20px;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .arrow-down {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .arrow-down {
   height: 50px;
   width: 50px;
   -o-object-fit: contain;
@@ -1628,8 +1609,8 @@ main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-revie
   transform: translateX(-50%);
   margin-bottom: 10px;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .acceptable-answers-holder,
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .user-answers-holder {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .acceptable-answers-holder,
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .user-answers-holder {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1637,8 +1618,8 @@ main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-revie
   gap: 10px;
   width: 70%;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .acceptable-answers-holder .multiple-choice-button,
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .user-answers-holder .multiple-choice-button {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .acceptable-answers-holder .multiple-choice-button,
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .user-answers-holder .multiple-choice-button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1658,13 +1639,13 @@ main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-revie
   padding: 5px 10px;
   transition: 300ms;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .acceptable-answers-holder .multiple-choice-button:hover,
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .user-answers-holder .multiple-choice-button:hover {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .acceptable-answers-holder .multiple-choice-button:hover,
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .user-answers-holder .multiple-choice-button:hover {
   border: 1px solid transparent;
   box-shadow: -3px -3px 5px 1px #bd1330, 3px 3px 5px 1px #144eba;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .acceptable-answers-holder .active-multiple-choice-button,
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .user-answers-holder .active-multiple-choice-button {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .acceptable-answers-holder .active-multiple-choice-button,
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .user-answers-holder .active-multiple-choice-button {
   cursor: default;
   -webkit-animation: rotate-box-shadow 300ms linear forwards;
           animation: rotate-box-shadow 300ms linear forwards;
@@ -1680,30 +1661,30 @@ main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-revie
     box-shadow: 3px 3px 5px 1px #bd1330, -3px -3px 5px 1px #144eba;
   }
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .acceptable-answers-holder .disabled-multiple-choice-button,
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .user-answers-holder .disabled-multiple-choice-button {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .acceptable-answers-holder .disabled-multiple-choice-button,
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .user-answers-holder .disabled-multiple-choice-button {
   cursor: default;
   opacity: 0.5;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .acceptable-answers-holder .disabled-multiple-choice-button:hover,
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .user-answers-holder .disabled-multiple-choice-button:hover {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .acceptable-answers-holder .disabled-multiple-choice-button:hover,
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .user-answers-holder .disabled-multiple-choice-button:hover {
   border: 1px solid #5e5c5c;
   box-shadow: none;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .acceptable-answers-holder .multiple-choice-button,
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .user-answers-holder .multiple-choice-button {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .acceptable-answers-holder .multiple-choice-button,
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .user-answers-holder .multiple-choice-button {
   width: 100%;
   font-size: 20px;
   cursor: default;
   padding: 3px 5px;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .acceptable-answers-holder .multiple-choice-button:hover,
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .user-answers-holder .multiple-choice-button:hover {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .acceptable-answers-holder .multiple-choice-button:hover,
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .user-answers-holder .multiple-choice-button:hover {
   border: 1px solid gray;
   box-shadow: none;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .acceptable-answers-holder .multiple-choice-button span,
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .user-answers-holder .multiple-choice-button span {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .acceptable-answers-holder .multiple-choice-button span,
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .answer-info .user-answers-holder .multiple-choice-button span {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1719,97 +1700,97 @@ main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-revie
   left: 5px;
   padding: 5px;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .xp-info,
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .time-info,
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .mode-info {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .xp-info,
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .time-info,
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .mode-info {
   gap: 10px;
   border-top: 1px solid #5e5c5c;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .xp-info .progress-bar-about,
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .time-info .progress-bar-about,
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .mode-info .progress-bar-about {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .xp-info .progress-bar-about,
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .time-info .progress-bar-about,
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .mode-info .progress-bar-about {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
   gap: 15px;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .xp-info .progress-bar-about .single-progress-bar-about,
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .time-info .progress-bar-about .single-progress-bar-about,
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .mode-info .progress-bar-about .single-progress-bar-about {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .xp-info .progress-bar-about .single-progress-bar-about,
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .time-info .progress-bar-about .single-progress-bar-about,
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .mode-info .progress-bar-about .single-progress-bar-about {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
   gap: 10px;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .xp-info .progress-bar-about .single-progress-bar-about .about-circle,
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .time-info .progress-bar-about .single-progress-bar-about .about-circle,
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .mode-info .progress-bar-about .single-progress-bar-about .about-circle {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .xp-info .progress-bar-about .single-progress-bar-about .about-circle,
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .time-info .progress-bar-about .single-progress-bar-about .about-circle,
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .mode-info .progress-bar-about .single-progress-bar-about .about-circle {
   height: 25px;
   width: 25px;
   border: 1px solid #5e5c5c;
   border-radius: 50%;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .xp-info .progress-bar-about .single-progress-bar-about p,
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .time-info .progress-bar-about .single-progress-bar-about p,
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .mode-info .progress-bar-about .single-progress-bar-about p {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .xp-info .progress-bar-about .single-progress-bar-about p,
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .time-info .progress-bar-about .single-progress-bar-about p,
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .mode-info .progress-bar-about .single-progress-bar-about p {
   color: #5e5c5c;
   font-size: 20px;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .xp-info .info-text,
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .time-info .info-text,
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .mode-info .info-text {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .xp-info .info-text,
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .time-info .info-text,
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .mode-info .info-text {
   color: #5e5c5c;
   font-size: 17px;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .time-info .statistic-progress-bar .progress-bar .progress-bar-line {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .time-info .statistic-progress-bar .progress-bar .progress-bar-line {
   background-color: white;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .time-info .statistic-progress-bar .progress-bar .progress-bar-stats-holder #active-progress-bar-stat {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .time-info .statistic-progress-bar .progress-bar .progress-bar-stats-holder #active-progress-bar-stat {
   background-color: #0559f5;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .mode-info .mode-info-holder {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .mode-info .mode-info-holder {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
   gap: 10px;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .mode-info .mode-info-holder img {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .mode-info .mode-info-holder img {
   height: 30px;
   width: 30px;
   -o-object-fit: contain;
      object-fit: contain;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .explanation-holder {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .task-review .explanation-holder {
   border-top: 1px solid #5e5c5c;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .multiple-choice-images-review .options-holder {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .multiple-choice-images-review .options-holder {
   display: flex;
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
   gap: 5px;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .multiple-choice-images-review .options-holder .options-images-holder {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .multiple-choice-images-review .options-holder .options-images-holder {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
   gap: 10px;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .multiple-choice-images-review .options-holder .options-images-holder .option-image-user {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .multiple-choice-images-review .options-holder .options-images-holder .option-image-user {
   border: 2px solid #5e5c5c;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .multiple-choice-images-review .options-holder .options-images-holder .option-image-correct {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .multiple-choice-images-review .options-holder .options-images-holder .option-image-correct {
   border: 2px solid #07db2d;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .answer-info .text-p,
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .translate-review .text-p,
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .complete-text-review .text-p,
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .listen-review .text-p {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .answer-info .text-p,
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .translate-review .text-p,
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .complete-text-review .text-p,
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .listen-review .text-p {
   color: #5e5c5c;
   font-size: 20px;
   background-color: white;
@@ -1818,35 +1799,35 @@ main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-revie
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
   padding: 10px;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .answer-info .text-p span,
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .translate-review .text-p span,
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .complete-text-review .text-p span,
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .listen-review .text-p span {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .answer-info .text-p span,
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .translate-review .text-p span,
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .complete-text-review .text-p span,
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .listen-review .text-p span {
   font-weight: normal;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .conversation-review .conversation-holder {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .conversation-review .conversation-holder {
   max-height: 350px;
   width: 70%;
   background-color: white;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .conversation-review .conversation-holder .conversation-participant .avatar {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .conversation-review .conversation-holder .conversation-participant .avatar {
   height: 50px;
   width: 50px;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .conversation-review .conversation-holder .conversation-participant .avatar span {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .conversation-review .conversation-holder .conversation-participant .avatar span {
   font-size: 35px;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .conversation-review .conversation-holder .conversation-participant strong {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .conversation-review .conversation-holder .conversation-participant strong {
   font-size: 25px;
   margin: 0;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .conversation-review .conversation-holder .conversation-messages .user-message-holder p {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .conversation-review .conversation-holder .conversation-messages .user-message-holder p {
   color: white;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .conversation-review .conversation-holder .conversation-messages .user-message-holder .invalid-message {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .conversation-review .conversation-holder .conversation-messages .user-message-holder .invalid-message {
   background-color: #d91435;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .connect-review .connect-holder {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .connect-review .connect-holder {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1854,7 +1835,7 @@ main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-revie
   gap: 10px;
   width: 85%;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .connect-review .connect-holder .connection {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .connect-review .connect-holder .connection {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1862,7 +1843,7 @@ main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-revie
   gap: 5px;
   width: 100%;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .connect-review .connect-holder .connection .multiple-choice-button {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .connect-review .connect-holder .connection .multiple-choice-button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1882,11 +1863,11 @@ main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-revie
   padding: 5px 10px;
   transition: 300ms;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .connect-review .connect-holder .connection .multiple-choice-button:hover {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .connect-review .connect-holder .connection .multiple-choice-button:hover {
   border: 1px solid transparent;
   box-shadow: -3px -3px 5px 1px #bd1330, 3px 3px 5px 1px #144eba;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .connect-review .connect-holder .connection .active-multiple-choice-button {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .connect-review .connect-holder .connection .active-multiple-choice-button {
   cursor: default;
   -webkit-animation: rotate-box-shadow 300ms linear forwards;
           animation: rotate-box-shadow 300ms linear forwards;
@@ -1902,23 +1883,23 @@ main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-revie
     box-shadow: 3px 3px 5px 1px #bd1330, -3px -3px 5px 1px #144eba;
   }
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .connect-review .connect-holder .connection .disabled-multiple-choice-button {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .connect-review .connect-holder .connection .disabled-multiple-choice-button {
   cursor: default;
   opacity: 0.5;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .connect-review .connect-holder .connection .disabled-multiple-choice-button:hover {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .connect-review .connect-holder .connection .disabled-multiple-choice-button:hover {
   border: 1px solid #5e5c5c;
   box-shadow: none;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .connect-review .connect-holder .connection .multiple-choice-button {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .connect-review .connect-holder .connection .multiple-choice-button {
   width: 100%;
   cursor: default;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .connect-review .connect-holder .connection .multiple-choice-button:hover {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .connect-review .connect-holder .connection .multiple-choice-button:hover {
   border: 1px solid gray;
   box-shadow: none;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .connect-review .connect-holder .connection .multiple-choice-button span {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .connect-review .connect-holder .connection .multiple-choice-button span {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1934,38 +1915,38 @@ main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-revie
   left: 5px;
   padding: 5px;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .complete-text-review .text-p strong {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .complete-text-review .text-p strong {
   font-size: 20px;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .complete-text-review .text-p .correct-answer {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .complete-text-review .text-p .correct-answer {
   color: #07db2d;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .complete-text-review .text-p .incorrect-answer {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .complete-text-review .text-p .incorrect-answer {
   color: #d91435;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .listen-review .listen-holder {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .listen-review .listen-holder {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
   gap: 10px;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .listen-review .listen-holder .speak-button img {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task .task-view-more .listen-review .listen-holder .speak-button img {
   height: 40px;
   width: 40px;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task:hover .task-view-more {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task:hover .task-view-more {
   height: 40px;
   border-top: 1px solid white;
 }
-main .exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task #active-task-view-more {
+.exercise-modal .exercise-modal-review .review-holder .exercise-modal-review-task #active-task-view-more {
   height: 40px;
   border-top: 1px solid white;
 }
-main .exercise-modal .exercise-modal-review .review-holder > div:last-of-type {
+.exercise-modal .exercise-modal-review .review-holder > div:last-of-type {
   border: none;
 }
-main .exercise-modal .exercise-modal-review .wide-button {
+.exercise-modal .exercise-modal-review .wide-button {
   color: white;
   background-color: #144eba;
   font-size: 30px;
@@ -1978,175 +1959,79 @@ main .exercise-modal .exercise-modal-review .wide-button {
   margin: 20px 0;
   transition: 300ms;
 }
-main .exercise-modal .exercise-modal-review .wide-button:hover {
+.exercise-modal .exercise-modal-review .wide-button:hover {
   text-shadow: white 0px 0px 2px;
   background-color: #0559f5;
 }
-main .exercise-modal .exercise-modal-review .disabled-wide-button {
+.exercise-modal .exercise-modal-review .disabled-wide-button {
   cursor: not-allowed;
   opacity: 0.5;
 }
-main .exercise-modal .exercise-modal-review .disabled-wide-button:hover {
+.exercise-modal .exercise-modal-review .disabled-wide-button:hover {
   text-shadow: none;
   background-color: #bd1330;
 }
-main .exercise-modal .exercise-modal-review .wide-button {
+.exercise-modal .exercise-modal-review .wide-button {
   width: 80%;
   margin: 0;
   opacity: 0;
   position: absolute;
   bottom: -100px;
 }
-main .exercise-modal .exercise-modal-review .wide-button:hover {
+.exercise-modal .exercise-modal-review .wide-button:hover {
   box-shadow: 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
 }
-main .exercise-modal .active-exercise-modal-review {
+.exercise-modal .active-exercise-modal-review {
   opacity: 1;
   left: 0;
 }
-main .exercise-modal .active-exercise-modal-review .wide-button {
+.exercise-modal .active-exercise-modal-review .wide-button {
   opacity: 1;
   bottom: 15px;
 }
-main #active-exercise-modal {
-  left: 0;
+
+#active-exercise-modal {
+  opacity: 1;
+  bottom: 0;
 }
-main #full-screen-exercise-modal {
+
+#full-screen-exercise-modal {
   width: 100%;
   left: 0;
+}
+
+main {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: row;
+  min-height: 100%;
+  position: relative;
+}
+main section {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
 }
 main .exercises-info {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
-  width: 55%;
-  position: relative;
-  transform: scale(1);
-  overflow: auto;
-}
-main .exercises-info .interactive-title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  position: relative;
-  margin: 10px 0;
-}
-main .exercises-info .interactive-title span {
-  color: white;
-  font-size: 70px;
-  text-transform: capitalize;
-  font-weight: bold;
-  white-space: nowrap;
-  text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
-  cursor: inherit;
-  transition: text-shadow 0.25s, color 0.25s, top 0.25s, left 0.5s, z-index 0.5s;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  z-index: 3;
-}
-main .exercises-info .interactive-title span:first-child, main .exercises-info .interactive-title span:last-child {
-  position: absolute;
-}
-main .exercises-info .interactive-title span:first-child {
-  color: #bd1330;
-  top: -5px;
-  left: -3px;
-  z-index: 1;
-}
-main .exercises-info .interactive-title span:last-child {
-  color: #144eba;
-  top: 5px;
-  left: 5px;
-  z-index: 2;
-}
-main .exercises-info .interactive-title:hover span {
-  text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-}
-main .exercises-info .interactive-title:hover span:first-child {
-  color: #d91435;
-  top: -7px;
-  left: -5px;
-  z-index: 2;
-  text-shadow: 0px 0px 15px rgba(247, 72, 101, 0.5);
-}
-main .exercises-info .interactive-title:hover span:last-child {
-  color: #0559f5;
-  top: 7px;
-  left: 7px;
-  z-index: 1;
-  text-shadow: 0px 0px 15px rgba(82, 138, 242, 0.5);
-}
-main .exercises-info .mini-title span {
-  font-size: 40px;
-}
-main .exercises-info p {
-  color: #5e5c5c;
-  font-size: 20px;
-  text-align: center;
-  padding: 10px 30px;
-}
-main .loading {
-  z-index: 99;
-}
-main .exercises-holder {
-  width: 45%;
-  background-image: url("../images/background.png");
-  background-position-y: 0;
-  border-left: 1px solid lightgray;
-  box-shadow: -2px 0px 5px -2px rgba(0, 0, 0, 0.1);
-  position: relative;
-  overflow: auto;
-}
-main .exercises-holder .exercises-list-top {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  flex-direction: row;
-  width: 100%;
+  gap: 20px;
+  width: 50%;
   position: -webkit-sticky;
   position: sticky;
-  top: 10px;
-  margin-top: 10px;
-  padding: 3px 5px;
-  z-index: 5;
+  top: 115px;
+  margin-top: 50px;
 }
-main .exercises-holder .exercises-list-top .trophy-counter {
+main .exercises-info .exercises-search {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  gap: 10px;
-  background-color: rgba(255, 255, 255, 0.7);
-  border: 2px solid rgb(200, 200, 200);
-  border-radius: 30px;
-  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
-  position: absolute;
-  top: 3px;
-  left: 5px;
-  padding: 5px 10px;
-}
-main .exercises-holder .exercises-list-top .trophy-counter img {
-  height: 40px;
-  width: 40px;
-  -o-object-fit: contain;
-     object-fit: contain;
-}
-main .exercises-holder .exercises-list-top .trophy-counter p {
-  color: #5e5c5c;
-  font-size: 25px;
-  font-weight: bold;
-}
-main .exercises-holder .exercises-list-top .exercises-search {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
+  width: 50%;
   background-color: rgba(255, 255, 255, 0.3);
   border: 2px solid rgb(200, 200, 200);
   -webkit-backdrop-filter: blur(10px);
@@ -2157,8 +2042,8 @@ main .exercises-holder .exercises-list-top .exercises-search {
   padding: 5px 10px;
   transition: 300ms;
 }
-main .exercises-holder .exercises-list-top .exercises-search input {
-  width: 0;
+main .exercises-info .exercises-search input {
+  width: 100%;
   color: #5e5c5c;
   font-size: 25px;
   background-color: rgba(255, 255, 255, 0.3);
@@ -2166,51 +2051,129 @@ main .exercises-holder .exercises-list-top .exercises-search input {
   outline: none;
   transition: 300ms;
 }
-main .exercises-holder .exercises-list-top .exercises-search input:not(:-moz-placeholder-shown) {
-  width: 300px;
-}
-main .exercises-holder .exercises-list-top .exercises-search input:not(:-ms-input-placeholder) {
-  width: 300px;
-}
-main .exercises-holder .exercises-list-top .exercises-search input:focus, main .exercises-holder .exercises-list-top .exercises-search input:not(:placeholder-shown) {
-  width: 300px;
-}
-main .exercises-holder .exercises-list-top .exercises-search input::-moz-placeholder {
+main .exercises-info .exercises-search input::-moz-placeholder {
   text-transform: capitalize;
 }
-main .exercises-holder .exercises-list-top .exercises-search input:-ms-input-placeholder {
+main .exercises-info .exercises-search input:-ms-input-placeholder {
   text-transform: capitalize;
 }
-main .exercises-holder .exercises-list-top .exercises-search input::placeholder {
+main .exercises-info .exercises-search input::placeholder {
   text-transform: capitalize;
 }
-main .exercises-holder .exercises-list-top .exercises-search:hover input {
-  width: 300px;
-}
-main .exercises-holder .exercises-list-top .exercises-search img {
+main .exercises-info .exercises-search img {
   height: 35px;
   width: 35px;
   -o-object-fit: contain;
      object-fit: contain;
   z-index: 2;
 }
+main .exercises-info .info-other {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 50%;
+  background-color: white;
+  border: 2px solid rgb(200, 200, 200);
+  border-radius: 20px;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+}
+main .exercises-info .info-other .other-title {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 5px;
+  width: 100%;
+  padding: 5px 10px;
+}
+main .exercises-info .info-other .other-title img {
+  height: 20px;
+  width: 20px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+main .exercises-info .info-other .other-title strong {
+  color: #5e5c5c;
+  font-size: 20px;
+  text-transform: capitalize;
+}
+main .exercises-info .info-other .other-button-holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+  padding: 10px 15px;
+  padding-top: 0;
+}
+main .exercises-info .info-other .other-button-holder a {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
+  text-decoration: none;
+  background-color: white;
+  border: 2px solid rgb(200, 200, 200);
+  border-radius: 20px;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  padding: 5px 10px;
+  transition: 300ms;
+}
+main .exercises-info .info-other .other-button-holder a:hover {
+  border: 2px solid gray;
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
+}
+main .exercises-info .info-other .other-button-holder a img {
+  height: 30px;
+  width: 30px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  position: relative;
+  left: 0;
+  transition: 300ms;
+}
+main .exercises-info .info-other .other-button-holder a:hover img {
+  left: 15px;
+}
+main .exercises-info .info-other .other-button-holder a p {
+  color: #5e5c5c;
+  font-size: 25px;
+  position: relative;
+  left: 0;
+  margin: 0;
+  transition: 300ms;
+}
+main .exercises-info .info-other .other-button-holder a:hover p {
+  left: 15px;
+}
+main .exercises-info .info-other .other-button-holder .support-us:hover {
+  border: 2px solid #d91435;
+  box-shadow: 1px 1px 10px 1px rgba(217, 20, 53, 0.7);
+}
+main .loading {
+  z-index: 99;
+}
+main .exercises-holder {
+  width: 50%;
+  border-left: 1px solid lightgray;
+  box-shadow: -2px 0px 5px -2px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
 main .exercises-holder .exercises-list {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
-  gap: 100px;
   width: 100%;
   position: relative;
   top: 0;
   margin: 20px 0;
   transition: 50ms;
-}
-main .exercises-holder .exercises-list > div:nth-of-type(4) {
-  margin-top: 100px;
-}
-main .exercises-holder .exercises-list > div:nth-last-of-type(1) {
-  margin-bottom: 100px;
 }
 main .exercises-holder .exercises-list .exercises-list-line {
   height: 100%;
@@ -2230,7 +2193,7 @@ main .exercises-holder .exercises-list .exercises-list-start-end-holder {
   border: 2px solid rgb(200, 200, 200);
   border-radius: 20px;
   padding: 10px;
-  position: absolute;
+  position: relative;
   box-shadow: 0px 1px 5px rgba(128, 128, 128, 0.329);
 }
 main .exercises-holder .exercises-list .exercises-list-start-end-holder img {
@@ -2243,12 +2206,6 @@ main .exercises-holder .exercises-list .exercises-list-start-end-holder strong {
   color: #5e5c5c;
   font-size: 30px;
   text-transform: capitalize;
-}
-main .exercises-holder .exercises-list .start-holder {
-  top: 0;
-}
-main .exercises-holder .exercises-list .end-holder {
-  bottom: 0;
 }
 main .exercises-holder .exercises-list .interactive-title {
   display: flex;
@@ -2402,8 +2359,8 @@ main .exercises-holder .exercises-list .exercise-clone:hover .exercise-content {
   height: 85px;
   width: 85px;
 }
-main .exercises-holder .scrollbar {
-  z-index: 9;
+main .exercises-holder .exercises-list .exercise-holder {
+  margin: 50px 0;
 }
 
 .loading {
@@ -2417,6 +2374,7 @@ main .exercises-holder .scrollbar {
   background-image: url("../images/background.png");
   background-color: white;
   position: absolute;
+  top: 0;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
@@ -2555,6 +2513,7 @@ nav {
   position: fixed;
   top: 0;
   padding: 3px;
+  transition: 500ms;
   z-index: 10;
 }
 nav .interactive-title {
@@ -2659,15 +2618,6 @@ nav .button-holder #current-page {
   font-weight: bold;
 }
 
-#exercises-nav {
-  position: relative;
-  background-color: white;
-  border-bottom: 1px solid lightgray;
-  -webkit-backdrop-filter: none;
-          backdrop-filter: none;
-  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.1);
-}
-
 footer {
   display: flex;
   align-items: flex-start;
@@ -2696,113 +2646,18 @@ footer div a {
   cursor: pointer;
 }
 
-.modal-options {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  gap: 15px;
+.modal-x {
+  height: 40px;
+  width: 40px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  opacity: 0.7;
+  cursor: pointer;
+  pointer-events: all;
   position: absolute;
   top: 10px;
   right: 10px;
   z-index: 5;
-}
-.modal-options .modal-x {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  height: 40px;
-  width: 40px;
-  background-color: transparent;
-  cursor: pointer;
-  position: relative;
-  transition: 300ms;
-}
-.modal-options .modal-x::before, .modal-options .modal-x::after {
-  content: "";
-  display: block;
-  height: 5px;
-  width: 100%;
-  position: absolute;
-  transition: 300ms;
-}
-.modal-options .modal-x::before {
-  background-color: #bd1330;
-  transform: rotate(45deg);
-}
-.modal-options .modal-x:hover::before {
-  background-color: #144eba;
-  transform: rotate(-45deg);
-}
-.modal-options .modal-x::after {
-  background-color: #144eba;
-  transform: rotate(-45deg);
-}
-.modal-options .modal-x:hover::after {
-  background-color: #bd1330;
-  transform: rotate(45deg);
-}
-.modal-options .modal-resize {
-  height: 40px;
-  width: 20px;
-  border-top: 5px solid #bd1330;
-  border-bottom: 5px solid #bd1330;
-  border-left: 5px solid #144eba;
-  border-right: 5px solid #144eba;
-  cursor: pointer;
-  transition: 300ms;
-}
-.modal-options .modal-resize:hover {
-  transform: rotate(90deg);
-}
-.modal-options #active-modal-resize {
-  transform: rotate(90deg);
-}
-.modal-options .modal-return {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  height: 35px;
-  width: 35px;
-  background-color: transparent;
-  cursor: pointer;
-  position: relative;
-  transition: 300ms;
-}
-.modal-options .modal-return::before, .modal-options .modal-return::after {
-  content: "";
-  display: block;
-  height: 5px;
-  width: 100%;
-  border-radius: 5px;
-  position: absolute;
-  transition: 300ms;
-}
-.modal-options .modal-return:hover {
-  height: 40px;
-  width: 40px;
-}
-.modal-options .modal-return::before {
-  background-color: #bd1330;
-  top: 10px;
-  transform: rotate(-30deg);
-}
-.modal-options .modal-return:hover::before {
-  background-color: #144eba;
-  top: 50%;
-  transform: rotate(45deg);
-}
-.modal-options .modal-return::after {
-  background-color: #144eba;
-  top: calc(100% - 10px);
-  transform: rotate(30deg);
-}
-.modal-options .modal-return:hover::after {
-  background-color: #bd1330;
-  top: 50%;
-  transform: rotate(-45deg);
 }
 
 .arrow-button {
@@ -2939,7 +2794,7 @@ footer div a {
 .exercise-holder .exercise-info {
   filter: drop-shadow(1px 1px 10px rgba(0, 0, 0, 0.3));
   position: absolute;
-  right: 55px;
+  right: 90px;
   transition: 300ms;
 }
 .exercise-holder .exercise-info .exercise-title {
@@ -3048,7 +2903,7 @@ footer div a {
   margin: 0;
 }
 .exercise-holder .active-exercise-info {
-  right: 40px;
+  right: 80px;
 }
 .exercise-holder .active-exercise-info .exercise-title {
   background-color: white;
@@ -3815,4 +3670,74 @@ footer div a {
 }
 .conversation-holder .disabled-conversation-answer input:hover {
   border: 2px solid rgb(200, 200, 200);
+}
+
+.exercises-stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 50%;
+  background-color: white;
+  border: 2px solid rgb(200, 200, 200);
+  border-radius: 20px;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+}
+.exercises-stats .stats-title {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 5px;
+  width: 100%;
+  padding: 5px 10px;
+}
+.exercises-stats .stats-title img {
+  height: 20px;
+  width: 20px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.exercises-stats .stats-title strong {
+  color: #5e5c5c;
+  font-size: 20px;
+  text-transform: capitalize;
+}
+.exercises-stats .stats-holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 5px;
+  width: 100%;
+  padding: 10px;
+  padding-top: 0;
+}
+.exercises-stats .stats-holder .stat {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 10px;
+  width: 48%;
+  border: 2px solid rgb(200, 200, 200);
+  border-radius: 20px;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+  padding: 3px 5px;
+}
+.exercises-stats .stats-holder .stat:first-child {
+  width: 98%;
+}
+.exercises-stats .stats-holder .stat img {
+  height: 40px;
+  width: 40px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.exercises-stats .stats-holder .stat p {
+  color: #5e5c5c;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
 }/*# sourceMappingURL=main.css.map */

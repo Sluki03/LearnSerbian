@@ -3,7 +3,7 @@ import Loading from "./list/other/Loading.js";
 import Nav from "./list/other/Nav.js"
 import Footer from "./list/other/Footer.js";
 import InteractiveTitle from "./list/other/InteractiveTitle.js"
-import ModalOptions from "./list/other/ModalOptions.js";
+import ModalX from "./list/other/ModalX.js";
 import ArrowButton from "./list/other/ArrowButton.js";
 import ClassicModal from "./list/other/ClassicModal.js";
 import Typing from "./list/other/Typing.js";
@@ -19,7 +19,7 @@ import ExerciseModalContent from "./list/exercises/ExerciseModalContent.js";
 import ExerciseModalTask from "./list/exercises/ExerciseModalTask.js";
 import ExerciseModalFinished from "./list/exercises/ExerciseModalFinished.js";
 import ExerciseModalReview from "./list/exercises/ExerciseModalReview.js";
-import TrophyCounter from "./list/exercises/TrophyCounter.js";
+import ExercisesStats from "./list/exercises/ExercisesStats.js";
 import OptionImage from "./list/exercises/OptionImage.js";
 import ConversationHolder from "./list/exercises/ConversationHolder.js";
 
@@ -28,13 +28,13 @@ import { buildEventList } from "../functions/EventControl.js";
 
 const components = {
     PanelsList, Loading, Nav, Footer, InteractiveTitle,
-    ModalOptions, ArrowButton, ClassicModal, Typing, DiacriticKeyboard,
+    ModalX, ArrowButton, ClassicModal, Typing, DiacriticKeyboard,
     MiniModal, Scrollbar, SpeakButton, StatisticProgressBar, ExercisesList,
     ExerciseStats, ExerciseModal, ExerciseModalContent, ExerciseModalTask, ExerciseModalFinished,
-    ExerciseModalReview, TrophyCounter, OptionImage, ConversationHolder
+    ExerciseModalReview, ExercisesStats, OptionImage, ConversationHolder
 };
 
-export const Component = { create, render, update };
+export const Component = { create, render };
 
 function create(componentName, params) {
     let componentInfo;
@@ -83,7 +83,7 @@ function render(element) {
 
         Object.keys(dataset).forEach((key, index) => {
             if(key === "component") return;
-            validDataset = {...validDataset, [key]: Object.values(dataset)[index]};
+            validDataset = {...validDataset, [key]: convertDatasetValue(Object.values(dataset)[index])};
         });
 
         const componentProps = { builtIn: componentElements[index], params: validDataset };
@@ -92,15 +92,23 @@ function render(element) {
         
         newComponent.component = { name: componentInfo.name, params: validDataset };
         buildEventList(newComponent);
+
+        function convertDatasetValue(value) {
+            let element = "";
+            
+            if(value.indexOf("select(") > -1) {
+                const selectedElement = value.split("select(")[1];
+                element = selectedElement.substring(0, selectedElement.length - 1);
+            }
+            
+            switch(value) {
+                case "true":
+                case "false":
+                    return value === "true" ? true : false;
+                case `select(${element})`: return document.querySelector(element);
+
+                default: return value;
+            }
+        }
     });
-}
-
-function update(componentElement, newParams) {
-    const component = componentElement.component;
-    const { name, params } = component;
-
-    const parent = componentElement.parentNode;
-
-    componentElement.remove();
-    return create(name, {...params, ...newParams, appendTo: parent}, true);
 }

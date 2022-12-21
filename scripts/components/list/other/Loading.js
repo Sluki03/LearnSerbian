@@ -50,5 +50,8 @@ export default function Loading(componentProps) {
         appendTo: loadingElement
     });
 
+    const body = document.querySelector("body");
+    body.style.overflow = "hidden";
+
     return loadingElement;
 }

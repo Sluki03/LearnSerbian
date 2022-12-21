@@ -1,10 +1,10 @@
 import { Component } from "../components/Component.js";
 import { exercisesData } from "../../data/exercises/index.js";
+import { ExerciseModalStatus } from "./ExerciseModalStatus.js";
 import { Convert } from "../functions/Convert.js";
 import createElement from "../functions/createElement.js";
 import initializeStats from "./initializeStats.js";
 import getDifficultyColor from "./getDifficultyColor.js";
-import openExerciseModal from "./openExerciseModal.js";
 
 export default function loadExercises() {
     const data = [];
@@ -21,7 +21,7 @@ export default function loadExercises() {
     });
     
     const list = document.querySelector(".exercises-list");
-    const listEnd = document.getElementById("exercises-list-end");
+    const endHolder = document.querySelector(".end-holder");
 
     const searchInput = document.querySelector(".exercises-search input");
     let prevSearchInputValue = searchInput.value;
@@ -45,7 +45,7 @@ export default function loadExercises() {
 
         exercises.forEach((exercise, index) => {
             const exerciseHolder = document.querySelector("[data-template='exercise-holder']").content.firstElementChild.cloneNode(true);
-            list.insertBefore(exerciseHolder, listEnd);
+            list.insertBefore(exerciseHolder, endHolder);
 
             const [articleExercise, exerciseInfo] = [...exerciseHolder.children];
             const [exerciseTitle] = [...exerciseInfo.children];
@@ -59,7 +59,7 @@ export default function loadExercises() {
             exerciseP.innerHTML = exercise.name;
 
             if(exercise.noResults) exerciseHolder.id = "exercise-holder-error";
-            else articleExercise.onclick = () => openExerciseModal(articleExercise, exercise, index + 1);
+            else articleExercise.onclick = () => ExerciseModalStatus.open(articleExercise, exercise, index + 1);
 
             const exerciseContent = articleExercise.children[1];
 
