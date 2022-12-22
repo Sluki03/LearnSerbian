@@ -20,7 +20,7 @@ export default function ExerciseModal(componentProps) {
     });
 
     window.eventList.remove("exerciseModalReviewKeyDown");
-    Component.create("ExerciseModalContent", { exercise, appendTo: exerciseModal });
+    Component.create("ExerciseModalTask", { exercise, appendTo: exerciseModal });
 
     return exerciseModal;
 }
