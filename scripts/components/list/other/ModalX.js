@@ -7,7 +7,7 @@ export default function ModalX(componentProps) {
     const modalX = builtIn ? builtIn : createElement({
         tag: "img",
         attributes: { src: "./images/icons/x-icon.png", alt: "X", class: "modal-x" },
-        events: [{ on: "click", call: onClick }],
+        events: [{ on: "click", call: () => onClick() }],
         appendTo
     });
 

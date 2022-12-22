@@ -95,10 +95,16 @@ export default function answer(reviewProps) {
         case "completeText":
             if(result.isCorrect) return;
         
+            const answerArrowHolder = createElement({
+                tag: "div",
+                attributes: { class: "answer-arrow-holder" },
+                appendTo: answerInfo
+            });
+            
             createElement({
                 tag: "img",
                 attributes: { src: "./images/icons/arrow-down-icon.png", alt: "ARROW-DOWN", class: "arrow-down" },
-                appendTo: answerInfo
+                appendTo: answerArrowHolder
             });
 
             const completeTextP = document.querySelector(".complete-text-review .text-p").cloneNode(true);
@@ -123,7 +129,7 @@ export default function answer(reviewProps) {
                 tag: "p",
                 attributes: { class: "text-p" },
                 innerHTML: completeTextP.innerHTML,
-                appendTo: answerInfo
+                appendTo: answerArrowHolder
             });
 
             function getAcceptableAnswer(acceptableKey) {

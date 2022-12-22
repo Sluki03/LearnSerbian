@@ -230,11 +230,9 @@ export class Exercise {
                 this.taskProgressBarHolder.remove();
                 this.exerciseElement.remove();
 
-                const exerciseModalContent = Component.create("ExerciseModalContent", {
+                const exerciseModalContent = Component.create("ExerciseModalTask", {
                     exercise: this.exercise,
-                    appendTo: this.exerciseModal,
-                    style: { opacity: "0", left: "20px" },
-                    titleStyle: { opacity: "0", top: "-10px" }
+                    appendTo: this.exerciseModal
                 });
 
                 setTimeout(() => {

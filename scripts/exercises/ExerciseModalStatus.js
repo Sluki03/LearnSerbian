@@ -43,7 +43,7 @@ function open(activeExercise, exercise, id = -1) {
     activeExerciseId = id;
 }
 
-function close(confirmed, openNew) {
+function close(confirmed = false, openNew) {
     const taskConnectKeydown = window.eventList.get("taskConnectKeydown");
     const taskConnectActiveMultipleChoiceButton = document.querySelector(".connect-holder .active-multiple-choice-button");
     

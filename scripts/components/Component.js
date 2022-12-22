@@ -15,7 +15,6 @@ import StatisticProgressBar from "./list/other/StatisticProgressBar.js";
 import ExercisesList from "./list/exercises/ExercisesList.js";
 import ExerciseStats from "./list/exercises/ExerciseStats.js";
 import ExerciseModal from "./list/exercises/ExerciseModal.js";
-import ExerciseModalContent from "./list/exercises/ExerciseModalContent.js";
 import ExerciseModalTask from "./list/exercises/ExerciseModalTask.js";
 import ExerciseModalFinished from "./list/exercises/ExerciseModalFinished.js";
 import ExerciseModalReview from "./list/exercises/ExerciseModalReview.js";
@@ -30,8 +29,8 @@ const components = {
     PanelsList, Loading, Nav, Footer, InteractiveTitle,
     ModalX, ArrowButton, ClassicModal, Typing, DiacriticKeyboard,
     MiniModal, Scrollbar, SpeakButton, StatisticProgressBar, ExercisesList,
-    ExerciseStats, ExerciseModal, ExerciseModalContent, ExerciseModalTask, ExerciseModalFinished,
-    ExerciseModalReview, ExercisesStats, OptionImage, ConversationHolder
+    ExerciseStats, ExerciseModal, ExerciseModalTask, ExerciseModalFinished, ExerciseModalReview,
+    ExercisesStats, OptionImage, ConversationHolder
 };
 
 export const Component = { create, render };

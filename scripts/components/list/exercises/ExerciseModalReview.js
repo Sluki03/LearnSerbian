@@ -119,13 +119,7 @@ export default function ExerciseModalReview(componentProps) {
         setTimeout(() => {
             exerciseModalReview.remove();
             
-            const exerciseModalContent = Component.create("ExerciseModalContent", {
-                exercise,
-                appendTo,
-                style: { opacity: "0", left: "-20px" },
-                titleStyle: { opacity: "0", top: "-10px" },
-                buttonStyle: { opacity: "0", bottom: "-100px" }
-            });
+            const exerciseModalContent = Component.create("ExerciseModalTask", { exercise, appendTo });
 
             setTimeout(() => {
                 exerciseModalContent.style.opacity = "";

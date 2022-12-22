@@ -64,13 +64,15 @@
             }
         }
 
+        .answer-arrow-holder {
+            @include add-flex(column);
+        }
+        
         .arrow-down {
             height: 50px;
             width: 50px;
             object-fit: contain;
             position: relative;
-            left: 50%;
-            transform: translateX(-50%);
             margin-bottom: 10px;
         }
 
