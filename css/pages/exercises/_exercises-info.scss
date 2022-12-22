@@ -17,12 +17,13 @@
         position: relative;
         padding: 5px 10px;
         transition: 300ms;
-        
+
         input {
             width: 100%;
             color: $defDarkGrey;
             font-size: set-size(lg);
-            background-color: $defBlurBg;
+            background-color: transparent;
+            padding: 0px 5px;
             border: none;
             outline: none;
             transition: 300ms;
@@ -33,10 +34,11 @@
         }
 
         img {
-            height: 35px;
-            width: 35px;
+            height: 30px;
+            width: 30px;
             object-fit: contain;
             z-index: 2;
+            opacity: .8;
         }
     }
 

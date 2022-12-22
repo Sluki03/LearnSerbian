@@ -9,7 +9,7 @@
     top: 10px;
     right: 10px;
     z-index: 5;
-    transition: 300ms;
+    transition: opacity .3s;
 
     &:hover {
         opacity: 1;
