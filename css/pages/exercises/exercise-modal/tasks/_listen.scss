@@ -1,12 +1,12 @@
 .listen-holder {
     @include add-flex;
-    width: 100%;
+    width: 80%;
     margin: 10px;
 
     .interface {
         @include add-flex(column);
         gap: 15px;
-        width: 80%;
+        width: 70%;
 
         .speak-button {
             border-radius: 30%;

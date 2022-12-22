@@ -756,7 +756,7 @@ img {
   justify-content: center;
   flex-direction: column;
   height: 220px;
-  width: 100%;
+  width: 70%;
   gap: 20px;
 }
 .exercise-modal .exercise-modal-task .task-holder .translate-holder .interface textarea {
@@ -950,7 +950,7 @@ img {
   justify-content: center;
   flex-direction: column;
   gap: 20px;
-  width: 80%;
+  width: 60%;
   margin: 20px 0;
 }
 .exercise-modal .exercise-modal-task .task-holder .complete-text-holder .interface {
@@ -1088,7 +1088,7 @@ img {
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  width: 100%;
+  width: 80%;
   margin: 10px;
 }
 .exercise-modal .exercise-modal-task .task-holder .listen-holder .interface {
@@ -1097,7 +1097,7 @@ img {
   justify-content: center;
   flex-direction: column;
   gap: 15px;
-  width: 80%;
+  width: 70%;
 }
 .exercise-modal .exercise-modal-task .task-holder .listen-holder .interface .speak-button {
   border-radius: 30%;
