@@ -2055,7 +2055,7 @@ main .exercises-info .exercises-search input {
   color: #5e5c5c;
   font-size: 25px;
   background-color: transparent;
-  padding: 0px 5px;
+  padding: 0px 15px;
   border: none;
   outline: none;
   transition: 300ms;
@@ -2095,7 +2095,7 @@ main .exercises-info .info-other .other-title {
   flex-direction: row;
   gap: 5px;
   width: 100%;
-  padding: 5px 10px;
+  padding: 5px 15px;
 }
 main .exercises-info .info-other .other-title img {
   height: 20px;
@@ -3704,7 +3704,7 @@ footer div a {
   flex-direction: row;
   gap: 5px;
   width: 100%;
-  padding: 5px 10px;
+  padding: 5px 15px;
 }
 .exercises-stats .stats-title img {
   height: 20px;
@@ -3725,7 +3725,7 @@ footer div a {
   flex-wrap: wrap;
   gap: 5px;
   width: 100%;
-  padding: 10px;
+  padding: 10px 15px;
   padding-top: 0;
 }
 .exercises-stats .stats-holder .stat {
@@ -3734,14 +3734,14 @@ footer div a {
   justify-content: center;
   flex-direction: row;
   gap: 10px;
-  width: 48%;
+  width: 45%;
   border: 2px solid rgb(200, 200, 200);
   border-radius: 20px;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
   padding: 3px 5px;
 }
 .exercises-stats .stats-holder .stat:first-child {
-  width: 98%;
+  width: 100%;
 }
 .exercises-stats .stats-holder .stat img {
   height: 40px;

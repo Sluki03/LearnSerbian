@@ -23,7 +23,7 @@
             color: $defDarkGrey;
             font-size: set-size(lg);
             background-color: transparent;
-            padding: 0px 5px;
+            padding: 0px 15px;
             border: none;
             outline: none;
             transition: 300ms;
@@ -54,7 +54,7 @@
             @include add-flex(row, flex-start);
             gap: 5px;
             width: 100%;
-            padding: 5px 10px;
+            padding: 5px 15px;
             
             img {
                 height: 20px;
