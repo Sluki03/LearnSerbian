@@ -3832,7 +3832,6 @@ footer div a {
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  flex-wrap: wrap;
   gap: 5px;
   width: 100%;
   padding: 10px 15px;
@@ -3842,16 +3841,12 @@ footer div a {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: row;
-  gap: 10px;
-  width: 45%;
+  flex-direction: column;
+  width: 100%;
   border: 2px solid rgb(200, 200, 200);
   border-radius: 20px;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
-  padding: 3px 5px;
-}
-.exercises-stats .stats-holder .stat:first-child {
-  width: 100%;
+  padding: 10px;
 }
 .exercises-stats .stats-holder .stat img {
   height: 40px;

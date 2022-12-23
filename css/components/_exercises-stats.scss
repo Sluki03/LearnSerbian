@@ -27,24 +27,18 @@
 
     .stats-holder {
         @include add-flex;
-        flex-wrap: wrap;
         gap: 5px;
         width: 100%;
         padding: 10px 15px;
         padding-top: 0;
 
         .stat {
-            @include add-flex;
-            gap: 10px;
-            width: 45%;
+            @include add-flex(column);
+            width: 100%;
             border: 2px solid $defLightGrey;
             border-radius: 20px;
             box-shadow: $defLighterShadow;
-            padding: 3px 5px;
-
-            &:first-child {
-                width: 100%;
-            }
+            padding: 10px;
 
             img {
                 height: 40px;
