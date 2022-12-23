@@ -1,6 +1,6 @@
 import { Component } from "../components/Component.js";
 
-export const ExerciseModalStatus = { open, close };
+export const ExerciseModalStatus = { open, close, restart };
 
 let activeExerciseId = 0;
 
@@ -52,6 +52,8 @@ function close(confirmed = false, openNew) {
     const exerciseModal = document.querySelector(".exercise-modal");
     const activeExerciseHolder = document.getElementById("active-exercise-holder");
 
+    if(exerciseModal === null || activeExerciseHolder === null) return;
+
     const exerciseModalTask = document.querySelector(".active-exercise-modal-task");
 
     if(exerciseModalTask !== null && !confirmed) return Component.create("ClassicModal", {
@@ -92,4 +94,44 @@ function close(confirmed = false, openNew) {
         ExerciseModalStatus.close(true, openNew);
         window.eventList.remove("taskCheckKeyDown", "taskFunctionsSetActiveButton");
     }
+}
+
+let inProgress = false;
+
+function restart(exercise, appendTo) {
+    if(inProgress) return;
+    inProgress = true;
+
+    window.eventList.remove("exerciseModalReviewKeyDown");
+    
+    let targetExerciseModal = null;
+    
+    const exerciseModalTask = document.querySelector(".exercise-modal-task");
+    const exerciseModalReview = document.querySelector(".exercise-modal-review");
+
+    targetExerciseModal = exerciseModalTask === null ? exerciseModalReview : exerciseModalTask;
+    targetExerciseModal.classList.remove(`active-exercise-modal-${exerciseModalTask === null ? "review" : "task"}`);
+
+    setTimeout(() => {
+        const isExerciseModalTaskTarget = exerciseModalTask !== null;
+        
+        if(isExerciseModalTaskTarget) {
+            const taskLives = document.querySelector(".task-lives");
+            const taskProgressBarHolder = document.querySelector(".task-progress-bar-holder");
+
+            taskLives.remove();
+            taskProgressBarHolder.remove();
+        }
+        
+        targetExerciseModal.remove();
+        
+        const exerciseModalContent = Component.create("ExerciseModalTask", { exercise, appendTo });
+
+        setTimeout(() => {
+            exerciseModalContent.style.opacity = "";
+            exerciseModalContent.style.left = "";
+
+            inProgress = false;
+        }, 100);
+    }, 300);
 }

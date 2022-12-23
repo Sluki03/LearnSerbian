@@ -3,7 +3,7 @@ import Loading from "./list/other/Loading.js";
 import Nav from "./list/other/Nav.js"
 import Footer from "./list/other/Footer.js";
 import InteractiveTitle from "./list/other/InteractiveTitle.js"
-import ModalX from "./list/other/ModalX.js";
+import ModalOptions from "./list/other/ModalOptions.js";
 import ArrowButton from "./list/other/ArrowButton.js";
 import ClassicModal from "./list/other/ClassicModal.js";
 import Typing from "./list/other/Typing.js";
@@ -27,7 +27,7 @@ import { buildEventList } from "../functions/EventControl.js";
 
 const components = {
     PanelsList, Loading, Nav, Footer, InteractiveTitle,
-    ModalX, ArrowButton, ClassicModal, Typing, DiacriticKeyboard,
+    ModalOptions, ArrowButton, ClassicModal, Typing, DiacriticKeyboard,
     MiniModal, Scrollbar, SpeakButton, StatisticProgressBar, ExercisesList,
     ExerciseStats, ExerciseModal, ExerciseModalTask, ExerciseModalFinished, ExerciseModalReview,
     ExercisesStats, OptionImage, ConversationHolder

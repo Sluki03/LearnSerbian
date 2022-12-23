@@ -1306,19 +1306,17 @@ img {
 .exercise-modal .exercise-modal-finished .finished-holder {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   flex-direction: column;
   width: 80%;
   opacity: 0;
   position: relative;
-  left: 20px;
-  margin-top: 40px;
+  margin-top: 70px;
   transition: 300ms;
 }
 .exercise-modal .exercise-modal-finished .finished-holder .exercise-finished {
-  width: 395px;
   color: #5e5c5c;
-  font-size: 40px;
+  font-size: 50px;
   text-transform: capitalize;
   letter-spacing: 3px;
   line-height: 0.5;
@@ -1331,8 +1329,8 @@ img {
   align-items: flex-start;
   justify-content: flex-start;
   flex-direction: column;
-  width: 395px;
-  gap: 70px;
+  width: 475px;
+  gap: 90px;
   position: relative;
 }
 .exercise-modal .exercise-modal-finished .finished-holder .overview-holder .overview-holder-line {
@@ -1341,14 +1339,14 @@ img {
   width: 5px;
   background-color: #144eba;
   position: absolute;
-  left: 3px;
+  left: 4px;
 }
 .exercise-modal .exercise-modal-finished .finished-holder .overview-holder .overview-block {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   flex-direction: row;
-  gap: 10px;
+  gap: 30px;
   width: 100%;
   line-height: 1;
   position: relative;
@@ -1358,27 +1356,27 @@ img {
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  height: 50px;
-  width: 50px;
+  height: 60px;
+  width: 60px;
   background-color: white;
   border-radius: 50%;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
   position: absolute;
-  left: -20px;
+  left: -25px;
 }
 .exercise-modal .exercise-modal-finished .finished-holder .overview-holder .overview-block .overview-dot .img-holder {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  height: 45px;
-  width: 45px;
+  height: 55px;
+  width: 55px;
   background-color: #bd1330;
   border-radius: 50%;
 }
 .exercise-modal .exercise-modal-finished .finished-holder .overview-holder .overview-block .overview-dot .img-holder img {
-  height: 35px;
-  width: 35px;
+  height: 45px;
+  width: 45px;
   -o-object-fit: contain;
      object-fit: contain;
   filter: invert(1);
@@ -1957,7 +1955,19 @@ img {
 .exercise-modal .exercise-modal-review .review-holder > div:last-of-type {
   border: none;
 }
-.exercise-modal .exercise-modal-review .wide-button {
+.exercise-modal .exercise-modal-review .button-holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 10px;
+  width: 80%;
+  opacity: 0;
+  position: absolute;
+  bottom: -100px;
+  transition: 300ms;
+}
+.exercise-modal .exercise-modal-review .button-holder .wide-button {
   color: white;
   background-color: #144eba;
   font-size: 30px;
@@ -1970,33 +1980,55 @@ img {
   margin: 20px 0;
   transition: 300ms;
 }
-.exercise-modal .exercise-modal-review .wide-button:hover {
+.exercise-modal .exercise-modal-review .button-holder .wide-button:hover {
   text-shadow: white 0px 0px 2px;
   background-color: #0559f5;
 }
-.exercise-modal .exercise-modal-review .disabled-wide-button {
+.exercise-modal .exercise-modal-review .button-holder .disabled-wide-button {
   cursor: not-allowed;
   opacity: 0.5;
 }
-.exercise-modal .exercise-modal-review .disabled-wide-button:hover {
+.exercise-modal .exercise-modal-review .button-holder .disabled-wide-button:hover {
   text-shadow: none;
   background-color: #bd1330;
 }
-.exercise-modal .exercise-modal-review .wide-button {
-  width: 80%;
-  margin: 0;
-  opacity: 0;
-  position: absolute;
-  bottom: -100px;
+.exercise-modal .exercise-modal-review .button-holder .wide-button {
+  width: 100%;
 }
-.exercise-modal .exercise-modal-review .wide-button:hover {
+.exercise-modal .exercise-modal-review .button-holder .wide-button:hover {
   box-shadow: 3px 3px 15px 1px rgba(0, 0, 0, 0.3);
+}
+.exercise-modal .exercise-modal-review .button-holder .restart-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  background-color: white;
+  border: 2px solid rgb(200, 200, 200);
+  border-radius: 50%;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+  opacity: 0.7;
+  cursor: pointer;
+  padding: 10px;
+  transition: 700ms;
+}
+.exercise-modal .exercise-modal-review .button-holder .restart-button:hover {
+  border: 2px solid gray;
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
+  opacity: 1;
+  transform: rotate(360deg);
+}
+.exercise-modal .exercise-modal-review .button-holder .restart-button img {
+  height: 35px;
+  width: 35px;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 .exercise-modal .active-exercise-modal-review {
   opacity: 1;
   left: 0;
 }
-.exercise-modal .active-exercise-modal-review .wide-button {
+.exercise-modal .active-exercise-modal-review .button-holder {
   opacity: 1;
   bottom: 15px;
 }
@@ -2078,6 +2110,75 @@ main .exercises-info .exercises-search img {
      object-fit: contain;
   z-index: 2;
   opacity: 0.8;
+}
+main .exercises-info .notes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 50%;
+  background-color: white;
+  border: 2px solid rgb(200, 200, 200);
+  border-radius: 20px;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+}
+main .exercises-info .notes .notes-title {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 5px;
+  width: 100%;
+  padding: 5px 15px;
+}
+main .exercises-info .notes .notes-title img {
+  height: 20px;
+  width: 20px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+main .exercises-info .notes .notes-title strong {
+  color: #5e5c5c;
+  font-size: 20px;
+  text-transform: capitalize;
+}
+main .exercises-info .notes .notes-holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+  padding: 10px 15px;
+  padding-top: 0;
+}
+main .exercises-info .notes .notes-holder .note {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
+  text-decoration: none;
+  background-color: white;
+  border: 2px solid rgb(200, 200, 200);
+  border-radius: 20px;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  padding: 5px 10px;
+}
+main .exercises-info .notes .notes-holder .note img {
+  height: 30px;
+  width: 30px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+main .exercises-info .notes .notes-holder .note p {
+  color: #5e5c5c;
+  font-size: 25px;
+  position: relative;
+  left: 0;
+  margin: 0;
 }
 main .exercises-info .info-other {
   display: flex;
@@ -2658,7 +2759,18 @@ footer div a {
   cursor: pointer;
 }
 
-.modal-x {
+.modal-options {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 10px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 5;
+}
+.modal-options img {
   height: 40px;
   width: 40px;
   -o-object-fit: contain;
@@ -2666,13 +2778,9 @@ footer div a {
   opacity: 0.7;
   cursor: pointer;
   pointer-events: all;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  z-index: 5;
   transition: opacity 0.3s;
 }
-.modal-x:hover {
+.modal-options img:hover {
   opacity: 1;
 }
 

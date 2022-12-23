@@ -1,4 +1,5 @@
 import { Component } from "../../Component.js";
+import { ExerciseModalStatus } from "../../../exercises/ExerciseModalStatus.js";
 import createElement from "../../../functions/createElement.js";
 import review from "../../../exercises/review/index.js";
 
@@ -100,34 +101,17 @@ export default function ExerciseModalReview(componentProps) {
         }
     });
 
-    const continueButton = document.querySelector(".exercise-modal-review .wide-button");
-    continueButton.onclick = continueToStart;
+    const buttonHolder = document.querySelector(".exercise-modal-review .button-holder");
+    const [continueButton, restartButton] = [...buttonHolder.children];
+    
+    continueButton.onclick = () => ExerciseModalStatus.close(true);
+    restartButton.onclick = () => ExerciseModalStatus.restart(exercise, appendTo);
 
-    window.eventList.add({ id: "exerciseModalReviewKeyDown", type: "keydown", listener: continueToStart });
+    window.eventList.add({ id: "exerciseModalReviewKeyDown", type: "keydown", listener: closeExerciseModalKeyboard });
 
-    let inProgress = false;
-
-    function continueToStart(e) {     
+    function closeExerciseModalKeyboard(e) {
         if(e.key !== "Enter" && e.type === "keydown") return;
-
-        if(inProgress) return;
-        inProgress = true;
-
-        window.eventList.remove("exerciseModalReviewKeyDown");
-        exerciseModalReview.classList.remove("active-exercise-modal-review");
-
-        setTimeout(() => {
-            exerciseModalReview.remove();
-            
-            const exerciseModalContent = Component.create("ExerciseModalTask", { exercise, appendTo });
-
-            setTimeout(() => {
-                exerciseModalContent.style.opacity = "";
-                exerciseModalContent.style.left = "";
-
-                inProgress = false;
-            }, 100);
-        }, 300);
+        ExerciseModalStatus.close(true);
     }
 
     return exerciseModalReview;

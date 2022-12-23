@@ -14,8 +14,11 @@ export default function ExerciseModal(componentProps) {
 
     setTimeout(() => exerciseModal.setAttribute("id", "active-exercise-modal"), 100);
 
-    Component.create("ModalX", {
-        onClick: ExerciseModalStatus.close,
+    Component.create("ModalOptions", {
+        functions: {
+            restart: () => ExerciseModalStatus.restart(exercise, exerciseModal),
+            x: ExerciseModalStatus.close
+        },
         appendTo: exerciseModal
     });
 
