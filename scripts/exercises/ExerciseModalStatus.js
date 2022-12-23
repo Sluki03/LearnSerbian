@@ -104,34 +104,46 @@ function restart(exercise, appendTo) {
 
     window.eventList.remove("exerciseModalReviewKeyDown");
     
-    let targetExerciseModal = null;
-    
     const exerciseModalTask = document.querySelector(".exercise-modal-task");
     const exerciseModalReview = document.querySelector(".exercise-modal-review");
 
-    targetExerciseModal = exerciseModalTask === null ? exerciseModalReview : exerciseModalTask;
-    targetExerciseModal.classList.remove(`active-exercise-modal-${exerciseModalTask === null ? "review" : "task"}`);
+    if(exerciseModalTask !== null) return Component.create("ClassicModal", {
+        text: "Do you really want to restart the exercise?",
+        buttons: ["no", "yes"],
+        buttonsTrigger: { no: "Escape", yes: "Enter" },
+        functions: { yes: confirmFunction, no: () => { inProgress = false } },
+        appendTo: appendTo
+    });
 
-    setTimeout(() => {
-        const isExerciseModalTaskTarget = exerciseModalTask !== null;
-        
-        if(isExerciseModalTaskTarget) {
-            const taskLives = document.querySelector(".task-lives");
-            const taskProgressBarHolder = document.querySelector(".task-progress-bar-holder");
+    else confirmFunction();
 
-            taskLives.remove();
-            taskProgressBarHolder.remove();
-        }
+    function confirmFunction() {
+        let targetExerciseModal = null;
         
-        targetExerciseModal.remove();
-        
-        const exerciseModalContent = Component.create("ExerciseModalTask", { exercise, appendTo });
+        targetExerciseModal = exerciseModalTask === null ? exerciseModalReview : exerciseModalTask;
+        targetExerciseModal.classList.remove(`active-exercise-modal-${exerciseModalTask === null ? "review" : "task"}`);
 
         setTimeout(() => {
-            exerciseModalContent.style.opacity = "";
-            exerciseModalContent.style.left = "";
+            const isExerciseModalTaskTarget = exerciseModalTask !== null;
+            
+            if(isExerciseModalTaskTarget) {
+                const taskLives = document.querySelector(".task-lives");
+                const taskProgressBarHolder = document.querySelector(".task-progress-bar-holder");
 
-            inProgress = false;
-        }, 100);
-    }, 300);
+                taskLives.remove();
+                taskProgressBarHolder.remove();
+            }
+            
+            targetExerciseModal.remove();
+            
+            const exerciseModalContent = Component.create("ExerciseModalTask", { exercise, appendTo });
+
+            setTimeout(() => {
+                exerciseModalContent.style.opacity = "";
+                exerciseModalContent.style.left = "";
+
+                inProgress = false;
+            }, 100);
+        }, 300);
+    }
 }
