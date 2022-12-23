@@ -2111,75 +2111,6 @@ main .exercises-info .exercises-search img {
   z-index: 2;
   opacity: 0.8;
 }
-main .exercises-info .notes {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  width: 50%;
-  background-color: white;
-  border: 2px solid rgb(200, 200, 200);
-  border-radius: 20px;
-  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
-}
-main .exercises-info .notes .notes-title {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-direction: row;
-  gap: 5px;
-  width: 100%;
-  padding: 5px 15px;
-}
-main .exercises-info .notes .notes-title img {
-  height: 20px;
-  width: 20px;
-  -o-object-fit: contain;
-     object-fit: contain;
-}
-main .exercises-info .notes .notes-title strong {
-  color: #5e5c5c;
-  font-size: 20px;
-  text-transform: capitalize;
-}
-main .exercises-info .notes .notes-holder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 5px;
-  width: 100%;
-  padding: 10px 15px;
-  padding-top: 0;
-}
-main .exercises-info .notes .notes-holder .note {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-direction: row;
-  gap: 10px;
-  width: 100%;
-  text-decoration: none;
-  background-color: white;
-  border: 2px solid rgb(200, 200, 200);
-  border-radius: 20px;
-  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  padding: 5px 10px;
-}
-main .exercises-info .notes .notes-holder .note img {
-  height: 30px;
-  width: 30px;
-  -o-object-fit: contain;
-     object-fit: contain;
-}
-main .exercises-info .notes .notes-holder .note p {
-  color: #5e5c5c;
-  font-size: 25px;
-  position: relative;
-  left: 0;
-  margin: 0;
-}
 main .exercises-info .info-other {
   display: flex;
   align-items: center;
@@ -3859,4 +3790,125 @@ footer div a {
   font-size: 20px;
   font-weight: bold;
   margin: 0;
+}
+
+.notes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 50%;
+  background-color: white;
+  border: 2px solid rgb(200, 200, 200);
+  border-radius: 20px;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+}
+.notes .notes-title {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 5px;
+  width: 100%;
+  padding: 5px 15px;
+}
+.notes .notes-title img {
+  height: 20px;
+  width: 20px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.notes .notes-title strong {
+  color: #5e5c5c;
+  font-size: 20px;
+  text-transform: capitalize;
+}
+.notes .notes-holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+  padding: 10px 15px;
+  padding-top: 0;
+}
+.notes .notes-holder .note,
+.notes .notes-holder .no-notes {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
+  text-decoration: none;
+  background-color: white;
+  border: 2px solid rgb(200, 200, 200);
+  border-radius: 20px;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  padding: 5px 10px;
+  transition: 300ms;
+}
+.notes .notes-holder .note:hover,
+.notes .notes-holder .no-notes:hover {
+  border: 2px solid gray;
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
+}
+.notes .notes-holder .note img,
+.notes .notes-holder .no-notes img {
+  height: 30px;
+  width: 30px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  position: relative;
+  left: 0;
+  transition: 300ms;
+}
+.notes .notes-holder .note:hover img,
+.notes .notes-holder .no-notes:hover img {
+  left: 15px;
+}
+.notes .notes-holder .note p,
+.notes .notes-holder .no-notes p {
+  color: #5e5c5c;
+  font-size: 25px;
+  position: relative;
+  left: 0;
+  margin: 0;
+  transition: 300ms;
+}
+.notes .notes-holder .note:hover p,
+.notes .notes-holder .no-notes:hover p {
+  left: 15px;
+}
+
+.create-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  width: 50%;
+  background-color: white;
+  border: 2px solid rgb(200, 200, 200);
+  border-radius: 20px;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px 15px;
+  z-index: 10;
+  transition: 300ms;
+}
+.create-note h3 {
+  color: #5e5c5c;
+  font-size: 35px;
+  text-transform: capitalize;
+}
+
+.active-create-note {
+  opacity: 1;
+  top: 50%;
 }/*# sourceMappingURL=main.css.map */

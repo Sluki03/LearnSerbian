@@ -1,0 +1,109 @@
+.notes {
+    @include add-flex(column);
+    width: 50%;
+    background-color: white;
+    border: 2px solid $defLightGrey;
+    border-radius: 20px;
+    box-shadow: $defLighterShadow;
+
+    .notes-title {
+        @include add-flex(row, flex-start);
+        gap: 5px;
+        width: 100%;
+        padding: 5px 15px;
+        
+        img {
+            height: 20px;
+            width: 20px;
+            object-fit: contain;
+        }
+        
+        strong {
+            color: $defDarkGrey;
+            font-size: set-size(md);
+            text-transform: capitalize;
+        }
+    }
+    
+    .notes-holder {
+        @include add-flex(column);
+        gap: 5px;
+        width: 100%;
+        padding: 10px 15px;
+        padding-top: 0;
+
+        .note,
+        .no-notes {
+            @include add-flex(row, flex-start);
+            gap: 10px;
+            width: 100%;
+            text-decoration: none;
+            background-color: white;
+            border: 2px solid $defLightGrey;
+            border-radius: 20px;
+            box-shadow: $defLighterShadow;
+            cursor: pointer;
+            padding: 5px 10px;
+            transition: 300ms;
+
+            &:hover {
+                border: 2px solid $defGrey;
+                box-shadow: $defLightShadow;
+            }
+
+            img {
+                height: 30px;
+                width: 30px;
+                object-fit: contain;
+                position: relative;
+                left: 0;
+                transition: 300ms;
+            }
+
+            &:hover img {
+                left: 15px;
+            }
+
+            p {
+                color: $defDarkGrey;
+                font-size: set-size(lg);
+                position: relative;
+                left: 0;
+                margin: 0;
+                transition: 300ms;
+            }
+
+            &:hover p {
+                left: 15px;
+            }
+        }
+    }
+}
+
+.create-note {
+    @include add-flex;
+    width: 50%;
+    background-color: white;
+    border: 2px solid $defLightGrey;
+    border-radius: 20px;
+    box-shadow: $defLighterShadow;
+    opacity: 0;
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px 15px;
+    z-index: 10;
+    transition: 300ms;
+
+    h3 {
+        color: $defDarkGrey;
+        font-size: set-size(xxl);
+        text-transform: capitalize;
+    }
+}
+
+.active-create-note {
+    opacity: 1;
+    top: 50%;
+}
