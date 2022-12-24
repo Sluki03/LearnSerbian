@@ -1,5 +1,5 @@
 import createElement from "../../../functions/createElement.js";
-import markup from "../../../functions/markup.js";
+import markdown from "../../../functions/markdown.js";
 
 export default function explanation(reviewProps) {
     const { current, taskReview } = reviewProps;
@@ -21,7 +21,7 @@ export default function explanation(reviewProps) {
 
     createElement({
         tag: "p",
-        innerHTML: markup(result.explanation),
+        innerHTML: markdown(result.explanation),
         appendTo: explanationHolder
     });
 }

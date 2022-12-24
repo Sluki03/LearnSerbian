@@ -1,5 +1,6 @@
 import { Component } from "../../Component.js";
 import createElement from "../../../functions/createElement.js";
+import updateNotes from "../../../functions/updateNotes.js";
 
 export default function Notes(componentProps) {
     const { builtIn } = componentProps;
@@ -35,58 +36,36 @@ export default function Notes(componentProps) {
         appendTo: notes
     });
 
-    const allNotes = JSON.parse(localStorage.getItem("notes"));
+    const addNoteButton = createElement({
+        tag: "button",
+        attributes: { class: "note" },
+        events: [{ on: "click", call: addNote }],
+        appendTo: notesHolder
+    });
 
-    if(!allNotes || Object.keys(allNotes).length === 0) {
-        const noNotes = createElement({
-            tag: "div",
-            attributes: { class: "no-notes" },
-            events: [{ on: "click", call: createNote }],
-            appendTo: notesHolder
-        });
+    createElement({
+        tag: "img",
+        attributes: { src: "./images/icons/plus-icon.png", alt: "PLUS" },
+        appendTo: addNoteButton
+    });
 
-        createElement({
-            tag: "img",
-            attributes: { src: "./images/icons/plus-icon.png", alt: "PLUS" },
-            appendTo: noNotes
-        });
+    createElement({
+        tag: "p",
+        innerText: "Add note",
+        appendTo: addNoteButton
+    });
 
-        createElement({
-            tag: "p",
-            innerText: "Add note",
-            appendTo: noNotes
-        });
-    }
+    updateNotes();
+
+    Component.create("Scrollbar", { trigger: notesHolder, appendTo: notes });
 
     return notes;
 
-    function createNote() {
+    function addNote() {
+        const existingNoteModal = document.querySelector(".note-modal");
+        if(existingNoteModal) return;
+
         const body = document.querySelector("body");
-
-        const createNoteModal = createElement({
-            tag: "div",
-            attributes: { class: "create-note" },
-            appendTo: body
-        });
-
-        setTimeout(() => createNoteModal.classList.add("active-create-note"), 100);
-
-        Component.create("ModalOptions", {
-            functions: { x: closeCreateNoteModal },
-            appendTo: createNoteModal
-        });
-        
-        createElement({
-            tag: "h3",
-            innerText: "create note",
-            appendTo: createNoteModal
-        });
-
-        function closeCreateNoteModal() {
-            createNoteModal.style.opacity = "0";
-            createNoteModal.style.top = "60%";
-
-            setTimeout(() => createNoteModal.remove(), 300);
-        }
+        Component.create("NoteModal", { type: "add", appendTo: body });
     }
 }

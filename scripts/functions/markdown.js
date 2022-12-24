@@ -1,5 +1,5 @@
-export default function markup(string) {
-    const markupCharacters = [
+export default function markdown(string) {
+    const markdownCharacters = [
         { character: "**", regex: /\*\*/g, html: "b" },
         { character: "*", regex: /\*/g, html: "i" },
         { character: "__", regex: /_/g, html: "u" },
@@ -10,22 +10,22 @@ export default function markup(string) {
         { character: "#", regex: /#/g, html: "h1" },
     ];
 
-    let markupString = string;
+    let markdownString = string;
     
-    markupCharacters.forEach(convertObject => {
-        const allCharacters = [...markupString.matchAll(convertObject.regex)] || [];
+    markdownCharacters.forEach(convertObject => {
+        const allCharacters = [...markdownString.matchAll(convertObject.regex)] || [];
         const convertLast = allCharacters.length % 2 === 0;
         let isClosingTag = false;
 
         for(let i = 0; i < allCharacters.length; i++) {
             if(allCharacters.length - 1 > i || convertLast) {
                 const htmlTag = !isClosingTag ? `<${convertObject.html}>` : `</${convertObject.html}>`;
-                markupString = markupString.replace(convertObject.character, htmlTag);
+                markdownString = markdownString.replace(convertObject.character, htmlTag);
 
                 isClosingTag = !isClosingTag;
             }
         }
     });
 
-    return markupString;
+    return markdownString;
 }

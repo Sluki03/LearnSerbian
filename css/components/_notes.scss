@@ -1,10 +1,13 @@
 .notes {
-    @include add-flex(column);
+    @include add-flex(column, flex-start);
+    max-height: 200px;
     width: 50%;
     background-color: white;
     border: 2px solid $defLightGrey;
     border-radius: 20px;
     box-shadow: $defLighterShadow;
+    position: relative;
+    overflow: auto;
 
     .notes-title {
         @include add-flex(row, flex-start);
@@ -32,8 +35,7 @@
         padding: 10px 15px;
         padding-top: 0;
 
-        .note,
-        .no-notes {
+        .note {
             @include add-flex(row, flex-start);
             gap: 10px;
             width: 100%;
@@ -78,11 +80,16 @@
             }
         }
     }
+
+    .scrollbar {
+        right: 0;
+    }
 }
 
-.create-note {
-    @include add-flex;
-    width: 50%;
+.note-modal {
+    @include add-flex(column);
+    gap: 15px;
+    width: 30%;
     background-color: white;
     border: 2px solid $defLightGrey;
     border-radius: 20px;
@@ -92,18 +99,90 @@
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 10px 15px;
+    padding: 15px;
     z-index: 10;
     transition: 300ms;
 
-    h3 {
+    .note-modal-title {
+        @include add-flex;
+        gap: 10px;
+        margin-top: 15px;
+
+        img {
+            height: 40px;
+            width: 40px;
+            object-fit: contain;
+        }
+        
+        h3 {
+            color: $defDarkGrey;
+            font-size: set-size(xxl);
+            text-transform: capitalize;
+        }
+    }
+
+    form {
+        @include add-flex(column);
+        gap: 20px;
+        width: 100%;
+
+        fieldset {
+            @include add-flex(column);
+            gap: 5px;
+            width: 90%;
+            border: none;
+
+            label {
+                width: 100%;
+                font-size: 17px;
+                color: $defGrey;
+                text-transform: capitalize;
+                font-weight: bold;
+            }
+            
+            input, textarea {
+                width: 100%;
+                color: $defDarkGrey;
+                font-size: set-size(md);
+                outline: none;
+                padding: 3px 5px;
+                transition: 300ms;
+
+                &:hover {
+                    border: 2px solid $defGrey;
+                }
+
+                &:focus {
+                    border: 2px solid $defGrey;
+                    box-shadow: $defLighterShadow;
+                }
+            }
+            
+            input {
+                border: 2px solid transparent;
+                border-bottom: 2px solid $defLightGrey;
+            }
+
+            textarea {
+                border: 2px solid $defLightGrey;
+                resize: none;
+            }
+        }
+
+        @include classic-button;
+    }
+
+    p {
+        max-height: 400px;
         color: $defDarkGrey;
-        font-size: set-size(xxl);
-        text-transform: capitalize;
+        font-size: 17px;
+        padding: 10px;
+        padding-top: 0;
+        overflow: auto;
     }
 }
 
-.active-create-note {
+.active-note-modal {
     opacity: 1;
     top: 50%;
 }
