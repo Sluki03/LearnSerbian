@@ -2,7 +2,7 @@ import { Component } from "../components/Component.js";
 
 export const NoteModalOptions = { open, close };
 
-function open(id) {
+function open(id = null) {
     const existingNoteModal = document.querySelector(".note-modal");
 
     if(existingNoteModal) {
@@ -22,7 +22,11 @@ function open(id) {
         if(id === key) targetNote = {...targetNote, ...Object.values(allNotes)[index]};
     });
 
-    Component.create("NoteModal", { type: "view", targetNote, appendTo: body });
+    Component.create("NoteModal", {
+        type: id ? "view" : "add",
+        targetNote: id ? targetNote : null,
+        appendTo: body
+    });
 }
 
 let inProgress = false;

@@ -13,6 +13,7 @@
         @include add-flex(row, flex-start);
         gap: 5px;
         width: 100%;
+        position: relative;
         padding: 5px 15px;
         
         img {
@@ -25,6 +26,19 @@
             color: $defDarkGrey;
             font-size: set-size(md);
             text-transform: capitalize;
+        }
+
+        .add-note {
+            height: 30px;
+            width: 30px;
+            object-fit: contain;
+            border: 2px solid $defLightGrey;
+            border-radius: 50%;
+            box-shadow: $defLighterShadow;
+            cursor: pointer;
+            pointer-events: all;
+            position: absolute;
+            right: 5px;
         }
     }
     
@@ -79,6 +93,12 @@
                 left: 15px;
             }
         }
+
+        span {
+            color: $defGrey;
+            font-size: set-size(md);
+            font-style: italic;
+        }
     }
 
     .scrollbar {
@@ -102,6 +122,11 @@
     padding: 15px;
     z-index: 10;
     transition: 300ms;
+
+    .modal-options img {
+        height: 30px;
+        width: 30px;
+    }
 
     .note-modal-title {
         @include add-flex;
@@ -172,13 +197,22 @@
         @include classic-button;
     }
 
-    p {
+    .content-holder {
         max-height: 400px;
-        color: $defDarkGrey;
-        font-size: 17px;
-        padding: 10px;
-        padding-top: 0;
+        position: relative;
         overflow: auto;
+        
+        p {
+            color: $defDarkGrey;
+            font-size: 17px;
+            position: relative;
+            padding: 15px;
+            padding-top: 0;
+        }
+
+        .scrollbar {
+            right: 0;
+        }
     }
 }
 

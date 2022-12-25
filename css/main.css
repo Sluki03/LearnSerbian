@@ -3813,6 +3813,7 @@ footer div a {
   flex-direction: row;
   gap: 5px;
   width: 100%;
+  position: relative;
   padding: 5px 15px;
 }
 .notes .notes-title img {
@@ -3825,6 +3826,19 @@ footer div a {
   color: #5e5c5c;
   font-size: 20px;
   text-transform: capitalize;
+}
+.notes .notes-title .add-note {
+  height: 30px;
+  width: 30px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  border: 2px solid rgb(200, 200, 200);
+  border-radius: 50%;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  pointer-events: all;
+  position: absolute;
+  right: 5px;
 }
 .notes .notes-holder {
   display: flex;
@@ -3879,6 +3893,11 @@ footer div a {
 .notes .notes-holder .note:hover p {
   left: 15px;
 }
+.notes .notes-holder span {
+  color: gray;
+  font-size: 20px;
+  font-style: italic;
+}
 .notes .scrollbar {
   right: 0;
 }
@@ -3902,6 +3921,10 @@ footer div a {
   padding: 15px;
   z-index: 10;
   transition: 300ms;
+}
+.note-modal .modal-options img {
+  height: 30px;
+  width: 30px;
 }
 .note-modal .note-modal-title {
   display: flex;
@@ -3986,13 +4009,20 @@ footer div a {
   background-color: #0559f5;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
 }
-.note-modal p {
+.note-modal .content-holder {
   max-height: 400px;
+  position: relative;
+  overflow: auto;
+}
+.note-modal .content-holder p {
   color: #5e5c5c;
   font-size: 17px;
-  padding: 10px;
+  position: relative;
+  padding: 15px;
   padding-top: 0;
-  overflow: auto;
+}
+.note-modal .content-holder .scrollbar {
+  right: 0;
 }
 
 .active-note-modal {

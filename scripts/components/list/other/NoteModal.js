@@ -83,11 +83,21 @@ export default function NoteModal(componentProps) {
         });
     }
 
-    else createElement({
-        tag: "p",
-        innerHTML: markdown(targetNote.content),
-        appendTo: noteModal
-    });
+    else {
+        const contentHolder = createElement({
+            tag: "div",
+            attributes: { class: "content-holder" },
+            appendTo: noteModal
+        });
+        
+        createElement({
+            tag: "p",
+            innerHTML: markdown(targetNote.content),
+            appendTo: contentHolder
+        });
+
+        Component.create("Scrollbar", { appendTo: contentHolder });
+    }
 
     function createNote(e = null) {
         if(e) e.preventDefault();
