@@ -3035,7 +3035,7 @@ footer div a {
   width: 700px;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
   opacity: 0;
-  position: absolute;
+  position: fixed;
   top: 45%;
   left: 50%;
   padding: 10px 15px;
@@ -3081,6 +3081,14 @@ footer div a {
   color: white;
   background-color: #0559f5;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
+}
+.classic-modal .button-holder .disabled-classic-button {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.classic-modal .button-holder .disabled-classic-button:hover {
+  text-shadow: none;
+  background-color: #bd1330;
 }
 .classic-modal .button-holder button {
   width: 100%;
@@ -3863,6 +3871,7 @@ footer div a {
   border-radius: 20px;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
   cursor: pointer;
+  position: relative;
   padding: 5px 10px;
   transition: 300ms;
 }
@@ -3893,6 +3902,19 @@ footer div a {
 .notes .notes-holder .note:hover p {
   left: 15px;
 }
+.notes .notes-holder .note .delete-note {
+  opacity: 0;
+  pointer-events: all;
+  position: absolute;
+  left: auto;
+  right: 0;
+  transition: 300ms;
+}
+.notes .notes-holder .note:hover .delete-note {
+  opacity: 1;
+  left: auto;
+  right: 10px;
+}
 .notes .notes-holder span {
   color: gray;
   font-size: 20px;
@@ -3919,7 +3941,7 @@ footer div a {
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 15px;
-  z-index: 10;
+  z-index: 4;
   transition: 300ms;
 }
 .note-modal .modal-options img {
@@ -4009,6 +4031,14 @@ footer div a {
   background-color: #0559f5;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
 }
+.note-modal form .disabled-classic-button {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.note-modal form .disabled-classic-button:hover {
+  text-shadow: none;
+  background-color: #bd1330;
+}
 .note-modal .content-holder {
   max-height: 400px;
   position: relative;
@@ -4016,7 +4046,8 @@ footer div a {
 }
 .note-modal .content-holder p {
   color: #5e5c5c;
-  font-size: 17px;
+  font-size: 20px;
+  white-space: break-spaces;
   position: relative;
   padding: 15px;
   padding-top: 0;

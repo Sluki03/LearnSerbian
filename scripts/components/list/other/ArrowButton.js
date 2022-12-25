@@ -7,7 +7,7 @@ export default function ArrowButton(componentProps) {
     const arrowButtonElement = builtIn ? builtIn : createElement({
         tag: tag ? tag : "button",
         attributes: { class: "arrow-button", href: href ? href : "" },
-        appendTo: appendTo
+        appendTo
     });
 
     createElement({

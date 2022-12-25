@@ -112,7 +112,7 @@ function restart(exercise, appendTo) {
         buttons: ["no", "yes"],
         buttonsTrigger: { no: "Escape", yes: "Enter" },
         functions: { yes: confirmFunction, no: () => { inProgress = false } },
-        appendTo: appendTo
+        appendTo
     });
 
     else confirmFunction();

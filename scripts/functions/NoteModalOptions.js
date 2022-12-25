@@ -1,6 +1,9 @@
 import { Component } from "../components/Component.js";
+import updateNotes from "./updateNotes.js";
 
-export const NoteModalOptions = { open, close };
+export const NoteModalOptions = { open, close, remove };
+
+const body = document.querySelector("body");
 
 function open(id = null) {
     const existingNoteModal = document.querySelector(".note-modal");
@@ -12,21 +15,27 @@ function open(id = null) {
         close();
         return setTimeout(() => open(id), 300);
     }
-    
-    const body = document.querySelector("body");
 
-    const allNotes = JSON.parse(localStorage.getItem("notes"));
-    let targetNote = { id };
-
-    Object.keys(allNotes).forEach((key, index) => {
-        if(id === key) targetNote = {...targetNote, ...Object.values(allNotes)[index]};
-    });
+    const targetNote = getTargetNote(id);    
 
     Component.create("NoteModal", {
         type: id ? "view" : "add",
         targetNote: id ? targetNote : null,
         appendTo: body
     });
+
+    function getTargetNote(id = null) {
+        if(!id) return id;
+        
+        const allNotes = JSON.parse(localStorage.getItem("notes"));
+        let targetNote = { id };
+    
+        Object.keys(allNotes).forEach((key, index) => {
+            if(id === key) targetNote = {...targetNote, ...Object.values(allNotes)[index]};
+        });
+    
+        return targetNote;
+    }
 }
 
 let inProgress = false;
@@ -47,4 +56,31 @@ function close() {
         noteModal.remove();
         inProgress = false;
     }, 300);
+}
+
+function remove(confirm = false, id) {
+    if(!confirm) return Component.create("ClassicModal", {
+        text: "Do you really want to delete this note?",
+        buttons: ["no", "yes"],
+        buttonsTrigger: { no: "Escape", yes: "Enter" },
+        functions: { yes: () => NoteModalOptions.remove(true, id) },
+        appendTo: body
+    });
+    
+    const allNotes = JSON.parse(localStorage.getItem("notes"));
+    let newAllNotes = {};
+
+    Object.keys(allNotes).forEach((key, index) => {
+        if(id === key) return;
+        newAllNotes = {...newAllNotes, [key]: Object.values(allNotes)[index]};
+    });
+
+    localStorage.setItem("notes", JSON.stringify(newAllNotes));
+
+    const existingNoteModal = document.querySelector(".note-modal");
+    const existingNoteModalId = existingNoteModal.id.split("-")[0];
+
+    if(existingNoteModalId === id) close();
+
+    updateNotes();
 }
