@@ -22,6 +22,7 @@ import ExercisesStats from "./list/exercises/ExercisesStats.js";
 import OptionImage from "./list/exercises/OptionImage.js";
 import ConversationHolder from "./list/exercises/ConversationHolder.js";
 import Notes from "./list/other/Notes.js";
+import NotesDashboard from "./list/other/NotesDashboard.js";
 import NoteModal from "./list/other/NoteModal.js";
 
 import { Convert } from "../functions/Convert.js";
@@ -32,7 +33,7 @@ const components = {
     ModalOptions, ArrowButton, ClassicModal, Typing, DiacriticKeyboard,
     MiniModal, Scrollbar, SpeakButton, StatisticProgressBar, ExercisesList,
     ExerciseStats, ExerciseModal, ExerciseModalTask, ExerciseModalFinished, ExerciseModalReview,
-    ExercisesStats, OptionImage, ConversationHolder, Notes, NoteModal
+    ExercisesStats, OptionImage, ConversationHolder, Notes, NotesDashboard, NoteModal
 };
 
 export const Component = { create, render };

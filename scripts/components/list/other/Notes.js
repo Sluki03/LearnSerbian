@@ -1,5 +1,4 @@
-import { Component } from "../../Component.js";
-import { NoteModalOptions } from "../../../functions/NoteModalOptions.js";
+import { NoteOptions } from "../../../functions/NoteOptions.js";
 import createElement from "../../../functions/createElement.js";
 import updateNotes from "../../../functions/updateNotes.js";
 
@@ -34,7 +33,7 @@ export default function Notes(componentProps) {
     createElement({
         tag: "img",
         attributes: { src: "./images/icons/plus-icon.png", alt: "ADD", class: "add-note" },
-        events: [{ on: "click", call: () => NoteModalOptions.open() }],
+        events: [{ on: "click", call: () => NoteOptions.openModal() }],
         appendTo: notesTitle        
     });
 
@@ -45,8 +44,6 @@ export default function Notes(componentProps) {
     });
 
     updateNotes();
-
-    Component.create("Scrollbar", { trigger: notesHolder, appendTo: notes });
 
     return notes;
 }

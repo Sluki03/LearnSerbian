@@ -1,40 +1,46 @@
-import { NoteModalOptions } from "./NoteModalOptions.js";
+import { Component } from "../components/Component.js";
+import { NoteOptions } from "./NoteOptions.js";
 import createElement from "./createElement.js";
 
 export default function updateNotes() {
+    const notes = document.querySelector(".notes");
     const notesHolder = document.querySelector(".notes-holder");
     
     const allNotes = JSON.parse(localStorage.getItem("notes"));
 
     notesHolder.innerHTML = "";
     
-    if(allNotes && Object.keys(allNotes).length > 0) Object.keys(allNotes).forEach((key, index) => {
-        const note = createElement({
-            tag: "div",
-            attributes: { class: "note", id: key },
-            events: [{ on: "click", call: () => NoteModalOptions.open(key) }],
-            appendTo: notesHolder
-        });
+    if(allNotes && Object.keys(allNotes).length > 0) {
+        Object.keys(allNotes).forEach((key, index) => {
+            const note = createElement({
+                tag: "div",
+                attributes: { class: "note", id: key },
+                events: [{ on: "click", call: () => NoteOptions.openModal(key) }],
+                appendTo: notesHolder
+            });
+        
+            createElement({
+                tag: "img",
+                attributes: { src: "./images/icons/notes-icon.png", alt: "NOTE" },
+                appendTo: note
+            });
+        
+            createElement({
+                tag: "p",
+                innerText: Object.values(allNotes)[index].title,
+                appendTo: note
+            });
     
-        createElement({
-            tag: "img",
-            attributes: { src: "./images/icons/notes-icon.png", alt: "NOTE" },
-            appendTo: note
-        });
-    
-        createElement({
-            tag: "p",
-            innerText: Object.values(allNotes)[index].title,
-            appendTo: note
+            createElement({
+                tag: "div",
+                attributes: { class: "note-check" },
+                events: [{ on: "click", call: e => checkNote(e, key) }],
+                appendTo: note
+            });
         });
 
-        createElement({
-            tag: "img",
-            attributes: { src: "./images/icons/delete-icon.png", alt: "DELETE", class: "delete-note" },
-            events: [{ on: "click", call: e => removeNote(e, key)}],
-            appendTo: note
-        });
-    });
+        Component.create("Scrollbar", { trigger: notesHolder, appendTo: notesHolder });
+    }
 
     else createElement({
         tag: "span",
@@ -42,8 +48,44 @@ export default function updateNotes() {
         appendTo: notesHolder
     });
 
-    function removeNote(e, key) {
+    function checkNote(e, id) {
         e.stopPropagation();
-        NoteModalOptions.remove(false, key);
+        
+        const targetNote = document.getElementById(id);
+        const targetNoteCheck = targetNote.querySelector(".note-check");
+
+        const notesDashboard = notes.querySelector(".notes-dashboard");
+
+        if(targetNote.classList.contains("checked-note")) {
+            targetNote.classList.remove("checked-note");
+            targetNoteCheck.classList.remove("active-note-check");
+            
+            const targetNoteImg = targetNoteCheck.children[0];
+            targetNoteImg.classList.remove("active-note-check-img");
+
+            setTimeout(() => targetNoteImg.remove(), 150);
+
+            const checkedNotes = notes.querySelectorAll(".checked-note");
+            
+            if(checkedNotes.length === 0) {
+                notesDashboard.style.height = "";
+                setTimeout(() => notesDashboard.remove(), 300);
+            }
+        }
+
+        else {
+            targetNote.classList.add("checked-note");
+            targetNoteCheck.classList.add("active-note-check");
+
+            const targetNoteImg = createElement({
+                tag: "img",
+                attributes: { src: "./images/icons/check-icon.png", alt: "CHECK" },
+                appendTo: targetNoteCheck
+            });
+
+            setTimeout(() => targetNoteImg.classList.add("active-note-check-img"), 100);
+
+            if(!notesDashboard) Component.create("NotesDashboard", { appendTo: notes });
+        }
     }
 }

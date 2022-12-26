@@ -1,13 +1,11 @@
 .notes {
-    @include add-flex(column, flex-start);
-    max-height: 200px;
+    @include add-flex(column);
     width: 50%;
     background-color: white;
     border: 2px solid $defLightGrey;
     border-radius: 20px;
     box-shadow: $defLighterShadow;
     position: relative;
-    overflow: auto;
 
     .notes-title {
         @include add-flex(row, flex-start);
@@ -43,11 +41,14 @@
     }
     
     .notes-holder {
-        @include add-flex(column);
+        @include add-flex(column, flex-start);
         gap: 5px;
+        max-height: 170px;
         width: 100%;
+        position: relative;
         padding: 10px 15px;
         padding-top: 0;
+        overflow: auto;
 
         .note {
             @include add-flex(row, flex-start);
@@ -94,19 +95,49 @@
                 left: 15px;
             }
 
-            .delete-note {
+            .note-check {
+                @include add-flex;
+                height: 25px;
+                width: 25px;
+                background-color: transparent;
+                border: 2px solid $defLightGrey;
+                border-radius: 5px;
+                box-shadow: $defLighterShadow;
                 opacity: 0;
-                pointer-events: all;
                 position: absolute;
-                left: auto;
                 right: 0;
                 transition: 300ms;
+
+                img {
+                    height: 0;
+                    width: 0;
+                    opacity: 0;
+                    transition: 150ms;
+                }
             }
 
-            &:hover .delete-note {
+            &:hover .note-check {
                 opacity: 1;
-                left: auto;
                 right: 10px;
+
+                img {
+                    left: auto;
+                }
+            }
+
+            .active-note-check {
+                opacity: 1;
+                right: 10px;
+
+                img {
+                    left: auto;
+                }
+
+                .active-note-check-img {
+                    height: 35px;
+                    width: 35px;
+                    opacity: 1;
+                }
             }
         }
 
@@ -115,10 +146,58 @@
             font-size: set-size(md);
             font-style: italic;
         }
+
+        .scrollbar {
+            right: 0;
+        }
     }
 
-    .scrollbar {
-        right: 0;
+    .notes-dashboard {
+        @include add-flex;
+        height: 0;
+        width: 100%;
+        border-top: 2px solid $defLightGrey;
+        transition: 300ms;
+        overflow: hidden;
+
+        button {
+            @include add-flex;
+            gap: 10px;
+            width: 50%;
+            background-color: white;
+            border: 2px solid $defLightGrey;
+            border-radius: 20px;
+            box-shadow: $defLighterShadow;
+            cursor: pointer;
+            margin: 10px;
+            padding: 5px;
+            transition: 300ms;
+
+            &:first-child {
+                margin-right: 5px;
+            }
+
+            &:last-child {
+                margin-left: 5px;
+            }
+
+            &:hover {
+                border: 2px solid $defGrey;
+                box-shadow: $defLightShadow;
+            }
+
+            img {
+                height: 25px;
+                width: 25px;
+                object-fit: contain;
+            }
+
+            p {
+                color: $defDarkGrey;
+                font-size: set-size(md);
+                text-transform: capitalize;
+            }
+        }
     }
 }
 
@@ -158,7 +237,6 @@
         h3 {
             color: $defDarkGrey;
             font-size: set-size(xxl);
-            text-transform: capitalize;
         }
     }
 

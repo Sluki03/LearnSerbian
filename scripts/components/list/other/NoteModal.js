@@ -1,6 +1,6 @@
 import { Component } from "../../Component.js";
 import { Convert } from "../../../functions/Convert.js";
-import { NoteModalOptions } from "../../../functions/NoteModalOptions.js";
+import { NoteOptions } from "../../../functions/NoteOptions.js";
 import createElement from "../../../functions/createElement.js";
 import updateNotes from "../../../functions/updateNotes.js";
 import markdown from "../../../functions/markdown.js";
@@ -19,8 +19,8 @@ export default function NoteModal(componentProps) {
 
     Component.create("ModalOptions", {
         functions: {
-            delete: () => NoteModalOptions.remove(false, targetNote.id),
-            x: NoteModalOptions.close
+            delete: () => NoteOptions.delete(false, targetNote.id),
+            x: NoteOptions.closeModal
         },
         appendTo: noteModal
     });
@@ -39,14 +39,14 @@ export default function NoteModal(componentProps) {
     
     createElement({
         tag: "h3",
-        innerText: targetNote ? targetNote.title : "add note",
+        innerText: targetNote ? targetNote.title : "Add Note",
         appendTo: noteModalTitle
     });
 
     if(type === "add") {
         const form = createElement({
             tag: "form",
-            events: [{ on: "submit", call: createNote }],
+            events: [{ on: "submit", call: NoteOptions.create }],
             appendTo: noteModal
         });
     
@@ -106,34 +106,6 @@ export default function NoteModal(componentProps) {
             if(isValid) submitButton.classList.remove("disabled-classic-button");
             else submitButton.classList.add("disabled-classic-button");
         }
-
-        function createNote(e = null) {
-            if(e) e.preventDefault();
-            if(submitButton.classList.contains("disabled-classic-button")) return;
-
-            NoteModalOptions.close();
-    
-            const fieldsets = document.querySelectorAll("fieldset");
-            let noteObject = {};
-    
-            fieldsets.forEach((fieldset, index) => {
-                const value = fieldset.children[1].value;
-                noteObject = {...noteObject, [index ? "content" : "title"]: value};
-            });
-    
-            const formattedNoteObjectTitle = Convert.cssToJsStandard(noteObject.title.replaceAll(" ", "-"));
-            
-            const allNotes = JSON.parse(localStorage.getItem("notes"));
-            
-            if(allNotes === null) localStorage.setItem("notes", JSON.stringify({ [`${formattedNoteObjectTitle}_0`]: noteObject }));
-    
-            else {
-                const newAllNotes = {...allNotes, [`${formattedNoteObjectTitle}_${Object.keys(allNotes).length}`]: noteObject};
-                localStorage.setItem("notes", JSON.stringify(newAllNotes));
-            }
-    
-            updateNotes();
-        }
     
         function notesKeydown(e) {
             if(e.key !== "Enter") return;
@@ -146,7 +118,7 @@ export default function NoteModal(componentProps) {
                 textarea.focus();
             }
 
-            if(!textarea.isEqualNode(document.activeElement)) createNote();
+            if(!textarea.isEqualNode(document.activeElement)) NoteOptions.create();
         }
     }
 

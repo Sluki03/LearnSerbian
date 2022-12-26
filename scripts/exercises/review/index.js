@@ -1,5 +1,6 @@
 import { Convert } from "../../functions/Convert.js";
 import createElement from "../../functions/createElement.js";
+import transitionHeightChange from "../../functions/transitionHeightChange.js";
 
 import multipleChoice from "./construct/multipleChoice.js";
 import translate from "./construct/translate.js";
@@ -54,16 +55,7 @@ export default function review(results, current) {
     const stats = { answer, xp, time, mode, explanation };
     Object.values(stats).forEach(value => value({ results, current, taskReview }));
 
-    transitionHeightChange();
-
-    function transitionHeightChange() {
-        taskViewMore.style.height = "auto";
-        
-        const realHeight = taskViewMore.getBoundingClientRect().height.toFixed(2);
-        taskViewMore.style.height = "";
-
-        setTimeout(() => { taskViewMore.style.height = `${realHeight}px` }, 10);
-    }
+    transitionHeightChange(taskViewMore);
 
     function typeToTitle() {
         const titles = {
