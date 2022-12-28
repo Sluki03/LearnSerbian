@@ -32,7 +32,7 @@ export default function NoteModal(componentProps) {
 
     createElement({
         tag: "img",
-        attributes: { src: targetNote.icon, alt: "NOTES" },
+        attributes: { src: targetNote ? targetNote.icon : "./images/icons/notes-icon.png", alt: "NOTES" },
         appendTo: noteModalTitle
     });
     
