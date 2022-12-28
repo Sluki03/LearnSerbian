@@ -1,6 +1,6 @@
 import { Convert } from "../../functions/Convert.js";
 import createElement from "../../functions/createElement.js";
-import transitionHeightChange from "../../functions/transitionHeightChange.js";
+import { TransitionDimensions } from "../../functions/TransitionDimensions.js";
 
 import multipleChoice from "./construct/multipleChoice.js";
 import translate from "./construct/translate.js";
@@ -55,7 +55,7 @@ export default function review(results, current) {
     const stats = { answer, xp, time, mode, explanation };
     Object.values(stats).forEach(value => value({ results, current, taskReview }));
 
-    transitionHeightChange(taskViewMore);
+    TransitionDimensions.height(taskViewMore);
 
     function typeToTitle() {
         const titles = {

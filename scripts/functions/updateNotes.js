@@ -21,7 +21,7 @@ export default function updateNotes() {
         
             createElement({
                 tag: "img",
-                attributes: { src: "./images/icons/notes-icon.png", alt: "NOTE" },
+                attributes: { src: Object.values(allNotes)[index].icon, alt: "NOTE" },
                 appendTo: note
             });
         

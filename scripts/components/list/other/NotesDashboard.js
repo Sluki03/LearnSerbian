@@ -1,7 +1,7 @@
 import { Component } from "../../Component.js";
 import { NoteOptions } from "../../../functions/NoteOptions.js";
 import createElement from "../../../functions/createElement.js";
-import transitionHeightChange from "../../../functions/transitionHeightChange.js";
+import { TransitionDimensions } from "../../../functions/TransitionDimensions.js";
 import updateNotes from "../../../functions/updateNotes.js";
 
 export default function NotesDashboard(componentProps) {
@@ -36,7 +36,7 @@ export default function NotesDashboard(componentProps) {
         });
     });
 
-    transitionHeightChange(notesDashboard);
+    TransitionDimensions.height(notesDashboard);
 
     function multipleDownload() {
         const checkedNotes = document.querySelectorAll(".checked-note");

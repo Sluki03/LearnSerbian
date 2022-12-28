@@ -223,6 +223,68 @@
         width: 30px;
     }
 
+    .note-options-modal {
+        @include add-flex(column);
+        width: 55%;
+        background-color: white;
+        border: 2px solid $defLightGrey;
+        border-radius: 20px;
+        box-shadow: $defLighterShadow;
+        opacity: 0;
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transition: 300ms;
+        overflow: hidden;
+
+        button {
+            @include add-flex(row, flex-start);
+            gap: 15px;
+            width: 100%;
+            background-color: white;
+            border: none;
+            border-bottom: 2px solid $defLightGrey;
+            cursor: pointer;
+            padding: 10px 15px;
+
+            &:last-child {
+                border-bottom: none;
+            }
+
+            img {
+                height: 30px;
+                width: 30px;
+                object-fit: contain;
+                position: relative;
+                left: 0;
+                transition: 300ms;
+            }
+
+            &:hover img {
+                left: 15px;
+            }
+
+            p {
+                color: $defDarkGrey;
+                font-size: set-size(lg);
+                text-transform: capitalize;
+                position: relative;
+                left: 0;
+                transition: 300ms;
+            }
+
+            &:hover p {
+                left: 15px;
+            }
+        }
+    }
+
+    .active-note-options-modal {
+        opacity: 1;
+        top: 50%;
+    }
+
     .note-modal-title {
         @include add-flex;
         gap: 10px;
@@ -280,11 +342,54 @@
             input {
                 border: 2px solid transparent;
                 border-bottom: 2px solid $defLightGrey;
+            
+                &:hover,
+                &:focus {
+                    border-radius: 10px;
+                }
             }
 
             textarea {
                 border: 2px solid $defLightGrey;
+                border-radius: 10px;
                 resize: none;
+            }
+        }
+
+        .icon-fieldset {
+            @include add-flex(row, flex-start);
+            gap: 10px;
+
+            label {
+                width: auto;
+            }
+            
+            .icons-holder {
+                @include add-flex;
+                height: 50px;
+                width: 50px;
+                border: 1px solid $defLightGrey;
+                border-radius: 20px;
+                cursor: pointer;
+                padding: 0 10px;
+                transition: 300ms;
+                overflow: hidden;
+
+                .icons-list {
+                    @include add-flex;
+                    height: 50px;
+                    position: relative;
+
+                    img {
+                        height: 30px;
+                        width: 30px;
+                        object-fit: contain;
+                        pointer-events: all;
+                        position: absolute;
+                        left: 0;
+                        transition: 500ms;
+                    }
+                }
             }
         }
 

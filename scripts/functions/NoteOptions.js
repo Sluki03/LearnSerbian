@@ -3,7 +3,10 @@ import { Convert } from "./Convert.js";
 import createElement from "./createElement.js";
 import updateNotes from "./updateNotes.js";
 
-export const NoteOptions = { create, delete: remove, download, openModal, closeModal };
+export const NoteOptions = {
+    create, edit, delete: remove, download, openModal,
+    closeModal, openOptionsModal, closeOptionsModal
+};
 
 const body = document.querySelector("body");
 
@@ -19,8 +22,15 @@ function create(e = null) {
     let noteObject = {};
 
     fieldsets.forEach((fieldset, index) => {
-        const value = fieldset.children[1].value;
-        noteObject = {...noteObject, [index ? "content" : "title"]: value};
+        if(!index) {
+            const selectedIcon = document.getElementById("selected-icon");
+            noteObject = {...noteObject, icon: selectedIcon.src};
+        }
+        
+        else {
+            const value = fieldset.children[1].value;
+            noteObject = {...noteObject, [index === 1 ? "title" : "content"]: value};
+        }
     });
 
     const formattedNoteObjectTitle = Convert.cssToJsStandard(noteObject.title.replaceAll(" ", "-"));
@@ -35,6 +45,10 @@ function create(e = null) {
     }
 
     updateNotes();
+}
+
+function edit() {
+
 }
 
 function remove(confirm = false, id) {
@@ -60,7 +74,7 @@ function remove(confirm = false, id) {
     
     if(existingNoteModal) {
         const existingNoteModalId = existingNoteModal.id.split("-")[0];
-        if(existingNoteModalId === id) close();
+        if(existingNoteModalId === id) closeModal();
     }
 
     updateNotes();
@@ -98,7 +112,7 @@ function openModal(id = null) {
         const noteModalId = existingNoteModal.id.split("-")[0];
         if(noteModalId === id) return;
 
-        close();
+        closeModal();
         return setTimeout(() => open(id), 300);
     }
 
@@ -142,4 +156,23 @@ function closeModal() {
         noteModal.remove();
         inProgress = false;
     }, 300);
+}
+
+function openOptionsModal() {
+    const existingNoteOptionsModal = document.querySelector(".note-options-modal");
+    if(existingNoteOptionsModal) return closeOptionsModal();
+    
+    const noteModal = document.querySelector(".note-modal");
+    Component.create("NoteOptionsModal", { appendTo: noteModal });
+}
+
+function closeOptionsModal() {
+    window.eventList.remove("noteOptionsModalClick");
+    
+    const noteOptionsModal = document.querySelector(".note-options-modal");
+
+    noteOptionsModal.style.opacity = "0";
+    noteOptionsModal.style.top = "60%";
+
+    setTimeout(() => noteOptionsModal.remove(), 300);
 }

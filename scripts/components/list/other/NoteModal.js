@@ -1,8 +1,8 @@
 import { Component } from "../../Component.js";
-import { Convert } from "../../../functions/Convert.js";
 import { NoteOptions } from "../../../functions/NoteOptions.js";
+import { TransitionDimensions } from "../../../functions/TransitionDimensions.js";
+import { noteIconsData } from "../../../../data/noteIconsData.js";
 import createElement from "../../../functions/createElement.js";
-import updateNotes from "../../../functions/updateNotes.js";
 import markdown from "../../../functions/markdown.js";
 
 export default function NoteModal(componentProps) {
@@ -17,13 +17,12 @@ export default function NoteModal(componentProps) {
 
     setTimeout(() => noteModal.classList.add("active-note-modal"), 100);
 
-    Component.create("ModalOptions", {
-        functions: {
-            delete: () => NoteOptions.delete(false, targetNote.id),
-            x: NoteOptions.closeModal
-        },
-        appendTo: noteModal
-    });
+    const functions = {};
+    
+    if(type === "view") functions.options = NoteOptions.openOptionsModal;
+    functions.x = NoteOptions.closeModal;
+
+    Component.create("ModalOptions", { functions, appendTo: noteModal });
     
     const noteModalTitle = createElement({
         tag: "div",
@@ -33,7 +32,7 @@ export default function NoteModal(componentProps) {
 
     createElement({
         tag: "img",
-        attributes: { src: "./images/icons/notes-icon.png", alt: "NOTES" },
+        attributes: { src: targetNote.icon, alt: "NOTES" },
         appendTo: noteModalTitle
     });
     
@@ -52,32 +51,58 @@ export default function NoteModal(componentProps) {
     
         window.eventList.add({ id: "notesKeyDown", type: "keydown", listener: notesKeydown });
     
-        for(let i = 0; i < 2; i++) {
+        const formScheme = [
+            { tag: "div", id: "icon", class: "icons-holder" },
+            { tag: "input", id: "title", type: "text", placeholder: "e.g. Words meaning" },
+            { tag: "textarea", id: "content", placeholder: "Your content...", rows: "5", columns: "10" }
+        ];
+        
+        formScheme.forEach((element, index) => {
             const fieldset = createElement({
                 tag: "fieldset",
+                attributes: { class: !index ? "icon-fieldset" : "" },
                 appendTo: form
             });
     
             createElement({
                 tag: "label",
-                attributes: { for: i ? "content" : "title" },
-                innerText: `${i ? "content" : "title"}:`,
+                attributes: { for: element.id },
+                innerText: `${element.id}:`,
                 appendTo: fieldset
             });
     
             createElement({
-                tag: i ? "textarea" : "input",
+                tag: element.tag,
                 attributes: {
-                    id: i ? "content" : "title",
-                    type: "text",
-                    placeholder: i ? "Your content..." : "e.g. Words meaning",
-                    rows: "5",
-                    columns: "10"
+                    class: element.class ? element.class : "",
+                    id: element.id,
+                    type: element.type ? element.type : "",
+                    placeholder: element.placeholder ? element.placeholder : "",
+                    rows: element.rows ? element.rows : "",
+                    columns: element.columns ? element.columns : ""
                 },
-                events: [{ on: "input", call: e => inputChecker(e) }],
+                events: index ? [{ on: "input", call: e => inputChecker(e) }] : [],
                 appendTo: fieldset
             });
-        }
+        });
+
+        const iconsHolder = document.querySelector(".icons-holder");
+        iconsHolder.onclick = expandIconsHolder;
+
+        const iconsList = createElement({
+            tag: "div",
+            attributes: { class: "icons-list" },
+            style: { width: `${noteIconsData.length * 40 - 10}px` },
+            appendTo: iconsHolder
+        });
+
+        noteIconsData.forEach((icon, index) => createElement({
+            tag: "img",
+            attributes: { src: icon, alt: "NOTE", id: !index ? "selected-icon" : "" },
+            style: { left: `${0 + (index * 40)}px` },
+            events: [{ on: "click", call: selectIcon }],
+            appendTo: iconsList
+        }));
 
         const input = document.querySelector(".note-modal input");
         input.focus();
@@ -90,6 +115,47 @@ export default function NoteModal(componentProps) {
             innerText: "submit",
             appendTo: form
         });
+
+        function expandIconsHolder() {
+            window.eventList.add({ id: "noteModalChangeIconClick", type: "click", listener: minimizeIconsHolder });
+
+            TransitionDimensions.width(iconsHolder);
+            iconsHolder.classList.add("expanded-icons-holder");
+
+            function minimizeIconsHolder(e) {
+                let closeStatus = true;
+
+                e.composedPath().forEach(element => {
+                    if(element.classList === undefined) return;
+                    if(element.classList.contains("icons-holder")) closeStatus = false;
+                });
+
+                if(closeStatus) {
+                    window.eventList.remove("noteModalChangeIconClick");
+
+                    iconsHolder.classList.remove("expanded-icons-holder");
+                    iconsHolder.style.width = "";
+                }
+            }
+        }
+
+        function selectIcon(e) {
+            if(!iconsHolder.classList.contains("expanded-icons-holder")) return;
+            if(e.target.id === "selected-icon") return;
+
+            const existingSelectedIcon = document.getElementById("selected-icon");
+            
+            const positions = {
+                selectedIcon: parseInt(getComputedStyle(existingSelectedIcon).getPropertyValue("left")),
+                newSelectedIcon: parseInt(getComputedStyle(e.target).getPropertyValue("left"))
+            };
+            
+            existingSelectedIcon.style.left = `${positions.newSelectedIcon}px`;
+            e.target.style.left = `${positions.selectedIcon}px`;
+
+            existingSelectedIcon.id = "";
+            e.target.id = "selected-icon";
+        }
 
         function inputChecker(e) {
             const target = e.target;
