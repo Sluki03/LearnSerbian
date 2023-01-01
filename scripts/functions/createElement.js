@@ -15,6 +15,7 @@ export default function createElement(element) {
 
     if(element.innerText) newElement.innerText = element.innerText;
     if(element.innerHTML) newElement.innerHTML = element.innerHTML;
+    if(element.value) newElement.value = element.value;
 
     if(element.events) for(let i = 0; i < element.events.length; i++) {
         const { on, call } = element.events[i];

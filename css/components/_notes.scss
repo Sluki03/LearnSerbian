@@ -201,7 +201,8 @@
     }
 }
 
-.note-modal {
+.note-modal,
+.note-icon-modal {
     @include add-flex(column);
     gap: 15px;
     width: 30%;
@@ -214,9 +215,8 @@
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 15px;
-    z-index: 4;
     transition: 300ms;
+    z-index: 4;
 
     .modal-options img {
         height: 30px;
@@ -288,7 +288,7 @@
     .note-modal-title {
         @include add-flex;
         gap: 10px;
-        margin-top: 15px;
+        margin: 30px 15px 0 15px;
 
         img {
             height: 40px;
@@ -306,6 +306,7 @@
         @include add-flex(column);
         gap: 20px;
         width: 100%;
+        margin: 0 15px 15px 15px;
 
         fieldset {
             @include add-flex(column);
@@ -370,11 +371,16 @@
                 width: 50px;
                 border: 1px solid $defLightGrey;
                 border-radius: 20px;
-                cursor: pointer;
+                box-shadow: $defLighterShadow;
                 padding: 0 10px;
                 transition: 300ms;
                 overflow: hidden;
 
+                &:hover {
+                    border: 1px solid $defGrey;
+                    box-shadow: $defLightShadow;
+                }
+                
                 .icons-list {
                     @include add-flex;
                     height: 50px;
@@ -384,6 +390,7 @@
                         height: 30px;
                         width: 30px;
                         object-fit: contain;
+                        cursor: pointer;
                         pointer-events: all;
                         position: absolute;
                         left: 0;
@@ -398,6 +405,7 @@
 
     .content-holder {
         max-height: 400px;
+        margin: 0 15px 15px 15px;
         position: relative;
         overflow: auto;
         
@@ -419,4 +427,114 @@
 .active-note-modal {
     opacity: 1;
     top: 50%;
+}
+
+.edit-note-modal {
+    height: 0;
+    overflow: hidden;
+}
+
+.note-icon-modal {
+    @include add-flex(column);
+    width: 80%;
+    padding: 15px;
+
+    .note-icon-modal-title {
+        @include add-flex(row);
+        gap: 10px;
+
+        img {
+            height: 30px;
+            width: 30px;
+            object-fit: contain;
+        }
+
+        h4 {
+            color: $defDarkGrey;
+            font-size: set-size(lg);
+            text-transform: capitalize;
+        }
+    }
+
+    .upload-holder {
+        @include add-flex;
+        height: 120px;
+        width: 90%;
+        border: 3px dashed $defLightGrey;
+        border-radius: 20px;
+        box-shadow: $defLighterShadow;
+        position: relative;
+        transition: 300ms;
+        overflow: hidden;
+
+        .upload-image-input {
+            height: 100%;
+            width: 100%;
+            opacity: 0;
+            cursor: pointer;
+            position: absolute;
+            z-index: 2;
+        }
+        
+        .img-holder {
+            @include add-flex;
+            background-color: white;
+            border: 1px solid $defLightGrey;
+            border-radius: 50%;
+            box-shadow: $defLighterShadow;
+            z-index: 1;
+            
+            img {
+                height: 60px;
+                width: 60px;
+                border-radius: 50%;
+                object-fit: contain;
+                transition: 300ms;
+            }
+        }
+
+        .img-circle {
+            height: 50px;
+            width: 50px;
+            background-color: $defGrey;
+            border-radius: 50%;
+            box-shadow: $defLightShadow;
+            position: absolute;
+            transition: 600ms;
+        }
+    }
+
+    .active-upload-holder {
+        border: 3px solid $defGrey;
+        box-shadow: $defLightShadow;
+        
+        .img-holder img {
+            height: 70px;
+            width: 70px;
+        }
+
+        #img-circle-1 {
+            height: 160px;
+            width: 160px;
+            background-color: $defLighterRed
+        }
+
+        #img-circle-2 {
+            height: 130px;
+            width: 130px;
+            background-color: $defLighterBlue;
+        }
+
+        #img-circle-3 {
+            height: 100px;
+            width: 100px;
+            background-color: white;
+        }
+    }
+
+    @include classic-button;
+
+    button {
+        font-size: set-size(md);
+    }
 }

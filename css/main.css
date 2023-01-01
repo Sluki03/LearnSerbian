@@ -4001,7 +4001,8 @@ footer div a {
   text-transform: capitalize;
 }
 
-.note-modal {
+.note-modal,
+.note-icon-modal {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -4017,15 +4018,16 @@ footer div a {
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 15px;
-  z-index: 4;
   transition: 300ms;
+  z-index: 4;
 }
-.note-modal .modal-options img {
+.note-modal .modal-options img,
+.note-icon-modal .modal-options img {
   height: 30px;
   width: 30px;
 }
-.note-modal .note-options-modal {
+.note-modal .note-options-modal,
+.note-icon-modal .note-options-modal {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -4043,7 +4045,8 @@ footer div a {
   transition: 300ms;
   overflow: hidden;
 }
-.note-modal .note-options-modal button {
+.note-modal .note-options-modal button,
+.note-icon-modal .note-options-modal button {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -4056,10 +4059,12 @@ footer div a {
   cursor: pointer;
   padding: 10px 15px;
 }
-.note-modal .note-options-modal button:last-child {
+.note-modal .note-options-modal button:last-child,
+.note-icon-modal .note-options-modal button:last-child {
   border-bottom: none;
 }
-.note-modal .note-options-modal button img {
+.note-modal .note-options-modal button img,
+.note-icon-modal .note-options-modal button img {
   height: 30px;
   width: 30px;
   -o-object-fit: contain;
@@ -4068,10 +4073,12 @@ footer div a {
   left: 0;
   transition: 300ms;
 }
-.note-modal .note-options-modal button:hover img {
+.note-modal .note-options-modal button:hover img,
+.note-icon-modal .note-options-modal button:hover img {
   left: 15px;
 }
-.note-modal .note-options-modal button p {
+.note-modal .note-options-modal button p,
+.note-icon-modal .note-options-modal button p {
   color: #5e5c5c;
   font-size: 25px;
   text-transform: capitalize;
@@ -4079,40 +4086,48 @@ footer div a {
   left: 0;
   transition: 300ms;
 }
-.note-modal .note-options-modal button:hover p {
+.note-modal .note-options-modal button:hover p,
+.note-icon-modal .note-options-modal button:hover p {
   left: 15px;
 }
-.note-modal .active-note-options-modal {
+.note-modal .active-note-options-modal,
+.note-icon-modal .active-note-options-modal {
   opacity: 1;
   top: 50%;
 }
-.note-modal .note-modal-title {
+.note-modal .note-modal-title,
+.note-icon-modal .note-modal-title {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
   gap: 10px;
-  margin-top: 15px;
+  margin: 30px 15px 0 15px;
 }
-.note-modal .note-modal-title img {
+.note-modal .note-modal-title img,
+.note-icon-modal .note-modal-title img {
   height: 40px;
   width: 40px;
   -o-object-fit: contain;
      object-fit: contain;
 }
-.note-modal .note-modal-title h3 {
+.note-modal .note-modal-title h3,
+.note-icon-modal .note-modal-title h3 {
   color: #5e5c5c;
   font-size: 35px;
 }
-.note-modal form {
+.note-modal form,
+.note-icon-modal form {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   gap: 20px;
   width: 100%;
+  margin: 0 15px 15px 15px;
 }
-.note-modal form fieldset {
+.note-modal form fieldset,
+.note-icon-modal form fieldset {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -4121,14 +4136,17 @@ footer div a {
   width: 90%;
   border: none;
 }
-.note-modal form fieldset label {
+.note-modal form fieldset label,
+.note-icon-modal form fieldset label {
   width: 100%;
   font-size: 17px;
   color: gray;
   text-transform: capitalize;
   font-weight: bold;
 }
-.note-modal form fieldset input, .note-modal form fieldset textarea {
+.note-modal form fieldset input, .note-modal form fieldset textarea,
+.note-icon-modal form fieldset input,
+.note-icon-modal form fieldset textarea {
   width: 100%;
   color: #5e5c5c;
   font-size: 20px;
@@ -4136,36 +4154,47 @@ footer div a {
   padding: 3px 5px;
   transition: 300ms;
 }
-.note-modal form fieldset input:hover, .note-modal form fieldset textarea:hover {
+.note-modal form fieldset input:hover, .note-modal form fieldset textarea:hover,
+.note-icon-modal form fieldset input:hover,
+.note-icon-modal form fieldset textarea:hover {
   border: 2px solid gray;
 }
-.note-modal form fieldset input:focus, .note-modal form fieldset textarea:focus {
+.note-modal form fieldset input:focus, .note-modal form fieldset textarea:focus,
+.note-icon-modal form fieldset input:focus,
+.note-icon-modal form fieldset textarea:focus {
   border: 2px solid gray;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
 }
-.note-modal form fieldset input {
+.note-modal form fieldset input,
+.note-icon-modal form fieldset input {
   border: 2px solid transparent;
   border-bottom: 2px solid rgb(200, 200, 200);
 }
-.note-modal form fieldset input:hover, .note-modal form fieldset input:focus {
+.note-modal form fieldset input:hover, .note-modal form fieldset input:focus,
+.note-icon-modal form fieldset input:hover,
+.note-icon-modal form fieldset input:focus {
   border-radius: 10px;
 }
-.note-modal form fieldset textarea {
+.note-modal form fieldset textarea,
+.note-icon-modal form fieldset textarea {
   border: 2px solid rgb(200, 200, 200);
   border-radius: 10px;
   resize: none;
 }
-.note-modal form .icon-fieldset {
+.note-modal form .icon-fieldset,
+.note-icon-modal form .icon-fieldset {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   flex-direction: row;
   gap: 10px;
 }
-.note-modal form .icon-fieldset label {
+.note-modal form .icon-fieldset label,
+.note-icon-modal form .icon-fieldset label {
   width: auto;
 }
-.note-modal form .icon-fieldset .icons-holder {
+.note-modal form .icon-fieldset .icons-holder,
+.note-icon-modal form .icon-fieldset .icons-holder {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -4174,12 +4203,18 @@ footer div a {
   width: 50px;
   border: 1px solid rgb(200, 200, 200);
   border-radius: 20px;
-  cursor: pointer;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
   padding: 0 10px;
   transition: 300ms;
   overflow: hidden;
 }
-.note-modal form .icon-fieldset .icons-holder .icons-list {
+.note-modal form .icon-fieldset .icons-holder:hover,
+.note-icon-modal form .icon-fieldset .icons-holder:hover {
+  border: 1px solid gray;
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
+}
+.note-modal form .icon-fieldset .icons-holder .icons-list,
+.note-icon-modal form .icon-fieldset .icons-holder .icons-list {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -4187,17 +4222,20 @@ footer div a {
   height: 50px;
   position: relative;
 }
-.note-modal form .icon-fieldset .icons-holder .icons-list img {
+.note-modal form .icon-fieldset .icons-holder .icons-list img,
+.note-icon-modal form .icon-fieldset .icons-holder .icons-list img {
   height: 30px;
   width: 30px;
   -o-object-fit: contain;
      object-fit: contain;
+  cursor: pointer;
   pointer-events: all;
   position: absolute;
   left: 0;
   transition: 500ms;
 }
-.note-modal form button {
+.note-modal form button,
+.note-icon-modal form button {
   color: white;
   font-size: 25px;
   font-weight: bold;
@@ -4209,25 +4247,31 @@ footer div a {
   padding: 10px 20px;
   transition: 300ms;
 }
-.note-modal form button:hover {
+.note-modal form button:hover,
+.note-icon-modal form button:hover {
   color: white;
   background-color: #0559f5;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
 }
-.note-modal form .disabled-classic-button {
+.note-modal form .disabled-classic-button,
+.note-icon-modal form .disabled-classic-button {
   cursor: not-allowed;
   opacity: 0.5;
 }
-.note-modal form .disabled-classic-button:hover {
+.note-modal form .disabled-classic-button:hover,
+.note-icon-modal form .disabled-classic-button:hover {
   text-shadow: none;
   background-color: #bd1330;
 }
-.note-modal .content-holder {
+.note-modal .content-holder,
+.note-icon-modal .content-holder {
   max-height: 400px;
+  margin: 0 15px 15px 15px;
   position: relative;
   overflow: auto;
 }
-.note-modal .content-holder p {
+.note-modal .content-holder p,
+.note-icon-modal .content-holder p {
   color: #5e5c5c;
   font-size: 20px;
   white-space: break-spaces;
@@ -4235,11 +4279,145 @@ footer div a {
   padding: 15px;
   padding-top: 0;
 }
-.note-modal .content-holder .scrollbar {
+.note-modal .content-holder .scrollbar,
+.note-icon-modal .content-holder .scrollbar {
   right: 0;
 }
 
 .active-note-modal {
   opacity: 1;
   top: 50%;
+}
+
+.edit-note-modal {
+  height: 0;
+  overflow: hidden;
+}
+
+.note-icon-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 80%;
+  padding: 15px;
+}
+.note-icon-modal .note-icon-modal-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 10px;
+}
+.note-icon-modal .note-icon-modal-title img {
+  height: 30px;
+  width: 30px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.note-icon-modal .note-icon-modal-title h4 {
+  color: #5e5c5c;
+  font-size: 25px;
+  text-transform: capitalize;
+}
+.note-icon-modal .upload-holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  height: 120px;
+  width: 90%;
+  border: 3px dashed rgb(200, 200, 200);
+  border-radius: 20px;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+  position: relative;
+  transition: 300ms;
+  overflow: hidden;
+}
+.note-icon-modal .upload-holder .upload-image-input {
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  cursor: pointer;
+  position: absolute;
+  z-index: 2;
+}
+.note-icon-modal .upload-holder .img-holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  background-color: white;
+  border: 1px solid rgb(200, 200, 200);
+  border-radius: 50%;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+.note-icon-modal .upload-holder .img-holder img {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  -o-object-fit: contain;
+     object-fit: contain;
+  transition: 300ms;
+}
+.note-icon-modal .upload-holder .img-circle {
+  height: 50px;
+  width: 50px;
+  background-color: gray;
+  border-radius: 50%;
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
+  position: absolute;
+  transition: 600ms;
+}
+.note-icon-modal .active-upload-holder {
+  border: 3px solid gray;
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
+}
+.note-icon-modal .active-upload-holder .img-holder img {
+  height: 70px;
+  width: 70px;
+}
+.note-icon-modal .active-upload-holder #img-circle-1 {
+  height: 160px;
+  width: 160px;
+  background-color: #f20707;
+}
+.note-icon-modal .active-upload-holder #img-circle-2 {
+  height: 130px;
+  width: 130px;
+  background-color: #0589f5;
+}
+.note-icon-modal .active-upload-holder #img-circle-3 {
+  height: 100px;
+  width: 100px;
+  background-color: white;
+}
+.note-icon-modal button {
+  color: white;
+  font-size: 25px;
+  font-weight: bold;
+  text-transform: capitalize;
+  background-color: #059c20;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  padding: 10px 20px;
+  transition: 300ms;
+}
+.note-icon-modal button:hover {
+  color: white;
+  background-color: #0559f5;
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
+}
+.note-icon-modal .disabled-classic-button {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.note-icon-modal .disabled-classic-button:hover {
+  text-shadow: none;
+  background-color: #bd1330;
+}
+.note-icon-modal button {
+  font-size: 20px;
 }/*# sourceMappingURL=main.css.map */

@@ -1,5 +1,6 @@
 import { Component } from "../components/Component.js";
 import { Convert } from "./Convert.js";
+import { TransitionDimensions } from "./TransitionDimensions.js";
 import createElement from "./createElement.js";
 import updateNotes from "./updateNotes.js";
 
@@ -18,21 +19,7 @@ function create(e = null) {
 
     closeModal();
 
-    const fieldsets = document.querySelectorAll("fieldset");
-    let noteObject = {};
-
-    fieldsets.forEach((fieldset, index) => {
-        if(!index) {
-            const selectedIcon = document.getElementById("selected-icon");
-            noteObject = {...noteObject, icon: selectedIcon.src};
-        }
-        
-        else {
-            const value = fieldset.children[1].value;
-            noteObject = {...noteObject, [index === 1 ? "title" : "content"]: value};
-        }
-    });
-
+    const noteObject = getFormData();
     const formattedNoteObjectTitle = Convert.cssToJsStandard(noteObject.title.replaceAll(" ", "-"));
     
     const allNotes = JSON.parse(localStorage.getItem("notes"));
@@ -47,8 +34,70 @@ function create(e = null) {
     updateNotes();
 }
 
-function edit() {
+function edit(e) {
+    e.preventDefault();
 
+    const noteModal = document.querySelector(".note-modal");
+    const validId = noteModal.id.split("-")[0];
+
+    const noteObject = getFormData();
+
+    const formattedNoteObjectTitle = Convert.cssToJsStandard(noteObject.title.replaceAll(" ", "-"));
+    const order = parseInt(validId.split("_")[1]);
+
+    const allNotes = JSON.parse(localStorage.getItem("notes"));
+    let newAllNotes = {};
+
+    Object.keys(allNotes).forEach((key, index) => {
+        const noteOrder = parseInt(key.split("_")[1]);
+
+        if(order === noteOrder) {
+            noteModal.id = `${formattedNoteObjectTitle}_${order}-modal`;
+            return newAllNotes = {...newAllNotes, [`${formattedNoteObjectTitle}_${order}`]: noteObject};
+        }
+        
+        newAllNotes = {...newAllNotes, [key]: Object.values(allNotes)[index]};
+    });
+
+    localStorage.setItem("notes", JSON.stringify(newAllNotes));
+    updateNotes();
+
+    noteModal.style.height = "";
+    noteModal.classList.add("edit-note-modal");
+    
+    setTimeout(() => {
+        noteModal.innerHTML = "";
+        
+        Component.create("ModalOptions", {
+            functions: { options: openOptionsModal, x: closeModal },
+            appendTo: noteModal
+        });
+        
+        const noteModalTitle = createElement({
+            tag: "div",
+            attributes: { class: "note-modal-title" },
+            appendTo: noteModal
+        });
+
+        createElement({
+            tag: "img",
+            attributes: { src: noteObject.icon, alt: "NOTES" },
+            appendTo: noteModalTitle
+        });
+
+        createElement({
+            tag: "h3",
+            innerText: noteObject.title,
+            appendTo: noteModalTitle
+        });
+
+        Component.create("NoteModalView", { targetNote: noteObject, appendTo: noteModal });
+
+        setTimeout(() => {
+            TransitionDimensions.height(noteModal);
+            setTimeout(() => noteModal.classList.remove("edit-note-modal"), 300);
+        }, 100);
+    }, 300);
 }
 
 function remove(confirm = false, id) {
@@ -175,4 +224,23 @@ function closeOptionsModal() {
     noteOptionsModal.style.top = "60%";
 
     setTimeout(() => noteOptionsModal.remove(), 300);
+}
+
+function getFormData() {
+    const fieldsets = document.querySelectorAll("fieldset");
+    let noteObject = {};
+
+    fieldsets.forEach((fieldset, index) => {
+        if(!index) {
+            const selectedIcon = document.getElementById("selected-icon");
+            noteObject = {...noteObject, icon: selectedIcon.src};
+        }
+        
+        else {
+            const value = fieldset.children[1].value;
+            noteObject = {...noteObject, [index === 1 ? "title" : "content"]: value};
+        }
+    });
+
+    return noteObject;
 }

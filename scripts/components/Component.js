@@ -24,7 +24,10 @@ import ConversationHolder from "./list/exercises/ConversationHolder.js";
 import Notes from "./list/other/Notes.js";
 import NotesDashboard from "./list/other/NotesDashboard.js";
 import NoteModal from "./list/other/NoteModal.js";
+import NoteModalForm from "./list/other/NoteModalForm.js";
+import NoteModalView from "./list/other/NoteModalView.js";
 import NoteOptionsModal from "./list/other/NoteOptionsModal.js";
+import NoteIconModal from "./list/other/NoteIconModal.js";
 
 import { Convert } from "../functions/Convert.js";
 import { buildEventList } from "../functions/EventControl.js";
@@ -35,7 +38,7 @@ const components = {
     MiniModal, Scrollbar, SpeakButton, StatisticProgressBar, ExercisesList,
     ExerciseStats, ExerciseModal, ExerciseModalTask, ExerciseModalFinished, ExerciseModalReview,
     ExercisesStats, OptionImage, ConversationHolder, Notes, NotesDashboard,
-    NoteModal, NoteOptionsModal
+    NoteModal, NoteModalForm, NoteModalView, NoteOptionsModal, NoteIconModal
 };
 
 export const Component = { create, render };
