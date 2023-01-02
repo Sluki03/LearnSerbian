@@ -84,13 +84,14 @@ export default function NotesDashboard(componentProps) {
     function multipleDelete() {
         const checkedNotes = document.querySelectorAll(".checked-note");
         const body = document.querySelector("body");
+        const exerciseModal = document.querySelector(".exercise-modal");
 
         Component.create("ClassicModal", {
             text: `Do you really want to delete this note${checkedNotes.length > 1 ? "s" : ""}?`,
             buttons: ["no", "yes"],
             buttonsTrigger: { no: "Escape", yes: "Enter" },
             functions: { yes: confirmedDelete },
-            appendTo: body
+            appendTo: exerciseModal ? exerciseModal : body
         });
 
         function confirmedDelete() {

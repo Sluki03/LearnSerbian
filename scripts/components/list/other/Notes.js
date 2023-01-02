@@ -4,11 +4,12 @@ import updateNotes from "../../../functions/updateNotes.js";
 
 export default function Notes(componentProps) {
     const { builtIn } = componentProps;
-    const { appendTo } = componentProps.params;
+    const { style, appendTo } = componentProps.params;
 
     const notes = builtIn ? builtIn : createElement({
         tag: "div",
         attributes: { class: "notes" },
+        style,
         appendTo
     });
 
@@ -30,11 +31,13 @@ export default function Notes(componentProps) {
         appendTo: notesTitle
     });
 
+    const exerciseModal = document.querySelector(".exercise-modal");
+    
     createElement({
         tag: "img",
         attributes: { src: "./images/icons/plus-icon.png", alt: "ADD", class: "add-note" },
-        events: [{ on: "click", call: () => NoteOptions.openModal() }],
-        appendTo: notesTitle        
+        events: [{ on: "click", call: () => NoteOptions.openModal(null, exerciseModal) }],
+        appendTo: notesTitle
     });
 
     createElement({

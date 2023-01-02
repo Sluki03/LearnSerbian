@@ -1,5 +1,6 @@
 import { Component } from "../../Component.js";
 import { ExerciseModalStatus } from "../../../exercises/ExerciseModalStatus.js";
+import { NoteOptions } from "../../../functions/NoteOptions.js";
 
 export default function ExerciseModal(componentProps) {
     const { exercise } = componentProps.params;
@@ -16,6 +17,7 @@ export default function ExerciseModal(componentProps) {
 
     Component.create("ModalOptions", {
         functions: {
+            notes: NoteOptions.openInExercise,
             restart: () => ExerciseModalStatus.restart(exercise, exerciseModal),
             x: ExerciseModalStatus.close
         },

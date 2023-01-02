@@ -112,6 +112,8 @@ export default function NoteOptionsModal(componentProps) {
                     functions: { x: NoteOptions.closeModal },
                     appendTo: noteModal
                 });
+
+                Component.create("MoveModal", { appendTo: noteModal });
                 
                 const noteModalTitle = createElement({
                     tag: "div",

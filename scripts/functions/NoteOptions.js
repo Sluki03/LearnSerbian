@@ -6,7 +6,7 @@ import updateNotes from "./updateNotes.js";
 
 export const NoteOptions = {
     create, edit, delete: remove, download, openModal,
-    closeModal, openOptionsModal, closeOptionsModal
+    closeModal, openOptionsModal, closeOptionsModal, openInExercise, closeInExercise
 };
 
 const body = document.querySelector("body");
@@ -81,6 +81,8 @@ function edit(e = null) {
             functions: { options: openOptionsModal, x: closeModal },
             appendTo: noteModal
         });
+
+        Component.create("MoveModal", { appendTo: noteModal });
         
         const noteModalTitle = createElement({
             tag: "div",
@@ -114,12 +116,14 @@ function edit(e = null) {
 }
 
 function remove(confirm = false, id) {
+    const exerciseModal = document.querySelector(".exercise-modal");
+    
     if(!confirm) return Component.create("ClassicModal", {
         text: `Do you really want to delete this note?`,
         buttons: ["no", "yes"],
         buttonsTrigger: { no: "Escape", yes: "Enter" },
         functions: { yes: () => NoteOptions.delete(true, id) },
-        appendTo: body
+        appendTo: exerciseModal ? exerciseModal : body
     });
     
     const allNotes = JSON.parse(localStorage.getItem("notes"));
@@ -167,7 +171,7 @@ function download(id) {
     a.remove();
 }
 
-function openModal(id = null) {
+function openModal(id = null, appendTo = null) {
     const existingNoteModal = document.querySelector(".note-modal");
 
     if(existingNoteModal) {
@@ -175,7 +179,7 @@ function openModal(id = null) {
         if(noteModalId === id) return;
 
         closeModal();
-        return setTimeout(() => openModal(id), 300);
+        return setTimeout(() => openModal(id, appendTo), 300);
     }
 
     const targetNote = getTargetNote(id);    
@@ -183,7 +187,7 @@ function openModal(id = null) {
     Component.create("NoteModal", {
         type: id ? "view" : "add",
         targetNote: id ? targetNote : null,
-        appendTo: body
+        appendTo: appendTo ? appendTo : body
     });
 
     function getTargetNote(id = null) {
@@ -254,4 +258,45 @@ function getFormData() {
     });
 
     return noteObject;
+}
+
+function openInExercise() {
+    const exerciseModal = document.querySelector(".exercise-modal");
+    const existingNotes = document.querySelector(".exercise-modal .notes");
+
+    if(existingNotes) return closeInExercise();
+    
+    const notes = Component.create("Notes", {
+        style: {
+            width: "385px",
+            opacity: "0",
+            position: "absolute",
+            top: "50%",
+            right: "-385px",
+            transform: "translateY(-50%)"
+        },
+        appendTo: exerciseModal
+    });
+
+    setTimeout(() => {
+        notes.style.opacity = "";
+        notes.style.right = "10px";
+
+        const modalOptionsNotesIcon = document.querySelectorAll(".modal-options img")[0];
+        modalOptionsNotesIcon.style.opacity = "1";
+    }, 100);
+}
+
+function closeInExercise() {
+    const notes = document.querySelector(".exercise-modal .notes");
+
+    notes.style.opacity = "0";
+    notes.style.right = "-385px";
+
+    setTimeout(() => {
+        notes.remove();
+
+        const modalOptionsNotesIcon = document.querySelectorAll(".modal-options img")[0];
+        modalOptionsNotesIcon.style.opacity = "";
+    }, 300);
 }

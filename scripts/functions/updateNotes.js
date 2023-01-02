@@ -5,6 +5,8 @@ import createElement from "./createElement.js";
 export default function updateNotes() {
     const notes = document.querySelector(".notes");
     const notesHolder = document.querySelector(".notes-holder");
+
+    const exerciseModal = document.querySelector(".exercise-modal");
     
     const allNotes = JSON.parse(localStorage.getItem("notes"));
 
@@ -15,7 +17,7 @@ export default function updateNotes() {
             const note = createElement({
                 tag: "div",
                 attributes: { class: "note", id: key },
-                events: [{ on: "click", call: () => NoteOptions.openModal(key) }],
+                events: [{ on: "click", call: () => NoteOptions.openModal(key, exerciseModal) }],
                 appendTo: notesHolder
             });
         

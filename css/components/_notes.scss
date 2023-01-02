@@ -6,6 +6,8 @@
     border-radius: 20px;
     box-shadow: $defLighterShadow;
     position: relative;
+    transition: 300ms;
+    z-index: 1;
 
     .notes-title {
         @include add-flex(row, flex-start);

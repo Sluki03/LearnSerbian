@@ -3811,6 +3811,8 @@ footer div a {
   border-radius: 20px;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
   position: relative;
+  transition: 300ms;
+  z-index: 1;
 }
 .notes .notes-title {
   display: flex;
