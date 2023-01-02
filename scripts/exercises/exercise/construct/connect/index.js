@@ -1,5 +1,6 @@
 import createElement from "../../../../functions/createElement.js";
 import randomArray from "../../../../functions/randomArray.js";
+import inputKeydown from "../../../../functions/inputKeydown.js";
 
 export default function connect(thisExercise) {
     const { taskHolder } = thisExercise.elements;
@@ -27,7 +28,7 @@ export default function connect(thisExercise) {
         },
 
         select: e => {
-            e.preventDefault();
+            if(!inputKeydown(e)) e.preventDefault();
 
             const validButtons = ["Escape"];
 

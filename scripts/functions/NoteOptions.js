@@ -29,7 +29,11 @@ function create(e = null) {
     if(allNotes === null) localStorage.setItem("notes", JSON.stringify({ [`${formattedNoteObjectTitle}_0`]: noteObject }));
 
     else {
-        const newAllNotes = {...allNotes, [`${formattedNoteObjectTitle}_${Object.keys(allNotes).length}`]: noteObject};
+        const lastKey = Object.keys(allNotes)[Object.keys(allNotes).length - 1];
+        const order = parseInt(lastKey.split("_")[1]) + 1;
+        const id = `${formattedNoteObjectTitle}_${order}`;
+
+        const newAllNotes = {...allNotes, [id]: noteObject};
         localStorage.setItem("notes", JSON.stringify(newAllNotes));
     }
 

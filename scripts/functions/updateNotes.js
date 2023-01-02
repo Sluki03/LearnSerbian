@@ -4,50 +4,52 @@ import createElement from "./createElement.js";
 
 export default function updateNotes() {
     const notes = document.querySelector(".notes");
-    const notesHolder = document.querySelector(".notes-holder");
+    const allNotesHolders = document.querySelectorAll(".notes-holder");
 
     const exerciseModal = document.querySelector(".exercise-modal");
     
     const allNotes = JSON.parse(localStorage.getItem("notes"));
 
-    notesHolder.innerHTML = "";
-    
-    if(allNotes && Object.keys(allNotes).length > 0) {
-        Object.keys(allNotes).forEach((key, index) => {
-            const note = createElement({
-                tag: "div",
-                attributes: { class: "note", id: key },
-                events: [{ on: "click", call: () => NoteOptions.openModal(key, exerciseModal) }],
-                appendTo: notesHolder
-            });
+    allNotesHolders.forEach(notesHolder => {
+        notesHolder.innerHTML = "";
+
+        if(allNotes && Object.keys(allNotes).length > 0) {
+            Object.keys(allNotes).forEach((key, index) => {
+                const note = createElement({
+                    tag: "div",
+                    attributes: { class: "note", id: key },
+                    events: [{ on: "click", call: () => NoteOptions.openModal(key, exerciseModal) }],
+                    appendTo: notesHolder
+                });
+            
+                createElement({
+                    tag: "img",
+                    attributes: { src: Object.values(allNotes)[index].icon, alt: "NOTE" },
+                    appendTo: note
+                });
+            
+                createElement({
+                    tag: "p",
+                    innerText: Object.values(allNotes)[index].title,
+                    appendTo: note
+                });
         
-            createElement({
-                tag: "img",
-                attributes: { src: Object.values(allNotes)[index].icon, alt: "NOTE" },
-                appendTo: note
-            });
-        
-            createElement({
-                tag: "p",
-                innerText: Object.values(allNotes)[index].title,
-                appendTo: note
+                createElement({
+                    tag: "div",
+                    attributes: { class: "note-check" },
+                    events: [{ on: "click", call: e => checkNote(e, key) }],
+                    appendTo: note
+                });
             });
     
-            createElement({
-                tag: "div",
-                attributes: { class: "note-check" },
-                events: [{ on: "click", call: e => checkNote(e, key) }],
-                appendTo: note
-            });
+            Component.create("Scrollbar", { trigger: notesHolder, appendTo: notesHolder });
+        }
+    
+        else createElement({
+            tag: "span",
+            innerText: "You have no notes.",
+            appendTo: notesHolder
         });
-
-        Component.create("Scrollbar", { trigger: notesHolder, appendTo: notesHolder });
-    }
-
-    else createElement({
-        tag: "span",
-        innerText: "You have no notes.",
-        appendTo: notesHolder
     });
 
     function checkNote(e, id) {

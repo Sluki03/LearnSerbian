@@ -1,5 +1,6 @@
 import createElement from "../../../../functions/createElement.js";
 import randomArray from "../../../../functions/randomArray.js";
+import inputKeydown from "../../../../functions/inputKeydown.js";
 
 export default function multipleChoice(thisExercise) {
     const { taskHolder, taskInfo } = thisExercise.elements;
@@ -70,7 +71,7 @@ export default function multipleChoice(thisExercise) {
     });
 
     function setActiveButton(e) {
-        e.preventDefault();
+        if(!inputKeydown(e)) e.preventDefault();
         
         const taskInfoBottom = parseInt(getComputedStyle(taskInfo).getPropertyValue("bottom"));
         if(taskInfoBottom === 0) return;
