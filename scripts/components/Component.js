@@ -12,6 +12,7 @@ import MiniModal from "./list/other/MiniModal.js";
 import Scrollbar from "./list/other/Scrollbar.js";
 import SpeakButton from "./list/other/SpeakButton.js";
 import StatisticProgressBar from "./list/other/StatisticProgressBar.js";
+import MoveModal from "./list/other/MoveModal.js";
 import ExercisesList from "./list/exercises/ExercisesList.js";
 import ExerciseStats from "./list/exercises/ExerciseStats.js";
 import ExerciseModal from "./list/exercises/ExerciseModal.js";
@@ -35,10 +36,11 @@ import { buildEventList } from "../functions/EventControl.js";
 const components = {
     PanelsList, Loading, Nav, Footer, InteractiveTitle,
     ModalOptions, ArrowButton, ClassicModal, Typing, DiacriticKeyboard,
-    MiniModal, Scrollbar, SpeakButton, StatisticProgressBar, ExercisesList,
-    ExerciseStats, ExerciseModal, ExerciseModalTask, ExerciseModalFinished, ExerciseModalReview,
-    ExercisesStats, OptionImage, ConversationHolder, Notes, NotesDashboard,
-    NoteModal, NoteModalForm, NoteModalView, NoteOptionsModal, NoteIconModal
+    MiniModal, Scrollbar, SpeakButton, StatisticProgressBar, MoveModal,
+    ExercisesList, ExerciseStats, ExerciseModal, ExerciseModalTask, ExerciseModalFinished,
+    ExerciseModalReview, ExercisesStats, OptionImage, ConversationHolder, Notes,
+    NotesDashboard, NoteModal, NoteModalForm, NoteModalView, NoteOptionsModal,
+    NoteIconModal
 };
 
 export const Component = { create, render };

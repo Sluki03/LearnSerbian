@@ -1,7 +1,6 @@
 import { Component } from "../../Component.js";
 import { NoteOptions } from "../../../functions/NoteOptions.js";
 import createElement from "../../../functions/createElement.js";
-import markdown from "../../../functions/markdown.js";
 
 export default function NoteModal(componentProps) {
     const { builtIn } = componentProps;
@@ -21,6 +20,7 @@ export default function NoteModal(componentProps) {
     functions.x = NoteOptions.closeModal;
 
     Component.create("ModalOptions", { functions, appendTo: noteModal });
+    Component.create("MoveModal", { appendTo: noteModal });
     
     const noteModalTitle = createElement({
         tag: "div",

@@ -4420,4 +4420,33 @@ footer div a {
 }
 .note-icon-modal button {
   font-size: 20px;
+}
+
+.move-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  background-color: transparent;
+  border: none;
+  opacity: 0.7;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  transition: 300ms;
+}
+.move-modal:hover {
+  opacity: 1;
+}
+.move-modal img {
+  height: 30px;
+  width: 30px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.active-move-modal {
+  opacity: 1;
+  cursor: none;
 }/*# sourceMappingURL=main.css.map */
