@@ -17,6 +17,8 @@ function create(e = null) {
     const submitButton = document.querySelector(".note-modal .classic-button");
     if(submitButton.classList.contains("disabled-classic-button")) return;
 
+    window.eventList.remove("notesKeyDown");
+
     closeModal();
 
     const noteObject = getFormData();
@@ -34,8 +36,15 @@ function create(e = null) {
     updateNotes();
 }
 
-function edit(e) {
-    e.preventDefault();
+let editInProgress = false;
+
+function edit(e = null) {
+    if(editInProgress) return;
+    editInProgress = true;
+    
+    if(e) e.preventDefault();
+
+    window.eventList.remove("notesKeyDown");
 
     const noteModal = document.querySelector(".note-modal");
     const validId = noteModal.id.split("-")[0];
@@ -95,7 +104,11 @@ function edit(e) {
 
         setTimeout(() => {
             TransitionDimensions.height(noteModal);
-            setTimeout(() => noteModal.classList.remove("edit-note-modal"), 300);
+            
+            setTimeout(() => {
+                noteModal.classList.remove("edit-note-modal");
+                editInProgress = false;
+            }, 300);
         }, 100);
     }, 300);
 }
@@ -162,7 +175,7 @@ function openModal(id = null) {
         if(noteModalId === id) return;
 
         closeModal();
-        return setTimeout(() => open(id), 300);
+        return setTimeout(() => openModal(id), 300);
     }
 
     const targetNote = getTargetNote(id);    
@@ -198,8 +211,6 @@ function closeModal() {
 
     noteModal.style.opacity = "0";
     noteModal.style.top = "60%";
-    
-    window.eventList.remove("notesKeyDown");
 
     setTimeout(() => {
         noteModal.remove();

@@ -44,7 +44,7 @@ export default function NoteOptionsModal(componentProps) {
 
     return noteOptionsModal;
 
-    function closeNoteOptionsModal() {
+    function closeNoteOptionsModal(e) {
         let closeStatus = true;
 
         e.composedPath().forEach(element => {

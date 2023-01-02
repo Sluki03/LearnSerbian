@@ -37,7 +37,7 @@ export default function Notes(componentProps) {
         appendTo: notesTitle        
     });
 
-    const notesHolder = createElement({
+    createElement({
         tag: "div",
         attributes: { class: "notes-holder" },
         appendTo: notes

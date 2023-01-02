@@ -190,6 +190,6 @@ export default function NoteModalForm(componentProps) {
             textarea.focus();
         }
 
-        if(!textarea.isEqualNode(document.activeElement)) NoteOptions.create();
+        if(!textarea.isEqualNode(document.activeElement)) type === "edit" ? NoteOptions.edit() : NoteOptions.create();
     }
 }
