@@ -27,23 +27,23 @@ export default function MoveModal(componentProps) {
 
         moveModal.classList.add("active-move-modal");
 
-        const { height, width } = e.target.getBoundingClientRect();
-        const { top, left } = appendTo.getBoundingClientRect();
+        const buttonValues = e.target.getBoundingClientRect();
+        const { height, width, top, left } = appendTo.getBoundingClientRect();
 
         appendTo.style.transform = "none";
         appendTo.style.transition = "0ms";
 
-        appendTo.style.top = `${top.toFixed(2)}px`,
-        appendTo.style.left = `${left.toFixed(2)}px`
+        appendTo.style.top = `${top.toFixed(2)}px`;
+        appendTo.style.left = `${left.toFixed(2)}px`;
 
         function move(e) {
             const mouse = {
-                x: e.clientX - width / 2 - 10,
-                y: e.clientY - height / 2 - 10
+                x: e.clientX - buttonValues.width / 2 - 10,
+                y: e.clientY - buttonValues.height / 2 - 10
             };
             
-            appendTo.style.top = `${mouse.y}px`,
-            appendTo.style.left = `${mouse.x}px`
+            if(mouse.y > 0 && mouse.y + height < window.innerHeight) appendTo.style.top = `${mouse.y}px`;
+            if(mouse.x > 0 && mouse.x + width < window.innerWidth) appendTo.style.left = `${mouse.x}px`;
         }
         
         function cancelMove() {
