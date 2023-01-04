@@ -1,0 +1,100 @@
+form {
+    @include add-flex(column);
+    gap: 20px;
+    width: 100%;
+    margin: 0 15px 15px 15px;
+
+    fieldset {
+        @include add-flex(column);
+        gap: 5px;
+        width: 90%;
+        border: none;
+
+        label {
+            width: 100%;
+            font-size: 17px;
+            color: $defGrey;
+            text-transform: capitalize;
+            font-weight: bold;
+        }
+        
+        input, textarea {
+            width: 100%;
+            color: $defDarkGrey;
+            font-size: set-size(md);
+            outline: none;
+            padding: 3px 5px;
+            transition: 300ms;
+
+            &:hover {
+                border: 2px solid $defGrey;
+            }
+
+            &:focus {
+                border: 2px solid $defGrey;
+                box-shadow: $defLighterShadow;
+            }
+        }
+        
+        input {
+            border: 2px solid transparent;
+            border-bottom: 2px solid $defLightGrey;
+        
+            &:hover,
+            &:focus {
+                border-radius: 10px;
+            }
+        }
+
+        textarea {
+            border: 2px solid $defLightGrey;
+            border-radius: 10px;
+            resize: none;
+        }
+    }
+
+    .icon-fieldset {
+        @include add-flex(row, flex-start);
+        gap: 10px;
+
+        label {
+            width: auto;
+        }
+        
+        .icons-holder {
+            @include add-flex;
+            height: 50px;
+            width: 50px;
+            border: 1px solid $defLightGrey;
+            border-radius: 20px;
+            box-shadow: $defLighterShadow;
+            padding: 0 10px;
+            transition: 300ms;
+            overflow: hidden;
+
+            &:hover {
+                border: 1px solid $defGrey;
+                box-shadow: $defLightShadow;
+            }
+            
+            .icons-list {
+                @include add-flex;
+                height: 50px;
+                position: relative;
+
+                img {
+                    height: 30px;
+                    width: 30px;
+                    object-fit: contain;
+                    cursor: pointer;
+                    pointer-events: all;
+                    position: absolute;
+                    left: 0;
+                    transition: 500ms;
+                }
+            }
+        }
+    }
+
+    @include classic-button;
+}

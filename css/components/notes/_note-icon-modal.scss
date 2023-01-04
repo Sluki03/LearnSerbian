@@ -1,0 +1,143 @@
+.note-icon-modal {
+    @include add-flex(column);
+    gap: 15px;
+    width: 80%;
+    background-color: white;
+    border: 2px solid $defLightGrey;
+    border-radius: 20px;
+    box-shadow: $defLighterShadow;
+    opacity: 0;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    padding: 15px;
+    transform: translate(-50%, -50%);
+    transition: 300ms;
+    z-index: 4;
+
+    .modal-options img {
+        height: 30px;
+        width: 30px;
+    }
+
+    .note-modal-title {
+        @include add-flex;
+        gap: 10px;
+        margin: 30px 15px 0 15px;
+
+        img {
+            height: 40px;
+            width: 40px;
+            object-fit: contain;
+        }
+        
+        h3 {
+            color: $defDarkGrey;
+            font-size: set-size(xxl);
+        }
+    }
+
+    .note-icon-modal-title {
+        @include add-flex(row);
+        gap: 10px;
+
+        img {
+            height: 30px;
+            width: 30px;
+            object-fit: contain;
+        }
+
+        h4 {
+            color: $defDarkGrey;
+            font-size: set-size(lg);
+            text-transform: capitalize;
+        }
+    }
+
+    .upload-holder {
+        @include add-flex;
+        height: 120px;
+        width: 90%;
+        border: 3px dashed $defLightGrey;
+        border-radius: 20px;
+        box-shadow: $defLighterShadow;
+        position: relative;
+        transition: 300ms;
+        overflow: hidden;
+
+        .upload-image-input {
+            height: 100%;
+            width: 100%;
+            opacity: 0;
+            cursor: pointer;
+            position: absolute;
+            z-index: 2;
+        }
+        
+        .img-holder {
+            @include add-flex;
+            background-color: white;
+            border: 1px solid $defLightGrey;
+            border-radius: 50%;
+            box-shadow: $defLighterShadow;
+            z-index: 1;
+            
+            img {
+                height: 60px;
+                width: 60px;
+                border-radius: 50%;
+                object-fit: contain;
+                transition: 300ms;
+            }
+        }
+
+        .img-circle {
+            height: 50px;
+            width: 50px;
+            background-color: $defGrey;
+            border-radius: 50%;
+            box-shadow: $defLightShadow;
+            position: absolute;
+            transition: 600ms;
+        }
+    }
+
+    .active-upload-holder {
+        border: 3px solid $defGrey;
+        box-shadow: $defLightShadow;
+        
+        .img-holder img {
+            height: 70px;
+            width: 70px;
+        }
+
+        #img-circle-1 {
+            height: 160px;
+            width: 160px;
+            background-color: $defLighterRed
+        }
+
+        #img-circle-2 {
+            height: 130px;
+            width: 130px;
+            background-color: $defLighterBlue;
+        }
+
+        #img-circle-3 {
+            height: 100px;
+            width: 100px;
+            background-color: white;
+        }
+    }
+
+    @include classic-button;
+
+    button {
+        font-size: set-size(md);
+    }
+}
+
+.active-note-modal {
+    opacity: 1;
+    top: 50%;
+}

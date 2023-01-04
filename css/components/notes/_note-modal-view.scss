@@ -1,0 +1,19 @@
+.content-holder {
+    max-height: 400px;
+    margin: 0 15px 15px 15px;
+    position: relative;
+    overflow: auto;
+    
+    p {
+        color: $defDarkGrey;
+        font-size: set-size(md);
+        white-space: break-spaces;
+        position: relative;
+        padding: 15px;
+        padding-top: 0;
+    }
+
+    .scrollbar {
+        right: 0;
+    }
+}

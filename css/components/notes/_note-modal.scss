@@ -1,0 +1,52 @@
+.note-modal {
+    @include add-flex(column);
+    gap: 15px;
+    width: 30%;
+    background-color: white;
+    border: 2px solid $defLightGrey;
+    border-radius: 20px;
+    box-shadow: $defLighterShadow;
+    opacity: 0;
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: 300ms;
+    z-index: 4;
+
+    .modal-options img {
+        height: 30px;
+        width: 30px;
+    }
+
+    .note-modal-title {
+        @include add-flex;
+        gap: 10px;
+        margin: 30px 15px 0 15px;
+
+        img {
+            height: 40px;
+            width: 40px;
+            object-fit: contain;
+        }
+        
+        h3 {
+            color: $defDarkGrey;
+            font-size: set-size(xxl);
+        }
+    }
+
+    @import "./note-options-modal";
+    @import "./note-modal-form";
+    @import "./note-modal-view";
+}
+
+.active-note-modal {
+    opacity: 1;
+    top: 50%;
+}
+
+.edit-note-modal {
+    height: 0;
+    overflow: hidden;
+}
