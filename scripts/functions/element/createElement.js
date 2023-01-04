@@ -1,5 +1,5 @@
 import { Styles } from "./Styles.js";
-import { buildEventList } from "./EventControl.js";
+import { buildEventList } from "../other/EventControl.js";
 
 export default function createElement(element) {
     const newElement = document.createElement(element.tag);

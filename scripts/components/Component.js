@@ -3,16 +3,23 @@ import Loading from "./list/other/Loading.js";
 import Nav from "./list/other/Nav.js"
 import Footer from "./list/other/Footer.js";
 import InteractiveTitle from "./list/other/InteractiveTitle.js"
-import ModalOptions from "./list/other/ModalOptions.js";
-import ArrowButton from "./list/other/ArrowButton.js";
-import ClassicModal from "./list/other/ClassicModal.js";
 import Typing from "./list/other/Typing.js";
 import DiacriticKeyboard from "./list/other/DiacriticKeyboard.js";
-import MiniModal from "./list/other/MiniModal.js";
 import Scrollbar from "./list/other/Scrollbar.js";
-import SpeakButton from "./list/other/SpeakButton.js";
 import StatisticProgressBar from "./list/other/StatisticProgressBar.js";
-import MoveModal from "./list/other/MoveModal.js";
+import ArrowButton from "./list/other/buttons/ArrowButton.js";
+import SpeakButton from "./list/other/buttons/SpeakButton.js";
+import ModalOptions from "./list/other/modal/ModalOptions.js";
+import MoveModal from "./list/other/modal/MoveModal.js";
+import MiniModal from "./list/other/modal/MiniModal.js";
+import ClassicModal from "./list/other/modal/ClassicModal.js";
+import Notes from "./list/other/notes/Notes.js";
+import NotesDashboard from "./list/other/notes/NotesDashboard.js";
+import NoteModal from "./list/other/notes/NoteModal.js";
+import NoteModalForm from "./list/other/notes/NoteModalForm.js";
+import NoteModalView from "./list/other/notes/NoteModalView.js";
+import NoteOptionsModal from "./list/other/notes/NoteOptionsModal.js";
+import NoteIconModal from "./list/other/notes/NoteIconModal.js";
 import ExercisesList from "./list/exercises/ExercisesList.js";
 import ExerciseStats from "./list/exercises/ExerciseStats.js";
 import ExerciseModal from "./list/exercises/ExerciseModal.js";
@@ -22,16 +29,9 @@ import ExerciseModalReview from "./list/exercises/ExerciseModalReview.js";
 import ExercisesStats from "./list/exercises/ExercisesStats.js";
 import OptionImage from "./list/exercises/OptionImage.js";
 import ConversationHolder from "./list/exercises/ConversationHolder.js";
-import Notes from "./list/other/Notes.js";
-import NotesDashboard from "./list/other/NotesDashboard.js";
-import NoteModal from "./list/other/NoteModal.js";
-import NoteModalForm from "./list/other/NoteModalForm.js";
-import NoteModalView from "./list/other/NoteModalView.js";
-import NoteOptionsModal from "./list/other/NoteOptionsModal.js";
-import NoteIconModal from "./list/other/NoteIconModal.js";
 
-import { Convert } from "../functions/Convert.js";
-import { buildEventList } from "../functions/EventControl.js";
+import { Convert } from "../functions/text/Convert.js";
+import { buildEventList } from "../functions/other/EventControl.js";
 
 const components = {
     PanelsList, Loading, Nav, Footer, InteractiveTitle,

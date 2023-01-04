@@ -1,8 +1,8 @@
 import { Component } from "../../../../components/Component.js";
-import { Convert } from "../../../../functions/Convert.js";
-import createElement from "../../../../functions/createElement.js";
-import { Shorten } from "../../../../functions/Shorten.js";
-import randomArray from "../../../../functions/randomArray.js";
+import { Convert } from "../../../../functions/text/Convert.js";
+import createElement from "../../../../functions/element/createElement.js";
+import { Shorten } from "../../../../functions/text/Shorten.js";
+import randomArray from "../../../../functions/other/randomArray.js";
 import { getAllPlaceholders, getFields, emptyFieldSelector } from "./functions.js";
 import setTranslatableWords from "../../../setTranslatableWords.js";
 

@@ -1,7 +1,7 @@
-import loaded from "../functions/loaded.js";
+import loaded from "../functions/other/loaded.js";
 import { Component } from "../components/Component.js";
-import { buildEventList } from "../functions/EventControl.js";
-import scrollingParallax from "../functions/scrollingParallax.js";
+import { buildEventList } from "../functions/other/EventControl.js";
+import scrollingParallax from "../functions/element/scrollingParallax.js";
 
 window.addEventListener("load", () => {
     loaded();

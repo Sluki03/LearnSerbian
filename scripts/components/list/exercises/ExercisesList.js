@@ -1,4 +1,4 @@
-import createElement from "../../../functions/createElement.js";
+import createElement from "../../../functions/element/createElement.js";
 import loadExercises from "../../../exercises/loadExercises.js";
 
 export default function ExercisesList(componentProps) {

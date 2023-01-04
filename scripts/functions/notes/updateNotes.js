@@ -1,6 +1,6 @@
-import { Component } from "../components/Component.js";
+import { Component } from "../../components/Component.js";
 import { NoteOptions } from "./NoteOptions.js";
-import createElement from "./createElement.js";
+import createElement from "../element/createElement.js";
 
 export default function updateNotes() {
     const notes = document.querySelector(".notes");

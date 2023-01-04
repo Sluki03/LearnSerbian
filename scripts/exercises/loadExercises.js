@@ -1,8 +1,8 @@
 import { Component } from "../components/Component.js";
 import { exercisesData } from "../../data/exercises/index.js";
 import { ExerciseModalStatus } from "./ExerciseModalStatus.js";
-import { Convert } from "../functions/Convert.js";
-import createElement from "../functions/createElement.js";
+import { Convert } from "../functions/text/Convert.js";
+import createElement from "../functions/element/createElement.js";
 import initializeStats from "./initializeStats.js";
 import getDifficultyColor from "./getDifficultyColor.js";
 

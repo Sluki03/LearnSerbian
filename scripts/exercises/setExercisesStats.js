@@ -1,5 +1,5 @@
 import { exercisesData } from "../../data/exercises/index.js";
-import formatTime from "../functions/formatTime.js";
+import formatTime from "../functions/calc/formatTime.js";
 
 export default function setExercisesStats() {
     const statsContent = {

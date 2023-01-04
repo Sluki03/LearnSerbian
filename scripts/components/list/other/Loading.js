@@ -1,5 +1,5 @@
 import { loadingTipsData } from "../../../../data/loadingTipsData.js";
-import createElement from "../../../functions/createElement.js";
+import createElement from "../../../functions/element/createElement.js";
 
 export default function Loading(componentProps) {
     const { builtIn } = componentProps;

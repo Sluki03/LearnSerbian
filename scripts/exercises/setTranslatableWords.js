@@ -1,5 +1,5 @@
 import { Component } from "../components/Component.js";
-import breakText from "../functions/breakText.js";
+import breakText from "../functions/text/breakText.js";
 
 export default function setTranslatableWords(parent, text, translation, englishSerbian = false, speak = true) {
     const brokenText = breakText(text, { lowerCase: false });

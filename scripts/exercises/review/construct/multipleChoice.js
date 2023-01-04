@@ -1,5 +1,5 @@
 import { Component } from "../../../components/Component.js";
-import createElement from "../../../functions/createElement.js";
+import createElement from "../../../functions/element/createElement.js";
 
 export default function multipleChoice(reviewProps) {
     const { current, taskReview } = reviewProps;

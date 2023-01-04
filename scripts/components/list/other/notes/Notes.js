@@ -1,6 +1,6 @@
-import { NoteOptions } from "../../../functions/NoteOptions.js";
-import createElement from "../../../functions/createElement.js";
-import updateNotes from "../../../functions/updateNotes.js";
+import { NoteOptions } from "../../../../functions/notes/NoteOptions.js";
+import createElement from "../../../../functions/element/createElement.js";
+import updateNotes from "../../../../functions/notes/updateNotes.js";
 
 export default function Notes(componentProps) {
     const { builtIn } = componentProps;

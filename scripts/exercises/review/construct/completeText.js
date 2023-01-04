@@ -1,6 +1,6 @@
-import { Convert } from "../../../functions/Convert.js";
-import createElement from "../../../functions/createElement.js";
-import breakText from "../../../functions/breakText.js";
+import { Convert } from "../../../functions/text/Convert.js";
+import createElement from "../../../functions/element/createElement.js";
+import breakText from "../../../functions/text/breakText.js";
 import setTranslatableWords from "../../setTranslatableWords.js";
 
 export default function completeText(reviewProps) {

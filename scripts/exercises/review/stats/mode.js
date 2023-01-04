@@ -1,5 +1,5 @@
-import { Convert } from "../../../functions/Convert.js";
-import createElement from "../../../functions/createElement.js";
+import { Convert } from "../../../functions/text/Convert.js";
+import createElement from "../../../functions/element/createElement.js";
 
 export default function mode(reviewProps) {
     const { current, taskReview } = reviewProps;

@@ -1,6 +1,6 @@
-import createElement from "../../../../functions/createElement.js";
-import randomArray from "../../../../functions/randomArray.js";
-import inputKeydown from "../../../../functions/inputKeydown.js";
+import createElement from "../../../../functions/element/createElement.js";
+import randomArray from "../../../../functions/other/randomArray.js";
+import inputKeydown from "../../../../functions/element/inputKeydown.js";
 
 export default function connect(thisExercise) {
     const { taskHolder } = thisExercise.elements;

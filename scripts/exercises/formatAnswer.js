@@ -1,4 +1,4 @@
-import breakText from "../functions/breakText.js";
+import breakText from "../functions/text/breakText.js";
 
 export default function formatAnswer(type, acceptableAnswers, userAnswer = "") {
     let otherAnswers = acceptableAnswers;

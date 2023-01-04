@@ -1,6 +1,6 @@
 import { Component } from "../../../../components/Component.js";
-import createElement from "../../../../functions/createElement.js";
-import randomArray from "../../../../functions/randomArray.js";
+import createElement from "../../../../functions/element/createElement.js";
+import randomArray from "../../../../functions/other/randomArray.js";
 
 export default function taskInterface(thisExercise) {
     const interfaceElement = document.querySelector(".interface");

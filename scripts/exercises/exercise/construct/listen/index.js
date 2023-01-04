@@ -1,5 +1,5 @@
 import taskInterface from "./interface.js";
-import createElement from "../../../../functions/createElement.js";
+import createElement from "../../../../functions/element/createElement.js";
 
 export default function listen(thisExercise, changeMode) {
     if(changeMode) return taskInterface(thisExercise);

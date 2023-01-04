@@ -1,5 +1,5 @@
 import { indexPanelsData } from "../../../../data/indexPanelsData.js";
-import createElement from "../../../functions/createElement.js";
+import createElement from "../../../functions/element/createElement.js";
 
 export default function PanelsList(componentProps) {
     const { builtIn } = componentProps;

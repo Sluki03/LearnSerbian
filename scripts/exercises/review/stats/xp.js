@@ -1,6 +1,6 @@
 import { Component } from "../../../components/Component.js";
-import { Percentage } from "../../../functions/Percentage.js";
-import createElement from "../../../functions/createElement.js";
+import { Percentage } from "../../../functions/calc/Percentage.js";
+import createElement from "../../../functions/element/createElement.js";
 
 export default function xp(reviewProps) {
     const { results, current, taskReview } = reviewProps;

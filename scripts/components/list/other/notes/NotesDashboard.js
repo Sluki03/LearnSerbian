@@ -1,8 +1,8 @@
-import { Component } from "../../Component.js";
-import { NoteOptions } from "../../../functions/NoteOptions.js";
-import createElement from "../../../functions/createElement.js";
-import { TransitionDimensions } from "../../../functions/TransitionDimensions.js";
-import updateNotes from "../../../functions/updateNotes.js";
+import { Component } from "../../../Component.js";
+import { NoteOptions } from "../../../../functions/notes/NoteOptions.js";
+import createElement from "../../../../functions/element/createElement.js";
+import { TransitionDimensions } from "../../../../functions/element/TransitionDimensions.js";
+import updateNotes from "../../../../functions/notes/updateNotes.js";
 
 export default function NotesDashboard(componentProps) {
     const { builtIn } = componentProps;

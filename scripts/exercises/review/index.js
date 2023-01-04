@@ -1,6 +1,6 @@
-import { Convert } from "../../functions/Convert.js";
-import createElement from "../../functions/createElement.js";
-import { TransitionDimensions } from "../../functions/TransitionDimensions.js";
+import { Convert } from "../../functions/text/Convert.js";
+import createElement from "../../functions/element/createElement.js";
+import { TransitionDimensions } from "../../functions/element/TransitionDimensions.js";
 
 import multipleChoice from "./construct/multipleChoice.js";
 import translate from "./construct/translate.js";

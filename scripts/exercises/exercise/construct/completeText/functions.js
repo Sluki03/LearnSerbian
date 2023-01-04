@@ -1,4 +1,4 @@
-import { Shorten } from "../../../../functions/Shorten.js";
+import { Shorten } from "../../../../functions/text/Shorten.js";
 
 export const Inputs = {
     set: (thisExercise) => {

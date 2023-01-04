@@ -1,8 +1,8 @@
-import { Component } from "../../Component.js";
-import { noteIconsData } from "../../../../data/noteIconsData.js";
-import { TransitionDimensions } from "../../../functions/TransitionDimensions.js";
-import { NoteOptions } from "../../../functions/NoteOptions.js";
-import createElement from "../../../functions/createElement.js";
+import { Component } from "../../../Component.js";
+import { noteIconsData } from "../../../../../data/noteIconsData.js";
+import { TransitionDimensions } from "../../../../functions/element/TransitionDimensions.js";
+import { NoteOptions } from "../../../../functions/notes/NoteOptions.js";
+import createElement from "../../../../functions/element/createElement.js";
 
 export default function NoteModalForm(componentProps) {
     const { builtIn } = componentProps;

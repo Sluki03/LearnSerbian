@@ -1,6 +1,6 @@
 import { Component } from "../../../components/Component.js";
-import { Convert } from "../../../functions/Convert.js";
-import createElement from "../../../functions/createElement.js";
+import { Convert } from "../../../functions/text/Convert.js";
+import createElement from "../../../functions/element/createElement.js";
 import formatAnswer from "../../formatAnswer.js";
 
 export default function answer(reviewProps) {

@@ -1,7 +1,7 @@
 import { Component } from "../../../components/Component.js";
-import { Percentage } from "../../../functions/Percentage.js";
-import createElement from "../../../functions/createElement.js";
-import formatTime from "../../../functions/formatTime.js";
+import { Percentage } from "../../../functions/calc/Percentage.js";
+import createElement from "../../../functions/element/createElement.js";
+import formatTime from "../../../functions/calc/formatTime.js";
 
 export default function time(reviewProps) {
     const { results, current, taskReview } = reviewProps;

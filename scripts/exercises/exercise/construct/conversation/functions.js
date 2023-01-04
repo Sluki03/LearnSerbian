@@ -1,7 +1,7 @@
 import { Component } from "../../../../components/Component.js";
-import createElement from "../../../../functions/createElement.js";
+import createElement from "../../../../functions/element/createElement.js";
 import setTranslatableWords from "../../../setTranslatableWords.js";
-import { Shorten } from "../../../../functions/Shorten.js";
+import { Shorten } from "../../../../functions/text/Shorten.js";
 
 const userAnswers = [];
 

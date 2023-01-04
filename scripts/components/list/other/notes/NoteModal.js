@@ -1,6 +1,6 @@
-import { Component } from "../../Component.js";
-import { NoteOptions } from "../../../functions/NoteOptions.js";
-import createElement from "../../../functions/createElement.js";
+import { Component } from "../../../Component.js";
+import { NoteOptions } from "../../../../functions/notes/NoteOptions.js";
+import createElement from "../../../../functions/element/createElement.js";
 
 export default function NoteModal(componentProps) {
     const { builtIn } = componentProps;

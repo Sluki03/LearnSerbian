@@ -1,5 +1,5 @@
 import { Component } from "../../../components/Component.js";
-import createElement from "../../../functions/createElement.js";
+import createElement from "../../../functions/element/createElement.js";
 import setTranslatableWords from "../../setTranslatableWords.js";
 
 export default function conversation(reviewProps) {

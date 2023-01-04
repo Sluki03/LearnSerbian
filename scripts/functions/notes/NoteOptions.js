@@ -1,7 +1,7 @@
-import { Component } from "../components/Component.js";
-import { Convert } from "./Convert.js";
-import { TransitionDimensions } from "./TransitionDimensions.js";
-import createElement from "./createElement.js";
+import { Component } from "../../components/Component.js";
+import { Convert } from "../text/Convert.js";
+import { TransitionDimensions } from "../element/TransitionDimensions.js";
+import createElement from "../element/createElement.js";
 import updateNotes from "./updateNotes.js";
 
 export const NoteOptions = {

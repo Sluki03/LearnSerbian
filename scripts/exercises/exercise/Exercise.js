@@ -1,12 +1,12 @@
 import { Component } from "../../components/Component.js";
-import { Convert } from "../../functions/Convert.js";
-import { Percentage } from "../../functions/Percentage.js";
-import createElement from "../../functions/createElement.js";
+import { Convert } from "../../functions/text/Convert.js";
+import { Percentage } from "../../functions/calc/Percentage.js";
+import createElement from "../../functions/element/createElement.js";
 import { constructTask, changeMode } from "./construct/index.js";
-import randomArray from "../../functions/randomArray.js";
-import breakText from "../../functions/breakText.js";
+import randomArray from "../../functions/other/randomArray.js";
+import breakText from "../../functions/text/breakText.js";
 import formatAnswer from "../formatAnswer.js";
-import formatTime from "../../functions/formatTime.js";
+import formatTime from "../../functions/calc/formatTime.js";
 import getDefaultTitle from "../getDefaultTitle.js";
 
 export class Exercise {

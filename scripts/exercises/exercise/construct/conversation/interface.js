@@ -1,8 +1,8 @@
 import { Component } from "../../../../components/Component.js";
 import { sendMessage, participantBehavior, getInputMaxLength, buttonTyping, translationModal } from "./functions.js";
-import createElement from "../../../../functions/createElement.js";
-import breakText from "../../../../functions/breakText.js";
-import randomArray from "../../../../functions/randomArray.js";
+import createElement from "../../../../functions/element/createElement.js";
+import breakText from "../../../../functions/text/breakText.js";
+import randomArray from "../../../../functions/other/randomArray.js";
 
 const userAnswers = [];
 

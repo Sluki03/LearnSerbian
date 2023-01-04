@@ -1,4 +1,4 @@
-import { Convert } from "./Convert.js";
+import { Convert } from "../text/Convert.js";
 
 export const Styles = { set, remove };
 

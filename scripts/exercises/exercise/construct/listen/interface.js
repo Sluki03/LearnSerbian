@@ -1,6 +1,6 @@
 import { Component } from "../../../../components/Component.js";
 import { changeMode } from "../index.js";
-import createElement from "../../../../functions/createElement.js";
+import createElement from "../../../../functions/element/createElement.js";
 import setTranslatableWords from "../../../setTranslatableWords.js";
 
 export default function taskInterface(thisExercise) {

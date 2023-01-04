@@ -1,4 +1,4 @@
-import createElement from "../../../functions/createElement.js";
+import createElement from "../../../functions/element/createElement.js";
 
 export default function Typing(componentProps) {
     const { builtIn } = componentProps;

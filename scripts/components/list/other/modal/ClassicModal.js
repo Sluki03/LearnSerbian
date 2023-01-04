@@ -1,5 +1,5 @@
-import createElement from "../../../functions/createElement.js";
-import { Convert } from "../../../functions/Convert.js";
+import createElement from "../../../../functions/element/createElement.js";
+import { Convert } from "../../../../functions/text/Convert.js";
 
 export default function ClassicModal(componentProps) {
     const { text, buttons, buttonsTrigger, functions, appendTo } = componentProps.params;

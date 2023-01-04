@@ -1,6 +1,6 @@
 import { Component } from "../../Component.js";
 import { ExerciseModalStatus } from "../../../exercises/ExerciseModalStatus.js";
-import createElement from "../../../functions/createElement.js";
+import createElement from "../../../functions/element/createElement.js";
 import review from "../../../exercises/review/index.js";
 
 export default function ExerciseModalReview(componentProps) {

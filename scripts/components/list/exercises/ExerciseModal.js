@@ -1,6 +1,6 @@
 import { Component } from "../../Component.js";
 import { ExerciseModalStatus } from "../../../exercises/ExerciseModalStatus.js";
-import { NoteOptions } from "../../../functions/NoteOptions.js";
+import { NoteOptions } from "../../../functions/notes/NoteOptions.js";
 
 export default function ExerciseModal(componentProps) {
     const { exercise } = componentProps.params;

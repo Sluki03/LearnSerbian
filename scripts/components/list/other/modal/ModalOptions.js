@@ -1,4 +1,4 @@
-import createElement from "../../../functions/createElement.js";
+import createElement from "../../../../functions/element/createElement.js";
 
 export default function ModalOptions(componentProps) {
     const { builtIn } = componentProps;

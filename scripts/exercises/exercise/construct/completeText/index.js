@@ -1,5 +1,5 @@
 import taskInterface from "./interface.js";
-import createElement from "../../../../functions/createElement.js";
+import createElement from "../../../../functions/element/createElement.js";
 import { Inputs, Spans, emptyFieldSelector } from "./functions.js";
 
 export default function completeText(thisExercise, changeMode) {

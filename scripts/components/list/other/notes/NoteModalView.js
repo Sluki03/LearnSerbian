@@ -1,6 +1,6 @@
-import { Component } from "../../Component.js";
-import createElement from "../../../functions/createElement.js";
-import markdown from "../../../functions/markdown.js";
+import { Component } from "../../../Component.js";
+import createElement from "../../../../functions/element/createElement.js";
+import markdown from "../../../../functions/text/markdown.js";
 
 export default function NoteModalView(componentProps) {
     const { builtIn } = componentProps;

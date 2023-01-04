@@ -1,6 +1,6 @@
 import { Component } from "../../Component.js";
 import { navButtonsData } from "../../../../data/navButtonsData.js";
-import createElement from "../../../functions/createElement.js";
+import createElement from "../../../functions/element/createElement.js";
 
 export default function Nav(componentProps) {
     const { builtIn } = componentProps;

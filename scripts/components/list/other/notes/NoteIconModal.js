@@ -1,5 +1,5 @@
-import { Component } from "../../Component.js";
-import createElement from "../../../functions/createElement.js";
+import { Component } from "../../../Component.js";
+import createElement from "../../../../functions/element/createElement.js";
 
 export default function NoteIconModal(componentProps) {
     const { builtIn } = componentProps;
