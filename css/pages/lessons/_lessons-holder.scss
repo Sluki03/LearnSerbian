@@ -1,0 +1,41 @@
+.lessons-holder {
+    @include add-flex;
+    width: 60%;
+    padding: 20px 0;
+
+    .lessons-search {
+        @include add-flex;
+        width: 80%;
+        background-color: $defBlurBg;
+        border: 2px solid $defLightGrey;
+        backdrop-filter: $defBlurFilter;
+        border-radius: 30px;
+        box-shadow: $defLighterShadow;
+        position: relative;
+        padding: 5px 10px;
+        transition: 300ms;
+
+        input {
+            width: 100%;
+            color: $defDarkGrey;
+            font-size: set-size(lg);
+            background-color: transparent;
+            padding: 0px 15px;
+            border: none;
+            outline: none;
+            transition: 300ms;
+            
+            &::placeholder {
+                text-transform: capitalize;
+            }
+        }
+
+        img {
+            height: 30px;
+            width: 30px;
+            object-fit: contain;
+            z-index: 2;
+            opacity: .8;
+        }
+    }
+}

@@ -204,6 +204,83 @@ img {
   padding: 20px;
 }
 
+#lessons {
+  height: 100vh;
+  background-image: url("../images/background.png");
+  position: relative;
+  padding-top: 65px;
+  overflow: auto;
+}
+
+main {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: row;
+  min-height: 100%;
+  position: relative;
+}
+main section {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+main .lessons-holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  width: 60%;
+  padding: 20px 0;
+}
+main .lessons-holder .lessons-search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  width: 80%;
+  background-color: rgba(255, 255, 255, 0.3);
+  border: 2px solid rgb(200, 200, 200);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  border-radius: 30px;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+  position: relative;
+  padding: 5px 10px;
+  transition: 300ms;
+}
+main .lessons-holder .lessons-search input {
+  width: 100%;
+  color: #5e5c5c;
+  font-size: 25px;
+  background-color: transparent;
+  padding: 0px 15px;
+  border: none;
+  outline: none;
+  transition: 300ms;
+}
+main .lessons-holder .lessons-search input::-moz-placeholder {
+  text-transform: capitalize;
+}
+main .lessons-holder .lessons-search input:-ms-input-placeholder {
+  text-transform: capitalize;
+}
+main .lessons-holder .lessons-search input::placeholder {
+  text-transform: capitalize;
+}
+main .lessons-holder .lessons-search img {
+  height: 30px;
+  width: 30px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  z-index: 2;
+  opacity: 0.8;
+}
+main .lessons-info {
+  width: 40%;
+}
+
 #exercises {
   height: 100vh;
   background-image: url("../images/background.png");
@@ -2056,149 +2133,6 @@ main section {
   justify-content: flex-start;
   flex-direction: column;
 }
-main .exercises-info {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-direction: column;
-  gap: 20px;
-  width: 50%;
-  position: -webkit-sticky;
-  position: sticky;
-  top: 100px;
-  margin-top: 35px;
-}
-main .exercises-info .exercises-search {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  width: 50%;
-  background-color: rgba(255, 255, 255, 0.3);
-  border: 2px solid rgb(200, 200, 200);
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
-  border-radius: 30px;
-  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
-  position: relative;
-  padding: 5px 10px;
-  transition: 300ms;
-}
-main .exercises-info .exercises-search input {
-  width: 100%;
-  color: #5e5c5c;
-  font-size: 25px;
-  background-color: transparent;
-  padding: 0px 15px;
-  border: none;
-  outline: none;
-  transition: 300ms;
-}
-main .exercises-info .exercises-search input::-moz-placeholder {
-  text-transform: capitalize;
-}
-main .exercises-info .exercises-search input:-ms-input-placeholder {
-  text-transform: capitalize;
-}
-main .exercises-info .exercises-search input::placeholder {
-  text-transform: capitalize;
-}
-main .exercises-info .exercises-search img {
-  height: 30px;
-  width: 30px;
-  -o-object-fit: contain;
-     object-fit: contain;
-  z-index: 2;
-  opacity: 0.8;
-}
-main .exercises-info .info-other {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  width: 50%;
-  background-color: white;
-  border: 2px solid rgb(200, 200, 200);
-  border-radius: 20px;
-  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
-}
-main .exercises-info .info-other .other-title {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-direction: row;
-  gap: 5px;
-  width: 100%;
-  padding: 5px 15px;
-}
-main .exercises-info .info-other .other-title img {
-  height: 20px;
-  width: 20px;
-  -o-object-fit: contain;
-     object-fit: contain;
-}
-main .exercises-info .info-other .other-title strong {
-  color: #5e5c5c;
-  font-size: 20px;
-  text-transform: capitalize;
-}
-main .exercises-info .info-other .other-button-holder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 5px;
-  width: 100%;
-  padding: 10px 15px;
-  padding-top: 0;
-}
-main .exercises-info .info-other .other-button-holder a {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-direction: row;
-  gap: 10px;
-  width: 100%;
-  text-decoration: none;
-  background-color: white;
-  border: 2px solid rgb(200, 200, 200);
-  border-radius: 20px;
-  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  padding: 5px 10px;
-  transition: 300ms;
-}
-main .exercises-info .info-other .other-button-holder a:hover {
-  border: 2px solid gray;
-  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
-}
-main .exercises-info .info-other .other-button-holder a img {
-  height: 30px;
-  width: 30px;
-  -o-object-fit: contain;
-     object-fit: contain;
-  position: relative;
-  left: 0;
-  transition: 300ms;
-}
-main .exercises-info .info-other .other-button-holder a:hover img {
-  left: 15px;
-}
-main .exercises-info .info-other .other-button-holder a p {
-  color: #5e5c5c;
-  font-size: 25px;
-  position: relative;
-  left: 0;
-  margin: 0;
-  transition: 300ms;
-}
-main .exercises-info .info-other .other-button-holder a:hover p {
-  left: 15px;
-}
-main .exercises-info .info-other .other-button-holder .support-us:hover {
-  border: 2px solid #d91435;
-  box-shadow: 1px 1px 10px 1px rgba(217, 20, 53, 0.7);
-}
 main .loading {
   z-index: 99;
 }
@@ -2405,6 +2339,149 @@ main .exercises-holder .exercises-list .exercise-clone:hover .exercise-content {
 }
 main .exercises-holder .exercises-list .exercise-holder {
   margin: 50px 0;
+}
+main .exercises-info {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 20px;
+  width: 50%;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 100px;
+  margin-top: 35px;
+}
+main .exercises-info .exercises-search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  width: 50%;
+  background-color: rgba(255, 255, 255, 0.3);
+  border: 2px solid rgb(200, 200, 200);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  border-radius: 30px;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+  position: relative;
+  padding: 5px 10px;
+  transition: 300ms;
+}
+main .exercises-info .exercises-search input {
+  width: 100%;
+  color: #5e5c5c;
+  font-size: 25px;
+  background-color: transparent;
+  padding: 0px 15px;
+  border: none;
+  outline: none;
+  transition: 300ms;
+}
+main .exercises-info .exercises-search input::-moz-placeholder {
+  text-transform: capitalize;
+}
+main .exercises-info .exercises-search input:-ms-input-placeholder {
+  text-transform: capitalize;
+}
+main .exercises-info .exercises-search input::placeholder {
+  text-transform: capitalize;
+}
+main .exercises-info .exercises-search img {
+  height: 30px;
+  width: 30px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  z-index: 2;
+  opacity: 0.8;
+}
+main .exercises-info .info-other {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 50%;
+  background-color: white;
+  border: 2px solid rgb(200, 200, 200);
+  border-radius: 20px;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+}
+main .exercises-info .info-other .other-title {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 5px;
+  width: 100%;
+  padding: 5px 15px;
+}
+main .exercises-info .info-other .other-title img {
+  height: 20px;
+  width: 20px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+main .exercises-info .info-other .other-title strong {
+  color: #5e5c5c;
+  font-size: 20px;
+  text-transform: capitalize;
+}
+main .exercises-info .info-other .other-button-holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+  padding: 10px 15px;
+  padding-top: 0;
+}
+main .exercises-info .info-other .other-button-holder a {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
+  text-decoration: none;
+  background-color: white;
+  border: 2px solid rgb(200, 200, 200);
+  border-radius: 20px;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  padding: 5px 10px;
+  transition: 300ms;
+}
+main .exercises-info .info-other .other-button-holder a:hover {
+  border: 2px solid gray;
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
+}
+main .exercises-info .info-other .other-button-holder a img {
+  height: 30px;
+  width: 30px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  position: relative;
+  left: 0;
+  transition: 300ms;
+}
+main .exercises-info .info-other .other-button-holder a:hover img {
+  left: 15px;
+}
+main .exercises-info .info-other .other-button-holder a p {
+  color: #5e5c5c;
+  font-size: 25px;
+  position: relative;
+  left: 0;
+  margin: 0;
+  transition: 300ms;
+}
+main .exercises-info .info-other .other-button-holder a:hover p {
+  left: 15px;
+}
+main .exercises-info .info-other .other-button-holder .support-us:hover {
+  border: 2px solid #d91435;
+  box-shadow: 1px 1px 10px 1px rgba(217, 20, 53, 0.7);
 }
 
 .arrow-button {

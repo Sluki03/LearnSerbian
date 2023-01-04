@@ -8,11 +8,33 @@
         <link rel="stylesheet" href="./css/main.css">
         <!--<script defer>console.log = () => {}</script>-->
         <script defer src="https://code.responsivevoice.org/responsivevoice.js?key=Y8q6gksp"></script>
-        <script defer type="module" src="./scripts/exercises/index.js"></script>
+        <script defer type="module" src="./scripts/lessons/index.js"></script>
         <title>Learn Serbian - Lessons</title>
     </head>
 
-    <body>
-        
+    <body id="lessons">
+        <div class="loading" data-component="loading"></div>
+        <nav data-component="nav"></nav>
+
+        <main>
+            <section class="lessons-holder">
+                <div class="lessons-search">    
+                    <input
+                        type="text"
+                        placeholder="search lessons..."
+                    >
+
+                    <img src="./images/icons/search-icon.png" alt="SEARCH">
+                </div>
+
+                <div class="lesson">
+                    <img src="./images/icons/lessons-icon.png" alt="LESSON">
+                </div>
+            </section>
+
+            <section class="lessons-info"></section>
+        </main>
+
+        <div class="scrollbar" data-component="scrollbar"></div>
     </body>
 </html>

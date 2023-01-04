@@ -26,7 +26,7 @@ function create(e = null) {
     
     const allNotes = JSON.parse(localStorage.getItem("notes"));
     
-    if(allNotes === null) localStorage.setItem("notes", JSON.stringify({ [`${formattedNoteObjectTitle}_0`]: noteObject }));
+    if(allNotes === null || Object.keys(allNotes).length === 0) localStorage.setItem("notes", JSON.stringify({ [`${formattedNoteObjectTitle}_0`]: noteObject }));
 
     else {
         const lastKey = Object.keys(allNotes)[Object.keys(allNotes).length - 1];

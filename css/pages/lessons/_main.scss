@@ -1,12 +1,10 @@
-#exercises {
+#lessons {
     height: 100vh;
     background-image: url("../images/background.png");
     position: relative;
     padding-top: 65px;
     overflow: auto;
 }
-
-@import "./exercise-modal/main";
 
 main {
     @include add-flex(row, center, flex-start);
@@ -17,6 +15,6 @@ main {
         @include add-flex(column, flex-start);
     }
 
-    @import "./exercises-holder";
-    @import "./exercises-info";
+    @import "./lessons-holder";
+    @import "./lessons-info";
 }
