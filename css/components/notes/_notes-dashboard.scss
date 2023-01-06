@@ -10,8 +10,9 @@
         @include add-flex;
         gap: 10px;
         width: 50%;
-        background-color: white;
-        border: 2px solid $defLightGrey;
+        background-color: $defBlurBg;
+        backdrop-filter: $defBlurFilter;
+        border: none;
         border-radius: 20px;
         box-shadow: $defLighterShadow;
         cursor: pointer;
@@ -28,7 +29,6 @@
         }
 
         &:hover {
-            border: 2px solid $defGrey;
             box-shadow: $defLightShadow;
         }
 

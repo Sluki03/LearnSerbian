@@ -1,8 +1,8 @@
 .exercises-stats {
     @include add-flex(column);
     width: 50%;
-    background-color: white;
-    border: 2px solid $defLightGrey;
+    background-color: $defBlurBg;
+    backdrop-filter: $defBlurFilter;
     border-radius: 20px;
     box-shadow: $defLighterShadow;
 
@@ -30,12 +30,12 @@
         gap: 5px;
         width: 100%;
         padding: 10px 15px;
-        padding-top: 0;
 
         .stat {
             @include add-flex(column);
             width: 100%;
-            border: 2px solid $defLightGrey;
+            background-color: $defBlurBg;
+            backdrop-filter: $defBlurFilter;
             border-radius: 20px;
             box-shadow: $defLighterShadow;
             padding: 10px;

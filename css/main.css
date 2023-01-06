@@ -230,7 +230,8 @@ main .lessons-holder {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: row;
+  flex-direction: column;
+  gap: 25px;
   width: 60%;
   padding: 20px 0;
 }
@@ -276,6 +277,136 @@ main .lessons-holder .lessons-search img {
      object-fit: contain;
   z-index: 2;
   opacity: 0.8;
+}
+main .lessons-holder .lessons-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  width: 80%;
+}
+main .lessons-holder .lessons-list .lesson {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 20px;
+  height: 100px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.3);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  border-radius: 20px;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  padding: 10px 15px;
+  position: relative;
+  top: 0;
+  transition: 300ms;
+}
+main .lessons-holder .lessons-list .lesson:hover {
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
+  top: -5px;
+}
+main .lessons-holder .lessons-list .lesson img {
+  height: 70px;
+  width: 70px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+main .lessons-holder .lessons-list .lesson .interactive-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  position: relative;
+  margin: 10px 0;
+}
+main .lessons-holder .lessons-list .lesson .interactive-title span {
+  color: white;
+  font-size: 60px;
+  text-transform: capitalize;
+  font-weight: bold;
+  white-space: nowrap;
+  text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+  cursor: inherit;
+  transition: text-shadow 0.25s, color 0.25s, top 0.25s, left 0.5s, z-index 0.5s;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  z-index: 3;
+}
+main .lessons-holder .lessons-list .lesson .interactive-title span:first-child, main .lessons-holder .lessons-list .lesson .interactive-title span:last-child {
+  position: absolute;
+}
+main .lessons-holder .lessons-list .lesson .interactive-title span:first-child {
+  color: #bd1330;
+  top: -5px;
+  left: -3px;
+  z-index: 1;
+}
+main .lessons-holder .lessons-list .lesson .interactive-title span:last-child {
+  color: #144eba;
+  top: 5px;
+  left: 5px;
+  z-index: 2;
+}
+main .lessons-holder .lessons-list .lesson .interactive-title:hover span {
+  text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+main .lessons-holder .lessons-list .lesson .interactive-title:hover span:first-child {
+  color: #d91435;
+  top: -7px;
+  left: -5px;
+  z-index: 2;
+  text-shadow: 0px 0px 15px rgba(247, 72, 101, 0.5);
+}
+main .lessons-holder .lessons-list .lesson .interactive-title:hover span:last-child {
+  color: #0559f5;
+  top: 7px;
+  left: 7px;
+  z-index: 1;
+  text-shadow: 0px 0px 15px rgba(82, 138, 242, 0.5);
+}
+main .lessons-holder .lessons-list .lesson .interactive-title {
+  width: 70px;
+  margin: 0;
+}
+main .lessons-holder .lessons-list .lesson .interactive-title span:first-child {
+  top: calc(50% - 5px);
+  left: calc(50% - 3px);
+  transform: translate(-50%, -50%);
+}
+main .lessons-holder .lessons-list .lesson .interactive-title span:last-child {
+  top: calc(50% + 5px);
+  left: calc(50% + 5px);
+  transform: translate(-50%, -50%);
+}
+main .lessons-holder .lessons-list .lesson .interactive-title:hover span:first-child {
+  top: calc(50% - 7px);
+  left: calc(50% - 5px);
+  transform: translate(-50%, -50%);
+}
+main .lessons-holder .lessons-list .lesson .interactive-title:hover span:last-child {
+  top: calc(50% + 7px);
+  left: calc(50% + 7px);
+  transform: translate(-50%, -50%);
+}
+main .lessons-holder .lessons-list .lesson .lesson-title {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+}
+main .lessons-holder .lessons-list .lesson .lesson-title strong {
+  color: #5e5c5c;
+  font-size: 30px;
+}
+main .lessons-holder .lessons-list .lesson .lesson-title p {
+  color: #5e5c5c;
+  font-size: 17px;
 }
 main .lessons-info {
   width: 40%;
@@ -2359,7 +2490,6 @@ main .exercises-info .exercises-search {
   flex-direction: row;
   width: 50%;
   background-color: rgba(255, 255, 255, 0.3);
-  border: 2px solid rgb(200, 200, 200);
   -webkit-backdrop-filter: blur(10px);
           backdrop-filter: blur(10px);
   border-radius: 30px;
@@ -2401,8 +2531,9 @@ main .exercises-info .info-other {
   justify-content: center;
   flex-direction: column;
   width: 50%;
-  background-color: white;
-  border: 2px solid rgb(200, 200, 200);
+  background-color: rgba(255, 255, 255, 0.3);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
   border-radius: 20px;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
 }
@@ -2434,7 +2565,6 @@ main .exercises-info .info-other .other-button-holder {
   gap: 5px;
   width: 100%;
   padding: 10px 15px;
-  padding-top: 0;
 }
 main .exercises-info .info-other .other-button-holder a {
   display: flex;
@@ -2444,8 +2574,9 @@ main .exercises-info .info-other .other-button-holder a {
   gap: 10px;
   width: 100%;
   text-decoration: none;
-  background-color: white;
-  border: 2px solid rgb(200, 200, 200);
+  background-color: rgba(255, 255, 255, 0.3);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
   border-radius: 20px;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
   cursor: pointer;
@@ -2453,7 +2584,6 @@ main .exercises-info .info-other .other-button-holder a {
   transition: 300ms;
 }
 main .exercises-info .info-other .other-button-holder a:hover {
-  border: 2px solid gray;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
 }
 main .exercises-info .info-other .other-button-holder a img {
@@ -2480,7 +2610,6 @@ main .exercises-info .info-other .other-button-holder a:hover p {
   left: 15px;
 }
 main .exercises-info .info-other .other-button-holder .support-us:hover {
-  border: 2px solid #d91435;
   box-shadow: 1px 1px 10px 1px rgba(217, 20, 53, 0.7);
 }
 
@@ -2737,8 +2866,9 @@ main .exercises-info .info-other .other-button-holder .support-us:hover {
   justify-content: center;
   flex-direction: column;
   width: 50%;
-  background-color: white;
-  border: 2px solid rgb(200, 200, 200);
+  background-color: rgba(255, 255, 255, 0.3);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
   border-radius: 20px;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
   position: relative;
@@ -2771,7 +2901,9 @@ main .exercises-info .info-other .other-button-holder .support-us:hover {
   width: 30px;
   -o-object-fit: contain;
      object-fit: contain;
-  border: 2px solid rgb(200, 200, 200);
+  background-color: rgba(255, 255, 255, 0.3);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
   border-radius: 50%;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
   cursor: pointer;
@@ -2789,7 +2921,6 @@ main .exercises-info .info-other .other-button-holder .support-us:hover {
   width: 100%;
   position: relative;
   padding: 10px 15px;
-  padding-top: 0;
   overflow: auto;
 }
 .notes .notes-holder .note {
@@ -2800,8 +2931,9 @@ main .exercises-info .info-other .other-button-holder .support-us:hover {
   gap: 10px;
   width: 100%;
   text-decoration: none;
-  background-color: white;
-  border: 2px solid rgb(200, 200, 200);
+  background-color: rgba(255, 255, 255, 0.3);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
   border-radius: 20px;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
   cursor: pointer;
@@ -2810,7 +2942,6 @@ main .exercises-info .info-other .other-button-holder .support-us:hover {
   transition: 300ms;
 }
 .notes .notes-holder .note:hover {
-  border: 2px solid gray;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
 }
 .notes .notes-holder .note img {
@@ -2903,8 +3034,10 @@ main .exercises-info .info-other .other-button-holder .support-us:hover {
   flex-direction: row;
   gap: 10px;
   width: 50%;
-  background-color: white;
-  border: 2px solid rgb(200, 200, 200);
+  background-color: rgba(255, 255, 255, 0.3);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  border: none;
   border-radius: 20px;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
   cursor: pointer;
@@ -2919,7 +3052,6 @@ main .exercises-info .info-other .other-button-holder .support-us:hover {
   margin-left: 5px;
 }
 .notes .notes-dashboard button:hover {
-  border: 2px solid gray;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
 }
 .notes .notes-dashboard button img {
@@ -2941,8 +3073,9 @@ main .exercises-info .info-other .other-button-holder .support-us:hover {
   flex-direction: column;
   gap: 15px;
   width: 30%;
-  background-color: white;
-  border: 2px solid rgb(200, 200, 200);
+  background-color: rgba(255, 255, 255, 0.8);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
   border-radius: 20px;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
   opacity: 0;
@@ -3195,8 +3328,9 @@ main .exercises-info .info-other .other-button-holder .support-us:hover {
   flex-direction: column;
   gap: 15px;
   width: 80%;
-  background-color: white;
-  border: 2px solid rgb(200, 200, 200);
+  background-color: rgba(255, 255, 255, 0.8);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
   border-radius: 20px;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
   opacity: 0;
@@ -4471,8 +4605,9 @@ footer div a {
   justify-content: center;
   flex-direction: column;
   width: 50%;
-  background-color: white;
-  border: 2px solid rgb(200, 200, 200);
+  background-color: rgba(255, 255, 255, 0.3);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
   border-radius: 20px;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
 }
@@ -4504,7 +4639,6 @@ footer div a {
   gap: 5px;
   width: 100%;
   padding: 10px 15px;
-  padding-top: 0;
 }
 .exercises-stats .stats-holder .stat {
   display: flex;
@@ -4512,7 +4646,9 @@ footer div a {
   justify-content: center;
   flex-direction: column;
   width: 100%;
-  border: 2px solid rgb(200, 200, 200);
+  background-color: rgba(255, 255, 255, 0.3);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
   border-radius: 20px;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
   padding: 10px;

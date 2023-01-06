@@ -1,0 +1,41 @@
+import { lessonsData } from "../../data/lessons/index.js";
+import { Component } from "../components/Component.js";
+import createElement from "../functions/element/createElement.js";
+
+export default function loadLessons() {
+    const lessonsList = document.querySelector(".lessons-list");
+    
+    lessonsData.forEach((lesson, index) => {
+        const lessonElement = createElement({
+            tag: "div",
+            attributes: { class: "lesson" },
+            appendTo: lessonsList
+        });
+    
+        if(lesson.icon) createElement({
+            tag: "img",
+            attributes: { src: lesson.icon, alt: lesson.name },
+            appendTo: lessonElement
+        });
+
+        else Component.create("InteractiveTitle", { title: index + 1, appendTo: lessonElement });
+
+        const lessonTitle = createElement({
+            tag: "div",
+            attributes: { class: "lesson-title" },
+            appendTo: lessonElement
+        });
+
+        createElement({
+            tag: "strong",
+            innerText: lesson.name,
+            appendTo: lessonTitle
+        });
+
+        createElement({
+            tag: "p",
+            innerText: lesson.description,
+            appendTo: lessonTitle
+        });
+    });
+}

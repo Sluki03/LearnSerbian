@@ -1,4 +1,21 @@
+// Index
 import PanelsList from "./list/index/PanelsList.js";
+
+// Lessons
+import LessonsList from "./list/lessons/LessonsList.js";
+
+// Exercises
+import ExercisesList from "./list/exercises/ExercisesList.js";
+import ExerciseStats from "./list/exercises/ExerciseStats.js";
+import ExerciseModal from "./list/exercises/ExerciseModal.js";
+import ExerciseModalTask from "./list/exercises/ExerciseModalTask.js";
+import ExerciseModalFinished from "./list/exercises/ExerciseModalFinished.js";
+import ExerciseModalReview from "./list/exercises/ExerciseModalReview.js";
+import ExercisesStats from "./list/exercises/ExercisesStats.js";
+import OptionImage from "./list/exercises/OptionImage.js";
+import ConversationHolder from "./list/exercises/ConversationHolder.js";
+
+// Other
 import Loading from "./list/other/Loading.js";
 import Nav from "./list/other/Nav.js"
 import Footer from "./list/other/Footer.js";
@@ -20,27 +37,18 @@ import NoteModalForm from "./list/other/notes/NoteModalForm.js";
 import NoteModalView from "./list/other/notes/NoteModalView.js";
 import NoteOptionsModal from "./list/other/notes/NoteOptionsModal.js";
 import NoteIconModal from "./list/other/notes/NoteIconModal.js";
-import ExercisesList from "./list/exercises/ExercisesList.js";
-import ExerciseStats from "./list/exercises/ExerciseStats.js";
-import ExerciseModal from "./list/exercises/ExerciseModal.js";
-import ExerciseModalTask from "./list/exercises/ExerciseModalTask.js";
-import ExerciseModalFinished from "./list/exercises/ExerciseModalFinished.js";
-import ExerciseModalReview from "./list/exercises/ExerciseModalReview.js";
-import ExercisesStats from "./list/exercises/ExercisesStats.js";
-import OptionImage from "./list/exercises/OptionImage.js";
-import ConversationHolder from "./list/exercises/ConversationHolder.js";
 
 import { Convert } from "../functions/text/Convert.js";
 import { buildEventList } from "../functions/other/EventControl.js";
 
 const components = {
-    PanelsList, Loading, Nav, Footer, InteractiveTitle,
-    ModalOptions, ArrowButton, ClassicModal, Typing, DiacriticKeyboard,
-    MiniModal, Scrollbar, SpeakButton, StatisticProgressBar, MoveModal,
-    ExercisesList, ExerciseStats, ExerciseModal, ExerciseModalTask, ExerciseModalFinished,
-    ExerciseModalReview, ExercisesStats, OptionImage, ConversationHolder, Notes,
-    NotesDashboard, NoteModal, NoteModalForm, NoteModalView, NoteOptionsModal,
-    NoteIconModal
+    PanelsList, LessonsList, ExercisesList, ExerciseStats, ExerciseModal,
+    ExerciseModalTask, ExerciseModalFinished, ExerciseModalReview, ExercisesStats, OptionImage,
+    ConversationHolder, Loading, Nav, Footer, InteractiveTitle,
+    Typing, DiacriticKeyboard, Scrollbar, StatisticProgressBar, ArrowButton,
+    SpeakButton, ModalOptions, MoveModal, MiniModal, ClassicModal,
+    Notes, NotesDashboard, NoteModal, NoteModalForm, NoteModalView,
+    NoteOptionsModal, NoteIconModal
 };
 
 export const Component = { create, render };

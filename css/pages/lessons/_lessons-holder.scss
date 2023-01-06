@@ -1,5 +1,6 @@
 .lessons-holder {
-    @include add-flex;
+    @include add-flex(column);
+    gap: 25px;
     width: 60%;
     padding: 20px 0;
 
@@ -36,6 +37,88 @@
             object-fit: contain;
             z-index: 2;
             opacity: .8;
+        }
+    }
+
+    .lessons-list {
+        @include add-flex(column);
+        gap: 10px;
+        width: 80%;
+
+        .lesson {
+            @include add-flex(row, flex-start);
+            gap: 20px;
+            height: 100px;
+            width: 100%;
+            background-color: $defBlurBg;
+            backdrop-filter: $defBlurFilter;
+            border-radius: 20px;
+            box-shadow: $defLighterShadow;
+            cursor: pointer;
+            padding: 10px 15px;
+            position: relative;
+            top: 0;
+            transition: 300ms;
+
+            &:hover {
+                box-shadow: $defLightShadow;
+                top: -5px;
+            }
+
+            img {
+                height: 70px;
+                width: 70px;
+                object-fit: contain;
+            }
+
+            @include interactive-title(60px);
+
+            .interactive-title {
+                width: 70px;
+                margin: 0;
+
+                span {
+                    &:first-child {
+                        top: calc(50% - 5px);
+                        left: calc(50% - 3px);
+                        transform: translate(-50%, -50%);
+                    }
+
+                    &:last-child {
+                        top: calc(50% + 5px);
+                        left: calc(50% + 5px);
+                        transform: translate(-50%, -50%);
+                    }
+                }
+
+                &:hover span {
+                    &:first-child {
+                        top: calc(50% - 7px);
+                        left: calc(50% - 5px);
+                        transform: translate(-50%, -50%);
+                    }
+
+                    &:last-child {
+                        top: calc(50% + 7px);
+                        left: calc(50% + 7px);
+                        transform: translate(-50%, -50%);
+                    }
+                }
+            }
+
+            .lesson-title {
+                @include add-flex(column, center, flex-start);
+
+                strong {
+                    color: $defDarkGrey;
+                    font-size: set-size(xl);
+                }
+
+                p {
+                    color: $defDarkGrey;
+                    font-size: 17px;
+                }
+            }
         }
     }
 }
