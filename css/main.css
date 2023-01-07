@@ -2959,7 +2959,7 @@ main .exercises-info .info-other .holder .support-us:hover {
   transition: 300ms;
 }
 .notes .notes-holder .note:hover img {
-  left: 15px;
+  left: 10px;
 }
 .notes .notes-holder .note p {
   color: #5e5c5c;
@@ -2970,7 +2970,7 @@ main .exercises-info .info-other .holder .support-us:hover {
   transition: 300ms;
 }
 .notes .notes-holder .note:hover p {
-  left: 15px;
+  left: 10px;
 }
 .notes .notes-holder .note .note-check {
   display: flex;
@@ -2996,7 +2996,7 @@ main .exercises-info .info-other .holder .support-us:hover {
 }
 .notes .notes-holder .note:hover .note-check {
   opacity: 1;
-  right: 10px;
+  right: 20px;
 }
 .notes .notes-holder .note:hover .note-check img {
   left: auto;
@@ -3004,13 +3004,15 @@ main .exercises-info .info-other .holder .support-us:hover {
 .notes .notes-holder .note .active-note-check {
   opacity: 1;
   right: 10px;
+  background-color: #0589f5;
+  border: 2px solid #0559f5;
 }
 .notes .notes-holder .note .active-note-check img {
   left: auto;
 }
 .notes .notes-holder .note .active-note-check .active-note-check-img {
-  height: 35px;
-  width: 35px;
+  height: 20px;
+  width: 20px;
   opacity: 1;
 }
 .notes .notes-holder span {

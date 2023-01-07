@@ -81,7 +81,7 @@
             }
 
             &:hover img {
-                left: 15px;
+                left: 10px;
             }
 
             p {
@@ -94,7 +94,7 @@
             }
 
             &:hover p {
-                left: 15px;
+                left: 10px;
             }
 
             .note-check {
@@ -120,7 +120,7 @@
 
             &:hover .note-check {
                 opacity: 1;
-                right: 10px;
+                right: 20px;
 
                 img {
                     left: auto;
@@ -130,14 +130,16 @@
             .active-note-check {
                 opacity: 1;
                 right: 10px;
+                background-color: $defLighterBlue;
+                border: 2px solid $defLightBlue;
 
                 img {
                     left: auto;
                 }
 
                 .active-note-check-img {
-                    height: 35px;
-                    width: 35px;
+                    height: 20px;
+                    width: 20px;
                     opacity: 1;
                 }
             }
