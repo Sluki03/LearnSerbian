@@ -42,11 +42,11 @@ $defIncorrect: linear-gradient(135deg, $defRed 65%, $defLightRed 65% 85%, $defLi
 $defGreyGradient: linear-gradient(135deg, $defLightGrey 45%, white 45% 55%, $defDarkGrey 55% 100%);
 
 $defLighterShadow: 1px 1px 5px 1px rgba(0,0,0,0.1);
-$defLightShadow: 1px 1px 10px 1px rgba(0,0,0,0.3);
+$defLightShadow: 1px 1px 8px 1px rgba(0,0,0,0.3);
 $defShadow: 3px 3px 15px 1px rgba(0,0,0,0.3);
 $defLightInnerShadow: inset 1px 1px 10px 1px rgba(0,0,0,0.3);
 $defInnerShadow: inset 3px 3px 15px 1px rgba(0,0,0,0.3);
-$defTextShadow: 2px 2px 15px rgba(0, 0, 0, 0.30);
+$defTextShadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
 $defRedBlueShadow: -3px -3px 5px 1px $defRed, 3px 3px 5px 1px $defBlue;
 $defGreenShadow: 3px 3px 15px 1px $defLightGreen;
 $defLightRedShadow: 1px 1px 10px 1px rgba($defLightRed, 0.7);

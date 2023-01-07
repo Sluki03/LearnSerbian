@@ -19,7 +19,7 @@
         .exercises-list-line {
             height: 100%;
             width: 3px;
-            background: rgb(200, 200, 200);
+            background: $defLighterGrey;
             position: absolute;
         }
 
@@ -28,7 +28,6 @@
             gap: 10px;
             background-color: $defBlurBg;
             backdrop-filter: $defBlurFilter;
-            border: 2px solid $defLightGrey;
             border-radius: 20px;
             padding: 10px;
             position: relative;
