@@ -8,7 +8,6 @@
         @include add-flex;
         width: 80%;
         background-color: $defBlurBg;
-        border: 2px solid $defLightGrey;
         backdrop-filter: $defBlurFilter;
         border-radius: 30px;
         box-shadow: $defLighterShadow;
@@ -37,6 +36,7 @@
             object-fit: contain;
             z-index: 2;
             opacity: .8;
+            margin-right: 10px;
         }
     }
 
