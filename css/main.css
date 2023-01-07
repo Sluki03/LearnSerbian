@@ -2587,8 +2587,8 @@ main .exercises-info .info-other .holder a {
   padding: 5px 10px;
   transition: 300ms;
 }
-main .exercises-info .info-other .other-button-holder a:hover {
-  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
+main .exercises-info .info-other .holder a:hover {
+  box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.3);
 }
 main .exercises-info .info-other .holder a img {
   height: 30px;
@@ -2901,8 +2901,8 @@ main .exercises-info .info-other .holder .support-us:hover {
   text-transform: capitalize;
 }
 .notes .notes-title .add-note {
-  height: 30px;
-  width: 30px;
+  height: 22px;
+  width: 22px;
   -o-object-fit: contain;
      object-fit: contain;
   background-color: rgba(255, 255, 255, 0.3);
@@ -2913,7 +2913,8 @@ main .exercises-info .info-other .holder .support-us:hover {
   cursor: pointer;
   pointer-events: all;
   position: absolute;
-  right: 5px;
+  right: 15px;
+  top: 8px;
 }
 .notes .notes-holder {
   display: flex;

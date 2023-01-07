@@ -29,8 +29,8 @@
         }
 
         .add-note {
-            height: 30px;
-            width: 30px;
+            height: 22px;
+            width: 22px;
             object-fit: contain;
             background-color: $defBlurBg;
             backdrop-filter: $defBlurFilter;
@@ -39,7 +39,8 @@
             cursor: pointer;
             pointer-events: all;
             position: absolute;
-            right: 5px;
+            right: 15px;
+            top: 8px
         }
     }
     
