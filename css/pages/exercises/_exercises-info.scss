@@ -49,7 +49,7 @@
         border-radius: 20px;
         box-shadow: $defLighterShadow;
 
-        .other-title {
+        .title {
             @include add-flex(row, flex-start);
             gap: 5px;
             width: 100%;
@@ -68,7 +68,7 @@
             }
         }
 
-        .other-button-holder {
+        .holder {
             @include add-flex(column);
             gap: 5px;
             width: 100%;

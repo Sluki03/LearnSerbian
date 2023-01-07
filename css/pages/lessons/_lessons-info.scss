@@ -1,3 +1,4 @@
 .lessons-info {
+    @include add-flex(column);
     width: 40%;
 }

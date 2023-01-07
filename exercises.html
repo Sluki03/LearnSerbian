@@ -6,7 +6,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="images/logo.png" type="image/x-icon"/>
         <link rel="stylesheet" href="./css/main.css">
-        <script defer>console.log = () => {}</script>
         <script defer src="https://code.responsivevoice.org/responsivevoice.js?key=Y8q6gksp"></script>
         <script defer src="http://cdn.jsdelivr.net/g/filesaver.js"></script>
         <script defer src="./scripts/functions/other/jszip.js"></script>
@@ -38,12 +37,12 @@
                 <div class="notes" data-component="notes"></div>
 
                 <div class="info-other">
-                    <div class="other-title">
+                    <div class="title">
                         <img src="./images/icons/other-icon.png" alt="OTHER">
                         <strong>other</strong>
                     </div>
 
-                    <div class="other-button-holder">
+                    <div class="holder">
                         <a class="support-us">
                             <img src="./images/icons/lives-icon.png" alt="SUPPORT US">
                             <p>Support us</p>
@@ -62,7 +61,7 @@
             class="scrollbar"
             data-component="scrollbar"
             data-ignore-target="true"
-            data-trigger="select(.exercises-list)"
+            data-trigger="htmlpp.select(.exercises-list)"
         ></div>
 
         <template data-template="exercise-holder">

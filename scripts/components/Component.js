@@ -40,6 +40,7 @@ import NoteIconModal from "./list/other/notes/NoteIconModal.js";
 
 import { Convert } from "../functions/text/Convert.js";
 import { buildEventList } from "../functions/other/EventControl.js";
+import oneSplit from "../functions/text/oneSplit.js";
 
 const components = {
     PanelsList, LessonsList, ExercisesList, ExerciseStats, ExerciseModal,
@@ -111,20 +112,40 @@ function render(element) {
         buildEventList(newComponent);
 
         function convertDatasetValue(value) {
-            let element = "";
-            
-            if(value.indexOf("select(") > -1) {
-                const selectedElement = value.split("select(")[1];
-                element = selectedElement.substring(0, selectedElement.length - 1);
-            }
-            
             switch(value) {
                 case "true":
                 case "false":
                     return value === "true" ? true : false;
-                case `select(${element})`: return document.querySelector(element);
 
-                default: return value;
+                default:
+                    const HTMLPPValue = renderHTMLPPFunction();
+                    return HTMLPPValue;
+            }
+
+            function renderHTMLPPFunction() {
+                const HTMLPPFunctions = ["js", "select"];
+                let HTMLPPFunction = null;
+                
+                if(value.indexOf("htmlpp.") > -1) HTMLPPFunction = value.split("htmlpp.")[1];
+                else return value;
+
+                let functionExistence = false;
+
+                HTMLPPFunctions.forEach(f => {
+                    if(HTMLPPFunction.indexOf(f + "(") > -1) functionExistence = true;
+                });
+
+                if(!functionExistence) return value;
+
+                const [name, params] = oneSplit(HTMLPPFunction, "(");
+                const functionProps = { name, params: params.substring(0, params.length - 1) };
+
+                switch(functionProps.name) {
+                    case "js": return eval(functionProps.params);
+                    case "select": return document.querySelector(functionProps.params);
+                    
+                    default: ;
+                }
             }
         }
     });

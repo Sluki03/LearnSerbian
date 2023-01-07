@@ -409,6 +409,10 @@ main .lessons-holder .lessons-list .lesson .lesson-title p {
   font-size: 17px;
 }
 main .lessons-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   width: 40%;
 }
 
@@ -2537,7 +2541,7 @@ main .exercises-info .info-other {
   border-radius: 20px;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
 }
-main .exercises-info .info-other .other-title {
+main .exercises-info .info-other .title {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -2546,18 +2550,18 @@ main .exercises-info .info-other .other-title {
   width: 100%;
   padding: 5px 15px;
 }
-main .exercises-info .info-other .other-title img {
+main .exercises-info .info-other .title img {
   height: 20px;
   width: 20px;
   -o-object-fit: contain;
      object-fit: contain;
 }
-main .exercises-info .info-other .other-title strong {
+main .exercises-info .info-other .title strong {
   color: #5e5c5c;
   font-size: 20px;
   text-transform: capitalize;
 }
-main .exercises-info .info-other .other-button-holder {
+main .exercises-info .info-other .holder {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2566,7 +2570,7 @@ main .exercises-info .info-other .other-button-holder {
   width: 100%;
   padding: 10px 15px;
 }
-main .exercises-info .info-other .other-button-holder a {
+main .exercises-info .info-other .holder a {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -2583,10 +2587,10 @@ main .exercises-info .info-other .other-button-holder a {
   padding: 5px 10px;
   transition: 300ms;
 }
-main .exercises-info .info-other .other-button-holder a:hover {
+main .exercises-info .info-other .holder a:hover {
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
 }
-main .exercises-info .info-other .other-button-holder a img {
+main .exercises-info .info-other .holder a img {
   height: 30px;
   width: 30px;
   -o-object-fit: contain;
@@ -2595,10 +2599,10 @@ main .exercises-info .info-other .other-button-holder a img {
   left: 0;
   transition: 300ms;
 }
-main .exercises-info .info-other .other-button-holder a:hover img {
+main .exercises-info .info-other .holder a:hover img {
   left: 15px;
 }
-main .exercises-info .info-other .other-button-holder a p {
+main .exercises-info .info-other .holder a p {
   color: #5e5c5c;
   font-size: 25px;
   position: relative;
@@ -2606,10 +2610,10 @@ main .exercises-info .info-other .other-button-holder a p {
   margin: 0;
   transition: 300ms;
 }
-main .exercises-info .info-other .other-button-holder a:hover p {
+main .exercises-info .info-other .holder a:hover p {
   left: 15px;
 }
-main .exercises-info .info-other .other-button-holder .support-us:hover {
+main .exercises-info .info-other .holder .support-us:hover {
   box-shadow: 1px 1px 10px 1px rgba(217, 20, 53, 0.7);
 }
 
