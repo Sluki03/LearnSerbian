@@ -2600,7 +2600,7 @@ main .exercises-info .info-other .holder a img {
   transition: 300ms;
 }
 main .exercises-info .info-other .holder a:hover img {
-  left: 15px;
+  left: 10px;
 }
 main .exercises-info .info-other .holder a p {
   color: #5e5c5c;
@@ -2611,7 +2611,7 @@ main .exercises-info .info-other .holder a p {
   transition: 300ms;
 }
 main .exercises-info .info-other .holder a:hover p {
-  left: 15px;
+  left: 10px;
 }
 main .exercises-info .info-other .holder .support-us:hover {
   box-shadow: 1px 1px 10px 1px rgba(217, 20, 53, 0.7);
