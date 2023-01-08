@@ -3173,6 +3173,10 @@ main .exercises-info .info-other .holder .support-us:hover {
   position: absolute;
   right: 15px;
   top: 8px;
+  transition: box-shadow 0.3s;
+}
+.notes .title .add-note:hover {
+  box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.3);
 }
 .notes .holder {
   max-height: 170px;

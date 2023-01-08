@@ -19,7 +19,12 @@
             pointer-events: all;
             position: absolute;
             right: 15px;
-            top: 8px
+            top: 8px;
+            transition: box-shadow .3s;
+
+            &:hover {
+                box-shadow: $defLightShadow;
+            }
         }
     }
     
