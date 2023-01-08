@@ -2606,7 +2606,7 @@ main .exercises-info .info-other .holder a img {
   transition: 300ms;
 }
 main .exercises-info .info-other .holder a:hover img {
-  left: 15px;
+  left: 10px;
 }
 main .exercises-info .info-other .holder a p {
   color: #5e5c5c;
@@ -2617,7 +2617,7 @@ main .exercises-info .info-other .holder a p {
   transition: 300ms;
 }
 main .exercises-info .info-other .holder a:hover p {
-  left: 15px;
+  left: 10px;
 }
 main .exercises-info .info-other .holder .support-us:hover {
   box-shadow: 1px 1px 10px 1px rgba(217, 20, 53, 0.7);
@@ -2914,9 +2914,30 @@ main .exercises-info .info-other .holder .support-us:hover {
   width: 100%;
   padding: 10px 15px;
 }
-.notes .title .add-note {
-  height: 30px;
-  width: 30px;
+.notes .notes-title {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 5px;
+  width: 100%;
+  position: relative;
+  padding: 5px 15px;
+}
+.notes .notes-title img {
+  height: 20px;
+  width: 20px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.notes .notes-title strong {
+  color: #5e5c5c;
+  font-size: 20px;
+  text-transform: capitalize;
+}
+.notes .notes-title .add-note {
+  height: 22px;
+  width: 22px;
   -o-object-fit: contain;
      object-fit: contain;
   background-color: rgba(255, 255, 255, 0.3);
@@ -2927,14 +2948,20 @@ main .exercises-info .info-other .holder .support-us:hover {
   cursor: pointer;
   pointer-events: all;
   position: absolute;
-  right: 5px;
+  right: 15px;
+  top: 8px;
 }
-.notes .holder {
+.notes .notes-holder {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 5px;
   max-height: 170px;
   position: relative;
   overflow: auto;
 }
-.notes .holder .note {
+.notes .notes-holder .note {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -2952,10 +2979,10 @@ main .exercises-info .info-other .holder .support-us:hover {
   padding: 5px 10px;
   transition: 300ms;
 }
-.notes .holder .note:hover {
+.notes .notes-holder .note:hover {
   box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.3);
 }
-.notes .holder .note img {
+.notes .notes-holder .note img {
   height: 30px;
   width: 30px;
   -o-object-fit: contain;
@@ -2964,10 +2991,10 @@ main .exercises-info .info-other .holder .support-us:hover {
   left: 0;
   transition: 300ms;
 }
-.notes .holder .note:hover img {
-  left: 15px;
+.notes .notes-holder .note:hover img {
+  left: 10px;
 }
-.notes .holder .note p {
+.notes .notes-holder .note p {
   color: #5e5c5c;
   font-size: 25px;
   position: relative;
@@ -2975,10 +3002,10 @@ main .exercises-info .info-other .holder .support-us:hover {
   margin: 0;
   transition: 300ms;
 }
-.notes .holder .note:hover p {
-  left: 15px;
+.notes .notes-holder .note:hover p {
+  left: 10px;
 }
-.notes .holder .note .note-check {
+.notes .notes-holder .note .note-check {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2994,37 +3021,39 @@ main .exercises-info .info-other .holder .support-us:hover {
   right: 0;
   transition: 300ms;
 }
-.notes .holder .note .note-check img {
+.notes .notes-holder .note .note-check img {
   height: 0;
   width: 0;
   opacity: 0;
   transition: 150ms;
 }
-.notes .holder .note:hover .note-check {
+.notes .notes-holder .note:hover .note-check {
   opacity: 1;
-  right: 10px;
+  right: 20px;
 }
-.notes .holder .note:hover .note-check img {
+.notes .notes-holder .note:hover .note-check img {
   left: auto;
 }
-.notes .holder .note .active-note-check {
+.notes .notes-holder .note .active-note-check {
   opacity: 1;
   right: 10px;
+  background-color: #0589f5;
+  border: 2px solid #0559f5;
 }
-.notes .holder .note .active-note-check img {
+.notes .notes-holder .note .active-note-check img {
   left: auto;
 }
-.notes .holder .note .active-note-check .active-note-check-img {
-  height: 35px;
-  width: 35px;
+.notes .notes-holder .note .active-note-check .active-note-check-img {
+  height: 20px;
+  width: 20px;
   opacity: 1;
 }
-.notes .holder span {
+.notes .notes-holder span {
   color: gray;
   font-size: 20px;
   font-style: italic;
 }
-.notes .holder .scrollbar {
+.notes .notes-holder .scrollbar {
   right: 0;
 }
 .notes .notes-dashboard {

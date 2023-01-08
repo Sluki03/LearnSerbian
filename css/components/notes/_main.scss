@@ -4,21 +4,44 @@
     transition: 300ms;
     z-index: 1;
 
-    .title .add-note {
-        height: 30px;
-        width: 30px;
-        object-fit: contain;
-        background-color: $defBlurBg;
-        backdrop-filter: $defBlurFilter;
-        border-radius: 50%;
-        box-shadow: $defLighterShadow;
-        cursor: pointer;
-        pointer-events: all;
-        position: absolute;
-        right: 5px;
-    }
+    .notes-title {
+        @include add-flex(row, flex-start);
+        gap: 5px;
+        width: 100%;
+        position: relative;
+        padding: 5px 15px;
+        
+        img {
+            height: 20px;
+            width: 20px;
+            object-fit: contain;
+        }
+        
+        strong {
+            color: $defDarkGrey;
+            font-size: set-size(md);
+            text-transform: capitalize;
+        }
 
-    .holder {
+        .add-note {
+            height: 22px;
+            width: 22px;
+            object-fit: contain;
+            background-color: $defBlurBg;
+            backdrop-filter: $defBlurFilter;
+            border-radius: 50%;
+            box-shadow: $defLighterShadow;
+            cursor: pointer;
+            pointer-events: all;
+            position: absolute;
+            right: 15px;
+            top: 8px
+        }
+    }
+    
+    .notes-holder {
+        @include add-flex(column, flex-start);
+        gap: 5px;
         max-height: 170px;
         position: relative;
         overflow: auto;
@@ -51,7 +74,7 @@
             }
 
             &:hover img {
-                left: 15px;
+                left: 10px;
             }
 
             p {
@@ -64,7 +87,7 @@
             }
 
             &:hover p {
-                left: 15px;
+                left: 10px;
             }
 
             .note-check {
@@ -90,7 +113,7 @@
 
             &:hover .note-check {
                 opacity: 1;
-                right: 10px;
+                right: 20px;
 
                 img {
                     left: auto;
@@ -100,14 +123,16 @@
             .active-note-check {
                 opacity: 1;
                 right: 10px;
+                background-color: $defLighterBlue;
+                border: 2px solid $defLightBlue;
 
                 img {
                     left: auto;
                 }
 
                 .active-note-check-img {
-                    height: 35px;
-                    width: 35px;
+                    height: 20px;
+                    width: 20px;
                     opacity: 1;
                 }
             }
