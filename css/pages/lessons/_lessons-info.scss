@@ -1,4 +1,131 @@
 .lessons-info {
     @include add-flex(column);
+    gap: 20px;
     width: 40%;
+    position: sticky;
+    top: 100px;
+    padding: 20px 0;
+
+    .lessons-sort,
+    .lessons-recent {
+        @include block;
+        width: 65%;
+
+        .title strong {
+            text-transform: none;
+        }
+
+        .holder {
+            @include add-flex(column);
+            gap: 10px;
+
+            button {
+                @include add-flex(row, flex-start);
+                gap: 10px;
+                width: 100%;
+                background-color: $defStrongBlurBg;
+                border: none;
+                border-radius: 20px;
+                backdrop-filter: $defBlurFilter;
+                box-shadow: $defLighterShadow;
+                cursor: pointer;
+                padding: 5px 10px;
+                transition: 300ms;
+
+                &:hover {
+                    box-shadow: $defLightShadow;
+                }
+
+                img {
+                    height: 40px;
+                    width: 40px;
+                    object-fit: contain;
+                    position: relative;
+                    left: 0;
+                    transition: 300ms;
+                }
+
+                &:hover img {
+                    left: 15px;
+                }
+
+                p {
+                    color: $defDarkGrey;
+                    font-size: set-size(lg);
+                    text-transform: capitalize;
+                    font-weight: bold;
+                    position: relative;
+                    left: 0;
+                    transition: 300ms;
+                }
+
+                &:hover p {
+                    left: 15px;
+                }
+            }
+        }
+    }
+
+    .lessons-recent .holder button {
+        height: 45px;
+        
+        @include interactive-title(30px);
+
+        .interactive-title {
+            width: 35px;
+            left: 0;
+            margin: 0;
+            transition: 300ms;
+
+            span {
+                &:first-child {
+                    top: calc(50% - 3px);
+                    left: calc(50% - 1px);
+                    transform: translate(-50%, -50%);
+                }
+
+                &:last-child {
+                    top: calc(50% + 3px);
+                    left: calc(50% + 3px);
+                    transform: translate(-50%, -50%);
+                }
+            }
+
+            &:hover span {
+                &:first-child {
+                    top: calc(50% - 5px);
+                    left: calc(50% - 3px);
+                    transform: translate(-50%, -50%);
+                }
+
+                &:last-child {
+                    top: calc(50% + 5px);
+                    left: calc(50% + 5px);
+                    transform: translate(-50%, -50%);
+                }
+            }
+        }
+
+        &:hover .interactive-title {
+            left: 10px;
+        }
+        
+        img {
+            height: 35px;
+            width: 35px;
+        }
+
+        &:hover img {
+            left: 10px;
+        }
+
+        p {
+            font-size: set-size(md);
+            text-transform: none;
+        }
+
+        &:hover p {
+            left: 10px;
+        }
+    }
 }

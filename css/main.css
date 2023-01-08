@@ -413,7 +413,222 @@ main .lessons-info {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  gap: 20px;
   width: 40%;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 100px;
+  padding: 20px 0;
+}
+main .lessons-info .lessons-sort,
+main .lessons-info .lessons-recent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 50%;
+  background-color: rgba(255, 255, 255, 0.3);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  border-radius: 20px;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+  width: 65%;
+}
+main .lessons-info .lessons-sort .title,
+main .lessons-info .lessons-recent .title {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 5px;
+  width: 100%;
+  padding: 5px 15px;
+}
+main .lessons-info .lessons-sort .title img,
+main .lessons-info .lessons-recent .title img {
+  height: 20px;
+  width: 20px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+main .lessons-info .lessons-sort .title strong,
+main .lessons-info .lessons-recent .title strong {
+  color: #5e5c5c;
+  font-size: 20px;
+  text-transform: capitalize;
+}
+main .lessons-info .lessons-sort .holder,
+main .lessons-info .lessons-recent .holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 5px;
+  width: 100%;
+  padding: 10px 15px;
+}
+main .lessons-info .lessons-sort .title strong,
+main .lessons-info .lessons-recent .title strong {
+  text-transform: none;
+}
+main .lessons-info .lessons-sort .holder,
+main .lessons-info .lessons-recent .holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+}
+main .lessons-info .lessons-sort .holder button,
+main .lessons-info .lessons-recent .holder button {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  border-radius: 20px;
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  padding: 5px 10px;
+  transition: 300ms;
+}
+main .lessons-info .lessons-sort .holder button:hover,
+main .lessons-info .lessons-recent .holder button:hover {
+  box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.3);
+}
+main .lessons-info .lessons-sort .holder button img,
+main .lessons-info .lessons-recent .holder button img {
+  height: 40px;
+  width: 40px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  position: relative;
+  left: 0;
+  transition: 300ms;
+}
+main .lessons-info .lessons-sort .holder button:hover img,
+main .lessons-info .lessons-recent .holder button:hover img {
+  left: 15px;
+}
+main .lessons-info .lessons-sort .holder button p,
+main .lessons-info .lessons-recent .holder button p {
+  color: #5e5c5c;
+  font-size: 25px;
+  text-transform: capitalize;
+  font-weight: bold;
+  position: relative;
+  left: 0;
+  transition: 300ms;
+}
+main .lessons-info .lessons-sort .holder button:hover p,
+main .lessons-info .lessons-recent .holder button:hover p {
+  left: 15px;
+}
+main .lessons-info .lessons-recent .holder button {
+  height: 45px;
+}
+main .lessons-info .lessons-recent .holder button .interactive-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  position: relative;
+  margin: 10px 0;
+}
+main .lessons-info .lessons-recent .holder button .interactive-title span {
+  color: white;
+  font-size: 30px;
+  text-transform: capitalize;
+  font-weight: bold;
+  white-space: nowrap;
+  text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+  cursor: inherit;
+  transition: text-shadow 0.25s, color 0.25s, top 0.25s, left 0.5s, z-index 0.5s;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  z-index: 3;
+}
+main .lessons-info .lessons-recent .holder button .interactive-title span:first-child, main .lessons-info .lessons-recent .holder button .interactive-title span:last-child {
+  position: absolute;
+}
+main .lessons-info .lessons-recent .holder button .interactive-title span:first-child {
+  color: #bd1330;
+  top: -5px;
+  left: -3px;
+  z-index: 1;
+}
+main .lessons-info .lessons-recent .holder button .interactive-title span:last-child {
+  color: #144eba;
+  top: 5px;
+  left: 5px;
+  z-index: 2;
+}
+main .lessons-info .lessons-recent .holder button .interactive-title:hover span {
+  text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+main .lessons-info .lessons-recent .holder button .interactive-title:hover span:first-child {
+  color: #d91435;
+  top: -7px;
+  left: -5px;
+  z-index: 2;
+  text-shadow: 0px 0px 15px rgba(247, 72, 101, 0.5);
+}
+main .lessons-info .lessons-recent .holder button .interactive-title:hover span:last-child {
+  color: #0559f5;
+  top: 7px;
+  left: 7px;
+  z-index: 1;
+  text-shadow: 0px 0px 15px rgba(82, 138, 242, 0.5);
+}
+main .lessons-info .lessons-recent .holder button .interactive-title {
+  width: 35px;
+  left: 0;
+  margin: 0;
+  transition: 300ms;
+}
+main .lessons-info .lessons-recent .holder button .interactive-title span:first-child {
+  top: calc(50% - 3px);
+  left: calc(50% - 1px);
+  transform: translate(-50%, -50%);
+}
+main .lessons-info .lessons-recent .holder button .interactive-title span:last-child {
+  top: calc(50% + 3px);
+  left: calc(50% + 3px);
+  transform: translate(-50%, -50%);
+}
+main .lessons-info .lessons-recent .holder button .interactive-title:hover span:first-child {
+  top: calc(50% - 5px);
+  left: calc(50% - 3px);
+  transform: translate(-50%, -50%);
+}
+main .lessons-info .lessons-recent .holder button .interactive-title:hover span:last-child {
+  top: calc(50% + 5px);
+  left: calc(50% + 5px);
+  transform: translate(-50%, -50%);
+}
+main .lessons-info .lessons-recent .holder button:hover .interactive-title {
+  left: 10px;
+}
+main .lessons-info .lessons-recent .holder button img {
+  height: 35px;
+  width: 35px;
+}
+main .lessons-info .lessons-recent .holder button:hover img {
+  left: 10px;
+}
+main .lessons-info .lessons-recent .holder button p {
+  font-size: 20px;
+  text-transform: none;
+}
+main .lessons-info .lessons-recent .holder button:hover p {
+  left: 10px;
 }
 
 #exercises {
