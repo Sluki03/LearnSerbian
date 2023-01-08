@@ -2914,28 +2914,10 @@ main .exercises-info .info-other .holder .support-us:hover {
   width: 100%;
   padding: 10px 15px;
 }
-.notes .notes-title {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-direction: row;
-  gap: 5px;
-  width: 100%;
+.notes .title {
   position: relative;
-  padding: 5px 15px;
 }
-.notes .notes-title img {
-  height: 20px;
-  width: 20px;
-  -o-object-fit: contain;
-     object-fit: contain;
-}
-.notes .notes-title strong {
-  color: #5e5c5c;
-  font-size: 20px;
-  text-transform: capitalize;
-}
-.notes .notes-title .add-note {
+.notes .title .add-note {
   height: 22px;
   width: 22px;
   -o-object-fit: contain;
@@ -2951,17 +2933,12 @@ main .exercises-info .info-other .holder .support-us:hover {
   right: 15px;
   top: 8px;
 }
-.notes .notes-holder {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-direction: column;
-  gap: 5px;
+.notes .holder {
   max-height: 170px;
   position: relative;
   overflow: auto;
 }
-.notes .notes-holder .note {
+.notes .holder .note {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -2979,10 +2956,10 @@ main .exercises-info .info-other .holder .support-us:hover {
   padding: 5px 10px;
   transition: 300ms;
 }
-.notes .notes-holder .note:hover {
+.notes .holder .note:hover {
   box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.3);
 }
-.notes .notes-holder .note img {
+.notes .holder .note img {
   height: 30px;
   width: 30px;
   -o-object-fit: contain;
@@ -2991,10 +2968,10 @@ main .exercises-info .info-other .holder .support-us:hover {
   left: 0;
   transition: 300ms;
 }
-.notes .notes-holder .note:hover img {
+.notes .holder .note:hover img {
   left: 10px;
 }
-.notes .notes-holder .note p {
+.notes .holder .note p {
   color: #5e5c5c;
   font-size: 25px;
   position: relative;
@@ -3002,10 +2979,10 @@ main .exercises-info .info-other .holder .support-us:hover {
   margin: 0;
   transition: 300ms;
 }
-.notes .notes-holder .note:hover p {
+.notes .holder .note:hover p {
   left: 10px;
 }
-.notes .notes-holder .note .note-check {
+.notes .holder .note .note-check {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3021,39 +2998,39 @@ main .exercises-info .info-other .holder .support-us:hover {
   right: 0;
   transition: 300ms;
 }
-.notes .notes-holder .note .note-check img {
+.notes .holder .note .note-check img {
   height: 0;
   width: 0;
   opacity: 0;
   transition: 150ms;
 }
-.notes .notes-holder .note:hover .note-check {
+.notes .holder .note:hover .note-check {
   opacity: 1;
   right: 20px;
 }
-.notes .notes-holder .note:hover .note-check img {
+.notes .holder .note:hover .note-check img {
   left: auto;
 }
-.notes .notes-holder .note .active-note-check {
+.notes .holder .note .active-note-check {
   opacity: 1;
   right: 10px;
   background-color: #0589f5;
   border: 2px solid #0559f5;
 }
-.notes .notes-holder .note .active-note-check img {
+.notes .holder .note .active-note-check img {
   left: auto;
 }
-.notes .notes-holder .note .active-note-check .active-note-check-img {
+.notes .holder .note .active-note-check .active-note-check-img {
   height: 20px;
   width: 20px;
   opacity: 1;
 }
-.notes .notes-holder span {
+.notes .holder span {
   color: gray;
   font-size: 20px;
   font-style: italic;
 }
-.notes .notes-holder .scrollbar {
+.notes .holder .scrollbar {
   right: 0;
 }
 .notes .notes-dashboard {
