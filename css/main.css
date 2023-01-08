@@ -420,10 +420,10 @@ main .lessons-holder .lessons-list .lesson .lesson-title .keyword-holder p {
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  gap: 5px;
-  color: white;
+  gap: 7px;
+  color: #5e5c5c;
   font-size: 15px;
-  background-color: #5e5c5c;
+  background-color: rgb(200, 200, 200);
   border-radius: 10px;
   padding: 5px 10px;
 }
@@ -547,7 +547,6 @@ main .lessons-info .lessons-recent .holder button p {
   color: #5e5c5c;
   font-size: 25px;
   text-transform: capitalize;
-  font-weight: bold;
   position: relative;
   left: 0;
   transition: 300ms;

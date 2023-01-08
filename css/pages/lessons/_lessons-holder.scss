@@ -125,10 +125,10 @@
 
                     p {
                         @include add-flex;
-                        gap: 5px;
-                        color: white;
+                        gap: 7px;
+                        color: $defDarkGrey;
                         font-size: set-size(sm);
-                        background-color: $defDarkGrey;
+                        background-color: $defLightGrey;
                         border-radius: 10px;
                         padding: 5px 10px;
 
