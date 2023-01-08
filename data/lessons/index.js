@@ -2,7 +2,7 @@ export const lessonsData = [
     {
         name: "welcome lesson",
         description: "Something about welcome lesson goes here...",
-        keywords: ["welcome", "new words", { keyword: "grammar", color: "red" }, "something like that"]
+        keywords: ["welcome", "new words", { text: "grammar", color: "red" }, { text: "something like that", color: "#144dde" }]
     },
 
     {

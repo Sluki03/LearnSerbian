@@ -292,7 +292,7 @@ main .lessons-holder .lessons-list .lesson {
   justify-content: flex-start;
   flex-direction: row;
   gap: 20px;
-  height: 100px;
+  min-height: 105px;
   width: 100%;
   background-color: rgba(255, 255, 255, 0.3);
   -webkit-backdrop-filter: blur(10px);
@@ -407,6 +407,33 @@ main .lessons-holder .lessons-list .lesson .lesson-title strong {
 main .lessons-holder .lessons-list .lesson .lesson-title p {
   color: #5e5c5c;
   font-size: 17px;
+}
+main .lessons-holder .lessons-list .lesson .lesson-title .keyword-holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 5px;
+}
+main .lessons-holder .lessons-list .lesson .lesson-title .keyword-holder p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 5px;
+  color: white;
+  font-size: 15px;
+  background-color: #5e5c5c;
+  border-radius: 10px;
+  padding: 5px 10px;
+}
+main .lessons-holder .lessons-list .lesson .lesson-title .keyword-holder p::before {
+  content: "";
+  display: block;
+  height: 10px;
+  width: 10px;
+  background-color: white;
+  border-radius: 50%;
 }
 main .lessons-info {
   display: flex;

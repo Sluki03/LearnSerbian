@@ -48,7 +48,7 @@
         .lesson {
             @include add-flex(row, flex-start);
             gap: 20px;
-            height: 100px;
+            min-height: 105px;
             width: 100%;
             background-color: $defBlurBg;
             backdrop-filter: $defBlurFilter;
@@ -117,6 +117,30 @@
                 p {
                     color: $defDarkGrey;
                     font-size: 17px;
+                }
+
+                .keyword-holder {
+                    @include add-flex;
+                    gap: 5px;
+
+                    p {
+                        @include add-flex;
+                        gap: 5px;
+                        color: white;
+                        font-size: set-size(sm);
+                        background-color: $defDarkGrey;
+                        border-radius: 10px;
+                        padding: 5px 10px;
+
+                        &::before {
+                            content: "";
+                            display: block;
+                            height: 10px;
+                            width: 10px;
+                            background-color: white;
+                            border-radius: 50%;
+                        }
+                    }
                 }
             }
         }

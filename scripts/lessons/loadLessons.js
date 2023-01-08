@@ -37,5 +37,24 @@ export default function loadLessons() {
             innerText: lesson.description,
             appendTo: lessonTitle
         });
+
+        if(lesson.keywords) {
+            const keywordHolder = createElement({
+                tag: "div",
+                attributes: { class: "keyword-holder" },
+                appendTo: lessonTitle
+            });
+    
+            lesson.keywords.forEach(keyword => {
+                const keywordScheme = {
+                    tag: "p",
+                    innerText: keyword,
+                    appendTo: keywordHolder
+                };
+                
+                if(typeof keyword === "string") createElement(keywordScheme);
+                else createElement({...keywordScheme,  innerText: keyword.text, style: { background: keyword.color } });
+            });
+        }
     });
 }
