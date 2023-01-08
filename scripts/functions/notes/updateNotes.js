@@ -4,7 +4,7 @@ import createElement from "../element/createElement.js";
 
 export default function updateNotes() {
     const notes = document.querySelector(".notes");
-    const allNotesHolders = document.querySelectorAll(".notes-holder");
+    const allNotesHolders = document.querySelectorAll(".notes .holder");
 
     const exerciseModal = document.querySelector(".exercise-modal");
     

@@ -2565,10 +2565,16 @@ main .exercises-info .info-other .holder {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
+  flex-direction: row;
   gap: 5px;
   width: 100%;
   padding: 10px 15px;
+}
+main .exercises-info .info-other .holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 main .exercises-info .info-other .holder a {
   display: flex;
@@ -2587,8 +2593,8 @@ main .exercises-info .info-other .holder a {
   padding: 5px 10px;
   transition: 300ms;
 }
-main .exercises-info .info-other .other-button-holder a:hover {
-  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
+main .exercises-info .info-other .holder a:hover {
+  box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.3);
 }
 main .exercises-info .info-other .holder a img {
   height: 30px;
@@ -2879,28 +2885,36 @@ main .exercises-info .info-other .holder .support-us:hover {
   transition: 300ms;
   z-index: 1;
 }
-.notes .notes-title {
+.notes .title {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   flex-direction: row;
   gap: 5px;
   width: 100%;
-  position: relative;
   padding: 5px 15px;
 }
-.notes .notes-title img {
+.notes .title img {
   height: 20px;
   width: 20px;
   -o-object-fit: contain;
      object-fit: contain;
 }
-.notes .notes-title strong {
+.notes .title strong {
   color: #5e5c5c;
   font-size: 20px;
   text-transform: capitalize;
 }
-.notes .notes-title .add-note {
+.notes .holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 5px;
+  width: 100%;
+  padding: 10px 15px;
+}
+.notes .title .add-note {
   height: 30px;
   width: 30px;
   -o-object-fit: contain;
@@ -2915,19 +2929,12 @@ main .exercises-info .info-other .holder .support-us:hover {
   position: absolute;
   right: 5px;
 }
-.notes .notes-holder {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-direction: column;
-  gap: 5px;
+.notes .holder {
   max-height: 170px;
-  width: 100%;
   position: relative;
-  padding: 10px 15px;
   overflow: auto;
 }
-.notes .notes-holder .note {
+.notes .holder .note {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -2945,10 +2952,10 @@ main .exercises-info .info-other .holder .support-us:hover {
   padding: 5px 10px;
   transition: 300ms;
 }
-.notes .notes-holder .note:hover {
+.notes .holder .note:hover {
   box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.3);
 }
-.notes .notes-holder .note img {
+.notes .holder .note img {
   height: 30px;
   width: 30px;
   -o-object-fit: contain;
@@ -2957,10 +2964,10 @@ main .exercises-info .info-other .holder .support-us:hover {
   left: 0;
   transition: 300ms;
 }
-.notes .notes-holder .note:hover img {
+.notes .holder .note:hover img {
   left: 15px;
 }
-.notes .notes-holder .note p {
+.notes .holder .note p {
   color: #5e5c5c;
   font-size: 25px;
   position: relative;
@@ -2968,10 +2975,10 @@ main .exercises-info .info-other .holder .support-us:hover {
   margin: 0;
   transition: 300ms;
 }
-.notes .notes-holder .note:hover p {
+.notes .holder .note:hover p {
   left: 15px;
 }
-.notes .notes-holder .note .note-check {
+.notes .holder .note .note-check {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2987,37 +2994,37 @@ main .exercises-info .info-other .holder .support-us:hover {
   right: 0;
   transition: 300ms;
 }
-.notes .notes-holder .note .note-check img {
+.notes .holder .note .note-check img {
   height: 0;
   width: 0;
   opacity: 0;
   transition: 150ms;
 }
-.notes .notes-holder .note:hover .note-check {
+.notes .holder .note:hover .note-check {
   opacity: 1;
   right: 10px;
 }
-.notes .notes-holder .note:hover .note-check img {
+.notes .holder .note:hover .note-check img {
   left: auto;
 }
-.notes .notes-holder .note .active-note-check {
+.notes .holder .note .active-note-check {
   opacity: 1;
   right: 10px;
 }
-.notes .notes-holder .note .active-note-check img {
+.notes .holder .note .active-note-check img {
   left: auto;
 }
-.notes .notes-holder .note .active-note-check .active-note-check-img {
+.notes .holder .note .active-note-check .active-note-check-img {
   height: 35px;
   width: 35px;
   opacity: 1;
 }
-.notes .notes-holder span {
+.notes .holder span {
   color: gray;
   font-size: 20px;
   font-style: italic;
 }
-.notes .notes-holder .scrollbar {
+.notes .holder .scrollbar {
   right: 0;
 }
 .notes .notes-dashboard {
@@ -4108,6 +4115,73 @@ main .exercises-info .info-other .holder .support-us:hover {
   font-weight: bold;
 }
 
+.exercises-stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 50%;
+  background-color: rgba(255, 255, 255, 0.3);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  border-radius: 20px;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+}
+.exercises-stats .title {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 5px;
+  width: 100%;
+  padding: 5px 15px;
+}
+.exercises-stats .title img {
+  height: 20px;
+  width: 20px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.exercises-stats .title strong {
+  color: #5e5c5c;
+  font-size: 20px;
+  text-transform: capitalize;
+}
+.exercises-stats .holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 5px;
+  width: 100%;
+  padding: 10px 15px;
+}
+.exercises-stats .holder .stat {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.3);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  border-radius: 20px;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+}
+.exercises-stats .holder .stat img {
+  height: 40px;
+  width: 40px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.exercises-stats .holder .stat p {
+  color: #5e5c5c;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+}
+
 .loading {
   display: flex;
   align-items: center;
@@ -4601,71 +4675,4 @@ footer div a {
 .option-image p {
   color: #5e5c5c;
   font-size: 20px;
-}
-
-.exercises-stats {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  width: 50%;
-  background-color: rgba(255, 255, 255, 0.3);
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
-  border-radius: 20px;
-  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
-}
-.exercises-stats .stats-title {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-direction: row;
-  gap: 5px;
-  width: 100%;
-  padding: 5px 15px;
-}
-.exercises-stats .stats-title img {
-  height: 20px;
-  width: 20px;
-  -o-object-fit: contain;
-     object-fit: contain;
-}
-.exercises-stats .stats-title strong {
-  color: #5e5c5c;
-  font-size: 20px;
-  text-transform: capitalize;
-}
-.exercises-stats .stats-holder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  gap: 5px;
-  width: 100%;
-  padding: 10px 15px;
-}
-.exercises-stats .stats-holder .stat {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  width: 100%;
-  background-color: rgba(255, 255, 255, 0.3);
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
-  border-radius: 20px;
-  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
-  padding: 10px;
-}
-.exercises-stats .stats-holder .stat img {
-  height: 40px;
-  width: 40px;
-  -o-object-fit: contain;
-     object-fit: contain;
-}
-.exercises-stats .stats-holder .stat p {
-  color: #5e5c5c;
-  font-size: 20px;
-  font-weight: bold;
-  margin: 0;
 }/*# sourceMappingURL=main.css.map */

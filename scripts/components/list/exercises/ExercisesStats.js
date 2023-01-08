@@ -13,7 +13,7 @@ export default function ExercisesStats(componentProps) {
 
     const statsTitle = createElement({
         tag: "div",
-        attributes: { class: "stats-title" },
+        attributes: { class: "title" },
         appendTo: exercisesStats
     });
 
@@ -39,7 +39,7 @@ export default function ExercisesStats(componentProps) {
 
     const statsHolder = createElement({
         tag: "div",
-        attributes: { class: "stats-holder" },
+        attributes: { class: "holder" },
         appendTo: exercisesStats
     });
 

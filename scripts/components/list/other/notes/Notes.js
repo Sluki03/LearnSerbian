@@ -15,7 +15,7 @@ export default function Notes(componentProps) {
 
     const notesTitle = createElement({
         tag: "div",
-        attributes: { class: "notes-title" },
+        attributes: { class: "title" },
         appendTo: notes
     });
 
@@ -42,7 +42,7 @@ export default function Notes(componentProps) {
 
     createElement({
         tag: "div",
-        attributes: { class: "notes-holder" },
+        attributes: { class: "holder" },
         appendTo: notes
     });
 

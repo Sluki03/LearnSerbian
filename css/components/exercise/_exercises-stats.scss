@@ -1,0 +1,26 @@
+.exercises-stats {
+    @include block;
+
+    .holder .stat {
+        @include add-flex(column);
+        width: 100%;
+        background-color: $defBlurBg;
+        backdrop-filter: $defBlurFilter;
+        border-radius: 20px;
+        box-shadow: $defLighterShadow;
+        padding: 10px;
+
+        img {
+            height: 40px;
+            width: 40px;
+            object-fit: contain;
+        }
+
+        p {
+            color: $defDarkGrey;
+            font-size: set-size(md);
+            font-weight: bold;
+            margin: 0;
+        }
+    }
+}

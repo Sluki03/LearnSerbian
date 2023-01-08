@@ -1,55 +1,26 @@
 .notes {
-    @include add-flex(column);
-    width: 50%;
-    background-color: $defBlurBg;
-    backdrop-filter: $defBlurFilter;
-    border-radius: 20px;
-    box-shadow: $defLighterShadow;
+    @include block;
     position: relative;
     transition: 300ms;
     z-index: 1;
 
-    .notes-title {
-        @include add-flex(row, flex-start);
-        gap: 5px;
-        width: 100%;
-        position: relative;
-        padding: 5px 15px;
-        
-        img {
-            height: 20px;
-            width: 20px;
-            object-fit: contain;
-        }
-        
-        strong {
-            color: $defDarkGrey;
-            font-size: set-size(md);
-            text-transform: capitalize;
-        }
-
-        .add-note {
-            height: 30px;
-            width: 30px;
-            object-fit: contain;
-            background-color: $defBlurBg;
-            backdrop-filter: $defBlurFilter;
-            border-radius: 50%;
-            box-shadow: $defLighterShadow;
-            cursor: pointer;
-            pointer-events: all;
-            position: absolute;
-            right: 5px;
-        }
+    .title .add-note {
+        height: 30px;
+        width: 30px;
+        object-fit: contain;
+        background-color: $defBlurBg;
+        backdrop-filter: $defBlurFilter;
+        border-radius: 50%;
+        box-shadow: $defLighterShadow;
+        cursor: pointer;
+        pointer-events: all;
+        position: absolute;
+        right: 5px;
     }
-    
-    .notes-holder {
-        @include add-flex(column, flex-start);
-        gap: 5px;
+
+    .holder {
         max-height: 170px;
-        width: 100%;
         position: relative;
-        padding: 10px 15px;
         overflow: auto;
 
         .note {
