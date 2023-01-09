@@ -1,7 +1,7 @@
 import { Component } from "../components/Component.js";
 import setExercisesStats from "./setExercisesStats.js";
 
-let initalLoad = true;
+let initialLoad = true;
 
 export default function initializeStats() {
     const stats = JSON.parse(localStorage.getItem("exercisesStats"));
@@ -52,10 +52,10 @@ export default function initializeStats() {
         }
     });
 
-    if(initalLoad) return initalLoad = false;
+    if(initialLoad) return initialLoad = false;
     
     const statsContent = setExercisesStats();
-    const statsHolder = document.querySelector(".exercises-stats .stats-holder");
+    const statsHolder = document.querySelector(".exercises-stats .holder");
 
     Object.values(statsContent).forEach((value, index) => {
         const statsHolderP = statsHolder.children[index].children[1];

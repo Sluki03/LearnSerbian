@@ -14,7 +14,7 @@ export default function DiacriticKeyboard(componentProps) {
     
     const buttonOrder = {
         letters: ["č", "ć", "đ", "š", "ž"],
-        arrows: ["&#x1F861;", "&#x1F863;"]
+        arrows: ["./images/icons/arrow-up-icon.png", "./images/icons/arrow-down-icon.png"]
     };
 
     for(let i = 0; i < holders.length; i++) createElement({
@@ -37,10 +37,16 @@ export default function DiacriticKeyboard(componentProps) {
     
     const changeCaseButton = createElement({
         tag: "button",
-        innerHTML: buttonOrder.arrows[input.value ? 0 : 1],
         style: smaller ? { height: "35px", width: "35px" } : null,
         events: [{ on: "click", call: changeCaseStatus }],
         appendTo: diacriticKeyboardArrows
+    });
+
+    const changeCaseButtonImg = createElement({
+        tag: "img",
+        attributes: { src: buttonOrder.arrows[input.value ? 0 : 1], alt: input.value ? "UP" : "DOWN" },
+        style: smaller ? { height: "15px", width: "15px" } : null,
+        appendTo: changeCaseButton
     });
 
     input.eventList.add({ id: "diacriticKeyboard", type: "input", listener: inputValueChanged });
@@ -62,7 +68,7 @@ export default function DiacriticKeyboard(componentProps) {
         const firstButton = diacriticKeyboardLetters.children[0].innerText;
         const isUpperCase = firstButton === firstButton.toUpperCase();
 
-        changeCaseButton.innerHTML = buttonOrder.arrows[isUpperCase ? 0 : 1];
+        changeCaseButtonImg.src = buttonOrder.arrows[isUpperCase ? 0 : 1];
 
         [...diacriticKeyboardLetters.children].forEach(button => {
             if(isUpperCase) button.innerText = button.innerText.toLowerCase();
@@ -79,7 +85,6 @@ export default function DiacriticKeyboard(componentProps) {
             else button.innerText = button.innerText.toUpperCase();
         });
     
-        const arrowSymbols = ["🡡", "🡣"];
-        firstArrow.innerHTML = arrowSymbols[input.value ? 0 : 1];
+        changeCaseButtonImg.src = buttonOrder.arrows[input.value ? 0 : 1];
     }
 }

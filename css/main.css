@@ -2742,6 +2742,9 @@ main .exercises-info .exercises-search {
   padding: 5px 10px;
   transition: 300ms;
 }
+main .exercises-info .exercises-search:focus-within {
+  box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.3);
+}
 main .exercises-info .exercises-search input {
   width: 100%;
   color: #5e5c5c;
@@ -4142,8 +4145,6 @@ main .exercises-info .info-other .holder .support-us:hover {
 }
 .exercise-holder .exercise-info {
   filter: drop-shadow(1px 1px 8px rgba(0, 0, 0, 0.2));
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
   position: absolute;
   right: 90px;
   transition: 300ms;
@@ -4852,6 +4853,12 @@ footer div a {
 .diacritic-keyboard div button:hover {
   border: 2px solid #5e5c5c;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+}
+.diacritic-keyboard div button img {
+  height: 25px;
+  width: 25px;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 .diacritic-keyboard .diacritic-keyboard-letters {
   width: 250px;

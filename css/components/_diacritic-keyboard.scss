@@ -27,6 +27,12 @@
                 border: 2px solid $defDarkGrey;
                 box-shadow: $defLighterShadow;
             }
+
+            img {
+                height: 25px;
+                width: 25px;
+                object-fit: contain;
+            }
         }
     }
 
