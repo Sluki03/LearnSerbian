@@ -270,6 +270,9 @@ main .lessons-holder .lessons-search {
   padding: 5px 10px;
   transition: 300ms;
 }
+main .lessons-holder .lessons-search:focus-within {
+  box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.3);
+}
 main .lessons-holder .lessons-search input {
   width: 100%;
   color: #5e5c5c;
