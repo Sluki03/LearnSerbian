@@ -212,6 +212,26 @@ img {
   overflow: auto;
 }
 
+.lesson-modal {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background: white;
+  position: fixed;
+  bottom: -100%;
+  transition: 500ms;
+  overflow-x: hidden;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+#active-lesson-modal {
+  bottom: 0;
+}
+
 main {
   display: flex;
   align-items: flex-start;
@@ -655,6 +675,9 @@ main .lessons-info .lessons-recent .holder button p {
 }
 main .lessons-info .lessons-recent .holder button:hover p {
   left: 10px;
+}
+main .lessons-info .notes {
+  width: 65%;
 }
 
 #exercises {
@@ -2488,11 +2511,6 @@ main .lessons-info .lessons-recent .holder button:hover p {
 
 #active-exercise-modal {
   bottom: 0;
-}
-
-#full-screen-exercise-modal {
-  width: 100%;
-  left: 0;
 }
 
 main {

@@ -1,5 +1,7 @@
 import { lessonsData } from "../../data/lessons/index.js";
 import { Component } from "../components/Component.js";
+import { Convert } from "../functions/text/Convert.js";
+import { LessonModalStatus } from "./LessonModalStatus.js";
 import createElement from "../functions/element/createElement.js";
 
 export default function loadLessons() {
@@ -8,7 +10,8 @@ export default function loadLessons() {
     lessonsData.forEach((lesson, index) => {
         const lessonElement = createElement({
             tag: "div",
-            attributes: { class: "lesson" },
+            attributes: { class: "lesson", id: `${Convert.cssToJsStandard(lesson.name.replaceAll(" ", "-"))}_${index}` },
+            events: [{ on: "click", call: LessonModalStatus.open }],
             appendTo: lessonsList
         });
     

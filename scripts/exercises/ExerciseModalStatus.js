@@ -2,27 +2,17 @@ import { Component } from "../components/Component.js";
 
 export const ExerciseModalStatus = { open, close, restart };
 
-let activeExerciseId = 0;
+let activeExerciseId = -1;
 
 const body = document.querySelector("body");
 const nav = document.querySelector("nav");
 const scrollbar = document.querySelector("body .scrollbar");
 
-function open(activeExercise, exercise, id = -1) {
-    const [exerciseBorder, exerciseContent] = [...activeExercise.children];
+function open(exercise, id) {
+    const exerciseHolder = document.querySelector(".exercise-holder");
 
-    exerciseBorder.style.transform = "";
-
-    exerciseContent.style.height = "";
-    exerciseContent.style.width = "";
-    
-    const exerciseModal = document.querySelector(".exercise-modal");
-    const exerciseHolder = activeExercise.parentNode;
-
-    if(exerciseModal === null && activeExerciseId > 0) activeExerciseId = 0;
     if(activeExerciseId === id) return;
-        
-    if(activeExerciseId !== 0) ExerciseModalStatus.close(false, { activeExercise, exercise });
+    if(activeExerciseId !== -1) close(false);
         
     else {
         body.style.overflow = "hidden";
@@ -37,13 +27,13 @@ function open(activeExercise, exercise, id = -1) {
         setTimeout(() => { scrollbar.style.display = "none" }, 500);
 
         exerciseHolder.id = "active-exercise-holder";
-        Component.create("ExerciseModal", { exercise });
+        Component.create("ExerciseModal", { exercise, appendTo: body });
     }
 
     activeExerciseId = id;
 }
 
-function close(confirmed = false, openNew) {
+function close(confirmed = false) {
     const taskConnectKeydown = window.eventList.get("taskConnectKeydown");
     const taskConnectActiveMultipleChoiceButton = document.querySelector(".connect-holder .active-multiple-choice-button");
     
@@ -82,16 +72,13 @@ function close(confirmed = false, openNew) {
         }, 100);
         
         exerciseModal.remove();
-        window.eventList.remove("exerciseModalContentKeyDown", "modalOptionsKeyDown");
-        
-        if(openNew !== undefined) {
-            const { activeExercise, exercise } = openNew;
-            ExerciseModalStatus.open(activeExercise, exercise);
-        }
+        window.eventList.remove("exerciseModalContentKeyDown");
+
+        activeExerciseId = -1;
     }, 300);
 
     function confirmFunction() {
-        ExerciseModalStatus.close(true, openNew);
+        ExerciseModalStatus.close(true);
         window.eventList.remove("taskCheckKeyDown", "taskFunctionsSetActiveButton");
     }
 }

@@ -59,7 +59,7 @@ export default function loadExercises() {
             exerciseP.innerHTML = exercise.name;
 
             if(exercise.noResults) exerciseHolder.id = "exercise-holder-error";
-            else articleExercise.onclick = () => ExerciseModalStatus.open(articleExercise, exercise, index + 1);
+            else articleExercise.onclick = () => ExerciseModalStatus.open(exercise, index + 1);
 
             const exerciseContent = articleExercise.children[1];
 

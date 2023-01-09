@@ -6,7 +6,11 @@ export default function updateNotes() {
     const notes = document.querySelector(".notes");
     const allNotesHolders = document.querySelectorAll(".notes .holder");
 
-    const exerciseModal = document.querySelector(".exercise-modal");
+    const pathname = window.location.pathname.substring(1);
+    const path = pathname.split(".")[0];
+    const type = path.substring(0, path.length - 1);
+
+    const targetModal = document.querySelector(`.${type}-modal`);
     
     const allNotes = JSON.parse(localStorage.getItem("notes"));
 
@@ -18,7 +22,7 @@ export default function updateNotes() {
                 const note = createElement({
                     tag: "div",
                     attributes: { class: "note", id: key },
-                    events: [{ on: "click", call: () => NoteOptions.openModal(key, exerciseModal) }],
+                    events: [{ on: "click", call: () => NoteOptions.openModal(key, targetModal) }],
                     appendTo: notesHolder
                 });
             

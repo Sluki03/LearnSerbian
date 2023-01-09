@@ -6,6 +6,8 @@
     overflow: auto;
 }
 
+@import "./lesson-modal/main";
+
 main {
     @include add-flex(row, center, flex-start);
     min-height: 100%;

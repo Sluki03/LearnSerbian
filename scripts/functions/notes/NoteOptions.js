@@ -6,7 +6,7 @@ import updateNotes from "./updateNotes.js";
 
 export const NoteOptions = {
     create, edit, delete: remove, download, openModal,
-    closeModal, openOptionsModal, closeOptionsModal, openInExercise, closeInExercise
+    closeModal, openOptionsModal, closeOptionsModal, openInModal, closeInModal
 };
 
 const body = document.querySelector("body");
@@ -120,14 +120,18 @@ function edit(e = null) {
 }
 
 function remove(confirm = false, id) {
-    const exerciseModal = document.querySelector(".exercise-modal");
+    const pathname = window.location.pathname.substring(1);
+    const path = pathname.split(".")[0];
+    const type = path.substring(0, path.length - 1);
+
+    const targetModal = document.querySelector(`.${type}-modal`);
     
     if(!confirm) return Component.create("ClassicModal", {
         text: `Do you really want to delete this note?`,
         buttons: ["no", "yes"],
         buttonsTrigger: { no: "Escape", yes: "Enter" },
         functions: { yes: () => NoteOptions.delete(true, id) },
-        appendTo: exerciseModal ? exerciseModal : body
+        appendTo: targetModal ? targetModal : body
     });
     
     const allNotes = JSON.parse(localStorage.getItem("notes"));
@@ -264,11 +268,11 @@ function getFormData() {
     return noteObject;
 }
 
-function openInExercise() {
-    const exerciseModal = document.querySelector(".exercise-modal");
-    const existingNotes = document.querySelector(".exercise-modal .notes");
+function openInModal(type) {
+    const targetModal = document.querySelector(`.${type}-modal`);
+    const existingNotes = document.querySelector(`.${type}-modal .notes`);
 
-    if(existingNotes) return closeInExercise();
+    if(existingNotes) return closeInModal(type);
     
     const notes = Component.create("Notes", {
         style: {
@@ -279,7 +283,7 @@ function openInExercise() {
             right: "-385px",
             transform: "translateY(-50%)"
         },
-        appendTo: exerciseModal
+        appendTo: targetModal
     });
 
     setTimeout(() => {
@@ -291,8 +295,8 @@ function openInExercise() {
     }, 100);
 }
 
-function closeInExercise() {
-    const notes = document.querySelector(".exercise-modal .notes");
+function closeInModal(type) {
+    const notes = document.querySelector(`.${type}-modal .notes`);
 
     notes.style.opacity = "0";
     notes.style.right = "-385px";

@@ -3,6 +3,7 @@ import PanelsList from "./list/index/PanelsList.js";
 
 // Lessons
 import LessonsList from "./list/lessons/LessonsList.js";
+import LessonModal from "./list/lessons/LessonModal.js";
 
 // Exercises
 import ExercisesList from "./list/exercises/ExercisesList.js";
@@ -43,13 +44,13 @@ import { buildEventList } from "../functions/other/EventControl.js";
 import oneSplit from "../functions/text/oneSplit.js";
 
 const components = {
-    PanelsList, LessonsList, ExercisesList, ExerciseStats, ExerciseModal,
-    ExerciseModalTask, ExerciseModalFinished, ExerciseModalReview, ExercisesStats, OptionImage,
-    ConversationHolder, Loading, Nav, Footer, InteractiveTitle,
-    Typing, DiacriticKeyboard, Scrollbar, StatisticProgressBar, ArrowButton,
-    SpeakButton, ModalOptions, MoveModal, MiniModal, ClassicModal,
-    Notes, NotesDashboard, NoteModal, NoteModalForm, NoteModalView,
-    NoteOptionsModal, NoteIconModal
+    PanelsList, LessonsList, LessonModal, ExercisesList, ExerciseStats,
+    ExerciseModal, ExerciseModalTask, ExerciseModalFinished, ExerciseModalReview, ExercisesStats,
+    OptionImage, ConversationHolder, Loading, Nav, Footer,
+    InteractiveTitle, Typing, DiacriticKeyboard, Scrollbar, StatisticProgressBar,
+    ArrowButton, SpeakButton, ModalOptions, MoveModal, MiniModal,
+    ClassicModal, Notes, NotesDashboard, NoteModal, NoteModalForm,
+    NoteModalView, NoteOptionsModal, NoteIconModal
 };
 
 export const Component = { create, render };

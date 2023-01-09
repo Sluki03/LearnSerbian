@@ -1,0 +1,16 @@
+.lesson-modal {
+    @include add-flex(column, flex-start);
+    height: 100%;
+    width: 100%;
+    background: white;
+    position: fixed;
+    bottom: -100%;
+    transition: 500ms;
+    overflow-x: hidden;
+    overflow-y: auto;
+    z-index: 10;
+}
+
+#active-lesson-modal {
+    bottom: 0;
+}

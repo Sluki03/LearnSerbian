@@ -1,4 +1,5 @@
 import { Component } from "../../Component.js";
+import createElement from "../../../functions/element/createElement.js";
 import initializeStats from "../../../exercises/initializeStats.js";
 
 export default function ExerciseModalFinished(componentProps) {
@@ -17,10 +18,12 @@ export default function ExerciseModalFinished(componentProps) {
     continueButton.onclick = continueToRYA;
     window.eventList.add({ id: "exerciseModalFinishedKeyDown", type: "keydown", listener: continueToRYA });
 
-    const exerciseModalTitle = document.querySelector("[data-template='exercise-modal-title']").content.firstElementChild.cloneNode(true);
-    exerciseModalTitle.classList.add("disabled-exercise-modal-title");
-
-    appendTo.insertBefore(exerciseModalTitle, exerciseModalFinished);
+    const exerciseModalTitle = createElement({
+        tag: "div",
+        attributes: { class: "exercise-modal-title disabled-exercise-modal-title" },
+        appendTo,
+        before: exerciseModalFinished
+    });
 
     continueButton.style.bottom = "-100px";
 
@@ -56,6 +59,8 @@ export default function ExerciseModalFinished(componentProps) {
     });
 
     let inProgress = false;
+
+    return exerciseModalFinished;
 
     function continueToRYA(e) {
         if(e.key !== "Enter" && e.type === "keydown") return;
@@ -145,6 +150,4 @@ export default function ExerciseModalFinished(componentProps) {
 
         return validStats;
     }
-
-    return exerciseModalFinished;
 }

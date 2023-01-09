@@ -1,11 +1,15 @@
 import { Component } from "../../Component.js";
 import { Exercise } from "../../../exercises/exercise/Exercise.js";
+import createElement from "../../../functions/element/createElement.js";
 
 export default function ExerciseModalTask(componentProps) {
     const { exercise, appendTo } = componentProps.params;
     
-    const taskLives = document.querySelector("[data-template='task-lives']").content.firstElementChild.cloneNode(true);
-    appendTo.appendChild(taskLives);
+    createElement({
+        tag: "div",
+        attributes: { class: "task-lives" },
+        appendTo
+    });
     
     const taskProgressBarHolder = document.querySelector("[data-template='task-progress-bar-holder']").content.firstElementChild.cloneNode(true);
     appendTo.appendChild(taskProgressBarHolder);

@@ -17,12 +17,16 @@ export default function ModalOptions(componentProps) {
         appendTo: modalOptions
     }));
 
-    if(window.eventList.get("modalOptionsXKeyDown") === null) window.eventList.add({ id: "modalOptionsXKeyDown", type: "keydown", listener: keyboardTrigger });
+    window.eventList.add({ id: "modalOptionsKeyDown", type: "keydown", listener: keyboardTrigger });
 
     return modalOptions;
 
     function keyboardTrigger(e) {
         const xKey = "Escape";
-        if(xKey === e.key) functions.x();
+
+        if(xKey === e.key) {
+            window.eventList.remove("modalOptionsKeyDown");
+            functions.x();
+        }
     }
 }
