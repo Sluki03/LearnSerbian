@@ -16,7 +16,7 @@
         transition: 300ms;
 
         &:focus-within {
-            box-shadow: $defLightShadow;
+            box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.3);
         }
 
         input {
