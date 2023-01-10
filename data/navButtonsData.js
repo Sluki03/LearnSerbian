@@ -2,7 +2,7 @@ export const navButtonsData = [
     {
         title: "home",
         icon: "./images/icons/home-icon.png",
-        link: "index.html"
+        link: "/"
     },
 
     {

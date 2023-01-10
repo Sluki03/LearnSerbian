@@ -3,6 +3,7 @@ import { Convert } from "../text/Convert.js";
 import { TransitionDimensions } from "../element/TransitionDimensions.js";
 import createElement from "../element/createElement.js";
 import updateNotes from "./updateNotes.js";
+import getPath from "../other/getPath.js";
 
 export const NoteOptions = {
     create, edit, delete: remove, download, openModal,
@@ -10,6 +11,7 @@ export const NoteOptions = {
 };
 
 const body = document.querySelector("body");
+const path = getPath();
 
 function create(e = null) {
     if(e) e.preventDefault();
@@ -120,10 +122,7 @@ function edit(e = null) {
 }
 
 function remove(confirm = false, id) {
-    const pathname = window.location.pathname.substring(1);
-    const path = pathname.split(".")[0];
     const type = path.substring(0, path.length - 1);
-
     const targetModal = document.querySelector(`.${type}-modal`);
     
     if(!confirm) return Component.create("ClassicModal", {
@@ -179,7 +178,10 @@ function download(id) {
     a.remove();
 }
 
-function openModal(id = null, appendTo = null) {
+function openModal(id = null) {
+    const type = path.substring(0, path.length - 1);
+    const targetModal = document.querySelector(`.${type}-modal`);
+    
     const existingNoteModal = document.querySelector(".note-modal");
 
     if(existingNoteModal) {
@@ -187,15 +189,15 @@ function openModal(id = null, appendTo = null) {
         if(noteModalId === id) return;
 
         closeModal();
-        return setTimeout(() => openModal(id, appendTo), 300);
+        return setTimeout(() => openModal(id), 300);
     }
 
-    const targetNote = getTargetNote(id);    
+    const targetNote = getTargetNote(id);
 
     Component.create("NoteModal", {
         type: id ? "view" : "add",
         targetNote: id ? targetNote : null,
-        appendTo: appendTo ? appendTo : body
+        appendTo: targetModal ? targetModal : body
     });
 
     function getTargetNote(id = null) {

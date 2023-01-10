@@ -30,13 +30,11 @@ export default function Notes(componentProps) {
         innerText: "notes",
         appendTo: notesTitle
     });
-
-    const exerciseModal = document.querySelector(".exercise-modal");
     
     createElement({
         tag: "img",
         attributes: { src: "./images/icons/plus-icon.png", alt: "ADD", class: "add-note" },
-        events: [{ on: "click", call: () => NoteOptions.openModal(null, exerciseModal) }],
+        events: [{ on: "click", call: () => NoteOptions.openModal() }],
         appendTo: notesTitle
     });
 

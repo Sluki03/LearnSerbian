@@ -1,19 +1,18 @@
 import { Component } from "../../Component.js";
 import { navButtonsData } from "../../../../data/navButtonsData.js";
 import createElement from "../../../functions/element/createElement.js";
+import getPath from "../../../functions/other/getPath.js";
 
 export default function Nav(componentProps) {
     const { builtIn } = componentProps;
     const { id, appendTo } = componentProps.params;
     
     const navElement = builtIn ? builtIn : createElement({ tag: "nav", attributes: { id }, appendTo });
-
-    const validHomeLink = window.location.pathname.includes("LearnSerbian") ? "/LearnSerbian" : "/";
     
     const homeLink = createElement({
         tag: "a",
         attributes: { class: "nav-logo" },
-        events: [{ on: "click", call: () => navigate(validHomeLink) }],
+        events: [{ on: "click", call: () => navigate(getPath()) }],
         appendTo: navElement
     });
 
@@ -21,7 +20,7 @@ export default function Nav(componentProps) {
 
     const buttonHolder = createElement({ tag: "div", attributes: { class: "button-holder" }, appendTo: navElement });
 
-    const pathname = window.location.pathname.substring(1).split(".")[0];
+    const pathname = getPath();
     const currentPage = (pathname === "index" || !pathname) ? "home" : pathname;
     
     navButtonsData.forEach(button => {
