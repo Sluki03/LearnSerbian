@@ -222,10 +222,113 @@ img {
   background: white;
   position: fixed;
   bottom: -100%;
+  padding: 10px 15px;
   transition: 500ms;
   overflow-x: hidden;
   overflow-y: auto;
   z-index: 10;
+}
+.lesson-modal .lesson-time {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 10px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+.lesson-modal .lesson-time img {
+  height: 30px;
+  width: 30px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.lesson-modal .lesson-time p {
+  color: #5e5c5c;
+  font-size: 25px;
+  font-weight: bold;
+}
+.lesson-modal .lesson-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 10px;
+}
+.lesson-modal .lesson-title img {
+  height: 60px;
+  width: 60px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.lesson-modal .lesson-title .interactive-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  position: relative;
+  margin: 10px 0;
+}
+.lesson-modal .lesson-title .interactive-title span {
+  color: white;
+  font-size: 45px;
+  text-transform: capitalize;
+  font-weight: bold;
+  white-space: nowrap;
+  text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+  cursor: inherit;
+  transition: text-shadow 0.25s, color 0.25s, top 0.25s, left 0.5s, z-index 0.5s;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  z-index: 3;
+}
+.lesson-modal .lesson-title .interactive-title span:first-child, .lesson-modal .lesson-title .interactive-title span:last-child {
+  position: absolute;
+}
+.lesson-modal .lesson-title .interactive-title span:first-child {
+  color: #bd1330;
+  top: -5px;
+  left: -3px;
+  z-index: 1;
+}
+.lesson-modal .lesson-title .interactive-title span:last-child {
+  color: #144eba;
+  top: 5px;
+  left: 5px;
+  z-index: 2;
+}
+.lesson-modal .lesson-title .interactive-title:hover span {
+  text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+.lesson-modal .lesson-title .interactive-title:hover span:first-child {
+  color: #d91435;
+  top: -7px;
+  left: -5px;
+  z-index: 2;
+  text-shadow: 0px 0px 15px rgba(247, 72, 101, 0.5);
+}
+.lesson-modal .lesson-title .interactive-title:hover span:last-child {
+  color: #0559f5;
+  top: 7px;
+  left: 7px;
+  z-index: 1;
+  text-shadow: 0px 0px 15px rgba(82, 138, 242, 0.5);
+}
+.lesson-modal .lesson-title .interactive-title {
+  margin: 0;
+}
+.lesson-modal .lesson-title h2 {
+  color: #5e5c5c;
+  font-size: 35px;
+}
+.lesson-modal .lesson-content {
+  width: 65%;
+  color: #5e5c5c;
+  font-size: 20px;
+  margin: 50px 0;
 }
 
 #active-lesson-modal {

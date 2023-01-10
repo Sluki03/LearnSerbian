@@ -5,10 +5,60 @@
     background: white;
     position: fixed;
     bottom: -100%;
+    padding: 10px 15px;
     transition: 500ms;
     overflow-x: hidden;
     overflow-y: auto;
     z-index: 10;
+
+    .lesson-time {
+        @include add-flex;
+        gap: 10px;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+
+        img {
+            height: 30px;
+            width: 30px;
+            object-fit: contain;
+        }
+
+        p {
+            color: $defDarkGrey;
+            font-size: set-size(lg);
+            font-weight: bold;
+        }
+    }
+    
+    .lesson-title {
+        @include add-flex;
+        gap: 10px;
+        
+        img {
+            height: 60px;
+            width: 60px;
+            object-fit: contain;
+        }
+
+        @include interactive-title(45px);
+
+        .interactive-title {
+            margin: 0;
+        }
+
+        h2 {
+            color: $defDarkGrey;
+            font-size: set-size(xxl);
+        }
+    }
+
+    .lesson-content {
+        width: 65%;
+        color: $defDarkGrey;
+        font-size: set-size(md);
+        margin: 50px 0;
+    }
 }
 
 #active-lesson-modal {

@@ -11,7 +11,7 @@ export default function loadLessons() {
         const lessonElement = createElement({
             tag: "div",
             attributes: { class: "lesson", id: `${Convert.cssToJsStandard(lesson.name.replaceAll(" ", "-"))}_${index}` },
-            events: [{ on: "click", call: LessonModalStatus.open }],
+            events: [{ on: "click", call: () => LessonModalStatus.open(lesson, index) }],
             appendTo: lessonsList
         });
     

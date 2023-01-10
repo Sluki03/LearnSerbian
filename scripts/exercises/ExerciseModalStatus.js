@@ -9,7 +9,7 @@ const nav = document.querySelector("nav");
 const scrollbar = document.querySelector("body .scrollbar");
 
 function open(exercise, id) {
-    const exerciseHolder = document.querySelector(".exercise-holder");
+    const exerciseHolder = document.querySelectorAll(".exercise-holder")[id];
 
     if(activeExerciseId === id) return;
     if(activeExerciseId !== -1) close(false);
@@ -26,7 +26,7 @@ function open(exercise, id) {
         
         setTimeout(() => { scrollbar.style.display = "none" }, 500);
 
-        exerciseHolder.id = "active-exercise-holder";
+        exerciseHolder.classList.add("active-exercise-holder");
         Component.create("ExerciseModal", { exercise, appendTo: body });
     }
 
@@ -40,7 +40,7 @@ function close(confirmed = false) {
     if(taskConnectKeydown !== null && taskConnectActiveMultipleChoiceButton !== null) return;
     
     const exerciseModal = document.querySelector(".exercise-modal");
-    const activeExerciseHolder = document.getElementById("active-exercise-holder");
+    const activeExerciseHolder = document.querySelector(".active-exercise-holder");
 
     if(exerciseModal === null || activeExerciseHolder === null) return;
 
@@ -58,7 +58,7 @@ function close(confirmed = false) {
     nav.style.top = "";
 
     exerciseModal.id = "";
-    activeExerciseHolder.id = "";
+    activeExerciseHolder.classList.remove("active-exercise-holder");
 
     setTimeout(() => {        
         body.style.overflow = "";

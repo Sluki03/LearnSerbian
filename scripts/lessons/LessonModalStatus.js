@@ -9,6 +9,8 @@ const nav = document.querySelector("nav");
 const scrollbar = document.querySelector("body .scrollbar");
 
 function open(lesson, id) {
+    const lessonElement = document.querySelectorAll(".lesson")[id];
+
     if(activeLessonId === id) return;
     if(activeLessonId !== -1) close();
     
@@ -23,6 +25,8 @@ function open(lesson, id) {
         scrollbar.style.right = "-10px";
 
         setTimeout(() => { scrollbar.style.display = "none" }, 500);
+
+        lessonElement.classList.add("active-lesson");
         Component.create("LessonModal", { lesson, appendTo: body });
     }
 
@@ -30,6 +34,11 @@ function open(lesson, id) {
 }
 
 function close() {
+    const activeLesson = document.querySelector(".active-lesson");
+
+    if(activeLesson === null) return;
+    activeLesson.classList.remove("active-lesson");
+    
     nav.style.opacity = "";
     nav.style.top = "";
 

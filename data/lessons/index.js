@@ -1,8 +1,11 @@
+import welcomeLesson from "./contents/welcomeLesson.js";
+
 export const lessonsData = [
     {
         name: "welcome lesson",
         description: "Something about welcome lesson goes here...",
-        keywords: ["welcome", "new words", { text: "grammar", color: "red" }, { text: "something like that", color: "#144dde" }]
+        keywords: ["welcome", "new words", { text: "grammar", color: "red" }, { text: "something like that", color: "#144dde" }],
+        content: welcomeLesson
     },
 
     {
