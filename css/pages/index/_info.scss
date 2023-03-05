@@ -13,7 +13,7 @@
             color: $defDarkGrey;
             font-size: set-size(heading);
             text-align: center;
-            text-shadow: $defTextShadow;
+            text-shadow: 0px 1px 5px rgba(128, 128, 128, 0.1);
         }
 
         .panels {
@@ -30,7 +30,7 @@
                 text-align: center;
                 background-color: white;
                 border-radius: 20px;
-                box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.50);
+                box-shadow: 0px 1px 5px rgba(128, 128, 128, 0.1);
                 backdrop-filter: $defBlurFilter;
     
                 h1 {
@@ -38,7 +38,6 @@
                     color: white;
                     font-size: set-size(xl);
                     background-color: $defLightBlue;
-                    border-bottom: 1px solid lightgray;
                     border-radius: 20px 20px 0px 0px;
                     padding: 10px 0;
                 }

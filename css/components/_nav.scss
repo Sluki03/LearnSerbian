@@ -5,7 +5,7 @@ nav {
     user-select: none;
     background-color: transparent;
     backdrop-filter: $defBlurFilter;
-    box-shadow: 0px 1px 10px gray;
+    box-shadow: 0px 1px 5px rgba(128, 128, 128, 0.1);
     position: fixed;
     top: 0;
     padding: 3px;

@@ -21,11 +21,5 @@ export const navButtonsData = [
         title: "discord",
         icon: "./images/icons/discord-icon.png",
         link: "https://discord.gg/6PbNDhp"
-    },
-
-    {
-        title: "about",
-        icon: "./images/icons/about-icon.png",
-        link: "about.html"
     }
 ];
