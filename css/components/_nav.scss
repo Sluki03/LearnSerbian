@@ -1,6 +1,6 @@
 nav {
     @include add-flex(row, space-between);
-    height: 65px;
+    height: 50px;
     width: 100%;
     user-select: none;
     background-color: transparent;
@@ -12,14 +12,14 @@ nav {
     transition: 500ms;
     z-index: 10;
     
-    @include interactive-title(40px);
+    @include interactive-title(30px);
 
     a {
         text-decoration: none;
         cursor: pointer;
 
         .interactive-title {
-            margin-left: 10px;
+            margin-left: 15px;
         }
     }
 
@@ -33,7 +33,7 @@ nav {
             gap: 10px;
             text-decoration: none;
             border-radius: 10px;
-            padding: 12px;
+            padding: 10px;
             transition: 300ms;
 
             &:hover {
@@ -50,7 +50,7 @@ nav {
             p {
                 color: $defDarkGrey;
                 text-align: center;
-                font-size: 22px;
+                font-size: 18px;
                 text-transform: capitalize;
                 margin: 0;
             }
