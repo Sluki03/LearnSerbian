@@ -4,12 +4,12 @@ export const footerData = [
         links: [
             {
                 title: "GitHub Page",
-                href: "https://github.com/StrahinjaLukic03/LearnSerbian"
+                href: "https://github.com/Sluki03/LearnSerbian"
             },
 
             {
                 title: "Download",
-                href: "https://github.com/StrahinjaLukic03/LearnSerbian/archive/refs/heads/main.zip"
+                href: "https://github.com/Sluki03/LearnSerbian/archive/refs/heads/main.zip"
             }
         ]
     },
@@ -18,8 +18,8 @@ export const footerData = [
         title: "Design and Code",
         links: [
             {
-                title: "@StrahinjaLukic03",
-                href: "https://github.com/StrahinjaLukic03"
+                title: "@Sluki03",
+                href: "https://github.com/Sluki03"
             },
 
             {
